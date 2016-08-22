@@ -6,7 +6,7 @@ namespace Ramda.NET
     {
         public delegate dynamic Lambda1(object arg = null);
 
-        public static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
+        private static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
             return new Lambda1(arg1 => {
                 if (__.Equals(arg1) || arg1 == null) {
                     return Curry1(fn);

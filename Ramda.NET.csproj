@@ -41,14 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Src\Arity.cs" />
+    <Compile Include="Src\Currying.cs" />
     <Compile Include="Src\Placeholder.cs" />
     <Compile Include="Src\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Src\Ramda.lib.cs" />
-    <Compile Include="Src\Ramda`N.cs" />
-    <Compile Include="Src\Ramda`1.cs" />
-    <Compile Include="Src\Ramda`3.cs" />
-    <Compile Include="Src\Ramda`2.cs" />
+    <Compile Include="Src\Core.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Ramda.NET
 {
-    public static partial class R
+    public static partial class Currying
     {
         private static int FunctionArity(params object[] arguments) {
             return arguments.Sum(arg => Convert.ToInt32(arg != null));

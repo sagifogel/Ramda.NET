@@ -1,37 +1,30 @@
 ﻿using System;
-using System.Collections;
+using System.Collections.Generic;
 
 namespace Ramda.NET
 {
     public static partial class R
     {
-        public readonly static dynamic CurryN = Curry2<int, Delegate, dynamic>((length, fn) => {
-            if (length == 1) {
-                return Curry1(new Func<object[], dynamic>(fn.DynamicInvoke));
-            }
+        public static Currying.RamdaPlaceholder __ = new Currying.RamdaPlaceholder();
 
-            return Arity(length, InternalCurryN(length, new object[0], fn));
-        });
+        public static dynamic CurryN(int length, Delegate fn) {
+            return Currying.CurryN(length, fn);
+        }
 
-        public readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => {
-            return arg1 + arg2;
-        });
+        public static dynamic Add(int arg1, int arg2) {
+            return Currying.Add(arg1, arg2);
+        }
 
-        public readonly static dynamic Adjust = Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
-            int start = 0;
-            int index = 0;
-            IList concatedList = null;
+        public static dynamic Add(double arg1, double arg2) {
+            return Currying.Add(arg1, arg2);
+        }
 
-            if (idx >= list.Count || idx < -list.Count) {
-                return list;
-            }
+        public static dynamic Add(string arg1, string arg2) {
+            return Currying.Add(arg1, arg2);
+        }
 
-            start = idx < 0 ? list.Count : 0;
-            index = start + idx;
-            concatedList = InternalConcat(list);
-            concatedList[index] = fn(list[index]);
-
-            return concatedList;
-        });
+        public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, IList<TValue> list) {
+            return Currying.Adjust(fn, idx, list);
+        }
     }
 }

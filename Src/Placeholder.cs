@@ -1,17 +1,14 @@
-﻿
-namespace Ramda.NET
+﻿namespace Ramda.NET
 {
-    public static partial class R
+    public static partial class Currying
     {
-        public class RamdaPlaceHolder
+        public class RamdaPlaceholder
         {
-            internal RamdaPlaceHolder() { }
+            internal RamdaPlaceholder() { }
         }
 
-        public static RamdaPlaceHolder __ = new RamdaPlaceHolder();
-
         private static bool IsPlaceholder(object param) {
-            return param != null && __.Equals(param);
+            return param != null && R.__.Equals(param);
         }
     }
 }

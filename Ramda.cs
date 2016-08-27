@@ -26,5 +26,9 @@ namespace Ramda.NET
         public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, IList<TValue> list) {
             return Currying.Adjust(fn, idx, list);
         }
+
+        public static dynamic Always<TValue>(TValue  value) {
+            return Currying.Always(value);
+        }
     }
 }

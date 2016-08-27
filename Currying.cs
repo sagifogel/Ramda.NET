@@ -10,7 +10,7 @@ namespace Ramda.NET
         public delegate dynamic LambdaN(params object[] arguments);
         public delegate dynamic Lambda2(object arg1 = null, object arg2 = null);
         public delegate dynamic Lambda3(object arg1 = null, object arg2 = null, object arg3 = null);
-        
+
         internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
             return new Lambda1(arg1 => {
                 if (R.__.Equals(arg1) || arg1 == null) {
@@ -101,11 +101,40 @@ namespace Ramda.NET
 
             start = idx < 0 ? list.Count : 0;
             index = start + idx;
-            concatedList = Core.InternalConcat(list);
+            concatedList = Core.Concat(list);
             concatedList[index] = fn(list[index]);
 
             return concatedList;
         });
+
+
+        internal readonly static dynamic Always = Curry1<dynamic, Func<dynamic>>(value => () => value);
+
+        internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
+
+        internal readonly static dynamic All = Curry2(Core.Dispatchable2("All", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, false))));
+
+        internal readonly static dynamic Any = Curry2(Core.Dispatchable2("Any", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, true))));
+
+        internal readonly static dynamic Aperture = Curry2(Core.Dispatchable2("Aperture", new LambdaN((arguments) => null), new Func<int, IList, IList>(Core.Aperture)));
+
+        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Core.Concat(list, new List<object>() { el }));
+
+        internal readonly static dynamic Apply = Curry2<LambdaN, object[], dynamic>((fn, arguments) => fn(arguments));
+
+        internal static bool AddOrAny(Func<object, bool> fn, IList list, bool returnValue) {
+            var idx = 0;
+
+            while (idx < list.Count) {
+                if (fn(list[idx])) {
+                    return returnValue;
+                }
+
+                idx += 1;
+            }
+
+            return !returnValue;
+        }
 
         private static LambdaN InternalCurryN(int length, object[] received, Delegate fn) {
             return new LambdaN(arguments => {

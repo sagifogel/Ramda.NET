@@ -8,14 +8,6 @@ namespace Ramda.NET
 {
     internal static partial class Core
     {
-        internal static TArg CastTo<TArg>(this object arg) {
-            if (typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
-                return (TArg)Convert.ChangeType(arg, typeof(TArg));
-            }
-
-            return (TArg)arg;
-        }
-
         internal static Func<object[], bool> Complement(Func<object[], bool> fn) {
             return (arguments => !fn.Invoke(arguments));
         }
@@ -38,7 +30,7 @@ namespace Ramda.NET
             return result;
         }
 
-        private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
+        public static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
             foreach (var item in list) {
                 if (predicate(x, item)) {
                     return true;
@@ -60,7 +52,7 @@ namespace Ramda.NET
             return result;
         }
 
-        private static IList Slice(IList arguments, int from = int.MinValue, int to = int.MinValue) {
+        internal static IList Slice(IList arguments, int from = int.MinValue, int to = int.MinValue) {
             if (from == int.MinValue) {
                 return Slice(arguments, 0, arguments.Count);
             }
@@ -89,23 +81,26 @@ namespace Ramda.NET
             }
         }
 
-        internal static Func<object, dynamic> Dispatchable(Currying.LambdaN transducerFunction, Delegate fn) {
-            return arg1 => {
-                if (Currying.FunctionArity(arg1) == 0) {
+        internal static Currying.LambdaN Dispatchable(Currying.LambdaN transducerFunction, Delegate fn) {
+            return new Currying.LambdaN(arguments => {
+                if (arguments.Arity() != 1) {
                     return fn.DynamicInvoke(new object[0]);
                 }
 
-                return fn.DynamicInvoke(arg1);
-            };
+                return fn.DynamicInvoke(arguments[0]);
+            });
         }
 
-        internal static Func<object, object, dynamic> Dispatchable2(string methodName, Currying.LambdaN transducerFunction, Delegate fn) {
-            return (arg1, arg2) => {
-                var length = Currying.FunctionArity(arg1, arg2);
+        internal static Currying.LambdaN Dispatchable2(string methodName, Currying.LambdaN transducerFunction, Delegate fn) {
+            return new Currying.LambdaN(arguments => {
+                var length = arguments.Arity();
 
-                if (length == 0) {
+                if (length == 2) {
                     return fn.DynamicInvoke(new object[0]);
                 }
+
+                var arg1 = arguments[0];
+                var arg2 = arguments[2];
 
                 if (!arg2.GetType().IsArray) {
                     var members = arg2.GetType().GetMember(methodName);
@@ -126,7 +121,7 @@ namespace Ramda.NET
                 }
 
                 return fn.DynamicInvoke(arg1, arg2);
-            };
+            });
         }
 
         private static IList DropLastWhile(Func<object, bool> predicate, object x, IList list) {

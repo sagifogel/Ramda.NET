@@ -12,8 +12,10 @@ namespace Ramda.NET
         public delegate dynamic Lambda3(object arg1 = null, object arg2 = null, object arg3 = null);
 
         internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
-            return new Lambda1(arg1 => {
-                if (R.__.Equals(arg1) || arg1 == null) {
+            return new LambdaN(arguments => {
+                var arg1 = arguments.AssignIfArgumentInRange(0);
+
+                if (R.__.Equals(arg1) || arguments.Arity() == 0) {
                     return Curry1(fn);
                 }
 
@@ -22,17 +24,19 @@ namespace Ramda.NET
         }
 
         internal static dynamic Curry2<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn) {
-            return new Lambda2((arg1, arg2) => {
-                bool arg1IsPlaceHolder = false;
-                bool arg2IsPlaceHolder = false;
+            return new LambdaN(arguments => {
+                var arg1IsPlaceHolder = false;
+                var arg2IsPlaceHolder = false;
+                var arg1 = arguments.AssignIfArgumentInRange(0);
+                var arg2 = arguments.AssignIfArgumentInRange(1);
 
-                switch (FunctionArity(arg1, arg2)) {
+                switch (Arity(arguments)) {
                     case 0:
                         return Curry2(fn);
                     case 1:
-                        return IsPlaceholder(arg1) ? Curry2(fn) : Curry1<TArg2, TResult>(_arg2 => fn(arg1.CastTo<TArg1>(), _arg2));
+                        return IsPlaceholder(arg1 = arguments[0]) ? Curry2(fn) : Curry1<TArg2, TResult>(_arg2 => fn(arg1.CastTo<TArg1>(), _arg2));
                     default:
-                        return (arg1IsPlaceHolder = IsPlaceholder(arg1)) && (arg2IsPlaceHolder = IsPlaceholder(arg2)) ? Curry2(fn) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
+                        return (arg1IsPlaceHolder = IsPlaceholder(arg1 = arguments[0])) && (arg2IsPlaceHolder = IsPlaceholder(arg2 = arguments[0])) ? Curry2(fn) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
                             return fn(_arg1, arg2.CastTo<TArg2>());
                         }) : arg2IsPlaceHolder ? Curry1<TArg2, TResult>(_arg2 => {
                             return fn(arg1.CastTo<TArg1>(), _arg2);
@@ -42,12 +46,15 @@ namespace Ramda.NET
         }
 
         internal static dynamic Curry3<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> fn) {
-            return new Lambda3((arg1, arg2, arg3) => {
-                bool arg1IsPlaceHolder = false;
-                bool arg2IsPlaceHolder = false;
-                bool arg3IsPlaceHolder = false;
+            return new LambdaN(arguments => {
+                var arg1IsPlaceHolder = false;
+                var arg2IsPlaceHolder = false;
+                var arg3IsPlaceHolder = false;
+                var arg1 = arguments.AssignIfArgumentInRange(0);
+                var arg2 = arguments.AssignIfArgumentInRange(1);
+                var arg3 = arguments.AssignIfArgumentInRange(2);
 
-                switch (FunctionArity(arg1, arg2, arg3)) {
+                switch (arguments.Arity()) {
                     case 0:
                         return Curry3(fn);
                     case 1:
@@ -91,8 +98,8 @@ namespace Ramda.NET
         });
 
         public readonly static dynamic Adjust = Currying.Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
-            int start = 0;
-            int index = 0;
+            var start = 0;
+            var index = 0;
             IList concatedList = null;
 
             if (idx >= list.Count || idx < -list.Count) {
@@ -112,15 +119,79 @@ namespace Ramda.NET
 
         internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
 
-        internal readonly static dynamic All = Curry2(Core.Dispatchable2("All", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, false))));
+        internal readonly static dynamic All = CurryN(Core.Dispatchable2("All", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, false))));
 
-        internal readonly static dynamic Any = Curry2(Core.Dispatchable2("Any", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, true))));
+        internal readonly static dynamic Any = CurryN(Core.Dispatchable2("Any", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, true))));
 
-        internal readonly static dynamic Aperture = Curry2(Core.Dispatchable2("Aperture", new LambdaN((arguments) => null), new Func<int, IList, IList>(Core.Aperture)));
+        internal readonly static dynamic Aperture = CurryN(Core.Dispatchable2("Aperture", new LambdaN((arguments) => null), new Func<int, IList, IList>(Core.Aperture)));
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Core.Concat(list, new List<object>() { el }));
 
         internal readonly static dynamic Apply = Curry2<LambdaN, object[], dynamic>((fn, arguments) => fn(arguments));
+
+        internal readonly static dynamic Assoc = Curry3<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
+
+        internal readonly static dynamic AssocPath = Curry3<IList<string>, object, object, object>((path, val, obj) => {
+            switch (path.Count) {
+                case 0:
+                    return val;
+                case 1:
+                    return Assoc(path[0], val, obj);
+                default:
+                    return Assoc(path[0], AssocPath(Core.Slice((IList)path, 1), val, obj.Member(path[0])), obj);
+            }
+        });
+
+        internal readonly static dynamic Clamp = Curry3<double, double, double, double>((min, max, value) => {
+            if (min > max) {
+                throw new ArgumentOutOfRangeException("min must not be greater than max in Clamp(min, max, value)");
+            }
+
+            return value < min ? min : value > max ? max : value;
+        });
+
+        internal readonly static dynamic Comparator = Curry1<Func<object, object, bool>, Lambda2>(pred => {
+            return new Lambda2((a, b) => pred(a, b) ? -1 : pred(b, a) ? 1 : 0);
+        });
+
+        internal readonly static dynamic Dec = Add(-1);
+
+        internal readonly static dynamic DefaultTo = Curry2<object, object, object>((defaultValue, value) => {
+            return ReferenceEquals(value, null) ? defaultValue : value;
+        });
+
+        internal readonly static dynamic DifferenceWith = Curry3<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
+            var idx = 0;
+            var firstLen = first.Count;
+            var result = new List<object>();
+
+            while (idx < firstLen) {
+                if (!Core.ContainsWith(pred, first[idx], second) && !Core.ContainsWith(pred, first[idx], result)) {
+                    result.Add(first[idx]);
+                }
+
+                idx += 1;
+            }
+
+            return result;
+        });
+
+        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj)  => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
+
+        internal readonly static dynamic DissocPath = Curry2<IList, object, object>((path, obj) => {
+            switch (path.Count) {
+                case 0:
+                    return obj;
+                case 1:
+                    return Dissoc(path[0], obj);
+                default:
+                    var head = (string)path[0];
+                    var tail = Core.Slice(path, 1);
+                    var headValue = obj.Member(head);
+
+                    return headValue.IsNull() ? obj : Assoc(head, DissocPath(tail, headValue), obj);
+            }
+        });
 
         internal static bool AddOrAny(Func<object, bool> fn, IList list, bool returnValue) {
             var idx = 0;

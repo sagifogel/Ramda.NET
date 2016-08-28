@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="Arity.cs" />
     <Compile Include="Currying.cs" />
+    <Compile Include="Extensions\CurryingExtemsions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
+    <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda.cs" />

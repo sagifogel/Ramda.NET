@@ -5,8 +5,8 @@ namespace Ramda.NET
 {
     public static partial class Currying
     {
-        internal static int FunctionArity(params object[] arguments) {
-            return arguments.Sum(arg => Convert.ToInt32(arg != null));
+        internal static int Arity(this object[] arguments) {
+            return arguments != null ? arguments.Length : 0;
         }
 
         private static dynamic Arity(int length, Delegate fn) {

@@ -176,9 +176,13 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj)  => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
+        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => {
+            return ShallowCloner.CloneAndAssignDefaultValue(prop, obj);
+        });
 
-        internal readonly static dynamic DissocPath = Curry2<IList, object, object>((path, obj) => {
+        internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
+
+        private static object InternalDissocPath(IList path, object obj) {
             switch (path.Count) {
                 case 0:
                     return obj;
@@ -189,11 +193,11 @@ namespace Ramda.NET
                     var tail = Core.Slice(path, 1);
                     var headValue = obj.Member(head);
 
-                    return headValue.IsNull() ? obj : Assoc(head, DissocPath(tail, headValue), obj);
+                    return headValue.IsNull() ? obj : Assoc(head, InternalDissocPath(tail, headValue), obj);
             }
-        });
+        }
 
-        internal static bool AddOrAny(Func<object, bool> fn, IList list, bool returnValue) {
+        private static bool AddOrAny(Func<object, bool> fn, IList list, bool returnValue) {
             var idx = 0;
 
             while (idx < list.Count) {

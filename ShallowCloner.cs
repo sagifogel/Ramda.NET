@@ -11,24 +11,93 @@ namespace Ramda.NET
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
 
         internal static object CloneAndAssignValue(string prop, object propValue, object obj) {
-            var target = Clone(obj);
-            var property = target.GetType().GetProperty(prop, ReflectionExtensions.bindingFlags);
+            object target = null;
+            var type = obj.GetType();
 
-            property.SetValue(target, propValue);
+            if (type.IsAnonymousType()) {
+                target = AnonymousTypeCloneAndAssignValue(prop, (_) => propValue, type, obj);
+            }
+            else {
+                target = WellKnownCloneAndAssignValue(prop, obj, propValue);
+            }
 
             return target;
         }
 
         internal static object CloneAndAssignDefaultValue(string prop, object obj) {
-            var target = Clone(obj);
-            var property = target.GetType().GetProperty(prop, ReflectionExtensions.bindingFlags);
+            object target = null;
+            var type = obj.GetType();
 
-            property.SetValue(target, null);
+            if (type.IsAnonymousType()) {
+                target = AnonymousTypeCloneAndAssignValue(prop, (paramType) => paramType.GetDefaultValue(), type, obj);
+            }
+            else {
+                target = WellKnownCloneAndAssignValue(prop, obj, null);
+            }
 
             return target;
         }
 
-        internal static object GetDefaultValue(this Type type) {
+        private static object AnonymousTypeCloneAndAssignValue(string prop, Func<Type, object> propValueFactory, Type type, object obj) {
+            ConstructorInfo ctor = null;
+            ParameterInfo[] parameters = null;
+            var arguments = new List<object>();
+
+            ctor = type.GetConstructors()[0];
+            parameters = ctor.GetParameters();
+
+            arguments.AddRange(parameters.Select(param => {
+                if (param.Name.Equals(prop)) {
+                    return propValueFactory(param.ParameterType);
+                }
+
+                return obj.Member(param.Name).Clone();
+            }));
+
+            return ctor.Invoke(arguments.ToArray());
+        }
+
+        private static object WellKnownCloneAndAssignValue(string prop, object obj, object value) {
+            var target = Clone(obj);
+            MemberInfo member = obj.TryGetMember(prop);
+
+            switch (member.MemberType) {
+                case MemberTypes.Field:
+                    var property = (PropertyInfo)member;
+
+                    if (property.CanWrite) {
+                        property.SetValue(target, value);
+                    }
+
+                    break;
+                case MemberTypes.Property:
+                    var field = (FieldInfo)member;
+
+                    if (!field.IsInitOnly) {
+                        field.SetValue(target, value);
+                    }
+
+                    break;
+            }
+
+            return target;
+        }
+
+        private static object Clone(this object source) {
+            Delegate @delegate = null;
+            var type = source.GetType();
+
+            if (!cache.TryGetValue(type, out @delegate)) {
+                var parameter = Expression.Parameter(type);
+                var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
+                @delegate = Expression.Lambda(Expression.GetFuncType(new[] { type, type }), Expression.Convert(clone, type), parameter).Compile();
+                cache.Add(type, @delegate);
+            }
+
+            return @delegate.DynamicInvoke(source);
+        }
+
+        private static object GetDefaultValue(this Type type) {
             Delegate @delegate;
 
             if (!cache.TryGetValue(type, out @delegate)) {
@@ -38,44 +107,6 @@ namespace Ramda.NET
             }
 
             return ((Func<object>)@delegate)();
-        }
-
-        internal static object Clone(object source) {
-            Delegate @delegate = null;
-            var type = source.GetType();
-
-            if (!cache.TryGetValue(type, out @delegate)) {
-                var list = new List<object>();
-                MemberInitExpression memberInit = null;
-                var parameter = Expression.Parameter(type);
-                var ctor = source.GetType().GetConstructor(list);
-                var newExpression = Expression.New(ctor, list.Select(arg => Expression.Constant(arg, arg.GetType())));
-                IEnumerable<MemberBinding> memberBindings = null;
-
-                memberBindings = source.GetType()
-                                       .GetMembers(ReflectionExtensions.bindingFlags)
-                                       .Where(member => member.MemberType == MemberTypes.Field || (member.MemberType == MemberTypes.Property && ((PropertyInfo)member).CanWrite))
-                                       .Select(field => Expression.Bind(field, Expression.Constant(source.Member(field.Name))));
-                
-                memberInit = Expression.MemberInit(newExpression, memberBindings);
-                @delegate = Expression.Lambda<Func<object, object>>(memberInit, parameter).Compile();
-                cache.Add(type, @delegate);
-            }
-
-            return @delegate.DynamicInvoke(source);
-        }
-
-        private static ConstructorInfo GetConstructor(this Type type, List<object> list) {
-            var ctor = type.GetConstructor(Type.EmptyTypes);
-
-            if (ctor != null) {
-                return ctor;
-            }
-
-            ctor = type.GetConstructors()[0];
-            ctor.GetParameters().ForEach(param => list.Add(param.ParameterType.GetDefaultValue()));
-
-            return ctor;
         }
     }
 }

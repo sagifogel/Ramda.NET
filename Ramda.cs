@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Ramda.NET
 {
-    public static partial class R {
+    public static partial class R
+    {
         public static Currying.RamdaPlaceholder __ = new Currying.RamdaPlaceholder();
 
         public static dynamic CurryN(int length, Delegate fn) {
@@ -26,11 +27,11 @@ namespace Ramda.NET
             return Currying.Add(arg1);
         }
 
-        public static dynamic Add(Currying.RamdaPlaceholder arg1 = null) {
+        public static dynamic Add(Currying.RamdaPlaceholder arg1) {
             return Currying.Add(arg1);
         }
 
-        public static dynamic Add(Currying.RamdaPlaceholder arg1 = null, Currying.RamdaPlaceholder arg2 = null) {
+        public static dynamic Add(Currying.RamdaPlaceholder arg1, Currying.RamdaPlaceholder arg2) {
             return Currying.Add(arg1, arg2);
         }
 
@@ -79,8 +80,28 @@ namespace Ramda.NET
             return Currying.DefaultTo(arg1, arg2);
         }
 
+        public static dynamic DissocPath(IList<string> list) {
+            return Currying.DissocPath(list);
+        }
+
+        public static dynamic DissocPath() {
+            return Currying.DissocPath(__, __);
+        }
+
         public static dynamic DissocPath(IList<string> list, object obj) {
             return Currying.DissocPath(list, obj);
+        }
+
+        public static dynamic DissocPath(Currying.RamdaPlaceholder __, object obj) {
+            return Currying.DissocPath(__, obj);
+        }
+
+        public static dynamic DissocPath(IList<string> list, Currying.RamdaPlaceholder __) {
+            return Currying.DissocPath(list, __);
+        }
+
+        public static dynamic Evolve(Dictionary<string, object> transformations, object target) {
+            return Currying.Evolve(transformations, target);
         }
     }
 }

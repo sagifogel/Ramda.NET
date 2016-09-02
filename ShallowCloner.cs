@@ -18,7 +18,7 @@ namespace Ramda.NET
                 target = AnonymousTypeCloneAndAssignValue(prop, (_) => propValue, type, obj);
             }
             else {
-                target = WellKnownCloneAndAssignValue(prop, obj, propValue);
+                target = WellKnownTypeCloneAndAssignValue(prop, obj, propValue);
             }
 
             return target;
@@ -32,7 +32,7 @@ namespace Ramda.NET
                 target = AnonymousTypeCloneAndAssignValue(prop, (paramType) => paramType.GetDefaultValue(), type, obj);
             }
             else {
-                target = WellKnownCloneAndAssignValue(prop, obj, null);
+                target = WellKnownTypeCloneAndAssignValue(prop, obj, null);
             }
 
             return target;
@@ -57,7 +57,7 @@ namespace Ramda.NET
             return ctor.Invoke(arguments.ToArray());
         }
 
-        private static object WellKnownCloneAndAssignValue(string prop, object obj, object value) {
+        private static object WellKnownTypeCloneAndAssignValue(string prop, object obj, object value) {
             var target = Clone(obj);
             MemberInfo member = obj.TryGetMember(prop);
 
@@ -95,18 +95,6 @@ namespace Ramda.NET
             }
 
             return @delegate.DynamicInvoke(source);
-        }
-
-        private static object GetDefaultValue(this Type type) {
-            Delegate @delegate;
-
-            if (!cache.TryGetValue(type, out @delegate)) {
-                @delegate = Expression.Lambda<Func<object>>(
-                                Expression.Convert(Expression.Default(type),
-                                                    typeof(object))).Compile();
-            }
-
-            return ((Func<object>)@delegate)();
         }
     }
 }

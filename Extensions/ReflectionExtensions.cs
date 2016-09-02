@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
+using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace Ramda.NET
 {
@@ -14,6 +18,18 @@ namespace Ramda.NET
             }
 
             return (TArg)arg;
+        }
+
+        internal static bool IsFunction(this Type type) {
+            return typeof(Delegate).IsAssignableFrom(type);
+        }
+
+        internal static bool IsDictionary(this Type type) {
+            return typeof(IDictionary).IsAssignableFrom(type);
+        }
+
+        internal static bool IsFunction(this object value) {
+            return value.GetType().IsFunction();
         }
 
         internal static bool IsNull(this object target) {
@@ -41,6 +57,15 @@ namespace Ramda.NET
             return null;
         }
 
+        internal static Dictionary<string, object> ToMemberDictionary(this object target) {
+            var type = target.GetType();
+
+            return type.GetProperties(bindingFlags)
+                       .Cast<MemberInfo>()
+                       .Concat(type.GetFields(bindingFlags))
+                       .ToDictionary(member => member.Name, m => target.Member(m.Name));
+        }
+
         internal static MemberInfo TryGetMember(this object target, string name) {
             var members = target.GetType().GetMember(name, bindingFlags);
 
@@ -51,11 +76,44 @@ namespace Ramda.NET
             return null;
         }
 
+        internal static object GetDefaultValue(this Type type) {
+            var @delegate = Expression.Lambda<Func<object>>(
+                                Expression.Convert(Expression.Default(type),
+                                                    typeof(object))).Compile();
+
+            return ((Func<object>)@delegate)();
+        }
+
         internal static bool IsAnonymousType(this Type type) {
             return type.IsClass &&
                    type.IsSealed &&
                    type.Attributes.HasFlag(TypeAttributes.NotPublic) &&
                    type.IsDefined(typeof(CompilerGeneratedAttribute), true);
+        }
+
+        internal static ConstructorInfo GetConstructor(this object value, out IEnumerable<Type> parameters) {
+            var type = value.GetType();
+            var ctor = type.GetConstructor(Type.EmptyTypes);
+
+            parameters = new List<Type>();
+
+            if (ctor.IsNotNull()) {
+                return ctor;
+            }
+
+            ctor = type.GetConstructors()[0];
+            parameters = ctor.GetParameters().Select(param => param.ParameterType);
+
+            return ctor;
+        }
+
+        internal static Func<object> GetFactory(this object value) {
+            IEnumerable<Type> parameters;
+            var ctor = value.GetConstructor(out parameters);
+            var arguments = parameters.Select(param => Expression.Constant(param.GetDefaultValue(), param));
+
+            return Expression.Lambda<Func<object>>(
+                        Expression.Convert(Expression.New(ctor, arguments), typeof(object))).Compile();
         }
     }
 }

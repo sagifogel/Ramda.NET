@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -181,6 +182,83 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
+
+        internal readonly static dynamic Divide = Curry2<double, double, double>((a, b) => a / b);
+
+        internal readonly static dynamic DropWhile = CurryN(Core.Dispatchable2("DropWhile", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, IList>((pred, list) => {
+            var idx = 0;
+            var len = list.Count;
+
+            while (idx < len && pred(list[idx])) {
+                idx += 1;
+            }
+
+            return Core.Slice(list, idx);
+        })));
+
+        internal readonly static dynamic Empty = Curry1<object, dynamic>(x => {
+            if (x.IsNotNull()) {
+                var type = x.GetType();
+
+                if (type.Equals(typeof(string))) {
+                    return string.Empty;
+                }
+
+                if (type.IsClass && !type.IsFunction()) {
+                    x.GetFactory().Invoke();
+                }
+            }
+
+            return null;
+        });
+
+        internal readonly static dynamic Evolve = Curry2<IDictionary<string, object>, object, object>(InternalEvolve);
+
+        internal readonly static dynamic Find = CurryN(Core.Dispatchable2("find", new LambdaN((arguments) => null), new Func<Func<object, bool>, IList, object>((fn, list) => {
+            var idx = 0;
+            var len = list.Count;
+
+            while (idx < len) {
+                if (fn(list[idx])) {
+                    return list[idx];
+                }
+
+                idx += 1;
+            }
+
+            return null;
+        })));
+
+        private static object InternalEvolve(IDictionary<string, object> transformations, object target) {
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var keyValue in target.ToMemberDictionary()) {
+                object transformation;
+                var key = keyValue.Key;
+                var value = keyValue.Value;
+
+                if (transformations.TryGetValue(key, out transformation)) {
+                    var transformationType = transformation.GetType();
+
+                    if (transformationType.IsFunction()) {
+                        result[key] = ((Delegate)transformation).DynamicInvoke(value);
+                        continue;
+                    }
+                    else if (value is object) {
+                        if (!transformationType.IsDictionary()) {
+                            transformation = transformation.ToMemberDictionary();
+                        }
+
+                        result[key] = InternalEvolve((IDictionary<string, object>)transformation, value);
+                        continue;
+                    }
+                }
+
+                result[key] = value;
+            }
+
+            return result;
+        }
 
         private static object InternalDissocPath(IList path, object obj) {
             switch (path.Count) {

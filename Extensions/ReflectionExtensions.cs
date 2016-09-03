@@ -28,6 +28,10 @@ namespace Ramda.NET
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
+        internal static bool IsArray(this object value) {
+            return value.GetType().IsArray;
+        }
+
         internal static bool IsFunction(this object value) {
             return value.GetType().IsFunction();
         }
@@ -48,7 +52,24 @@ namespace Ramda.NET
                     case MemberTypes.Field:
                         return ((FieldInfo)member).GetValue(target);
                     case MemberTypes.Property:
-                        return ((PropertyInfo)member).GetValue(target);
+                        return ((PropertyInfo)member).GetValue(target, null);
+                    default:
+                        break;
+                }
+            }
+
+            return null;
+        }
+
+        internal static object HasMember(this object target, string name) {
+            var member = target.TryGetMember(name);
+
+            if (member.IsNotNull()) {
+                switch (member.MemberType) {
+                    case MemberTypes.Field:
+                        return ((FieldInfo)member).GetValue(target);
+                    case MemberTypes.Property:
+                        return ((PropertyInfo)member).GetValue(target, null);
                     default:
                         break;
                 }

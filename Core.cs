@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -63,7 +64,7 @@ namespace Ramda.NET
                 IList result;
                 var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
 
-                if (arguments.IsFixedSize) {
+                if (arguments.IsArray()) {
                     result = new object[len];
                     Array.Copy((object[])arguments, from, (object[])result, 0, len);
                 }
@@ -81,8 +82,8 @@ namespace Ramda.NET
             }
         }
 
-        internal static Currying.LambdaN Dispatchable(Currying.LambdaN transducerFunction, Delegate fn) {
-            return new Currying.LambdaN(arguments => {
+        internal static LambdaN Dispatchable(LambdaN transducerFunction, Delegate fn) {
+            return new LambdaN(arguments => {
                 if (arguments.Arity() != 1) {
                     return fn.DynamicInvoke(new object[0]);
                 }
@@ -91,8 +92,8 @@ namespace Ramda.NET
             });
         }
 
-        internal static Currying.LambdaN Dispatchable2(string methodName, Currying.LambdaN transducerFunction, Delegate fn) {
-            return new Currying.LambdaN(arguments => {
+        internal static LambdaN Dispatchable2(string methodName, LambdaN transducerFunction, Delegate fn) {
+            return new LambdaN(arguments => {
                 var length = arguments.Arity();
 
                 if (length == 2) {
@@ -140,7 +141,7 @@ namespace Ramda.NET
             IList acc = null;
 
             limit = limit >= 0 ? limit : 0;
-            acc = list.IsFixedSize ? (IList)new object[limit] : new List<object>(limit);
+            acc = list.IsArray() ? (IList)new object[limit] : new List<object>(limit);
 
             while (idx < limit) {
                 acc[idx] = Slice(list, idx, idx + length);
@@ -148,6 +149,37 @@ namespace Ramda.NET
             }
 
             return acc;
+        }
+
+        internal static LambdaN CheckForMethod(string methodName, Delegate fn) {
+            return new LambdaN((arguments) => {
+                object obj;
+                object member;
+                Type memberType;
+                var length = arguments.Length;
+
+                if (length == 0) {
+                    return fn.DynamicInvoke();
+                }
+
+                obj = arguments[length - 1];
+                member = obj.Member(methodName);
+                memberType = member.GetType();
+
+                if (memberType.IsArray || !memberType.IsFunction()) {
+                    return fn.DynamicInvoke(arguments);
+                }
+
+                return ((Delegate)member).DynamicInvoke(obj, Slice(arguments, 0, length - 1));
+            });
+        }
+
+        internal static bool Has(string prop, object obj) {
+            return obj.TryGetMember(prop).IsNotNull();
+        }
+
+        internal static TValue identity<TValue>(TValue x) {
+            return x;
         }
     }
 }

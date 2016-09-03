@@ -15,7 +15,7 @@ namespace Ramda.NET
             var type = obj.GetType();
 
             if (type.IsAnonymousType()) {
-                target = AnonymousTypeCloneAndAssignValue(prop, (_) => propValue, type, obj);
+                target = AnonymousTypeCloneAndAssignValue(prop, _ => propValue, type, obj);
             }
             else {
                 target = WellKnownTypeCloneAndAssignValue(prop, obj, propValue);
@@ -66,7 +66,7 @@ namespace Ramda.NET
                     var property = (PropertyInfo)member;
 
                     if (property.CanWrite) {
-                        property.SetValue(target, value);
+                        property.SetValue(target, value, null);
                     }
 
                     break;

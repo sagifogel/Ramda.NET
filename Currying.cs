@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using System.Dynamic;
+using System.Collections;
 using static Ramda.NET.Core;
+using System.Collections.Generic;
 
 namespace Ramda.NET
 {
@@ -89,17 +90,17 @@ namespace Ramda.NET
 
         internal static dynamic CurryN = Curry2<int, Delegate, dynamic>((length, fn) => {
             if (length == 1) {
-                return Curry1(new Func<object[], dynamic>(fn.DynamicInvoke));
+                return Curry1(new Func<object, object>(arg => fn.DynamicInvoke(new[] { arg })));
             }
 
             return Arity(length, InternalCurryN(length, new object[0], fn));
         });
 
-        internal readonly static dynamic Add = Currying.Curry2<double, double, double>((arg1, arg2) => {
+        internal readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => {
             return arg1 + arg2;
         });
 
-        public readonly static dynamic Adjust = Currying.Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
+        public readonly static dynamic Adjust = Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
             var start = 0;
             var index = 0;
             IList concatedList = null;
@@ -125,7 +126,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Any = CurryN(Dispatchable2("Any", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, true))));
 
-        internal readonly static dynamic Aperture = CurryN(Dispatchable2("Aperture", new LambdaN(arguments => null), new Func<int, IList, IList>(Aperture)));
+        internal readonly static dynamic Aperture = CurryN(Dispatchable2("Aperture", new LambdaN(arguments => null), new Func<int, IList, IList>(Core.Aperture)));
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Concat(list, new List<object>() { el }));
 
@@ -330,6 +331,18 @@ namespace Ramda.NET
         internal readonly static dynamic Gte = Curry2<dynamic, dynamic, bool>((a, b) => a >= b);
 
         internal readonly static dynamic Has = Curry2<string, object, bool>(Core.Has);
+
+        internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a.IsNotNull() ? a.Equals(b) : b.IsNull());
+
+        internal readonly static dynamic Identity = Curry1<object, object>(Core.Identity);
+
+        internal readonly static dynamic IfElse = Curry3<LambdaN, LambdaN, LambdaN, LambdaN>((condition, onTrue, onFalse) => {
+            return CurryN(1, new Lambda1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
+        });
+
+        private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {
+            return (bool)condition.Invoke(arguments) ? onTrue.Invoke(arguments) : onFalse.Invoke(arguments);
+        }
 
         private static object InternalEvolve(IDictionary<string, object> transformations, object target) {
             IDictionary<string, object> result = new ExpandoObject();

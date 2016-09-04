@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Arity.cs" />
     <Compile Include="Currying.cs" />
-    <Compile Include="Extensions\CurryingExtemsions.cs" />
+    <Compile Include="Extensions\CurryingExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="ShallowCloner.cs" />

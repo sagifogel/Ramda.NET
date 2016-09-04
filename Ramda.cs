@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
     public static partial class R
     {
-        public static Currying.RamdaPlaceholder __ = new Currying.RamdaPlaceholder();
+        public static RamdaPlaceholder __ = new RamdaPlaceholder();
 
         public static dynamic CurryN(int length, Delegate fn) {
             return Currying.CurryN(length, fn);
@@ -27,11 +28,11 @@ namespace Ramda.NET
             return Currying.Add(arg1);
         }
 
-        public static dynamic Add(Currying.RamdaPlaceholder arg1) {
+        public static dynamic Add(RamdaPlaceholder arg1) {
             return Currying.Add(arg1);
         }
 
-        public static dynamic Add(Currying.RamdaPlaceholder arg1, Currying.RamdaPlaceholder arg2) {
+        public static dynamic Add(RamdaPlaceholder arg1, RamdaPlaceholder arg2) {
             return Currying.Add(arg1, arg2);
         }
 
@@ -72,12 +73,20 @@ namespace Ramda.NET
             return Currying.DefaultTo(arg1);
         }
 
-        public static dynamic DefaultTo(Currying.RamdaPlaceholder arg1 = null) {
+        public static dynamic DefaultTo(RamdaPlaceholder arg1 = null) {
             return Currying.DefaultTo(arg1);
         }
 
         public static dynamic DefaultTo<TArg1, TArg2>(TArg1 arg1, TArg2 arg2) {
             return Currying.DefaultTo(arg1, arg2);
+        }
+
+        public static dynamic Assoc(string memberName, object value, object target) {
+            return Currying.Assoc(memberName, value, target);
+        }
+
+        public static dynamic Assoc(string memberName, object value, RamdaPlaceholder target = null) {
+            return Currying.Assoc(memberName, value, target);
         }
 
         public static dynamic DissocPath(IList<string> list) {
@@ -92,16 +101,46 @@ namespace Ramda.NET
             return Currying.DissocPath(list, obj);
         }
 
-        public static dynamic DissocPath(Currying.RamdaPlaceholder __, object obj) {
+        public static dynamic DissocPath(RamdaPlaceholder __, object obj) {
             return Currying.DissocPath(__, obj);
         }
 
-        public static dynamic DissocPath(IList<string> list, Currying.RamdaPlaceholder __) {
+        public static dynamic DissocPath(IList<string> list, RamdaPlaceholder __) {
             return Currying.DissocPath(list, __);
         }
 
         public static dynamic Evolve(Dictionary<string, object> transformations, object target) {
             return Currying.Evolve(transformations, target);
+        }
+
+        public static dynamic Has(string member, object target) {
+            return Currying.Has(member, target);
+        }
+
+        public static dynamic Has(string member, RamdaPlaceholder __ = null) {
+            return Currying.Has(member, __);
+        }
+
+        public static dynamic Identical<TArg1, TArg2>(TArg1 arg1, TArg2 arg2) {
+            return Currying.Identical(arg1, arg2);
+        }
+
+        public static dynamic IfElse(Delegate predicate, Delegate onTrue, Delegate onFalse) {
+            return Currying.IfElse(predicate, onTrue, onFalse);
+        }
+
+        public static dynamic Gt<TArg1, TArg2>(TArg1 arg1, TArg2 arg2) {
+            return Currying.Gt(arg1, arg2);
+        }
+
+        public static dynamic Gt<TArg1, TArg2>(TArg1 arg1, RamdaPlaceholder __ = null) {
+            return Currying.Gt(arg1, __);
+        }
+
+        public static dynamic Stam<TArg1, TArg2>(TArg1 arg1, TArg2 arg2) {
+            return CurryN(2, new LambdaN(args => {
+                return true;
+            }));
         }
     }
 }

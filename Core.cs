@@ -178,7 +178,7 @@ namespace Ramda.NET
             return obj.TryGetMember(prop).IsNotNull();
         }
 
-        internal static TValue identity<TValue>(TValue x) {
+        internal static TValue Identity<TValue>(TValue x) {
             return x;
         }
     }

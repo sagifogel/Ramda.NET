@@ -340,6 +340,25 @@ namespace Ramda.NET
             return CurryN(1, new Lambda1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
         });
 
+        internal readonly static dynamic Inc = Add(1);
+
+        internal readonly static dynamic Insert = Curry3<int, object, IList, IList>((idx, elt, list) => {
+            var result = list.CreateNewList();
+
+            idx = idx < list.Count && idx >= 0 ? idx : list.Count;
+            result.Insert(idx, elt);
+
+            if (list.IsArray()) {
+                var arrayResult = result.CreateNewArray(list.Count);
+
+                Array.Copy((Array)result, (Array)arrayResult, list.Count);
+
+                return arrayResult;
+            }
+
+            return result;
+        });
+
         private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {
             return (bool)condition.Invoke(arguments) ? onTrue.Invoke(arguments) : onFalse.Invoke(arguments);
         }

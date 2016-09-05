@@ -65,17 +65,16 @@ namespace Ramda.NET
                 var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
 
                 if (arguments.IsArray()) {
-                    result = new object[len];
-                    Array.Copy((object[])arguments, from, (object[])result, 0, len);
+                    result = arguments.CreateNewArray(len);
+                    Array.Copy((Array)arguments, from, (Array)result, 0, len);
                 }
                 else {
-                    var list = new List<object>();
+                    result = arguments.CreateNewList();
+                    to = len + from;
 
-                    foreach (var item in arguments) {
-                        list.Add(item);
+                    for (int i = from; i < to; i++) {
+                        result.Add(result[i]);
                     }
-
-                    result = list.Skip(from).Take(len).ToList();
                 }
 
                 return result;

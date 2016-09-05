@@ -128,6 +128,14 @@ namespace Ramda.NET
             return ctor;
         }
 
+        internal static IList CreateNewArray(this IList array, int len) {
+            return (IList)array.GetType().GetConstructors()[0].Invoke(new object[] { len });
+        }
+
+        internal static IList CreateNewList(this IList list) {
+            return (IList)list.GetType().GetConstructor(Type.EmptyTypes).Invoke(null);
+        }
+
         internal static Func<object> GetFactory(this object value) {
             IEnumerable<Type> parameters;
             var ctor = value.GetConstructor(out parameters);

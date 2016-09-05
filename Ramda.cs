@@ -136,11 +136,5 @@ namespace Ramda.NET
         public static dynamic Gt<TArg1, TArg2>(TArg1 arg1, RamdaPlaceholder __ = null) {
             return Currying.Gt(arg1, __);
         }
-
-        public static dynamic Stam<TArg1, TArg2>(TArg1 arg1, TArg2 arg2) {
-            return CurryN(2, new LambdaN(args => {
-                return true;
-            }));
-        }
     }
 }

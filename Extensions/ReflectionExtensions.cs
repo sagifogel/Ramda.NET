@@ -32,6 +32,10 @@ namespace Ramda.NET
             return value.GetType().IsArray;
         }
 
+        internal static bool IsList(this object value) {
+            return typeof(IList).IsAssignableFrom(value.GetType());
+        }
+
         internal static bool IsFunction(this object value) {
             return value.GetType().IsFunction();
         }
@@ -134,6 +138,10 @@ namespace Ramda.NET
 
         internal static IList CreateNewList(this IList list) {
             return (IList)list.GetType().GetConstructor(Type.EmptyTypes).Invoke(null);
+        }
+
+        internal static IList CreateNewListOfType(this IList list, Type type) {
+            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 
         internal static Func<object> GetFactory(this object value) {

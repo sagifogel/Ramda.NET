@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Dynamic;
 using System.Collections;
 using static Ramda.NET.Core;
@@ -274,7 +273,7 @@ namespace Ramda.NET
             return -1;
         })));
 
-        internal readonly static dynamic ForEach = CurryN(CheckForMethod("ForEach", new Func<Action<object>, IList, IList>((fn, list) => {
+        internal readonly static dynamic ForEach = Curry2(CheckForMethod2<Action<object>, IList, IList>("ForEach", (fn, list) => {
             var len = list.Count;
             var idx = 0;
 
@@ -284,7 +283,7 @@ namespace Ramda.NET
             }
 
             return list;
-        })));
+        }));
 
         internal readonly static dynamic FromPairs = Curry1<object[][], object>((pairs) => {
             var idx = 0;
@@ -357,6 +356,52 @@ namespace Ramda.NET
             }
 
             return result;
+        });
+
+        internal readonly static dynamic InsertAll = Curry3<int, IList, IList, IList>((idx, elts, list) => {
+            idx = idx < list.Count && idx >= 0 ? idx : list.Count;
+
+            return Concat(Concat(Slice(list, 0, idx), elts), Slice(list, idx));
+        });
+
+        internal readonly static dynamic Intersperse = Curry2(CheckForMethod2<object, IList, IList>("intersperse", (separator, list) => {
+            var idx = 0;
+            IList result = null;
+            var length = list.Count;
+            Type underlyingType = null;
+            var listType = list.GetType();
+
+            if (listType.IsArray) {
+                var separatorType = underlyingType = separator.GetType();
+
+                if (!separatorType.Equals(listType.GetElementType())) {
+                    underlyingType = typeof(object);
+                }
+            }
+
+            result = list.CreateNewListOfType(underlyingType);
+
+            while (idx < length) {
+                result.Add(list[idx]);
+
+                if (idx != length - 1) {
+                    result.Add(separator);
+                }
+
+                idx += 1;
+            }
+
+            return result;
+        }));
+
+        internal readonly static dynamic Is = Curry2<Type, object, bool>((type, val) => {
+            if (val.IsNotNull()) {
+                var valueType = val.GetType();
+
+                return valueType.Equals(type) || valueType.IsInstanceOfType(type);
+            }
+
+            return false;
         });
 
         private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {

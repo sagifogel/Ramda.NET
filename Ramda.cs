@@ -136,5 +136,13 @@ namespace Ramda.NET
         public static dynamic Gt<TArg1, TArg2>(TArg1 arg1, RamdaPlaceholder __ = null) {
             return Currying.Gt(arg1, __);
         }
+
+        public static dynamic Intersperse<TValue>(object seperator, IList<TValue> list) {
+            return Currying.Intersperse(seperator, list);
+        }
+
+        public static dynamic Is<TType>(object value) {
+            return Currying.Is(typeof(TType), value);
+        }
     }
 }

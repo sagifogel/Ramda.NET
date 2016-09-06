@@ -150,27 +150,38 @@ namespace Ramda.NET
             return acc;
         }
 
-        internal static LambdaN CheckForMethod(string methodName, Delegate fn) {
-            return new LambdaN((arguments) => {
-                object obj;
-                object member;
-                Type memberType;
-                var length = arguments.Length;
+        internal static Func<TArg1, TArg2, TResult> CheckForMethod2<TArg1, TArg2, TResult>(string methodName, Func<TArg1, TArg2, TResult> fn) {
+            return (arg1, arg2) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2);
+        }
 
-                if (length == 0) {
-                    return fn.DynamicInvoke();
-                }
+        internal static Func<TArg1, TArg2, TArg3, TResult> CheckForMethod3<TArg1, TArg2, TArg3, TResult>(string methodName, Func<TArg1, TArg2, TArg3, TResult> fn) {
+            return (arg1, arg2, arg3) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2, arg3);
+        }
 
-                obj = arguments[length - 1];
-                member = obj.Member(methodName);
+        private static object CheckForMethodN(string methodName, Delegate fn, params object[] arguments) {
+            object obj;
+            object member;
+            Type memberType;
+            var invokeFn = false;
+
+            var length = arguments.Length;
+            if (length == 0) {
+                return fn.DynamicInvoke();
+            }
+
+            obj = arguments[length - 1];
+            member = obj.TryGetMember(methodName);
+
+            if (member.IsNotNull()) {
                 memberType = member.GetType();
+                invokeFn = !memberType.IsFunction();
+            }
 
-                if (memberType.IsArray || !memberType.IsFunction()) {
-                    return fn.DynamicInvoke(arguments);
-                }
+            if (invokeFn || obj.IsList()) {
+                return fn.DynamicInvoke(arguments);
+            }
 
-                return ((Delegate)member).DynamicInvoke(obj, Slice(arguments, 0, length - 1));
-            });
+            return ((Delegate)member).DynamicInvoke(obj, Slice(arguments, 0, length - 1));
         }
 
         internal static bool Has(string prop, object obj) {

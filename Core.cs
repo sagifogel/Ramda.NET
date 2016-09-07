@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Collections;
+using static Ramda.NET.Lambda;
 using System.Collections.Generic;
-using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {

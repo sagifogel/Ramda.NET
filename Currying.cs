@@ -1,18 +1,16 @@
 ﻿using System;
+using System.Linq;
 using System.Dynamic;
 using System.Collections;
 using static Ramda.NET.Core;
+using static Ramda.NET.Lambda;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
-    public static partial class Currying
+    internal static partial class Currying
     {
-        public delegate dynamic Lambda1(object arg = null);
-        public delegate dynamic LambdaN(params object[] arguments);
-        public delegate dynamic Lambda2(object arg1 = null, object arg2 = null);
-        public delegate dynamic Lambda3(object arg1 = null, object arg2 = null, object arg3 = null);
-
         internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
             return new LambdaN(arguments => {
                 var arg1 = arguments.AssignIfArgumentInRange(0);
@@ -36,9 +34,12 @@ namespace Ramda.NET
                     case 0:
                         return Curry2(fn);
                     case 1:
-                        return IsPlaceholder(arg1 = arguments[0]) ? Curry2(fn) : Curry1<TArg2, TResult>(_arg2 => fn(arg1.CastTo<TArg1>(), _arg2));
+                        return IsPlaceholder(arg1) ? Curry2(fn) : Curry1<TArg2, TResult>(_arg2 => fn(arg1.CastTo<TArg1>(), _arg2));
                     default:
-                        return (arg1IsPlaceHolder = IsPlaceholder(arg1 = arguments[0])) && (arg2IsPlaceHolder = IsPlaceholder(arg2 = arguments[0])) ? Curry2(fn) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
+                        arg1IsPlaceHolder = IsPlaceholder(arg1);
+                        arg2IsPlaceHolder = IsPlaceholder(arg2);
+
+                        return arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2(fn) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
                             return fn(_arg1, arg2.CastTo<TArg2>());
                         }) : arg2IsPlaceHolder ? Curry1<TArg2, TResult>(_arg2 => {
                             return fn(arg1.CastTo<TArg1>(), _arg2);
@@ -62,6 +63,9 @@ namespace Ramda.NET
                     case 1:
                         return IsPlaceholder(arg1) ? Curry3(fn) : Curry2<TArg2, TArg3, TResult>((_arg2, _arg3) => fn(arg1.CastTo<TArg1>(), _arg2, _arg3));
                     case 2:
+                        arg1IsPlaceHolder = IsPlaceholder(arg1);
+                        arg2IsPlaceHolder = IsPlaceholder(arg2);
+
                         return (arg1IsPlaceHolder = IsPlaceholder(arg1)) && (arg2IsPlaceHolder = IsPlaceholder(arg2)) ? Curry3(fn) : arg1IsPlaceHolder ? Curry2<TArg1, TArg3, TResult>((_arg1, _arg3) => {
                             return fn(_arg1, arg2.CastTo<TArg2>(), _arg3);
                         }) : arg2IsPlaceHolder ? Curry2<TArg2, TArg3, TResult>((_arg2, _arg3) => {
@@ -70,7 +74,12 @@ namespace Ramda.NET
                             return fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), _arg3);
                         });
                     default:
-                        return (arg1IsPlaceHolder = IsPlaceholder(arg1)) && (arg2IsPlaceHolder = IsPlaceholder(arg2)) && (arg3IsPlaceHolder = IsPlaceholder(arg3)) ? Curry3(fn) : arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2<TArg1, TArg2, TResult>((_arg1, _arg2) => {
+
+                        arg1IsPlaceHolder = IsPlaceholder(arg1);
+                        arg2IsPlaceHolder = IsPlaceholder(arg2);
+                        arg3IsPlaceHolder = IsPlaceholder(arg3);
+
+                        return arg1IsPlaceHolder && arg2IsPlaceHolder && arg3IsPlaceHolder ? Curry3(fn) : arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2<TArg1, TArg2, TResult>((_arg1, _arg2) => {
                             return fn(_arg1, _arg2, arg3.CastTo<TArg3>());
                         }) : arg1IsPlaceHolder && arg3IsPlaceHolder ? Curry2<TArg1, TArg3, TResult>((_arg1, _arg3) => {
                             return fn(_arg1, arg2.CastTo<TArg2>(), _arg3);
@@ -404,6 +413,45 @@ namespace Ramda.NET
             return false;
         });
 
+        internal readonly static dynamic IsNil = Curry1<object, bool>(val => ReferenceEquals(val, null));
+
+        internal readonly static dynamic Keys = Curry1<object, IEnumerable<string>>(val => val.ToMemberDictionary().Select(kv => kv.Key));
+
+        internal readonly static dynamic Length = Curry1<IList, int>(list => list.Count);
+
+        internal readonly static dynamic Lt = Curry2<dynamic, dynamic, bool>((a, b) => a < b);
+
+        internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => a <= b);
+
+        internal readonly static dynamic MapAccum = Curry3<Func<object, object, Tuple<object, object>>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
+            return MapAccumInternal(0, list.Count, 1, (from, to) => from < to, fn, acc, list);
+        });
+
+        internal readonly static dynamic MapAccumRight = Curry3<Func<object, object, Tuple<object, object>>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
+            return MapAccumInternal(list.Count - 1, 0, -1, (from, to) => from >= to, fn, acc, list);
+        });
+
+        internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
+
+        internal readonly static dynamic MathMod = Curry2<dynamic, dynamic, dynamic>((m, p) => (m % p + p) % p);
+
+        internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a);
+
+        internal readonly static dynamic MaxBy = Curry3<Func<dynamic, dynamic>, dynamic, dynamic, dynamic>((f, a, b) => f(b) > f(a) ? b : a);
+
+        private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, Tuple<object, object>> fn, object acc, IList list) {
+            var tuple = Tuple.Create<object, object>(acc, null);
+            IList result = new object[Math.Max(from, to) + 1];
+
+            while (loopPredicate(from, to)) {
+                tuple = fn(tuple.Item1, list[from]);
+                result[from] = tuple.Item1;
+                from += indexerAcc;
+            }
+
+            return Tuple.Create(tuple.Item1, result);
+        }
+
         private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {
             return (bool)condition.Invoke(arguments) ? onTrue.Invoke(arguments) : onFalse.Invoke(arguments);
         }
@@ -466,6 +514,10 @@ namespace Ramda.NET
             }
 
             return !returnValue;
+        }
+
+        private static bool IsPlaceholder(object param) {
+            return param != null && R.__.Equals(param);
         }
 
         private static LambdaN InternalCurryN(int length, object[] received, Delegate fn) {

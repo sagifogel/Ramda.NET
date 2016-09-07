@@ -137,7 +137,13 @@ namespace Ramda.NET
         }
 
         internal static IList CreateNewList(this IList list) {
-            return (IList)list.GetType().GetConstructor(Type.EmptyTypes).Invoke(null);
+            var type = list.GetType();
+
+            if (type.IsArray) {
+                type = type.GetElementType();
+            }
+
+            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 
         internal static IList CreateNewListOfType(this IList list, Type type) {

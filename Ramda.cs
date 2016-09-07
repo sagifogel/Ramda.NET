@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using static Ramda.NET.Currying;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
@@ -85,6 +87,10 @@ namespace Ramda.NET
             return Currying.Assoc(memberName, value, target);
         }
 
+        public static dynamic Assoc(RamdaPlaceholder __, object value, object target) {
+            return Currying.Assoc(__, value, target);
+        }
+
         public static dynamic Assoc(string memberName, object value, RamdaPlaceholder target = null) {
             return Currying.Assoc(memberName, value, target);
         }
@@ -143,6 +149,46 @@ namespace Ramda.NET
 
         public static dynamic Is<TType>(object value) {
             return Currying.Is(typeof(TType), value);
+        }
+
+        public static dynamic Keys(object value) {
+            return Currying.Keys(value);
+        }
+
+        public static dynamic Length<TValue>(IList<TValue> list) {
+            return Currying.Length(list);
+        }
+
+        public static dynamic MapAccum(Func<dynamic, dynamic, Tuple<object, object>> fn, object acc, IList list) {
+            return Currying.MapAccum(fn, acc, list);
+        }
+
+        public static dynamic MapAccumRight(Func<dynamic, dynamic, Tuple<object, object>> fn, object acc, IList list) {
+            return Currying.MapAccumRight(fn, acc, list);
+        }
+
+        public static dynamic Match(Regex rx, string str) {
+            return Currying.Match(rx, str);
+        }
+
+        public static dynamic Match(Regex rx, RamdaPlaceholder __ = null) {
+            return Currying.Match(rx, __);
+        }
+
+        public static dynamic MathMod(int m, int p) {
+            return Currying.MathMod(m, p);
+        }
+
+        public static dynamic MathMod(RamdaPlaceholder __, int p) {
+            return Currying.MathMod(__, p);
+        }
+
+        public static dynamic MathMod(int m, RamdaPlaceholder __ = null) {
+            return Currying.MathMod(m);
+        }
+
+        public static dynamic IsNil(object value) {
+            return Currying.IsNil(value);
         }
     }
 }

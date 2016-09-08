@@ -20,7 +20,7 @@ namespace Ramda.NET
                 i--;
             }
 
-            return i++;
+            return ++i;
         }
 
         internal static int Arity(this Delegate @delegate) {

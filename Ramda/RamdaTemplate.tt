@@ -1,0 +1,88 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ include file="T4Toolbox.tt" #><#+
+public class RamdaTemplate : CSharpTemplate
+{		
+	private readonly string name;
+	
+	public RamdaTemplate() {
+		Generics = new List<string>();
+		Parameters = new List<Tuple<string, string>>();
+		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
+	}
+
+	public List<string> Generics { get; set; }
+	
+	public bool AllGapsFunctionAlreadyExists { get; set; }
+	
+	public List<Tuple<string, string>> Parameters { get; set; }
+
+	private string FormatTuple(Tuple<string, string> tuple) {
+		return string.Format("{0} {1}", tuple.Item1, tuple.Item2);
+	}
+
+	private string Join(IEnumerable<Tuple<string, string>> joined) {
+		return string.Join(", ", joined.Select(FormatTuple)); 
+	}
+
+	private Tuple<string, string> FillPlaceholder(Tuple<string, string> tuple) {
+		
+		return Tuple.Create("RamdaPlaceholder", tuple.Item2);
+	}
+
+	private Tuple<string, string> FillNullablePlaceholder(Tuple<string, string> tuple) {
+		
+		return Tuple.Create("RamdaPlaceholder", string.Format("{0} = null", tuple.Item2));
+	}
+
+	public override string TransformText() {
+		base.TransformText();
+#>
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Ramda.NET
+{
+	public static partial class R
+	{	
+<#+		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
+		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));#>
+		public static dynamic <#= name #><#= generics #>(<#= Join(Parameters) #>) {
+			return Currying.<#= name #>(<#= parameterNames #>);
+		}
+<#+		for (var i = 0; i < Parameters.Count; i++)	 {
+			var shifted = Parameters.ToList();
+			var shiftedItem = Parameters[i];
+
+			shifted.RemoveAt(i);
+			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
+#>		
+		public static dynamic <#= name #><#= generics #>(<#= Join(shifted) #>) {
+			return Currying.<#= name #>(<#= parameterNames #>); 
+		}
+<#+}
+		for (var i = 1; i < Parameters.Count - 1; i++)	 {
+			var taken = Parameters.Take(i);
+			var skipped = Parameters.Skip(i);
+			var rightFilled = string.Join(", ", taken.Concat(skipped.Select(FillNullablePlaceholder)).Select(FormatTuple)); #>		
+		
+		public static dynamic <#= name #><#= generics #>(<#= rightFilled #>) {
+			return Currying.<#= name #>(<#= parameterNames #>);
+		}
+<#+		}
+		if (!AllGapsFunctionAlreadyExists && Parameters.Count > 1) {	#>
+		
+		public static dynamic <#= name #><#= generics #>(<#= string.Join(", ", Parameters.Select(FillNullablePlaceholder).Select(FormatTuple)) #>) {
+			return Currying.<#= name #>(<#= parameterNames #>);
+		}
+<#+}#>
+	}
+}
+<#+
+        return this.GenerationEnvironment.ToString();
+	}
+}
+#>

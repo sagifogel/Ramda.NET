@@ -9,7 +9,7 @@ namespace Ramda.NET
     internal static partial class Core
     {
         internal static Func<object[], bool> Complement(Func<object[], bool> fn) {
-            return (arguments => !fn.Invoke(arguments));
+            return arguments => !fn.Invoke(arguments);
         }
 
         internal static IList Concat(IList set1, IList set2 = null) {

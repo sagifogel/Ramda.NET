@@ -43,20 +43,185 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ramda\Add.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Add.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Add.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Add.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Adjust.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Adjust.tt</DependentUpon>
+    </Compile>
     <Compile Include="Arity.cs" />
+    <Compile Include="Ramda\All.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Always.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Always.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\And.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>And.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Any.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Any.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Aperture.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aperture.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Append.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Append.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Assoc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Assoc.tt</DependentUpon>
+    </Compile>
     <Compile Include="Currying.cs" />
     <Compile Include="Extensions\CurryingExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Lambda.cs" />
+    <Compile Include="Ramda\AssocPath.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssocPath.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Clamp.double.cs">
+      <DependentUpon>Clamp.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Clamp.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Clamp.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Comparator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Comparator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Dec.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dec.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Dec.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dec.int.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
-    <Compile Include="Ramda.cs" />
+    <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Ramda\Add.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.double.cs</LastGenOutput>
+      <LastOutputs>.\Add.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Add.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.int.cs</LastGenOutput>
+      <LastOutputs>.\Add.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Adjust.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Adjust.cs</LastGenOutput>
+      <LastOutputs>.\Adjust.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\All.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>All.cs</LastGenOutput>
+      <LastOutputs>.\All.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Always.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Always.cs</LastGenOutput>
+      <LastOutputs>.\Always.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\And.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>And.cs</LastGenOutput>
+      <LastOutputs>.\And.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Any.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Any.cs</LastGenOutput>
+      <LastOutputs>.\Any.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Aperture.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Aperture.cs</LastGenOutput>
+      <LastOutputs>.\Aperture.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Append.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Append.cs</LastGenOutput>
+      <LastOutputs>.\Append.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Assoc.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Assoc.cs</LastGenOutput>
+      <LastOutputs>.\Assoc.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\AssocPath.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssocPath.cs</LastGenOutput>
+      <LastOutputs>.\AssocPath.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Clamp.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Clamp.double.cs</LastGenOutput>
+      <LastOutputs>.\Clamp.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Clamp.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Clamp.int.cs</LastGenOutput>
+      <LastOutputs>.\Clamp.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Comparator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Comparator.cs</LastGenOutput>
+      <LastOutputs>.\Comparator.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Dec.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Dec.double.cs</LastGenOutput>
+      <LastOutputs>.\Dec.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Dec.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Dec.int.cs</LastGenOutput>
+      <LastOutputs>.\Dec.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\RamdaTemplate.tt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

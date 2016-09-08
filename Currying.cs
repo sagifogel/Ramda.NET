@@ -130,15 +130,13 @@ namespace Ramda.NET
 
         internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
 
-        internal readonly static dynamic All = CurryN(Dispatchable2("All", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, false))));
+        internal readonly static dynamic All = CurryN(Dispatchable2("All", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AllOrAny(fn, list, false))));
 
-        internal readonly static dynamic Any = CurryN(Dispatchable2("Any", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AddOrAny(fn, list, true))));
+        internal readonly static dynamic Any = CurryN(Dispatchable2("Any", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AllOrAny(fn, list, true))));
 
         internal readonly static dynamic Aperture = CurryN(Dispatchable2("Aperture", new LambdaN(arguments => null), new Func<int, IList, IList>(Core.Aperture)));
 
-        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Concat(list, new List<object>() { el }));
-
-        internal readonly static dynamic Apply = Curry2<LambdaN, object[], dynamic>((fn, arguments) => fn(arguments));
+        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Concat(list, list.CreateNewList(new object[] { el })));
 
         internal readonly static dynamic Assoc = Curry3<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
 
@@ -153,7 +151,7 @@ namespace Ramda.NET
             }
         });
 
-        internal readonly static dynamic Clamp = Curry3<double, double, double, double>((min, max, value) => {
+        internal readonly static dynamic Clamp = Curry3<dynamic, dynamic, dynamic, dynamic>((min, max, value) => {
             if (min > max) {
                 throw new ArgumentOutOfRangeException("min must not be greater than max in Clamp(min, max, value)");
             }
@@ -502,7 +500,7 @@ namespace Ramda.NET
             }
         }
 
-        private static bool AddOrAny(Func<object, bool> fn, IList list, bool returnValue) {
+        private static bool AllOrAny(Func<object, bool> fn, IList list, bool returnValue) {
             var idx = 0;
 
             while (idx < list.Count) {

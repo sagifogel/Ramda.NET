@@ -365,7 +365,7 @@
     <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="RTuple.cs" />
+    <Compile Include="R.Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ramda\FindLast.tt">

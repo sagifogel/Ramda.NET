@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Collections;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Collections;
 
 namespace Ramda.NET
 {

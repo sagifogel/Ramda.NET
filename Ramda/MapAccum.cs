@@ -12,7 +12,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple<dynamic, dynamic>> fn, dynamic acc, IList<dynamic> list) {
+		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple> fn, dynamic acc, IList<dynamic> list) {
 			return Currying.MapAccum(fn, acc, list);
 		}
 		
@@ -20,16 +20,16 @@ namespace Ramda.NET
 			return Currying.MapAccum(fn, acc, list); 
 		}
 		
-		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple<dynamic, dynamic>> fn, RamdaPlaceholder acc, IList<dynamic> list) {
+		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple> fn, RamdaPlaceholder acc, IList<dynamic> list) {
 			return Currying.MapAccum(fn, acc, list); 
 		}
 		
-		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple<dynamic, dynamic>> fn, dynamic acc, RamdaPlaceholder list = null) {
+		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple> fn, dynamic acc, RamdaPlaceholder list = null) {
 			return Currying.MapAccum(fn, acc, list); 
 		}
 		
 		
-		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple<dynamic, dynamic>> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+		public static dynamic MapAccum(Func<dynamic, dynamic, Tuple> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccum(fn, acc, list);
 		}
 		

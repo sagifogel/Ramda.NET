@@ -385,11 +385,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => a <= b);
 
-        internal readonly static dynamic MapAccum = Curry3<Func<object, object, Tuple<object, object>>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
+        internal readonly static dynamic MapAccum = Curry3<Func<object, object, R.Tuple>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
             return MapAccumInternal(0, list.Count, 1, (from, to) => from < to, fn, acc, list);
         });
 
-        internal readonly static dynamic MapAccumRight = Curry3<Func<object, object, Tuple<object, object>>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
+        internal readonly static dynamic MapAccumRight = Curry3<Func<object, object, R.Tuple>, object, IList, Tuple<object, IList>>((fn, acc, list) => {
             return MapAccumInternal(list.Count - 1, 0, -1, (from, to) => from >= to, fn, acc, list);
         });
 
@@ -401,8 +401,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic MaxBy = Curry3<Func<object, object>, dynamic, dynamic, dynamic>((f, a, b) => f(b) > f(a) ? b : a);
 
-        private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, Tuple<object, object>> fn, object acc, IList list) {
-            var tuple = Tuple.Create<object, object>(acc, null);
+        private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
+            var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
 
             while (loopPredicate(from, to)) {

@@ -4,7 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("Func<dynamic, dynamic, Tuple<dynamic, dynamic>>", "fn"));	
+	template.Parameters.Add(Tuple.Create("Func<dynamic, dynamic, Tuple>", "fn"));	
 	template.Parameters.Add(Tuple.Create("dynamic", "acc"));
 	template.Parameters.Add(Tuple.Create("IList<dynamic>", "list"));
 	template.Render();

@@ -5,8 +5,8 @@
 	var template = new RamdaTemplate();
 
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("double", "min"));	
-	template.Parameters.Add(Tuple.Create("double", "max"));
+	template.Parameters.Add(Tuple.Create("double", "minimum"));	
+	template.Parameters.Add(Tuple.Create("double", "maximum"));
 	template.Parameters.Add(Tuple.Create("double", "value"));
 	template.Render();
 #>

@@ -1,0 +1,10 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="T4Toolbox.tt" #>
+<#
+// <copyright file="GroupWith.tt" company="ClickTale">
+//  Copyright © ClickTale. All Rights Reserved.
+// </copyright>
+
+
+#>

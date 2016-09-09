@@ -11,29 +11,29 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue value, TTarget target) {
-			return Currying.AssocPath(path, value, target);
+		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, TTarget obj) {
+			return Currying.AssocPath(path, val, obj);
 		}
 		
-		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path, TValue value, TTarget target) {
-			return Currying.AssocPath(path, value, target); 
+		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path, TValue val, TTarget obj) {
+			return Currying.AssocPath(path, val, obj); 
 		}
 		
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder value, TTarget target) {
-			return Currying.AssocPath(path, value, target); 
+		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val, TTarget obj) {
+			return Currying.AssocPath(path, val, obj); 
 		}
 		
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue value, RamdaPlaceholder target = null) {
-			return Currying.AssocPath(path, value, target); 
+		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, RamdaPlaceholder obj = null) {
+			return Currying.AssocPath(path, val, obj); 
 		}
 		
 		
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder value = null, RamdaPlaceholder target = null) {
-			return Currying.AssocPath(path, value, target);
+		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+			return Currying.AssocPath(path, val, obj);
 		}
 		
-		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder value = null, RamdaPlaceholder target = null) {
-			return Currying.AssocPath(path, value, target);
+		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+			return Currying.AssocPath(path, val, obj);
 		}
 	}
 }

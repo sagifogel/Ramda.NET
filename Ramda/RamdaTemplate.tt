@@ -59,11 +59,14 @@ namespace Ramda.NET
 
 			shifted.RemoveAt(i);
 			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
+			
+			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
 #>		
 		public static dynamic <#= name #><#= generics #>(<#= Join(shifted) #>) {
 			return Currying.<#= name #>(<#= parameterNames #>); 
 		}
-<#+}
+<#+        }
+   }
 		for (var i = 1; i < Parameters.Count - 1; i++)	 {
 			var taken = Parameters.Take(i);
 			var skipped = Parameters.Skip(i);

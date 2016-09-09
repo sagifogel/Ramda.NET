@@ -11,20 +11,20 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Add(double arg1, double arg2) {
-			return Currying.Add(arg1, arg2);
+		public static dynamic Add(double a, double b) {
+			return Currying.Add(a, b);
 		}
 		
-		public static dynamic Add(RamdaPlaceholder arg1, double arg2) {
-			return Currying.Add(arg1, arg2); 
+		public static dynamic Add(RamdaPlaceholder a, double b) {
+			return Currying.Add(a, b); 
 		}
 		
-		public static dynamic Add(double arg1, RamdaPlaceholder arg2 = null) {
-			return Currying.Add(arg1, arg2); 
+		public static dynamic Add(double a, RamdaPlaceholder b = null) {
+			return Currying.Add(a, b); 
 		}
 		
-		public static dynamic Add(RamdaPlaceholder arg1 = null, RamdaPlaceholder arg2 = null) {
-			return Currying.Add(arg1, arg2);
+		public static dynamic Add(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
+			return Currying.Add(a, b);
 		}
 	}
 }

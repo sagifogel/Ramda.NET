@@ -11,29 +11,29 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Clamp(int min, int max, int value) {
-			return Currying.Clamp(min, max, value);
+		public static dynamic Clamp(int minimum, int maximum, int value) {
+			return Currying.Clamp(minimum, maximum, value);
 		}
 		
-		public static dynamic Clamp(RamdaPlaceholder min, int max, int value) {
-			return Currying.Clamp(min, max, value); 
+		public static dynamic Clamp(RamdaPlaceholder minimum, int maximum, int value) {
+			return Currying.Clamp(minimum, maximum, value); 
 		}
 		
-		public static dynamic Clamp(int min, RamdaPlaceholder max, int value) {
-			return Currying.Clamp(min, max, value); 
+		public static dynamic Clamp(int minimum, RamdaPlaceholder maximum, int value) {
+			return Currying.Clamp(minimum, maximum, value); 
 		}
 		
-		public static dynamic Clamp(int min, int max, RamdaPlaceholder value = null) {
-			return Currying.Clamp(min, max, value); 
+		public static dynamic Clamp(int minimum, int maximum, RamdaPlaceholder value = null) {
+			return Currying.Clamp(minimum, maximum, value); 
 		}
 		
 		
-		public static dynamic Clamp(int min, RamdaPlaceholder max = null, RamdaPlaceholder value = null) {
-			return Currying.Clamp(min, max, value);
+		public static dynamic Clamp(int minimum, RamdaPlaceholder maximum = null, RamdaPlaceholder value = null) {
+			return Currying.Clamp(minimum, maximum, value);
 		}
 		
-		public static dynamic Clamp(RamdaPlaceholder min = null, RamdaPlaceholder max = null, RamdaPlaceholder value = null) {
-			return Currying.Clamp(min, max, value);
+		public static dynamic Clamp(RamdaPlaceholder minimum = null, RamdaPlaceholder maximum = null, RamdaPlaceholder value = null) {
+			return Currying.Clamp(minimum, maximum, value);
 		}
 	}
 }

@@ -7,7 +7,7 @@
 	template.Generics.Add("TValue");
 	template.Generics.Add("TTarget");
 	template.Parameters.Add(Tuple.Create("IList<string>", "path"));
-	template.Parameters.Add(Tuple.Create("TValue", "value"));
-	template.Parameters.Add(Tuple.Create("TTarget", "target"));
+	template.Parameters.Add(Tuple.Create("TValue", "val"));
+	template.Parameters.Add(Tuple.Create("TTarget", "obj"));
 	template.Render();
 #>

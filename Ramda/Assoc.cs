@@ -11,20 +11,29 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Assoc<TValue, TTarget>(TValue value, TTarget target) {
-			return Currying.Assoc(value, target);
+		public static dynamic Assoc<TValue, TTarget>(string prop, TValue val, TTarget obj) {
+			return Currying.Assoc(prop, val, obj);
 		}
 		
-		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder value, TTarget target) {
-			return Currying.Assoc(value, target); 
+		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder prop, TValue val, TTarget obj) {
+			return Currying.Assoc(prop, val, obj); 
 		}
 		
-		public static dynamic Assoc<TValue, TTarget>(TValue value, RamdaPlaceholder target = null) {
-			return Currying.Assoc(value, target); 
+		public static dynamic Assoc<TValue, TTarget>(string prop, RamdaPlaceholder val, TTarget obj) {
+			return Currying.Assoc(prop, val, obj); 
 		}
 		
-		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder value = null, RamdaPlaceholder target = null) {
-			return Currying.Assoc(value, target);
+		public static dynamic Assoc<TValue, TTarget>(string prop, TValue val, RamdaPlaceholder obj = null) {
+			return Currying.Assoc(prop, val, obj); 
+		}
+		
+		
+		public static dynamic Assoc<TValue, TTarget>(string prop, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+			return Currying.Assoc(prop, val, obj);
+		}
+		
+		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder prop = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+			return Currying.Assoc(prop, val, obj);
 		}
 	}
 }

@@ -11,20 +11,20 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic And(bool arg1, bool arg2) {
-			return Currying.And(arg1, arg2);
+		public static dynamic And(bool a, bool b) {
+			return Currying.And(a, b);
 		}
 		
-		public static dynamic And(RamdaPlaceholder arg1, bool arg2) {
-			return Currying.And(arg1, arg2); 
+		public static dynamic And(RamdaPlaceholder a, bool b) {
+			return Currying.And(a, b); 
 		}
 		
-		public static dynamic And(bool arg1, RamdaPlaceholder arg2 = null) {
-			return Currying.And(arg1, arg2); 
+		public static dynamic And(bool a, RamdaPlaceholder b = null) {
+			return Currying.And(a, b); 
 		}
 		
-		public static dynamic And(RamdaPlaceholder arg1 = null, RamdaPlaceholder arg2 = null) {
-			return Currying.And(arg1, arg2);
+		public static dynamic And(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
+			return Currying.And(a, b);
 		}
 	}
 }

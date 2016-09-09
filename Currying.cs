@@ -166,7 +166,13 @@ namespace Ramda.NET
         internal readonly static dynamic Dec = Add(-1);
 
         internal readonly static dynamic DefaultTo = Curry2<object, object, object>((defaultValue, value) => {
-            return ReferenceEquals(value, null) ? defaultValue : value;
+            var type = value.GetType();
+
+            if (type.IsClass) {
+                return ReferenceEquals(value, null) ? defaultValue : value;
+            }
+
+            return value == type.GetDefaultValue() ? defaultValue : value;
         });
 
         internal readonly static dynamic DifferenceWith = Curry3<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
@@ -191,7 +197,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
 
-        internal readonly static dynamic Divide = Curry2<double, double, double>((a, b) => a / b);
+        internal readonly static dynamic Divide = Curry2<dynamic, dynamic, dynamic>((a, b) => a / b);
 
         internal readonly static dynamic DropWhile = CurryN(Dispatchable2("DropWhile", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, IList>((pred, list) => {
             var idx = 0;
@@ -223,61 +229,19 @@ namespace Ramda.NET
         internal readonly static dynamic Evolve = Curry2<IDictionary<string, object>, object, object>(InternalEvolve);
 
         internal readonly static dynamic Find = CurryN(Dispatchable2("find", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, object>((fn, list) => {
-            var idx = 0;
-            var len = list.Count;
-
-            while (idx < len) {
-                if (fn(list[idx])) {
-                    return list[idx];
-                }
-
-                idx += 1;
-            }
-
-            return null;
+            return FindInternal(0, list.Count, 1, (idx, len) => idx < len, fn, list);
         })));
 
         internal readonly static dynamic FindIndex = CurryN(Dispatchable2("FindIndex", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, int>((fn, list) => {
-            var idx = 0;
-            var len = list.Count;
-
-            while (idx < len) {
-                if (fn(list[idx])) {
-                    return idx;
-                }
-
-                idx += 1;
-            }
-
-            return -1;
+            return FindIndexInternal(0, list.Count, 1, (idx, len) => idx < len, fn, list);
         })));
 
         internal readonly static dynamic FindLast = CurryN(Dispatchable2("FindLast", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, object>((fn, list) => {
-            var idx = list.Count - 1;
-
-            while (idx >= 0) {
-                if (fn(list[idx])) {
-                    return list[idx];
-                }
-
-                idx -= 1;
-            }
-
-            return null;
+            return FindInternal(list.Count - 1, 0, -1, (idx, len) => idx >= len, fn, list);
         })));
 
         internal readonly static dynamic FindLastIndex = CurryN(Dispatchable2("FindLastIndex", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, int>((fn, list) => {
-            var idx = list.Count - 1;
-
-            while (idx >= 0) {
-                if (fn(list[idx])) {
-                    return idx;
-                }
-
-                idx -= 1;
-            }
-
-            return -1;
+            return FindIndexInternal(list.Count - 1, 0, -1, (idx, len) => idx >= len, fn, list);
         })));
 
         internal readonly static dynamic ForEach = Curry2(CheckForMethod2<Action<object>, IList, IList>("ForEach", (fn, list) => {
@@ -292,7 +256,7 @@ namespace Ramda.NET
             return list;
         }));
 
-        internal readonly static dynamic FromPairs = Curry1<object[][], object>((pairs) => {
+        internal readonly static dynamic FromPairs = Curry1<object[][], IDictionary<string, object>>(pairs => {
             var idx = 0;
             IDictionary<string, object> result = new ExpandoObject();
 
@@ -300,7 +264,7 @@ namespace Ramda.NET
                 var key = pairs[idx][0];
 
                 if (key is string) {
-                    result[pairs[idx][0].ToString()] = pairs[idx][1];
+                    result[key.ToString()] = pairs[idx][1];
                 }
 
                 idx += 1;
@@ -448,6 +412,36 @@ namespace Ramda.NET
             }
 
             return Tuple.Create(tuple.Item1, result);
+        }
+
+        private static object FindInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, bool> fn, IList list) {
+            var idx = from;
+            var len = to;
+
+            while (loopPredicate(idx, len)) {
+                if (fn(list[idx])) {
+                    return list[idx];
+                }
+
+                idx += indexerAcc;
+            }
+
+            return null;
+        }
+
+        private static int FindIndexInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, bool> fn, IList list) {
+            var idx = from;
+            var len = to;
+
+            while (loopPredicate(idx, len)) {
+                if (fn(list[idx])) {
+                    return idx;
+                }
+
+                idx += indexerAcc;
+            }
+
+            return -1;
         }
 
         private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {

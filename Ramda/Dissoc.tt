@@ -3,8 +3,9 @@
 <#@ include file="RamdaTemplate.tt" #>
 <#
 	var template = new RamdaTemplate();
-
+		
 	template.Generics.Add("TValue");
-	template.Parameters.Add(Tuple.Create("TValue", "val"));	
+	template.Parameters.Add(Tuple.Create("string", "prop"));
+	template.Parameters.Add(Tuple.Create("TValue", "obj"));
 	template.Render();
 #>

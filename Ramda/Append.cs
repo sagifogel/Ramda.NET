@@ -9,22 +9,22 @@ using System.Collections.Generic;
 
 namespace Ramda.NET
 {
-    public static partial class R
-    {
-        public static dynamic Append<TValue>(TValue el, IList<TValue> list) {
-            return Currying.Append(el, list);
-        }
-
-        public static dynamic Append<TValue>(RamdaPlaceholder el, IList<TValue> list) {
-            return Currying.Append(el, list);
-        }
-
-        public static dynamic Append<TValue>(TValue el, RamdaPlaceholder list = null) {
-            return Currying.Append(el, list);
-        }
-
-        public static dynamic Append<TValue>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
-            return Currying.Append(el, list);
-        }
-    }
+	public static partial class R
+	{	
+		public static dynamic Append<TValue>(TValue el, IList<TValue> list) {
+			return Currying.Append(el, list);
+		}
+		
+		public static dynamic Append<TValue>(RamdaPlaceholder el, IList<TValue> list) {
+			return Currying.Append(el, list); 
+		}
+		
+		public static dynamic Append<TValue>(TValue el, RamdaPlaceholder list = null) {
+			return Currying.Append(el, list); 
+		}
+		
+		public static dynamic Append<TValue>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
+			return Currying.Append(el, list);
+		}
+	}
 }

@@ -273,7 +273,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic GroupWith = Curry2<Func<object, object, bool>, IList, IList>((fn, list) => {
+        internal readonly static dynamic GroupWith = Curry2<Delegate, IList, IList>((fn, list) => {
             var idx = 0;
             var len = list.Count;
             var res = new List<object>();
@@ -281,7 +281,7 @@ namespace Ramda.NET
             while (idx < len) {
                 var nextidx = idx + 1;
 
-                while (nextidx < len && fn(list[idx], list[nextidx])) {
+                while (nextidx < len && (bool)fn.DynamicInvoke(list[idx], list[nextidx])) {
                     nextidx += 1;
                 }
 

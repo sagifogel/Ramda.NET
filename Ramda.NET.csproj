@@ -209,6 +209,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroupWith.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Gt.bool.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gt.bool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gt.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gt.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gt.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gt.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gte.bool.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gte.bool.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gte.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gte.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gte.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gte.int.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
@@ -376,6 +406,36 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GroupWith.cs</LastGenOutput>
       <LastOutputs>.\GroupWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gt.bool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gt.bool.cs</LastGenOutput>
+      <LastOutputs>.\Gt.bool.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gt.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gt.double.cs</LastGenOutput>
+      <LastOutputs>.\Gt.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gt.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gt.int.cs</LastGenOutput>
+      <LastOutputs>.\Gt.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gte.bool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gte.bool.cs</LastGenOutput>
+      <LastOutputs>.\Gte.bool.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gte.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gte.double.cs</LastGenOutput>
+      <LastOutputs>.\Gte.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gte.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gte.int.cs</LastGenOutput>
+      <LastOutputs>.\Gte.int.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

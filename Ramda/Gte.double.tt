@@ -4,7 +4,6 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.AllGapsFunctionAlreadyExists = true;
 	template.Parameters.Add(Tuple.Create("double", "a"));	
 	template.Parameters.Add(Tuple.Create("double", "b"));
 	template.Render();

@@ -4,7 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 		
-	template.Parameters.Add(Tuple.Create("bool", "a"));	
-	template.Parameters.Add(Tuple.Create("bool", "b"));
+	template.Generics.Add("TValue");
+	template.Parameters.Add(Tuple.Create("Type", "type"));	
+	template.Parameters.Add(Tuple.Create("TValue", "val"));
 	template.Render();
 #>

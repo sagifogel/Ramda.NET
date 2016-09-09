@@ -6,6 +6,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
@@ -21,6 +22,10 @@ namespace Ramda.NET
 		
 		public static dynamic Gte(double a, RamdaPlaceholder b = null) {
 			return Currying.Gte(a, b); 
+		}
+		
+		public static dynamic Gte(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
+			return Currying.Gte(a, b);
 		}
 	}
 }

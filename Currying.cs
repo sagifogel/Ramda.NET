@@ -306,7 +306,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Identity = Curry1<object, object>(Core.Identity);
 
-        internal readonly static dynamic IfElse = Curry3<LambdaN, LambdaN, LambdaN, LambdaN>((condition, onTrue, onFalse) => {
+        internal readonly static dynamic IfElse = Curry3<Delegate, Delegate, Delegate, LambdaN>((condition, onTrue, onFalse) => {
             return CurryN(1, new Lambda1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
         });
 
@@ -399,11 +399,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a);
 
-        internal readonly static dynamic MaxBy = Curry3<Func<dynamic, dynamic>, dynamic, dynamic, dynamic>((f, a, b) => f(b) > f(a) ? b : a);
+        internal readonly static dynamic MaxBy = Curry3<Func<object, object>, dynamic, dynamic, dynamic>((f, a, b) => f(b) > f(a) ? b : a);
 
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, Tuple<object, object>> fn, object acc, IList list) {
             var tuple = Tuple.Create<object, object>(acc, null);
-            IList result = new object[Math.Max(from, to) + 1];
+            IList result = new object[list.Count];
 
             while (loopPredicate(from, to)) {
                 tuple = fn(tuple.Item1, list[from]);
@@ -444,8 +444,8 @@ namespace Ramda.NET
             return -1;
         }
 
-        private static object InternalIfElse(LambdaN condition, LambdaN onTrue, LambdaN onFalse, params object[] arguments) {
-            return (bool)condition.Invoke(arguments) ? onTrue.Invoke(arguments) : onFalse.Invoke(arguments);
+        private static object InternalIfElse(Delegate condition, Delegate onTrue, Delegate onFalse, params object[] arguments) {
+            return (bool)((LambdaN)condition).Invoke(arguments) ? ((LambdaN)onTrue).Invoke(arguments) : ((LambdaN)onFalse).Invoke(arguments);
         }
 
         private static object InternalEvolve(IDictionary<string, object> transformations, object target) {

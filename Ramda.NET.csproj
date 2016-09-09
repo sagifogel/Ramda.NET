@@ -209,11 +209,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroupWith.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Gt.bool.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Gt.bool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Ramda\Gt.double.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -224,11 +219,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Gt.int.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Gte.bool.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Gte.bool.tt</DependentUpon>
-    </Compile>
     <Compile Include="Ramda\Gte.double.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +228,136 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Gte.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Has.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Has.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Identical.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Identical.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Identity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Identity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\IfElse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IfElse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Inc.double.cs">
+      <DependentUpon>Inc.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Inc.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Inc.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Insert.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Insert.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\InsertAll.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InsertAll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Intersperse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Intersperse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Is.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Is.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\IsNil.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsNil.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Keys.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Keys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Length.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Length.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Lt.double.cs">
+      <DependentUpon>Lt.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Lte.double.cs">
+      <DependentUpon>Lte.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Lte.int.cs">
+      <DependentUpon>Lte.int.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Lt.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lt.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MapAccumRight.cs">
+      <DependentUpon>MapAccumRight.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\MapAccum.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapAccum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Match.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Match.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MathMod.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MathMod.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Max.char.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Max.char.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Max.double.cs">
+      <DependentUpon>Max.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Max.string.cs">
+      <DependentUpon>Max.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Max.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Max.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MaxBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaxBy.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -407,11 +527,6 @@
       <LastGenOutput>GroupWith.cs</LastGenOutput>
       <LastOutputs>.\GroupWith.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Gt.bool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Gt.bool.cs</LastGenOutput>
-      <LastOutputs>.\Gt.bool.cs</LastOutputs>
-    </Content>
     <Content Include="Ramda\Gt.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Gt.double.cs</LastGenOutput>
@@ -422,11 +537,6 @@
       <LastGenOutput>Gt.int.cs</LastGenOutput>
       <LastOutputs>.\Gt.int.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Gte.bool.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Gte.bool.cs</LastGenOutput>
-      <LastOutputs>.\Gte.bool.cs</LastOutputs>
-    </Content>
     <Content Include="Ramda\Gte.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Gte.double.cs</LastGenOutput>
@@ -436,6 +546,136 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Gte.int.cs</LastGenOutput>
       <LastOutputs>.\Gte.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Has.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Has.cs</LastGenOutput>
+      <LastOutputs>.\Has.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Identical.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identical.cs</LastGenOutput>
+      <LastOutputs>.\Identical.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Identity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Identity.cs</LastGenOutput>
+      <LastOutputs>.\Identity.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IfElse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IfElse.cs</LastGenOutput>
+      <LastOutputs>.\IfElse.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Inc.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Inc.double.cs</LastGenOutput>
+      <LastOutputs>.\Inc.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Inc.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Inc.int.cs</LastGenOutput>
+      <LastOutputs>.\Inc.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Insert.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Insert.cs</LastGenOutput>
+      <LastOutputs>.\Insert.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\InsertAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InsertAll.cs</LastGenOutput>
+      <LastOutputs>.\InsertAll.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Intersperse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Intersperse.cs</LastGenOutput>
+      <LastOutputs>.\Intersperse.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Is.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Is.cs</LastGenOutput>
+      <LastOutputs>.\Is.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IsNil.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IsNil.cs</LastGenOutput>
+      <LastOutputs>.\IsNil.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Keys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Keys.cs</LastGenOutput>
+      <LastOutputs>.\Keys.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Length.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Length.cs</LastGenOutput>
+      <LastOutputs>.\Length.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lt.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lt.double.cs</LastGenOutput>
+      <LastOutputs>.\Lt.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lte.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lte.double.cs</LastGenOutput>
+      <LastOutputs>.\Lte.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lte.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lte.int.cs</LastGenOutput>
+      <LastOutputs>.\Lte.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lt.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lt.int.cs</LastGenOutput>
+      <LastOutputs>.\Lt.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MapAccumRight.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapAccumRight.cs</LastGenOutput>
+      <LastOutputs>.\MapAccumRight.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MapAccum.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapAccum.cs</LastGenOutput>
+      <LastOutputs>.\MapAccum.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Match.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Match.cs</LastGenOutput>
+      <LastOutputs>.\Match.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MathMod.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MathMod.cs</LastGenOutput>
+      <LastOutputs>.\MathMod.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.double.cs</LastGenOutput>
+      <LastOutputs>.\Max.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.string.cs</LastGenOutput>
+      <LastOutputs>.\Max.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.int.cs</LastGenOutput>
+      <LastOutputs>.\Max.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.char.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.char.cs</LastGenOutput>
+      <LastOutputs>.\Max.char.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MaxBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MaxBy.cs</LastGenOutput>
+      <LastOutputs>.\MaxBy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

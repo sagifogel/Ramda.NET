@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using static Ramda.NET.Lambda;
@@ -173,7 +175,7 @@ namespace Ramda.NET
 
             if (member.IsNotNull()) {
                 memberType = member.GetType();
-                invokeFn = !memberType.IsFunction();
+                invokeFn = !memberType.IsDelegate();
             }
 
             if (invokeFn || obj.IsList()) {
@@ -189,6 +191,14 @@ namespace Ramda.NET
 
         internal static TValue Identity<TValue>(TValue x) {
             return x;
+        }
+
+        internal static object Assign(params object[] objectN) {
+            return ObjectAssigner.Assign(new ExpandoObject(), objectN);
+        }
+
+        internal static object Assign(IList list) {
+            return ObjectAssigner.Assign(new ExpandoObject(), list.Cast<object>().ToArray());
         }
     }
 }

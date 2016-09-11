@@ -84,15 +84,17 @@ namespace Ramda.NET
         }
 
         private static object Clone(this object source) {
-            Delegate @delegate = null;
             var type = source.GetType();
 
-            if (!cache.TryGetValue(type, out @delegate)) {
+            var @delegate = cache.GetOrAdd(type, () => {
                 var parameter = Expression.Parameter(type);
                 var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
-                @delegate = Expression.Lambda(Expression.GetFuncType(new[] { type, type }), Expression.Convert(clone, type), parameter).Compile();
-                cache.Add(type, @delegate);
-            }
+                var lambda = Expression.Lambda(
+                                    Expression.GetFuncType(new[] { type, type }),
+                                    Expression.Convert(clone, type), parameter);
+
+                return lambda.Compile();
+            });
 
             return @delegate.DynamicInvoke(source);
         }

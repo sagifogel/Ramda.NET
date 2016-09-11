@@ -218,7 +218,7 @@ namespace Ramda.NET
                     return string.Empty;
                 }
 
-                if (type.IsClass && !type.IsFunction()) {
+                if (type.IsClass && !type.IsDelegate()) {
                     x.GetFactory().Invoke();
                 }
             }
@@ -401,6 +401,57 @@ namespace Ramda.NET
 
         internal readonly static dynamic MaxBy = Curry3<Func<object, object>, dynamic, dynamic, dynamic>((f, a, b) => f(b) > f(a) ? b : a);
 
+        internal readonly static dynamic Merge = Curry2<object, object, object>((l, r) => {
+            return Assign(l, r);
+        });
+
+        internal readonly static dynamic MergeAll = Curry1<IList, object>(list => {
+            return Assign(list);
+        });
+
+        internal readonly static dynamic MergeWithKey = Curry3<Delegate, object, object, object>((fn, l, r) => {
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var pair in l.ToMemberDictionary()) {
+                if (Core.Has(pair.Key, l)) {
+                    result[pair.Key] = Has(pair, r) ? fn.DynamicInvoke(pair, l.Member(pair.Key), r.Member(pair.Key)) : l.Member(pair.Key);
+                }
+            }
+
+            foreach (var pair in r.ToMemberDictionary()) {
+                if (Core.Has(pair.Key, r) && !Core.Has(pair.Key, result)) {
+                    result[pair.Key] = r.Member(pair.Key);
+                }
+            }
+
+            return result;
+        });
+
+        internal readonly static dynamic Min = Curry2<dynamic, dynamic, dynamic>((a, b) => b < a ? b : a);
+
+        internal readonly static dynamic MinBy = Curry3<Func<object, object>, dynamic, dynamic, dynamic>((f, a, b) => f(b) < f(a) ? b : a);
+
+        internal readonly static dynamic Modulo = Curry2<dynamic, dynamic, dynamic>((a, b) => a % b);
+
+        internal readonly static dynamic Multiply = Curry2<dynamic, dynamic, dynamic>((a, b) => a * b);
+
+        internal readonly static dynamic NAry = Curry2<int, Delegate, Delegate>((length, fn) => {
+            if (length <= 10) {
+                return new LambdaN(arguments => {
+                    var len = Math.Min(length, arguments.Length);
+                    var args = arguments.CreateNewArray(len);
+
+                    length = len;
+                    Array.Copy(arguments, (Array)args, length);
+
+                    return fn.DynamicInvoke(new[] { args });
+                });
+            }
+            else {
+                throw new ArgumentOutOfRangeException("length", "First argument to Arity must be a non-negative integer no greater than ten");
+            }
+        });
+
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
@@ -459,7 +510,7 @@ namespace Ramda.NET
                 if (transformations.TryGetValue(key, out transformation)) {
                     var transformationType = transformation.GetType();
 
-                    if (transformationType.IsFunction()) {
+                    if (transformationType.IsDelegate()) {
                         result[key] = ((Delegate)transformation).DynamicInvoke(value);
                         continue;
                     }

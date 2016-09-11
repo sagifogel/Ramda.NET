@@ -10,7 +10,7 @@ namespace Ramda.NET
 {
     internal static class ReflectionExtensions
     {
-        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy;
 
         internal static TArg CastTo<TArg>(this object arg) {
             if (arg != null && typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
@@ -20,7 +20,7 @@ namespace Ramda.NET
             return (TArg)arg;
         }
 
-        internal static bool IsFunction(this Type type) {
+        internal static bool IsDelegate(this Type type) {
             return typeof(Delegate).IsAssignableFrom(type);
         }
 
@@ -37,7 +37,7 @@ namespace Ramda.NET
         }
 
         internal static bool IsFunction(this object value) {
-            return value.GetType().IsFunction();
+            return value.GetType().IsDelegate();
         }
 
         internal static bool IsNull(this object target) {
@@ -91,6 +91,14 @@ namespace Ramda.NET
                        .ToDictionary(member => member.Name, m => target.Member(m.Name));
         }
 
+        internal static IEnumerable<MemberInfo> ToMemberInfos(this object target) {
+            var type = target.GetType();
+
+            return type.GetProperties(bindingFlags)
+                       .Cast<MemberInfo>()
+                       .Concat(type.GetFields(bindingFlags));
+        }
+
         internal static MemberInfo TryGetMember(this object target, string name) {
             var members = target.GetType().GetMember(name, bindingFlags);
 
@@ -132,8 +140,19 @@ namespace Ramda.NET
             return ctor;
         }
 
-        internal static IList CreateNewArray(this IList array, int len) {
+        internal static IList CreateNewArray(this object[] array, int len) {
+            Type lastType = array[0].GetType();
+            var allSameType = array.All(el => lastType.Equals(el.GetType()));
+
+            if (allSameType) {
+                return (IList)lastType.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len });
+            }
+
             return (IList)array.GetType().GetConstructors()[0].Invoke(new object[] { len });
+        }
+
+        internal static IList CreateNewArray(this IList array, int len) {
+            return array.Cast<object>().ToArray().CreateNewArray(len);
         }
 
         internal static IList CreateNewList(this IList list, IEnumerable<object> elements = null) {

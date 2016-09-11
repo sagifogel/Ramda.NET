@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -339,13 +341,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Max.char.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Max.double.cs">
-      <DependentUpon>Max.double.tt</DependentUpon>
+    <Compile Include="Ramda\MinBy.cs">
+      <DependentUpon>MinBy.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Max.string.cs">
-      <DependentUpon>Max.string.tt</DependentUpon>
+    <Compile Include="Ramda\Min.int.cs">
+      <DependentUpon>Min.int.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Min.double.cs">
+      <DependentUpon>Min.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Max.double.cs">
+      <DependentUpon>Max.double.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -358,6 +370,46 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MaxBy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Merge.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Merge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MergeAll.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergeAll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Min.char.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Min.char.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Modulo.int.cs">
+      <DependentUpon>Modulo.int.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Modulo.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Modulo.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Multiply.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Multiply.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Multiply.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Multiply.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\NAry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NAry.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -653,15 +705,23 @@
       <LastGenOutput>MathMod.cs</LastGenOutput>
       <LastOutputs>.\MathMod.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\MinBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MinBy.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ramda\Min.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Min.int.cs</LastGenOutput>
+      <LastOutputs>.\Min.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Min.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Min.double.cs</LastGenOutput>
+    </Content>
     <Content Include="Ramda\Max.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Max.double.cs</LastGenOutput>
       <LastOutputs>.\Max.double.cs</LastOutputs>
-    </Content>
-    <Content Include="Ramda\Max.string.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Max.string.cs</LastGenOutput>
-      <LastOutputs>.\Max.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Max.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -677,6 +737,46 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MaxBy.cs</LastGenOutput>
       <LastOutputs>.\MaxBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Merge.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Merge.cs</LastGenOutput>
+      <LastOutputs>.\Merge.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MergeAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MergeAll.cs</LastGenOutput>
+      <LastOutputs>.\MergeAll.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Min.char.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Min.char.cs</LastGenOutput>
+      <LastOutputs>.\Min.char.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Modulo.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Modulo.int.cs</LastGenOutput>
+      <LastOutputs>.\Modulo.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Modulo.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Modulo.double.cs</LastGenOutput>
+      <LastOutputs>.\Modulo.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Multiply.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Multiply.double.cs</LastGenOutput>
+      <LastOutputs>.\Multiply.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Multiply.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Multiply.int.cs</LastGenOutput>
+      <LastOutputs>.\Multiply.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\NAry.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NAry.cs</LastGenOutput>
+      <LastOutputs>.\NAry.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

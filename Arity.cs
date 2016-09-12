@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using static Ramda.NET.Lambda;
 
 namespace Ramda.NET
@@ -27,10 +28,10 @@ namespace Ramda.NET
             return @delegate.Method.GetParameters().Arity();
         }
 
-        private static dynamic Arity(int length, Delegate fn) {
+        private static Delegate Arity(int length, Delegate fn) {
             if (length <= 10) {
                 return new LambdaN(arguments => {
-                    return fn.DynamicInvoke(new[] { arguments });
+                    return fn.DynamicInvoke(new[] { arguments.ToInvokable() });
                 });
             }
             else {

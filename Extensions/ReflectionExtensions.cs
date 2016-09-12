@@ -181,5 +181,13 @@ namespace Ramda.NET
             return Expression.Lambda<Func<object>>(
                         Expression.Convert(Expression.New(ctor, arguments), typeof(object))).Compile();
         }
+
+        internal static object ToInvokable(this object target) {
+            if (target.GetType().IsArray) {
+                return ((IList)target).Cast<object>().ToArray();
+            }
+
+            return target;
+        }
     }
 }

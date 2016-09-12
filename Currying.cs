@@ -6,6 +6,7 @@ using static Ramda.NET.Core;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Ramda.NET
 {
@@ -98,7 +99,7 @@ namespace Ramda.NET
 
         internal static dynamic CurryN = Curry2<int, Delegate, dynamic>((length, fn) => {
             if (length == 1) {
-                return Curry1(new Func<object, object>(arg => fn.DynamicInvoke(new[] { arg })));
+                return Curry1(new Func<object, object>(arg => fn.DynamicInvoke(new[] { arg.ToInvokable() })));
             }
 
             return Arity(length, InternalCurryN(length, new object[0], fn));
@@ -465,6 +466,14 @@ namespace Ramda.NET
             return list[idx];
         });
 
+        internal readonly static dynamic NthArg = Curry1<int, LambdaN>(n => {
+            var arity = n < 0 ? 1 : n + 1;
+
+            return CurryN(arity, new Lambda1(arguments => {
+                return Nth(n, arguments);
+            }));
+        });
+
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
@@ -603,7 +612,7 @@ namespace Ramda.NET
                     combinedIdx += 1;
                 }
 
-                return left <= 0 ? fn.DynamicInvoke(combined.ToArray()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
+                return left <= 0 ? fn.DynamicInvoke(combined.ToInvokable()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
             });
         }
     }

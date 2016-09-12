@@ -24,6 +24,14 @@ namespace Ramda.NET
             return Currying.Nth(offset, list);
         }
 
+        public static dynamic NthArg<TValue>(int offset, RamdaPlaceholder list = null) {
+            return Currying.NthArg(offset, list);
+        }
+
+        public static dynamic NthArg<TValue>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
+            return Currying.NthArg(offset, list);
+        }
+
         public static dynamic Evolve<TTarget>(object transformations, TTarget obj) {
             return Currying.Evolve(transformations, obj);
         }

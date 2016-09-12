@@ -426,6 +426,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>None.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Of.cs">
+      <DependentUpon>Of.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Not.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -435,6 +440,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Nth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ObjOf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ObjOf.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -818,6 +828,11 @@
       <LastGenOutput>None.cs</LastGenOutput>
       <LastOutputs>.\None.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Of.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Of.cs</LastGenOutput>
+      <LastOutputs>.\Of.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Not.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Not.cs</LastGenOutput>
@@ -827,6 +842,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Nth.cs</LastGenOutput>
       <LastOutputs>.\Nth.IEnumerable.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ObjOf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ObjOf.cs</LastGenOutput>
+      <LastOutputs>.\ObjOf.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

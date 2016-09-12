@@ -145,14 +145,22 @@ namespace Ramda.NET
             var allSameType = array.All(el => lastType.Equals(el.GetType()));
 
             if (allSameType) {
-                return (IList)lastType.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len });
+                return lastType.CreateNewArray<IList>(len);
             }
 
-            return (IList)array.GetType().GetConstructors()[0].Invoke(new object[] { len });
+            return array.GetType().CreateNewArray<IList>(len);
         }
 
-        internal static IList CreateNewArray(this IList array, int len) {
-            return array.Cast<object>().ToArray().CreateNewArray(len);
+        internal static IList CreateNewArray(this IList array, int? len = null) {
+            return array.Cast<object>().ToArray().CreateNewArray(len ?? array.Count);
+        }
+
+        internal static ListType CreateNewArray<ListType>(this Type type, int len) {
+            return (ListType)type.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len }); ;
+        }
+
+        internal static ListType CreateNewList<ListType>(this Type type) {
+            return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(new object[0]);
         }
 
         internal static IList CreateNewList(this IList list, IEnumerable<object> elements = null) {

@@ -197,5 +197,14 @@ namespace Ramda.NET
         internal static object Assign(IList list) {
             return ObjectAssigner.Assign(new ExpandoObject(), list.Cast<object>().ToArray());
         }
+
+        internal static Array Of(object x) {
+            var type = x.GetType();
+            var list = type.CreateNewList<IList>();
+
+            list.Insert(0, x);
+
+            return (Array)list.CreateNewArray();
+        }
     }
 }

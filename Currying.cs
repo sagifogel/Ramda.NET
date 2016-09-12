@@ -474,6 +474,16 @@ namespace Ramda.NET
             }));
         });
 
+        internal readonly static dynamic ObjOf = Curry2<string, object, object>((key, val) => {
+            IDictionary<string, object> obj = new ExpandoObject();
+
+            obj[key] = val;
+
+            return obj;
+        });
+
+        internal readonly static dynamic Of = Curry1<object, dynamic>(x => Core.Of(x));
+
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];

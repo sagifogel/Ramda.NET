@@ -130,9 +130,9 @@ namespace Ramda.NET
 
         internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
 
-        internal readonly static dynamic All = CurryN(Dispatchable2("All", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AllOrAny(fn, list, false))));
+        internal readonly static dynamic All = CurryN(Dispatchable2("All", new LambdaN(arguments => null), new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, false))));
 
-        internal readonly static dynamic Any = CurryN(Dispatchable2("Any", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, bool>((fn, list) => AllOrAny(fn, list, true))));
+        internal readonly static dynamic Any = Curry2(new Func<object, object, dynamic>(Dispatchable2("Any", new LambdaN(arguments => null), new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, true)))));
 
         internal readonly static dynamic Aperture = CurryN(Dispatchable2("Aperture", new LambdaN(arguments => null), new Func<int, IList, IList>(Core.Aperture)));
 
@@ -438,10 +438,10 @@ namespace Ramda.NET
         internal readonly static dynamic NAry = Curry2<int, Delegate, Delegate>((length, fn) => {
             if (length <= 10) {
                 return new LambdaN(arguments => {
-                    var len = Math.Min(length, arguments.Length);
-                    var args = arguments.CreateNewArray(len);
+                    IList args;
 
-                    length = len;
+                    length = Math.Min(length, arguments.Length);
+                    args = arguments.CreateNewArray(length);
                     Array.Copy(arguments, (Array)args, length);
 
                     return fn.DynamicInvoke(new[] { args });
@@ -450,6 +450,19 @@ namespace Ramda.NET
             else {
                 throw new ArgumentOutOfRangeException("length", "First argument to Arity must be a non-negative integer no greater than ten");
             }
+        });
+
+        internal readonly static dynamic Negate = Curry1<dynamic, dynamic>(n => -n);
+
+        internal readonly static dynamic None = Curry2(new Func<object, object, dynamic>(Dispatchable2("any", new LambdaN(argumnets => null), new Func<object, object, dynamic>((a, b) => Any(a, b)))));
+
+        internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
+
+        internal readonly static dynamic Nth = Curry2<int, dynamic, object>((offset, list) => {
+            var count = list.GetType().Equals(typeof(string)) ? ((string)list).Length : ((IList)list).Count;
+            var idx = offset < 0 ? count + offset : offset;
+
+            return list[idx];
         });
 
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
@@ -545,11 +558,11 @@ namespace Ramda.NET
             }
         }
 
-        private static bool AllOrAny(Func<object, bool> fn, IList list, bool returnValue) {
+        private static bool AllOrAny(Delegate fn, IList list, bool returnValue) {
             var idx = 0;
 
             while (idx < list.Count) {
-                if (fn(list[idx])) {
+                if ((bool)fn.DynamicInvoke(list[idx])) {
                     return returnValue;
                 }
 

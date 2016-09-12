@@ -411,6 +411,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NAry.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Negate.double.cs">
+      <DependentUpon>Negate.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Negate.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Negate.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\None.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>None.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Not.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Not.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Nth.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Nth.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
@@ -777,6 +802,31 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>NAry.cs</LastGenOutput>
       <LastOutputs>.\NAry.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Negate.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Negate.double.cs</LastGenOutput>
+      <LastOutputs>.\Negate.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Negate.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Negate.int.cs</LastGenOutput>
+      <LastOutputs>.\Negate.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\None.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>None.cs</LastGenOutput>
+      <LastOutputs>.\None.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Not.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Not.cs</LastGenOutput>
+      <LastOutputs>.\Not.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Nth.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Nth.cs</LastGenOutput>
+      <LastOutputs>.\Nth.IEnumerable.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

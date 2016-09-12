@@ -16,6 +16,13 @@ namespace Ramda.NET
         public static dynamic CurryN(int length, Delegate fn) {
             return Currying.CurryN(length, fn);
         }
+        public static dynamic Nth<TValue>(int offset, IList<TValue> list) {
+            return Currying.Nth(offset, list);
+        }
+
+        public static dynamic Nth<TValue>(RamdaPlaceholder offset, IList<TValue> list) {
+            return Currying.Nth(offset, list);
+        }
 
         public static dynamic Evolve<TTarget>(object transformations, TTarget obj) {
             return Currying.Evolve(transformations, obj);

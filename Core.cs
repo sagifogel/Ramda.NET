@@ -10,8 +10,8 @@ namespace Ramda.NET
 {
     internal static partial class Core
     {
-        internal static Func<object[], bool> Complement(Func<object[], bool> fn) {
-            return arguments => !fn.Invoke(arguments);
+        internal static Delegate Complement(Delegate fn) {
+            return new LambdaN(arguments => !(bool)fn.DynamicInvoke(arguments));
         }
 
         internal static IList Concat(IList set1, IList set2 = null) {
@@ -92,16 +92,13 @@ namespace Ramda.NET
             });
         }
 
-        internal static LambdaN Dispatchable2(string methodName, LambdaN transducerFunction, Delegate fn) {
-            return new LambdaN(arguments => {
-                var length = arguments.Arity();
+        internal static Lambda2 Dispatchable2(string methodName, LambdaN transducerFunction, Delegate fn) {
+            return new Lambda2((arg1, arg2) => {
+                var length = new object[] { arg1, arg2 }.Arity();
 
-                if (length == 2) {
+                if (length == 0) {
                     return fn.DynamicInvoke(new object[0]);
                 }
-
-                var arg1 = arguments[0];
-                var arg2 = arguments[2];
 
                 if (!arg2.GetType().IsArray) {
                     var members = arg2.GetType().GetMember(methodName);

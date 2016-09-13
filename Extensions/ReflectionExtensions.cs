@@ -49,7 +49,7 @@ namespace Ramda.NET
         }
 
         internal static object Member(this object target, string name) {
-            var member = target.TryGetMember(name);
+            var member = target.TryGetMemberInfo(name);
 
             if (member.IsNotNull()) {
                 switch (member.MemberType) {
@@ -66,7 +66,7 @@ namespace Ramda.NET
         }
 
         internal static object HasMember(this object target, string name) {
-            var member = target.TryGetMember(name);
+            var member = target.TryGetMemberInfo(name);
 
             if (member.IsNotNull()) {
                 switch (member.MemberType) {
@@ -99,7 +99,7 @@ namespace Ramda.NET
                        .Concat(type.GetFields(bindingFlags));
         }
 
-        internal static MemberInfo TryGetMember(this object target, string name) {
+        internal static MemberInfo TryGetMemberInfo(this object target, string name) {
             var members = target.GetType().GetMember(name, bindingFlags);
 
             if (members.Length == 1) {

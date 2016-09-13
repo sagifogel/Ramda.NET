@@ -168,7 +168,7 @@ namespace Ramda.NET
             }
 
             obj = arguments[length - 1];
-            member = obj.TryGetMember(methodName);
+            member = obj.TryGetMemberInfo(methodName);
 
             if (member.IsNotNull()) {
                 memberType = member.GetType();
@@ -183,7 +183,7 @@ namespace Ramda.NET
         }
 
         internal static bool Has(string prop, object obj) {
-            return obj.TryGetMember(prop).IsNotNull();
+            return obj.TryGetMemberInfo(prop).IsNotNull();
         }
 
         internal static TValue Identity<TValue>(TValue x) {

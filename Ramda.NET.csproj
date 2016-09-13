@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="ObjectAssigner.cs" />
+    <Compile Include="Currying.internal.cs" />
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -475,6 +476,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PathSatisfies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Pick.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pick.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -907,6 +913,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PathSatisfies.cs</LastGenOutput>
       <LastOutputs>.\PathSatisfies.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Pick.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pick.cs</LastGenOutput>
+      <LastOutputs>.\Pick.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

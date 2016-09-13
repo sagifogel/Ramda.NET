@@ -446,6 +446,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjOf.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Once.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Once.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Or.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Or.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Pair.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pair.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Path.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Path.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PathOr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PathOr.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PathSatisfies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PathSatisfies.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
@@ -847,6 +877,36 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjOf.cs</LastGenOutput>
       <LastOutputs>.\ObjOf.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Once.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Once.cs</LastGenOutput>
+      <LastOutputs>.\Once.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Or.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Or.cs</LastGenOutput>
+      <LastOutputs>.\Or.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Pair.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pair.cs</LastGenOutput>
+      <LastOutputs>.\Pair.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Path.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Path.cs</LastGenOutput>
+      <LastOutputs>.\Path.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PathOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PathOr.cs</LastGenOutput>
+      <LastOutputs>.\PathOr.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PathSatisfies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PathSatisfies.cs</LastGenOutput>
+      <LastOutputs>.\PathSatisfies.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

@@ -12,6 +12,12 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
+        internal class IdentityObj
+        {
+            public object Value { get; set; }
+            public Delegate Map { get; set; }
+        }
+
         internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
             return new LambdaN(arguments => {
                 var arg1 = arguments.AssignIfArgumentInRange(0);
@@ -484,6 +490,56 @@ namespace Ramda.NET
 
         internal readonly static dynamic Of = Curry1<object, dynamic>(x => Core.Of(x));
 
+        internal readonly static dynamic Once = Curry1<Delegate, Delegate>(fn => {
+            var called = false;
+            object result = null;
+            var arity = fn.Arity();
+
+            return Arity(arity, new LambdaN(argumnets => {
+                if (called) {
+                    return result;
+                }
+
+                called = true;
+                result = fn.DynamicInvoke(argumnets);
+                return result;
+            }));
+        });
+
+        internal readonly static dynamic Or = Curry2<bool, bool, bool>((a, b) => a || b);
+
+        internal readonly static dynamic Over = Curry3<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, Delegate, object, object>((lens, f, x) => {
+            return lens(y => IdentityInternal(f.DynamicInvoke(new[] { y.ToInvokable() })))(x).Value;
+        });
+
+        internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => {
+            return new object[2] { fst, snd };
+        });
+
+        internal readonly static dynamic Path = Curry2<IList<string>, object, object>((paths, obj) => {
+            var idx = 0;
+            var val = obj;
+
+            while (idx < paths.Count) {
+                if (val == null) {
+                    return null;
+                }
+
+                val = val.Member(paths[idx]);
+                idx += 1;
+            }
+
+            return val;
+        });
+
+        internal readonly static dynamic PathOr = Curry3<object, IList<string>, object, object>((d, p, obj) => {
+            return DefaultTo(d, Path(p, obj));
+        });
+
+        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList<string>, object, bool>((pred, propPath, obj) => {
+            return propPath.Count > 0 && (bool)pred.DynamicInvoke(new[] { Path(propPath, obj) });
+        });
+
         private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
@@ -624,6 +680,15 @@ namespace Ramda.NET
 
                 return left <= 0 ? fn.DynamicInvoke(combined.ToInvokable()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
             });
+        }
+
+        private static IdentityObj IdentityInternal(object x) {
+            return new IdentityObj() {
+                Value = x,
+                Map = new Func<Delegate, IdentityObj>(f => {
+                    return IdentityInternal(f.DynamicInvoke(new[] { x.ToInvokable() }));
+                })
+            };
         }
     }
 }

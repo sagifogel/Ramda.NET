@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TArg1");
 	template.Generics.Add("TArg2");
-	template.Parameters.Add(Tuple.Create("TArg1", "a"));	
-	template.Parameters.Add(Tuple.Create("TArg2", "b"));	
+	template.Parameters.Add(Tuple.Create("TArg1", "fst"));	
+	template.Parameters.Add(Tuple.Create("TArg2", "snd"));
 	template.Render();
 #>

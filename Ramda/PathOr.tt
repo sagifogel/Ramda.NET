@@ -6,7 +6,8 @@
 
 	template.Generics.Add("TArg1");
 	template.Generics.Add("TArg2");
-	template.Parameters.Add(Tuple.Create("TArg1", "a"));	
-	template.Parameters.Add(Tuple.Create("TArg2", "b"));	
+	template.Parameters.Add(Tuple.Create("TArg1", "d"));
+	template.Parameters.Add(Tuple.Create("IList<string>", "p"));
+	template.Parameters.Add(Tuple.Create("TArg2", "obj"));
 	template.Render();
 #>

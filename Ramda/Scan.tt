@@ -1,0 +1,14 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TSource");
+	template.Generics.Add("TAccmulator");
+	template.Generics.Add("TResult");
+	template.Parameters.Add(Tuple.Create("Func<TAccmulator, TSource, TResult>", "fn"));
+	template.Parameters.Add(Tuple.Create("TAccmulator", "acc"));
+	template.Parameters.Add(Tuple.Create("IEnumerable<TSource>", "list"));
+	template.Render();
+#>

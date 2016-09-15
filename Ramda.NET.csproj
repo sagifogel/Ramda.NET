@@ -547,6 +547,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Replace.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Reverse.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reverse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Scan.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scan.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1050,6 +1060,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Replace.cs</LastGenOutput>
       <LastOutputs>.\Replace.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Reverse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Reverse.cs</LastGenOutput>
+      <LastOutputs>.\Reverse.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Scan.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Scan.cs</LastGenOutput>
+      <LastOutputs>.\Scan.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

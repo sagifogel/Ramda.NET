@@ -588,5 +588,30 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Replace = Curry3<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement));
+
+        internal readonly static dynamic Reverse = Curry1<IEnumerable, IEnumerable>(enumerable => {
+            var list = enumerable.CreateNewList();
+            var enumerator = enumerable.GetEnumerator();
+
+            while (enumerator.MoveNext()) {
+                list.Insert(0, enumerator.Current);
+            }
+
+            return list;
+        });
+
+        internal readonly static dynamic Scan = Curry3<Delegate, object, IList, IList>((fn, acc, list) => {
+            var idx = 0;
+            var len = list.Count;
+            var result = new List<object>() { acc };
+
+            while (idx < len) {
+                acc = fn.DynamicInvoke(acc, list[idx]);
+                result.Insert(idx + 1, acc);
+                idx += 1;
+            }
+
+            return result;
+        });
     }
 }

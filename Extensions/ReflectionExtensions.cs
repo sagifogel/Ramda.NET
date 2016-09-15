@@ -182,21 +182,28 @@ namespace Ramda.NET
             return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(new object[0]);
         }
 
-        internal static IList CreateNewList(this IList list, IEnumerable<object> elements = null) {
-            var type = list.GetType();
+        internal static IList CreateNewList(this IEnumerable list, IEnumerable<object> elements = null) {
+            Type type;
+            var listType = list.GetType();
 
-            if (type.IsArray) {
-                type = type.GetElementType();
+            if (listType.HasElementType) {
+                type = listType.GetElementType();
+            }
+            else if (listType.IsGenericType) {
+                type = listType.GetGenericArguments()[0];
+            }
+            else {
+                type = typeof(object);
             }
 
-            if (elements.IsNotNull()) {
+            if (elements != null) {
                 return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(type) }).Invoke(new object[] { elements });
             }
 
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 
-        internal static IList CreateNewListOfType(this IList list, Type type) {
+        internal static IList CreateNewListOfType(this IEnumerable list, Type type) {
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 

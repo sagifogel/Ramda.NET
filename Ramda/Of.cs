@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Of<TValue>(TValue x) {
+		public static dynamic Of<TSource>(TSource x) {
 			return Currying.Of(x);
 		}
 		
-		public static dynamic Of<TValue>(RamdaPlaceholder x = null) {
+		public static dynamic Of<TSource>(RamdaPlaceholder x = null) {
 			return Currying.Of(x); 
 		}
 	}

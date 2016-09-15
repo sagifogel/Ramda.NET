@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Is<TValue>(Type type, TValue val) {
+		public static dynamic Is<TTarget>(Type type, TTarget val) {
 			return Currying.Is(type, val);
 		}
 		
-		public static dynamic Is<TValue>(RamdaPlaceholder type, TValue val) {
+		public static dynamic Is<TTarget>(RamdaPlaceholder type, TTarget val) {
 			return Currying.Is(type, val); 
 		}
 		
-		public static dynamic Is<TValue>(Type type, RamdaPlaceholder val = null) {
+		public static dynamic Is<TTarget>(Type type, RamdaPlaceholder val = null) {
 			return Currying.Is(type, val); 
 		}
 		
-		public static dynamic Is<TValue>(RamdaPlaceholder type = null, RamdaPlaceholder val = null) {
+		public static dynamic Is<TTarget>(RamdaPlaceholder type = null, RamdaPlaceholder val = null) {
 			return Currying.Is(type, val);
 		}
 	}

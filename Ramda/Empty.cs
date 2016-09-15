@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Empty<TValue>(TValue x) {
+		public static dynamic Empty<TTarget>(TTarget x) {
 			return Currying.Empty(x);
 		}
 		
-		public static dynamic Empty<TValue>(RamdaPlaceholder x = null) {
+		public static dynamic Empty<TTarget>(RamdaPlaceholder x = null) {
 			return Currying.Empty(x); 
 		}
 	}

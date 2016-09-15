@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TValue");
+	template.Generics.Add("TSource");
 	template.Parameters.Add(Tuple.Create("int", "offset"));	
-	template.Parameters.Add(Tuple.Create("IEnumerable<TValue>", "list"));
+	template.Parameters.Add(Tuple.Create("IEnumerable<TSource>", "list"));
 	template.Render();
 #>

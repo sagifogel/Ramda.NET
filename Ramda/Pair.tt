@@ -4,9 +4,9 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TArg1");
-	template.Generics.Add("TArg2");
-	template.Parameters.Add(Tuple.Create("TArg1", "fst"));	
-	template.Parameters.Add(Tuple.Create("TArg2", "snd"));
+	template.Generics.Add("TSource1");
+	template.Generics.Add("TSource2");
+	template.Parameters.Add(Tuple.Create("TSource1", "fst"));	
+	template.Parameters.Add(Tuple.Create("TSource2", "snd"));
 	template.Render();
 #>

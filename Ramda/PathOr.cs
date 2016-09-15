@@ -12,28 +12,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PathOr<TArg1, TArg2>(TArg1 d, IList<string> p, TArg2 obj) {
+		public static dynamic PathOr<TValue, TTarget>(TValue d, IList<string> p, TTarget obj) {
 			return Currying.PathOr(d, p, obj);
 		}
 		
-		public static dynamic PathOr<TArg1, TArg2>(RamdaPlaceholder d, IList<string> p, TArg2 obj) {
+		public static dynamic PathOr<TValue, TTarget>(RamdaPlaceholder d, IList<string> p, TTarget obj) {
 			return Currying.PathOr(d, p, obj); 
 		}
 		
-		public static dynamic PathOr<TArg1, TArg2>(TArg1 d, RamdaPlaceholder p, TArg2 obj) {
+		public static dynamic PathOr<TValue, TTarget>(TValue d, RamdaPlaceholder p, TTarget obj) {
 			return Currying.PathOr(d, p, obj); 
 		}
 		
-		public static dynamic PathOr<TArg1, TArg2>(TArg1 d, IList<string> p, RamdaPlaceholder obj = null) {
+		public static dynamic PathOr<TValue, TTarget>(TValue d, IList<string> p, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj); 
 		}
 		
 		
-		public static dynamic PathOr<TArg1, TArg2>(TArg1 d, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
+		public static dynamic PathOr<TValue, TTarget>(TValue d, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);
 		}
 		
-		public static dynamic PathOr<TArg1, TArg2>(RamdaPlaceholder d = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
+		public static dynamic PathOr<TValue, TTarget>(RamdaPlaceholder d = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);
 		}
 	}

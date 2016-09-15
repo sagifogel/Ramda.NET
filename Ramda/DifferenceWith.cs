@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic DifferenceWith<TValue>(IList<TValue> list1, IList<TValue> list2) {
+		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(list1, list2);
 		}
 		
-		public static dynamic DifferenceWith<TValue>(RamdaPlaceholder list1, IList<TValue> list2) {
+		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(list1, list2); 
 		}
 		
-		public static dynamic DifferenceWith<TValue>(IList<TValue> list1, RamdaPlaceholder list2 = null) {
+		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(list1, list2); 
 		}
 		
-		public static dynamic DifferenceWith<TValue>(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
+		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(list1, list2);
 		}
 	}

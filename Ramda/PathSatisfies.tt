@@ -4,9 +4,9 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TValue");
+	template.Generics.Add("TArg");
 	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("Func<TValue, bool>", "pred"));
+	template.Parameters.Add(Tuple.Create("Func<TArg, bool>", "pred"));
 	template.Parameters.Add(Tuple.Create("IList<string>", "propPath"));
 	template.Parameters.Add(Tuple.Create("TTarget", "obj"));
 	template.Render();

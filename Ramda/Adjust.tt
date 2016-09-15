@@ -4,10 +4,10 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TValue");
-	template.Parameters.Add(Tuple.Create("Func<TValue, TValue>", "fn"));	
+	template.Generics.Add("TSource");
+	template.Parameters.Add(Tuple.Create("Func<TSource, TSource>", "fn"));	
 	template.Parameters.Add(Tuple.Create("int", "idx"));
-	template.Parameters.Add(Tuple.Create("IList<TValue>", "list"));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list"));
 	template.Parameters.Add(Tuple.Create("string", "memberName"));
 	template.Render();
 #>

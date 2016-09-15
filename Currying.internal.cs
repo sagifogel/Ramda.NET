@@ -16,12 +16,12 @@ namespace Ramda.NET
             public Delegate Map { get; set; }
         }
 
-        private static Tuple<object, IList> MapAccumInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, object, R.Tuple> fn, object acc, IList list) {
+        private static Tuple<object, IList> MapAccumInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
 
-            while (loopPredicate(from, to)) {
-                tuple = fn(tuple.Item1, list[from]);
+            while (loopPredicate(from)) {
+                tuple = (R.Tuple)fn.DynamicInvoke(tuple.Item1, list[from]);
                 result[from] = tuple.Item1;
                 from += indexerAcc;
             }
@@ -29,11 +29,10 @@ namespace Ramda.NET
             return Tuple.Create(tuple.Item1, result);
         }
 
-        private static object FindInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, bool> fn, IList list) {
+        private static object FindInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Func<object, bool> fn, IList list) {
             var idx = from;
-            var len = to;
 
-            while (loopPredicate(idx, len)) {
+            while (loopPredicate(idx)) {
                 if (fn(list[idx])) {
                     return list[idx];
                 }
@@ -44,11 +43,10 @@ namespace Ramda.NET
             return null;
         }
 
-        private static int FindIndexInternal(int from, int to, int indexerAcc, Func<int, int, bool> loopPredicate, Func<object, bool> fn, IList list) {
+        private static int FindIndexInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Func<object, bool> fn, IList list) {
             var idx = from;
-            var len = to;
 
-            while (loopPredicate(idx, len)) {
+            while (loopPredicate(idx)) {
                 if (fn(list[idx])) {
                     return idx;
                 }
@@ -110,14 +108,10 @@ namespace Ramda.NET
         }
 
         private static bool AllOrAny(Delegate fn, IList list, bool returnValue) {
-            var idx = 0;
-
-            while (idx < list.Count) {
-                if ((bool)fn.DynamicInvoke(list[idx])) {
+            foreach (var item in list) {
+                if ((bool)fn.DynamicInvoke(item)) {
                     return returnValue;
                 }
-
-                idx += 1;
             }
 
             return !returnValue;
@@ -137,6 +131,17 @@ namespace Ramda.NET
             }
 
             return result;
+        }
+
+        private static object ReduceInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, object acc, IList list) {
+            var idx = from;
+
+            while (loopPredicate(idx)) {
+                acc = fn.DynamicInvoke(acc, list[idx]);
+                idx += indexerAcc;
+            }
+
+            return acc;
         }
 
         private static bool IsPlaceholder(object param) {
@@ -174,11 +179,17 @@ namespace Ramda.NET
             });
         }
 
+        private static Reduced ReducedInternal(object x) {
+            var reduced = x as Reduced;
+
+            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new Reduced(x);
+        }
+
         private static IdentityObj IdentityInternal(object x) {
             return new IdentityObj() {
                 Value = x,
                 Map = new Func<Delegate, IdentityObj>(f => {
-                    return IdentityInternal(f.DynamicInvoke(new[] { x.ToInvokable() }));
+                    return IdentityInternal(f.DynamicInvoke(x));
                 })
             };
         }

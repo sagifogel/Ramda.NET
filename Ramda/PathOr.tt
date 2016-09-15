@@ -4,10 +4,10 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TArg1");
-	template.Generics.Add("TArg2");
-	template.Parameters.Add(Tuple.Create("TArg1", "d"));
+	template.Generics.Add("TValue");
+	template.Generics.Add("TTarget");
+	template.Parameters.Add(Tuple.Create("TValue", "d"));
 	template.Parameters.Add(Tuple.Create("IList<string>", "p"));
-	template.Parameters.Add(Tuple.Create("TArg2", "obj"));
+	template.Parameters.Add(Tuple.Create("TTarget", "obj"));
 	template.Render();
 #>

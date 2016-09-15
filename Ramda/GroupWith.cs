@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic GroupWith<TValue>(Func<TValue, TValue, bool> fn, IList<TValue> list) {
+		public static dynamic GroupWith<TSource>(Func<TSource, TSource, bool> fn, IList<TSource> list) {
 			return Currying.GroupWith(fn, list);
 		}
 		
-		public static dynamic GroupWith<TValue>(RamdaPlaceholder fn, IList<TValue> list) {
+		public static dynamic GroupWith<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.GroupWith(fn, list); 
 		}
 		
-		public static dynamic GroupWith<TValue>(Func<TValue, TValue, bool> fn, RamdaPlaceholder list = null) {
+		public static dynamic GroupWith<TSource>(Func<TSource, TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.GroupWith(fn, list); 
 		}
 		
-		public static dynamic GroupWith<TValue>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+		public static dynamic GroupWith<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.GroupWith(fn, list);
 		}
 	}

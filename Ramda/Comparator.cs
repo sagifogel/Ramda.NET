@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Comparator<TValue>(Func<TValue, TValue, bool> pred) {
+		public static dynamic Comparator<TArg>(Func<TArg, TArg, bool> pred) {
 			return Currying.Comparator(pred);
 		}
 		
-		public static dynamic Comparator<TValue>(RamdaPlaceholder pred = null) {
+		public static dynamic Comparator<TArg>(RamdaPlaceholder pred = null) {
 			return Currying.Comparator(pred); 
 		}
 	}

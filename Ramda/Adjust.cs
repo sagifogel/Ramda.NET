@@ -12,37 +12,37 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, IList<TValue> list, string memberName) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, IList<TSource> list, string memberName) {
 			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
-		public static dynamic Adjust<TValue>(RamdaPlaceholder fn, int idx, IList<TValue> list, string memberName) {
+		public static dynamic Adjust<TSource>(RamdaPlaceholder fn, int idx, IList<TSource> list, string memberName) {
 			return Currying.Adjust(fn, idx, list, memberName); 
 		}
 		
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, RamdaPlaceholder idx, IList<TValue> list, string memberName) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx, IList<TSource> list, string memberName) {
 			return Currying.Adjust(fn, idx, list, memberName); 
 		}
 		
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, RamdaPlaceholder list, string memberName) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, RamdaPlaceholder list, string memberName) {
 			return Currying.Adjust(fn, idx, list, memberName); 
 		}
 		
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, IList<TValue> list, RamdaPlaceholder memberName = null) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, IList<TSource> list, RamdaPlaceholder memberName = null) {
 			return Currying.Adjust(fn, idx, list, memberName); 
 		}
 		
 		
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
 			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
 		
-		public static dynamic Adjust<TValue>(Func<TValue, TValue> fn, int idx, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
+		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
 			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
-		public static dynamic Adjust<TValue>(RamdaPlaceholder fn = null, RamdaPlaceholder idx = null, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
+		public static dynamic Adjust<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder idx = null, RamdaPlaceholder list = null, RamdaPlaceholder memberName = null) {
 			return Currying.Adjust(fn, idx, list, memberName);
 		}
 	}

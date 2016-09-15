@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Once<TValue>(TValue fn) {
+		public static dynamic Once<TDelegate>(TDelegate fn) {
 			return Currying.Once(fn);
 		}
 		
-		public static dynamic Once<TValue>(RamdaPlaceholder fn = null) {
+		public static dynamic Once<TDelegate>(RamdaPlaceholder fn = null) {
 			return Currying.Once(fn); 
 		}
 	}

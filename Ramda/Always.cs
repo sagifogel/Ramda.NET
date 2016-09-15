@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Always<TValue>(TValue val) {
+		public static dynamic Always<TTarget>(TTarget val) {
 			return Currying.Always(val);
 		}
 		
-		public static dynamic Always<TValue>(RamdaPlaceholder val = null) {
+		public static dynamic Always<TTarget>(RamdaPlaceholder val = null) {
 			return Currying.Always(val); 
 		}
 	}

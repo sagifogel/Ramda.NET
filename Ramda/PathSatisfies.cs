@@ -12,28 +12,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PathSatisfies<TValue, TTarget>(Func<TValue, bool> pred, IList<string> propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 		
-		public static dynamic PathSatisfies<TValue, TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TArg, TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj); 
 		}
 		
-		public static dynamic PathSatisfies<TValue, TTarget>(Func<TValue, bool> pred, RamdaPlaceholder propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj); 
 		}
 		
-		public static dynamic PathSatisfies<TValue, TTarget>(Func<TValue, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(pred, propPath, obj); 
 		}
 		
 		
-		public static dynamic PathSatisfies<TValue, TTarget>(Func<TValue, bool> pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 		
-		public static dynamic PathSatisfies<TValue, TTarget>(RamdaPlaceholder pred = null, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
+		public static dynamic PathSatisfies<TArg, TTarget>(RamdaPlaceholder pred = null, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 	}

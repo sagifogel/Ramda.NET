@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic DropWhile<TValue>(Func<TValue, bool> fn, IList<TValue> list) {
+		public static dynamic DropWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.DropWhile(fn, list);
 		}
 		
-		public static dynamic DropWhile<TValue>(RamdaPlaceholder fn, IList<TValue> list) {
+		public static dynamic DropWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.DropWhile(fn, list); 
 		}
 		
-		public static dynamic DropWhile<TValue>(Func<TValue, bool> fn, RamdaPlaceholder list = null) {
+		public static dynamic DropWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.DropWhile(fn, list); 
 		}
 		
-		public static dynamic DropWhile<TValue>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+		public static dynamic DropWhile<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.DropWhile(fn, list);
 		}
 	}

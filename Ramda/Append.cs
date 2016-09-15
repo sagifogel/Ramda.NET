@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Append<TValue>(TValue el, IList<TValue> list) {
+		public static dynamic Append<TSource>(TSource el, IList<TSource> list) {
 			return Currying.Append(el, list);
 		}
 		
-		public static dynamic Append<TValue>(RamdaPlaceholder el, IList<TValue> list) {
+		public static dynamic Append<TSource>(RamdaPlaceholder el, IList<TSource> list) {
 			return Currying.Append(el, list); 
 		}
 		
-		public static dynamic Append<TValue>(TValue el, RamdaPlaceholder list = null) {
+		public static dynamic Append<TSource>(TSource el, RamdaPlaceholder list = null) {
 			return Currying.Append(el, list); 
 		}
 		
-		public static dynamic Append<TValue>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
+		public static dynamic Append<TSource>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
 			return Currying.Append(el, list);
 		}
 	}

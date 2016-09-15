@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TValue");
-	template.Parameters.Add(Tuple.Create("IList<TValue>", "list1"));	
-	template.Parameters.Add(Tuple.Create("IList<TValue>", "list2"));	
+	template.Generics.Add("TSource");
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list1"));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list2"));	
 	template.Render();
 #>

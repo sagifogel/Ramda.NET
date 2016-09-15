@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Aperture<TValue>(int n, IList<TValue> list) {
+		public static dynamic Aperture<TSource>(int n, IList<TSource> list) {
 			return Currying.Aperture(n, list);
 		}
 		
-		public static dynamic Aperture<TValue>(RamdaPlaceholder n, IList<TValue> list) {
+		public static dynamic Aperture<TSource>(RamdaPlaceholder n, IList<TSource> list) {
 			return Currying.Aperture(n, list); 
 		}
 		
-		public static dynamic Aperture<TValue>(int n, RamdaPlaceholder list = null) {
+		public static dynamic Aperture<TSource>(int n, RamdaPlaceholder list = null) {
 			return Currying.Aperture(n, list); 
 		}
 		
-		public static dynamic Aperture<TValue>(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
+		public static dynamic Aperture<TSource>(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
 			return Currying.Aperture(n, list);
 		}
 	}

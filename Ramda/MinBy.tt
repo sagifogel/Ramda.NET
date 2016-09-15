@@ -4,8 +4,9 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("Func<dynamic, dynamic>", "f"));	
-	template.Parameters.Add(Tuple.Create("dynamic", "a"));	
-	template.Parameters.Add(Tuple.Create("dynamic", "b"));
+	template.Generics.Add("TArg");
+	template.Parameters.Add(Tuple.Create("Func<TArg, TArg>", "f"));	
+	template.Parameters.Add(Tuple.Create("TArg", "a"));	
+	template.Parameters.Add(Tuple.Create("TArg", "b"));
 	template.Render();
 #>

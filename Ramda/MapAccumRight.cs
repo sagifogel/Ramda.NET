@@ -12,28 +12,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic MapAccumRight(Func<dynamic, dynamic, Tuple> fn, dynamic acc, IList<dynamic> list) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccumRight(fn, acc, list);
 		}
 		
-		public static dynamic MapAccumRight(RamdaPlaceholder fn, dynamic acc, IList<dynamic> list) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccumRight(fn, acc, list); 
 		}
 		
-		public static dynamic MapAccumRight(Func<dynamic, dynamic, Tuple> fn, RamdaPlaceholder acc, IList<dynamic> list) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.MapAccumRight(fn, acc, list); 
 		}
 		
-		public static dynamic MapAccumRight(Func<dynamic, dynamic, Tuple> fn, dynamic acc, RamdaPlaceholder list = null) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(fn, acc, list); 
 		}
 		
 		
-		public static dynamic MapAccumRight(Func<dynamic, dynamic, Tuple> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(fn, acc, list);
 		}
 		
-		public static dynamic MapAccumRight(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(fn, acc, list);
 		}
 	}

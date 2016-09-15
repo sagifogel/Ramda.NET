@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic ObjOf<TValue>(string key, TValue val) {
+		public static dynamic ObjOf<TSource>(string key, TSource val) {
 			return Currying.ObjOf(key, val);
 		}
 		
-		public static dynamic ObjOf<TValue>(RamdaPlaceholder key, TValue val) {
+		public static dynamic ObjOf<TSource>(RamdaPlaceholder key, TSource val) {
 			return Currying.ObjOf(key, val); 
 		}
 		
-		public static dynamic ObjOf<TValue>(string key, RamdaPlaceholder val = null) {
+		public static dynamic ObjOf<TSource>(string key, RamdaPlaceholder val = null) {
 			return Currying.ObjOf(key, val); 
 		}
 		
-		public static dynamic ObjOf<TValue>(RamdaPlaceholder key = null, RamdaPlaceholder val = null) {
+		public static dynamic ObjOf<TSource>(RamdaPlaceholder key = null, RamdaPlaceholder val = null) {
 			return Currying.ObjOf(key, val);
 		}
 	}

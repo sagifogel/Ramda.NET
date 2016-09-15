@@ -216,5 +216,9 @@ namespace Ramda.NET
 
             return target;
         }
+
+        public static bool Is<TCompareTo>(this object @object) {
+            return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
+        }
     }
 }

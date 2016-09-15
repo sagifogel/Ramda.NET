@@ -497,7 +497,58 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Prepend.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Prop.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Prop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PropIs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropIs.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PropOr.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropOr.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Props.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Props.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PropSatisfies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropSatisfies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Range.cs">
+      <DependentUpon>Range.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Reduced.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reduced.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ReduceRight.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReduceRight.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Remove.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Remove.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Replace.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Replace.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
+    <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda\Ramda.cs" />
@@ -794,6 +845,7 @@
     <Content Include="Ramda\MinBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MinBy.cs</LastGenOutput>
+      <LastOutputs>.\MinBy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Min.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -892,7 +944,7 @@
     <Content Include="Ramda\Nth.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Nth.cs</LastGenOutput>
-      <LastOutputs>.\Nth.IEnumerable.cs</LastOutputs>
+      <LastOutputs>.\Nth.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ObjOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -948,7 +1000,57 @@
       <LastGenOutput>Prepend.cs</LastGenOutput>
       <LastOutputs>.\Prepend.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Prop.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Prop.cs</LastGenOutput>
+      <LastOutputs>.\Prop.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PropIs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropIs.cs</LastGenOutput>
+      <LastOutputs>.\PropIs.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PropOr.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropOr.cs</LastGenOutput>
+      <LastOutputs>.\PropOr.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Props.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Props.cs</LastGenOutput>
+      <LastOutputs>.\Props.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PropSatisfies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropSatisfies.cs</LastGenOutput>
+      <LastOutputs>.\PropSatisfies.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
+    <Content Include="Ramda\Range.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Range.cs</LastGenOutput>
+      <LastOutputs>.\Range.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Reduced.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Reduced.cs</LastGenOutput>
+      <LastOutputs>.\Reduced.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ReduceRight.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ReduceRight.cs</LastGenOutput>
+      <LastOutputs>.\ReduceRight.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Remove.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Remove.cs</LastGenOutput>
+      <LastOutputs>.\Remove.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Replace.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Replace.cs</LastGenOutput>
+      <LastOutputs>.\Replace.cs</LastOutputs>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

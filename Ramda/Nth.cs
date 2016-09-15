@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Nth<TValue>(int offset, IEnumerable<TValue> list) {
+		public static dynamic Nth<TSource>(int offset, IEnumerable<TSource> list) {
 			return Currying.Nth(offset, list);
 		}
 		
-		public static dynamic Nth<TValue>(RamdaPlaceholder offset, IEnumerable<TValue> list) {
+		public static dynamic Nth<TSource>(RamdaPlaceholder offset, IEnumerable<TSource> list) {
 			return Currying.Nth(offset, list); 
 		}
 		
-		public static dynamic Nth<TValue>(int offset, RamdaPlaceholder list = null) {
+		public static dynamic Nth<TSource>(int offset, RamdaPlaceholder list = null) {
 			return Currying.Nth(offset, list); 
 		}
 		
-		public static dynamic Nth<TValue>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
+		public static dynamic Nth<TSource>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
 			return Currying.Nth(offset, list);
 		}
 	}

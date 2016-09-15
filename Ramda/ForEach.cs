@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic ForEach<TValue>(Action<TValue> fn, IList<TValue> list) {
+		public static dynamic ForEach<TSource>(Action<TSource> fn, IList<TSource> list) {
 			return Currying.ForEach(fn, list);
 		}
 		
-		public static dynamic ForEach<TValue>(RamdaPlaceholder fn, IList<TValue> list) {
+		public static dynamic ForEach<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.ForEach(fn, list); 
 		}
 		
-		public static dynamic ForEach<TValue>(Action<TValue> fn, RamdaPlaceholder list = null) {
+		public static dynamic ForEach<TSource>(Action<TSource> fn, RamdaPlaceholder list = null) {
 			return Currying.ForEach(fn, list); 
 		}
 		
-		public static dynamic ForEach<TValue>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+		public static dynamic ForEach<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.ForEach(fn, list);
 		}
 	}

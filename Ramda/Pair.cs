@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Pair<TArg1, TArg2>(TArg1 fst, TArg2 snd) {
+		public static dynamic Pair<TSource1, TSource2>(TSource1 fst, TSource2 snd) {
 			return Currying.Pair(fst, snd);
 		}
 		
-		public static dynamic Pair<TArg1, TArg2>(RamdaPlaceholder fst, TArg2 snd) {
+		public static dynamic Pair<TSource1, TSource2>(RamdaPlaceholder fst, TSource2 snd) {
 			return Currying.Pair(fst, snd); 
 		}
 		
-		public static dynamic Pair<TArg1, TArg2>(TArg1 fst, RamdaPlaceholder snd = null) {
+		public static dynamic Pair<TSource1, TSource2>(TSource1 fst, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd); 
 		}
 		
-		public static dynamic Pair<TArg1, TArg2>(RamdaPlaceholder fst = null, RamdaPlaceholder snd = null) {
+		public static dynamic Pair<TSource1, TSource2>(RamdaPlaceholder fst = null, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd);
 		}
 	}

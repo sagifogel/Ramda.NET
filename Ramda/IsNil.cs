@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic IsNil<TValue>(TValue x) {
+		public static dynamic IsNil<TTarget>(TTarget x) {
 			return Currying.IsNil(x);
 		}
 		
-		public static dynamic IsNil<TValue>(RamdaPlaceholder x = null) {
+		public static dynamic IsNil<TTarget>(RamdaPlaceholder x = null) {
 			return Currying.IsNil(x); 
 		}
 	}

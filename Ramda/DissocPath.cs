@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic DissocPath<TValue>(IList<string> path, TValue obj) {
+		public static dynamic DissocPath<TTarget>(IList<string> path, TTarget obj) {
 			return Currying.DissocPath(path, obj);
 		}
 		
-		public static dynamic DissocPath<TValue>(RamdaPlaceholder path, TValue obj) {
+		public static dynamic DissocPath<TTarget>(RamdaPlaceholder path, TTarget obj) {
 			return Currying.DissocPath(path, obj); 
 		}
 		
-		public static dynamic DissocPath<TValue>(IList<string> path, RamdaPlaceholder obj = null) {
+		public static dynamic DissocPath<TTarget>(IList<string> path, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj); 
 		}
 		
-		public static dynamic DissocPath<TValue>(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {
+		public static dynamic DissocPath<TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj);
 		}
 	}

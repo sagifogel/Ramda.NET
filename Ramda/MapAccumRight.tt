@@ -3,9 +3,12 @@
 <#@ include file="RamdaTemplate.tt" #>
 <#
 	var template = new RamdaTemplate();
-
-	template.Parameters.Add(Tuple.Create("Func<dynamic, dynamic, Tuple>", "fn"));	
-	template.Parameters.Add(Tuple.Create("dynamic", "acc"));
-	template.Parameters.Add(Tuple.Create("IList<dynamic>", "list"));
+		
+	template.Generics.Add("TArg");
+	template.Generics.Add("TSource");
+	template.Generics.Add("TAccmulator");	
+	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, Tuple>", "fn"));	
+	template.Parameters.Add(Tuple.Create("TAccmulator", "acc"));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list"));
 	template.Render();
 #>

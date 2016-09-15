@@ -1,0 +1,11 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Parameters.Add(Tuple.Create("Regex", "pattern"));	
+	template.Parameters.Add(Tuple.Create("string", "replacement"));
+	template.Parameters.Add(Tuple.Create("string", "str"));
+	template.Render();
+#>

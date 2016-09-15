@@ -4,7 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 		
-	template.Generics.Add("TValue");
-	template.Parameters.Add(Tuple.Create("Func<TValue, TValue, bool>", "pred"));
+	template.Generics.Add("TArg");
+	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, bool>", "pred"));
 	template.Render();
 #>

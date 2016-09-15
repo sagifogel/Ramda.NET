@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Length<TValue>(IList<TValue> list) {
+		public static dynamic Length<TSource>(IList<TSource> list) {
 			return Currying.Length(list);
 		}
 		
-		public static dynamic Length<TValue>(RamdaPlaceholder list = null) {
+		public static dynamic Length<TSource>(RamdaPlaceholder list = null) {
 			return Currying.Length(list); 
 		}
 	}

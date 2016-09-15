@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic None<TValue>(Func<TValue, bool> fn, IList<TValue> list) {
+		public static dynamic None<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.None(fn, list);
 		}
 		
-		public static dynamic None<TValue>(RamdaPlaceholder fn, IList<TValue> list) {
+		public static dynamic None<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.None(fn, list); 
 		}
 		
-		public static dynamic None<TValue>(Func<TValue, bool> fn, RamdaPlaceholder list = null) {
+		public static dynamic None<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.None(fn, list); 
 		}
 		
-		public static dynamic None<TValue>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+		public static dynamic None<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.None(fn, list);
 		}
 	}

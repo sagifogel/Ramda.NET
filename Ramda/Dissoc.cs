@@ -12,19 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Dissoc<TValue>(string prop, TValue obj) {
+		public static dynamic Dissoc<TTarget>(string prop, TTarget obj) {
 			return Currying.Dissoc(prop, obj);
 		}
 		
-		public static dynamic Dissoc<TValue>(RamdaPlaceholder prop, TValue obj) {
+		public static dynamic Dissoc<TTarget>(RamdaPlaceholder prop, TTarget obj) {
 			return Currying.Dissoc(prop, obj); 
 		}
 		
-		public static dynamic Dissoc<TValue>(string prop, RamdaPlaceholder obj = null) {
+		public static dynamic Dissoc<TTarget>(string prop, RamdaPlaceholder obj = null) {
 			return Currying.Dissoc(prop, obj); 
 		}
 		
-		public static dynamic Dissoc<TValue>(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {
+		public static dynamic Dissoc<TTarget>(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {
 			return Currying.Dissoc(prop, obj);
 		}
 	}

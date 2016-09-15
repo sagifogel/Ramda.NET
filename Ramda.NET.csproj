@@ -477,10 +477,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PathSatisfies.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\PickAll.cs">
+      <DependentUpon>PickAll.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Pick.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Pick.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PickBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PickBy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Prepend.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Prepend.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -914,10 +929,24 @@
       <LastGenOutput>PathSatisfies.cs</LastGenOutput>
       <LastOutputs>.\PathSatisfies.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\PickAll.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PickAll.cs</LastGenOutput>
+    </Content>
     <Content Include="Ramda\Pick.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pick.cs</LastGenOutput>
       <LastOutputs>.\Pick.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PickBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PickBy.cs</LastGenOutput>
+      <LastOutputs>.\PickBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Prepend.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Prepend.cs</LastGenOutput>
+      <LastOutputs>.\Prepend.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
   </ItemGroup>

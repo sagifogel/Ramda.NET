@@ -20,6 +20,10 @@ namespace Ramda.NET
             return Currying.Nth(offset, list);
         }
 
+        public static dynamic Evolve<TTarget>(object transformations, TTarget obj) {
+            return Currying.Evolve(transformations, obj);
+        }
+
         public static dynamic Nth<TValue>(RamdaPlaceholder offset, IList<TValue> list) {
             return Currying.Nth(offset, list);
         }
@@ -28,16 +32,12 @@ namespace Ramda.NET
             return Currying.NthArg(offset, list);
         }
 
-        public static dynamic NthArg<TValue>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
-            return Currying.NthArg(offset, list);
-        }
-
-        public static dynamic Evolve<TTarget>(object transformations, TTarget obj) {
-            return Currying.Evolve(transformations, obj);
-        }
-
         public static dynamic FormPairs<TValue>(IEnumerable<KeyValuePair<string, TValue>> pairs) {
             return Currying.FromPairs(pairs.Select(pair => new object[] { pair.Key, pair.Value }).ToArray());
+        }
+
+        public static dynamic NthArg<TValue>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
+            return Currying.NthArg(offset, list);
         }
     }
 }

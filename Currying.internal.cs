@@ -4,6 +4,7 @@ using System.Collections;
 using static Ramda.NET.Core;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
+using Object = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -120,6 +121,22 @@ namespace Ramda.NET
             }
 
             return !returnValue;
+        }
+
+        internal static IDictionary<string, object> PickIntrenal(IList<string> names, object obj, bool setIfNull = false) {
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var name in names) {
+                object member;
+
+                if (!Object.TryGetMember(name, obj, out member) && !setIfNull) {
+                    continue;
+                }
+
+                result[name] = member;
+            }
+
+            return result;
         }
 
         private static bool IsPlaceholder(object param) {

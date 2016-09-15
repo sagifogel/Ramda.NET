@@ -65,6 +65,25 @@ namespace Ramda.NET
             return null;
         }
 
+        internal static bool TryGetMember(string name, object target, out object memberVal) {
+            var member = target.TryGetMemberInfo(name);
+
+            memberVal = null;
+
+            if (member.IsNotNull()) {
+                switch (member.MemberType) {
+                    case MemberTypes.Field:
+                        memberVal = ((FieldInfo)member).GetValue(target);
+                        return true;
+                    case MemberTypes.Property:
+                        memberVal = ((PropertyInfo)member).GetValue(target, null);
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
         internal static object HasMember(this object target, string name) {
             var member = target.TryGetMemberInfo(name);
 

@@ -6,6 +6,7 @@ using static Ramda.NET.Core;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Object = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -533,22 +534,22 @@ namespace Ramda.NET
             return propPath.Count > 0 && (bool)pred.DynamicInvoke(new[] { Path(propPath, obj) });
         });
 
-        internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => {
-            var idx = 0;
+        internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
+
+        internal readonly static dynamic PickAll = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj, true));
+
+        internal readonly static dynamic PickBy = Curry2<Delegate, object, IDictionary<string, object>>((pred, obj) => {
             IDictionary<string, object> result = new ExpandoObject();
 
-            while (idx < names.Count) {
-                var key = names[idx];
-                var member = obj.Member(key);
-
-                if (member.IsNotNull()) {
-                    result[names[idx]] = member;
+            foreach (var keyVal in obj.ToMemberDictionary()) {
+                if ((bool)pred.DynamicInvoke(new[] { keyVal.Value, keyVal.Key, obj })) {
+                    result[keyVal.Key] = keyVal.Value;
                 }
-
-                idx += 1;
             }
 
             return result;
         });
+
+        internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => Concat(new[] { el }, list));
     }
 }

@@ -10,6 +10,19 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
+        internal class ComparerFactory : IComparer
+        {
+            private Delegate comparator;
+
+            internal ComparerFactory(Delegate comparator) {
+                this.comparator = comparator;
+            }
+
+            public int Compare(object x, object y) {
+                return (int)comparator.DynamicInvoke(x, y);
+            }
+        }
+
         internal class IdentityObj
         {
             public object Value { get; set; }

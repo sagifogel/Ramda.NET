@@ -557,6 +557,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Scan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Slice.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Slice.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Sort.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sort.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1070,6 +1080,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Scan.cs</LastGenOutput>
       <LastOutputs>.\Scan.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Slice.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Slice.cs</LastGenOutput>
+      <LastOutputs>.\Slice.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Sort.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sort.cs</LastGenOutput>
+      <LastOutputs>.\Sort.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

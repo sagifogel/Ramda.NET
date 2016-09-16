@@ -163,8 +163,9 @@ namespace Ramda.NET
             var invokeFn = false;
 
             var length = arguments.Length;
+
             if (length == 0) {
-                return fn.DynamicInvoke();
+                return fn.DynamicInvoke(new object[0]);
             }
 
             obj = arguments[length - 1];
@@ -176,7 +177,7 @@ namespace Ramda.NET
             }
 
             if (invokeFn || obj.IsList()) {
-                return fn.DynamicInvoke(arguments);
+                return fn.Invoke(arguments);
             }
 
             return ((Delegate)member).DynamicInvoke(obj, Slice(arguments, 0, length - 1));

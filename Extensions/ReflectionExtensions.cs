@@ -5,11 +5,13 @@ using System.Collections;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
     internal static class ReflectionExtensions
     {
+        private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy;
 
         internal static TArg CastTo<TArg>(this object arg) {
@@ -128,12 +130,29 @@ namespace Ramda.NET
             return null;
         }
 
-        internal static object GetDefaultValue(this Type type) {
-            var @delegate = Expression.Lambda<Func<object>>(
-                                Expression.Convert(Expression.Default(type),
-                                                    typeof(object))).Compile();
+        internal static object Cast(this object target, Type to) {
+            var from = target.GetType();
+            var key = typeof(Func<,>).MakeGenericType(from, to);
 
-            return ((Func<object>)@delegate)();
+            var @delegate = cache.GetOrAdd(key, () => {
+                var param = Expression.Parameter(from, "source");
+
+                return Expression.Lambda(
+                            Expression.Convert(param, to),
+                            param).Compile();
+            });
+
+            return @delegate.DynamicInvoke(target);
+        }
+
+        internal static object GetDefaultValue(this Type type) {
+            var @delegate = cache.GetOrAdd(type, () => {
+                return Expression.Lambda<Func<object>>(
+                            Expression.Convert(Expression.Default(type),
+                                typeof(object))).Compile();
+            });
+
+            return @delegate.DynamicInvoke();
         }
 
         internal static bool IsAnonymousType(this Type type) {
@@ -159,18 +178,18 @@ namespace Ramda.NET
             return ctor;
         }
 
-        internal static IList CreateNewArray(this object[] array, int len) {
+        internal static Array CreateNewArray(this object[] array, int len) {
             Type lastType = array[0].GetType();
             var allSameType = array.All(el => lastType.Equals(el.GetType()));
 
             if (allSameType) {
-                return lastType.CreateNewArray<IList>(len);
+                return lastType.CreateNewArray<Array>(len);
             }
 
-            return array.GetType().CreateNewArray<IList>(len);
+            return array.GetType().CreateNewArray<Array>(len);
         }
 
-        internal static IList CreateNewArray(this IList array, int? len = null) {
+        internal static Array CreateNewArray(this IList array, int? len = null) {
             return array.Cast<object>().ToArray().CreateNewArray(len ?? array.Count);
         }
 
@@ -182,7 +201,7 @@ namespace Ramda.NET
             return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(new object[0]);
         }
 
-        internal static IList CreateNewList(this IEnumerable list, IEnumerable<object> elements = null) {
+        internal static IList CreateNewList(this IEnumerable list, IEnumerable elements = null) {
             Type type;
             var listType = list.GetType();
 
@@ -224,8 +243,19 @@ namespace Ramda.NET
             return target;
         }
 
-        public static bool Is<TCompareTo>(this object @object) {
+        internal static object Invoke(this Delegate target, object[] argumnets) {
+            var @params = target.Method.GetParameters();
+            var args = @params.Select((p, i) => argumnets[i].Cast(p.ParameterType));
+
+            return target.DynamicInvoke(args.ToArray());
+        }
+
+        internal static bool Is<TCompareTo>(this object @object) {
             return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
+        }
+
+        internal static IComparer ToComparer(this Delegate comparator) {
+            return new ComparerFactory(comparator);
         }
     }
 }

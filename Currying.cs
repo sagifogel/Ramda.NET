@@ -613,5 +613,25 @@ namespace Ramda.NET
 
             return result;
         });
+
+        internal readonly static dynamic Set = Curry3<Func<Func<object, IdentityObj>>, object, object, object>((lens, v, x) => {
+            return Over(lens, Always(v), x);
+        });
+
+        internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => Core.Slice(list, fromIndex, toIndex))));
+
+        internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
+            if (list.IsArray()) {
+                Array.Sort((Array)list, comparator.ToComparer());
+                return list;
+            }
+
+            var array = list.CreateNewArray(list.Count);
+
+            Array.Copy(list.Cast<object>().ToArray(), array, list.Count);
+            Array.Sort(array, comparator.ToComparer());
+
+            return array.CreateNewList(array);
+        });
     }
 }

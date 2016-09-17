@@ -7,7 +7,7 @@
 	template.Generics.Add("TArg");
 	template.Generics.Add("TTarget");
 	template.Parameters.Add(Tuple.Create("Func<TArg, bool>", "pred", true));
-	template.Parameters.Add(Tuple.Create("dynamic", "name", false));
+	template.Parameters.Add(Tuple.Create("string", "name", false));
 	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

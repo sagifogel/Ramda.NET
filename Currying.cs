@@ -553,7 +553,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.DynamicInvoke(Member(obj, name)));
 
-        internal readonly static dynamic Props = Curry2<IEnumerable<string>, object, object>((ps, obj) => {
+        internal readonly static dynamic Props = Curry2<IEnumerable<dynamic>, object, object>((ps, obj) => {
             var result = new List<object>();
 
             foreach (var prop in ps) {

@@ -174,7 +174,7 @@ namespace Ramda.NET
 
         internal static object Member(object target, dynamic member) {
             if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
-                return target.MemberOfArray((int)member);
+                return ((Array)target).Member((int)member);
             }
 
             return target.Member((string)member);

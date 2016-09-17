@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PropIs<TTarget>(Type type, dynamic name, TTarget obj) {
+		public static dynamic PropIs<TTarget>(Type type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
 		
-		public static dynamic PropIs<TTarget>(RamdaPlaceholder type, dynamic name, TTarget obj) {
+		public static dynamic PropIs<TTarget>(RamdaPlaceholder type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj); 
 		}
 		
@@ -24,7 +24,7 @@ namespace Ramda.NET
 			return Currying.PropIs(type, name, obj); 
 		}
 		
-		public static dynamic PropIs<TTarget>(Type type, dynamic name, RamdaPlaceholder obj = null) {
+		public static dynamic PropIs<TTarget>(Type type, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj); 
 		}
 		

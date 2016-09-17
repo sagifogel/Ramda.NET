@@ -67,14 +67,26 @@ namespace Ramda.NET
             return null;
         }
 
-        internal static object MemberOfArray(this object target, int index) {
-            var method = target.GetType().GetMethod("GetValue", new[] { typeof(int) });
+        internal static object Member(this Array target, int index) {
+            return target.GetValue(index);
+        }
+        
+        internal static bool TryGetMember(this Array target, int index, out object memberVal) {
+            if (index < target.Length) {
+                memberVal = target.Member(index);
+                return true;
+            }
 
-            return method.Invoke(target, new object[] { index });
+            memberVal = null;
+            return false;
         }
 
-        internal static bool TryGetMember(string name, object target, out object memberVal) {
-            var member = target.TryGetMemberInfo(name);
+        internal static bool TryGetMember(dynamic name, object target, out object memberVal) {
+            if (target.IsArray()) {
+                return ((Array)target).TryGetMember((int)name, out memberVal);
+            }
+
+            var member = target.TryGetMemberInfo((string)name);
 
             memberVal = null;
 

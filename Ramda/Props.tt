@@ -5,7 +5,7 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("IEnumerable<dynamic>", "ps", false));	
+	template.Parameters.Add(Tuple.Create("IEnumerable<string>", "ps", false));	
 	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

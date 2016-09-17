@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TTarget");
 	template.Parameters.Add(Tuple.Create("Type", "type", false));	
-	template.Parameters.Add(Tuple.Create("dynamic", "name", false));
+	template.Parameters.Add(Tuple.Create("string", "name", false));
 	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

@@ -121,7 +121,7 @@ namespace Ramda.NET
 				if (hasDynamic) {#>
 
 		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= Join(shiftedDynamics) #>) {
-			return Currying.<#= name #>(<#= parameterNames #>); 
+			return Currying.<#= name #>(<#= parameterNames #>);
 		}
 <#+			}
 #>		

@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("int", "minimum"));	
-	template.Parameters.Add(Tuple.Create("int", "maximum"));
-	template.Parameters.Add(Tuple.Create("int", "value"));
+	template.Parameters.Add(Tuple.Create("int", "minimum", false));	
+	template.Parameters.Add(Tuple.Create("int", "maximum", false));
+	template.Parameters.Add(Tuple.Create("int", "value", false));
 	template.Render();
 #>

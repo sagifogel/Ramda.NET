@@ -5,6 +5,6 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TSource");
-	template.Parameters.Add(Tuple.Create("IEnumerable<TSource>", "list"));	
+	template.Parameters.Add(Tuple.Create("IEnumerable<TSource>", "list", false));	
 	template.Render();
 #>

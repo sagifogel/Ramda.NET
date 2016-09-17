@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Dynamic;
 using System.Collections;
-using static Ramda.NET.Core;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using Object = Ramda.NET.ReflectionExtensions;
@@ -12,14 +12,14 @@ namespace Ramda.NET
     {
         internal class ComparerFactory : IComparer
         {
-            private Delegate comparator;
+            private Func<object, object, int> comparator;
 
-            internal ComparerFactory(Delegate comparator) {
+            internal ComparerFactory(Func<object, object, int> comparator) {
                 this.comparator = comparator;
             }
 
             public int Compare(object x, object y) {
-                return (int)comparator.DynamicInvoke(x, y);
+                return comparator(x, y);
             }
         }
 
@@ -155,6 +155,29 @@ namespace Ramda.NET
             }
 
             return acc;
+        }
+
+        private static IList SortInternal(IList list, IComparer comparer) {
+            if (list.IsArray()) {
+                Array.Sort((Array)list, comparer);
+
+                return list;
+            }
+
+            var array = list.CreateNewArray(list.Count);
+
+            Array.Copy(list.Cast<object>().ToArray(), array, list.Count);
+            Array.Sort(array, comparer);
+
+            return array.CreateNewList(array);
+        }
+
+        internal static object Member(object target, dynamic member) {
+            if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
+                return target.MemberOfArray((int)member);
+            }
+
+            return target.Member((string)member);
         }
 
         private static bool IsPlaceholder(object param) {

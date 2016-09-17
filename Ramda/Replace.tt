@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("Regex", "pattern"));	
-	template.Parameters.Add(Tuple.Create("string", "replacement"));
-	template.Parameters.Add(Tuple.Create("string", "str"));
+	template.Parameters.Add(Tuple.Create("Regex", "pattern", false));	
+	template.Parameters.Add(Tuple.Create("string", "replacement", false));
+	template.Parameters.Add(Tuple.Create("string", "str", false));
 	template.Render();
 #>

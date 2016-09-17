@@ -567,6 +567,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sort.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\SortBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SortBy.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -875,6 +880,7 @@
     <Content Include="Ramda\Min.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Min.double.cs</LastGenOutput>
+      <LastOutputs>.\Min.double.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Max.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1004,6 +1010,7 @@
     <Content Include="Ramda\PickAll.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PickAll.cs</LastGenOutput>
+      <LastOutputs>.\PickAll.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Pick.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1090,6 +1097,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Sort.cs</LastGenOutput>
       <LastOutputs>.\Sort.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SortBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SortBy.cs</LastGenOutput>
+      <LastOutputs>.\SortBy.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("Delegate", "condition"));
-	template.Parameters.Add(Tuple.Create("Delegate", "onTrue"));
-	template.Parameters.Add(Tuple.Create("Delegate", "onFalse"));
+	template.Parameters.Add(Tuple.Create("Delegate", "condition", false));
+	template.Parameters.Add(Tuple.Create("Delegate", "onTrue", false));
+	template.Parameters.Add(Tuple.Create("Delegate", "onFalse", false));
 	template.Render();
 #>

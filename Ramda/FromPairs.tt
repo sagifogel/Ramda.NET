@@ -4,6 +4,6 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("object[][]", "pairs"));	
+	template.Parameters.Add(Tuple.Create("object[][]", "pairs", false));	
 	template.Render();
 #>

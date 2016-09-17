@@ -7,8 +7,8 @@
 	template.Generics.Add("TArg");
 	template.Generics.Add("TSource");
 	template.Generics.Add("TAccmulator");	
-	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, Tuple>", "fn"));	
-	template.Parameters.Add(Tuple.Create("TAccmulator", "acc"));
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "list"));
+	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, Tuple>", "fn", true));	
+	template.Parameters.Add(Tuple.Create("TAccmulator", "acc", false));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
 	template.Render();
 #>

@@ -5,6 +5,6 @@
 	var template = new RamdaTemplate();
 		
 	template.Generics.Add("TArg");
-	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, bool>", "pred"));
+	template.Parameters.Add(Tuple.Create("Func<TArg, TArg, bool>", "pred", true));
 	template.Render();
 #>

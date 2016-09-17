@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TSource");
 	template.Generics.Add("TSeperator");
-	template.Parameters.Add(Tuple.Create("TSeperator", "separator"));	
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "list"));
+	template.Parameters.Add(Tuple.Create("TSeperator", "separator", false));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
 	template.Render();
 #>

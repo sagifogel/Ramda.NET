@@ -12,11 +12,19 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		public static dynamic FindIndex<TSource>(dynamic fn, IList<TSource> list) {
+			return Currying.FindIndex(fn, list);
+		}
+			
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.FindIndex(fn, list);
 		}
 		
 		public static dynamic FindIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
+			return Currying.FindIndex(fn, list); 
+		}
+
+		public static dynamic FindIndex(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.FindIndex(fn, list); 
 		}
 		

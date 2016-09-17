@@ -5,8 +5,8 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TSource");
-	template.Parameters.Add(Tuple.Create("int", "fromIndex"));	
-	template.Parameters.Add(Tuple.Create("int", "toIndex"));	
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "list"));	
+	template.Parameters.Add(Tuple.Create("int", "fromIndex", false));	
+	template.Parameters.Add(Tuple.Create("int", "toIndex", false));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));	
 	template.Render();
 #>

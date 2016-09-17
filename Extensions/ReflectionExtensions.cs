@@ -67,6 +67,12 @@ namespace Ramda.NET
             return null;
         }
 
+        internal static object MemberOfArray(this object target, int index) {
+            var method = target.GetType().GetMethod("GetValue", new[] { typeof(int) });
+
+            return method.Invoke(target, new object[] { index });
+        }
+
         internal static bool TryGetMember(string name, object target, out object memberVal) {
             var member = target.TryGetMemberInfo(name);
 
@@ -254,8 +260,12 @@ namespace Ramda.NET
             return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
         }
 
-        internal static IComparer ToComparer(this Delegate comparator) {
+        internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {
             return new ComparerFactory(comparator);
+        }
+
+        internal static bool IsJaggedArray(this object[] arr) {
+            return arr.GetType().GetElementType().IsArray;
         }
     }
 }

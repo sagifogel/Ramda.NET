@@ -545,13 +545,13 @@ namespace Ramda.NET
 
         internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => Concat(new[] { el }, list));
 
-        internal readonly static dynamic Prop = Curry2<string, object, object>((p, obj) => obj.Member(p));
+        internal readonly static dynamic Prop = Curry2<dynamic, object, object>((p, obj) => Member(obj, p));
 
-        internal readonly static dynamic PropIs = Curry3<Type, string, object, bool>((type, name, obj) => Is(type, obj.Member(name)));
+        internal readonly static dynamic PropIs = Curry3<Type, dynamic, object, bool>((type, name, obj) => Is(type, Member(obj, name)));
 
-        internal readonly static dynamic PropOr = Curry3<object, string, object, object>((val, p, obj) => obj.IsNotNull() ? obj.Member(p) ?? val : val);
+        internal readonly static dynamic PropOr = Curry3<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Member(obj, p) ?? val : val);
 
-        internal readonly static dynamic PropSatisfies = Curry3<Delegate, string, object, bool>((pred, name, obj) => (bool)pred.DynamicInvoke(obj.Member(name)));
+        internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.DynamicInvoke(Member(obj, name)));
 
         internal readonly static dynamic Props = Curry2<IEnumerable<string>, object, object>((ps, obj) => {
             var result = new List<object>();
@@ -621,17 +621,16 @@ namespace Ramda.NET
         internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => Core.Slice(list, fromIndex, toIndex))));
 
         internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
-            if (list.IsArray()) {
-                Array.Sort((Array)list, comparator.ToComparer());
-                return list;
-            }
+            return SortInternal(list, comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
+        });
 
-            var array = list.CreateNewArray(list.Count);
+        internal readonly static dynamic SortBy = Curry2<Delegate, IList, IList>((fn, list) => {
+            return SortInternal(list, fn.ToComparer((x, y) => {
+                var xx = (dynamic)fn.DynamicInvoke(new object[][] { new[] { x } });
+                var yy = (dynamic)fn.DynamicInvoke(new object[][] { new[] { y } });
 
-            Array.Copy(list.Cast<object>().ToArray(), array, list.Count);
-            Array.Sort(array, comparator.ToComparer());
-
-            return array.CreateNewList(array);
+                return xx < yy ? -1 : xx > yy ? 1 : 0;
+            }));
         });
     }
 }

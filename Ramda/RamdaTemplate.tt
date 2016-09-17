@@ -9,7 +9,7 @@ public class RamdaTemplate : CSharpTemplate
 	
 	public RamdaTemplate() {
 		Generics = new List<string>();
-		Parameters = new List<Tuple<string, string>>();
+		Parameters = new List<Tuple<string, string, bool>>();
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
 
@@ -17,24 +17,60 @@ public class RamdaTemplate : CSharpTemplate
 	
 	public bool AllGapsFunctionAlreadyExists { get; set; }
 	
-	public List<Tuple<string, string>> Parameters { get; set; }
+	public List<Tuple<string, string, bool>> Parameters { get; set; }
 
-	private string FormatTuple(Tuple<string, string> tuple) {
+	private string FormatTuple(Tuple<string, string, bool> tuple) {
 		return string.Format("{0} {1}", tuple.Item1, tuple.Item2);
 	}
 
-	private string Join(IEnumerable<Tuple<string, string>> joined) {
+	private string ResolveGenerics(List<string> generics) {
+		return generics.Count > 0 ? "<" + string.Join(", ", generics) + ">" : "";
+	}
+
+	private bool TryGetDynamicParameters(List<Tuple<string, string, bool>> tuples) {
+        bool hasDynamic = false;
+
+        for (int i = 0; i < tuples.Count; i++) {
+            var tuple = tuples[i];
+
+            if (tuple.Item3) {
+                hasDynamic = true;
+
+                tuples[i] = Tuple.Create("dynamic", tuple.Item2, false);
+            }
+        }
+
+        return hasDynamic;
+    }
+
+	private string ResolveGenerics(IEnumerable<Tuple<string, string, bool>> tuples) {
+		var hash = new HashSet<string>();
+        var generics = new List<string>();
+        var types = tuples.Select(tuple => tuple.Item1).ToList();
+
+        types.ForEach(type => {
+            var generic = Generics.SingleOrDefault(g => type.IndexOf(g) > -1);
+
+            if (generic != null && hash.Add(generic)) {
+                generics.Add(generic);
+            }
+        });
+
+        return ResolveGenerics(generics);
+	}
+
+	private string Join(IEnumerable<Tuple<string, string, bool>> joined) {
 		return string.Join(", ", joined.Select(FormatTuple)); 
 	}
 
-	private Tuple<string, string> FillPlaceholder(Tuple<string, string> tuple) {
+	private Tuple<string, string, bool> FillPlaceholder(Tuple<string, string, bool> tuple) {
 		
-		return Tuple.Create("RamdaPlaceholder", tuple.Item2);
+		return Tuple.Create("RamdaPlaceholder", tuple.Item2, false);
 	}
 
-	private Tuple<string, string> FillNullablePlaceholder(Tuple<string, string> tuple) {
+	private Tuple<string, string, bool> FillNullablePlaceholder(Tuple<string, string, bool> tuple) {
 		
-		return Tuple.Create("RamdaPlaceholder", string.Format("{0} = null", tuple.Item2));
+		return Tuple.Create("RamdaPlaceholder", string.Format("{0} = null", tuple.Item2), false);
 	}
 
 	public override string TransformText() {
@@ -49,19 +85,45 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-<#+		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
-		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));#>
+<#+		var generics = ResolveGenerics(Generics);
+		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));
+		var parametersWithDynamic = Parameters.ToList();
+
+		if (TryGetDynamicParameters(parametersWithDynamic)) {#>
+		public static dynamic <#= name #><#= ResolveGenerics(parametersWithDynamic) #>(<#= Join(parametersWithDynamic) #>) {
+			return Currying.<#= name #>(<#= parameterNames #>);
+		}
+			
+<#+		}
+#>
 		public static dynamic <#= name #><#= generics #>(<#= Join(Parameters) #>) {
 			return Currying.<#= name #>(<#= parameterNames #>);
 		}
 <#+		for (var i = 0; i < Parameters.Count; i++)	 {
+			var hasDynamic = false;
 			var shifted = Parameters.ToList();
 			var shiftedItem = Parameters[i];
-
+			Tuple<string, string, bool> insertee;
+			List<Tuple<string, string, bool>> shiftedDynamics;
+			
 			shifted.RemoveAt(i);
-			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
+			shiftedDynamics = shifted.ToList();
+			
+			if (TryGetDynamicParameters(shiftedDynamics)) {
+				hasDynamic = true;
+			}
+
+			insertee = i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem);
+			shiftedDynamics.Insert(i, insertee);
+			shifted.Insert(i, insertee); 
 			
 			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
+				if (hasDynamic) {#>
+
+		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= Join(shiftedDynamics) #>) {
+			return Currying.<#= name #>(<#= parameterNames #>); 
+		}
+<#+			}
 #>		
 		public static dynamic <#= name #><#= generics #>(<#= Join(shifted) #>) {
 			return Currying.<#= name #>(<#= parameterNames #>); 

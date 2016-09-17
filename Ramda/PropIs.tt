@@ -5,8 +5,8 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("Type", "type"));	
-	template.Parameters.Add(Tuple.Create("string", "name"));
-	template.Parameters.Add(Tuple.Create("TTarget", "obj"));
+	template.Parameters.Add(Tuple.Create("Type", "type", false));	
+	template.Parameters.Add(Tuple.Create("dynamic", "name", false));
+	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

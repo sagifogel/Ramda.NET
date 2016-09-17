@@ -5,7 +5,7 @@
 	var template = new RamdaTemplate();
 		
 	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("IDictionary<string, object>", "transformations"));
-	template.Parameters.Add(Tuple.Create("TTarget", "obj"));
+	template.Parameters.Add(Tuple.Create("IDictionary<string, object>", "transformations", false));
+	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

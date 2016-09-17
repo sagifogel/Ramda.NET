@@ -12,7 +12,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Props<TTarget>(IEnumerable<string> ps, TTarget obj) {
+		public static dynamic Props<TTarget>(IEnumerable<dynamic> ps, TTarget obj) {
 			return Currying.Props(ps, obj);
 		}
 		
@@ -20,7 +20,7 @@ namespace Ramda.NET
 			return Currying.Props(ps, obj); 
 		}
 		
-		public static dynamic Props<TTarget>(IEnumerable<string> ps, RamdaPlaceholder obj = null) {
+		public static dynamic Props<TTarget>(IEnumerable<dynamic> ps, RamdaPlaceholder obj = null) {
 			return Currying.Props(ps, obj); 
 		}
 		

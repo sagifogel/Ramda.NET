@@ -3,7 +3,15 @@
     internal static class CurryingExtensions
     {
         internal static object AssignIfArgumentInRange(this object[] arguments, int index) {
-            return arguments != null && index <= arguments.Length - 1 ? arguments[index] : null;
+            if (arguments.IsNull()) {
+                return null;
+            }
+
+            if (arguments.IsJaggedArray() && index == 0) {
+                return arguments;
+            }
+
+            return index <= arguments.Length - 1 ? arguments[index] : null;
         }
     }
 }

@@ -4,7 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("int", "n"));
-	template.Parameters.Add(Tuple.Create("Delegate", "fn"));	
+	template.Parameters.Add(Tuple.Create("int", "n", false));
+	template.Parameters.Add(Tuple.Create("Delegate", "fn", false));	
 	template.Render();
 #>

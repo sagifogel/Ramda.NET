@@ -4,7 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("Regex", "rx"));	
-	template.Parameters.Add(Tuple.Create("string", "str"));
+	template.Parameters.Add(Tuple.Create("Regex", "rx", false));	
+	template.Parameters.Add(Tuple.Create("string", "str", false));
 	template.Render();
 #>

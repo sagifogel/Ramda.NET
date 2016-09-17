@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TSource1");
 	template.Generics.Add("TSource2");
-	template.Parameters.Add(Tuple.Create("TSource1", "fst"));	
-	template.Parameters.Add(Tuple.Create("TSource2", "snd"));
+	template.Parameters.Add(Tuple.Create("TSource1", "fst", false));	
+	template.Parameters.Add(Tuple.Create("TSource2", "snd", false));
 	template.Render();
 #>

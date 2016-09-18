@@ -647,5 +647,26 @@ namespace Ramda.NET
 
             return result;
         });
+
+        internal readonly static dynamic SplitWhen = Curry2<Delegate, IList, IList>((pred, list) => {
+            var idx = 0;
+            var len = list.Count;
+            var prefix = list.CreateNewList();
+            var result = list.CreateNewListOfType(prefix.GetType());
+
+            if (list.IsArray()) {
+                list = list.CreateNewList(list);
+            }
+
+            while (idx < len && !(bool)pred.DynamicInvoke(list[idx])) {
+                prefix.Add(list[idx]);
+                idx += 1;
+            }
+
+            result.Add(prefix);
+            result.Add(Core.Slice(list, idx));
+
+            return result;
+        });
     }
 }

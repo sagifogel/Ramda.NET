@@ -240,7 +240,9 @@ namespace Ramda.NET
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 
-        internal static IList CreateNewListOfType(this IEnumerable list, Type type) {
+        internal static IList CreateNewListOfType(this IEnumerable list, Type type = null) {
+            type = type ?? list.GetType();
+
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
         }
 
@@ -281,7 +283,7 @@ namespace Ramda.NET
         }
 
         internal static object[] ToArgumentsArray(this object value, Type type = null) {
-            type = type ?? value.GetType(); 
+            type = type ?? value.GetType();
 
             if (type.IsArray) {
                 value = value.ToArgumentsArray(type.GetElementType());

@@ -577,6 +577,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitEvery.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\SplitWhen.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SplitWhen.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1112,6 +1117,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitEvery.cs</LastGenOutput>
       <LastOutputs>.\SplitEvery.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SplitWhen.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SplitWhen.cs</LastGenOutput>
+      <LastOutputs>.\SplitWhen.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

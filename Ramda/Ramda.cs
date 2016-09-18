@@ -99,5 +99,13 @@ namespace Ramda.NET
         public static dynamic SplitEvery<TValue>(RamdaPlaceholder n, string list) {
             return Currying.SplitEvery(n, list.ToCharArray());
         }
+
+        public static dynamic SplitWhen<TValue>(dynamic pred, string list) {
+            return Currying.SplitWhen(pred, list);
+        }
+
+        public static dynamic SplitWhen(Func<char, bool> pred, string list) {
+            return Currying.SplitWhen(pred, list.ToCharArray());
+        }
     }
 }

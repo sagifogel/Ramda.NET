@@ -70,11 +70,13 @@ namespace Ramda.NET
                     Array.Copy((Array)arguments, from, (Array)result, 0, len);
                 }
                 else {
-                    result = arguments.CreateNewList();
-                    to = len + from;
+                    var idx = 0;
 
-                    for (int i = from; i < to; i++) {
-                        result.Add(result[i]);
+                    result = arguments.CreateNewList();
+
+                    while (idx < len) {
+                        result.Add(arguments[from + idx]);
+                        idx += 1;
                     }
                 }
 

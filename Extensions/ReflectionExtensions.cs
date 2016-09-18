@@ -70,7 +70,7 @@ namespace Ramda.NET
         internal static object Member(this Array target, int index) {
             return target.GetValue(index);
         }
-        
+
         internal static bool TryGetMember(this Array target, int index, out object memberVal) {
             if (index < target.Length) {
                 memberVal = target.Member(index);
@@ -278,6 +278,16 @@ namespace Ramda.NET
 
         internal static bool IsJaggedArray(this object[] arr) {
             return arr.GetType().GetElementType().IsArray;
+        }
+
+        internal static object[] ToArgumentsArray(this object value, Type type = null) {
+            type = type ?? value.GetType(); 
+
+            if (type.IsArray) {
+                value = value.ToArgumentsArray(type.GetElementType());
+            }
+
+            return new[] { value };
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic PickBy(dynamic pred, RamdaPlaceholder obj = null) {
-			return Currying.PickBy(pred, obj); 
+			return Currying.PickBy(pred, obj);
 		}
 		
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, RamdaPlaceholder obj = null) {

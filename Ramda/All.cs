@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic All(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.All(fn, list); 
+			return Currying.All(fn, list);
 		}
 		
 		public static dynamic All<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {

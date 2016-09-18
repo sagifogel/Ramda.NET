@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic None(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.None(fn, list); 
+			return Currying.None(fn, list);
 		}
 		
 		public static dynamic None<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {

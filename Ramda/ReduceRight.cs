@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ReduceRight<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
-			return Currying.ReduceRight(fn, acc, list); 
+			return Currying.ReduceRight(fn, acc, list);
 		}
 		
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ReduceRight<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.ReduceRight(fn, acc, list); 
+			return Currying.ReduceRight(fn, acc, list);
 		}
 		
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, RamdaPlaceholder list = null) {

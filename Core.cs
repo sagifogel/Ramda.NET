@@ -205,7 +205,7 @@ namespace Ramda.NET
 
             list.Insert(0, x);
 
-            return (Array)list.CreateNewArray();
+            return list.CreateNewArray();
         }
     }
 }

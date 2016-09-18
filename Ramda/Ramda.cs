@@ -91,5 +91,13 @@ namespace Ramda.NET
         public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, RamdaPlaceholder obj = null) where TTarget : IList {
             return Currying.PropSatisfies(pred, p, obj);
         }
+
+        public static dynamic SplitEvery<TValue>(int n, string list) {
+            return Currying.SplitEvery(n, list.ToCharArray());
+        }
+
+        public static dynamic SplitEvery<TValue>(RamdaPlaceholder n, string list) {
+            return Currying.SplitEvery(n, list.ToCharArray());
+        }
     }
 }

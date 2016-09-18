@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ramda.NET</RootNamespace>
     <AssemblyName>Ramda.NET</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -572,6 +572,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SortBy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\SplitEvery.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SplitEvery.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1102,6 +1107,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SortBy.cs</LastGenOutput>
       <LastOutputs>.\SortBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SplitEvery.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SplitEvery.cs</LastGenOutput>
+      <LastOutputs>.\SplitEvery.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

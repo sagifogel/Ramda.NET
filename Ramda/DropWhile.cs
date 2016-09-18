@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic DropWhile(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.DropWhile(fn, list); 
+			return Currying.DropWhile(fn, list);
 		}
 		
 		public static dynamic DropWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {

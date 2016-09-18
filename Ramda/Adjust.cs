@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Adjust<TSource>(dynamic fn, RamdaPlaceholder idx, IList<TSource> list, string memberName) {
-			return Currying.Adjust(fn, idx, list, memberName); 
+			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx, IList<TSource> list, string memberName) {
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Adjust(dynamic fn, int idx, RamdaPlaceholder list, string memberName) {
-			return Currying.Adjust(fn, idx, list, memberName); 
+			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, RamdaPlaceholder list, string memberName) {
@@ -41,7 +41,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Adjust<TSource>(dynamic fn, int idx, IList<TSource> list, RamdaPlaceholder memberName = null) {
-			return Currying.Adjust(fn, idx, list, memberName); 
+			return Currying.Adjust(fn, idx, list, memberName);
 		}
 		
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, IList<TSource> list, RamdaPlaceholder memberName = null) {

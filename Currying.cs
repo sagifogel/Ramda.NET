@@ -626,11 +626,26 @@ namespace Ramda.NET
 
         internal readonly static dynamic SortBy = Curry2<Delegate, IList, IList>((fn, list) => {
             return SortInternal(list, fn.ToComparer((x, y) => {
-                var xx = (dynamic)fn.DynamicInvoke(new object[][] { new[] { x } });
-                var yy = (dynamic)fn.DynamicInvoke(new object[][] { new[] { y } });
+                var xx = (dynamic)fn.DynamicInvoke(x.ToArgumentsArray());
+                var yy = (dynamic)fn.DynamicInvoke(y.ToArgumentsArray());
 
                 return xx < yy ? -1 : xx > yy ? 1 : 0;
             }));
+        });
+
+        internal readonly static dynamic SplitEvery = Curry2<int, IList, IList>((n, list) => {
+            if (n <= 0) {
+                throw new ArgumentOutOfRangeException(nameof(n), "First argument to splitEvery must be a positive integer");
+            }
+
+            var idx = 0;
+            var result = list.CreateNewListOfType(list.GetType());
+
+            while (idx < list.Count) {
+                result.Add(Slice(idx, idx += n, list));
+            }
+
+            return result;
         });
     }
 }

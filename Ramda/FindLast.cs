@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic FindLast(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.FindLast(fn, list); 
+			return Currying.FindLast(fn, list);
 		}
 		
 		public static dynamic FindLast<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {

@@ -150,6 +150,12 @@ namespace Ramda.NET
             return acc;
         }
 
+        internal static LambdaN CheckForMethod1(string methodName, Delegate fn) {
+            return Currying.Curry1<IList, IList>(list => {
+                return (IList)CheckForMethodN(methodName, fn, list);
+            });
+        }
+
         internal static Func<TArg1, TArg2, TResult> CheckForMethod2<TArg1, TArg2, TResult>(string methodName, Func<TArg1, TArg2, TResult> fn) {
             return (arg1, arg2) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2);
         }

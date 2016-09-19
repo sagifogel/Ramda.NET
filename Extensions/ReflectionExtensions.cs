@@ -264,10 +264,14 @@ namespace Ramda.NET
         }
 
         internal static object Invoke(this Delegate target, object[] argumnets) {
-            var @params = target.Method.GetParameters();
-            var args = @params.Select((p, i) => argumnets[i].Cast(p.ParameterType));
+            if (argumnets.Length == 1 && argumnets.IsArray()) {
+                var array = (Array)argumnets[0];
+                var copied = array.CreateNewList(array);
 
-            return target.DynamicInvoke(args.ToArray());
+                return target.DynamicInvoke(new object[] { new object[] { copied } });
+            }
+
+            return target.DynamicInvoke(argumnets);
         }
 
         internal static bool Is<TCompareTo>(this object @object) {

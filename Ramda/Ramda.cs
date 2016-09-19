@@ -107,5 +107,9 @@ namespace Ramda.NET
         public static dynamic SplitWhen(Func<char, bool> pred, string list) {
             return Currying.SplitWhen(pred, list.ToCharArray());
         }
+
+        public static dynamic Tail(string list) {
+            return Currying.Tail(list.ToCharArray());
+        }
     }
 }

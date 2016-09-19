@@ -1,0 +1,10 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Parameters.Add(Tuple.Create("double", "a", false));	
+	template.Parameters.Add(Tuple.Create("double", "b", false));
+	template.Render();
+#>

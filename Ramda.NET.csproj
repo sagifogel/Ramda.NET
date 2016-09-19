@@ -34,12 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -582,6 +582,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitWhen.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Subtract.double.cs">
+      <DependentUpon>Subtract.double.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Subtract.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Subtract.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Tail.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Tail.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1122,6 +1137,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitWhen.cs</LastGenOutput>
       <LastOutputs>.\SplitWhen.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Subtract.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Subtract.double.cs</LastGenOutput>
+      <LastOutputs>.\Subtract.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Subtract.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Subtract.int.cs</LastGenOutput>
+      <LastOutputs>.\Subtract.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Tail.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tail.cs</LastGenOutput>
+      <LastOutputs>.\Tail.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -105,9 +105,7 @@ namespace Ramda.NET
             return Arity(length, InternalCurryN(length, new object[0], fn));
         });
 
-        internal readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => {
-            return arg1 + arg2;
-        });
+        internal readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => arg1 + arg2);
 
         public readonly static dynamic Adjust = Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
             var start = 0;
@@ -229,7 +227,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Evolve = Curry2<IDictionary<string, object>, object, object>(InternalEvolve);
 
-        internal readonly static dynamic Find = CurryN(Dispatchable2("find", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, object>((fn, list) => {
+        internal readonly static dynamic Find = CurryN(Dispatchable2("Find", new LambdaN(arguments => null), new Func<Func<object, bool>, IList, object>((fn, list) => {
             return FindInternal(0, 1, idx => idx < list.Count, fn, list);
         })));
 
@@ -329,7 +327,7 @@ namespace Ramda.NET
             return Concat(Concat(Slice(list, 0, idx), elts), Slice(list, idx));
         });
 
-        internal readonly static dynamic Intersperse = Curry2(CheckForMethod2<object, IList, IList>("intersperse", (separator, list) => {
+        internal readonly static dynamic Intersperse = Curry2(CheckForMethod2<object, IList, IList>("Intersperse", (separator, list) => {
             var idx = 0;
             IList result = null;
             var length = list.Count;
@@ -448,7 +446,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Negate = Curry1<dynamic, dynamic>(n => -n);
 
-        internal readonly static dynamic None = Curry2(new Func<object, object, dynamic>(Dispatchable2("any", new LambdaN(argumnets => null), new Func<object, object, dynamic>((a, b) => Any(a, b)))));
+        internal readonly static dynamic None = Curry2(new Func<object, object, dynamic>(Dispatchable2("Any", new LambdaN(argumnets => null), new Func<object, object, dynamic>((a, b) => Any(a, b)))));
 
         internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
 
@@ -668,5 +666,9 @@ namespace Ramda.NET
 
             return result;
         });
+
+        internal readonly static dynamic Subtract = Curry2<double, double, double>((arg1, arg2) => arg1 - arg2);
+
+        internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MinValue));
     }
 }

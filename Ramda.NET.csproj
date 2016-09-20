@@ -597,6 +597,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tail.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Take.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Take.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\TakeLastWhile.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TakeLastWhile.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\TakeWhile.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TakeWhile.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1152,6 +1167,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tail.cs</LastGenOutput>
       <LastOutputs>.\Tail.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Take.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Take.cs</LastGenOutput>
+      <LastOutputs>.\Take.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\TakeLastWhile.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TakeLastWhile.cs</LastGenOutput>
+      <LastOutputs>.\TakeLastWhile.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\TakeWhile.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TakeWhile.cs</LastGenOutput>
+      <LastOutputs>.\TakeWhile.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

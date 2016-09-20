@@ -111,5 +111,13 @@ namespace Ramda.NET
         public static dynamic Tail(string list) {
             return Currying.Tail(list.ToCharArray());
         }
+
+        public static dynamic Take(int n, string list) {
+            return Currying.Take(n, list.ToCharArray());
+        }
+
+        public static dynamic Take(RamdaPlaceholder n, string list) {
+            return Currying.Take(n, list.ToCharArray());
+        }
     }
 }

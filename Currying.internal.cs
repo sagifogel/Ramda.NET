@@ -172,6 +172,16 @@ namespace Ramda.NET
             return array.CreateNewList(array);
         }
 
+        private static IList TakeWhileInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, IList list, Func<int, int> sliceFrom, Func<int, int> sliceTo) {
+            var idx = from;
+
+            while (loopPredicate(idx) && (bool)fn.DynamicInvoke(list[idx])) {
+                idx += indexerAcc;
+            }
+
+            return Core.Slice(list, sliceFrom(idx), sliceTo(idx));
+        }
+
         internal static object Member(object target, dynamic member) {
             if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
                 return ((Array)target).Member((int)member);

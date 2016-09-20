@@ -190,9 +190,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => {
-            return ShallowCloner.CloneAndAssignDefaultValue(prop, obj);
-        });
+        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
 
         internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
 
@@ -377,13 +375,9 @@ namespace Ramda.NET
 
         internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => a <= b);
 
-        internal readonly static dynamic MapAccum = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => {
-            return MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list);
-        });
+        internal readonly static dynamic MapAccum = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list));
 
-        internal readonly static dynamic MapAccumRight = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => {
-            return MapAccumInternal(list.Count - 1, -1, from => from >= 0, fn, acc, list);
-        });
+        internal readonly static dynamic MapAccumRight = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(list.Count - 1, -1, from => from >= 0, fn, acc, list));
 
         internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
 
@@ -497,9 +491,7 @@ namespace Ramda.NET
             return lens(y => IdentityInternal(f.DynamicInvoke(y)))(x).Value;
         });
 
-        internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => {
-            return new object[2] { fst, snd };
-        });
+        internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => new object[2] { fst, snd });
 
         internal readonly static dynamic Path = Curry2<IList<string>, object, object>((paths, obj) => {
             var idx = 0;
@@ -517,13 +509,9 @@ namespace Ramda.NET
             return val;
         });
 
-        internal readonly static dynamic PathOr = Curry3<object, IList<string>, object, object>((d, p, obj) => {
-            return DefaultTo(d, Path(p, obj));
-        });
+        internal readonly static dynamic PathOr = Curry3<object, IList<string>, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj)));
 
-        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList<string>, object, bool>((pred, propPath, obj) => {
-            return propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj));
-        });
+        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList<string>, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj)));
 
         internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
 
@@ -670,5 +658,17 @@ namespace Ramda.NET
         internal readonly static dynamic Subtract = Curry2<double, double, double>((arg1, arg2) => arg1 - arg2);
 
         internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MinValue));
+
+        internal readonly static dynamic Take = Curry2(new Func<object, object, dynamic>(Dispatchable2("Take", new LambdaN(arguments => null), new Func<int, IList, IList>((n, xs) => {
+            return Slice(0, n < 0 ? int.MaxValue : n, xs);
+        }))));
+
+        internal readonly static dynamic TakeLastWhile = Curry2<Delegate, IList, IList>((fn, list) => {
+            return TakeWhileInternal(list.Count - 1, -1, idx => idx >= 0, fn, list, idx => idx + 1, idx => int.MaxValue);
+        });
+
+        internal readonly static dynamic TakeWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("TakeWhile", new LambdaN(arguments => null), new Func<Delegate, IList, IList>((fn, list) => {
+            return TakeWhileInternal(0, 1, idx => idx < list.Count, fn, list, idx => 0, idx => idx);
+        }))));
     }
 }

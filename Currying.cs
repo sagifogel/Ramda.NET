@@ -675,5 +675,27 @@ namespace Ramda.NET
             fn.DynamicInvoke(value);
             return value;
         });
+
+        internal readonly static dynamic Times = Curry2<Delegate, int, IList>((fn, n) => {
+            if (n < 0) {
+                throw new ArgumentOutOfRangeException("n must be a non-negative number");
+            }
+
+            var idx = 0;
+            var list = new object[n];
+
+            while (idx < n) {
+                list[idx] = fn.DynamicInvoke(idx);
+                idx += 1;
+            }
+
+            return list;
+        });
+
+        internal readonly static dynamic ToPairs = Curry1<object, object[]>((obj) => {
+            return obj.ToMemberDictionary()
+                      .Select(prop => new[] { prop.Key, prop.Value })
+                      .ToArray();
+        });
     }
 }

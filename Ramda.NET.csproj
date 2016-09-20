@@ -617,6 +617,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tap.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Times.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Times.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ToPairs.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToPairs.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1192,6 +1202,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tap.cs</LastGenOutput>
       <LastOutputs>.\Tap.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Times.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Times.cs</LastGenOutput>
+      <LastOutputs>.\Times.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ToPairs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToPairs.cs</LastGenOutput>
+      <LastOutputs>.\ToPairs.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

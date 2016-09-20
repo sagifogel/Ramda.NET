@@ -670,5 +670,10 @@ namespace Ramda.NET
         internal readonly static dynamic TakeWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("TakeWhile", new LambdaN(arguments => null), new Func<Delegate, IList, IList>((fn, list) => {
             return TakeWhileInternal(0, 1, idx => idx < list.Count, fn, list, idx => 0, idx => idx);
         }))));
+
+        internal readonly static dynamic Tap = Curry2<Delegate, object, object>((fn, value) => {
+            fn.DynamicInvoke(value);
+            return value;
+        });
     }
 }

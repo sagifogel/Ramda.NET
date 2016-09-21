@@ -627,6 +627,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToPairs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Transpose.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transpose.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1212,6 +1217,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToPairs.cs</LastGenOutput>
       <LastOutputs>.\ToPairs.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Transpose.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Transpose.cs</LastGenOutput>
+      <LastOutputs>.\Transpose.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

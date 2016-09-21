@@ -196,19 +196,8 @@ namespace Ramda.NET
             return ctor;
         }
 
-        internal static Array CreateNewArray(this object[] array, int len) {
-            Type lastType = array[0].GetType();
-            var allSameType = array.All(el => lastType.Equals(el.GetType()));
-
-            if (allSameType) {
-                return lastType.CreateNewArray<Array>(len);
-            }
-
-            return array.GetType().CreateNewArray<Array>(len);
-        }
-
-        internal static Array CreateNewArray(this IList array, int? len = null) {
-            return array.Cast<object>().ToArray().CreateNewArray(len ?? array.Count);
+        internal static Array CreateNewArray(this IList list, int? len = null) {
+            return list.GetElementType().CreateNewArray<Array>(len ?? list.Count);
         }
 
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
@@ -220,24 +209,40 @@ namespace Ramda.NET
         }
 
         internal static IList CreateNewList(this IEnumerable list, IEnumerable elements = null) {
-            Type type;
-            var listType = list.GetType();
-
-            if (listType.HasElementType) {
-                type = listType.GetElementType();
-            }
-            else if (listType.IsGenericType) {
-                type = listType.GetGenericArguments()[0];
-            }
-            else {
-                type = typeof(object);
-            }
+            Type type = list.GetElementType();
 
             if (elements != null) {
                 return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(type) }).Invoke(new object[] { elements });
             }
 
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
+        }
+
+        private static Type GetElementType(this IEnumerable enumerable) {
+            var elementType = typeof(object);
+            var enumerableType = enumerable.GetType();
+
+            if (enumerableType.HasElementType) {
+                elementType = enumerableType.GetElementType();
+            }
+            else if (enumerableType.IsGenericType) {
+                elementType = enumerableType.GetGenericArguments()[0];
+            }
+            else {
+                Type firstElementType = null;
+                var list = enumerable.Cast<object>();
+                var allSameType = list.Aggregate(true, (e1, e2) => {
+                    firstElementType = firstElementType ?? e2.GetType();
+
+                    return e1 && firstElementType.Equals(e2.GetType());
+                });
+
+                if (allSameType) {
+                    elementType = firstElementType;
+                }
+            }
+
+            return elementType;
         }
 
         internal static IList CreateNewListOfType(this IEnumerable list, Type type = null) {
@@ -294,6 +299,16 @@ namespace Ramda.NET
             }
 
             return new[] { value };
+        }
+
+        internal static Array ToArray(this IList list) {
+            IList arr = list.CreateNewArray(list.Count);
+
+            for (int i = 0; i < list.Count; i++) {
+                arr[i] = list[i];
+            }
+
+            return (Array)arr;
         }
     }
 }

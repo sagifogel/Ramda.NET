@@ -697,5 +697,32 @@ namespace Ramda.NET
                       .Select(prop => new[] { prop.Key, prop.Value })
                       .ToArray();
         });
+
+        internal readonly static dynamic Transpose = Curry1<IList, IList>((outerlist) => {
+            var i = 0;
+            var result = new List<IList>();
+
+            while (i < outerlist.Count) {
+                var j = 0;
+                IList resultInnnerList = null;
+                var innerlist = (IList)outerlist[i];
+
+                while (j < innerlist.Count) {
+                    if (result.Count > j) {
+                        resultInnnerList = result[j];
+                    }
+                    else {
+                        result.Add(resultInnnerList = innerlist.CreateNewList());
+                    }
+
+                    resultInnnerList.Add(innerlist[j]);
+                    j += 1;
+                }
+
+                i += 1;
+            }
+
+            return outerlist;//.CreateNewArray( result.Select(list => list.ToArray()).ToArray();
+        });
     }
 }

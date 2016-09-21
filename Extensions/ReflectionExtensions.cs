@@ -200,6 +200,14 @@ namespace Ramda.NET
             return list.GetElementType().CreateNewArray<Array>(len ?? list.Count);
         }
 
+        internal static Array CreateNewArray(this IList list, Array sourceToCopy) {
+            var array = list.CreateNewArray(sourceToCopy.Length);
+
+            sourceToCopy.CopyTo(array, 0);
+
+            return array;
+        }
+
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
             return (ListType)type.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len }); ;
         }

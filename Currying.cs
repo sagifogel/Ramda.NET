@@ -722,7 +722,9 @@ namespace Ramda.NET
                 i += 1;
             }
 
-            return outerlist;//.CreateNewArray( result.Select(list => list.ToArray()).ToArray();
+            return outerlist.CreateNewArray(result.Select(list => list.ToArray()).ToArray());
         });
+
+        internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
     }
 }

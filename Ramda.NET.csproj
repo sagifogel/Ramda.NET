@@ -632,6 +632,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Transpose.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Trim.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Trim.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1222,6 +1227,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Transpose.cs</LastGenOutput>
       <LastOutputs>.\Transpose.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Trim.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Trim.cs</LastGenOutput>
+      <LastOutputs>.\Trim.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -637,6 +637,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Trim.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\TryCatch.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TryCatch.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1232,6 +1237,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Trim.cs</LastGenOutput>
       <LastOutputs>.\Trim.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\TryCatch.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TryCatch.cs</LastGenOutput>
+      <LastOutputs>.\TryCatch.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

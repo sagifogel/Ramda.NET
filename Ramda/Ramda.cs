@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Collections;
+using static Ramda.NET.Lambda;
+using System.Collections.Generic;
 
 namespace Ramda.NET
 {
@@ -119,5 +120,13 @@ namespace Ramda.NET
         public static dynamic Take(RamdaPlaceholder n, string list) {
             return Currying.Take(n, list.ToCharArray());
         }
+
+        public static dynamic F = new LambdaN(arguments => {
+            return Currying.F();
+        });
+
+        public static dynamic T = new LambdaN(arguments => {
+            return Currying.T();
+        });
     }
 }

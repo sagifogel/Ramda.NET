@@ -726,5 +726,20 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
+
+        internal readonly static dynamic TryCatch = Curry2<Delegate, Delegate, LambdaN>((tryer, catcher) => {
+            return new LambdaN(arguments => {
+                try {
+                    return tryer.DynamicInvoke(new[] { arguments });
+                }
+                catch (Exception e) {
+                    return catcher.DynamicInvoke(new[] { Concat(new object[] { e }, arguments) });
+                }
+            });
+        });
+
+        internal readonly static dynamic F = Always(false);
+
+        internal readonly static dynamic T = Always(true);
     }
 }

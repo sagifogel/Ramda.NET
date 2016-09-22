@@ -195,11 +195,12 @@ namespace Ramda.NET
         }
 
         private static LambdaN InternalCurryN(int length, object[] received, Delegate fn) {
-            return new LambdaN(arguments => {
+            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var argsIdx = 0;
                 var left = length;
                 var combinedIdx = 0;
                 var combined = new List<object>();
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 while (combinedIdx < received.Length || argsIdx < arguments.Length) {
                     object result = null;
@@ -221,7 +222,7 @@ namespace Ramda.NET
                     combinedIdx += 1;
                 }
 
-                return left <= 0 ? fn.DynamicInvoke(combined.ToInvokable()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
+                return left <= 0 ? fn.DynamicInvoke(combined.Pad()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
             });
         }
 

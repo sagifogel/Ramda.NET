@@ -11,6 +11,7 @@ namespace Ramda.NET
 {
     internal static class ReflectionExtensions
     {
+        private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy;
 
@@ -182,7 +183,7 @@ namespace Ramda.NET
 
         internal static ConstructorInfo GetConstructor(this object value, out IEnumerable<Type> parameters) {
             var type = value.GetType();
-            var ctor = type.GetConstructor(Type.EmptyTypes);
+            var ctor = type.GetConstructor(EmptyTypes);
 
             parameters = new List<Type>();
 
@@ -213,7 +214,7 @@ namespace Ramda.NET
         }
 
         internal static ListType CreateNewList<ListType>(this Type type) {
-            return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(new object[0]);
+            return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(new object[0]);
         }
 
         internal static IList CreateNewList(this IEnumerable list, IEnumerable elements = null) {
@@ -223,7 +224,7 @@ namespace Ramda.NET
                 return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(type) }).Invoke(new object[] { elements });
             }
 
-            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
+            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(null);
         }
 
         private static Type GetElementType(this IEnumerable enumerable) {
@@ -256,7 +257,7 @@ namespace Ramda.NET
         internal static IList CreateNewListOfType(this IEnumerable list, Type type = null) {
             type = type ?? list.GetType();
 
-            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);
+            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(null);
         }
 
         internal static Func<object> GetFactory(this object value) {
@@ -269,7 +270,7 @@ namespace Ramda.NET
         }
 
         internal static object ToInvokable(this object target) {
-            if (target.GetType().IsArray) {
+            if (target.IsList()) {
                 return ((IList)target).Cast<object>().ToArray();
             }
 

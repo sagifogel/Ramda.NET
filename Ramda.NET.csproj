@@ -46,6 +46,11 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
+    <Compile Include="Ramda\Apply.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Apply.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -642,6 +647,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TryCatch.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Unapply.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unapply.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UncurryN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UncurryN.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -652,6 +667,11 @@
     <Compile Include="R.Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ramda\Apply.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Apply.cs</LastGenOutput>
+      <LastOutputs>.\Apply.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\FindLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FindLast.cs</LastGenOutput>
@@ -1242,6 +1262,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TryCatch.cs</LastGenOutput>
       <LastOutputs>.\TryCatch.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Unapply.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unapply.cs</LastGenOutput>
+      <LastOutputs>.\Unapply.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UncurryN.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UncurryN.cs</LastGenOutput>
+      <LastOutputs>.\UncurryN.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

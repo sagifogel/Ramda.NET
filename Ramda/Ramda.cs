@@ -121,11 +121,11 @@ namespace Ramda.NET
             return Currying.Take(n, list.ToCharArray());
         }
 
-        public static dynamic F = new LambdaN(arguments => {
+        public static dynamic F = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             return Currying.F();
         });
 
-        public static dynamic T = new LambdaN(arguments => {
+        public static dynamic T = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             return Currying.T();
         });
     }

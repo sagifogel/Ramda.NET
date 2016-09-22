@@ -11,7 +11,11 @@ namespace Ramda.NET
     internal static partial class Core
     {
         internal static Delegate Complement(Delegate fn) {
-            return new LambdaN(arguments => !(bool)fn.DynamicInvoke(arguments));
+            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Currying.Pad(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return !(bool)fn.DynamicInvoke(arguments);
+            });
         }
 
         internal static IList Concat(IList set1, IList set2 = null) {
@@ -85,8 +89,10 @@ namespace Ramda.NET
         }
 
         internal static LambdaN Dispatchable(LambdaN transducerFunction, Delegate fn) {
-            return new LambdaN(arguments => {
-                if (arguments.Arity() != 1) {
+            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Currying.Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                if (arguments.Length != 1) {
                     return fn.DynamicInvoke(new object[0]);
                 }
 
@@ -96,9 +102,9 @@ namespace Ramda.NET
 
         internal static Lambda2 Dispatchable2(string methodName, LambdaN transducerFunction, Delegate fn) {
             return new Lambda2((arg1, arg2) => {
-                var length = new object[] { arg1, arg2 }.Arity();
+                var arguments = Currying.Arity(arg1, arg2);
 
-                if (length == 0) {
+                if (arguments.Length == 0) {
                     return fn.DynamicInvoke(new object[0]);
                 }
 
@@ -169,7 +175,6 @@ namespace Ramda.NET
             object member;
             Type memberType;
             var invokeFn = false;
-
             var length = arguments.Length;
 
             if (length == 0) {

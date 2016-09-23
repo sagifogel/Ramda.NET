@@ -20,12 +20,12 @@ namespace Ramda.NET
 			return Currying.GroupWith(fn, list);
 		}
 		
-		public static dynamic GroupWith<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
-			return Currying.GroupWith(fn, list); 
-		}
-
 		public static dynamic GroupWith(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.GroupWith(fn, list);
+		}
+		
+		public static dynamic GroupWith<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
+			return Currying.GroupWith(fn, list); 
 		}
 		
 		public static dynamic GroupWith<TSource>(Func<TSource, TSource, bool> fn, RamdaPlaceholder list = null) {

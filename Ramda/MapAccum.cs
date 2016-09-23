@@ -20,21 +20,27 @@ namespace Ramda.NET
 			return Currying.MapAccum(fn, acc, list);
 		}
 		
+		public static dynamic MapAccum(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+			return Currying.MapAccum(fn, acc, list);
+		}
+		
 		public static dynamic MapAccum<TArg, TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccum(fn, acc, list); 
 		}
 
 		public static dynamic MapAccum<TSource>(dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(fn, acc, list);//
 		}
+				
 		
 		public static dynamic MapAccum<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.MapAccum(fn, acc, list); 
 		}
 
 		public static dynamic MapAccum<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(fn, acc, list);//
 		}
+				
 		
 		public static dynamic MapAccum<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.MapAccum(fn, acc, list); 

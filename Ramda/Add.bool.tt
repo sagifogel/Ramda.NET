@@ -4,8 +4,8 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TSource");
-	template.Parameters.Add(Tuple.Create("Delegate", "fn", true));	
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "args", false));	
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("bool", "a", false));	
+	template.Parameters.Add(Tuple.Create("bool", "b", false));
 	template.Render();
 #>

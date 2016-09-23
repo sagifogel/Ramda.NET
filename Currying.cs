@@ -15,8 +15,9 @@ namespace Ramda.NET
         internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var length = arguments?.Length ?? 0;
 
-                if (R.__.Equals(arg1) || arguments.Length == 0) {
+                if (R.__.Equals(arg1) || length == 0) {
                     return Curry1(fn);
                 }
 
@@ -29,8 +30,9 @@ namespace Ramda.NET
                 var arg1IsPlaceHolder = false;
                 var arg2IsPlaceHolder = false;
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var length = arguments?.Length ?? 0;
 
-                switch (arguments.Length) {
+                switch (length) {
                     case 0:
                         return Curry2(fn);
                     case 1:
@@ -54,8 +56,9 @@ namespace Ramda.NET
                 var arg2IsPlaceHolder = false;
                 var arg3IsPlaceHolder = false;
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var length = arguments?.Length ?? 0;
 
-                switch (arguments.Length) {
+                switch (length) {
                     case 0:
                         return Curry3(fn);
                     case 1:
@@ -104,9 +107,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => arg1 + arg2);
 
-        public readonly static dynamic Adjust = Curry3<Func<dynamic, dynamic>, int, IList, IList>((fn, idx, list) => {
+        public readonly static dynamic Adjust = Curry3<Delegate, int, IList, IList>((fn, idx, list) => {
             var start = 0;
             var index = 0;
+            Type elementType;
+            object adjustedValue;
             IList concatedList = null;
 
             if (idx >= list.Count || idx < -list.Count) {
@@ -116,7 +121,14 @@ namespace Ramda.NET
             start = idx < 0 ? list.Count : 0;
             index = start + idx;
             concatedList = Concat(list);
-            concatedList[index] = fn(list[index]);
+            elementType = concatedList.GetElementType();
+            adjustedValue = fn.Invoke(list[index]);
+
+            if (!elementType.Equals(adjustedValue.GetType())) {
+                adjustedValue = adjustedValue.Cast(elementType);
+            }
+
+            concatedList[index] = adjustedValue;
 
             return concatedList;
         });

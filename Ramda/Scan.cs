@@ -20,21 +20,27 @@ namespace Ramda.NET
 			return Currying.Scan(fn, acc, list);
 		}
 		
+		public static dynamic Scan(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+			return Currying.Scan(fn, acc, list);
+		}
+		
 		public static dynamic Scan<TSource, TAccmulator, TResult>(RamdaPlaceholder fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.Scan(fn, acc, list); 
 		}
 
 		public static dynamic Scan<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
-			return Currying.Scan(fn, acc, list);
+			return Currying.Scan(fn, acc, list);//
 		}
+				
 		
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
 			return Currying.Scan(fn, acc, list); 
 		}
 
 		public static dynamic Scan<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.Scan(fn, acc, list);
+			return Currying.Scan(fn, acc, list);//
 		}
+				
 		
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.Scan(fn, acc, list); 

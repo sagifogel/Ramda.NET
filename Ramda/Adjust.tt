@@ -8,6 +8,5 @@
 	template.Parameters.Add(Tuple.Create("Func<TSource, TSource>", "fn", true));	
 	template.Parameters.Add(Tuple.Create("int", "idx", false));
 	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
-	template.Parameters.Add(Tuple.Create("string", "memberName", false));
 	template.Render();
 #>

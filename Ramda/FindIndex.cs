@@ -20,12 +20,12 @@ namespace Ramda.NET
 			return Currying.FindIndex(fn, list);
 		}
 		
-		public static dynamic FindIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
-			return Currying.FindIndex(fn, list); 
-		}
-
 		public static dynamic FindIndex(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.FindIndex(fn, list);
+		}
+		
+		public static dynamic FindIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
+			return Currying.FindIndex(fn, list); 
 		}
 		
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {

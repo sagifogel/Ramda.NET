@@ -201,11 +201,12 @@ namespace Ramda.NET
                 var combinedIdx = 0;
                 var combined = new List<object>();
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var argumentsLength = arguments?.Length ?? 0;
 
-                while (combinedIdx < received.Length || argsIdx < arguments.Length) {
+                while (combinedIdx < received.Length || argsIdx < argumentsLength) {
                     object result = null;
 
-                    if (combinedIdx < received.Length && (!IsPlaceholder(received[combinedIdx]) || argsIdx >= arguments.Length)) {
+                    if (combinedIdx < received.Length && (!IsPlaceholder(received[combinedIdx]) || argsIdx >= argumentsLength)) {
                         result = received[combinedIdx];
                     }
                     else {

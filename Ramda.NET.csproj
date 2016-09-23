@@ -46,6 +46,11 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
+    <Compile Include="Ramda\Add.bool.cs">
+      <DependentUpon>Add.bool.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Apply.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -667,6 +672,11 @@
     <Compile Include="R.Tuple.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Ramda\Add.bool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.bool.cs</LastGenOutput>
+      <LastOutputs>.\Add.bool.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Apply.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Apply.cs</LastGenOutput>

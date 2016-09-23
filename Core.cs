@@ -19,7 +19,9 @@ namespace Ramda.NET
         }
 
         internal static IList Concat(IList set1, IList set2 = null) {
-            var result = new List<object>();
+            var list1ElemType = set1.GetElementType();
+            var list2ElemType = set2?.GetElementType() ?? list1ElemType;
+            var result = list1ElemType.Equals(list2ElemType) ? set1.CreateNewList() : new List<object>();
 
             if (set1 != null) {
                 foreach (var item in set1) {

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Add.cs" />
     <Compile Include="Adjust.cs" />
+    <Compile Include="All.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

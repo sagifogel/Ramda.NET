@@ -122,7 +122,7 @@ namespace Ramda.NET
 
         private static bool AllOrAny(Delegate fn, IList list, bool returnValue) {
             foreach (var item in list) {
-                if ((bool)fn.DynamicInvoke(item)) {
+                if ((bool)fn.DynamicInvoke(item) == returnValue) {
                     return returnValue;
                 }
             }

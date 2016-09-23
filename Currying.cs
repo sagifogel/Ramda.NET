@@ -138,11 +138,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
 
-        internal readonly static dynamic All = CurryN(Dispatchable2("All", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, false))));
+        internal readonly static dynamic All = Curry2(new Func<object, object, dynamic>(Dispatchable2("All", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, false)))));
 
         internal readonly static dynamic Any = Curry2(new Func<object, object, dynamic>(Dispatchable2("Any", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, true)))));
 
-        internal readonly static dynamic Aperture = CurryN(Dispatchable2("Aperture", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<int, IList, IList>(Core.Aperture)));
+        internal readonly static dynamic Aperture = Curry2(new Func<object, object, dynamic>(Dispatchable2("Aperture", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<int, IList, IList>(Core.Aperture))));
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => Concat(list, list.CreateNewList(new object[] { el })));
 

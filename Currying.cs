@@ -134,7 +134,7 @@ namespace Ramda.NET
         });
 
 
-        internal readonly static dynamic Always = Curry1<dynamic, Func<dynamic>>(value => () => value);
+        internal readonly static dynamic Always = Curry1<dynamic, LambdaN>(value => new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => value));
 
         internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
 

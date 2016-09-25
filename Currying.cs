@@ -823,6 +823,16 @@ namespace Ramda.NET
             return (bool)pred.DynamicInvoke(x) ? x : whenFalseFn.DynamicInvoke(x);
         });
 
+        internal readonly static dynamic Until = Curry3<Delegate, Delegate, object, object>((pred, fn, init) => {
+            var val = init;
+
+            while (!(bool)pred.Invoke(val)) {
+                val = fn.Invoke(val);
+            }
+
+            return val;
+        });
+
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);

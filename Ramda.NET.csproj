@@ -682,6 +682,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Unless.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Until.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Until.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1322,6 +1327,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unless.cs</LastGenOutput>
       <LastOutputs>.\Unless.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Until.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Until.cs</LastGenOutput>
+      <LastOutputs>.\Until.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

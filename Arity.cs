@@ -34,11 +34,19 @@ namespace Ramda.NET
         }
 
         internal static object[] Pad(params object[] arguments) {
-            var copied = new object[10];
+            return Pad(arguments);
+        }
+
+        internal static object[] Pad(this object[] arguments, int length = 10) {
+            var copied = new object[length];
 
             arguments.CopyTo(copied, 0);
 
             return copied;
+        }
+
+        internal static object[] Pad(this object[] arguments, Delegate @delegate) {
+            return arguments.Pad(@delegate.Method.GetParameters().Length);
         }
 
         internal static object[] Pad(this List<object> arguments) {

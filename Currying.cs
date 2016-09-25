@@ -833,6 +833,25 @@ namespace Ramda.NET
             return val;
         });
 
+        internal readonly static dynamic UseWith = Curry2<Delegate, IList<Delegate>, object>((fn, transformers) => {
+            var length = transformers.Count;
+
+            return CurryN(length, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var idx = 0;
+                var args = new List<object>();
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                while (idx < length) {
+                    args.Add(transformers[idx].Invoke(arguments[idx]));
+                    idx += 1;
+                }
+
+                return fn.Invoke((object[])Concat(arguments, Core.Slice(arguments, length)));
+            }));
+        });
+
+        internal readonly static dynamic Update = Curry3<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list));
+
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);

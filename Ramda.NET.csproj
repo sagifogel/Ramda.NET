@@ -687,6 +687,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Until.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Update.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Update.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UseWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UseWith.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1332,6 +1342,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Until.cs</LastGenOutput>
       <LastOutputs>.\Until.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Update.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Update.cs</LastGenOutput>
+      <LastOutputs>.\Update.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UseWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UseWith.cs</LastGenOutput>
+      <LastOutputs>.\UseWith.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

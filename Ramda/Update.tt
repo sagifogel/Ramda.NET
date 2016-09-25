@@ -1,0 +1,12 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TSource");
+	template.Parameters.Add(Tuple.Create("int", "idx", false));	
+	template.Parameters.Add(Tuple.Create("TSource", "x", false));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
+	template.Render();
+#>

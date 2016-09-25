@@ -187,7 +187,7 @@ namespace Ramda.NET
 					if (!Emitted.Contains(joined)) { #>
 
 		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= joined #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);//
+			return Currying.<#= name #>(<#= parameterNames #>);
 		}
 				
 <#+						Emitted.Add(joined);

@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IfElse(RamdaPlaceholder condition, dynamic onTrue, dynamic onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);//
+			return Currying.IfElse(condition, onTrue, onFalse);
 		}
 				
 		
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IfElse(dynamic condition, RamdaPlaceholder onTrue, dynamic onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);//
+			return Currying.IfElse(condition, onTrue, onFalse);
 		}
 				
 		
@@ -51,7 +51,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IfElse(dynamic condition, dynamic onTrue, RamdaPlaceholder onFalse = null) {
-			return Currying.IfElse(condition, onTrue, onFalse);//
+			return Currying.IfElse(condition, onTrue, onFalse);
 		}
 				
 		

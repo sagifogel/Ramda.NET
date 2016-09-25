@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic TryCatch(RamdaPlaceholder tryer, dynamic catcher) {
-			return Currying.TryCatch(tryer, catcher);//
+			return Currying.TryCatch(tryer, catcher);
 		}
 				
 		

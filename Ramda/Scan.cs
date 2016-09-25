@@ -29,7 +29,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Scan<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
-			return Currying.Scan(fn, acc, list);//
+			return Currying.Scan(fn, acc, list);
 		}
 				
 		
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Scan<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.Scan(fn, acc, list);//
+			return Currying.Scan(fn, acc, list);
 		}
 				
 		

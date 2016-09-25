@@ -292,6 +292,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Is.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\IsArrayLike.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsArrayLike.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\IsNil.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -662,6 +667,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UncurryN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Unfold.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unfold.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UniqWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniqWith.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Unless.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unless.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -911,6 +931,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Is.cs</LastGenOutput>
       <LastOutputs>.\Is.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IsArrayLike.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IsArrayLike.cs</LastGenOutput>
+      <LastOutputs>.\IsArrayLike.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IsNil.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1282,6 +1307,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UncurryN.cs</LastGenOutput>
       <LastOutputs>.\UncurryN.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Unfold.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unfold.cs</LastGenOutput>
+      <LastOutputs>.\Unfold.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UniqWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UniqWith.cs</LastGenOutput>
+      <LastOutputs>.\UniqWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Unless.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unless.cs</LastGenOutput>
+      <LastOutputs>.\Unless.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

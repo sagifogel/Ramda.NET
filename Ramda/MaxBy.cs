@@ -29,7 +29,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MaxBy<TArg>(dynamic f, RamdaPlaceholder a, TArg b) {
-			return Currying.MaxBy(f, a, b);//
+			return Currying.MaxBy(f, a, b);
 		}
 				
 		
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MaxBy<TArg>(dynamic f, TArg a, RamdaPlaceholder b = null) {
-			return Currying.MaxBy(f, a, b);//
+			return Currying.MaxBy(f, a, b);
 		}
 				
 		

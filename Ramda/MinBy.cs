@@ -29,7 +29,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MinBy<TArg>(dynamic f, RamdaPlaceholder a, TArg b) {
-			return Currying.MinBy(f, a, b);//
+			return Currying.MinBy(f, a, b);
 		}
 				
 		
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MinBy<TArg>(dynamic f, TArg a, RamdaPlaceholder b = null) {
-			return Currying.MinBy(f, a, b);//
+			return Currying.MinBy(f, a, b);
 		}
 				
 		

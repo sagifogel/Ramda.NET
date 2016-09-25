@@ -29,7 +29,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ReduceRight<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
-			return Currying.ReduceRight(fn, acc, list);//
+			return Currying.ReduceRight(fn, acc, list);
 		}
 				
 		
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ReduceRight<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.ReduceRight(fn, acc, list);//
+			return Currying.ReduceRight(fn, acc, list);
 		}
 				
 		

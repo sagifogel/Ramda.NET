@@ -366,6 +366,8 @@ namespace Ramda.NET
             return result;
         }));
 
+        internal readonly static dynamic IsArrayLike = Curry1<object, bool>(x => x.IsList());
+
         internal readonly static dynamic Is = Curry2<Type, object, bool>((type, val) => {
             if (val.IsNotNull()) {
                 var valueType = val.GetType();
@@ -785,6 +787,40 @@ namespace Ramda.NET
 
                 return value;
             }));
+        });
+
+        internal readonly static dynamic Unfold = Curry2<Delegate, int, IList>((fn, seed) => {
+            IList list;
+            var pair = fn.DynamicInvoke(seed);
+            IList result = new List<int>();
+
+            while ((list = pair as IList).IsNotNull()) {
+                result.Add(list[0]);
+                pair = fn.DynamicInvoke(list[1]);
+            }
+
+            return result.ToArray();
+        });
+
+        internal readonly static dynamic UniqWith = Curry2<Delegate, IList, IList>((pred, list) => {
+            var result = list.CreateNewList();
+            var prediacte = new Func<object, object, bool>((a, b) => (bool)pred.DynamicInvoke(a, b));
+
+            foreach (var item in list) {
+                if (!ContainsWith(prediacte, item, result)) {
+                    result.Add(item);
+                }
+            }
+
+            if (list.IsArray()) {
+                return result.ToArray();
+            }
+
+            return result;
+        });
+
+        internal readonly static dynamic Unless = Curry3<Delegate, Delegate, object, object>((pred, whenFalseFn, x) => {
+            return (bool)pred.DynamicInvoke(x) ? x : whenFalseFn.DynamicInvoke(x);
         });
 
         internal readonly static dynamic F = Always(false);

@@ -12,11 +12,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic SortBy<TArg>(dynamic pred, IList<TArg> list) {
+		public static dynamic SortBy<TSource>(dynamic pred, IList<TSource> list) {
 			return Currying.SortBy(pred, list);
 		}
 			
-		public static dynamic SortBy<TArg>(Func<TArg, int> pred, IList<TArg> list) {
+		public static dynamic SortBy<TSource>(Func<TSource, int> pred, IList<TSource> list) {
 			return Currying.SortBy(pred, list);
 		}
 		
@@ -24,15 +24,15 @@ namespace Ramda.NET
 			return Currying.SortBy(pred, list);
 		}
 		
-		public static dynamic SortBy<TArg>(RamdaPlaceholder pred, IList<TArg> list) {
+		public static dynamic SortBy<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
 			return Currying.SortBy(pred, list); 
 		}
 		
-		public static dynamic SortBy<TArg>(Func<TArg, int> pred, RamdaPlaceholder list = null) {
+		public static dynamic SortBy<TSource>(Func<TSource, int> pred, RamdaPlaceholder list = null) {
 			return Currying.SortBy(pred, list); 
 		}
 		
-		public static dynamic SortBy<TArg>(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
+		public static dynamic SortBy<TSource>(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.SortBy(pred, list);
 		}
 	}

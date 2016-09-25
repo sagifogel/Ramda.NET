@@ -7,6 +7,7 @@ using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Object = Ramda.NET.ReflectionExtensions;
+using static Ramda.NET.R;
 
 namespace Ramda.NET
 {
@@ -351,7 +352,7 @@ namespace Ramda.NET
                 }
             }
 
-            result = list.CreateNewListOfType(underlyingType);
+            result = list.CreateNewList(type: underlyingType);
 
             while (idx < length) {
                 result.Add(list[idx]);
@@ -503,7 +504,7 @@ namespace Ramda.NET
         internal readonly static dynamic Or = Curry2<bool, bool, bool>((a, b) => a || b);
 
         internal readonly static dynamic Over = Curry3<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, Delegate, object, object>((lens, f, x) => {
-            return lens(y => IdentityInternal(f.DynamicInvoke(y)))(x).Value;
+            return lens(y => IdentityInternal(f.Invoke(y)))(x).Value;
         });
 
         internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => new object[2] { fst, snd });
@@ -535,9 +536,9 @@ namespace Ramda.NET
         internal readonly static dynamic PickBy = Curry2<Delegate, object, IDictionary<string, object>>((pred, obj) => {
             IDictionary<string, object> result = new ExpandoObject();
 
-            foreach (var keyVal in obj.ToMemberDictionary()) {
-                if ((bool)pred.DynamicInvoke(keyVal.Value, keyVal.Key, obj)) {
-                    result[keyVal.Key] = keyVal.Value;
+            foreach (var pair in obj.ToMemberDictionary()) {
+                if ((bool)pred.DynamicInvoke(pair.Value, pair.Key, obj)) {
+                    result[pair.Key] = pair.Value;
                 }
             }
 
@@ -640,7 +641,7 @@ namespace Ramda.NET
             }
 
             var idx = 0;
-            var result = list.CreateNewListOfType(list.GetType());
+            var result = list.CreateNewList(type: list.GetType());
 
             while (idx < list.Count) {
                 result.Add(Slice(idx, idx += n, list));
@@ -653,7 +654,7 @@ namespace Ramda.NET
             var idx = 0;
             var len = list.Count;
             var prefix = list.CreateNewList();
-            var result = list.CreateNewListOfType(prefix.GetType());
+            var result = list.CreateNewList(type: prefix.GetType());
 
             if (list.IsArray()) {
                 list = list.CreateNewList(list);
@@ -833,6 +834,8 @@ namespace Ramda.NET
             return val;
         });
 
+        internal readonly static dynamic Update = Curry3<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list));
+
         internal readonly static dynamic UseWith = Curry2<Delegate, IList<Delegate>, object>((fn, transformers) => {
             var length = transformers.Count;
 
@@ -850,7 +853,38 @@ namespace Ramda.NET
             }));
         });
 
-        internal readonly static dynamic Update = Curry3<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list));
+        internal readonly static dynamic Values = Curry1<object, IList>(obj => {
+            Type firstType = null;
+            bool sameTypeForAll = true;
+            var pairs = obj.ToMemberDictionary();
+            IList vals = new List<object>();
+
+            pairs.ForEach((pair, i) => {
+                var value = pair.Value;
+                var type = value.GetType();
+
+                if (i == 0) {
+                    firstType = type;
+                }
+                else {
+                    sameTypeForAll &= type.Equals(firstType);
+                }
+
+                vals.Add(value);
+            });
+
+            if (sameTypeForAll) {
+                vals = vals.CreateNewList(vals, firstType);
+            }
+
+            return vals.ToArray();
+        });
+
+        internal readonly static dynamic View = Curry2<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, object, object>((lens, x) => lens(Const)(x).Value);
+
+        internal readonly static dynamic When = Curry3<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
+            return (bool)pred.Invoke(x) ? whenTrueFn.Invoke(x) : x;
+        });
 
         internal readonly static dynamic F = Always(false);
 

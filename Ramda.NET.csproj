@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="IdentityObj.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
     <Compile Include="Ramda\Add.bool.cs">
@@ -472,6 +473,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Or.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Over.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Over.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Pair.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -696,6 +702,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UseWith.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Values.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Values.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\View.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>View.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\When.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>When.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
@@ -1127,6 +1148,11 @@
       <LastGenOutput>Or.cs</LastGenOutput>
       <LastOutputs>.\Or.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Over.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Over.cs</LastGenOutput>
+      <LastOutputs>.\Over.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Pair.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pair.cs</LastGenOutput>
@@ -1352,6 +1378,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UseWith.cs</LastGenOutput>
       <LastOutputs>.\UseWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Values.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Values.cs</LastGenOutput>
+      <LastOutputs>.\Values.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\View.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>View.cs</LastGenOutput>
+      <LastOutputs>.\View.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\When.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>When.cs</LastGenOutput>
+      <LastOutputs>.\When.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

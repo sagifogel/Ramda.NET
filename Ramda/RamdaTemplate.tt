@@ -70,17 +70,27 @@ public class RamdaTemplate : CSharpTemplate
 	private string ResolveGenerics(IEnumerable<Tuple<string, string, bool>> tuples) {
 		var hash = new HashSet<string>();
         var generics = new List<string>();
+		var sorted = new List<string>();
+        
         var types = tuples.Select(tuple => tuple.Item1).ToList();
 
         types.ForEach(type => {
-            var generic = Generics.SingleOrDefault(g => type.IndexOf(g) > -1);
+			var filteredGenerics = Generics.Where(g => type.IndexOf(g) > -1).ToList();
 
-            if (generic != null && hash.Add(generic)) {
-                generics.Add(generic);
-            }
+			filteredGenerics.ForEach(generic => {
+				if (generic != null && hash.Add(generic)) {
+					generics.Add(generic);
+				}
+			});
         });
 
-        return ResolveGenerics(generics);
+		Generics.ForEach(generic => {
+			if (generics.Contains(generic)) {
+				sorted.Add(generic);
+			}
+		});
+
+		return ResolveGenerics(sorted);
 	}
 
 	private bool TupleEquals(Tuple<string, string, bool> first, Tuple<string, string, bool> second) {
@@ -189,7 +199,6 @@ namespace Ramda.NET
 		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= joined #>) {
 			return Currying.<#= name #>(<#= parameterNames #>);
 		}
-				
 <#+						Emitted.Add(joined);
 					}
 				}

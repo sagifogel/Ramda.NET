@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Sys = System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.R;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using Object = Ramda.NET.ReflectionExtensions;
@@ -23,12 +25,6 @@ namespace Ramda.NET
             }
         }
 
-        internal class IdentityObj
-        {
-            public object Value { get; set; }
-            public Delegate Map { get; set; }
-        }
-
         private static Tuple<object, IList> MapAccumInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
@@ -39,7 +35,7 @@ namespace Ramda.NET
                 from += indexerAcc;
             }
 
-            return Tuple.Create(tuple.Item1, result);
+            return Sys.Tuple.Create(tuple.Item1, result);
         }
 
         private static object FindInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Func<object, bool> fn, IList list) {
@@ -240,6 +236,16 @@ namespace Ramda.NET
                     return IdentityInternal(f.DynamicInvoke(x));
                 })
             };
+        }
+
+        private static IdentityObj Const(object x) {
+            var identity = new IdentityObj() { Value = x };
+
+            identity.Map = new Func<Delegate, IdentityObj>(f => {
+                return identity;
+            });
+
+            return identity;
         }
     }
 }

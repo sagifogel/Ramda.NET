@@ -217,11 +217,17 @@ namespace Ramda.NET
             return (ListType)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(new object[0]);
         }
 
-        internal static IList CreateNewList(this IEnumerable list, IEnumerable elements = null) {
-            Type type = list.GetElementType();
+        internal static IList CreateNewList(this IEnumerable enumerable, IEnumerable elements = null, Type type = null) {
+            type = type ?? enumerable.GetElementType();
 
             if (elements != null) {
-                return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(new Type[] { typeof(IEnumerable<>).MakeGenericType(type) }).Invoke(new object[] { elements });
+                IList list = null;
+
+                elements.Cast<object>().Select(e => e.Cast(type));
+                list = (IList)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(null);
+                elements.Cast<object>().ForEach(e => list.Add(e));
+
+                return list;
             }
 
             return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(null);
@@ -252,12 +258,6 @@ namespace Ramda.NET
             }
 
             return elementType;
-        }
-
-        internal static IList CreateNewListOfType(this IEnumerable list, Type type = null) {
-            type = type ?? list.GetType();
-
-            return (IList)typeof(List<>).MakeGenericType(type).GetConstructor(EmptyTypes).Invoke(null);
         }
 
         internal static Func<object> GetFactory(this object value) {

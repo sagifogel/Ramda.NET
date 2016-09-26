@@ -12,24 +12,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PickBy<TTarget>(dynamic pred, TTarget obj) {
-			return Currying.PickBy(pred, obj);
-		}
-			
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, TTarget obj) {
 			return Currying.PickBy(pred, obj);
 		}
-		
+			
+		public static dynamic PickBy<TTarget>(RamdaPlaceholder pred, TTarget obj) {
+			return Currying.PickBy(pred, obj);
+		}
+
+		public static dynamic PickBy<TTarget>(dynamic pred, TTarget obj) {
+			return Currying.PickBy(pred, obj); 
+		}
+					
 		public static dynamic PickBy(dynamic pred, RamdaPlaceholder obj = null) {
 			return Currying.PickBy(pred, obj);
 		}
-		
-		public static dynamic PickBy<TTarget>(RamdaPlaceholder pred, TTarget obj) {
-			return Currying.PickBy(pred, obj); 
-		}
-		
+			
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, RamdaPlaceholder obj = null) {
-			return Currying.PickBy(pred, obj); 
+			return Currying.PickBy(pred, obj);
 		}
 		
 		public static dynamic PickBy<TTarget>(RamdaPlaceholder pred = null, RamdaPlaceholder obj = null) {

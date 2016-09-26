@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Tail<TValue>(IList<TValue> list) {
 			return Currying.Tail(list);
 		}
-		
+			
 		public static dynamic Tail<TValue>(RamdaPlaceholder list = null) {
-			return Currying.Tail(list); 
+			return Currying.Tail(list);
 		}
 	}
 }

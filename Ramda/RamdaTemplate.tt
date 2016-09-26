@@ -51,20 +51,40 @@ public class RamdaTemplate : CSharpTemplate
 		return hasDynamic;
     }
 
-	private bool TryGetDynamicParameters(List<Tuple<string, string, bool>> tuples) {
+	private bool TryGetDynamicParameters(List<Tuple<string, string, bool>> tuples, int? index = null) {
         bool hasDynamic = false;
 
         for (int i = 0; i < tuples.Count; i++) {
             var tuple = tuples[i];
 
             if (tuple.Item3) {
-                hasDynamic = true;
+				if ((index != null && i == index) || index == null) {
+					hasDynamic = true;
 
-                tuples[i] = Tuple.Create("dynamic", tuple.Item2, true);
+					tuples[i] = Tuple.Create("dynamic", tuple.Item2, true);
+				}
+
+				if (hasDynamic && index != null) {
+					break;
+				}
             }
         }
 
         return hasDynamic;
+    }
+
+	private List<int> TryGetDynamicIndexes(List<Tuple<string, string, bool>> tuples) {
+        var list = new List<int>();
+
+        for (int i = 0; i < tuples.Count; i++) {
+            var tuple = tuples[i];
+
+            if (tuple.Item3) {
+                list.Add(i);
+            }
+        }
+
+        return list;
     }
 
 	private string ResolveGenerics(IEnumerable<Tuple<string, string, bool>> tuples) {
@@ -137,74 +157,53 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-<#+		var generics = ResolveGenerics(Generics);
-		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));
-		var parametersWithDynamic = Parameters.ToList();
-
-		if (TryGetDynamicParameters(parametersWithDynamic)) {
-			var joined = Join(parametersWithDynamic);
-			
-			Emitted.Add(joined); #>
-		public static dynamic <#= name #><#= ResolveGenerics(parametersWithDynamic) #>(<#= joined #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-			
-<#+		}
-#>
+<#+		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
+		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));#>
 		public static dynamic <#= name #><#= generics #>(<#= Join(Parameters) #>) {
 			return Currying.<#= name #>(<#= parameterNames #>);
 		}
 <#+		for (var i = 0; i < Parameters.Count; i++)	 {
-			var hasDynamic = false;
-			var hasShiftedDynamic = false;
+			string joined = null;
 			var shifted = Parameters.ToList();
 			var shiftedItem = Parameters[i];
-			Tuple<string, string, bool> insertee;
-			List<Tuple<string, string, bool>> shiftedDynamics;
-			List<Tuple<string, string, bool>> dynamicsWithPlaceHolders = null;
-			
-			dynamicsWithPlaceHolders = shifted.ToList();
+
 			shifted.RemoveAt(i);
-			shiftedDynamics = shifted.ToList();
-			
-			if (TryGetDynamicParameters(shiftedDynamics)) {
-				hasShiftedDynamic = true;
-			}
-
-			if (TryGetDynamicParameters(dynamicsWithPlaceHolders)) {
-				hasDynamic = FillPlaceholders(dynamicsWithPlaceHolders, i);
-			}
-
-			insertee = i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem);
-			shiftedDynamics.Insert(i, insertee);
-			shifted.Insert(i, insertee); 
+			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
 			
 			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
-				if (hasDynamic) {
-					var joined = Join(dynamicsWithPlaceHolders);
-					
-					if (!Emitted.Contains(joined)) { #>
-		
-		public static dynamic <#= name #>(<#= joined #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-<#+						Emitted.Add(joined);
-					}
-				}
-				if (hasShiftedDynamic && !SequenceEquals(shiftedDynamics, dynamicsWithPlaceHolders)) {
-					var joined = Join(shiftedDynamics);
-					
-					if (!Emitted.Contains(joined)) { #>
+				var dynamics = TryGetDynamicIndexes(shifted);
+				
+				if (dynamics.Count > 0) {
+					var replacedDynamics = Parameters.ToList();
 
+					TryGetDynamicParameters(replacedDynamics);
+					joined = Join(replacedDynamics);
+					
+					if (!Emitted.Contains(joined)) {#>
+
+		public static dynamic <#= name #><#= ResolveGenerics(replacedDynamics) #>(<#= joined #>) {
+			return Currying.<#= name #>(<#= parameterNames #>); 
+		}
+<#+
+						Emitted.Add(joined);
+					}
+
+					foreach (var item in dynamics) {
+						var shiftedDynamics = shifted.ToList();
+						
+						TryGetDynamicParameters(shiftedDynamics, item);
+						joined = Join(shiftedDynamics);
+						Emitted.Add(joined);
+						#>
+					
 		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= joined #>) {
 			return Currying.<#= name #>(<#= parameterNames #>);
 		}
-<#+						Emitted.Add(joined);
-					}
-				}
-#>		
+<#+					}
+				}#>
+			
 		public static dynamic <#= name #><#= generics #>(<#= Join(shifted) #>) {
-			return Currying.<#= name #>(<#= parameterNames #>); 
+			return Currying.<#= name #>(<#= parameterNames #>);
 		}
 <#+        }
    }
@@ -212,7 +211,6 @@ namespace Ramda.NET
 			var taken = Parameters.Take(i);
 			var skipped = Parameters.Skip(i);
 			var rightFilled = string.Join(", ", taken.Concat(skipped.Select(FillNullablePlaceholder)).Select(FormatTuple)); #>		
-		
 		public static dynamic <#= name #><#= generics #>(<#= rightFilled #>) {
 			return Currying.<#= name #>(<#= parameterNames #>);
 		}

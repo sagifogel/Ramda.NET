@@ -12,40 +12,33 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Adjust<TSource>(dynamic fn, int idx, IList<TSource> list) {
-			return Currying.Adjust(fn, idx, list);
-		}
-			
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, IList<TSource> list) {
 			return Currying.Adjust(fn, idx, list);
 		}
-		
-		public static dynamic Adjust(dynamic fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null) {
+			
+		public static dynamic Adjust<TSource>(RamdaPlaceholder fn, int idx, IList<TSource> list) {
 			return Currying.Adjust(fn, idx, list);
 		}
-		
-		public static dynamic Adjust<TSource>(RamdaPlaceholder fn, int idx, IList<TSource> list) {
+
+		public static dynamic Adjust<TSource>(dynamic fn, int idx, IList<TSource> list) {
 			return Currying.Adjust(fn, idx, list); 
 		}
-
+					
 		public static dynamic Adjust<TSource>(dynamic fn, RamdaPlaceholder idx, IList<TSource> list) {
 			return Currying.Adjust(fn, idx, list);
 		}
-				
-		
+			
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx, IList<TSource> list) {
-			return Currying.Adjust(fn, idx, list); 
+			return Currying.Adjust(fn, idx, list);
 		}
-
+					
 		public static dynamic Adjust(dynamic fn, int idx, RamdaPlaceholder list = null) {
 			return Currying.Adjust(fn, idx, list);
 		}
-				
-		
+			
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, RamdaPlaceholder list = null) {
-			return Currying.Adjust(fn, idx, list); 
+			return Currying.Adjust(fn, idx, list);
 		}
-		
 		
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null) {
 			return Currying.Adjust(fn, idx, list);

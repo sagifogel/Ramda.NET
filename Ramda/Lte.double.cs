@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Lte(double a, double b) {
 			return Currying.Lte(a, b);
 		}
-		
+			
 		public static dynamic Lte(RamdaPlaceholder a, double b) {
-			return Currying.Lte(a, b); 
+			return Currying.Lte(a, b);
 		}
-		
+			
 		public static dynamic Lte(double a, RamdaPlaceholder b = null) {
-			return Currying.Lte(a, b); 
+			return Currying.Lte(a, b);
 		}
 		
 		public static dynamic Lte(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {

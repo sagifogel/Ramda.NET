@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic DefaultTo<TArg1, TArg2>(TArg1 a, TArg2 b) {
 			return Currying.DefaultTo(a, b);
 		}
-		
+			
 		public static dynamic DefaultTo<TArg1, TArg2>(RamdaPlaceholder a, TArg2 b) {
-			return Currying.DefaultTo(a, b); 
+			return Currying.DefaultTo(a, b);
 		}
-		
+			
 		public static dynamic DefaultTo<TArg1, TArg2>(TArg1 a, RamdaPlaceholder b = null) {
-			return Currying.DefaultTo(a, b); 
+			return Currying.DefaultTo(a, b);
 		}
 		
 		public static dynamic DefaultTo<TArg1, TArg2>(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {

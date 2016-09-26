@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Negate(double n) {
 			return Currying.Negate(n);
 		}
-		
+			
 		public static dynamic Negate(RamdaPlaceholder n = null) {
-			return Currying.Negate(n); 
+			return Currying.Negate(n);
 		}
 	}
 }

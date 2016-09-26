@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic TakeWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.TakeWhile(fn, list);
 		}
-		
+			
 		public static dynamic TakeWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
-			return Currying.TakeWhile(fn, list); 
+			return Currying.TakeWhile(fn, list);
 		}
-		
+			
 		public static dynamic TakeWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.TakeWhile(fn, list); 
+			return Currying.TakeWhile(fn, list);
 		}
 		
 		public static dynamic TakeWhile<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

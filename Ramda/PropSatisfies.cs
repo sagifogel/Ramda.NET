@@ -12,38 +12,33 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PropSatisfies<TTarget>(dynamic pred, string name, TTarget obj) {
-			return Currying.PropSatisfies(pred, name, obj);
-		}
-			
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}
-		
-		public static dynamic PropSatisfies(dynamic pred, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
+			
+		public static dynamic PropSatisfies<TArg, TTarget>(RamdaPlaceholder pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}
-		
-		public static dynamic PropSatisfies<TArg, TTarget>(RamdaPlaceholder pred, string name, TTarget obj) {
+
+		public static dynamic PropSatisfies<TTarget>(dynamic pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(pred, name, obj); 
 		}
-
+					
 		public static dynamic PropSatisfies<TTarget>(dynamic pred, RamdaPlaceholder name, TTarget obj) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}
-		
+			
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder name, TTarget obj) {
-			return Currying.PropSatisfies(pred, name, obj); 
+			return Currying.PropSatisfies(pred, name, obj);
 		}
-
+					
 		public static dynamic PropSatisfies(dynamic pred, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}
-		
+			
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, string name, RamdaPlaceholder obj = null) {
-			return Currying.PropSatisfies(pred, name, obj); 
+			return Currying.PropSatisfies(pred, name, obj);
 		}
-		
 		
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(pred, name, obj);

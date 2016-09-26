@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Multiply(int a, int b) {
 			return Currying.Multiply(a, b);
 		}
-		
+			
 		public static dynamic Multiply(RamdaPlaceholder a, int b) {
-			return Currying.Multiply(a, b); 
+			return Currying.Multiply(a, b);
 		}
-		
+			
 		public static dynamic Multiply(int a, RamdaPlaceholder b = null) {
-			return Currying.Multiply(a, b); 
+			return Currying.Multiply(a, b);
 		}
 	}
 }

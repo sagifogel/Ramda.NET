@@ -15,19 +15,18 @@ namespace Ramda.NET
 		public static dynamic Slice<TSource>(int fromIndex, int toIndex, IList<TSource> list) {
 			return Currying.Slice(fromIndex, toIndex, list);
 		}
-		
+			
 		public static dynamic Slice<TSource>(RamdaPlaceholder fromIndex, int toIndex, IList<TSource> list) {
-			return Currying.Slice(fromIndex, toIndex, list); 
+			return Currying.Slice(fromIndex, toIndex, list);
 		}
-		
+			
 		public static dynamic Slice<TSource>(int fromIndex, RamdaPlaceholder toIndex, IList<TSource> list) {
-			return Currying.Slice(fromIndex, toIndex, list); 
+			return Currying.Slice(fromIndex, toIndex, list);
 		}
-		
+			
 		public static dynamic Slice<TSource>(int fromIndex, int toIndex, RamdaPlaceholder list = null) {
-			return Currying.Slice(fromIndex, toIndex, list); 
+			return Currying.Slice(fromIndex, toIndex, list);
 		}
-		
 		
 		public static dynamic Slice<TSource>(int fromIndex, RamdaPlaceholder toIndex = null, RamdaPlaceholder list = null) {
 			return Currying.Slice(fromIndex, toIndex, list);

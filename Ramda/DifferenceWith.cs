@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(list1, list2);
 		}
-		
+			
 		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder list1, IList<TSource> list2) {
-			return Currying.DifferenceWith(list1, list2); 
+			return Currying.DifferenceWith(list1, list2);
 		}
-		
+			
 		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, RamdaPlaceholder list2 = null) {
-			return Currying.DifferenceWith(list1, list2); 
+			return Currying.DifferenceWith(list1, list2);
 		}
 		
 		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {

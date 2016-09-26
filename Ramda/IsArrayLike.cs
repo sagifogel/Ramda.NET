@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic IsArrayLike<TTarget>(TTarget x) {
 			return Currying.IsArrayLike(x);
 		}
-		
+			
 		public static dynamic IsArrayLike<TTarget>(RamdaPlaceholder x = null) {
-			return Currying.IsArrayLike(x); 
+			return Currying.IsArrayLike(x);
 		}
 	}
 }

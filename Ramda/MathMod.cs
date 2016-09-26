@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic MathMod(int m, int p) {
 			return Currying.MathMod(m, p);
 		}
-		
+			
 		public static dynamic MathMod(RamdaPlaceholder m, int p) {
-			return Currying.MathMod(m, p); 
+			return Currying.MathMod(m, p);
 		}
-		
+			
 		public static dynamic MathMod(int m, RamdaPlaceholder p = null) {
-			return Currying.MathMod(m, p); 
+			return Currying.MathMod(m, p);
 		}
 		
 		public static dynamic MathMod(RamdaPlaceholder m = null, RamdaPlaceholder p = null) {

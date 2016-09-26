@@ -15,19 +15,18 @@ namespace Ramda.NET
 		public static dynamic Update<TSource>(int idx, TSource x, IList<TSource> list) {
 			return Currying.Update(idx, x, list);
 		}
-		
+			
 		public static dynamic Update<TSource>(RamdaPlaceholder idx, TSource x, IList<TSource> list) {
-			return Currying.Update(idx, x, list); 
+			return Currying.Update(idx, x, list);
 		}
-		
+			
 		public static dynamic Update<TSource>(int idx, RamdaPlaceholder x, IList<TSource> list) {
-			return Currying.Update(idx, x, list); 
+			return Currying.Update(idx, x, list);
 		}
-		
+			
 		public static dynamic Update<TSource>(int idx, TSource x, RamdaPlaceholder list = null) {
-			return Currying.Update(idx, x, list); 
+			return Currying.Update(idx, x, list);
 		}
-		
 		
 		public static dynamic Update<TSource>(int idx, RamdaPlaceholder x = null, RamdaPlaceholder list = null) {
 			return Currying.Update(idx, x, list);

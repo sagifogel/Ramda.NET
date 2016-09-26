@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Gt(int a, int b) {
 			return Currying.Gt(a, b);
 		}
-		
+			
 		public static dynamic Gt(RamdaPlaceholder a, int b) {
-			return Currying.Gt(a, b); 
+			return Currying.Gt(a, b);
 		}
-		
+			
 		public static dynamic Gt(int a, RamdaPlaceholder b = null) {
-			return Currying.Gt(a, b); 
+			return Currying.Gt(a, b);
 		}
 	}
 }

@@ -15,19 +15,18 @@ namespace Ramda.NET
 		public static dynamic PathOr<TValue, TTarget>(TValue d, IList<string> p, TTarget obj) {
 			return Currying.PathOr(d, p, obj);
 		}
-		
+			
 		public static dynamic PathOr<TValue, TTarget>(RamdaPlaceholder d, IList<string> p, TTarget obj) {
-			return Currying.PathOr(d, p, obj); 
+			return Currying.PathOr(d, p, obj);
 		}
-		
+			
 		public static dynamic PathOr<TValue, TTarget>(TValue d, RamdaPlaceholder p, TTarget obj) {
-			return Currying.PathOr(d, p, obj); 
+			return Currying.PathOr(d, p, obj);
 		}
-		
+			
 		public static dynamic PathOr<TValue, TTarget>(TValue d, IList<string> p, RamdaPlaceholder obj = null) {
-			return Currying.PathOr(d, p, obj); 
+			return Currying.PathOr(d, p, obj);
 		}
-		
 		
 		public static dynamic PathOr<TValue, TTarget>(TValue d, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);

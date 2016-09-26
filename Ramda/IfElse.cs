@@ -12,53 +12,49 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic IfElse(dynamic condition, dynamic onTrue, dynamic onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);
-		}
-			
 		public static dynamic IfElse(Delegate condition, Delegate onTrue, Delegate onFalse) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-		
-		public static dynamic IfElse(dynamic condition, RamdaPlaceholder onTrue = null, RamdaPlaceholder onFalse = null) {
-			return Currying.IfElse(condition, onTrue, onFalse);
-		}
 
-		public static dynamic IfElse(RamdaPlaceholder condition, dynamic onTrue, dynamic onFalse) {
+		public static dynamic IfElse(dynamic condition, dynamic onTrue, dynamic onFalse) {
+			return Currying.IfElse(condition, onTrue, onFalse); 
+		}
+					
+		public static dynamic IfElse(RamdaPlaceholder condition, dynamic onTrue, Delegate onFalse) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-				
-		
+					
+		public static dynamic IfElse(RamdaPlaceholder condition, Delegate onTrue, dynamic onFalse) {
+			return Currying.IfElse(condition, onTrue, onFalse);
+		}
+			
 		public static dynamic IfElse(RamdaPlaceholder condition, Delegate onTrue, Delegate onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse); 
-		}
-		
-		public static dynamic IfElse(RamdaPlaceholder condition, dynamic onTrue, RamdaPlaceholder onFalse = null) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-
-		public static dynamic IfElse(dynamic condition, RamdaPlaceholder onTrue, dynamic onFalse) {
+					
+		public static dynamic IfElse(dynamic condition, RamdaPlaceholder onTrue, Delegate onFalse) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-				
-		
+					
+		public static dynamic IfElse(Delegate condition, RamdaPlaceholder onTrue, dynamic onFalse) {
+			return Currying.IfElse(condition, onTrue, onFalse);
+		}
+			
 		public static dynamic IfElse(Delegate condition, RamdaPlaceholder onTrue, Delegate onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse); 
-		}
-		
-		public static dynamic IfElse(RamdaPlaceholder condition, RamdaPlaceholder onTrue, dynamic onFalse) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-
-		public static dynamic IfElse(dynamic condition, dynamic onTrue, RamdaPlaceholder onFalse = null) {
+					
+		public static dynamic IfElse(dynamic condition, Delegate onTrue, RamdaPlaceholder onFalse = null) {
 			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-				
-		
+					
+		public static dynamic IfElse(Delegate condition, dynamic onTrue, RamdaPlaceholder onFalse = null) {
+			return Currying.IfElse(condition, onTrue, onFalse);
+		}
+			
 		public static dynamic IfElse(Delegate condition, Delegate onTrue, RamdaPlaceholder onFalse = null) {
-			return Currying.IfElse(condition, onTrue, onFalse); 
+			return Currying.IfElse(condition, onTrue, onFalse);
 		}
-		
 		
 		public static dynamic IfElse(Delegate condition, RamdaPlaceholder onTrue = null, RamdaPlaceholder onFalse = null) {
 			return Currying.IfElse(condition, onTrue, onFalse);

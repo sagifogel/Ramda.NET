@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Range(int from, int to) {
 			return Currying.Range(from, to);
 		}
-		
+			
 		public static dynamic Range(RamdaPlaceholder from, int to) {
-			return Currying.Range(from, to); 
+			return Currying.Range(from, to);
 		}
-		
+			
 		public static dynamic Range(int from, RamdaPlaceholder to = null) {
-			return Currying.Range(from, to); 
+			return Currying.Range(from, to);
 		}
 		
 		public static dynamic Range(RamdaPlaceholder from = null, RamdaPlaceholder to = null) {

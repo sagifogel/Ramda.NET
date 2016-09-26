@@ -15,19 +15,18 @@ namespace Ramda.NET
 		public static dynamic Assoc<TValue, TTarget>(string prop, TValue val, TTarget obj) {
 			return Currying.Assoc(prop, val, obj);
 		}
-		
+			
 		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder prop, TValue val, TTarget obj) {
-			return Currying.Assoc(prop, val, obj); 
+			return Currying.Assoc(prop, val, obj);
 		}
-		
+			
 		public static dynamic Assoc<TValue, TTarget>(string prop, RamdaPlaceholder val, TTarget obj) {
-			return Currying.Assoc(prop, val, obj); 
+			return Currying.Assoc(prop, val, obj);
 		}
-		
+			
 		public static dynamic Assoc<TValue, TTarget>(string prop, TValue val, RamdaPlaceholder obj = null) {
-			return Currying.Assoc(prop, val, obj); 
+			return Currying.Assoc(prop, val, obj);
 		}
-		
 		
 		public static dynamic Assoc<TValue, TTarget>(string prop, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.Assoc(prop, val, obj);

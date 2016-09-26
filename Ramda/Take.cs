@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Take<TSource>(int n, IList<TSource> list) {
 			return Currying.Take(n, list);
 		}
-		
+			
 		public static dynamic Take<TSource>(RamdaPlaceholder n, IList<TSource> list) {
-			return Currying.Take(n, list); 
+			return Currying.Take(n, list);
 		}
-		
+			
 		public static dynamic Take<TSource>(int n, RamdaPlaceholder list = null) {
-			return Currying.Take(n, list); 
+			return Currying.Take(n, list);
 		}
 		
 		public static dynamic Take<TSource>(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {

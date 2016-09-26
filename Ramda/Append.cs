@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Append<TSource>(TSource el, IList<TSource> list) {
 			return Currying.Append(el, list);
 		}
-		
+			
 		public static dynamic Append<TSource>(RamdaPlaceholder el, IList<TSource> list) {
-			return Currying.Append(el, list); 
+			return Currying.Append(el, list);
 		}
-		
+			
 		public static dynamic Append<TSource>(TSource el, RamdaPlaceholder list = null) {
-			return Currying.Append(el, list); 
+			return Currying.Append(el, list);
 		}
 		
 		public static dynamic Append<TSource>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {

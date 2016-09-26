@@ -15,19 +15,18 @@ namespace Ramda.NET
 		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, TTarget obj) {
 			return Currying.AssocPath(path, val, obj);
 		}
-		
+			
 		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path, TValue val, TTarget obj) {
-			return Currying.AssocPath(path, val, obj); 
+			return Currying.AssocPath(path, val, obj);
 		}
-		
+			
 		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val, TTarget obj) {
-			return Currying.AssocPath(path, val, obj); 
+			return Currying.AssocPath(path, val, obj);
 		}
-		
+			
 		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, RamdaPlaceholder obj = null) {
-			return Currying.AssocPath(path, val, obj); 
+			return Currying.AssocPath(path, val, obj);
 		}
-		
 		
 		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.AssocPath(path, val, obj);

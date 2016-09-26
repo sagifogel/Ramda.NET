@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Identical<TTarget>(TTarget a, TTarget b) {
 			return Currying.Identical(a, b);
 		}
-		
+			
 		public static dynamic Identical<TTarget>(RamdaPlaceholder a, TTarget b) {
-			return Currying.Identical(a, b); 
+			return Currying.Identical(a, b);
 		}
-		
+			
 		public static dynamic Identical<TTarget>(TTarget a, RamdaPlaceholder b = null) {
-			return Currying.Identical(a, b); 
+			return Currying.Identical(a, b);
 		}
 		
 		public static dynamic Identical<TTarget>(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {

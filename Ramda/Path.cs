@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Path<TTarget>(IList<string> path, TTarget obj) {
 			return Currying.Path(path, obj);
 		}
-		
+			
 		public static dynamic Path<TTarget>(RamdaPlaceholder path, TTarget obj) {
-			return Currying.Path(path, obj); 
+			return Currying.Path(path, obj);
 		}
-		
+			
 		public static dynamic Path<TTarget>(IList<string> path, RamdaPlaceholder obj = null) {
-			return Currying.Path(path, obj); 
+			return Currying.Path(path, obj);
 		}
 		
 		public static dynamic Path<TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {

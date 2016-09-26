@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Values<TTarget>(TTarget obj) {
 			return Currying.Values(obj);
 		}
-		
+			
 		public static dynamic Values<TTarget>(RamdaPlaceholder obj = null) {
-			return Currying.Values(obj); 
+			return Currying.Values(obj);
 		}
 	}
 }

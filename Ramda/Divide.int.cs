@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Divide(int a, int b) {
 			return Currying.Divide(a, b);
 		}
-		
+			
 		public static dynamic Divide(RamdaPlaceholder a, int b) {
-			return Currying.Divide(a, b); 
+			return Currying.Divide(a, b);
 		}
-		
+			
 		public static dynamic Divide(int a, RamdaPlaceholder b = null) {
-			return Currying.Divide(a, b); 
+			return Currying.Divide(a, b);
 		}
 	}
 }

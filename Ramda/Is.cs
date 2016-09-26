@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Is<TTarget>(Type type, TTarget val) {
 			return Currying.Is(type, val);
 		}
-		
+			
 		public static dynamic Is<TTarget>(RamdaPlaceholder type, TTarget val) {
-			return Currying.Is(type, val); 
+			return Currying.Is(type, val);
 		}
-		
+			
 		public static dynamic Is<TTarget>(Type type, RamdaPlaceholder val = null) {
-			return Currying.Is(type, val); 
+			return Currying.Is(type, val);
 		}
 		
 		public static dynamic Is<TTarget>(RamdaPlaceholder type = null, RamdaPlaceholder val = null) {

@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Nth<TSource>(int offset, IEnumerable<TSource> list) {
 			return Currying.Nth(offset, list);
 		}
-		
+			
 		public static dynamic Nth<TSource>(RamdaPlaceholder offset, IEnumerable<TSource> list) {
-			return Currying.Nth(offset, list); 
+			return Currying.Nth(offset, list);
 		}
-		
+			
 		public static dynamic Nth<TSource>(int offset, RamdaPlaceholder list = null) {
-			return Currying.Nth(offset, list); 
+			return Currying.Nth(offset, list);
 		}
 		
 		public static dynamic Nth<TSource>(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {

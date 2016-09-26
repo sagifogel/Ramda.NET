@@ -12,24 +12,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic FindLastIndex<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.FindLastIndex(fn, list);
-		}
-			
 		public static dynamic FindLastIndex<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.FindLastIndex(fn, list);
 		}
-		
+			
+		public static dynamic FindLastIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
+			return Currying.FindLastIndex(fn, list);
+		}
+
+		public static dynamic FindLastIndex<TSource>(dynamic fn, IList<TSource> list) {
+			return Currying.FindLastIndex(fn, list); 
+		}
+					
 		public static dynamic FindLastIndex(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.FindLastIndex(fn, list);
 		}
-		
-		public static dynamic FindLastIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
-			return Currying.FindLastIndex(fn, list); 
-		}
-		
+			
 		public static dynamic FindLastIndex<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.FindLastIndex(fn, list); 
+			return Currying.FindLastIndex(fn, list);
 		}
 		
 		public static dynamic FindLastIndex<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

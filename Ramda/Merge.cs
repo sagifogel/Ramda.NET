@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Merge<TSource1, TSource2>(TSource1 l, TSource2 r) {
 			return Currying.Merge(l, r);
 		}
-		
+			
 		public static dynamic Merge<TSource1, TSource2>(RamdaPlaceholder l, TSource2 r) {
-			return Currying.Merge(l, r); 
+			return Currying.Merge(l, r);
 		}
-		
+			
 		public static dynamic Merge<TSource1, TSource2>(TSource1 l, RamdaPlaceholder r = null) {
-			return Currying.Merge(l, r); 
+			return Currying.Merge(l, r);
 		}
 		
 		public static dynamic Merge<TSource1, TSource2>(RamdaPlaceholder l = null, RamdaPlaceholder r = null) {

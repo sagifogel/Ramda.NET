@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Always<TTarget>(TTarget val) {
 			return Currying.Always(val);
 		}
-		
+			
 		public static dynamic Always<TTarget>(RamdaPlaceholder val = null) {
-			return Currying.Always(val); 
+			return Currying.Always(val);
 		}
 	}
 }

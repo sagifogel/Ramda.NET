@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic TakeLastWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.TakeLastWhile(fn, list);
 		}
-		
+			
 		public static dynamic TakeLastWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
-			return Currying.TakeLastWhile(fn, list); 
+			return Currying.TakeLastWhile(fn, list);
 		}
-		
+			
 		public static dynamic TakeLastWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.TakeLastWhile(fn, list); 
+			return Currying.TakeLastWhile(fn, list);
 		}
 		
 		public static dynamic TakeLastWhile<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

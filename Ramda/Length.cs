@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Length<TSource>(IList<TSource> list) {
 			return Currying.Length(list);
 		}
-		
+			
 		public static dynamic Length<TSource>(RamdaPlaceholder list = null) {
-			return Currying.Length(list); 
+			return Currying.Length(list);
 		}
 	}
 }

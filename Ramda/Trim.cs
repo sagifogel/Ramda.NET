@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Trim(string str) {
 			return Currying.Trim(str);
 		}
-		
+			
 		public static dynamic Trim(RamdaPlaceholder str = null) {
-			return Currying.Trim(str); 
+			return Currying.Trim(str);
 		}
 	}
 }

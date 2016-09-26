@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic IsNil<TTarget>(TTarget x) {
 			return Currying.IsNil(x);
 		}
-		
+			
 		public static dynamic IsNil<TTarget>(RamdaPlaceholder x = null) {
-			return Currying.IsNil(x); 
+			return Currying.IsNil(x);
 		}
 	}
 }

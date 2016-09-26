@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Has<TTarget>(string prop, TTarget obj) {
 			return Currying.Has(prop, obj);
 		}
-		
+			
 		public static dynamic Has<TTarget>(RamdaPlaceholder prop, TTarget obj) {
-			return Currying.Has(prop, obj); 
+			return Currying.Has(prop, obj);
 		}
-		
+			
 		public static dynamic Has<TTarget>(string prop, RamdaPlaceholder obj = null) {
-			return Currying.Has(prop, obj); 
+			return Currying.Has(prop, obj);
 		}
 		
 		public static dynamic Has<TTarget>(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {

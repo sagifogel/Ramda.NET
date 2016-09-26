@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Props<TTarget>(IEnumerable<string> ps, TTarget obj) {
 			return Currying.Props(ps, obj);
 		}
-		
+			
 		public static dynamic Props<TTarget>(RamdaPlaceholder ps, TTarget obj) {
-			return Currying.Props(ps, obj); 
+			return Currying.Props(ps, obj);
 		}
-		
+			
 		public static dynamic Props<TTarget>(IEnumerable<string> ps, RamdaPlaceholder obj = null) {
-			return Currying.Props(ps, obj); 
+			return Currying.Props(ps, obj);
 		}
 		
 		public static dynamic Props<TTarget>(RamdaPlaceholder ps = null, RamdaPlaceholder obj = null) {

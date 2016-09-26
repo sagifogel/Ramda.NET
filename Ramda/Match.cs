@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Match(Regex rx, string str) {
 			return Currying.Match(rx, str);
 		}
-		
+			
 		public static dynamic Match(RamdaPlaceholder rx, string str) {
-			return Currying.Match(rx, str); 
+			return Currying.Match(rx, str);
 		}
-		
+			
 		public static dynamic Match(Regex rx, RamdaPlaceholder str = null) {
-			return Currying.Match(rx, str); 
+			return Currying.Match(rx, str);
 		}
 		
 		public static dynamic Match(RamdaPlaceholder rx = null, RamdaPlaceholder str = null) {

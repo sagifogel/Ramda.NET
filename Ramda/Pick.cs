@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Pick<TTarget>(IList<string> names, TTarget obj) {
 			return Currying.Pick(names, obj);
 		}
-		
+			
 		public static dynamic Pick<TTarget>(RamdaPlaceholder names, TTarget obj) {
-			return Currying.Pick(names, obj); 
+			return Currying.Pick(names, obj);
 		}
-		
+			
 		public static dynamic Pick<TTarget>(IList<string> names, RamdaPlaceholder obj = null) {
-			return Currying.Pick(names, obj); 
+			return Currying.Pick(names, obj);
 		}
 		
 		public static dynamic Pick<TTarget>(RamdaPlaceholder names = null, RamdaPlaceholder obj = null) {

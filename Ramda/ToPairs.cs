@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic ToPairs<TTarget>(TTarget obj) {
 			return Currying.ToPairs(obj);
 		}
-		
+			
 		public static dynamic ToPairs<TTarget>(RamdaPlaceholder obj = null) {
-			return Currying.ToPairs(obj); 
+			return Currying.ToPairs(obj);
 		}
 	}
 }

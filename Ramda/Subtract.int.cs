@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Subtract(int a, int b) {
 			return Currying.Subtract(a, b);
 		}
-		
+			
 		public static dynamic Subtract(RamdaPlaceholder a, int b) {
-			return Currying.Subtract(a, b); 
+			return Currying.Subtract(a, b);
 		}
-		
+			
 		public static dynamic Subtract(int a, RamdaPlaceholder b = null) {
-			return Currying.Subtract(a, b); 
+			return Currying.Subtract(a, b);
 		}
 	}
 }

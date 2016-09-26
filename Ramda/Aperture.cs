@@ -15,13 +15,13 @@ namespace Ramda.NET
 		public static dynamic Aperture<TSource>(int n, IList<TSource> list) {
 			return Currying.Aperture(n, list);
 		}
-		
+			
 		public static dynamic Aperture<TSource>(RamdaPlaceholder n, IList<TSource> list) {
-			return Currying.Aperture(n, list); 
+			return Currying.Aperture(n, list);
 		}
-		
+			
 		public static dynamic Aperture<TSource>(int n, RamdaPlaceholder list = null) {
-			return Currying.Aperture(n, list); 
+			return Currying.Aperture(n, list);
 		}
 		
 		public static dynamic Aperture<TSource>(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {

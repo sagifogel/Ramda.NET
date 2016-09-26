@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic MergeAll<TSource>(IList<TSource> list) {
 			return Currying.MergeAll(list);
 		}
-		
+			
 		public static dynamic MergeAll<TSource>(RamdaPlaceholder list = null) {
-			return Currying.MergeAll(list); 
+			return Currying.MergeAll(list);
 		}
 	}
 }

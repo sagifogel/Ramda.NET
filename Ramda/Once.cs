@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Once<TDelegate>(TDelegate fn) {
 			return Currying.Once(fn);
 		}
-		
+			
 		public static dynamic Once<TDelegate>(RamdaPlaceholder fn = null) {
-			return Currying.Once(fn); 
+			return Currying.Once(fn);
 		}
 	}
 }	

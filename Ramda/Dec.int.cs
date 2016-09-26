@@ -15,9 +15,9 @@ namespace Ramda.NET
 		public static dynamic Dec(int n) {
 			return Currying.Dec(n);
 		}
-		
+			
 		public static dynamic Dec(RamdaPlaceholder n = null) {
-			return Currying.Dec(n); 
+			return Currying.Dec(n);
 		}
 	}
 }

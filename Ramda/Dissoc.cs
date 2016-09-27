@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic Dissoc<TTarget>(string prop, TTarget obj) {
 			return Currying.Dissoc(prop, obj);
 		}
-			
+
 		public static dynamic Dissoc<TTarget>(RamdaPlaceholder prop, TTarget obj) {
 			return Currying.Dissoc(prop, obj);
 		}
-			
-		public static dynamic Dissoc<TTarget>(string prop, RamdaPlaceholder obj = null) {
+
+		public static dynamic Dissoc(string prop, RamdaPlaceholder obj = null) {
 			return Currying.Dissoc(prop, obj);
 		}
-		
-		public static dynamic Dissoc<TTarget>(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic Dissoc(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {
 			return Currying.Dissoc(prop, obj);
 		}
 	}

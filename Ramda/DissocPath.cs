@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic DissocPath<TTarget>(IList<string> path, TTarget obj) {
 			return Currying.DissocPath(path, obj);
 		}
-			
+
 		public static dynamic DissocPath<TTarget>(RamdaPlaceholder path, TTarget obj) {
 			return Currying.DissocPath(path, obj);
 		}
-			
-		public static dynamic DissocPath<TTarget>(IList<string> path, RamdaPlaceholder obj = null) {
+
+		public static dynamic DissocPath(IList<string> path, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj);
 		}
-		
-		public static dynamic DissocPath<TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic DissocPath(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj);
 		}
 	}

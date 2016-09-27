@@ -16,43 +16,47 @@ namespace Ramda.NET
 			return Currying.Until(pred, fn, init);
 		}
 
-		public static dynamic Until<TArg>(dynamic pred, dynamic fn, TArg init) {
-			return Currying.Until(pred, fn, init); 
-		}
-					
-		public static dynamic Until<TArg>(RamdaPlaceholder pred, dynamic fn, TArg init) {
-			return Currying.Until(pred, fn, init);
-		}
-			
 		public static dynamic Until<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> fn, TArg init) {
 			return Currying.Until(pred, fn, init);
 		}
-					
-		public static dynamic Until<TArg>(dynamic pred, RamdaPlaceholder fn, TArg init) {
+
+		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn, TArg init) {
 			return Currying.Until(pred, fn, init);
 		}
-			
-		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, RamdaPlaceholder fn, TArg init) {
-			return Currying.Until(pred, fn, init);
-		}
-					
-		public static dynamic Until<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> fn, RamdaPlaceholder init = null) {
-			return Currying.Until(pred, fn, init);
-		}
-					
-		public static dynamic Until<TArg>(Func<TArg, bool> pred, dynamic fn, RamdaPlaceholder init = null) {
-			return Currying.Until(pred, fn, init);
-		}
-			
+
 		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> fn, RamdaPlaceholder init = null) {
 			return Currying.Until(pred, fn, init);
 		}
-		
-		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
+
+		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(pred, fn, init);
 		}
-		
-		public static dynamic Until<TArg, TReturn>(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
+
+		public static dynamic Until<TArg>(RamdaPlaceholder pred, dynamic fn, TArg init) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until<TArg>(dynamic pred, RamdaPlaceholder fn, TArg init) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until(dynamic pred, dynamic fn, RamdaPlaceholder init = null) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until(dynamic pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> fn, TArg init) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until<TArg>(Func<TArg, bool> pred, dynamic fn, TArg init) {
+			return Currying.Until(pred, fn, init);
+		}
+
+		public static dynamic Until(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(pred, fn, init);
 		}
 	}

@@ -15,19 +15,19 @@ namespace Ramda.NET
 		public static dynamic Clamp(double minimum, double maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
-			
+
 		public static dynamic Clamp(RamdaPlaceholder minimum, double maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
-			
+
 		public static dynamic Clamp(double minimum, RamdaPlaceholder maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
-			
+
 		public static dynamic Clamp(double minimum, double maximum, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
-		
+
 		public static dynamic Clamp(double minimum, RamdaPlaceholder maximum = null, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}

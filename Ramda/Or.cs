@@ -15,15 +15,15 @@ namespace Ramda.NET
 		public static dynamic Or(bool a, bool b) {
 			return Currying.Or(a, b);
 		}
-			
+
 		public static dynamic Or(RamdaPlaceholder a, bool b) {
 			return Currying.Or(a, b);
 		}
-			
+
 		public static dynamic Or(bool a, RamdaPlaceholder b = null) {
 			return Currying.Or(a, b);
 		}
-		
+
 		public static dynamic Or(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Or(a, b);
 		}

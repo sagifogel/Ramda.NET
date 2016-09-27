@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic PropOr<TValue, TTarget>(TValue val, IList<string> p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
-			
-		public static dynamic PropOr<TValue, TTarget>(RamdaPlaceholder val, IList<string> p, TTarget obj) {
+
+		public static dynamic PropOr<TTarget>(RamdaPlaceholder val, IList<string> p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
-			
+
 		public static dynamic PropOr<TValue, TTarget>(TValue val, RamdaPlaceholder p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
-			
-		public static dynamic PropOr<TValue, TTarget>(TValue val, IList<string> p, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropOr<TValue>(TValue val, IList<string> p, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
-		
-		public static dynamic PropOr<TValue, TTarget>(TValue val, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropOr<TValue>(TValue val, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
-		
-		public static dynamic PropOr<TValue, TTarget>(RamdaPlaceholder val = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropOr(RamdaPlaceholder val = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
 	}

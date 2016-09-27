@@ -15,23 +15,23 @@ namespace Ramda.NET
 		public static dynamic Unfold(Func<int, dynamic> fn, int seed) {
 			return Currying.Unfold(fn, seed);
 		}
-			
+
 		public static dynamic Unfold(RamdaPlaceholder fn, int seed) {
 			return Currying.Unfold(fn, seed);
 		}
 
-		public static dynamic Unfold(dynamic fn, int seed) {
-			return Currying.Unfold(fn, seed); 
-		}
-					
-		public static dynamic Unfold(dynamic fn, RamdaPlaceholder seed = null) {
-			return Currying.Unfold(fn, seed);
-		}
-			
 		public static dynamic Unfold(Func<int, dynamic> fn, RamdaPlaceholder seed = null) {
 			return Currying.Unfold(fn, seed);
 		}
-		
+
+		public static dynamic Unfold(dynamic fn, RamdaPlaceholder seed = null) {
+			return Currying.Unfold(fn, seed);
+		}
+
+		public static dynamic Unfold(dynamic fn, int seed) {
+			return Currying.Unfold(fn, seed);
+		}
+
 		public static dynamic Unfold(RamdaPlaceholder fn = null, RamdaPlaceholder seed = null) {
 			return Currying.Unfold(fn, seed);
 		}

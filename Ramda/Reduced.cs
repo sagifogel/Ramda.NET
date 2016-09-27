@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Reduced<TTarget>(TTarget x) {
 			return Currying.Reduced(x);
 		}
-			
-		public static dynamic Reduced<TTarget>(RamdaPlaceholder x = null) {
+
+		public static dynamic Reduced(RamdaPlaceholder x = null) {
 			return Currying.Reduced(x);
 		}
 	}

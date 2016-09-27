@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Transpose<TArg>(TArg[][] list) {
 			return Currying.Transpose(list);
 		}
-			
-		public static dynamic Transpose<TArg>(RamdaPlaceholder list = null) {
+
+		public static dynamic Transpose(RamdaPlaceholder list = null) {
 			return Currying.Transpose(list);
 		}
 	}

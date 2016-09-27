@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic Prepend<TSource>(TSource el, IList<TSource> list) {
 			return Currying.Prepend(el, list);
 		}
-			
+
 		public static dynamic Prepend<TSource>(RamdaPlaceholder el, IList<TSource> list) {
 			return Currying.Prepend(el, list);
 		}
-			
+
 		public static dynamic Prepend<TSource>(TSource el, RamdaPlaceholder list = null) {
 			return Currying.Prepend(el, list);
 		}
-		
-		public static dynamic Prepend<TSource>(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Prepend(RamdaPlaceholder el = null, RamdaPlaceholder list = null) {
 			return Currying.Prepend(el, list);
 		}
 	}

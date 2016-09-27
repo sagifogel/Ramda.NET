@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic Pair<TSource1, TSource2>(TSource1 fst, TSource2 snd) {
 			return Currying.Pair(fst, snd);
 		}
-			
-		public static dynamic Pair<TSource1, TSource2>(RamdaPlaceholder fst, TSource2 snd) {
+
+		public static dynamic Pair<TSource2>(RamdaPlaceholder fst, TSource2 snd) {
 			return Currying.Pair(fst, snd);
 		}
-			
-		public static dynamic Pair<TSource1, TSource2>(TSource1 fst, RamdaPlaceholder snd = null) {
+
+		public static dynamic Pair<TSource1>(TSource1 fst, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd);
 		}
-		
-		public static dynamic Pair<TSource1, TSource2>(RamdaPlaceholder fst = null, RamdaPlaceholder snd = null) {
+
+		public static dynamic Pair(RamdaPlaceholder fst = null, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd);
 		}
 	}

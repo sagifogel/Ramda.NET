@@ -15,8 +15,12 @@ namespace Ramda.NET
 		public static dynamic Unapply(Delegate fn) {
 			return Currying.Unapply(fn);
 		}
-			
+
 		public static dynamic Unapply(RamdaPlaceholder fn = null) {
+			return Currying.Unapply(fn);
+		}
+
+		public static dynamic Unapply(dynamic fn) {
 			return Currying.Unapply(fn);
 		}
 	}

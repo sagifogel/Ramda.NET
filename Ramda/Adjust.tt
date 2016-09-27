@@ -1,4 +1,4 @@
-<#@ template language="C#" debug="True" #>
+	<#@ template language="C#" debug="True" #>
 <#@ output extension="cs" #>
 <#@ include file="RamdaTemplate.tt" #>
 <#

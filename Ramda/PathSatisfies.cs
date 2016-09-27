@@ -15,36 +15,40 @@ namespace Ramda.NET
 		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
-			
-		public static dynamic PathSatisfies<TArg, TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
+
+		public static dynamic PathSatisfies<TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath, TTarget obj) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies<TTarget>(dynamic pred, RamdaPlaceholder propPath, TTarget obj) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies(dynamic pred, IList<string> propPath, RamdaPlaceholder obj = null) {
+			return Currying.PathSatisfies(pred, propPath, obj);
+		}
+
+		public static dynamic PathSatisfies(dynamic pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 
 		public static dynamic PathSatisfies<TTarget>(dynamic pred, IList<string> propPath, TTarget obj) {
-			return Currying.PathSatisfies(pred, propPath, obj); 
-		}
-					
-		public static dynamic PathSatisfies<TTarget>(dynamic pred, RamdaPlaceholder propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
-			
-		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath, TTarget obj) {
-			return Currying.PathSatisfies(pred, propPath, obj);
-		}
-					
-		public static dynamic PathSatisfies(dynamic pred, IList<string> propPath, RamdaPlaceholder obj = null) {
-			return Currying.PathSatisfies(pred, propPath, obj);
-		}
-			
-		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
-			return Currying.PathSatisfies(pred, propPath, obj);
-		}
-		
-		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
-			return Currying.PathSatisfies(pred, propPath, obj);
-		}
-		
-		public static dynamic PathSatisfies<TArg, TTarget>(RamdaPlaceholder pred = null, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PathSatisfies(RamdaPlaceholder pred = null, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 	}

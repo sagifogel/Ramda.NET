@@ -145,6 +145,43 @@ public class RamdaTemplate : CSharpTemplate
 		return Tuple.Create("RamdaPlaceholder", string.Format("{0} = null", tuple.Item2), false);
 	}
 
+	private void Emit(List<Tuple<string, string, bool>> list, string name, string arguments) {
+		for (var i = 0; i < list.Count; i++)	 {
+			string joined;
+			var shifted = list.ToList();
+			var shiftedItem = list[i];
+			
+			shifted.RemoveAt(i);
+			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
+			joined = Join(shifted);
+
+			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
+				Emit(name, ResolveGenerics(shifted), joined, arguments);
+			}
+        }
+
+		for (var i = 1; i < list.Count - 1; i++)	 {
+			var taken = list.Take(i);
+			var skipped = list.Skip(i);
+			var joined = taken.Concat(skipped.Select(FillNullablePlaceholder)).ToList();
+			var rightFilled = string.Join(", ", joined.Select(FormatTuple));		
+			
+			Emit(name, ResolveGenerics(joined), rightFilled, arguments);
+		}
+	}
+
+	private void Emit(string name, string generics, string parameters, string arguments, bool addNewLine = true) {
+		if (!Emitted.Contains(parameters)) {
+			if (addNewLine) {
+				WriteLine("");
+			}#>
+		public static dynamic <#= name #><#= generics #>(<#= parameters #>) {
+			return Currying.<#= name #>(<#= arguments #>);
+		}
+<#+			Emitted.Add(parameters);
+		}
+	}
+
 	public override string TransformText() {
 		base.TransformText();
 #>
@@ -157,70 +194,33 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-<#+		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
-		var parameterNames = string.Join(", ", Parameters.Select(t => t.Item2));#>
-		public static dynamic <#= name #><#= generics #>(<#= Join(Parameters) #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-<#+		for (var i = 0; i < Parameters.Count; i++)	 {
-			string joined = null;
-			var shifted = Parameters.ToList();
-			var shiftedItem = Parameters[i];
-
-			shifted.RemoveAt(i);
-			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
-			
-			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
-				var dynamics = TryGetDynamicIndexes(shifted);
-				
-				if (dynamics.Count > 0) {
-					var replacedDynamics = Parameters.ToList();
-
-					TryGetDynamicParameters(replacedDynamics);
-					joined = Join(replacedDynamics);
-					
-					if (!Emitted.Contains(joined)) {#>
-
-		public static dynamic <#= name #><#= ResolveGenerics(replacedDynamics) #>(<#= joined #>) {
-			return Currying.<#= name #>(<#= parameterNames #>); 
-		}
-<#+
-						Emitted.Add(joined);
-					}
-
-					foreach (var item in dynamics) {
-						var shiftedDynamics = shifted.ToList();
-						
-						TryGetDynamicParameters(shiftedDynamics, item);
-						joined = Join(shiftedDynamics);
-						Emitted.Add(joined);
-						#>
-					
-		public static dynamic <#= name #><#= ResolveGenerics(shiftedDynamics) #>(<#= joined #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-<#+					}
-				}#>
-			
-		public static dynamic <#= name #><#= generics #>(<#= Join(shifted) #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-<#+        }
-   }
-		for (var i = 1; i < Parameters.Count - 1; i++)	 {
-			var taken = Parameters.Take(i);
-			var skipped = Parameters.Skip(i);
-			var rightFilled = string.Join(", ", taken.Concat(skipped.Select(FillNullablePlaceholder)).Select(FormatTuple)); #>		
-		public static dynamic <#= name #><#= generics #>(<#= rightFilled #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
-		}
-<#+		}
-		if (!AllGapsFunctionAlreadyExists && Parameters.Count > 1) {	#>
+<#+		
+		var dynamics = Parameters.ToList();
+		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
+		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
 		
-		public static dynamic <#= name #><#= generics #>(<#= string.Join(", ", Parameters.Select(FillNullablePlaceholder).Select(FormatTuple)) #>) {
-			return Currying.<#= name #>(<#= parameterNames #>);
+		Emit(name, generics, Join(Parameters), arguments, false);
+		Emit(Parameters.ToList(), name, arguments);
+		
+		if (TryGetDynamicParameters(dynamics)) {
+			var indexes = TryGetDynamicIndexes(dynamics);
+			
+			Emit(dynamics, name, arguments);
+
+			indexes.ForEach(i => {
+				dynamics = Parameters.ToList();
+
+				if (TryGetDynamicParameters(dynamics, i)) {
+					var joined = string.Join(", ", dynamics.Select(FormatTuple));
+					
+					Emit(name, ResolveGenerics(dynamics), joined, arguments);
+				}
+			});
 		}
-<#+}#>
+		
+		if (!AllGapsFunctionAlreadyExists && Parameters.Count > 1) {
+			Emit(name, string.Empty, string.Join(", ", Parameters.Select(FillNullablePlaceholder).Select(FormatTuple)), arguments);
+		}#>
 	}
 }
 <#+

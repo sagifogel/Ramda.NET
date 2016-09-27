@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic Evolve<TTarget>(IDictionary<string, object> transformations, TTarget obj) {
 			return Currying.Evolve(transformations, obj);
 		}
-			
+
 		public static dynamic Evolve<TTarget>(RamdaPlaceholder transformations, TTarget obj) {
 			return Currying.Evolve(transformations, obj);
 		}
-			
-		public static dynamic Evolve<TTarget>(IDictionary<string, object> transformations, RamdaPlaceholder obj = null) {
+
+		public static dynamic Evolve(IDictionary<string, object> transformations, RamdaPlaceholder obj = null) {
 			return Currying.Evolve(transformations, obj);
 		}
-		
-		public static dynamic Evolve<TTarget>(RamdaPlaceholder transformations = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic Evolve(RamdaPlaceholder transformations = null, RamdaPlaceholder obj = null) {
 			return Currying.Evolve(transformations, obj);
 		}
 	}

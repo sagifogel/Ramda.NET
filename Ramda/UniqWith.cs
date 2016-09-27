@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list) {
 			return Currying.UniqWith(pred, list);
 		}
-			
+
 		public static dynamic UniqWith<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
 			return Currying.UniqWith(pred, list);
 		}
 
-		public static dynamic UniqWith<TSource>(dynamic pred, IList<TSource> list) {
-			return Currying.UniqWith(pred, list); 
-		}
-					
-		public static dynamic UniqWith(dynamic pred, RamdaPlaceholder list = null) {
-			return Currying.UniqWith(pred, list);
-		}
-			
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list = null) {
 			return Currying.UniqWith(pred, list);
 		}
-		
-		public static dynamic UniqWith<TSource>(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
+
+		public static dynamic UniqWith(dynamic pred, RamdaPlaceholder list = null) {
+			return Currying.UniqWith(pred, list);
+		}
+
+		public static dynamic UniqWith<TSource>(dynamic pred, IList<TSource> list) {
+			return Currying.UniqWith(pred, list);
+		}
+
+		public static dynamic UniqWith(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.UniqWith(pred, list);
 		}
 	}

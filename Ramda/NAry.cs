@@ -15,15 +15,15 @@ namespace Ramda.NET
 		public static dynamic NAry(int n, Delegate fn) {
 			return Currying.NAry(n, fn);
 		}
-			
+
 		public static dynamic NAry(RamdaPlaceholder n, Delegate fn) {
 			return Currying.NAry(n, fn);
 		}
-			
+
 		public static dynamic NAry(int n, RamdaPlaceholder fn = null) {
 			return Currying.NAry(n, fn);
 		}
-		
+
 		public static dynamic NAry(RamdaPlaceholder n = null, RamdaPlaceholder fn = null) {
 			return Currying.NAry(n, fn);
 		}

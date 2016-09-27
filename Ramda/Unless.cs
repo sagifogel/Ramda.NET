@@ -16,43 +16,47 @@ namespace Ramda.NET
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
 
-		public static dynamic Unless<TArg>(dynamic pred, dynamic whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x); 
-		}
-					
-		public static dynamic Unless<TArg>(RamdaPlaceholder pred, dynamic whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
-		}
-			
 		public static dynamic Unless<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> whenFalseFn, TArg x) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
-					
-		public static dynamic Unless<TArg>(dynamic pred, RamdaPlaceholder whenFalseFn, TArg x) {
+
+		public static dynamic Unless<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn, TArg x) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
-			
-		public static dynamic Unless<TArg, TReturn>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
-		}
-					
-		public static dynamic Unless<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> whenFalseFn, RamdaPlaceholder x = null) {
-			return Currying.Unless(pred, whenFalseFn, x);
-		}
-					
-		public static dynamic Unless<TArg>(Func<TArg, bool> pred, dynamic whenFalseFn, RamdaPlaceholder x = null) {
-			return Currying.Unless(pred, whenFalseFn, x);
-		}
-			
+
 		public static dynamic Unless<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenFalseFn, RamdaPlaceholder x = null) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
-		
-		public static dynamic Unless<TArg, TReturn>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
+
+		public static dynamic Unless<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
-		
-		public static dynamic Unless<TArg, TReturn>(RamdaPlaceholder pred = null, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
+
+		public static dynamic Unless<TArg>(RamdaPlaceholder pred, dynamic whenFalseFn, TArg x) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless<TArg>(dynamic pred, RamdaPlaceholder whenFalseFn, TArg x) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless(dynamic pred, dynamic whenFalseFn, RamdaPlaceholder x = null) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless(dynamic pred, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> whenFalseFn, TArg x) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless<TArg>(Func<TArg, bool> pred, dynamic whenFalseFn, TArg x) {
+			return Currying.Unless(pred, whenFalseFn, x);
+		}
+
+		public static dynamic Unless(RamdaPlaceholder pred = null, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}
 	}

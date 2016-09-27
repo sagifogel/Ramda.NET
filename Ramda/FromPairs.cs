@@ -15,7 +15,7 @@ namespace Ramda.NET
 		public static dynamic FromPairs(object[][] pairs) {
 			return Currying.FromPairs(pairs);
 		}
-			
+
 		public static dynamic FromPairs(RamdaPlaceholder pairs = null) {
 			return Currying.FromPairs(pairs);
 		}

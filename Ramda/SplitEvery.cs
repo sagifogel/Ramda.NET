@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic SplitEvery<TValue>(int n, IList<TValue> list) {
 			return Currying.SplitEvery(n, list);
 		}
-			
+
 		public static dynamic SplitEvery<TValue>(RamdaPlaceholder n, IList<TValue> list) {
 			return Currying.SplitEvery(n, list);
 		}
-			
-		public static dynamic SplitEvery<TValue>(int n, RamdaPlaceholder list = null) {
+
+		public static dynamic SplitEvery(int n, RamdaPlaceholder list = null) {
 			return Currying.SplitEvery(n, list);
 		}
-		
-		public static dynamic SplitEvery<TValue>(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
+
+		public static dynamic SplitEvery(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
 			return Currying.SplitEvery(n, list);
 		}
 	}

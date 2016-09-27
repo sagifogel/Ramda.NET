@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Identity<TTarget>(TTarget x) {
 			return Currying.Identity(x);
 		}
-			
-		public static dynamic Identity<TTarget>(RamdaPlaceholder x = null) {
+
+		public static dynamic Identity(RamdaPlaceholder x = null) {
 			return Currying.Identity(x);
 		}
 	}

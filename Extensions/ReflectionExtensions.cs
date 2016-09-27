@@ -31,6 +31,10 @@ namespace Ramda.NET
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
+        internal static bool IsDictionaryOf<TKey, TValue>(this Type type) {
+            return typeof(IDictionary<TKey, TValue>).IsAssignableFrom(type);
+        }
+
         internal static bool IsArray(this object value) {
             return value.GetType().IsArray;
         }
@@ -124,6 +128,10 @@ namespace Ramda.NET
 
         internal static Dictionary<string, object> ToMemberDictionary(this object target) {
             var type = target.GetType();
+
+            if (type.IsDictionaryOf<string, object>()) {
+                return (Dictionary<string, object>)target;
+            }
 
             return type.GetProperties(bindingFlags)
                        .Cast<MemberInfo>()

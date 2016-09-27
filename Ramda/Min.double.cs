@@ -15,11 +15,11 @@ namespace Ramda.NET
 		public static dynamic Min(double a, double b) {
 			return Currying.Min(a, b);
 		}
-			
+
 		public static dynamic Min(RamdaPlaceholder a, double b) {
 			return Currying.Min(a, b);
 		}
-			
+
 		public static dynamic Min(double a, RamdaPlaceholder b = null) {
 			return Currying.Min(a, b);
 		}

@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic PropIs<TTarget>(Type type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
-			
+
 		public static dynamic PropIs<TTarget>(RamdaPlaceholder type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
-			
+
 		public static dynamic PropIs<TTarget>(Type type, RamdaPlaceholder name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
-			
-		public static dynamic PropIs<TTarget>(Type type, string name, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropIs(Type type, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}
-		
-		public static dynamic PropIs<TTarget>(Type type, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropIs(Type type, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}
-		
-		public static dynamic PropIs<TTarget>(RamdaPlaceholder type = null, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PropIs(RamdaPlaceholder type = null, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}
 	}

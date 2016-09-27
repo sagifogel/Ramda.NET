@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Reverse<TSource>(IEnumerable<TSource> list) {
 			return Currying.Reverse(list);
 		}
-			
-		public static dynamic Reverse<TSource>(RamdaPlaceholder list = null) {
+
+		public static dynamic Reverse(RamdaPlaceholder list = null) {
 			return Currying.Reverse(list);
 		}
 	}

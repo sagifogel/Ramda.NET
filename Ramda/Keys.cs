@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Keys<TTarget>(TTarget obj) {
 			return Currying.Keys(obj);
 		}
-			
-		public static dynamic Keys<TTarget>(RamdaPlaceholder obj = null) {
+
+		public static dynamic Keys(RamdaPlaceholder obj = null) {
 			return Currying.Keys(obj);
 		}
 	}

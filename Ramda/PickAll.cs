@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic PickAll<TTarget>(IList<string> names, TTarget obj) {
 			return Currying.PickAll(names, obj);
 		}
-			
+
 		public static dynamic PickAll<TTarget>(RamdaPlaceholder names, TTarget obj) {
 			return Currying.PickAll(names, obj);
 		}
-			
-		public static dynamic PickAll<TTarget>(IList<string> names, RamdaPlaceholder obj = null) {
+
+		public static dynamic PickAll(IList<string> names, RamdaPlaceholder obj = null) {
 			return Currying.PickAll(names, obj);
 		}
-		
-		public static dynamic PickAll<TTarget>(RamdaPlaceholder names = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic PickAll(RamdaPlaceholder names = null, RamdaPlaceholder obj = null) {
 			return Currying.PickAll(names, obj);
 		}
 	}

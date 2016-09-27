@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic Insert<TSource>(int index, TSource elt, IList<TSource> list) {
 			return Currying.Insert(index, elt, list);
 		}
-			
+
 		public static dynamic Insert<TSource>(RamdaPlaceholder index, TSource elt, IList<TSource> list) {
 			return Currying.Insert(index, elt, list);
 		}
-			
+
 		public static dynamic Insert<TSource>(int index, RamdaPlaceholder elt, IList<TSource> list) {
 			return Currying.Insert(index, elt, list);
 		}
-			
+
 		public static dynamic Insert<TSource>(int index, TSource elt, RamdaPlaceholder list = null) {
 			return Currying.Insert(index, elt, list);
 		}
-		
-		public static dynamic Insert<TSource>(int index, RamdaPlaceholder elt = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Insert(int index, RamdaPlaceholder elt = null, RamdaPlaceholder list = null) {
 			return Currying.Insert(index, elt, list);
 		}
-		
-		public static dynamic Insert<TSource>(RamdaPlaceholder index = null, RamdaPlaceholder elt = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Insert(RamdaPlaceholder index = null, RamdaPlaceholder elt = null, RamdaPlaceholder list = null) {
 			return Currying.Insert(index, elt, list);
 		}
 	}

@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic Apply<TSource>(Delegate fn, IList<TSource> args) {
 			return Currying.Apply(fn, args);
 		}
-			
+
 		public static dynamic Apply<TSource>(RamdaPlaceholder fn, IList<TSource> args) {
 			return Currying.Apply(fn, args);
 		}
 
-		public static dynamic Apply<TSource>(dynamic fn, IList<TSource> args) {
-			return Currying.Apply(fn, args); 
+		public static dynamic Apply(Delegate fn, RamdaPlaceholder args = null) {
+			return Currying.Apply(fn, args);
 		}
-					
+
 		public static dynamic Apply(dynamic fn, RamdaPlaceholder args = null) {
 			return Currying.Apply(fn, args);
 		}
-			
-		public static dynamic Apply<TSource>(Delegate fn, RamdaPlaceholder args = null) {
+
+		public static dynamic Apply<TSource>(dynamic fn, IList<TSource> args) {
 			return Currying.Apply(fn, args);
 		}
-		
-		public static dynamic Apply<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder args = null) {
+
+		public static dynamic Apply(RamdaPlaceholder fn = null, RamdaPlaceholder args = null) {
 			return Currying.Apply(fn, args);
 		}
 	}

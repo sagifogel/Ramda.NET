@@ -15,7 +15,7 @@ namespace Ramda.NET
 		public static dynamic Inc(double n) {
 			return Currying.Inc(n);
 		}
-			
+
 		public static dynamic Inc(RamdaPlaceholder n = null) {
 			return Currying.Inc(n);
 		}

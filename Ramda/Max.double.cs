@@ -15,11 +15,11 @@ namespace Ramda.NET
 		public static dynamic Max(double a, double b) {
 			return Currying.Max(a, b);
 		}
-			
+
 		public static dynamic Max(RamdaPlaceholder a, double b) {
 			return Currying.Max(a, b);
 		}
-			
+
 		public static dynamic Max(double a, RamdaPlaceholder b = null) {
 			return Currying.Max(a, b);
 		}

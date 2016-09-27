@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic Remove<TSource>(int start, int count, IList<TSource> list) {
 			return Currying.Remove(start, count, list);
 		}
-			
+
 		public static dynamic Remove<TSource>(RamdaPlaceholder start, int count, IList<TSource> list) {
 			return Currying.Remove(start, count, list);
 		}
-			
+
 		public static dynamic Remove<TSource>(int start, RamdaPlaceholder count, IList<TSource> list) {
 			return Currying.Remove(start, count, list);
 		}
-			
-		public static dynamic Remove<TSource>(int start, int count, RamdaPlaceholder list = null) {
+
+		public static dynamic Remove(int start, int count, RamdaPlaceholder list = null) {
 			return Currying.Remove(start, count, list);
 		}
-		
-		public static dynamic Remove<TSource>(int start, RamdaPlaceholder count = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Remove(int start, RamdaPlaceholder count = null, RamdaPlaceholder list = null) {
 			return Currying.Remove(start, count, list);
 		}
-		
-		public static dynamic Remove<TSource>(RamdaPlaceholder start = null, RamdaPlaceholder count = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Remove(RamdaPlaceholder start = null, RamdaPlaceholder count = null, RamdaPlaceholder list = null) {
 			return Currying.Remove(start, count, list);
 		}
 	}

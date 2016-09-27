@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic Find<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.Find(fn, list);
 		}
-			
+
 		public static dynamic Find<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.Find(fn, list);
 		}
 
-		public static dynamic Find<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.Find(fn, list); 
-		}
-					
-		public static dynamic Find(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.Find(fn, list);
-		}
-			
 		public static dynamic Find<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.Find(fn, list);
 		}
-		
-		public static dynamic Find<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Find(dynamic fn, RamdaPlaceholder list = null) {
+			return Currying.Find(fn, list);
+		}
+
+		public static dynamic Find<TSource>(dynamic fn, IList<TSource> list) {
+			return Currying.Find(fn, list);
+		}
+
+		public static dynamic Find(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.Find(fn, list);
 		}
 	}

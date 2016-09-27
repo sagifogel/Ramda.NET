@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic DropWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.DropWhile(fn, list);
 		}
-			
+
 		public static dynamic DropWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.DropWhile(fn, list);
 		}
 
-		public static dynamic DropWhile<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.DropWhile(fn, list); 
-		}
-					
-		public static dynamic DropWhile(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.DropWhile(fn, list);
-		}
-			
 		public static dynamic DropWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.DropWhile(fn, list);
 		}
-		
-		public static dynamic DropWhile<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+
+		public static dynamic DropWhile(dynamic fn, RamdaPlaceholder list = null) {
+			return Currying.DropWhile(fn, list);
+		}
+
+		public static dynamic DropWhile<TSource>(dynamic fn, IList<TSource> list) {
+			return Currying.DropWhile(fn, list);
+		}
+
+		public static dynamic DropWhile(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.DropWhile(fn, list);
 		}
 	}

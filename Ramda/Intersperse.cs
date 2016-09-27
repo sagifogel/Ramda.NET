@@ -15,16 +15,16 @@ namespace Ramda.NET
 		public static dynamic Intersperse<TSource, TSeperator>(TSeperator separator, IList<TSource> list) {
 			return Currying.Intersperse(separator, list);
 		}
-			
-		public static dynamic Intersperse<TSource, TSeperator>(RamdaPlaceholder separator, IList<TSource> list) {
+
+		public static dynamic Intersperse<TSource>(RamdaPlaceholder separator, IList<TSource> list) {
 			return Currying.Intersperse(separator, list);
 		}
-			
-		public static dynamic Intersperse<TSource, TSeperator>(TSeperator separator, RamdaPlaceholder list = null) {
+
+		public static dynamic Intersperse<TSeperator>(TSeperator separator, RamdaPlaceholder list = null) {
 			return Currying.Intersperse(separator, list);
 		}
-		
-		public static dynamic Intersperse<TSource, TSeperator>(RamdaPlaceholder separator = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Intersperse(RamdaPlaceholder separator = null, RamdaPlaceholder list = null) {
 			return Currying.Intersperse(separator, list);
 		}
 	}

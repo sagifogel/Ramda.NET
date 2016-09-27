@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic Any<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.Any(fn, list);
 		}
-			
+
 		public static dynamic Any<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.Any(fn, list);
 		}
 
-		public static dynamic Any<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.Any(fn, list); 
-		}
-					
-		public static dynamic Any(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.Any(fn, list);
-		}
-			
 		public static dynamic Any<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.Any(fn, list);
 		}
-		
-		public static dynamic Any<TSource>(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
+
+		public static dynamic Any(dynamic fn, RamdaPlaceholder list = null) {
+			return Currying.Any(fn, list);
+		}
+
+		public static dynamic Any<TSource>(dynamic fn, IList<TSource> list) {
+			return Currying.Any(fn, list);
+		}
+
+		public static dynamic Any(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.Any(fn, list);
 		}
 	}

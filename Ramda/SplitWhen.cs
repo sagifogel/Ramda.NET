@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic SplitWhen<TValue>(Func<TValue, bool> pred, IList<TValue> list) {
 			return Currying.SplitWhen(pred, list);
 		}
-			
+
 		public static dynamic SplitWhen<TValue>(RamdaPlaceholder pred, IList<TValue> list) {
 			return Currying.SplitWhen(pred, list);
 		}
 
-		public static dynamic SplitWhen<TValue>(dynamic pred, IList<TValue> list) {
-			return Currying.SplitWhen(pred, list); 
-		}
-					
-		public static dynamic SplitWhen(dynamic pred, RamdaPlaceholder list = null) {
-			return Currying.SplitWhen(pred, list);
-		}
-			
 		public static dynamic SplitWhen<TValue>(Func<TValue, bool> pred, RamdaPlaceholder list = null) {
 			return Currying.SplitWhen(pred, list);
 		}
-		
-		public static dynamic SplitWhen<TValue>(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
+
+		public static dynamic SplitWhen(dynamic pred, RamdaPlaceholder list = null) {
+			return Currying.SplitWhen(pred, list);
+		}
+
+		public static dynamic SplitWhen<TValue>(dynamic pred, IList<TValue> list) {
+			return Currying.SplitWhen(pred, list);
+		}
+
+		public static dynamic SplitWhen(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.SplitWhen(pred, list);
 		}
 	}

@@ -15,11 +15,11 @@ namespace Ramda.NET
 		public static dynamic Modulo(int a, int b) {
 			return Currying.Modulo(a, b);
 		}
-			
+
 		public static dynamic Modulo(RamdaPlaceholder a, int b) {
 			return Currying.Modulo(a, b);
 		}
-			
+
 		public static dynamic Modulo(int a, RamdaPlaceholder b = null) {
 			return Currying.Modulo(a, b);
 		}

@@ -15,24 +15,24 @@ namespace Ramda.NET
 		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, TTarget obj) {
 			return Currying.AssocPath(path, val, obj);
 		}
-			
+
 		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path, TValue val, TTarget obj) {
 			return Currying.AssocPath(path, val, obj);
 		}
-			
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val, TTarget obj) {
+
+		public static dynamic AssocPath<TTarget>(IList<string> path, RamdaPlaceholder val, TTarget obj) {
 			return Currying.AssocPath(path, val, obj);
 		}
-			
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, TValue val, RamdaPlaceholder obj = null) {
+
+		public static dynamic AssocPath<TValue>(IList<string> path, TValue val, RamdaPlaceholder obj = null) {
 			return Currying.AssocPath(path, val, obj);
 		}
-		
-		public static dynamic AssocPath<TValue, TTarget>(IList<string> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic AssocPath(IList<string> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.AssocPath(path, val, obj);
 		}
-		
-		public static dynamic AssocPath<TValue, TTarget>(RamdaPlaceholder path = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+
+		public static dynamic AssocPath(RamdaPlaceholder path = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.AssocPath(path, val, obj);
 		}
 	}

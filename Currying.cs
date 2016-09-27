@@ -100,7 +100,7 @@ namespace Ramda.NET
 
         internal static dynamic CurryN = Curry2<int, Delegate, dynamic>((length, fn) => {
             if (length == 1) {
-                return Curry1(new Func<object, object>(arg => fn.DynamicInvoke(new[] { arg.ToInvokable() })));
+                return Curry1(new Func<object, object>(arg => fn.Invoke(arg)));
             }
 
             return Arity(length, InternalCurryN(length, new object[0], fn));
@@ -884,6 +884,18 @@ namespace Ramda.NET
 
         internal readonly static dynamic When = Curry3<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
             return (bool)pred.Invoke(x) ? whenTrueFn.Invoke(x) : x;
+        });
+
+        internal readonly static dynamic Where = Curry2<IDictionary<string, Delegate>, object, bool>((spec, testObj) => {
+            foreach (var pair in spec.ToMemberDictionary()) {
+                var testObjMember = testObj.Member(pair.Key);
+
+                if (testObjMember.IsNotNull() && !(bool)spec[pair.Key].Invoke(testObjMember)) {
+                    return false;
+                }
+            }
+
+            return true;
         });
 
         internal readonly static dynamic F = Always(false);

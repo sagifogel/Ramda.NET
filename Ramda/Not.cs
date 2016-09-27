@@ -15,7 +15,7 @@ namespace Ramda.NET
 		public static dynamic Not(bool a) {
 			return Currying.Not(a);
 		}
-			
+
 		public static dynamic Not(RamdaPlaceholder a = null) {
 			return Currying.Not(a);
 		}

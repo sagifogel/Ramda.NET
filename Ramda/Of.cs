@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Of<TSource>(TSource x) {
 			return Currying.Of(x);
 		}
-			
-		public static dynamic Of<TSource>(RamdaPlaceholder x = null) {
+
+		public static dynamic Of(RamdaPlaceholder x = null) {
 			return Currying.Of(x);
 		}
 	}

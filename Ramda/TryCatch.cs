@@ -16,27 +16,31 @@ namespace Ramda.NET
 			return Currying.TryCatch(tryer, catcher);
 		}
 
-		public static dynamic TryCatch(dynamic tryer, dynamic catcher) {
-			return Currying.TryCatch(tryer, catcher); 
+		public static dynamic TryCatch(RamdaPlaceholder tryer, Delegate catcher) {
+			return Currying.TryCatch(tryer, catcher);
 		}
-					
+
+		public static dynamic TryCatch(Delegate tryer, RamdaPlaceholder catcher = null) {
+			return Currying.TryCatch(tryer, catcher);
+		}
+
 		public static dynamic TryCatch(RamdaPlaceholder tryer, dynamic catcher) {
 			return Currying.TryCatch(tryer, catcher);
 		}
-			
-		public static dynamic TryCatch<TSource>(RamdaPlaceholder tryer, Delegate catcher) {
-			return Currying.TryCatch(tryer, catcher);
-		}
-					
+
 		public static dynamic TryCatch(dynamic tryer, RamdaPlaceholder catcher = null) {
 			return Currying.TryCatch(tryer, catcher);
 		}
-			
-		public static dynamic TryCatch<TSource>(Delegate tryer, RamdaPlaceholder catcher = null) {
+
+		public static dynamic TryCatch(dynamic tryer, Delegate catcher) {
 			return Currying.TryCatch(tryer, catcher);
 		}
-		
-		public static dynamic TryCatch<TSource>(RamdaPlaceholder tryer = null, RamdaPlaceholder catcher = null) {
+
+		public static dynamic TryCatch(Delegate tryer, dynamic catcher) {
+			return Currying.TryCatch(tryer, catcher);
+		}
+
+		public static dynamic TryCatch(RamdaPlaceholder tryer = null, RamdaPlaceholder catcher = null) {
 			return Currying.TryCatch(tryer, catcher);
 		}
 	}

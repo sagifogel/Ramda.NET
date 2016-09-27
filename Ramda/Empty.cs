@@ -15,8 +15,8 @@ namespace Ramda.NET
 		public static dynamic Empty<TTarget>(TTarget x) {
 			return Currying.Empty(x);
 		}
-			
-		public static dynamic Empty<TTarget>(RamdaPlaceholder x = null) {
+
+		public static dynamic Empty(RamdaPlaceholder x = null) {
 			return Currying.Empty(x);
 		}
 	}

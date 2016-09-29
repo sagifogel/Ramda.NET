@@ -734,7 +734,7 @@ namespace Ramda.NET
                 i += 1;
             }
 
-            return outerlist.CreateNewArray(result.Select(list => list.ToArray()).ToArray());
+            return outerlist.CreateNewArray(result.Select(list => list.ToArray<Array>()).ToArray());
         });
 
         internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
@@ -796,7 +796,7 @@ namespace Ramda.NET
                 pair = fn.DynamicInvoke(list[1]);
             }
 
-            return result.ToArray();
+            return result.ToArray<Array>();
         });
 
         internal readonly static dynamic UniqWith = Curry2<Delegate, IList, IList>((pred, list) => {
@@ -810,7 +810,7 @@ namespace Ramda.NET
             }
 
             if (list.IsArray()) {
-                return result.ToArray();
+                return result.ToArray<Array>();
             }
 
             return result;
@@ -873,7 +873,7 @@ namespace Ramda.NET
                 vals = vals.CreateNewList(vals, firstType);
             }
 
-            return vals.ToArray();
+            return vals.ToArray<Array>();
         });
 
         internal readonly static dynamic View = Curry2<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, object, object>((lens, x) => lens(Const)(x).Value);
@@ -895,39 +895,21 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic XProd = Curry2<IList, IList, IList>((a, b) => {
-            int j;
             var idx = 0;
             var ilen = a.Count;
             var jlen = b.Count;
-            var result = new List<IList>();
+            var result = new List<IList[]>();
 
             while (idx < ilen) {
-                j = 0;
-
-                while (j < jlen) {
-                    IList pair;
-                    var valA = a[idx];
-                    var valB = b[j];
-                    var typeA = valA.GetType();
-
-                    if (typeA.Equals(valB.GetType())) {
-                        pair = typeA.CreateNewList<IList>();
-                        pair.Add(valA);
-                        pair.Add(valB);
-                        pair = pair.CopyToNewArray();
-                    }
-                    else {
-                        pair = new object[] { valA, valB };
-                    }
-
-                    result.Add(pair);
-                    j += 1;
-                }
-
+                result.Add(ZipInternal(a, b, jlen, (list, _) => list[idx]));
                 idx += 1;
             }
 
-            return result.ToArray();
+            return result.SelectMany(list => list.AsEnumerable()).ToList();
+        });
+
+        internal readonly static dynamic Zip = Curry2<IList, IList, IList>((a, b) => {
+            return ZipInternal(a, b, Math.Min(a.Count, b.Count));
         });
 
         internal readonly static dynamic F = Always(false);

@@ -176,6 +176,33 @@ namespace Ramda.NET
             return Core.Slice(list, sliceFrom(idx), sliceTo(idx));
         }
 
+        private static IList[] ZipInternal(IList a, IList b, int len, Func<IList, int, object> valAResolver = null) {
+            var idx = 0;
+            var rv = new List<IList>();
+
+            while (idx < len) {
+                IList pair;
+                var valB = b[idx];
+                var valA = valAResolver?.Invoke(a, idx) ?? a[idx];
+                var typeA = valA.GetType();
+
+                if (typeA.Equals(valB.GetType())) {
+                    pair = typeA.CreateNewList<IList>();
+                    pair.Add(valA);
+                    pair.Add(valB);
+                    pair = pair.CopyToNewArray();
+                }
+                else {
+                    pair = new object[] { valA, valB };
+                }
+
+                rv.Add(pair);
+                idx += 1;
+            }
+
+            return rv.ToArray();
+        }
+
         internal static object Member(object target, dynamic member) {
             if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
                 return ((Array)target).Member((int)member);

@@ -218,7 +218,7 @@ namespace Ramda.NET
         }
 
         internal static Array CopyToNewArray(this IList list) {
-            var array = list.ToArray();
+            var array = list.ToArray<Array>();
 
             return list.CreateNewArray(array);
         }
@@ -309,14 +309,14 @@ namespace Ramda.NET
             return new[] { value };
         }
 
-        internal static Array ToArray(this IList list) {
+        internal static TArray ToArray<TArray>(this IList list) where TArray : IList {
             IList arr = list.CreateNewArray(list.Count);
 
             for (int i = 0; i < list.Count; i++) {
                 arr[i] = list[i];
             }
 
-            return (Array)arr;
+            return (TArray)arr;
         }
     }
 }

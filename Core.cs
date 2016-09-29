@@ -35,7 +35,7 @@ namespace Ramda.NET
                 }
             }
 
-            return result.ToArray();
+            return result.ToArray<Array>();
         }
 
         public static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {

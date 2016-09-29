@@ -723,6 +723,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Where.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Zip.cs">
+      <DependentUpon>Zip.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\XProd.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1408,6 +1413,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Where.cs</LastGenOutput>
       <LastOutputs>.\Where.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Zip.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Zip.cs</LastGenOutput>
+      <LastOutputs>.\Zip.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\XProd.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

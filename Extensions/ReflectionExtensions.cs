@@ -217,6 +217,12 @@ namespace Ramda.NET
             return array;
         }
 
+        internal static Array CopyToNewArray(this IList list) {
+            var array = list.ToArray();
+
+            return list.CreateNewArray(array);
+        }
+
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
             return (ListType)type.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len }); ;
         }
@@ -275,14 +281,6 @@ namespace Ramda.NET
 
             return Expression.Lambda<Func<object>>(
                         Expression.Convert(Expression.New(ctor, arguments), typeof(object))).Compile();
-        }
-
-        internal static object ToInvokable(this object target) {
-            if (target.IsList()) {
-                return ((IList)target).Cast<object>().ToArray();
-            }
-
-            return target;
         }
 
         internal static object Invoke(this Delegate target, params object[] arguments) {

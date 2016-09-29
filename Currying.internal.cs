@@ -160,9 +160,7 @@ namespace Ramda.NET
                 return list;
             }
 
-            var array = list.CreateNewArray(list.Count);
-
-            Array.Copy(list.Cast<object>().ToArray(), array, list.Count);
+            var array = list.CopyToNewArray();
             Array.Sort(array, comparer);
 
             return array.CreateNewList(array);

@@ -723,6 +723,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Where.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\XProd.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>XProd.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1403,6 +1408,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Where.cs</LastGenOutput>
       <LastOutputs>.\Where.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\XProd.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>XProd.cs</LastGenOutput>
+      <LastOutputs>.\XProd.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

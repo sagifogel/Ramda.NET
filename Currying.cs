@@ -321,11 +321,7 @@ namespace Ramda.NET
             result.Insert(idx, elt);
 
             if (list.IsArray()) {
-                var arrayResult = result.CreateNewArray(list.Count);
-
-                Array.Copy((Array)result, arrayResult, list.Count);
-
-                return arrayResult;
+                return result.CopyToNewArray();
             }
 
             return result;
@@ -896,6 +892,42 @@ namespace Ramda.NET
             }
 
             return true;
+        });
+
+        internal readonly static dynamic XProd = Curry2<IList, IList, IList>((a, b) => {
+            int j;
+            var idx = 0;
+            var ilen = a.Count;
+            var jlen = b.Count;
+            var result = new List<IList>();
+
+            while (idx < ilen) {
+                j = 0;
+
+                while (j < jlen) {
+                    IList pair;
+                    var valA = a[idx];
+                    var valB = b[j];
+                    var typeA = valA.GetType();
+
+                    if (typeA.Equals(valB.GetType())) {
+                        pair = typeA.CreateNewList<IList>();
+                        pair.Add(valA);
+                        pair.Add(valB);
+                        pair = pair.CopyToNewArray();
+                    }
+                    else {
+                        pair = new object[] { valA, valB };
+                    }
+
+                    result.Add(pair);
+                    j += 1;
+                }
+
+                idx += 1;
+            }
+
+            return result.ToArray();
         });
 
         internal readonly static dynamic F = Always(false);

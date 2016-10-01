@@ -190,7 +190,7 @@ namespace Ramda.NET
                     pair = typeA.CreateNewList<IList>();
                     pair.Add(valA);
                     pair.Add(valB);
-                    pair = pair.CopyToNewArray();
+                    pair = pair.CopyToNewArray(typeA);
                 }
                 else {
                     pair = new object[] { valA, valB };

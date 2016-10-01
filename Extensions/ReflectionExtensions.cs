@@ -205,8 +205,8 @@ namespace Ramda.NET
             return ctor;
         }
 
-        internal static Array CreateNewArray(this IList list, int? len = null) {
-            return list.GetElementType().CreateNewArray<Array>(len ?? list.Count);
+        internal static Array CreateNewArray(this IList list, int? len = null, Type type = null) {
+            return (type ?? list.GetElementType()).CreateNewArray<Array>(len ?? list.Count);
         }
 
         internal static Array CreateNewArray(this IList list, Array sourceToCopy) {
@@ -221,6 +221,10 @@ namespace Ramda.NET
             var array = list.ToArray<Array>();
 
             return list.CreateNewArray(array);
+        }
+
+        internal static Array CopyToNewArray(this IList list, Type type) {
+            return list.ToArray<Array>(type);
         }
 
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
@@ -309,8 +313,8 @@ namespace Ramda.NET
             return new[] { value };
         }
 
-        internal static TArray ToArray<TArray>(this IList list) where TArray : IList {
-            IList arr = list.CreateNewArray(list.Count);
+        internal static TArray ToArray<TArray>(this IList list, Type type = null) where TArray : IList {
+            IList arr = list.CreateNewArray(list.Count, type);
 
             for (int i = 0; i < list.Count; i++) {
                 arr[i] = list[i];

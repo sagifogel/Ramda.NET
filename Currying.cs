@@ -912,6 +912,48 @@ namespace Ramda.NET
             return ZipInternal(a, b, Math.Min(a.Count, b.Count));
         });
 
+        internal readonly static dynamic ZipObj = Curry2<IList<string>, IList, IDictionary<string, object>>((keys, values) => {
+            var idx = 0;
+            var len = Math.Min(keys.Count, values.Count);
+            IDictionary<string, object> result = new ExpandoObject();
+
+            while (idx < len) {
+                result[keys[idx]] = values[idx];
+                idx += 1;
+            }
+
+            return result;
+        });
+
+        internal readonly static dynamic ZipWith = Curry3<Delegate, IList, IList, IList>((fn, a, b) => {
+            var idx = 0;
+            Type type = null;
+            var allSameType = true;
+            var len = Math.Min(a.Count, b.Count);
+            var rv = new List<object>();
+
+            while (idx < len) {
+                var value = fn.Invoke(a[idx], b[idx]);
+                var typeofValue = value.GetType();
+
+                if (type.IsNotNull()) {
+                    allSameType &= typeofValue.Equals(type.GetType());
+                }
+                else {
+                    type = typeofValue;
+                }
+
+                rv.Add(value);
+                idx += 1;
+            }
+
+            if (allSameType) {
+                return rv.CopyToNewArray(type);
+            }
+
+            return rv.ToArray();
+        });
+
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);

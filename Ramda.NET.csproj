@@ -733,6 +733,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>XProd.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\ZipObj.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZipObj.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ZipWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZipWith.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShallowCloner.cs" />
     <Compile Include="Transducers\Reduced.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
@@ -1423,6 +1433,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>XProd.cs</LastGenOutput>
       <LastOutputs>.\XProd.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ZipObj.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ZipObj.cs</LastGenOutput>
+      <LastOutputs>.\ZipObj.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ZipWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ZipWith.cs</LastGenOutput>
+      <LastOutputs>.\ZipWith.cs</LastOutputs>
     </Content>
   </ItemGroup>
   <ItemGroup>

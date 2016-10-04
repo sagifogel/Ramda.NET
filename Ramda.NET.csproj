@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeepCloner.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IdentityObj.cs" />
     <Compile Include="ObjectAssigner.cs" />
@@ -56,6 +57,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Apply.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Clone.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Clone.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
@@ -762,6 +768,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Apply.cs</LastGenOutput>
       <LastOutputs>.\Apply.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Clone.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Clone.cs</LastGenOutput>
+      <LastOutputs>.\Clone.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\FindLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

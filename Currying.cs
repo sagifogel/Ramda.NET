@@ -957,5 +957,7 @@ namespace Ramda.NET
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);
+
+        internal readonly static dynamic Clone = Curry1<object, object>(DeepCloner.Clone);
     }
 }

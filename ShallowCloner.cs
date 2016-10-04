@@ -58,7 +58,7 @@ namespace Ramda.NET
         }
 
         private static object WellKnownTypeCloneAndAssignValue(string prop, object obj, object value) {
-            var target = Clone(obj);
+            var target = obj.Clone();
             MemberInfo member = obj.TryGetMemberInfo(prop);
 
             switch (member.MemberType) {

@@ -2,12 +2,12 @@
 using System.Linq;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.R;
 using static Ramda.NET.Core;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Object = Ramda.NET.ReflectionExtensions;
-using static Ramda.NET.R;
 
 namespace Ramda.NET
 {
@@ -744,10 +744,10 @@ namespace Ramda.NET
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 try {
-                    return tryer.DynamicInvoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    return tryer.Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                 }
                 catch (Exception e) {
-                    return catcher.DynamicInvoke(Pad(Concat(new object[] { e }, arguments)));
+                    return catcher.Invoke(Concat(new object[] { e }, arguments));
                 }
             });
         });
@@ -959,5 +959,15 @@ namespace Ramda.NET
         internal readonly static dynamic T = Always(true);
 
         internal readonly static dynamic Clone = Curry1<object, object>(DeepCloner.Clone);
+
+        internal readonly static dynamic Curry = Curry1<Delegate, Delegate>(fn => CurryN(fn.Arity(), fn));
+
+        internal readonly static dynamic Drop = Curry2(new Func<object, object, dynamic>(Dispatchable2("Drop", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<int, IList, IList>((n, xs) => Slice(Math.Max(0, n), int.MaxValue, xs)))));
+
+        internal readonly static dynamic DropLast = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropLast", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<int, IList, IList>(DropLastInternal))));
+
+        internal readonly static dynamic DropLastWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropLastWhile", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, IList, IList>(DropLastWhileInternal))));
+
+        internal new readonly static dynamic Equals = Curry2<object, object, bool>((a, b) => EqualsInternal(a, b));
     }
 }

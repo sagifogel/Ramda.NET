@@ -13,7 +13,7 @@ namespace Ramda.NET
     {
         private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
-        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy;
+        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
 
         internal static TArg CastTo<TArg>(this object arg) {
             if (arg != null && typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
@@ -41,6 +41,10 @@ namespace Ramda.NET
 
         internal static bool IsList(this object value) {
             return typeof(IList).IsAssignableFrom(value.GetType());
+        }
+
+        internal static bool IsEnumerable(this object value) {
+            return typeof(IEnumerable).IsAssignableFrom(value.GetType());
         }
 
         internal static bool IsFunction(this object value) {
@@ -109,21 +113,12 @@ namespace Ramda.NET
             return false;
         }
 
-        internal static object HasMember(this object target, string name) {
-            var member = target.TryGetMemberInfo(name);
+        internal static bool HasMember(this object target, string name) {
+            return target.TryGetMemberInfo(name).IsNotNull();
+        }
 
-            if (member.IsNotNull()) {
-                switch (member.MemberType) {
-                    case MemberTypes.Field:
-                        return ((FieldInfo)member).GetValue(target);
-                    case MemberTypes.Property:
-                        return ((PropertyInfo)member).GetValue(target, null);
-                    default:
-                        break;
-                }
-            }
-
-            return null;
+        internal static bool TypeHasMember(this Type type, string name) {
+            return type.TryGetMemberInfoFromType(name).IsNotNull();
         }
 
         internal static Dictionary<string, object> ToMemberDictionary(this object target) {
@@ -140,15 +135,21 @@ namespace Ramda.NET
         }
 
         internal static IEnumerable<MemberInfo> ToMemberInfos(this object target) {
-            var type = target.GetType();
+            return target.GetType().ToMembersInfoFromType();
+        }
 
+        internal static IEnumerable<MemberInfo> ToMembersInfoFromType(this Type type) {
             return type.GetProperties(bindingFlags)
                        .Cast<MemberInfo>()
                        .Concat(type.GetFields(bindingFlags));
         }
 
         internal static MemberInfo TryGetMemberInfo(this object target, string name) {
-            var members = target.GetType().GetMember(name, bindingFlags);
+            return target.GetType().TryGetMemberInfoFromType(name);
+        }
+
+        internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name) {
+            var members = type.GetMember(name, bindingFlags);
 
             if (members.Length == 1) {
                 return members[0];
@@ -180,6 +181,10 @@ namespace Ramda.NET
             });
 
             return @delegate.DynamicInvoke();
+        }
+
+        internal static bool IsAnonymousType(this object obj) {
+            return obj.GetType().IsAnonymousType();
         }
 
         internal static bool IsAnonymousType(this Type type) {
@@ -321,6 +326,28 @@ namespace Ramda.NET
             }
 
             return (TArray)arr;
+        }
+
+        internal static bool SequenceEqual(this IEnumerable first, IEnumerable second, Func<object, object, bool> comparer) {
+            bool flag;
+            var enumerator = first.GetEnumerator();
+            var enumerator1 = second.GetEnumerator();
+
+            while (enumerator.MoveNext()) {
+                if (enumerator1.MoveNext() && comparer(enumerator.Current, enumerator1.Current)) {
+                    continue;
+                }
+
+                return false;
+            }
+            if (!enumerator1.MoveNext()) {
+                return true;
+            }
+            else {
+                flag = false;
+            }
+
+            return flag;
         }
     }
 }

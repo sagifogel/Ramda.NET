@@ -46,6 +46,7 @@
     <Compile Include="DeepCloner.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IdentityObj.cs" />
+    <Compile Include="MemberComparer.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
     <Compile Include="Ramda\Add.bool.cs">
@@ -62,6 +63,31 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Clone.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Curry.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Curry.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Drop.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Drop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\DropLast.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DropLast.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\DropLastWhile.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DropLastWhile.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Equals.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
@@ -773,6 +799,31 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Clone.cs</LastGenOutput>
       <LastOutputs>.\Clone.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Curry.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Curry.cs</LastGenOutput>
+      <LastOutputs>.\Curry.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Drop.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Drop.cs</LastGenOutput>
+      <LastOutputs>.\Drop.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\DropLast.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DropLast.cs</LastGenOutput>
+      <LastOutputs>.\DropLast.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\DropLastWhile.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DropLastWhile.cs</LastGenOutput>
+      <LastOutputs>.\DropLastWhile.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Equals.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Equals.cs</LastGenOutput>
+      <LastOutputs>.\Equals.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\FindLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

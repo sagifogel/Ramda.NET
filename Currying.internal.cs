@@ -244,7 +244,7 @@ namespace Ramda.NET
                     combinedIdx += 1;
                 }
 
-                return left <= 0 ? fn.DynamicInvoke(combined.Pad()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
+                return left <= 0 ? fn.Invoke(combined) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
             });
         }
 
@@ -271,6 +271,58 @@ namespace Ramda.NET
             });
 
             return identity;
+        }
+
+        internal static Delegate CreatePartialApplicator(Func<IList, IList, IList> concat) {
+            return Curry2<Delegate, object[], Delegate>((fn, args) => {
+                return Arity(Math.Max(0, fn.Arity() - args.Length), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                    return fn.Invoke(concat(args, arguments));
+                }));
+            });
+        }
+
+        internal static IList DropLastInternal(int n, IList xs) {
+            return Take(n < xs.Count ? xs.Count - n : 0, xs);
+        }
+
+        internal static IList DropLastWhileInternal(Delegate pred, IList list) {
+            var idx = list.Count - 1;
+
+            while (idx >= 0 && (bool)pred.Invoke(list[idx])) {
+                idx -= 1;
+            }
+
+            return Core.Slice(list, 0, idx + 1);
+        }
+
+        internal static bool EqualsInternal(object a, object b) {
+            bool bothEnumerables;
+
+            if (Identical(a, b)) {
+                return true;
+            }
+
+            if (a.IsNull() || b.IsNull()) {
+                return false;
+            }
+
+            bothEnumerables = a.IsEnumerable() && b.IsEnumerable();
+
+            if (Type(a) != Type(b) && !bothEnumerables) {
+                var bothAnonymous = a.IsAnonymousType() && b.IsAnonymousType();
+
+                if (!bothAnonymous) {
+                    return false;
+                }
+            }
+
+            if (bothEnumerables) {
+                return ((IEnumerable)a).SequenceEqual((IEnumerable)b, EqualsInternal);
+            }
+
+            return MemberwiseComparer.Compare(a, b);
         }
     }
 }

@@ -132,16 +132,6 @@ namespace Ramda.NET
             });
         }
 
-        private static IList DropLastWhile(Func<object, bool> predicate, object x, IList list) {
-            var idx = list.Count - 1;
-
-            while (idx >= 0 && predicate(list[idx])) {
-                idx -= 1;
-            }
-
-            return Slice(list, 0, idx + 1);
-        }
-
         internal static IList Aperture(int length, IList list) {
             var idx = 0;
             var limit = list.Count - (length - 1);

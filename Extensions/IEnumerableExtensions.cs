@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -26,6 +27,12 @@ namespace Ramda.NET
             foreach (var item in source) {
                 action(item, count++);
             }
+        }
+
+        public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> predicate) {
+            var keys = new HashSet<TKey>();
+
+            return source.Where(element => keys.Add(predicate(element)));
         }
     }
 }

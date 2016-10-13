@@ -48,7 +48,7 @@ namespace Ramda.NET
             return false;
         }
 
-        private static IList Filter(Func<object, bool> fn, IList list) {
+        internal static IList Filter(Func<object, bool> fn, IList list) {
             var result = new List<object>();
 
             foreach (var item in list) {

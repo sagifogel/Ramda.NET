@@ -2,8 +2,8 @@
 {
     internal interface ITransducer
     {
-        dynamic Init();
-        dynamic Step();
-        dynamic result();
+        object Init();
+        object Result(object result);
+        object Step(object result, object input);
     }
 }

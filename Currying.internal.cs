@@ -248,10 +248,10 @@ namespace Ramda.NET
             });
         }
 
-        private static Reduced ReducedInternal(object x) {
-            var reduced = x as Reduced;
+        private static IReduced ReducedInternal(object x) {
+            var reduced = x as IReduced;
 
-            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new Reduced(x);
+            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new ReducedImpl(x);
         }
 
         private static IdentityObj IdentityInternal(object x) {
@@ -323,6 +323,40 @@ namespace Ramda.NET
             }
 
             return MemberwiseComparer.Compare(a, b);
+        }
+
+        internal static object Reduce(object fn, object acc, object list) {
+            ITransducer transducer = null;
+
+            if (fn.IsFunction()) {
+                transducer = new XWrap((Delegate)fn);
+            }
+
+            if (IsArrayLike(list)) {
+                return ArrayReduce(transducer, acc, (IList)list);
+            }
+
+            throw new ArgumentException("Reduce: list must be array or iterable");
+        }
+
+        private static object ArrayReduce(ITransducer xf, object acc, IList list) {
+            var idx = 0;
+            IReduced reduced;
+            var len = list.Count;
+
+            while (idx < len) {
+                acc = xf.Step(acc, list[idx]);
+                reduced = acc as IReduced;
+
+                if (reduced.IsNotNull()) {
+                    acc = reduced.Value;
+                    break;
+                }
+
+                idx += 1;
+            }
+
+            return xf.Result(acc);
         }
     }
 }

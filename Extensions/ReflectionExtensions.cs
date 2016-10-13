@@ -144,6 +144,10 @@ namespace Ramda.NET
                        .Concat(type.GetFields(bindingFlags));
         }
 
+        internal static string[] Keys(this object target) {
+            return target.ToMemberDictionary().Keys.ToArray();
+        }
+
         internal static MemberInfo TryGetMemberInfo(this object target, string name) {
             return target.GetType().TryGetMemberInfoFromType(name);
         }

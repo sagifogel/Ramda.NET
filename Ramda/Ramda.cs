@@ -129,5 +129,13 @@ namespace Ramda.NET
         public static dynamic T = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             return Currying.T();
         });
+
+        public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
+            return Currying.Filter(pred, filterable);
+        }
+
+        public static dynamic Filter<TSource>(dynamic pred, object filterable) {
+            return Currying.Filter(pred, filterable);
+        }
     }
 }

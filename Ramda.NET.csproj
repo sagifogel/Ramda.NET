@@ -89,6 +89,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
+    <Content Include="Ramda\Filter.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Filter.cs</LastGenOutput>
+      <LastOutputs>.\Filter.cs</LastOutputs>
+    </Content>
+    <Compile Include="Ramda\Filter.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Filter.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -776,13 +786,15 @@
       <DependentUpon>ZipWith.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
-    <Compile Include="Transducers\Reduced.cs" />
+    <Compile Include="Transducers\IReduced.cs" />
+    <Compile Include="Transducers\ReducedImpl.cs" />
     <Compile Include="Transducers\ITransducer.cs" />
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="R.Tuple.cs" />
+    <Compile Include="Transducers\XWrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ramda\Add.bool.tt">

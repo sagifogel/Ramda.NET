@@ -579,7 +579,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic ReduceRight = Curry3<Delegate, object, IList, object>((fn, acc, list) => ReduceInternal(list.Count - 1, -1, (from) => from >= 0, fn, acc, list));
 
-        internal readonly static dynamic Reduced = Curry1<object, Reduced>(ReducedInternal);
+        internal readonly static dynamic Reduced = Curry1<object, IReduced>(ReducedInternal);
 
         internal readonly static dynamic Remove = Curry3<int, int, IList, IList>((start, count, list) => {
             return Concat(Slice(list, 0, Math.Min(start, list.Count)), Slice(list, Math.Min(list.Count, start + count)));
@@ -969,5 +969,17 @@ namespace Ramda.NET
         internal readonly static dynamic DropLastWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropLastWhile", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, IList, IList>(DropLastWhileInternal))));
 
         internal new readonly static dynamic Equals = Curry2<object, object, bool>((a, b) => EqualsInternal(a, b));
+
+        internal readonly static dynamic Filter = Curry2(new Func<object, object, dynamic>(Dispatchable2("Filter", new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => null), new Func<Delegate, object, object>((pred, filterable) => {
+            return !filterable.IsEnumerable() ? Reduce(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
+                var value = filterable.Member(key);
+
+                if ((bool)pred.Invoke(value)) {
+                    acc[key] = value;
+                }
+
+                return acc;
+            }), new ExpandoObject(), filterable.Keys()) : Core.Filter(item => (bool)pred.Invoke(item), (IList)filterable);
+        }))));
     }
 }

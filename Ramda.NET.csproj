@@ -255,6 +255,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flatten.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Flip.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flip.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\ForEach.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -991,6 +996,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Flatten.cs</LastGenOutput>
       <LastOutputs>.\Flatten.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Flip.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Flip.cs</LastGenOutput>
+      <LastOutputs>.\Flip.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ForEach.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

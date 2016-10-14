@@ -233,6 +233,10 @@ namespace Ramda.NET
             return target.DynamicInvoke(arguments.Pad(target));
         }
 
+        internal static object InvokeWithArray(this Delegate target, object[] arguments) {
+            return target.DynamicInvoke(arguments.Pad(target));
+        }
+
         internal static bool Is<TCompareTo>(this object @object) {
             return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
         }

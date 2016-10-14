@@ -983,5 +983,17 @@ namespace Ramda.NET
         }))));
 
         internal readonly static dynamic Flatten = Curry1(MakeFlat(true));
+
+        internal readonly static dynamic Flip = Curry1<Delegate, Delegate>(fn => {
+            return CurryN(2, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var args = Core.Slice(arguments);
+
+                args[0] = arguments[1];
+                args[1] = arguments[0];
+
+                return fn.InvokeWithArray((object[])args);
+            }));
+        });
     }
 }

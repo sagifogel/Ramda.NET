@@ -244,7 +244,7 @@ namespace Ramda.NET
                     combinedIdx += 1;
                 }
 
-                return left <= 0 ? fn.Invoke(combined) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
+                return left <= 0 ? fn.Invoke(combined.ToArray()) : Arity(left, InternalCurryN(length, combined.ToArray(), fn));
             });
         }
 

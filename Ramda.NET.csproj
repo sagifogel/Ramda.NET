@@ -300,6 +300,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Has.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Head.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Head.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Identical.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -324,6 +329,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Inc.int.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Init.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Init.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Insert.cs">
       <AutoGen>True</AutoGen>
@@ -1042,6 +1052,11 @@
       <LastGenOutput>Has.cs</LastGenOutput>
       <LastOutputs>.\Has.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Head.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Head.cs</LastGenOutput>
+      <LastOutputs>.\Head.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Identical.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identical.cs</LastGenOutput>
@@ -1066,6 +1081,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Inc.int.cs</LastGenOutput>
       <LastOutputs>.\Inc.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Init.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Init.cs</LastGenOutput>
+      <LastOutputs>.\Init.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Insert.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

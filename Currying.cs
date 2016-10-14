@@ -459,7 +459,7 @@ namespace Ramda.NET
             var count = list.GetType().Equals(typeof(string)) ? ((string)list).Length : ((IList)list).Count;
             var idx = offset < 0 ? count + offset : offset;
 
-            return list[idx];
+            return count > 0 && idx <= count ? list[idx] : null;
         });
 
         internal readonly static dynamic NthArg = Curry1<int, LambdaN>(n => {
@@ -995,5 +995,9 @@ namespace Ramda.NET
                 return fn.InvokeWithArray((object[])args);
             }));
         });
+
+        internal readonly static dynamic Head = Nth(0);
+
+        internal readonly static dynamic Init = Curry1<IList, IList>(list => Core.Slice(list, 0, list.Count -1));
     }
 }

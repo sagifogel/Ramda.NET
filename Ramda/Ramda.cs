@@ -137,5 +137,9 @@ namespace Ramda.NET
         public static dynamic Filter<TSource>(dynamic pred, object filterable) {
             return Currying.Filter(pred, filterable);
         }
+
+        public static dynamic Init(string list) {
+            return Currying.Init(list.ToCharArray());
+        }
     }
 }

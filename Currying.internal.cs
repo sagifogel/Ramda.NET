@@ -325,6 +325,31 @@ namespace Ramda.NET
             return MemberwiseComparer.Compare(a, b);
         }
 
+        internal static Func<IList, IList> MakeFlat(bool recursive) {
+            return list => Flatt(list, recursive);
+        }
+
+        private static IList Flatt(IList list, bool recursive) {
+            var result = new ArrayList();
+
+            foreach (var item in list) {
+                if (IsArrayLike(item)) {
+                    var itemAsList = (IList)item;
+                    var value = recursive ? Flatt(itemAsList, recursive) : itemAsList;
+                    var list2 = itemAsList.CreateNewList(type: typeof(object));
+
+                    foreach (var item2 in value) {
+                        result.Add(item2);
+                    }
+                }
+                else {
+                    result.Add(item);
+                }
+            }
+
+            return result.ToArray<IList>();
+        }
+
         internal static object Reduce(object fn, object acc, object list) {
             ITransducer transducer = null;
 
@@ -332,31 +357,35 @@ namespace Ramda.NET
                 transducer = new XWrap((Delegate)fn);
             }
 
-            if (IsArrayLike(list)) {
-                return ArrayReduce(transducer, acc, (IList)list);
+            if (list.IsEnumerable()) {
+                return IterableReduce(transducer, acc, (IEnumerable)list);
+            }
+
+            if (list.HasMemberWhere("Reduce", t => t.IsFunction())) {
+                return MethodReduce(transducer, acc, list);
             }
 
             throw new ArgumentException("Reduce: list must be array or iterable");
         }
 
-        private static object ArrayReduce(ITransducer xf, object acc, IList list) {
-            var idx = 0;
+        private static object IterableReduce(ITransducer xf, object acc, IEnumerable list) {
             IReduced reduced;
-            var len = list.Count;
 
-            while (idx < len) {
-                acc = xf.Step(acc, list[idx]);
+            foreach (var item in list) {
+                acc = xf.Step(acc, item);
                 reduced = acc as IReduced;
 
                 if (reduced.IsNotNull()) {
                     acc = reduced.Value;
                     break;
                 }
-
-                idx += 1;
             }
 
             return xf.Result(acc);
+        }
+
+        private static object MethodReduce(ITransducer xf, object acc, dynamic obj) {
+            return xf.Result(obj.Reduce(new Func<object, object, object>(xf.Step), acc));
         }
     }
 }

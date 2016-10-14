@@ -981,5 +981,7 @@ namespace Ramda.NET
                 return acc;
             }), new ExpandoObject(), filterable.Keys()) : Core.Filter(item => (bool)pred.Invoke(item), (IList)filterable);
         }))));
+
+        internal readonly static dynamic Flatten = Curry1(MakeFlat(true));
     }
 }

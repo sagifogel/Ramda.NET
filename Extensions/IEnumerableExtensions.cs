@@ -47,16 +47,6 @@ namespace Ramda.NET
             return array;
         }
 
-        internal static Array CopyToNewArray(this IList list) {
-            var array = list.ToArray<Array>();
-
-            return list.CreateNewArray(array);
-        }
-
-        internal static Array CopyToNewArray(this IList list, Type type) {
-            return list.ToArray<Array>(type);
-        }
-
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
             return (ListType)type.MakeArrayType(1).GetConstructors()[0].Invoke(new object[] { len }); ;
         }
@@ -130,6 +120,16 @@ namespace Ramda.NET
             }
 
             return (TArray)arr;
+        }
+
+        internal static TList ToList<TList>(this IList list, Type type = null) where TList : IList {
+            IList result = list.CreateNewList(type: type);
+
+            for (int i = 0; i < list.Count; i++) {
+                result.Add(list[i]);
+            }
+
+            return (TList)result;
         }
 
         internal static bool SequenceEqual(this IEnumerable first, IEnumerable second, Func<object, object, bool> comparer) {

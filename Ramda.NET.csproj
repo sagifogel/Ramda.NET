@@ -84,11 +84,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DropLastWhile.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\EqBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EqBy.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Equals.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
+    <Content Include="Ramda\EqBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EqBy.cs</LastGenOutput>
+      <LastOutputs>.\EqBy.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Filter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Filter.cs</LastGenOutput>
@@ -344,6 +354,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InsertAll.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\IntersectionWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntersectionWith.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Intersperse.cs">
       <AutoGen>True</AutoGen>
@@ -1096,6 +1111,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>InsertAll.cs</LastGenOutput>
       <LastOutputs>.\InsertAll.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IntersectionWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IntersectionWith.cs</LastGenOutput>
+      <LastOutputs>.\IntersectionWith.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Intersperse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

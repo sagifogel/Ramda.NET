@@ -210,7 +210,7 @@ namespace Ramda.NET
 
             list.Insert(0, x);
 
-            return list.CopyToNewArray();
+            return list.ToArray<Array>();
         }
     }
 }

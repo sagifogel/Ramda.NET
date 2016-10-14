@@ -160,7 +160,7 @@ namespace Ramda.NET
                 return list;
             }
 
-            var array = list.CopyToNewArray();
+            var array = list.ToArray<Array>();
             Array.Sort(array, comparer);
 
             return array.CreateNewList(array);
@@ -190,7 +190,7 @@ namespace Ramda.NET
                     pair = typeA.CreateNewList<IList>();
                     pair.Add(valA);
                     pair.Add(valB);
-                    pair = pair.CopyToNewArray(typeA);
+                    pair = pair.ToArray<Array>(typeA);
                 }
                 else {
                     pair = new object[] { valA, valB };
@@ -299,6 +299,8 @@ namespace Ramda.NET
 
         internal static bool EqualsInternal(object a, object b) {
             bool bothEnumerables;
+            Type typeA;
+            Type typeB = b.GetType();
 
             if (Identical(a, b)) {
                 return true;
@@ -308,9 +310,11 @@ namespace Ramda.NET
                 return false;
             }
 
+            typeA = a.GetType();
+            typeB = b.GetType();
             bothEnumerables = a.IsEnumerable() && b.IsEnumerable();
 
-            if (Type(a) != Type(b) && !bothEnumerables) {
+            if (!typeA.Equals(typeB) && !bothEnumerables) {
                 var bothAnonymous = a.IsAnonymousType() && b.IsAnonymousType();
 
                 if (!bothAnonymous) {
@@ -320,6 +324,10 @@ namespace Ramda.NET
 
             if (bothEnumerables) {
                 return ((IEnumerable)a).SequenceEqual((IEnumerable)b, EqualsInternal);
+            }
+
+            if (typeA.Equals(typeB) && (typeA.IsPrimitive || typeA.Equals(typeof(string)) || typeA.Equals(typeof(DateTime)) || typeA.Equals(typeof(decimal)) || typeA.Equals(typeof(Guid)))) {
+                return false;
             }
 
             return MemberwiseComparer.Compare(a, b);
@@ -361,7 +369,7 @@ namespace Ramda.NET
                 return IterableReduce(transducer, acc, (IEnumerable)list);
             }
 
-            if (list.HasMemberWhere("Reduce", t => t.IsFunction())) {
+            if (list.WhereMember("Reduce", t => t.IsFunction())) {
                 return MethodReduce(transducer, acc, list);
             }
 

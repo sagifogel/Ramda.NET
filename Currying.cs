@@ -189,7 +189,7 @@ namespace Ramda.NET
         internal readonly static dynamic DifferenceWith = Curry3<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
             var idx = 0;
             var firstLen = first.Count;
-            var result = new List<object>();
+            var result = new ArrayList();
 
             while (idx < firstLen) {
                 if (!ContainsWith(pred, first[idx], second) && !ContainsWith(pred, first[idx], result)) {
@@ -199,7 +199,11 @@ namespace Ramda.NET
                 idx += 1;
             }
 
-            return result;
+            if (first.IsArray()) {
+                return result.ToArray<Array>();
+            }
+
+            return result.ToArray();
         });
 
         internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
@@ -278,7 +282,7 @@ namespace Ramda.NET
         internal readonly static dynamic GroupWith = Curry2<Delegate, IList, IList>((fn, list) => {
             var idx = 0;
             var len = list.Count;
-            var res = new List<object>();
+            var res = new ArrayList();
 
             while (idx < len) {
                 var nextidx = idx + 1;
@@ -321,7 +325,7 @@ namespace Ramda.NET
             result.Insert(idx, elt);
 
             if (list.IsArray()) {
-                return result.CopyToNewArray();
+                return result.ToArray<Array>();
             }
 
             return result;
@@ -801,7 +805,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic UniqWith = Curry2<Delegate, IList, IList>((pred, list) => {
             var result = list.CreateNewList();
-            var prediacte = new Func<object, object, bool>((a, b) => (bool)pred.DynamicInvoke(a, b));
+            var prediacte = new Func<object, object, bool>((a, b) => (bool)pred.Invoke(a, b));
 
             foreach (var item in list) {
                 if (!ContainsWith(prediacte, item, result)) {
@@ -813,7 +817,7 @@ namespace Ramda.NET
                 return result.ToArray<Array>();
             }
 
-            return result;
+            return result.ToList<IList>();
         });
 
         internal readonly static dynamic Unless = Curry3<Delegate, Delegate, object, object>((pred, whenFalseFn, x) => {
@@ -948,7 +952,7 @@ namespace Ramda.NET
             }
 
             if (allSameType) {
-                return rv.CopyToNewArray(type);
+                return rv.ToArray<Array>(type);
             }
 
             return rv.ToArray();
@@ -998,6 +1002,32 @@ namespace Ramda.NET
 
         internal readonly static dynamic Head = Nth(0);
 
-        internal readonly static dynamic Init = Curry1<IList, IList>(list => Core.Slice(list, 0, list.Count -1));
+        internal readonly static dynamic Init = Curry1<IList, IList>(list => Core.Slice(list, 0, list.Count - 1));
+
+        internal readonly static dynamic IntersectionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => {
+            IList lookupList;
+            IList filteredList;
+            var results = new ArrayList();
+            Func<object, object, bool> containsPredicate = (a, b) => (bool)pred.Invoke(a, b);
+
+            if (list1.Count > list2.Count) {
+                lookupList = list1;
+                filteredList = list2;
+            }
+            else {
+                lookupList = list2;
+                filteredList = list1;
+            }
+
+            foreach (var item in filteredList) {
+                if (ContainsWith(containsPredicate, item, lookupList)) {
+                    results.Add(item);
+                }
+            }
+
+            return UniqWith(pred, results);
+        });
+
+        internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
     }
 }

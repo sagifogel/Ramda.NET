@@ -2,7 +2,7 @@
 
 namespace Ramda.NET
 {
-    internal class XWrap : ITransducer
+    internal class XWrap : ITransformer
     {
         private readonly Delegate f;
 

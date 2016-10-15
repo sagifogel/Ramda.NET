@@ -10,6 +10,7 @@ public class RamdaTemplate : CSharpTemplate
 	public RamdaTemplate() {
 		Generics = new List<string>();
 		Emitted = new HashSet<string>();
+		SkippedIndexedGaps = new List<int>();
 		Parameters = new List<Tuple<string, string, bool>>();
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
@@ -17,6 +18,8 @@ public class RamdaTemplate : CSharpTemplate
 	public List<string> Generics { get; set; }
 
 	private HashSet<string> Emitted { get; set; }
+
+	public List<int> SkippedIndexedGaps { get; set; }
 	
 	public bool AllGapsFunctionAlreadyExists { get; set; }
 	
@@ -147,6 +150,10 @@ public class RamdaTemplate : CSharpTemplate
 
 	private void Emit(List<Tuple<string, string, bool>> list, string name, string arguments) {
 		for (var i = 0; i < list.Count; i++)	 {
+			if (SkippedIndexedGaps.Contains(i)) {
+				continue;
+			}
+
 			string joined;
 			var shifted = list.ToList();
 			var shiftedItem = list[i];

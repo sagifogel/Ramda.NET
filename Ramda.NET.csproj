@@ -365,6 +365,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Intersperse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Into.ITransformer.cs">
+      <DependentUpon>Into.ITransformer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Into.object.cs">
+      <DependentUpon>Into.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Into.string.cs">
+      <DependentUpon>Into.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Into.IList.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Into.IList.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Is.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -821,15 +841,16 @@
       <DependentUpon>ZipWith.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
-    <Compile Include="Transducers\IReduced.cs" />
-    <Compile Include="Transducers\ReducedImpl.cs" />
-    <Compile Include="Transducers\ITransducer.cs" />
+    <Compile Include="Transformers\IReduced.cs" />
+    <Compile Include="Transformers\ReducedImpl.cs" />
+    <Compile Include="Transformers\ITransformer.cs" />
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core.cs" />
     <Compile Include="R.Tuple.cs" />
-    <Compile Include="Transducers\XWrap.cs" />
+    <Compile Include="Transformers\StepCatArray.cs" />
+    <Compile Include="Transformers\XWrap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ramda\Add.bool.tt">
@@ -1121,6 +1142,26 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Intersperse.cs</LastGenOutput>
       <LastOutputs>.\Intersperse.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Into.ITransformer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.ITransformer.cs</LastGenOutput>
+      <LastOutputs>.\Into.ITransformer.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Into.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.object.cs</LastGenOutput>
+      <LastOutputs>.\Into.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Into.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.string.cs</LastGenOutput>
+      <LastOutputs>.\Into.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Into.IList.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.IList.cs</LastGenOutput>
+      <LastOutputs>.\Into.IList - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Is.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

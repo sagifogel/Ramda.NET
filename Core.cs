@@ -90,7 +90,7 @@ namespace Ramda.NET
             }
         }
 
-        internal static LambdaN Dispatchable(LambdaN transducerFunction, Delegate fn) {
+        internal static LambdaN Dispatchable(LambdaN xf, Delegate fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Currying.Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -102,7 +102,7 @@ namespace Ramda.NET
             });
         }
 
-        internal static Lambda2 Dispatchable2(string methodName, LambdaN transducerFunction, Delegate fn) {
+        internal static Lambda2 Dispatchable2(string methodName, LambdaN xf, Delegate fn) {
             return new Lambda2((arg1, arg2) => {
                 var arguments = Currying.Arity(arg1, arg2);
 
@@ -121,10 +121,10 @@ namespace Ramda.NET
                         }
                     }
 
-                    if (arg2 is ITransducer) {
-                        var transducer = transducerFunction(arg1);
+                    if (arg2 is ITransformer) {
+                        var transformer = xf(arg1);
 
-                        return transducer(arg2);
+                        return transformer(arg2);
                     }
                 }
 

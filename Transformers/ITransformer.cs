@@ -1,6 +1,6 @@
 ﻿namespace Ramda.NET
 {
-    internal interface ITransducer
+    public interface ITransformer
     {
         object Init();
         object Result(object result);

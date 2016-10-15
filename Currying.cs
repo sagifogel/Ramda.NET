@@ -1028,6 +1028,16 @@ namespace Ramda.NET
             return UniqWith(pred, results);
         });
 
+        internal readonly static dynamic Into = Curry3<object, Func<ITransformer, ITransformer>, IList, object>((acc, xf, list) => {
+            var transformer = acc as ITransformer;
+
+            if (transformer.IsNotNull()) {
+                return Reduce(xf(transformer), transformer.Init(), list);
+            }
+
+            return Reduce(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
+        });
+
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
     }
 }

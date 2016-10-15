@@ -10,6 +10,22 @@ namespace Ramda.NET
     {
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
 
+        internal static object Clone(this object source) {
+            var type = source.GetType();
+
+            var @delegate = cache.GetOrAdd(type, () => {
+                var parameter = Expression.Parameter(type);
+                var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
+                var lambda = Expression.Lambda(
+                                    Expression.GetFuncType(new[] { type, type }),
+                                    Expression.Convert(clone, type), parameter);
+
+                return lambda.Compile();
+            });
+
+            return @delegate.DynamicInvoke(source);
+        }
+
         internal static object CloneAndAssignValue(string prop, object propValue, object obj) {
             object target = null;
             var type = obj.GetType();
@@ -81,22 +97,6 @@ namespace Ramda.NET
             }
 
             return target;
-        }
-
-        private static object Clone(this object source) {
-            var type = source.GetType();
-
-            var @delegate = cache.GetOrAdd(type, () => {
-                var parameter = Expression.Parameter(type);
-                var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
-                var lambda = Expression.Lambda(
-                                    Expression.GetFuncType(new[] { type, type }),
-                                    Expression.Convert(clone, type), parameter);
-
-                return lambda.Compile();
-            });
-
-            return @delegate.DynamicInvoke(source);
         }
     }
 }

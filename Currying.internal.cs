@@ -359,24 +359,24 @@ namespace Ramda.NET
         }
 
         internal static object Reduce(object fn, object acc, object list) {
-            ITransducer transducer = null;
+            ITransformer transformer = null;
 
             if (fn.IsFunction()) {
-                transducer = new XWrap((Delegate)fn);
+                transformer = new XWrap((Delegate)fn);
             }
 
             if (list.IsEnumerable()) {
-                return IterableReduce(transducer, acc, (IEnumerable)list);
+                return IterableReduce(transformer, acc, (IEnumerable)list);
             }
 
             if (list.WhereMember("Reduce", t => t.IsFunction())) {
-                return MethodReduce(transducer, acc, list);
+                return MethodReduce(transformer, acc, list);
             }
 
             throw new ArgumentException("Reduce: list must be array or iterable");
         }
 
-        private static object IterableReduce(ITransducer xf, object acc, IEnumerable list) {
+        private static object IterableReduce(ITransformer xf, object acc, IEnumerable list) {
             IReduced reduced;
 
             foreach (var item in list) {
@@ -392,8 +392,33 @@ namespace Ramda.NET
             return xf.Result(acc);
         }
 
-        private static object MethodReduce(ITransducer xf, object acc, dynamic obj) {
+        private static object MethodReduce(ITransformer xf, object acc, dynamic obj) {
             return xf.Result(obj.Reduce(new Func<object, object, object>(xf.Step), acc));
+        }
+
+        internal static ITransformer StepCat(object obj) {
+            Type objType;
+            var transformer = obj as ITransformer;
+
+            if (transformer.IsNotNull()) {
+                return transformer;
+            }
+
+            if (IsArrayLike(obj)) {
+                return new StepCatArray();
+            }
+
+            objType = obj.GetType();
+
+            if (objType.Equals(typeof(string))) {
+                return transformer;
+            }
+
+            if (objType.Equals(typeof(object))) {
+                return transformer;
+            }
+
+            throw new ArgumentException($"Cannot create transformer for {obj.GetType().Name}");
         }
     }
 }

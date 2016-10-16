@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using static Ramda.NET.Lambda;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 
 namespace Ramda.NET
@@ -12,9 +13,9 @@ namespace Ramda.NET
     {
         internal static Delegate Complement(Delegate fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Currying.Pad(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                return !(bool)fn.DynamicInvoke(arguments);
+                return !(bool)fn.Invoke(arguments);
             });
         }
 
@@ -58,6 +59,50 @@ namespace Ramda.NET
             }
 
             return result;
+        }
+
+        internal static IReduced ForceReduced(object x) {
+            return new ReducedImpl(x);
+        }
+
+        internal static TValue Identity<TValue>(TValue x) {
+            return x;
+        }
+
+        internal static object Map(Delegate fn, IList functor) {
+            var idx = 0;
+            var len = functor.Count;
+            var result = new object[len];
+
+            while (idx < len) {
+                result[idx] = fn.Invoke(functor[idx]);
+                idx += 1;
+            }
+
+            return result;
+        }
+
+        internal static LambdaN Pipe(Delegate f, Delegate g) {
+            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return g.Invoke(f.Invoke(arguments));
+            });
+        }
+
+        internal static IReduced Reduced(object x) {
+            var reduced = x as IReduced;
+
+            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new ReducedImpl(x);
+        }
+
+        internal static Array Of(object x) {
+            var type = x.GetType();
+            var list = type.CreateNewList<IList>();
+
+            list.Insert(0, x);
+
+            return list.ToArray<Array>();
         }
 
         internal static IList Slice(IList arguments, int from = int.MinValue, int to = int.MinValue) {
@@ -188,25 +233,12 @@ namespace Ramda.NET
             return obj.TryGetMemberInfo(prop).IsNotNull();
         }
 
-        internal static TValue Identity<TValue>(TValue x) {
-            return x;
-        }
-
         internal static object Assign(params object[] objectN) {
             return ObjectAssigner.Assign(new ExpandoObject(), objectN);
         }
 
         internal static object Assign(IList list) {
             return ObjectAssigner.Assign(new ExpandoObject(), list.Cast<object>().ToArray());
-        }
-
-        internal static Array Of(object x) {
-            var type = x.GetType();
-            var list = type.CreateNewList<IList>();
-
-            list.Insert(0, x);
-
-            return list.ToArray<Array>();
         }
     }
 }

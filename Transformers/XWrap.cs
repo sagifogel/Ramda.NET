@@ -6,7 +6,7 @@ namespace Ramda.NET
     {
         private readonly Delegate f;
 
-        public XWrap(Delegate fn) {
+        internal XWrap(Delegate fn) {
             f = fn;
         }
 

@@ -846,7 +846,13 @@
       <DependentUpon>ZipWith.tt</DependentUpon>
     </Compile>
     <Compile Include="ShallowCloner.cs" />
+    <Compile Include="Transformers\AbstractXFindLast.cs" />
+    <Compile Include="Transformers\AbstractXFind.cs" />
+    <Compile Include="Transformers\AbstractXFn.cs" />
+    <Compile Include="Transformers\AbstractXPredicate.cs" />
+    <Compile Include="Transformers\AbstractXTransform.cs" />
     <Compile Include="Transformers\IReduced.cs" />
+    <Compile Include="Transformers\ITransformerBase.cs" />
     <Compile Include="Transformers\ReducedImpl.cs" />
     <Compile Include="Transformers\ITransformer.cs" />
     <Compile Include="Placeholder.cs" />
@@ -855,6 +861,24 @@
     <Compile Include="Core.cs" />
     <Compile Include="R.Tuple.cs" />
     <Compile Include="Transformers\StepCatArray.cs" />
+    <Compile Include="Transformers\XAny.cs" />
+    <Compile Include="Transformers\XAll.cs" />
+    <Compile Include="Transformers\AbstractXAnyOrAll.cs" />
+    <Compile Include="Transformers\XAperture.cs" />
+    <Compile Include="Transformers\AbstractXAperture.cs" />
+    <Compile Include="Transformers\XDrop.cs" />
+    <Compile Include="Transformers\XDropLast.cs" />
+    <Compile Include="Transformers\XDropRepeatsWith.cs" />
+    <Compile Include="Transformers\XDropWhile.cs" />
+    <Compile Include="Transformers\XFBase.cs" />
+    <Compile Include="Transformers\XFilter.cs" />
+    <Compile Include="Transformers\XFind.cs" />
+    <Compile Include="Transformers\XFindIndex.cs" />
+    <Compile Include="Transformers\XFindLastIndex.cs" />
+    <Compile Include="Transformers\XFindLast.cs" />
+    <Compile Include="Transformers\XTake.cs" />
+    <Compile Include="Transformers\XMap.cs" />
+    <Compile Include="Transformers\XTakeWhile.cs" />
     <Compile Include="Transformers\XWrap.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -246,12 +246,6 @@ namespace Ramda.NET
             });
         }
 
-        private static IReduced ReducedInternal(object x) {
-            var reduced = x as IReduced;
-
-            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new ReducedImpl(x);
-        }
-
         private static IdentityObj IdentityInternal(object x) {
             return new IdentityObj() {
                 Value = x,

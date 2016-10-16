@@ -583,7 +583,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic ReduceRight = Curry3<Delegate, object, IList, object>((fn, acc, list) => ReduceInternal(list.Count - 1, -1, (from) => from >= 0, fn, acc, list));
 
-        internal readonly static dynamic Reduced = Curry1<object, IReduced>(ReducedInternal);
+        internal readonly static dynamic Reduced = Currying.Curry1<object, IReduced>(Core.Reduced);
 
         internal readonly static dynamic Remove = Curry3<int, int, IList, IList>((start, count, list) => {
             return Concat(Slice(list, 0, Math.Min(start, list.Count)), Slice(list, Math.Min(list.Count, start + count)));

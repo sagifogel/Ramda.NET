@@ -876,6 +876,7 @@
     <Compile Include="Transformers\XFindIndex.cs" />
     <Compile Include="Transformers\XFindLastIndex.cs" />
     <Compile Include="Transformers\XFindLast.cs" />
+    <Compile Include="Transformers\XReduceBy.cs" />
     <Compile Include="Transformers\XTake.cs" />
     <Compile Include="Transformers\XMap.cs" />
     <Compile Include="Transformers\XTakeWhile.cs" />

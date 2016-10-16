@@ -79,14 +79,12 @@ namespace Ramda.NET
                 var value = keyValue.Value;
 
                 if (transformations.TryGetValue(key, out transformation)) {
-                    var transformationType = transformation.GetType();
-
-                    if (transformationType.IsDelegate()) {
+                    if (transformation.IsDelegate()) {
                         result[key] = ((Delegate)transformation).DynamicInvoke(value);
                         continue;
                     }
                     else if (value is object) {
-                        if (!transformationType.IsDictionary()) {
+                        if (!transformation.IsDictionary()) {
                             transformation = transformation.ToMemberDictionary();
                         }
 

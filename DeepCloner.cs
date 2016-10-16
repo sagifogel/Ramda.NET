@@ -33,7 +33,7 @@ namespace Ramda.NET
 
             var type = original.GetType();
 
-            if (type.IsDelegate()) {
+            if (type.TypeIsDelegate()) {
                 return null;
             }
 
@@ -239,7 +239,7 @@ namespace Ramda.NET
             }
 
             foreach (var field in readonlyFields) {
-                if (field.FieldType.IsDelegate()) {
+                if (field.FieldType.TypeIsDelegate()) {
                     ReadonlyFieldToNullExpression(field, boxingVariable, expressions);
                 }
                 else {
@@ -252,7 +252,7 @@ namespace Ramda.NET
             }
 
             foreach (var field in writableFields) {
-                if (field.FieldType.IsDelegate()) {
+                if (field.FieldType.TypeIsDelegate()) {
                     WritableFieldToNullExpression(field, outputVariable, expressions);
                 }
                 else {

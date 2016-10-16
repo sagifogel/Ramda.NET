@@ -175,11 +175,7 @@ namespace Ramda.NET
 
             obj = arguments[length - 1];
             member = obj.TryGetMemberInfo(methodName);
-
-            if (member.IsNotNull()) {
-                memberType = member.GetType();
-                invokeFn = !memberType.IsDelegate();
-            }
+            invokeFn = member.IsNotNull() && !member.IsDelegate();
 
             if (invokeFn || obj.IsList()) {
                 return fn.Invoke(arguments);

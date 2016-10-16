@@ -23,11 +23,19 @@ namespace Ramda.NET
             return (TArg)arg;
         }
 
-        internal static bool IsDelegate(this Type type) {
+        internal static bool IsDelegate(this object target) {
+            return target.GetType().TypeIsDelegate();
+        }
+
+        internal static bool TypeIsDelegate(this Type type) {
             return typeof(Delegate).IsAssignableFrom(type);
         }
 
-        internal static bool IsDictionary(this Type type) {
+        internal static bool IsDictionary(this object target) {
+            return target.GetType().TypeIsDelegate();
+        }
+
+        internal static bool TypeIsDictionary(this Type type) {
             return typeof(IDictionary).IsAssignableFrom(type);
         }
 
@@ -60,16 +68,27 @@ namespace Ramda.NET
         }
 
         internal static object Member(this object target, string name) {
-            var member = target.TryGetMemberInfo(name);
+            var type = target.GetType();
 
-            if (member.IsNotNull()) {
-                switch (member.MemberType) {
-                    case MemberTypes.Field:
-                        return ((FieldInfo)member).GetValue(target);
-                    case MemberTypes.Property:
-                        return ((PropertyInfo)member).GetValue(target, null);
-                    default:
-                        break;
+            if (type.TypeIsDictionary()) {
+                var dictionary = target as IDictionary;
+
+                if (dictionary.Contains(name)) {
+                    return dictionary[name];
+                }
+            }
+            else {
+                var member = type.TryGetMemberInfoFromType(name);
+
+                if (member.IsNotNull()) {
+                    switch (member.MemberType) {
+                        case MemberTypes.Field:
+                            return ((FieldInfo)member).GetValue(target);
+                        case MemberTypes.Property:
+                            return ((PropertyInfo)member).GetValue(target, null);
+                        default:
+                            break;
+                    }
                 }
             }
 

@@ -231,7 +231,7 @@ namespace Ramda.NET
                     return string.Empty;
                 }
 
-                if (type.IsClass && !type.IsDelegate()) {
+                if (type.IsClass && !type.TypeIsDelegate()) {
                     x.GetFactory().Invoke();
                 }
             }
@@ -308,7 +308,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Has = Curry2<string, object, bool>(Core.Has);
 
-        internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a.IsNotNull() ? a.Equals(b) : b.IsNull());
+        internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a?.Equals(b) ?? b.IsNull());
 
         internal readonly static dynamic Identity = Curry1<object, object>(Core.Identity);
 
@@ -756,7 +756,7 @@ namespace Ramda.NET
             });
         });
 
-        internal readonly static dynamic Type = Curry1<object, string>(obj => obj.IsNull() ? "null" : obj.GetType().Name);
+        internal readonly static dynamic Type = Curry1<object, string>(obj => obj?.GetType().Name ?? "null");
 
         internal readonly static dynamic Unapply = Curry1<Delegate, object>(fn => {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
@@ -776,7 +776,7 @@ namespace Ramda.NET
                 var currentDepth = 1;
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                while (currentDepth <= depth && value.GetType().IsDelegate()) {
+                while (currentDepth <= depth && value.IsDelegate()) {
                     var @delegate = value as Delegate;
                     var length = @delegate.Arity();
 
@@ -1036,6 +1036,24 @@ namespace Ramda.NET
             }
 
             return Reduce(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
+        });
+
+        internal readonly static dynamic Invert = Curry1<object, IDictionary<string, object>>(obj => {
+            var inverted = new Dictionary<string, ArrayList>();
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var prop in obj.Keys()) {
+                var val = obj.Member(prop).ToString();
+                var list = inverted.ContainsKey(val) ? inverted[val] : inverted[val] = new ArrayList();
+
+                list.Add(prop);
+            }
+
+            inverted.Keys.ForEach(key => {
+                result[key] = inverted[key].ToArray<Array>();
+            });
+
+            return result;
         });
 
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));

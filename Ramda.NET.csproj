@@ -385,6 +385,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Into.IList.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Invert.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invert.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Is.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1162,6 +1167,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Into.IList.cs</LastGenOutput>
       <LastOutputs>.\Into.IList - Copy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Invert.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Invert.cs</LastGenOutput>
+      <LastOutputs>.\Invert.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Is.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

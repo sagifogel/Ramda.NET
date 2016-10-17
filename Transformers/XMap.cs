@@ -1,5 +1,4 @@
 ﻿using System;
-using static Ramda.NET.Core;
 
 namespace Ramda.NET
 {

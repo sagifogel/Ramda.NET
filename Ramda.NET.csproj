@@ -858,7 +858,6 @@
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core.cs" />
     <Compile Include="R.Tuple.cs" />
     <Compile Include="Transformers\StepCatArray.cs" />
     <Compile Include="Transformers\XAny.cs" />
@@ -868,6 +867,7 @@
     <Compile Include="Transformers\AbstractXAperture.cs" />
     <Compile Include="Transformers\XDrop.cs" />
     <Compile Include="Transformers\XDropLast.cs" />
+    <Compile Include="Transformers\XDropLstWhile.cs" />
     <Compile Include="Transformers\XDropRepeatsWith.cs" />
     <Compile Include="Transformers\XDropWhile.cs" />
     <Compile Include="Transformers\XFBase.cs" />

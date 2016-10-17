@@ -1,5 +1,5 @@
 ﻿using System;
-using static Ramda.NET.Core;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -16,9 +16,9 @@ namespace Ramda.NET
             object ret;
 
             i += 1;
-            ret = n == 0 ? result : this.xf.Step(result, input);
+            ret = n == 0 ? result : xf.Step(result, input);
 
-            return i >= n ? Reduced(ret) : ret;
+            return i >= n ? ReducedInternal(ret) : ret;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -10,7 +11,7 @@ namespace Ramda.NET
         }
 
         public object Result(object result) {
-            return Core.Identity((IList)result).ToArray<Array>();
+            return IdentityInternal((IList)result).ToArray<Array>();
         }
 
         public object Step(object result, object input) {

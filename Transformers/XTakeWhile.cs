@@ -1,5 +1,5 @@
 ﻿using System;
-using static Ramda.NET.Core;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -9,7 +9,7 @@ namespace Ramda.NET
         }
 
         public override object Step(object result, object input) {
-            return f(input) ? xf.Step(result, input) : Reduced(result);
+            return f(input) ? xf.Step(result, input) : ReducedInternal(result);
         }
     }
 }

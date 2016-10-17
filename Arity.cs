@@ -24,7 +24,7 @@ namespace Ramda.NET
                 i--;
             }
 
-            result = (object[])Core.Slice(arguments, 0, ++i);
+            result = (object[])SliceInternal(arguments, 0, ++i);
 
             return result.Length == 0 ? null : result;
         }

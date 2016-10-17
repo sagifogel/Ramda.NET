@@ -1,5 +1,5 @@
 ﻿using System;
-using static Ramda.NET.Core;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -28,7 +28,7 @@ namespace Ramda.NET
         public object Step(object result, object input) {
             if (stepPredicate(f.Invoke(input))) {
                 allOrAny = !allOrAny;
-                result = Reduced(xf.Step(result, allOrAny));
+                result = ReducedInternal(xf.Step(result, allOrAny));
             }
 
             return result;

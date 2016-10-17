@@ -1,4 +1,5 @@
 ﻿using System;
+using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -12,7 +13,7 @@ namespace Ramda.NET
 
         public override object Result(object result) {
             if (!found) {
-                result = this.xf.Step(result, defaultValue);
+                result = xf.Step(result, defaultValue);
             }
 
             return base.Result(result);
@@ -21,7 +22,7 @@ namespace Ramda.NET
         public override object Step(object result, object input) {
             if (f(input)) {
                 found = true;
-                result = Core.Reduced(this.xf.Step(result, GetStepInputValue(input)));
+                result = ReducedInternal(xf.Step(result, GetStepInputValue(input)));
             }
 
             return result;

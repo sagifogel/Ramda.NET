@@ -2,13 +2,13 @@
 using System.Linq;
 using Sys = System;
 using System.Dynamic;
+using System.Reflection;
 using System.Collections;
 using static Ramda.NET.R;
+using System.Threading.Tasks;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using Object = Ramda.NET.ReflectionExtensions;
-using System.Threading.Tasks;
-using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -485,14 +485,6 @@ namespace Ramda.NET
             return rv.ToArray();
         }
 
-        private static object Member(object target, dynamic member) {
-            if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
-                return ((Array)target).Member((int)member);
-            }
-
-            return target.Member((string)member);
-        }
-
         private static bool IsPlaceholder(object param) {
             return param != null && R.__.Equals(param);
         }
@@ -577,7 +569,6 @@ namespace Ramda.NET
             }
 
             typeA = a.GetType();
-            typeB = b.GetType();
             bothEnumerables = a.IsEnumerable() && b.IsEnumerable();
 
             if (!typeA.Equals(typeB) && !bothEnumerables) {

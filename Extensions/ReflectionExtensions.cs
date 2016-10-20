@@ -14,6 +14,7 @@ namespace Ramda.NET
         private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+        private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
 
         internal static TArg CastTo<TArg>(this object arg) {
             if (arg != null && typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
@@ -60,11 +61,23 @@ namespace Ramda.NET
         }
 
         internal static bool IsNull(this object target) {
-            return ReferenceEquals(target, null);
+            if (Equals(target, null)) {
+                return true;
+            }
+
+            return target.Equals(null);
         }
 
         internal static bool IsNotNull(this object target) {
             return !target.IsNull();
+        }
+
+        internal static object Member(object target, dynamic member) {
+            if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
+                return ((Array)target).Member((int)member);
+            }
+
+            return target.Member((string)member);
         }
 
         internal static object Member(this object target, string name) {
@@ -75,6 +88,16 @@ namespace Ramda.NET
 
                 if (dictionary.Contains(name)) {
                     return dictionary[name];
+                }
+            }
+            else if (type.IsArray) {
+                int index;
+                var arr = (IList)target;
+
+                if (int.TryParse(name, out index)) {
+                    if (arr.Count > index) {
+                        return arr[index];
+                    }
                 }
             }
             else {
@@ -153,6 +176,10 @@ namespace Ramda.NET
                 return (Dictionary<string, object>)target;
             }
 
+            if (type.IsArray) {
+                return ((IList)target).ToDictionary((item, i) => i.ToString(), (item, i) => item);
+            }
+
             return type.GetProperties(bindingFlags)
                        .Cast<MemberInfo>()
                        .Concat(type.GetFields(bindingFlags))
@@ -225,7 +252,7 @@ namespace Ramda.NET
 
         internal static ConstructorInfo GetConstructor(this object value, out IEnumerable<Type> parameters) {
             var type = value.GetType();
-            var ctor = type.GetConstructor(EmptyTypes);
+            var ctor = type.GetConstructor(ctorBindingFlags, null, EmptyTypes, null);
 
             parameters = new List<Type>();
 
@@ -233,7 +260,7 @@ namespace Ramda.NET
                 return ctor;
             }
 
-            ctor = type.GetConstructors()[0];
+            ctor = type.GetConstructors(ctorBindingFlags)[0];
             parameters = ctor.GetParameters().Select(param => param.ParameterType);
 
             return ctor;

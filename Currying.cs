@@ -230,8 +230,16 @@ namespace Ramda.NET
                     return string.Empty;
                 }
 
+                if (x.IsEnumerable()) {
+                    return new object[0];
+                }
+
                 if (type.IsClass && !type.TypeIsDelegate()) {
-                    x.GetFactory().Invoke();
+                    if (type.IsAnonymousType()) {
+                        return new { };
+                    }
+
+                    return x.GetFactory().Invoke();
                 }
             }
 
@@ -409,7 +417,7 @@ namespace Ramda.NET
 
             foreach (var pair in l.ToMemberDictionary()) {
                 if (HasInternal(pair.Key, l)) {
-                    result[pair.Key] = Has(pair, r) ? fn.DynamicInvoke(pair, l.Member(pair.Key), r.Member(pair.Key)) : l.Member(pair.Key);
+                    result[pair.Key] = Has(pair, r) ? fn.Invoke(pair, l.Member(pair.Key), r.Member(pair.Key)) : l.Member(pair.Key);
                 }
             }
 
@@ -542,13 +550,13 @@ namespace Ramda.NET
 
         internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => Concat(new[] { el }, list));
 
-        internal readonly static dynamic Prop = Curry2<dynamic, object, object>((p, obj) => Member(obj, p));
+        internal readonly static dynamic Prop = Curry2<dynamic, object, object>((p, obj) => Object.Member(obj, p));
 
-        internal readonly static dynamic PropIs = Curry3<Type, dynamic, object, bool>((type, name, obj) => Is(type, Member(obj, name)));
+        internal readonly static dynamic PropIs = Curry3<Type, dynamic, object, bool>((type, name, obj) => Is(type, Object.Member(obj, name)));
 
-        internal readonly static dynamic PropOr = Curry3<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Member(obj, p) ?? val : val);
+        internal readonly static dynamic PropOr = Curry3<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Object.Member(obj, p) ?? val : val);
 
-        internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.DynamicInvoke(Member(obj, name)));
+        internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.Invoke((object)Object.Member(obj, name)));
 
         internal readonly static dynamic Props = Curry2<IEnumerable<dynamic>, object, object>((ps, obj) => {
             var result = new List<object>();
@@ -967,7 +975,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic DropLastWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropLastWhile", (Delegate)XDropLastWhile, new Func<Delegate, IList, IList>(DropLastWhileInternal))));
 
-        internal new readonly static dynamic Equals = Curry2<object, object, bool>((a, b) => EqualsInternal(a, b));
+        internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
 
         internal readonly static dynamic Filter = Curry2(new Func<object, object, dynamic>(Dispatchable2("Filter", (Delegate)XFilter, new Func<Delegate, object, object>((pred, filterable) => {
             return !filterable.IsEnumerable() ? Reduce(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
@@ -1051,6 +1059,22 @@ namespace Ramda.NET
             return result;
         });
 
+        internal readonly static dynamic InvertObj = Curry1<object, IDictionary<string, object>>(obj => {
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var prop in obj.Keys()) {
+                var val = obj.Member(prop).ToString();
+
+                result[val] = prop;
+            }
+
+            return result;
+        });
+
+        internal readonly static dynamic IsEmpty = Curry1<object, bool>(x => x.IsNotNull() && Equals(x, Empty(x)));
+
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
+
+        internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
     }
 }

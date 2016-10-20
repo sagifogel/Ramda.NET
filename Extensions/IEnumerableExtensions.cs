@@ -7,6 +7,24 @@ namespace Ramda.NET
 {
     internal static class IEnumerableExtensions
     {
+        internal static IEnumerable<TResult> Select<TResult>(IList source, Func<object, TResult> selector) {
+            foreach (var tSource in source) {
+                yield return selector(tSource);
+            }
+        }
+
+        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement>(this IList source, Func<object, int, TKey> keySelector, Func<object, int, TElement> elementSelector) {
+            int num = -1;
+            Dictionary<TKey, TElement> tKeys = new Dictionary<TKey, TElement>();
+
+            foreach (var tSource in source) {
+                num++;
+                tKeys.Add(keySelector(tSource, num), elementSelector(tSource, num));
+            }
+
+            return tKeys;
+        }
+
         internal static void ForEach<TSource>(this IEnumerable<TSource> source, Action<TSource> action) {
             foreach (var item in source) {
                 action(item);

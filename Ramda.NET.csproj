@@ -47,6 +47,8 @@
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="IdentityObj.cs" />
     <Compile Include="MemberComparer.cs" />
+    <Compile Include="Maybe.cs" />
+    <Compile Include="Nothing.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
     <Compile Include="Ramda\Add.bool.cs">
@@ -390,6 +392,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Invert.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\InvertObj.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvertObj.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Is.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -399,6 +406,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IsArrayLike.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\IsEmpty.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsEmpty.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\IsNil.cs">
       <AutoGen>True</AutoGen>
@@ -1198,6 +1210,11 @@
       <LastGenOutput>Invert.cs</LastGenOutput>
       <LastOutputs>.\Invert.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\InvertObj.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>InvertObj.cs</LastGenOutput>
+      <LastOutputs>.\InvertObj.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Is.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Is.cs</LastGenOutput>
@@ -1207,6 +1224,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsArrayLike.cs</LastGenOutput>
       <LastOutputs>.\IsArrayLike.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IsEmpty.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IsEmpty.cs</LastGenOutput>
+      <LastOutputs>.\IsEmpty.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IsNil.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

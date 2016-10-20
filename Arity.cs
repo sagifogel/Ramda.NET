@@ -17,7 +17,7 @@ namespace Ramda.NET
             int i = arguments.Length - 1;
 
             while (i >= 0) {
-                if (arguments[i].IsNotNull()) {
+                if (!object.Equals(arguments[i], null)) {
                     break;
                 }
 

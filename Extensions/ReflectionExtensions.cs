@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static Ramda.NET.Currying;
+using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -24,20 +25,30 @@ namespace Ramda.NET
             return (TArg)arg;
         }
 
-        internal static bool IsDelegate(this object target) {
-            return target.GetType().TypeIsDelegate();
-        }
-
-        internal static bool TypeIsDelegate(this Type type) {
+        internal static bool IsDelegate(this Type type) {
             return typeof(Delegate).IsAssignableFrom(type);
         }
 
         internal static bool IsDictionary(this object target) {
-            return target.GetType().TypeIsDelegate();
+            return target.GetType().TypeIsDictionary();
+        }
+
+        internal static bool IsExpandoObject(this Type type) {
+            return type.Equals(typeof(ExpandoObject));
         }
 
         internal static bool TypeIsDictionary(this Type type) {
-            return typeof(IDictionary).IsAssignableFrom(type);
+            if (typeof(IDictionary).IsAssignableFrom(type) || type.IsExpandoObject()) {
+                return true;
+            }
+
+            if (type.IsGenericParameter) {
+                var genericTypeDef = type.GetGenericTypeDefinition();
+
+                return genericTypeDef.Equals(typeof(IDictionary<,>));
+            }
+
+            return false;
         }
 
         internal static bool IsDictionaryOf<TKey, TValue>(this Type type) {
@@ -156,7 +167,11 @@ namespace Ramda.NET
         }
 
         internal static bool HasMember(this object target, string name) {
-            return target.TryGetMemberInfo(name).IsNotNull();
+            if (target.IsDictionary()) {
+                return ((IDictionary)target).Contains(name);
+            }
+
+            return target.Member(name).IsNotNull();
         }
 
         internal static bool WhereMember(this object target, string name, Func<Type, bool> predicate) {

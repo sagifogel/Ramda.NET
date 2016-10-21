@@ -66,6 +66,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Clone.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Concat.string.cs">
+      <DependentUpon>Concat.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Concat.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Concat.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Curry.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,6 +106,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
+    <Content Include="Ramda\Concat.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Concat.string.cs</LastGenOutput>
+      <LastOutputs>.\Concat.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Concat.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Concat.cs</LastGenOutput>
+      <LastOutputs>.\Concat.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\EqBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EqBy.cs</LastGenOutput>
@@ -422,6 +442,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Keys.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Last.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Last.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\LastIndexOf.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LastIndexOf.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Length.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -447,6 +477,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lt.int.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Map.object.cs">
+      <DependentUpon>Map.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Map.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Map.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\MapAccumRight.cs">
       <DependentUpon>MapAccumRight.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -456,6 +496,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MapAccum.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MapObjIndexed.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapObjIndexed.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Match.cs">
       <AutoGen>True</AutoGen>
@@ -471,6 +516,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Max.char.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\MergeWith.cs">
+      <DependentUpon>MergeWith.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\MergeWithKey.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergeWithKey.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\MinBy.cs">
       <DependentUpon>MinBy.tt</DependentUpon>
@@ -596,6 +651,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Pair.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Partial.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PartialRight.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PartialRight.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Path.cs">
       <AutoGen>True</AutoGen>
@@ -1240,6 +1305,16 @@
       <LastGenOutput>Keys.cs</LastGenOutput>
       <LastOutputs>.\Keys.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Last.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Last.cs</LastGenOutput>
+      <LastOutputs>.\Last.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\LastIndexOf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LastIndexOf.cs</LastGenOutput>
+      <LastOutputs>.\LastIndexOf.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Length.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Length.cs</LastGenOutput>
@@ -1265,6 +1340,16 @@
       <LastGenOutput>Lt.int.cs</LastGenOutput>
       <LastOutputs>.\Lt.int.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Map.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Map.object.cs</LastGenOutput>
+      <LastOutputs>.\Map.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Map.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Map.cs</LastGenOutput>
+      <LastOutputs>.\Map.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\MapAccumRight.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MapAccumRight.cs</LastGenOutput>
@@ -1275,6 +1360,11 @@
       <LastGenOutput>MapAccum.cs</LastGenOutput>
       <LastOutputs>.\MapAccum.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\MapObjIndexed.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapObjIndexed.cs</LastGenOutput>
+      <LastOutputs>.\MapObjIndexed.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Match.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Match.cs</LastGenOutput>
@@ -1284,6 +1374,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MathMod.cs</LastGenOutput>
       <LastOutputs>.\MathMod.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MergeWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MergeWith.cs</LastGenOutput>
+      <LastOutputs>.\MergeWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\MergeWithKey.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MergeWithKey.cs</LastGenOutput>
+      <LastOutputs>.\MergeWithKey.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MinBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1414,6 +1514,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pair.cs</LastGenOutput>
       <LastOutputs>.\Pair.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Partial.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partial.cs</LastGenOutput>
+      <LastOutputs>.\Partial.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PartialRight.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PartialRight.cs</LastGenOutput>
+      <LastOutputs>.\PartialRight.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Path.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

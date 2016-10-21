@@ -139,8 +139,16 @@ namespace Ramda.NET
             return Currying.Filter(pred, filterable);
         }
 
+        public static dynamic Head(string list) {
+            return Currying.Head(list.ToCharArray());
+        }
+
         public static dynamic Init(string list) {
             return Currying.Init(list.ToCharArray());
+        }
+
+        public static dynamic Last(string list) {
+            return Currying.Last(list.ToCharArray());
         }
     }
 }

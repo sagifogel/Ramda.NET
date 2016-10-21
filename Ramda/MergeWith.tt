@@ -1,0 +1,14 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TArg1");
+	template.Generics.Add("TArg2");
+	template.Generics.Add("TResult");
+	template.Parameters.Add(Tuple.Create("Func<string, TArg1, TArg2, TResult>", "fn", true));	
+	template.Parameters.Add(Tuple.Create("TArg1", "l", false));
+	template.Parameters.Add(Tuple.Create("TArg2", "r", false));
+	template.Render();
+#>

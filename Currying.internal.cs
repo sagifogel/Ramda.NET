@@ -22,7 +22,7 @@ namespace Ramda.NET
             });
         }
 
-        internal static IList Concat(IList set1, IList set2 = null) {
+        internal static IList ConcatInternal(IList set1, IList set2 = null) {
             var list1ElemType = set1.GetElementType();
             var list2ElemType = set2?.GetElementType() ?? list1ElemType;
             var result = list1ElemType.Equals(list2ElemType) ? set1.CreateNewList() : new List<object>();
@@ -67,12 +67,27 @@ namespace Ramda.NET
         private static IReduced ForceReduced(object x) => new ReducedImpl(x);
 
         private static bool HasInternal(string prop, object obj) {
+            if (obj.IsDictionary()) {
+                var dictionary = obj as IDictionary;
+                IDictionary<string, object> expandoDictionary;
+
+                if (dictionary.IsNotNull()) {
+                    return dictionary.Contains(prop);
+                }
+
+                expandoDictionary = obj as IDictionary<string, object>;
+
+                if (expandoDictionary.IsNotNull()) {
+                    return expandoDictionary.ContainsKey(prop);
+                }
+            }
+
             return obj.TryGetMemberInfo(prop).IsNotNull();
         }
 
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
-        private static object Map(Delegate fn, IList functor) {
+        private static object MapInternal(Delegate fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
             var result = new object[len];
@@ -199,7 +214,7 @@ namespace Ramda.NET
 
             obj = arguments[length - 1];
             member = obj.TryGetMemberInfo(methodName);
-            invokeFn = member.IsNotNull() && !member.IsDelegate();
+            invokeFn = member.IsNotNull() && !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
                 return fn.Invoke(arguments);
@@ -363,7 +378,7 @@ namespace Ramda.NET
                 var value = keyValue.Value;
 
                 if (transformations.TryGetValue(key, out transformation)) {
-                    if (transformation.IsDelegate()) {
+                    if (transformation.IsFunction()) {
                         result[key] = ((Delegate)transformation).Invoke(value);
                         continue;
                     }
@@ -541,12 +556,13 @@ namespace Ramda.NET
             return identity;
         }
 
-        private static Delegate CreatePartialApplicator(Func<IList, IList, IList> concat) {
-            return Curry2<Delegate, object[], Delegate>((fn, args) => {
-                return Arity(Math.Max(0, fn.Arity() - args.Length), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+        private static Delegate CreatePartialApplicator(Delegate concat) {
+            return Curry2<Delegate, IList, Delegate>((fn, args) => {
+                return Arity(Math.Max(0, fn.Arity() - args.Count), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var concatedArgs = (IList)concat.Invoke(args, arguments);
 
-                    return fn.Invoke(concat(args, arguments));
+                    return fn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
                 }));
             });
         }

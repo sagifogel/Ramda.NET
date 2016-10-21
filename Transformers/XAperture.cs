@@ -12,7 +12,7 @@ namespace Ramda.NET
             object copy;
 
             Store(input);
-            copy = Concat(SliceInternal(acc, pos), SliceInternal(acc, 0, pos));
+            copy = ConcatInternal(SliceInternal(acc, pos), SliceInternal(acc, 0, pos));
 
             return full ? xf.Step(result, copy) : result;
         }

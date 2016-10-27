@@ -667,6 +667,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Path.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\PathEq.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PathEq.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\PathOr.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1529,6 +1534,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Path.cs</LastGenOutput>
       <LastOutputs>.\Path.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PathEq.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PathEq.cs</LastGenOutput>
+      <LastOutputs>.\PathEq.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PathOr.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

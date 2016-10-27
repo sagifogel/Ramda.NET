@@ -1133,6 +1133,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(ConcatInternal)));
 
+        internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
+
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));

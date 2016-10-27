@@ -223,46 +223,46 @@ namespace Ramda.NET
             return ((Delegate)member).DynamicInvoke(obj, SliceInternal(arguments, 0, length - 1));
         }
 
-        private static LambdaN Dispatchable(LambdaN xf, Delegate fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Currying.Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
-                if (arguments.Length != 1) {
-                    return fn.DynamicInvoke(new object[0]);
-                }
-
-                return fn.DynamicInvoke(arguments[0]);
-            });
-        }
-
         private static Lambda2 Dispatchable2(string methodName, Delegate xf, Delegate fn) {
             return new Lambda2((arg1, arg2) => {
                 var arguments = Currying.Arity(arg1, arg2);
 
-                if (arguments.Length == 0) {
-                    return fn.DynamicInvoke(new object[0]);
-                }
-
-                if (!arg2.GetType().IsArray) {
-                    var members = arg2.GetType().GetMember(methodName);
-
-                    if (members.Length == 1) {
-                        var member = members[0];
-
-                        if (member.MemberType == MemberTypes.Method) {
-                            return ((MethodInfo)member).Invoke(arg2, new[] { arg1 });
-                        }
-                    }
-
-                    if (arg2 is ITransformer) {
-                        var transformer = (dynamic)xf.Invoke(arg1);
-
-                        return transformer(arg2);
-                    }
-                }
-
-                return fn.Invoke(arg1, arg2);
+                return Dispatchable(methodName, xf, fn, arguments);
             });
+        }
+
+        private static Func<object, object, object,object, object> Dispatchable4(string methodName, Delegate xf, Delegate fn) {
+            return new Func<object, object, object, object, object>((arg1, arg2, arg3, arg4) => {
+                var arguments = Currying.Arity(arg1, arg2, arg3, arg4);
+
+                return Dispatchable(methodName, xf, fn, arguments);
+            });
+        }
+
+        private static object Dispatchable(string methodName, Delegate xf, Delegate fn, params object[] arguments) {
+            object obj;
+
+            if (arguments.Length == 0) {
+                return fn.Invoke(new object[0]);
+            }
+
+            obj = arguments[arguments.Length - 1];
+            if (!obj.IsArray()) {
+                var args = (object[])SliceInternal(arguments, 0, arguments.Length - 1);
+                var member = (obj.GetMemberWhen<MethodInfo>(methodName, type => type.IsDelegate()));
+
+                if (member.IsNotNull()) {
+                    return member.Invoke(obj, args);
+                }
+
+                if (obj is ITransformer) {
+                    var transformer = (dynamic)xf.Invoke(args);
+
+                    return transformer(obj);
+                }
+            }
+
+            return fn.Invoke(arguments);
         }
 
         private static IList DropLastWhileInternal(Delegate pred, IList list) {
@@ -415,7 +415,7 @@ namespace Ramda.NET
 
         private static bool AllOrAny(Delegate fn, IList list, bool returnValue) {
             foreach (var item in list) {
-                if ((bool)fn.DynamicInvoke(item) == returnValue) {
+                if ((bool)fn.Invoke(item) == returnValue) {
                     return returnValue;
                 }
             }
@@ -437,17 +437,6 @@ namespace Ramda.NET
             }
 
             return result;
-        }
-
-        private static object ReduceInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, object acc, IList list) {
-            var idx = from;
-
-            while (loopPredicate(idx)) {
-                acc = fn.DynamicInvoke(acc, list[idx]);
-                idx += indexerAcc;
-            }
-
-            return acc;
         }
 
         private static IList SortInternal(IList list, IComparer comparer) {
@@ -572,9 +561,10 @@ namespace Ramda.NET
         }
 
         private static bool EqualsInternal(object a, object b) {
-            bool bothEnumerables;
             Type typeA;
+            bool bothEnumerables;
             Type typeB = b.GetType();
+            var typeofString = typeof(string);
 
             if (Identical(a, b)) {
                 return true;
@@ -585,7 +575,7 @@ namespace Ramda.NET
             }
 
             typeA = a.GetType();
-            bothEnumerables = a.IsEnumerable() && b.IsEnumerable();
+            bothEnumerables = a.IsEnumerable() && !typeA.Equals(typeofString) && b.IsEnumerable() && !typeA.Equals(typeofString);
 
             if (!typeA.Equals(typeB) && !bothEnumerables) {
                 var bothAnonymous = a.IsAnonymousType() && b.IsAnonymousType();
@@ -631,7 +621,7 @@ namespace Ramda.NET
             return result.ToArray<IList>();
         }
 
-        private static object Reduce(object fn, object acc, object list) {
+        private static object ReduceInternal(object fn, object acc, object list) {
             ITransformer transformer = null;
 
             if (fn.IsFunction()) {
@@ -642,7 +632,7 @@ namespace Ramda.NET
                 return IterableReduce(transformer, acc, (IEnumerable)list);
             }
 
-            if (list.WhereMember("Reduce", t => t.IsFunction())) {
+            if (list.WhenMember("Reduce", t => t.IsFunction())) {
                 return MethodReduce(transformer, acc, list);
             }
 

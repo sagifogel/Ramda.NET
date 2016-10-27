@@ -126,7 +126,7 @@ namespace Ramda.NET
                 }
             }
 
-            return null;
+            return R.Null;
         }
 
         internal static object Member(this Array target, int index) {
@@ -174,10 +174,20 @@ namespace Ramda.NET
             return target.Member(name).IsNotNull();
         }
 
-        internal static bool WhereMember(this object target, string name, Func<Type, bool> predicate) {
+        internal static bool WhenMember(this object target, string name, Func<Type, bool> predicate) {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
             return member.IsNotNull() && predicate(member.ReflectedType);
+        }
+
+        internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<Type, bool> predicate) where TMemberInfo : MemberInfo {
+            var member = target.GetType().TryGetMemberInfoFromType(name);
+
+            if (member.IsNotNull() && predicate(member.ReflectedType)) {
+                return (TMemberInfo)member;
+            }
+
+            return null;
         }
 
         internal static bool TypeHasMember(this Type type, string name) {

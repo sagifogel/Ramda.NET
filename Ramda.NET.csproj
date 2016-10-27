@@ -697,15 +697,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PickBy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Pluck.string.cs">
+      <DependentUpon>Pluck.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Pluck.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pluck.int.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Prepend.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Prepend.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Project.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Project.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Prop.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Prop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\PropEq.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropEq.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\PropIs.cs">
       <AutoGen>True</AutoGen>
@@ -731,6 +751,16 @@
       <DependentUpon>Range.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Reduce.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reduce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ReduceBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReduceBy.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Reduced.cs">
       <AutoGen>True</AutoGen>
@@ -1565,15 +1595,35 @@
       <LastGenOutput>PickBy.cs</LastGenOutput>
       <LastOutputs>.\PickBy.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Pluck.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pluck.string.cs</LastGenOutput>
+      <LastOutputs>.\Pluck.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Pluck.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pluck.int.cs</LastGenOutput>
+      <LastOutputs>.\Pluck.int.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Prepend.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Prepend.cs</LastGenOutput>
       <LastOutputs>.\Prepend.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Project.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Project.cs</LastGenOutput>
+      <LastOutputs>.\Project.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Prop.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Prop.cs</LastGenOutput>
       <LastOutputs>.\Prop.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PropEq.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropEq.cs</LastGenOutput>
+      <LastOutputs>.\PropEq.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PropIs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1600,6 +1650,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Range.cs</LastGenOutput>
       <LastOutputs>.\Range.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Reduce.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Reduce.cs</LastGenOutput>
+      <LastOutputs>.\Reduce.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ReduceBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ReduceBy.cs</LastGenOutput>
+      <LastOutputs>.\ReduceBy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Reduced.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

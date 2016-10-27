@@ -584,7 +584,16 @@ namespace Ramda.NET
             return Enumerable.Range(start, count).ToArray();
         });
 
-        internal readonly static dynamic ReduceRight = Curry3<Delegate, object, IList, object>((fn, acc, list) => ReduceInternal(list.Count - 1, -1, (from) => from >= 0, fn, acc, list));
+        internal readonly static dynamic ReduceRight = Curry3<Delegate, object, IList, object>((fn, acc, list) => {
+            var idx = list.Count - 1;
+
+            while (idx >= 0) {
+                acc = fn.Invoke(acc, list[idx]);
+                idx -= 1;
+            }
+
+            return acc;
+        });
 
         internal readonly static dynamic Reduced = Currying.Curry1<object, IReduced>(ReducedInternal);
 
@@ -852,7 +861,7 @@ namespace Ramda.NET
                     idx += 1;
                 }
 
-                return fn.Invoke((object[])ConcatInternal(arguments, SliceInternal(arguments, length)));
+                return fn.Invoke((object[])ConcatInternal(args, SliceInternal(arguments, length)));
             }));
         });
 
@@ -978,7 +987,7 @@ namespace Ramda.NET
         internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
 
         internal readonly static dynamic Filter = Curry2(new Func<object, object, dynamic>(Dispatchable2("Filter", (Delegate)XFilter, new Func<Delegate, object, object>((pred, filterable) => {
-            return !filterable.IsEnumerable() ? Reduce(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
+            return !filterable.IsEnumerable() ? ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
                 var value = filterable.Member(key);
 
                 if ((bool)pred.Invoke(value)) {
@@ -1035,10 +1044,10 @@ namespace Ramda.NET
             var transformer = acc as ITransformer;
 
             if (transformer.IsNotNull()) {
-                return Reduce(xf(transformer), transformer.Init(), list);
+                return ReduceInternal(xf(transformer), transformer.Init(), list);
             }
 
-            return Reduce(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
+            return ReduceInternal(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
         });
 
         internal readonly static dynamic Invert = Curry1<object, IDictionary<string, object>>(obj => {
@@ -1076,7 +1085,7 @@ namespace Ramda.NET
         internal readonly static dynamic Last = Nth(-1);
 
         internal readonly static dynamic LastIndexOf = Curry2<object, IList, int>((target, xs) => {
-            if (!xs.IsArray() && xs.WhereMember("LastIndexOf", m => m.IsFunction())) {
+            if (!xs.IsArray() && xs.WhenMember("LastIndexOf", m => m.IsFunction())) {
                 return ((dynamic)xs).LastIndexOf(target);
             }
             else {
@@ -1112,14 +1121,14 @@ namespace Ramda.NET
                 return MapInternal(fn, listFunctor);
             }
 
-            return Reduce(new Func<IDictionary<string, object>, string, object>((acc, key) => {
+            return ReduceInternal(new Func<IDictionary<string, object>, string, object>((acc, key) => {
                 acc[key] = fn.Invoke(functor.Member(key));
                 return acc;
             }), new ExpandoObject(), functor.Keys());
         }))));
 
         internal readonly static dynamic MapObjIndexed = Curry2<Delegate, object, object>((fn, obj) => {
-            return Reduce(new Func<IDictionary<string, object>, string, object>((acc, key) => {
+            return ReduceInternal(new Func<IDictionary<string, object>, string, object>((acc, key) => {
                 acc[key] = fn.Invoke(obj.Member(key), key, obj);
                 return acc;
             }), new ExpandoObject(), obj.Keys());
@@ -1136,6 +1145,24 @@ namespace Ramda.NET
         internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
 
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
+
+        internal readonly static dynamic Pluck = Curry2<object, IList, IList>((p, list) => Map(Prop(p), list));
+
+        internal readonly static dynamic Project = UseWith(new Func<Delegate, IList, object>(MapInternal), new[] { (Delegate)PickAll, (Delegate)Identity });
+
+        internal readonly static dynamic PropEq = Curry3<string, object, object, bool>((name, val, obj) => Equals(val, obj.Member(name)));
+
+        internal readonly static dynamic Reduce = Curry3<object, object, object, object>(ReduceInternal);
+
+        internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", (Delegate)XReduceBy, new Func<Delegate, object, Delegate, IList, object>((valueFn, valueAcc, keyFn, list) => {
+            return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
+                var key = (string)keyFn.Invoke(elt);
+
+                acc[key] = valueFn.Invoke(acc.ContainsKey(key) ? acc[key] : valueAcc, elt);
+
+                return acc;
+            }), new ExpandoObject(), list);
+        })));
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
 

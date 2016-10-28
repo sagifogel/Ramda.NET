@@ -105,7 +105,7 @@ namespace Ramda.NET
             return Arity(length, CurryNInternal(length, new object[0], fn));
         });
 
-        internal readonly static dynamic Add = Curry2<double, double, double>((arg1, arg2) => arg1 + arg2);
+        internal readonly static dynamic Add = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 + arg2);
 
         public readonly static dynamic Adjust = Curry3<Delegate, int, IList, IList>((fn, idx, list) => {
             var start = 0;
@@ -713,11 +713,11 @@ namespace Ramda.NET
             var list = new object[n];
 
             while (idx < n) {
-                list[idx] = fn.DynamicInvoke(idx);
+                list[idx] = fn.Invoke(idx);
                 idx += 1;
             }
 
-            return list;
+            return list.ToArray<Array>();
         });
 
         internal readonly static dynamic ToPairs = Curry1<object, object[]>((obj) => {
@@ -1163,6 +1163,26 @@ namespace Ramda.NET
                 return acc;
             }), new ExpandoObject(), list);
         })));
+
+        internal readonly static dynamic ReduceWhile = CurryN(4, new Func<Delegate, Delegate, object, IList, object>((pred, fn, a, list) => {
+            return ReduceInternal(new Func<object, object, object>((acc, x) => {
+                return (bool)pred.Invoke(acc, x) ? fn.Invoke(acc, x) : ReducedInternal(acc);
+            }), a, list);
+        }));
+
+        internal readonly static dynamic Reject = Curry2<Delegate, object, object>((pred, filterable) => {
+            return Filter(Complement(pred), filterable);
+        });
+
+        internal readonly static dynamic Repeat = Curry2<object, int, IList>((value, n) => Times(Always(value), n));
+
+        internal readonly static dynamic Sum = Reduce(Add, 0);
+
+        internal readonly static dynamic TakeLast = Curry2<int, IList, IList>((n, xs) => Drop(n >= 0 ? xs.Count - n : 0, xs));
+
+        internal readonly static dynamic Transduce = CurryN(4, new Func<Delegate, object, object, object, object>((xf, fn, acc, list) => {
+            return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((Delegate)fn) : fn), acc, list);
+        }));
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
 

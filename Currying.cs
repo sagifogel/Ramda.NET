@@ -1190,19 +1190,33 @@ namespace Ramda.NET
 
         internal readonly static dynamic WhereEq = Curry2<object, object, bool>((spec, testObj) => Where(Map(Equals, spec), testObj));
 
-        internal readonly static dynamic AllPass = Curry1<IList, Delegate>(preds => {
-            return CurryN(Reduce(Max, 0, Pluck("Length", preds)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+        internal readonly static dynamic AllPass = Curry1<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, false)));
 
-                foreach (Delegate pred in preds) {
-                    if (!(bool)pred.Invoke(arguments)) {
-                        return false;
-                    }
+        internal readonly static dynamic AnyPass = Curry1<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, true)));
 
-                }
+        internal readonly static dynamic Ap = Curry2<object, object, object>((applicative, fn) => {
+            Delegate applicativeFn = null;
+            var ap = applicative.Member("Ap");
 
-                return true;
-            }));
+            if (ap.IsNotNull()) {
+                applicativeFn = (Delegate)ap;
+
+                return applicativeFn.Invoke(fn);
+            }
+
+            if (applicative.IsFunction()) {
+                var @delegete = (Delegate)fn;
+
+                applicativeFn = (Delegate)applicative;
+
+                return new Func<object, object>((object x) => {
+                    var result = (Delegate)applicativeFn.Invoke(x);
+
+                    return result.Invoke(@delegete.Invoke(x));
+                });
+            }
+
+            return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => ConcatInternal(acc, Map(f, fn))), new object[0], applicative);
         });
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));

@@ -162,5 +162,13 @@ namespace Ramda.NET
         public static dynamic AllPass(IList<dynamic> preds) {
             return Currying.AllPass(preds);
         }
+
+        public static dynamic AnyPass(IList<dynamic> preds) {
+            return Currying.AnyPass(preds);
+        }
+
+        public static dynamic Ap(dynamic fns, dynamic vs) {
+            return Currying.Ap(fns, vs);
+        }
     }
 }

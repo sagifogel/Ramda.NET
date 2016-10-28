@@ -56,15 +56,40 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Ramda\AnyPass.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AnyPass.cs</LastGenOutput>
+      <LastOutputs>.\AnyPass.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\AllPass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AllPass1.cs</LastGenOutput>
       <LastOutputs>.\AllPass1.cs</LastOutputs>
     </Content>
+    <Compile Include="Ramda\AnyPass.cs">
+      <DependentUpon>AnyPass.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\AllPass1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AllPass.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Ap.fn.cs">
+      <DependentUpon>Ap.fn.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Ap.dynamic.cs">
+      <DependentUpon>Ap.dynamic.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Ap.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ap.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Apply.cs">
       <AutoGen>True</AutoGen>
@@ -116,6 +141,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
+    <Content Include="Ramda\Ap.fn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ap.fn.cs</LastGenOutput>
+      <LastOutputs>.\Ap.fn.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Ap.dynamic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ap.dynamic.cs</LastGenOutput>
+      <LastOutputs>.\Ap.dynamic.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Ap.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ap.list.cs</LastGenOutput>
+      <LastOutputs>.\Ap.list.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Concat.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Concat.string.cs</LastGenOutput>

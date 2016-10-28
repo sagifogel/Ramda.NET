@@ -231,7 +231,7 @@ namespace Ramda.NET
             });
         }
 
-        private static Func<object, object, object,object, object> Dispatchable4(string methodName, Delegate xf, Delegate fn) {
+        private static Func<object, object, object, object, object> Dispatchable4(string methodName, Delegate xf, Delegate fn) {
             return new Func<object, object, object, object, object>((arg1, arg2, arg3, arg4) => {
                 var arguments = Currying.Arity(arg1, arg2, arg3, arg4);
 
@@ -684,6 +684,20 @@ namespace Ramda.NET
             }
 
             throw new ArgumentException($"Cannot create transformer for {obj.GetType().Name}");
+        }
+
+        internal static LambdaN AnyOrAllPass(IList preds, bool comparend) {
+            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                foreach (Delegate pred in preds) {
+                    if ((bool)pred.Invoke(arguments) == comparend) {
+                        return comparend;
+                    }
+                }
+
+                return !comparend;
+            });
         }
     }
 }

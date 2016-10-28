@@ -56,6 +56,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Ramda\AllPass.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllPass1.cs</LastGenOutput>
+      <LastOutputs>.\AllPass1.cs</LastOutputs>
+    </Content>
+    <Compile Include="Ramda\AllPass1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllPass.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Apply.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -892,6 +902,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToPairs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Transduce.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transduce.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Transpose.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -921,6 +936,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Unfold.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UnionWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnionWith.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\UniqWith.cs">
       <AutoGen>True</AutoGen>
@@ -967,6 +987,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Where.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\WhereEq.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhereEq.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Zip.cs">
       <DependentUpon>Zip.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -993,6 +1018,7 @@
     <Compile Include="Transformers\AbstractXFn.cs" />
     <Compile Include="Transformers\AbstractXPredicate.cs" />
     <Compile Include="Transformers\AbstractXTransform.cs" />
+    <Compile Include="Transformers\PreservingReduced.cs" />
     <Compile Include="Transformers\IReduced.cs" />
     <Compile Include="Transformers\ITransformerBase.cs" />
     <Compile Include="Transformers\ReducedImpl.cs" />
@@ -1007,6 +1033,7 @@
     <Compile Include="Transformers\AbstractXAnyOrAll.cs" />
     <Compile Include="Transformers\XAperture.cs" />
     <Compile Include="Transformers\AbstractXAperture.cs" />
+    <Compile Include="Transformers\XFlatCat.cs" />
     <Compile Include="Transformers\XDrop.cs" />
     <Compile Include="Transformers\XDropLast.cs" />
     <Compile Include="Transformers\XDropLstWhile.cs" />
@@ -1821,6 +1848,11 @@
       <LastGenOutput>ToPairs.cs</LastGenOutput>
       <LastOutputs>.\ToPairs.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Transduce.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Transduce.cs</LastGenOutput>
+      <LastOutputs>.\Transduce.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Transpose.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Transpose.cs</LastGenOutput>
@@ -1850,6 +1882,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unfold.cs</LastGenOutput>
       <LastOutputs>.\Unfold.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UnionWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UnionWith.cs</LastGenOutput>
+      <LastOutputs>.\UnionWith.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\UniqWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1895,6 +1932,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Where.cs</LastGenOutput>
       <LastOutputs>.\Where.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\WhereEq.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>WhereEq.cs</LastGenOutput>
+      <LastOutputs>.\WhereEq.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Zip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

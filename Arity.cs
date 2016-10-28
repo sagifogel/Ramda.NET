@@ -2,6 +2,7 @@
 using System.Linq;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -30,7 +31,11 @@ namespace Ramda.NET
         }
 
         internal static int Arity(this Delegate @delegate) {
-            return @delegate.Method.GetParameters().Length;
+            return @delegate.Method.Arity();
+        }
+
+        internal static int Arity(this MethodInfo methodInfo) {
+            return methodInfo.GetParameters().Length;
         }
 
         internal static object[] Pad(params object[] arguments) {

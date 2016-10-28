@@ -1,7 +1,9 @@
-﻿namespace Ramda.NET
+﻿using System;
+
+namespace Ramda.NET
 {
     public class Lambda
-    {
+    {   
         public delegate dynamic Lambda1(object arg = null);
         public delegate dynamic Lambda2(object arg1 = null, object arg2 = null);
         public delegate dynamic Lambda3(object arg1 = null, object arg2 = null, object arg3 = null);

@@ -158,5 +158,9 @@ namespace Ramda.NET
         public static dynamic TakeLast(RamdaPlaceholder n, string list) {
             return Currying.TakeLast(list.ToCharArray());
         }
+
+        public static dynamic AllPass(IList<dynamic> preds) {
+            return Currying.AllPass(preds);
+        }
     }
 }

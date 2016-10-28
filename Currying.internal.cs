@@ -64,7 +64,7 @@ namespace Ramda.NET
             return result;
         }
 
-        private static IReduced ForceReduced(object x) => new ReducedImpl(x);
+        internal static IReduced ForceReduced(object x) => new ReducedImpl(x);
 
         private static bool HasInternal(string prop, object obj) {
             if (obj.IsDictionary()) {
@@ -249,7 +249,7 @@ namespace Ramda.NET
             obj = arguments[arguments.Length - 1];
             if (!obj.IsArray()) {
                 var args = (object[])SliceInternal(arguments, 0, arguments.Length - 1);
-                var member = (obj.GetMemberWhen<MethodInfo>(methodName, type => type.IsDelegate()));
+                var member = (obj.GetMemberWhen<MethodInfo>(methodName, m => m.ReflectedType.IsDelegate()));
 
                 if (member.IsNotNull()) {
                     return member.Invoke(obj, args);
@@ -310,6 +310,8 @@ namespace Ramda.NET
         private readonly static dynamic XTakeWhile = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XTakeWhile(f, xf));
 
         private readonly static dynamic XDropLastWhile = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf));
+
+        private readonly static dynamic XChain = Curry2<Delegate, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf)));
 
         internal class ComparerFactory : IComparer
         {
@@ -621,7 +623,7 @@ namespace Ramda.NET
             return result.ToArray<IList>();
         }
 
-        private static object ReduceInternal(object fn, object acc, object list) {
+        internal static object ReduceInternal(object fn, object acc, object list) {
             ITransformer transformer = null;
 
             if (fn.IsFunction()) {

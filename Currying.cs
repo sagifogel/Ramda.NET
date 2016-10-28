@@ -25,6 +25,7 @@ namespace Ramda.NET
             });
         }
 
+
         internal static dynamic Curry2<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arg1IsPlaceHolder = false;
@@ -898,11 +899,12 @@ namespace Ramda.NET
             return (bool)pred.Invoke(x) ? whenTrueFn.Invoke(x) : x;
         });
 
-        internal readonly static dynamic Where = Curry2<IDictionary<string, Delegate>, object, bool>((spec, testObj) => {
+        internal readonly static dynamic Where = Curry2<IDictionary<string, object>, object, bool>((spec, testObj) => {
             foreach (var pair in spec.ToMemberDictionary()) {
                 var testObjMember = testObj.Member(pair.Key);
+                var @delegate = (Delegate)pair.Value;
 
-                if (testObjMember.IsNotNull() && !(bool)spec[pair.Key].Invoke(testObjMember)) {
+                if (!(bool)@delegate.Invoke(testObjMember)) {
                     return false;
                 }
             }
@@ -1117,14 +1119,14 @@ namespace Ramda.NET
 
             listFunctor = functor as IList;
 
-            if (listFunctor.IsNotNull()) {
-                return MapInternal(fn, listFunctor);
+            if (listFunctor.IsNull()) {
+                return ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
+                    acc[key] = fn.Invoke(functor.Member(key));
+                    return acc;
+                }), new ExpandoObject(), functor.Keys());
             }
 
-            return ReduceInternal(new Func<IDictionary<string, object>, string, object>((acc, key) => {
-                acc[key] = fn.Invoke(functor.Member(key));
-                return acc;
-            }), new ExpandoObject(), functor.Keys());
+            return MapInternal(fn, listFunctor);
         }))));
 
         internal readonly static dynamic MapObjIndexed = Curry2<Delegate, object, object>((fn, obj) => {
@@ -1183,6 +1185,25 @@ namespace Ramda.NET
         internal readonly static dynamic Transduce = CurryN(4, new Func<Delegate, object, object, object, object>((xf, fn, acc, list) => {
             return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((Delegate)fn) : fn), acc, list);
         }));
+
+        internal readonly static dynamic UnionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, ConcatInternal(list1, list2)));
+
+        internal readonly static dynamic WhereEq = Curry2<object, object, bool>((spec, testObj) => Where(Map(Equals, spec), testObj));
+
+        internal readonly static dynamic AllPass = Curry1<IList, Delegate>(preds => {
+            return CurryN(Reduce(Max, 0, Pluck("Length", preds)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                foreach (Delegate pred in preds) {
+                    if (!(bool)pred.Invoke(arguments)) {
+                        return false;
+                    }
+
+                }
+
+                return true;
+            }));
+        });
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
 

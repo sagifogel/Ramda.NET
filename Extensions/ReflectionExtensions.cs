@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using System.Linq.Expressions;
+using static Ramda.NET.Lambda;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using static Ramda.NET.Currying;
-using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -111,6 +112,9 @@ namespace Ramda.NET
                     }
                 }
             }
+            else if (type.IsDelegate() && name.Equals("Length")) {
+                return ((Delegate)target).GetFunctionArity();
+            }
             else {
                 var member = type.TryGetMemberInfoFromType(name);
 
@@ -127,6 +131,19 @@ namespace Ramda.NET
             }
 
             return R.Null;
+        }
+
+        private static int GetFunctionArity(this Delegate @delegate) {
+            if (@delegate.GetType().Equals(typeof(LambdaN))) {
+                var traget = @delegate.Target;
+                var fn = traget.GetMemberWhen<FieldInfo>("fn", m => {
+                    return m.MemberType == MemberTypes.Field && ((FieldInfo)m).FieldType.IsDelegate();
+                });
+
+                return fn.FieldType.GetMethod("Invoke").Arity();
+            }
+
+            return @delegate.Arity();
         }
 
         internal static object Member(this Array target, int index) {
@@ -180,10 +197,10 @@ namespace Ramda.NET
             return member.IsNotNull() && predicate(member.ReflectedType);
         }
 
-        internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<Type, bool> predicate) where TMemberInfo : MemberInfo {
+        internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<MemberInfo, bool> predicate) where TMemberInfo : MemberInfo {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
-            if (member.IsNotNull() && predicate(member.ReflectedType)) {
+            if (member.IsNotNull() && predicate(member)) {
                 return (TMemberInfo)member;
             }
 
@@ -194,11 +211,11 @@ namespace Ramda.NET
             return type.TryGetMemberInfoFromType(name).IsNotNull();
         }
 
-        internal static Dictionary<string, object> ToMemberDictionary(this object target) {
+        internal static IDictionary<string, object> ToMemberDictionary(this object target) {
             var type = target.GetType();
 
             if (type.IsDictionaryOf<string, object>()) {
-                return (Dictionary<string, object>)target;
+                return (IDictionary<string, object>)target;
             }
 
             if (type.IsArray) {
@@ -314,6 +331,34 @@ namespace Ramda.NET
 
         internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {
             return new ComparerFactory(comparator);
+        }
+
+#if !NET_4_5
+
+        public static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(this ICustomAttributeProvider type, bool inherit = true) where TAttribute : Attribute {
+            return type.GetCustomAttributes(typeof(TAttribute), inherit)
+                       .Cast<TAttribute>();
+        }
+
+        public static TAttribute GetCustomAttribute<TAttribute>(this ICustomAttributeProvider type, bool inherit = true) where TAttribute : Attribute {
+            return type.GetCustomAttributes<TAttribute>(inherit).FirstOrDefault();
+        }
+
+#endif
+
+        internal static bool IsDefined<TAttribute>(this ICustomAttributeProvider attributeProvider, out TAttribute attribute, bool inherit = true) where TAttribute : Attribute {
+            attribute = default(TAttribute);
+
+            if (attributeProvider.IsDefined(typeof(TAttribute), inherit)) {
+                attribute = attributeProvider.GetCustomAttribute<TAttribute>(inherit);
+                return true;
+            }
+
+            return false;
+        }
+
+        internal static bool HasAttribute<TAttribute>(this ICustomAttributeProvider attributeProvider, bool inherit = true) where TAttribute : Attribute {
+            return attributeProvider.GetCustomAttributes<TAttribute>(inherit).FirstOrDefault().IsNotNull();
         }
     }
 }

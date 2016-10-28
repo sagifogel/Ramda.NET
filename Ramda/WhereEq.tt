@@ -1,0 +1,12 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TSpec");
+	template.Generics.Add("TTArget");
+	template.Parameters.Add(Tuple.Create("TSpec", "spec", false));	
+	template.Parameters.Add(Tuple.Create("TTArget", "testObj", false));	
+	template.Render();
+#>

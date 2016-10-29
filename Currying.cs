@@ -1219,6 +1219,8 @@ namespace Ramda.NET
             return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => ConcatInternal(acc, Map(f, fn))), new object[0], applicative);
         });
 
+        internal readonly static dynamic ApplySpec = Curry1<object, object>(ApplySpecInternal);
+
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {

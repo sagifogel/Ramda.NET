@@ -96,6 +96,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Apply.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\ApplySpec.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplySpec.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Clone.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,6 +160,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Ap.list.cs</LastGenOutput>
       <LastOutputs>.\Ap.list.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ApplySpec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ApplySpec.cs</LastGenOutput>
+      <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Concat.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

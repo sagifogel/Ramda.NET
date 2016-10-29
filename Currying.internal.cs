@@ -686,7 +686,7 @@ namespace Ramda.NET
             throw new ArgumentException($"Cannot create transformer for {obj.GetType().Name}");
         }
 
-        internal static LambdaN AnyOrAllPass(IList preds, bool comparend) {
+        private static LambdaN AnyOrAllPass(IList preds, bool comparend) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -698,6 +698,16 @@ namespace Ramda.NET
 
                 return !comparend;
             });
+        }
+
+        private static object ApplySpecInternal(object spec) {
+            spec = Map(new Func<object, object>(v => v.IsFunction() ? v : ApplySpecInternal(v)), spec);
+
+            return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return Map(new Func<object, object>(f => Apply(f, arguments)), spec);
+            }));
         }
     }
 }

@@ -96,10 +96,19 @@ namespace Ramda.NET
             var type = target.GetType();
 
             if (type.TypeIsDictionary()) {
-                var dictionary = target as IDictionary;
+                if (type.Equals(typeof(ExpandoObject))) {
+                    var dictionary = (IDictionary<string, object>)target;
 
-                if (dictionary.Contains(name)) {
-                    return dictionary[name];
+                    if (dictionary.ContainsKey(name)) {
+                        return dictionary[name];
+                    }
+                }
+                else {
+                    var dictionary = target as IDictionary;
+
+                    if (dictionary.Contains(name)) {
+                        return dictionary[name];
+                    }
                 }
             }
             else if (type.IsArray) {
@@ -135,12 +144,17 @@ namespace Ramda.NET
 
         private static int GetFunctionArity(this Delegate @delegate) {
             if (@delegate.GetType().Equals(typeof(LambdaN))) {
+                var methodName = "Invoke";
                 var traget = @delegate.Target;
                 var fn = traget.GetMemberWhen<FieldInfo>("fn", m => {
                     return m.MemberType == MemberTypes.Field && ((FieldInfo)m).FieldType.IsDelegate();
                 });
 
-                return fn.FieldType.GetMethod("Invoke").Arity();
+                if (fn.FieldType.Equals(typeof(Delegate))) {
+                    methodName = $"Dynamic{methodName}";
+                }
+
+                return fn.FieldType.GetMethod(methodName).Arity();
             }
 
             return @delegate.Arity();

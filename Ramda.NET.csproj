@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ramda.NET</RootNamespace>
     <AssemblyName>Ramda.NET</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -101,6 +101,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Chain.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Chain.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Clone.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,6 +120,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Concat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Cond.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Cond.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ConstructN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstructN.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Converge.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Converge.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\CountBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CountBy.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Curry.cs">
       <AutoGen>True</AutoGen>
@@ -135,6 +160,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DropLastWhile.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\DropRepeatsWith.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DropRepeatsWith.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\EqBy.cs">
       <AutoGen>True</AutoGen>
@@ -166,6 +196,11 @@
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Chain.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Chain.cs</LastGenOutput>
+      <LastOutputs>.\Chain.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Concat.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Concat.string.cs</LastGenOutput>
@@ -175,6 +210,31 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Concat.cs</LastGenOutput>
       <LastOutputs>.\Concat.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Cond.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Cond.cs</LastGenOutput>
+      <LastOutputs>.\Cond.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ConstructN.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastOutputs>.\ConstructN.cs</LastOutputs>
+      <LastGenOutput>ConstructN.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ramda\Converge.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Converge.cs</LastGenOutput>
+      <LastOutputs>.\Converge.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\CountBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CountBy.cs</LastGenOutput>
+      <LastOutputs>.\CountBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\DropRepeatsWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DropRepeatsWith.cs</LastGenOutput>
+      <LastOutputs>.\DropRepeatsWith.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\EqBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1410,7 +1470,7 @@
     <Content Include="Ramda\Into.IList.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Into.IList.cs</LastGenOutput>
-      <LastOutputs>.\Into.IList - Copy.cs</LastOutputs>
+      <LastOutputs>.\Into.IList.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Invert.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -109,7 +109,7 @@ namespace Ramda.NET
             return list.ToArray<Array>();
         }
 
-        private static LambdaN Pipe(Delegate f, Delegate g) {
+        private static LambdaN PipeInternal(Delegate f, Delegate g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -117,14 +117,11 @@ namespace Ramda.NET
             });
         }
 
-        private static LambdaN PipeP(Task f, Task g) {
+        private static LambdaN PipePInternal(Delegate f, Delegate g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                //return f.apply(ctx, arguments).then(function(x) {
-                //    return g.call(ctx, x);
-                //});
-                return null;// g.Invoke(f.Invoke(arguments));
+                return Task<object>.Factory.StartNew(() => f.Invoke(arguments)).ContinueWith(result => g.Invoke(result));
             });
         }
 

@@ -142,7 +142,7 @@ namespace Ramda.NET
             return R.Null;
         }
 
-        private static int GetFunctionArity(this Delegate @delegate) {
+        internal static int GetFunctionArity(this Delegate @delegate) {
             if (@delegate.GetType().Equals(typeof(LambdaN))) {
                 var methodName = "Invoke";
                 var traget = @delegate.Target;
@@ -150,14 +150,16 @@ namespace Ramda.NET
                     return m.MemberType == MemberTypes.Field && ((FieldInfo)m).FieldType.IsDelegate();
                 });
 
-                if (fn.FieldType.Equals(typeof(Delegate))) {
-                    methodName = $"Dynamic{methodName}";
-                }
+                if (fn.IsNotNull()) {
+                    if (fn.FieldType.Equals(typeof(Delegate))) {
+                        methodName = $"Dynamic{methodName}";
+                    }
 
-                return fn.FieldType.GetMethod(methodName).Arity();
+                    return fn.FieldType.GetMethod(methodName).Arity();
+                }
             }
 
-            return @delegate.Arity();
+            return @delegate.Method.Arity();
         }
 
         internal static object Member(this Array target, int index) {
@@ -329,6 +331,24 @@ namespace Ramda.NET
 
             return Expression.Lambda<Func<object>>(
                         Expression.Convert(Expression.New(ctor, arguments), typeof(object))).Compile();
+        }
+
+        internal static Delegate GetFactory(this Type type, int arity) {
+            Type delegateType;
+            Type[] parameterTypes;
+            IEnumerable<ParameterExpression> parameters;
+            var ctor = type.GetConstructors(ctorBindingFlags)
+                           .FirstOrDefault(c => c.GetParameters().Length == arity);
+
+            if (ctor.IsNull()) {
+                throw new ArgumentOutOfRangeException($"Constructor does not have {arity} arguments");
+            }
+
+            parameterTypes = ctor.GetParameters().Select(p => p.ParameterType).ToArray();
+            parameters = parameterTypes.Select(param => Expression.Parameter(param)).ToArray();
+            delegateType = Expression.GetFuncType(parameterTypes.Concat(new[] { type }).ToArray());
+
+            return Expression.Lambda(delegateType, Expression.New(ctor, parameters), parameters).Compile();
         }
 
         internal static object Invoke(this Delegate target, params object[] arguments) {

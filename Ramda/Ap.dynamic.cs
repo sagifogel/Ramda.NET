@@ -12,7 +12,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Ap(IList<dynamic> fns, IList vs) {
+		public static dynamic Ap<TSource>(IList<dynamic> fns, IList<TSource> vs) {
 			return Currying.Ap(fns, vs);
 		}
 

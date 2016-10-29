@@ -170,5 +170,25 @@ namespace Ramda.NET
         public static dynamic Ap(dynamic fns, dynamic vs) {
             return Currying.Ap(fns, vs);
         }
+
+        public static dynamic Cond(IList<dynamic> pairs) {
+            return Currying.Cond(pairs);
+        }
+
+        public static dynamic ConstructN<TTarget>(int n) {
+            return Currying.ConstructN(n, typeof(TTarget));
+        }
+
+        public static dynamic ConstructN<TTarget>(RamdaPlaceholder n = null) {
+            return Currying.ConstructN(n, typeof(TTarget));
+        }
+
+        public static dynamic Converge(Delegate after, IList<dynamic> functions) {
+            return Currying.Converge(after, functions);
+        }
+
+        public static dynamic Converge(RamdaPlaceholder after, IList<dynamic> functions) {
+            return Currying.Converge(after, functions);
+        }
     }
 }

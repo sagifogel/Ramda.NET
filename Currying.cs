@@ -442,14 +442,14 @@ namespace Ramda.NET
         internal readonly static dynamic NAry = Curry2<int, Delegate, Delegate>((length, fn) => {
             if (length <= 10) {
                 return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    IList args;
-                    var arguments = Pad(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    object[] args;
+                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                     length = Math.Min(length, arguments.Length);
-                    args = arguments.CreateNewArray(length);
+                    args = new object[length];
                     Array.Copy(arguments, (Array)args, length);
 
-                    return fn.DynamicInvoke(new[] { args });
+                    return fn.InvokeWithArray(args);
                 });
             }
             else {
@@ -1146,8 +1146,6 @@ namespace Ramda.NET
 
         internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
 
-        internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
-
         internal readonly static dynamic Pluck = Curry2<object, IList, IList>((p, list) => Map(Prop(p), list));
 
         internal readonly static dynamic Project = UseWith(new Func<Delegate, IList, object>(MapInternal), new[] { (Delegate)PickAll, (Delegate)Identity });
@@ -1158,7 +1156,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", (Delegate)XReduceBy, new Func<Delegate, object, Delegate, IList, object>((valueFn, valueAcc, keyFn, list) => {
             return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
-                var key = (string)keyFn.Invoke(elt);
+                var key = keyFn.Invoke(elt).ToString();
 
                 acc[key] = valueFn.Invoke(acc.ContainsKey(key) ? acc[key] : valueAcc, elt);
 
@@ -1220,6 +1218,98 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic ApplySpec = Curry1<object, object>(ApplySpecInternal);
+
+        internal readonly static dynamic Call = Curry(new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+            var fn = (Delegate)arg1;
+            var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+            return fn.Invoke(SliceInternal(arguments, 1));
+        }));
+
+        internal readonly static dynamic Chain = Curry2(new Func<object, object, dynamic>(Dispatchable2("Chain", (Delegate)XChain, new Func<Delegate, object, object>((fn, monad) => {
+            if (monad.IsFunction()) {
+                var monadFn = (Delegate)monad;
+
+                return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var resultFn = (Delegate)monadFn.Invoke(fn.Invoke(arguments));
+
+                    return resultFn.Invoke(arguments);
+                });
+            }
+
+            return MakeFlat(false)(Map(fn, monad));
+        }))));
+
+        internal readonly static dynamic Cond = Curry1<IList, object>(pairs => {
+            int arity = Reduce(Max, 0, Map(new Func<IList, int>(pair => ((Delegate)pair[0]).Arity()), pairs));
+
+            return Arity(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                foreach (IList pair in pairs) {
+                    var @delegate = (Delegate)pair[0];
+
+                    if ((bool)@delegate.Invoke(arguments)) {
+                        @delegate = (Delegate)pair[1];
+
+                        return @delegate.Invoke(arguments);
+                    }
+                }
+
+                return null;
+            }));
+        });
+
+        internal readonly static dynamic ConstructN = Curry2<int, Type, object>((n, Fn) => {
+            if (n > 10) {
+                throw new ArgumentOutOfRangeException("Constructor with greater than ten arguments");
+            }
+
+            if (n == 0) {
+                return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                    return Fn.GetFactory(n).DynamicInvoke();
+                });
+            }
+
+            return CurryN(n, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return Fn.GetFactory(n).DynamicInvoke((object[])SliceInternal(arguments, 0, n));
+            }));
+        });
+
+        internal readonly static dynamic Converge = Curry2<Delegate, IList<Delegate>, object>((after, fns) => {
+            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return after.Invoke((object[])Map(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns));
+            }));
+        });
+
+        internal readonly static dynamic CountBy = ReduceBy(new Func<int, object, int>((acc, elem) => acc + 1), 0);
+
+        internal readonly static dynamic DropRepeatsWith = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropRepeatsWith", (Delegate)XDropRepeatsWith, new Func<Delegate, IList, IList>((pred, list) => {
+            var idx = 1;
+            var len = list.Count;
+            var result = new List<object>();
+
+            if (len != 0) {
+                result.Add(list[0]);
+
+                while (idx < len) {
+                    if (!(bool)pred.Invoke((object)Last(result), list[idx])) {
+                        result.Add(list[idx]);
+                    }
+
+                    idx += 1;
+                }
+            }
+
+            return result.ToArray<Array>();
+        }))));
+
+        internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
 

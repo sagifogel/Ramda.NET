@@ -31,7 +31,7 @@ namespace Ramda.NET
         }
 
         internal static int Arity(this Delegate @delegate) {
-            return @delegate.Method.Arity();
+            return @delegate.GetFunctionArity();
         }
 
         internal static int Arity(this MethodInfo methodInfo) {
@@ -59,7 +59,7 @@ namespace Ramda.NET
             return Pad(arguments.ToArray());
         }
 
-        private static Delegate Arity(int length, Delegate fn) {
+        internal static Delegate Arity(int length, Delegate fn) {
             if (length <= 10) {
                 return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     return fn.Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);

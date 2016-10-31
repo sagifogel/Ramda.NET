@@ -1,4 +1,5 @@
 ﻿using System;
+using Ramda.NET;
 using System.Linq;
 using System.Dynamic;
 using System.Collections;
@@ -24,7 +25,6 @@ namespace Ramda.NET
                 return fn(arg1.CastTo<TArg1>());
             });
         }
-
 
         internal static dynamic Curry2<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
@@ -94,6 +94,31 @@ namespace Ramda.NET
                         }) : arg3IsPlaceHolder ? Curry1<TArg3, TResult>(_arg3 => {
                             return fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), _arg3);
                         }) : fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), arg3.CastTo<TArg3>());
+                }
+            });
+        }
+
+        internal static dynamic CurryParams(Delegate fn) {
+            return new Lambda2((object arg1, object arg2) => {
+                object[] args = null;
+                var arg1IsPlaceHolder = false;
+                var arg2IsPlaceHolder = false;
+                var arguments = Arity(arg1, arg2);
+                var length = arguments?.Length ?? 0;
+
+                switch (length) {
+                    case 0:
+                        return CurryParams(fn);
+                    case 1:
+                        return IsPlaceholder(arg1) ? CurryParams(fn) : fn.Invoke(arg1);
+                    default:
+                        arg1IsPlaceHolder = IsPlaceholder(arg1);
+                        arg2IsPlaceHolder = IsPlaceholder(arg2);
+                        args = arg2 as object[];
+
+                        return arg1IsPlaceHolder && arg2IsPlaceHolder ? CurryParams(fn) : arg1IsPlaceHolder ? Apply(R.__, args)
+                        : arg2IsPlaceHolder ? Apply(fn)
+                        : fn.Invoke(new[] { arg1 }.Concat(args).ToArray());
                 }
             });
         }
@@ -265,13 +290,13 @@ namespace Ramda.NET
             return FindIndexInternal(list.Count - 1, -1, idx => idx >= 0, obj => (bool)fn.Invoke(obj), list);
         })));
 
-        internal readonly static dynamic ForEach = Curry2(CheckForMethod2<Action<object>, IList, IList>("ForEach", (fn, list) => {
+        internal readonly static dynamic ForEach = Curry2(CheckForMethod2("ForEach", new Func<Delegate, IList, IList>((fn, list) => {
             foreach (var item in list) {
-                fn(item);
+                fn.Invoke(item);
             }
 
             return list;
-        }));
+        })));
 
         internal readonly static dynamic FromPairs = Curry1<object[][], IDictionary<string, object>>(pairs => {
             IDictionary<string, object> result = new ExpandoObject();
@@ -345,7 +370,7 @@ namespace Ramda.NET
             return ConcatInternal(ConcatInternal(Slice(list, 0, idx), elts), Slice(list, idx));
         });
 
-        internal readonly static dynamic Intersperse = Curry2(CheckForMethod2<object, IList, IList>("Intersperse", (separator, list) => {
+        internal readonly static dynamic Intersperse = Curry2(CheckForMethod2("Intersperse", new Func<object, IList, IList>((separator, list) => {
             var idx = 0;
             IList result = null;
             var length = list.Count;
@@ -373,7 +398,7 @@ namespace Ramda.NET
             }
 
             return result;
-        }));
+        })));
 
         internal readonly static dynamic IsArrayLike = Curry1<object, bool>(x => x.IsList());
 
@@ -1087,7 +1112,7 @@ namespace Ramda.NET
         internal readonly static dynamic Last = Nth(-1);
 
         internal readonly static dynamic LastIndexOf = Curry2<object, IList, int>((target, xs) => {
-            if (!xs.IsArray() && xs.WhenMember("LastIndexOf", m => m.IsFunction())) {
+            if (!xs.IsArray() && xs.HasMemberWhere("LastIndexOf", m => m.IsFunction())) {
                 return ((dynamic)xs).LastIndexOf(target);
             }
             else {
@@ -1219,11 +1244,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic ApplySpec = Curry1<object, object>(ApplySpecInternal);
 
-        internal readonly static dynamic Call = Curry(new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+        internal readonly static dynamic Call = CurryParams(new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             var fn = (Delegate)arg1;
-            var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+            var arguments = Arity(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-            return fn.Invoke(SliceInternal(arguments, 1));
+            return fn.InvokeWithArray(arguments);
         }));
 
         internal readonly static dynamic Chain = Curry2(new Func<object, object, dynamic>(Dispatchable2("Chain", (Delegate)XChain, new Func<Delegate, object, object>((fn, monad) => {
@@ -1283,7 +1308,7 @@ namespace Ramda.NET
             return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                return after.Invoke((object[])Map(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns));
+                return after.Invoke(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
             }));
         });
 
@@ -1312,6 +1337,34 @@ namespace Ramda.NET
         internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
 
         internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
+
+        internal readonly static dynamic GroupBy = Curry2(CheckForMethod2("GroupBy", ReduceBy(new Func<object, object, IList>((acc, item) => {
+            var result = acc as IList;
+
+            if (result.IsNull()) {
+                result = new List<object>();
+            }
+
+            result.Add(item);
+
+            return result;
+        }), R.Null)));
+
+        internal readonly static dynamic IndexBy = ReduceBy(new Func<object, object, object>((acc, elem) => elem), R.Null);
+
+        internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
+            if (xs.IsList()) {
+                return ((IList)xs).IndexOf(target);
+            }
+
+            if (xs.HasMemberWhere("IndexOf", t => t.IsDelegate())) {
+                return ((dynamic)xs).IndexOf(target);
+            }
+
+            return -1;
+        });
+
+        internal readonly static dynamic Juxt = Curry1<IList<Delegate>, Delegate>((fns) => Converge(ArrayOf, fns));
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

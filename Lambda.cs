@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Ramda.NET
+﻿namespace Ramda.NET
 {
     public class Lambda
     {   

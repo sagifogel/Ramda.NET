@@ -207,7 +207,7 @@ namespace Ramda.NET
             return target.Member(name).IsNotNull();
         }
 
-        internal static bool WhenMember(this object target, string name, Func<Type, bool> predicate) {
+        internal static bool HasMemberWhere(this object target, string name, Func<Type, bool> predicate) {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
             return member.IsNotNull() && predicate(member.ReflectedType);

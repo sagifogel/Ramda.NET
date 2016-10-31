@@ -44,9 +44,12 @@ namespace Ramda.NET
 
         internal static object[] Pad(this object[] arguments, int length = 10) {
             var copied = new object[length];
-            var to = Math.Min(arguments.Length, copied.Length);
 
-            Array.Copy(arguments, 0, copied, 0, to);
+            if (arguments.IsNotNull()) {
+                var to = Math.Min(arguments.Length, copied.Length);
+
+                Array.Copy(arguments, 0, copied, 0, to);
+            }
 
             return copied;
         }

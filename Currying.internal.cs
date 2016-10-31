@@ -87,7 +87,7 @@ namespace Ramda.NET
 
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
-        private static object MapInternal(Delegate fn, IList functor) {
+        private static object[] MapInternal(Delegate fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
             var result = new object[len];
@@ -191,8 +191,8 @@ namespace Ramda.NET
             });
         }
 
-        private static Func<TArg1, TArg2, TResult> CheckForMethod2<TArg1, TArg2, TResult>(string methodName, Func<TArg1, TArg2, TResult> fn) {
-            return (arg1, arg2) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2);
+        private static Func<object, object, object> CheckForMethod2(string methodName, Delegate fn) {
+            return new Func<object, object, object>((arg1, arg2) => CheckForMethodN(methodName, fn, arg1, arg2));
         }
 
         private static Func<TArg1, TArg2, TArg3, TResult> CheckForMethod3<TArg1, TArg2, TArg3, TResult>(string methodName, Func<TArg1, TArg2, TArg3, TResult> fn) {
@@ -631,7 +631,7 @@ namespace Ramda.NET
                 return IterableReduce(transformer, acc, (IEnumerable)list);
             }
 
-            if (list.WhenMember("Reduce", t => t.IsFunction())) {
+            if (list.HasMemberWhere("Reduce", t => t.IsFunction())) {
                 return MethodReduce(transformer, acc, list);
             }
 
@@ -706,5 +706,9 @@ namespace Ramda.NET
                 return Map(new Func<object, object>(f => Apply(f, arguments)), spec);
             }));
         }
+
+        private static object ArrayOf = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+            return Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+        });
     }
 }

@@ -190,5 +190,9 @@ namespace Ramda.NET
         public static dynamic Converge(RamdaPlaceholder after, IList<dynamic> functions) {
             return Currying.Converge(after, functions);
         }
+
+        public static dynamic Juxt(IList<dynamic> fns) {
+            return Currying.Juxt(fns);
+        }
     }
 }

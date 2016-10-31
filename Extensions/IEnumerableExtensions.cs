@@ -140,11 +140,11 @@ namespace Ramda.NET
             return (TArray)arr;
         }
 
-        internal static TList ToList<TList>(this IList list, Type type = null) where TList : IList {
+        internal static TList ToList<TList>(this IEnumerable list, Type type = null) where TList : IList {
             IList result = list.CreateNewList(type: type);
 
-            for (int i = 0; i < list.Count; i++) {
-                result.Add(list[i]);
+            foreach (var item in list) {
+                result.Add(item);
             }
 
             return (TList)result;

@@ -607,6 +607,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Length.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\LensIndex.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LensIndex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\LensProp.cs">
+      <DependentUpon>LensProp.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\LensPath.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LensPath.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Lt.double.cs">
       <DependentUpon>Lt.double.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1576,6 +1591,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Length.cs</LastGenOutput>
       <LastOutputs>.\Length.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\LensIndex.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LensIndex.cs</LastGenOutput>
+      <LastOutputs>.\LensIndex.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\LensProp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LensProp.cs</LastGenOutput>
+      <LastOutputs>.\LensProp.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\LensPath.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LensPath.cs</LastGenOutput>
+      <LastOutputs>.\LensPath.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Lt.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

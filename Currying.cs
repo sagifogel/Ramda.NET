@@ -1375,6 +1375,12 @@ namespace Ramda.NET
             });
         });
 
+        internal readonly static dynamic LensIndex = Curry1<int, Delegate>(n => Lens(Nth(n), Update(n)));
+
+        internal readonly static dynamic LensPath = Curry1<IList<string>, Delegate>(p => Lens(Path(p), AssocPath(p)));
+
+        internal readonly static dynamic LensProp = Curry1<string, Delegate>(k => Lens(Prop(k), Assoc(k)));
+
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;
             string firstString = null;
@@ -1413,5 +1419,5 @@ namespace Ramda.NET
 
             throw new ArgumentException($"{a.GetType().Name} is not a list or string");
         });
-    }
+}
 }

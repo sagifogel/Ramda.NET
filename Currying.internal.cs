@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Collections;
 using static Ramda.NET.R;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using Object = Ramda.NET.ReflectionExtensions;
@@ -246,10 +247,10 @@ namespace Ramda.NET
             obj = arguments[arguments.Length - 1];
             if (!obj.IsArray()) {
                 var args = (object[])SliceInternal(arguments, 0, arguments.Length - 1);
-                var member = (obj.GetMemberWhen<MethodInfo>(methodName, m => m.ReflectedType.IsDelegate()));
+                var member = GetMapFunction(obj);
 
                 if (member.IsNotNull()) {
-                    return member.Invoke(obj, args);
+                    return member.Invoke(args);
                 }
 
                 if (obj is ITransformer) {
@@ -260,6 +261,39 @@ namespace Ramda.NET
             }
 
             return fn.Invoke(arguments);
+        }
+
+        private static Delegate GetMapFunction(this object obj) {
+            Delegate @delegate = null;
+
+            obj.GetMemberWhen<MemberInfo>("Map", m => {
+                switch (m.MemberType) {
+                    case MemberTypes.Method:
+                        Type delegateType = null;
+                        var method = (MethodInfo)m;
+                        IEnumerable<Type> @params = method.GetParameters().Select(p => p.ParameterType);
+
+                        if (!method.ReturnType.Equals(typeof(void))) {
+                            @params = @params.Concat(new[] { method.ReturnType });
+                        }
+
+                        delegateType = Expression.GetFuncType(@params.ToArray());
+
+                        @delegate = Delegate.CreateDelegate(delegateType, method);
+                        break;
+                    case MemberTypes.Property:
+                        var prop = (PropertyInfo)m;
+
+                        @delegate = prop.GetGetMethod(true).Invoke(obj, null) as Delegate;
+                        break;
+                    default:
+                        return false;
+                }
+
+                return true;
+            });
+
+            return @delegate;
         }
 
         private static IList DropLastWhileInternal(Delegate pred, IList list) {
@@ -525,23 +559,23 @@ namespace Ramda.NET
             });
         }
 
-        private static IdentityObj IdentityFunctor(object x) {
-            return new IdentityObj() {
+        private static Functor IdentityFunctor(object x) {
+            return new Functor {
                 Value = x,
-                Map = new Func<Delegate, IdentityObj>(f => {
+                Map = new Func<Delegate, Functor>(f => {
                     return IdentityFunctor(f.DynamicInvoke(x));
                 })
             };
         }
 
-        private static IdentityObj Const(object x) {
-            var identity = new IdentityObj() { Value = x };
+        private static Functor Const(object x) {
+            var functor = new Functor { Value = x };
 
-            identity.Map = new Func<Delegate, IdentityObj>(f => {
-                return identity;
+            functor.Map = new Func<Delegate, Functor>(f => {
+                return functor;
             });
 
-            return identity;
+            return functor;
         }
 
         private static Delegate CreatePartialApplicator(Delegate concat) {

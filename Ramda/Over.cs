@@ -12,7 +12,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>> lens, Func<TElement, TElement> v, TTarget x) {
+		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, TTarget x) {
 			return Currying.Over(lens, v, x);
 		}
 
@@ -20,15 +20,15 @@ namespace Ramda.NET
 			return Currying.Over(lens, v, x);
 		}
 
-		public static dynamic Over<TTarget>(Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>> lens, RamdaPlaceholder v, TTarget x) {
+		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v, TTarget x) {
 			return Currying.Over(lens, v, x);
 		}
 
-		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>> lens, Func<TElement, TElement> v, RamdaPlaceholder x = null) {
+		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, RamdaPlaceholder x = null) {
 			return Currying.Over(lens, v, x);
 		}
 
-		public static dynamic Over<TTarget>(Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>> lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
+		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Over(lens, v, x);
 		}
 
@@ -52,7 +52,7 @@ namespace Ramda.NET
 			return Currying.Over(lens, v, x);
 		}
 
-		public static dynamic Over<TTarget>(Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>> lens, dynamic v, TTarget x) {
+		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, dynamic v, TTarget x) {
 			return Currying.Over(lens, v, x);
 		}
 

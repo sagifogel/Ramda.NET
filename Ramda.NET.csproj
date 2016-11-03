@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="DeepCloner.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="IdentityObj.cs" />
+    <Compile Include="Functor.cs" />
     <Compile Include="MemberComparer.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />
@@ -956,6 +956,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Scan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Lens.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lens.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Slice.cs">
       <AutoGen>True</AutoGen>
@@ -1922,6 +1927,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Scan.cs</LastGenOutput>
       <LastOutputs>.\Scan.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lens.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lens.cs</LastGenOutput>
+      <LastOutputs>.\Lens.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Slice.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

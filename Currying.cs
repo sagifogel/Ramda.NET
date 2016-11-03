@@ -117,8 +117,9 @@ namespace Ramda.NET
                         args = arg2 as object[];
 
                         return arg1IsPlaceHolder && arg2IsPlaceHolder ? CurryParams(fn) : arg1IsPlaceHolder ? Apply(R.__, args)
-                        : arg2IsPlaceHolder ? Apply(fn)
-                        : fn.Invoke(new[] { arg1 }.Concat(args).ToArray());
+                        : arg2IsPlaceHolder ? new LambdaN((_arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, ag11) => {
+                            return Apply(fn, Arity(arg1, _arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10));
+                        }) : fn.Invoke(new[] { arg1 }.Concat(args).ToArray());
                 }
             });
         }
@@ -532,7 +533,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Or = Curry2<bool, bool, bool>((a, b) => a || b);
 
-        internal readonly static dynamic Over = Curry3<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, Delegate, object, object>((lens, f, x) => {
+        internal readonly static dynamic Over = Curry3<Func<Func<object, Functor>, Func<object, Functor>>, Delegate, object, object>((lens, f, x) => {
             return lens(y => IdentityFunctor(f.Invoke(y)))(x).Value;
         });
 
@@ -654,7 +655,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Set = Curry3<Func<Func<object, IdentityObj>>, object, object, object>((lens, v, x) => {
+        internal readonly static dynamic Set = Curry3<Func<Func<object, Functor>>, object, object, object>((lens, v, x) => {
             return Over(lens, Always(v), x);
         });
 
@@ -918,7 +919,7 @@ namespace Ramda.NET
             return vals.ToArray<Array>();
         });
 
-        internal readonly static dynamic View = Curry2<Func<Func<object, IdentityObj>, Func<object, IdentityObj>>, object, object>((lens, x) => lens(Const)(x).Value);
+        internal readonly static dynamic View = Curry2<Func<Func<object, Functor>, Func<object, Functor>>, object, object>((lens, x) => lens(Const)(x).Value);
 
         internal readonly static dynamic When = Curry3<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
             return (bool)pred.Invoke(x) ? whenTrueFn.Invoke(x) : x;
@@ -1365,6 +1366,14 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Juxt = Curry1<IList<Delegate>, Delegate>((fns) => Converge(ArrayOf, fns));
+
+        internal readonly static dynamic Lens = Curry2<Delegate, Delegate, Delegate>((getter, setter) => {
+            return new Func<Func<object, Functor>, Func<object, Functor>>(toFunctorFn => {
+                return new Func<object, Functor>(target => {
+                    return Map(new Func<object, object>(focus => setter.Invoke(focus, target)), toFunctorFn(getter.Invoke(target)));
+                });
+            });
+        });
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

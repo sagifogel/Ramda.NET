@@ -136,6 +136,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConstructN.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Contains.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Contains.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Converge.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -230,6 +235,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastOutputs>.\ConstructN.cs</LastOutputs>
       <LastGenOutput>ConstructN.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ramda\Contains.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Contains.cs</LastGenOutput>
+      <LastOutputs>.\Contains.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Converge.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -841,6 +851,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PartialRight.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Partition.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Partition.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Path.cs">
       <AutoGen>True</AutoGen>
@@ -1841,6 +1856,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PartialRight.cs</LastGenOutput>
       <LastOutputs>.\PartialRight.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Partition.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Partition.cs</LastGenOutput>
+      <LastOutputs>.\Partition.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Path.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

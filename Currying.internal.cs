@@ -694,5 +694,19 @@ namespace Ramda.NET
         private static object ArrayOf = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             return Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
         });
+
+        private static bool ContainsInternal(object item, object list) {
+            if (list.IsList()) {
+                return ((IList)list).Contains(item);
+            }
+
+            var contains = list.GetMemberWhen<MethodInfo>("Contains", m => m.MemberType == MemberTypes.Method);
+
+            if (contains.IsNotNull()) {
+                return (bool)contains.Invoke(list, new[] { item });
+            }
+
+            return false;
+        }
     }
 }

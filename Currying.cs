@@ -1366,7 +1366,7 @@ namespace Ramda.NET
             return -1;
         });
 
-        internal readonly static dynamic Juxt = Curry1<IList<Delegate>, Delegate>((fns) => Converge(ArrayOf, fns));
+        internal readonly static dynamic Juxt = Curry1<IList<Delegate>, Delegate>(fns => Converge(ArrayOf, fns));
 
         internal readonly static dynamic Lens = Curry2<Delegate, Delegate, Delegate>((getter, setter) => {
             return new Func<Func<object, Functor>, Func<object, Functor>>(toFunctorFn => {
@@ -1408,6 +1408,10 @@ namespace Ramda.NET
                 return a < b ? -1 : a > b ? 1 : 0;
             }).Slice(idx, idx + width));
         });
+
+        internal readonly static dynamic Partition = Juxt(new Delegate[] { Filter, Reject });
+        
+        internal readonly static dynamic Contains = Curry2<object, object, bool>(ContainsInternal);
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

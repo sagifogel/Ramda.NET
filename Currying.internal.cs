@@ -23,26 +23,6 @@ namespace Ramda.NET
             });
         }
 
-        internal static IList ConcatInternal(IList set1, IList set2 = null) {
-            var list1ElemType = set1.GetElementType();
-            var list2ElemType = set2?.GetElementType() ?? list1ElemType;
-            var result = list1ElemType.Equals(list2ElemType) ? set1.CreateNewList() : new List<object>();
-
-            if (set1 != null) {
-                foreach (var item in set1) {
-                    result.Add(item);
-                }
-            }
-
-            if (set2 != null) {
-                foreach (var item in set2) {
-                    result.Add(item);
-                }
-            }
-
-            return result.ToArray<Array>();
-        }
-
         private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
             foreach (var item in list) {
                 if (predicate(x, item)) {
@@ -132,36 +112,6 @@ namespace Ramda.NET
             return reduced.IsNotNull() && reduced.IsReduced ? reduced : new ReducedImpl(x);
         }
 
-        internal static IList SliceInternal(IList arguments, int from = int.MinValue, int to = int.MinValue) {
-            if (from == int.MinValue) {
-                return SliceInternal(arguments, 0, arguments.Count);
-            }
-            else if (to == int.MinValue) {
-                return SliceInternal(arguments, from, arguments.Count);
-            }
-            else {
-                IList result;
-                var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
-
-                if (arguments.IsArray()) {
-                    result = arguments.CreateNewArray(len);
-                    Array.Copy((Array)arguments, from, (Array)result, 0, len);
-                }
-                else {
-                    var idx = 0;
-
-                    result = arguments.CreateNewList();
-
-                    while (idx < len) {
-                        result.Add(arguments[from + idx]);
-                        idx += 1;
-                    }
-                }
-
-                return result;
-            }
-        }
-
         private static IList ApertureInternal(int length, IList list) {
             var idx = 0;
             var limit = list.Count - (length - 1);
@@ -171,7 +121,7 @@ namespace Ramda.NET
             acc = list.IsArray() ? (IList)new object[limit] : new List<object>(limit);
 
             while (idx < limit) {
-                acc[idx] = SliceInternal(list, idx, idx + length);
+                acc[idx] = list.Slice(idx, idx + length);
                 idx += 1;
             }
 
@@ -218,7 +168,7 @@ namespace Ramda.NET
                 return fn.Invoke(arguments);
             }
 
-            return ((Delegate)member).DynamicInvoke(obj, SliceInternal(arguments, 0, length - 1));
+            return ((Delegate)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));
         }
 
         private static Lambda2 Dispatchable2(string methodName, Delegate xf, Delegate fn) {
@@ -246,7 +196,7 @@ namespace Ramda.NET
 
             obj = arguments[arguments.Length - 1];
             if (!obj.IsArray()) {
-                var args = (object[])SliceInternal(arguments, 0, arguments.Length - 1);
+                var args = (object[])arguments.Slice(0, arguments.Length - 1);
                 var member = GetMapFunction(obj);
 
                 if (member.IsNotNull()) {
@@ -303,7 +253,7 @@ namespace Ramda.NET
                 idx -= 1;
             }
 
-            return SliceInternal(list, 0, idx + 1);
+            return list.Slice(0, idx + 1);
         }
 
         private readonly static dynamic XAll = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAll((o => (bool)f.Invoke(o)), xf));
@@ -492,7 +442,7 @@ namespace Ramda.NET
                 idx += indexerAcc;
             }
 
-            return SliceInternal(list, sliceFrom(idx), sliceTo(idx));
+            return list.Slice(sliceFrom(idx), sliceTo(idx));
         }
 
         private static IList[] ZipInternal(IList a, IList b, int len, Func<IList, int, object> valAResolver = null) {

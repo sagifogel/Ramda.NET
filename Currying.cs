@@ -8,6 +8,7 @@ using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Object = Ramda.NET.ReflectionExtensions;
+using Core = Ramda.NET.IEnumerableExtensions;
 
 namespace Ramda.NET
 {
@@ -119,7 +120,7 @@ namespace Ramda.NET
                         return arg1IsPlaceHolder && arg2IsPlaceHolder ? CurryParams(fn) : arg1IsPlaceHolder ? Apply(R.__, args)
                         : arg2IsPlaceHolder ? new LambdaN((_arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, ag11) => {
                             return Apply(fn, Arity(arg1, _arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10));
-                        }) : fn.Invoke(new[] { arg1 }.Concat(args).ToArray());
+                        }) : fn.Invoke(new[] { arg1 }.Concat<object>(args).ToArray());
                 }
             });
         }
@@ -147,7 +148,7 @@ namespace Ramda.NET
 
             start = idx < 0 ? list.Count : 0;
             index = start + idx;
-            concatedList = ConcatInternal(list);
+            concatedList = list.Concat();
             elementType = concatedList.GetElementType();
             adjustedValue = fn.Invoke(list[index]);
 
@@ -171,7 +172,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Aperture = Curry2(new Func<object, object, dynamic>(Dispatchable2("Aperture", (Delegate)XAperture, new Func<int, IList, IList>(ApertureInternal))));
 
-        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => ConcatInternal(list, list.CreateNewList(new object[] { el })));
+        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new object[] { el })));
 
         internal readonly static dynamic Apply = Curry2<Delegate, object[], object>((fn, args) => fn.Invoke(args));
 
@@ -246,7 +247,7 @@ namespace Ramda.NET
                 idx += 1;
             }
 
-            return SliceInternal(list, idx);
+            return list.Slice(idx);
         }))));
 
         internal readonly static dynamic Empty = Curry1<object, dynamic>(x => {
@@ -368,7 +369,7 @@ namespace Ramda.NET
         internal readonly static dynamic InsertAll = Curry3<int, IList, IList, IList>((idx, elts, list) => {
             idx = idx < list.Count && idx >= 0 ? idx : list.Count;
 
-            return ConcatInternal(ConcatInternal(Slice(list, 0, idx), elts), Slice(list, idx));
+            return Slice(list, 0, idx).Concat(elts).Concat(Slice(list, idx));
         });
 
         internal readonly static dynamic Intersperse = Curry2(CheckForMethod2("Intersperse", new Func<object, IList, IList>((separator, list) => {
@@ -575,7 +576,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => ConcatInternal(new[] { el }, list));
+        internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => new[] { el }.Concat(list));
 
         internal readonly static dynamic Prop = Curry2<dynamic, object, object>((p, obj) => Object.Member(obj, p));
 
@@ -625,7 +626,7 @@ namespace Ramda.NET
         internal readonly static dynamic Reduced = Currying.Curry1<object, IReduced>(ReducedInternal);
 
         internal readonly static dynamic Remove = Curry3<int, int, IList, IList>((start, count, list) => {
-            return ConcatInternal(Slice(list, 0, Math.Min(start, list.Count)), Slice(list, Math.Min(list.Count, start + count)));
+            return Slice(list, 0, Math.Min(start, list.Count)).Concat(Slice(list, Math.Min(list.Count, start + count)));
         });
 
         internal readonly static dynamic Replace = Curry3<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement));
@@ -659,7 +660,7 @@ namespace Ramda.NET
             return Over(lens, Always(v), x);
         });
 
-        internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => SliceInternal(list, fromIndex, toIndex))));
+        internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => list.Slice(fromIndex, toIndex))));
 
         internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
             return SortInternal(list, comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
@@ -705,7 +706,7 @@ namespace Ramda.NET
             }
 
             result.Add(prefix);
-            result.Add(SliceInternal(list, idx));
+            result.Add(list.Slice(idx));
 
             return result;
         });
@@ -790,7 +791,7 @@ namespace Ramda.NET
                     return tryer.Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                 }
                 catch (Exception e) {
-                    return catcher.Invoke(ConcatInternal(new object[] { e }, arguments));
+                    return catcher.Invoke(new object[] { e }.Concat(arguments));
                 }
             });
         });
@@ -801,7 +802,7 @@ namespace Ramda.NET
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                return fn.DynamicInvoke(SliceInternal(arguments));
+                return fn.DynamicInvoke(arguments.Slice());
             });
         });
 
@@ -820,7 +821,7 @@ namespace Ramda.NET
                     var length = @delegate.Arity();
 
                     endIdx = currentDepth == depth ? arguments.Length : idx + length;
-                    value = @delegate.DynamicInvoke((object[])SliceInternal(arguments, idx, endIdx));
+                    value = @delegate.DynamicInvoke((object[])arguments.Slice(idx, endIdx));
                     currentDepth += 1;
                     idx = endIdx;
                 }
@@ -888,7 +889,7 @@ namespace Ramda.NET
                     idx += 1;
                 }
 
-                return fn.Invoke((object[])ConcatInternal(args, SliceInternal(arguments, length)));
+                return fn.Invoke((object[])args.Concat(arguments.Slice(length)));
             }));
         });
 
@@ -1031,7 +1032,7 @@ namespace Ramda.NET
         internal readonly static dynamic Flip = Curry1<Delegate, Delegate>(fn => {
             return CurryN(2, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                var args = SliceInternal(arguments);
+                var args = arguments.Slice();
 
                 args[0] = arguments[1];
                 args[1] = arguments[0];
@@ -1042,7 +1043,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Head = Nth(0);
 
-        internal readonly static dynamic Init = Curry1<IList, IList>(list => SliceInternal(list, 0, list.Count - 1));
+        internal readonly static dynamic Init = Curry1<IList, IList>(list => list.Slice(0, list.Count - 1));
 
         internal readonly static dynamic IntersectionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => {
             IList lookupList;
@@ -1166,9 +1167,9 @@ namespace Ramda.NET
             return MergeWithKey(new Func<object, object, object, object>((_, _l, _r) => fn.Invoke(_l, _r)), l, r);
         });
 
-        internal readonly static dynamic Partial = CreatePartialApplicator(new Func<IList, IList, IList>(ConcatInternal));
+        internal readonly static dynamic Partial = CreatePartialApplicator(new Func<IList, IList, IList>(Core.Concat));
 
-        internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(ConcatInternal)));
+        internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(Core.Concat)));
 
         internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
 
@@ -1210,7 +1211,7 @@ namespace Ramda.NET
             return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((Delegate)fn) : fn), acc, list);
         }));
 
-        internal readonly static dynamic UnionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, ConcatInternal(list1, list2)));
+        internal readonly static dynamic UnionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2)));
 
         internal readonly static dynamic WhereEq = Curry2<object, object, bool>((spec, testObj) => Where(Map(Equals, spec), testObj));
 
@@ -1240,7 +1241,7 @@ namespace Ramda.NET
                 });
             }
 
-            return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => ConcatInternal(acc, Map(f, fn))), new object[0], applicative);
+            return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => acc.Concat((IList)Map(f, fn))), new object[0], applicative);
         });
 
         internal readonly static dynamic ApplySpec = Curry1<object, object>(ApplySpecInternal);
@@ -1301,7 +1302,7 @@ namespace Ramda.NET
             return CurryN(n, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                return Fn.GetFactory(n).DynamicInvoke((object[])SliceInternal(arguments, 0, n));
+                return Fn.GetFactory(n).DynamicInvoke((object[])arguments.Slice(0, n));
             }));
         });
 
@@ -1381,6 +1382,33 @@ namespace Ramda.NET
 
         internal readonly static dynamic LensProp = Curry1<string, Delegate>(k => Lens(Prop(k), Assoc(k)));
 
+        internal readonly static dynamic LiftN = Curry2<int, Delegate, Delegate>((arity, fn) => {
+            var lifted = CurryN(arity, fn);
+
+            return CurryN(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
+                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+
+                return ReduceInternal(Ap, Map(lifted, arguments[0]), arguments.Slice(1));
+            }));
+        });
+
+        internal readonly static dynamic Mean = Curry1<IList<double>, double>(list => Sum(list) / list.Count);
+
+        internal readonly static dynamic Median = Curry1<IList, double>(list => {
+            var len = list.Count;
+
+            if (len == 0) {
+                return 0;
+            }
+
+            var width = 2 - len % 2;
+            var idx = (len - width) / 2;
+
+            return Mean(list.Slice().Sort<double>((a, b) => {
+                return a < b ? -1 : a > b ? 1 : 0;
+            }).Slice(idx, idx + width));
+        });
+
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;
             string firstString = null;
@@ -1411,7 +1439,7 @@ namespace Ramda.NET
                 var secondList = b as IList;
 
                 if (secondList.IsNotNull()) {
-                    return ConcatInternal(firstList, secondList);
+                    return firstList.Concat(secondList);
                 }
 
                 throw new ArgumentException($"{b.GetType().Name} is not a list");
@@ -1419,5 +1447,5 @@ namespace Ramda.NET
 
             throw new ArgumentException($"{a.GetType().Name} is not a list or string");
         });
-}
+    }
 }

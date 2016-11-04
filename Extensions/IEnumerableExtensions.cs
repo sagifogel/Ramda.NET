@@ -7,6 +7,56 @@ namespace Ramda.NET
 {
     internal static class IEnumerableExtensions
     {
+        internal static IList Slice(this IList arguments, int from = int.MinValue, int to = int.MaxValue) {
+            if (from == int.MinValue) {
+                return arguments.Slice(0, arguments.Count);
+            }
+            else if (to == int.MaxValue) {
+                return arguments.Slice(from, arguments.Count);
+            }
+            else {
+                IList result;
+                var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
+
+                if (arguments.IsArray()) {
+                    result = arguments.CreateNewArray(len);
+                    Array.Copy((Array)arguments, from, (Array)result, 0, len);
+                }
+                else {
+                    var idx = 0;
+
+                    result = arguments.CreateNewList();
+
+                    while (idx < len) {
+                        result.Add(arguments[from + idx]);
+                        idx += 1;
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        internal static IList Concat(this IList set1, IList set2 = null) {
+            var list1ElemType = set1.GetElementType();
+            var list2ElemType = set2?.GetElementType() ?? list1ElemType;
+            var result = list1ElemType.Equals(list2ElemType) ? set1.CreateNewList() : new List<object>();
+
+            if (set1 != null) {
+                foreach (var item in set1) {
+                    result.Add(item);
+                }
+            }
+
+            if (set2 != null) {
+                foreach (var item in set2) {
+                    result.Add(item);
+                }
+            }
+
+            return result.ToArray<Array>();
+        }
+
         internal static IEnumerable<TResult> Select<TResult>(IList source, Func<object, TResult> selector) {
             foreach (var tSource in source) {
                 yield return selector(tSource);
@@ -170,6 +220,14 @@ namespace Ramda.NET
             }
 
             return flag;
+        }
+
+        internal static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
+            var newList = new List<TResult>(list.Cast<TResult>());
+            
+            newList.Sort(comparison);
+
+            return newList.ToArray();
         }
     }
 }

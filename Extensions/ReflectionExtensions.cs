@@ -18,6 +18,28 @@ namespace Ramda.NET
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
         private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
 
+        internal static object[] Arity(params object[] arguments) {
+            object[] result;
+
+            if (arguments.IsNull() || arguments.Length == 0) {
+                return null;
+            }
+
+            int i = arguments.Length - 1;
+
+            while (i >= 0) {
+                if (!object.Equals(arguments[i], null)) {
+                    break;
+                }
+
+                i--;
+            }
+
+            result = (object[])arguments.Slice(0, ++i);
+
+            return result.Length == 0 ? null : result;
+        }
+
         internal static TArg CastTo<TArg>(this object arg) {
             if (arg != null && typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
                 return (TArg)Convert.ChangeType(arg, typeof(TArg));
@@ -346,7 +368,7 @@ namespace Ramda.NET
 
             parameterTypes = ctor.GetParameters().Select(p => p.ParameterType).ToArray();
             parameters = parameterTypes.Select(param => Expression.Parameter(param)).ToArray();
-            delegateType = Expression.GetFuncType(parameterTypes.Concat(new[] { type }).ToArray());
+            delegateType = Expression.GetFuncType(parameterTypes.Concat<Type>(new[] { type }).ToArray());
 
             return Expression.Lambda(delegateType, Expression.New(ctor, parameters), parameters).Compile();
         }
@@ -365,34 +387,6 @@ namespace Ramda.NET
 
         internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {
             return new ComparerFactory(comparator);
-        }
-
-#if !NET_4_5
-
-        public static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(this ICustomAttributeProvider type, bool inherit = true) where TAttribute : Attribute {
-            return type.GetCustomAttributes(typeof(TAttribute), inherit)
-                       .Cast<TAttribute>();
-        }
-
-        public static TAttribute GetCustomAttribute<TAttribute>(this ICustomAttributeProvider type, bool inherit = true) where TAttribute : Attribute {
-            return type.GetCustomAttributes<TAttribute>(inherit).FirstOrDefault();
-        }
-
-#endif
-
-        internal static bool IsDefined<TAttribute>(this ICustomAttributeProvider attributeProvider, out TAttribute attribute, bool inherit = true) where TAttribute : Attribute {
-            attribute = default(TAttribute);
-
-            if (attributeProvider.IsDefined(typeof(TAttribute), inherit)) {
-                attribute = attributeProvider.GetCustomAttribute<TAttribute>(inherit);
-                return true;
-            }
-
-            return false;
-        }
-
-        internal static bool HasAttribute<TAttribute>(this ICustomAttributeProvider attributeProvider, bool inherit = true) where TAttribute : Attribute {
-            return attributeProvider.GetCustomAttributes<TAttribute>(inherit).FirstOrDefault().IsNotNull();
         }
     }
 }

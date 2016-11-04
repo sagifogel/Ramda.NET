@@ -622,6 +622,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LensPath.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\LiftN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LiftN.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Lt.double.cs">
       <DependentUpon>Lt.double.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -681,6 +686,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Max.char.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Mean.cs">
+      <DependentUpon>Mean.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Median.cs">
+      <DependentUpon>Median.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\MergeWith.cs">
       <DependentUpon>MergeWith.tt</DependentUpon>
@@ -1607,6 +1622,11 @@
       <LastGenOutput>LensPath.cs</LastGenOutput>
       <LastOutputs>.\LensPath.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\LiftN.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LiftN.cs</LastGenOutput>
+      <LastOutputs>.\LiftN.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Lt.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Lt.double.cs</LastGenOutput>
@@ -1661,6 +1681,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MathMod.cs</LastGenOutput>
       <LastOutputs>.\MathMod.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Mean.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mean.cs</LastGenOutput>
+      <LastOutputs>.\Mean.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Median.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Median.cs</LastGenOutput>
+      <LastOutputs>.\Median.double.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MergeWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

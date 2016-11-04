@@ -1,5 +1,4 @@
 ﻿using System;
-using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
@@ -12,7 +11,7 @@ namespace Ramda.NET
             object copy;
 
             Store(input);
-            copy = ConcatInternal(SliceInternal(acc, pos), SliceInternal(acc, 0, pos));
+            copy = acc.Slice(pos).Concat(acc.Slice(0, pos));
 
             return full ? xf.Step(result, copy) : result;
         }

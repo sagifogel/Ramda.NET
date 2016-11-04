@@ -1,33 +1,14 @@
 ﻿using System;
-using System.Linq;
+using System.Reflection;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
     {
         internal static object[] Arity(params object[] arguments) {
-            object[] result;
-
-            if (arguments.IsNull() || arguments.Length == 0) {
-                return null;
-            }
-
-            int i = arguments.Length - 1;
-
-            while (i >= 0) {
-                if (!object.Equals(arguments[i], null)) {
-                    break;
-                }
-
-                i--;
-            }
-
-            result = (object[])SliceInternal(arguments, 0, ++i);
-
-            return result.Length == 0 ? null : result;
+            return ReflectionExtensions.Arity(arguments);
         }
 
         internal static int Arity(this Delegate @delegate) {

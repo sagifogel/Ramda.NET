@@ -156,6 +156,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Curry.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Difference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Difference.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Drop.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,6 +175,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DropLastWhile.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\DropRepeats.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DropRepeats.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\DropRepeatsWith.cs">
       <AutoGen>True</AutoGen>
@@ -250,6 +260,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CountBy.cs</LastGenOutput>
       <LastOutputs>.\CountBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Difference.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Difference.cs</LastGenOutput>
+      <LastOutputs>.\Difference.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\DropRepeats.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DropRepeats.cs</LastGenOutput>
+      <LastOutputs>.\DropRepeats.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\DropRepeatsWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -631,6 +651,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LensPath.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Lift.cs">
+      <DependentUpon>Lift.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\LiftN.cs">
       <AutoGen>True</AutoGen>
@@ -1636,6 +1661,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LensPath.cs</LastGenOutput>
       <LastOutputs>.\LensPath.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lift.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lift.cs</LastGenOutput>
+      <LastOutputs>.\Lift.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\LiftN.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

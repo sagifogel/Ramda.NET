@@ -171,6 +171,12 @@ namespace Ramda.NET
             return ((Delegate)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));
         }
 
+        private static Func<object, object> Dispatchable1(string methodName, Delegate xf, Delegate fn) {
+            return new Func<object, object>(arg => {
+                return Dispatchable(methodName, xf, fn, arg);
+            });
+        }
+
         private static Lambda2 Dispatchable2(string methodName, Delegate xf, Delegate fn) {
             return new Lambda2((arg1, arg2) => {
                 var arguments = Currying.Arity(arg1, arg2);

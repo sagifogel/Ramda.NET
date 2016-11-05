@@ -1410,8 +1410,24 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Partition = Juxt(new Delegate[] { Filter, Reject });
-        
+
         internal readonly static dynamic Contains = Curry2<object, object, bool>(ContainsInternal);
+
+        internal readonly static dynamic Difference = Curry2<IList, IList, IList>((first, second) => {
+            var result = new ArrayList();
+
+            foreach (var item in first) {
+                if (!second.Contains(item) && !result.Contains(item)) {
+                    result.Add(item);
+                }
+            }
+
+            return result.ToArray<Array>();
+        });
+
+        internal readonly static dynamic DropRepeats = Curry1(new Func<object, dynamic>(Dispatchable1("DropRepeats", (Delegate)XDropRepeatsWith(Equals), DropRepeatsWith(Equals))));
+
+        internal readonly static dynamic Lift = Curry1<Delegate, Delegate>(fn => LiftN(fn.Arity(), fn));
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

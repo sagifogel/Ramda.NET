@@ -40,14 +40,6 @@ namespace Ramda.NET
             return result.Length == 0 ? null : result;
         }
 
-        internal static TArg CastTo<TArg>(this object arg) {
-            if (arg != null && typeof(IConvertible).IsAssignableFrom(arg.GetType())) {
-                return (TArg)Convert.ChangeType(arg, typeof(TArg));
-            }
-
-            return (TArg)arg;
-        }
-
         internal static bool IsDelegate(this Type type) {
             return typeof(Delegate).IsAssignableFrom(type);
         }
@@ -165,7 +157,7 @@ namespace Ramda.NET
         }
 
         internal static int GetFunctionArity(this Delegate @delegate) {
-            if (@delegate.GetType().Equals(typeof(LambdaN))) {
+            if (typeof(AbstractLambda).IsAssignableFrom(@delegate.GetType())) {
                 var methodName = "Invoke";
                 var traget = @delegate.Target;
                 var fn = traget.GetMemberWhen<FieldInfo>("fn", m => {

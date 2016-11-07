@@ -7,135 +7,40 @@ using static Ramda.NET.R;
 using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Object = Ramda.NET.ReflectionExtensions;
 using Core = Ramda.NET.IEnumerableExtensions;
+using Object = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
     {
-        internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                var length = arguments?.Length ?? 0;
-
-                if (R.__.Equals(arg1) || length == 0) {
-                    return Curry1(fn);
-                }
-
-                return fn(arg1.CastTo<TArg1>());
-            });
+        internal static dynamic Curry1(object fn) {
+            return new Curry1(fn);
         }
 
-        internal static dynamic Curry2<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arg1IsPlaceHolder = false;
-                var arg2IsPlaceHolder = false;
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                var length = arguments?.Length ?? 0;
-
-                switch (length) {
-                    case 0:
-                        return Curry2(fn);
-                    case 1:
-                        return IsPlaceholder(arg1) ? Curry2(fn) : Curry1<TArg2, TResult>(_arg2 => fn(arg1.CastTo<TArg1>(), _arg2));
-                    default:
-                        arg1IsPlaceHolder = IsPlaceholder(arg1);
-                        arg2IsPlaceHolder = IsPlaceholder(arg2);
-
-                        return arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2(fn) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
-                            return fn(_arg1, arg2.CastTo<TArg2>());
-                        }) : arg2IsPlaceHolder ? Curry1<TArg2, TResult>(_arg2 => {
-                            return fn(arg1.CastTo<TArg1>(), _arg2);
-                        }) : fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>());
-                }
-            });
+        internal static dynamic Curry2(object fn) {
+            return new Curry2(fn);
         }
 
-        internal static dynamic Curry3<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arg1IsPlaceHolder = false;
-                var arg2IsPlaceHolder = false;
-                var arg3IsPlaceHolder = false;
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                var length = arguments?.Length ?? 0;
-
-                switch (length) {
-                    case 0:
-                        return Curry3(fn);
-                    case 1:
-                        return IsPlaceholder(arg1) ? Curry3(fn) : Curry2<TArg2, TArg3, TResult>((_arg2, _arg3) => fn(arg1.CastTo<TArg1>(), _arg2, _arg3));
-                    case 2:
-                        arg1IsPlaceHolder = IsPlaceholder(arg1);
-                        arg2IsPlaceHolder = IsPlaceholder(arg2);
-
-                        return (arg1IsPlaceHolder = IsPlaceholder(arg1)) && (arg2IsPlaceHolder = IsPlaceholder(arg2)) ? Curry3(fn) : arg1IsPlaceHolder ? Curry2<TArg1, TArg3, TResult>((_arg1, _arg3) => {
-                            return fn(_arg1, arg2.CastTo<TArg2>(), _arg3);
-                        }) : arg2IsPlaceHolder ? Curry2<TArg2, TArg3, TResult>((_arg2, _arg3) => {
-                            return fn(arg1.CastTo<TArg1>(), _arg2, _arg3);
-                        }) : Curry1<TArg3, TResult>(_arg3 => {
-                            return fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), _arg3);
-                        });
-                    default:
-
-                        arg1IsPlaceHolder = IsPlaceholder(arg1);
-                        arg2IsPlaceHolder = IsPlaceholder(arg2);
-                        arg3IsPlaceHolder = IsPlaceholder(arg3);
-
-                        return arg1IsPlaceHolder && arg2IsPlaceHolder && arg3IsPlaceHolder ? Curry3(fn) : arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2<TArg1, TArg2, TResult>((_arg1, _arg2) => {
-                            return fn(_arg1, _arg2, arg3.CastTo<TArg3>());
-                        }) : arg1IsPlaceHolder && arg3IsPlaceHolder ? Curry2<TArg1, TArg3, TResult>((_arg1, _arg3) => {
-                            return fn(_arg1, arg2.CastTo<TArg2>(), _arg3);
-                        }) : arg2IsPlaceHolder && arg3IsPlaceHolder ? Curry2<TArg2, TArg3, TResult>((_arg2, _arg3) => {
-                            return fn(arg1.CastTo<TArg1>(), _arg2, _arg3);
-                        }) : arg1IsPlaceHolder ? Curry1<TArg1, TResult>(_arg1 => {
-                            return fn(_arg1, arg2.CastTo<TArg2>(), arg3.CastTo<TArg3>());
-                        }) : arg2IsPlaceHolder ? Curry1<TArg2, TResult>(_arg2 => {
-                            return fn(arg1.CastTo<TArg1>(), _arg2, arg3.CastTo<TArg3>());
-                        }) : arg3IsPlaceHolder ? Curry1<TArg3, TResult>(_arg3 => {
-                            return fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), _arg3);
-                        }) : fn(arg1.CastTo<TArg1>(), arg2.CastTo<TArg2>(), arg3.CastTo<TArg3>());
-                }
-            });
+        internal static dynamic Curry3(object fn) {
+            return new Curry3(fn);
         }
 
         internal static dynamic CurryParams(Delegate fn) {
-            return new Lambda2((object arg1, object arg2) => {
-                object[] args = null;
-                var arg1IsPlaceHolder = false;
-                var arg2IsPlaceHolder = false;
-                var arguments = Arity(arg1, arg2);
-                var length = arguments?.Length ?? 0;
-
-                switch (length) {
-                    case 0:
-                        return CurryParams(fn);
-                    case 1:
-                        return IsPlaceholder(arg1) ? CurryParams(fn) : fn.Invoke(arg1);
-                    default:
-                        arg1IsPlaceHolder = IsPlaceholder(arg1);
-                        arg2IsPlaceHolder = IsPlaceholder(arg2);
-                        args = arg2 as object[];
-
-                        return arg1IsPlaceHolder && arg2IsPlaceHolder ? CurryParams(fn) : arg1IsPlaceHolder ? Apply(R.__, args)
-                        : arg2IsPlaceHolder ? new LambdaN((_arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, ag11) => {
-                            return Apply(fn, Arity(arg1, _arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10));
-                        }) : fn.Invoke(new[] { arg1 }.Concat<object>(args).ToArray());
-                }
-            });
+            return new CurryParams(fn);
         }
 
-        internal static dynamic CurryN = Curry2<int, Delegate, dynamic>((length, fn) => {
+        internal static dynamic CurryN = Curry2(new Func<int, Delegate, dynamic>((length, fn) => {
             if (length == 1) {
                 return Curry1(new Func<object, object>(arg => fn.Invoke(arg)));
             }
 
             return Arity(length, CurryNInternal(length, new object[0], fn));
-        });
+        }));
 
-        internal readonly static dynamic Add = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 + arg2);
+        internal readonly static dynamic Add = Curry2(new Func<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 + arg2));
 
-        public readonly static dynamic Adjust = Curry3<Delegate, int, IList, IList>((fn, idx, list) => {
+        public readonly static dynamic Adjust = Curry3(new Func<Delegate, int, IList, IList>((fn, idx, list) => {
             var start = 0;
             var index = 0;
             Type elementType;
@@ -159,12 +64,12 @@ namespace Ramda.NET
             concatedList[index] = adjustedValue;
 
             return concatedList;
-        });
+        }));
 
 
-        internal readonly static dynamic Always = Curry1<dynamic, LambdaN>(value => new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => value));
+        internal readonly static dynamic Always = Curry1(new Func<dynamic, LambdaN>(value => new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => value)));
 
-        internal readonly static dynamic And = Curry2<bool, bool, bool>((a, b) => a && b);
+        internal readonly static dynamic And = Curry2(new Func<bool, bool, bool>((a, b) => a && b));
 
         internal readonly static dynamic All = Curry2(new Func<object, object, dynamic>(Dispatchable2("All", (Delegate)XAll, new Func<Delegate, IList, bool>((fn, list) => AllOrAny(fn, list, false)))));
 
@@ -172,13 +77,13 @@ namespace Ramda.NET
 
         internal readonly static dynamic Aperture = Curry2(new Func<object, object, dynamic>(Dispatchable2("Aperture", (Delegate)XAperture, new Func<int, IList, IList>(ApertureInternal))));
 
-        internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new object[] { el })));
+        internal readonly static dynamic Append = Curry2(new Func<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new object[] { el }))));
 
-        internal readonly static dynamic Apply = Curry2<Delegate, object[], object>((fn, args) => fn.Invoke(args));
+        internal readonly static dynamic Apply = Curry2(new Func<Delegate, object[], object>((fn, args) => fn.Invoke(args)));
 
-        internal readonly static dynamic Assoc = Curry3<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
+        internal readonly static dynamic Assoc = Curry3(new Func<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj)));
 
-        internal readonly static dynamic AssocPath = Curry3<IList<string>, object, object, object>((path, val, obj) => {
+        internal readonly static dynamic AssocPath = Curry3(new Func<IList<string>, object, object, object>((path, val, obj) => {
             switch (path.Count) {
                 case 0:
                     return val;
@@ -187,23 +92,23 @@ namespace Ramda.NET
                 default:
                     return Assoc(path[0], AssocPath(Slice((IList)path, 1), val, obj.Member(path[0])), obj);
             }
-        });
+        }));
 
-        internal readonly static dynamic Clamp = Curry3<dynamic, dynamic, dynamic, dynamic>((min, max, value) => {
+        internal readonly static dynamic Clamp = Curry3(new Func<dynamic, dynamic, dynamic, dynamic>((min, max, value) => {
             if (min > max) {
                 throw new ArgumentOutOfRangeException("min must not be greater than max in Clamp(min, max, value)");
             }
 
             return value < min ? min : value > max ? max : value;
-        });
+        }));
 
-        internal readonly static dynamic Comparator = Curry1<Func<object, object, bool>, Lambda2>(pred => {
+        internal readonly static dynamic Comparator = Curry1(new Func<Func<object, object, bool>, Lambda2>(pred => {
             return new Lambda2((a, b) => pred(a, b) ? -1 : pred(b, a) ? 1 : 0);
-        });
+        }));
 
         internal readonly static dynamic Dec = Add(-1);
 
-        internal readonly static dynamic DefaultTo = Curry2<object, object, object>((defaultValue, value) => {
+        internal readonly static dynamic DefaultTo = Curry2(new Func<object, object, object>((defaultValue, value) => {
             var type = value.GetType();
 
             if (type.IsClass) {
@@ -211,9 +116,9 @@ namespace Ramda.NET
             }
 
             return value == type.GetDefaultValue() ? defaultValue : value;
-        });
+        }));
 
-        internal readonly static dynamic DifferenceWith = Curry3<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
+        internal readonly static dynamic DifferenceWith = Curry3(new Func<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
             var idx = 0;
             var firstLen = first.Count;
             var result = new ArrayList();
@@ -231,13 +136,13 @@ namespace Ramda.NET
             }
 
             return result.ToArray();
-        });
+        }));
 
-        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
+        internal readonly static dynamic Dissoc = Curry2(new Func<string, object, object>((prop, obj) => ShallowCloner.CloneAndAssignDefaultValue(prop, obj)));
 
-        internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
+        internal readonly static dynamic DissocPath = Curry2(new Func<IList, object, object>(InternalDissocPath));
 
-        internal readonly static dynamic Divide = Curry2<dynamic, dynamic, dynamic>((a, b) => a / b);
+        internal readonly static dynamic Divide = Curry2(new Func<dynamic, dynamic, dynamic>((a, b) => a / b));
 
         internal readonly static dynamic DropWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropWhile", (Delegate)XDropWhile, new Func<Delegate, IList, IList>((pred, list) => {
             var idx = 0;
@@ -250,7 +155,7 @@ namespace Ramda.NET
             return list.Slice(idx);
         }))));
 
-        internal readonly static dynamic Empty = Curry1<object, dynamic>(x => {
+        internal readonly static dynamic Empty = Curry1(new Func<object, dynamic>(x => {
             if (x.IsNotNull()) {
                 var type = x.GetType();
 
@@ -272,9 +177,9 @@ namespace Ramda.NET
             }
 
             return null;
-        });
+        }));
 
-        internal readonly static dynamic Evolve = Curry2<IDictionary<string, object>, object, object>(InternalEvolve);
+        internal readonly static dynamic Evolve = Curry2(new Func<IDictionary<string, object>, object, object>(InternalEvolve));
 
         internal readonly static dynamic Find = CurryN(Dispatchable2("Find", (Delegate)XFind, new Func<Delegate, IList, object>((fn, list) => {
             return FindInternal(0, 1, idx => idx < list.Count, obj => (bool)fn.Invoke(obj), list);
@@ -300,7 +205,7 @@ namespace Ramda.NET
             return list;
         })));
 
-        internal readonly static dynamic FromPairs = Curry1<object[][], IDictionary<string, object>>(pairs => {
+        internal readonly static dynamic FromPairs = Curry1(new Func<object[][], IDictionary<string, object>>(pairs => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in pairs) {
@@ -312,9 +217,9 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic GroupWith = Curry2<Delegate, IList, IList>((fn, list) => {
+        internal readonly static dynamic GroupWith = Curry2(new Func<Delegate, IList, IList>((fn, list) => {
             var idx = 0;
             var len = list.Count;
             var res = new ArrayList();
@@ -335,25 +240,25 @@ namespace Ramda.NET
             }
 
             return res;
-        });
+        }));
 
-        internal readonly static dynamic Gt = Curry2<dynamic, dynamic, bool>((a, b) => a > b);
+        internal readonly static dynamic Gt = Curry2(new Func<dynamic, dynamic, bool>((a, b) => a > b));
 
-        internal readonly static dynamic Gte = Curry2<dynamic, dynamic, bool>((a, b) => a >= b);
+        internal readonly static dynamic Gte = Curry2(new Func<dynamic, dynamic, bool>((a, b) => a >= b));
 
-        internal readonly static dynamic Has = Curry2<string, object, bool>(HasInternal);
+        internal readonly static dynamic Has = Curry2(new Func<string, object, bool>(HasInternal));
 
-        internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a?.Equals(b) ?? b.IsNull());
+        internal readonly static dynamic Identical = Curry2(new Func<object, object, bool>((a, b) => a?.Equals(b) ?? b.IsNull()));
 
-        internal readonly static dynamic Identity = Curry1<object, object>(IdentityInternal);
+        internal readonly static dynamic Identity = Curry1(new Func<object, object>(IdentityInternal));
 
-        internal readonly static dynamic IfElse = Curry3<Delegate, Delegate, Delegate, LambdaN>((condition, onTrue, onFalse) => {
+        internal readonly static dynamic IfElse = Curry3(new Func<Delegate, Delegate, Delegate, LambdaN>((condition, onTrue, onFalse) => {
             return CurryN(1, new Lambda1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
-        });
+        }));
 
         internal readonly static dynamic Inc = Add(1);
 
-        internal readonly static dynamic Insert = Curry3<int, object, IList, IList>((idx, elt, list) => {
+        internal readonly static dynamic Insert = Curry3(new Func<int, object, IList, IList>((idx, elt, list) => {
             var result = list.CreateNewList();
 
             idx = idx < list.Count && idx >= 0 ? idx : list.Count;
@@ -364,13 +269,13 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic InsertAll = Curry3<int, IList, IList, IList>((idx, elts, list) => {
+        internal readonly static dynamic InsertAll = Curry3(new Func<int, IList, IList, IList>((idx, elts, list) => {
             idx = idx < list.Count && idx >= 0 ? idx : list.Count;
 
             return Slice(list, 0, idx).Concat(elts).Concat(Slice(list, idx));
-        });
+        }));
 
         internal readonly static dynamic Intersperse = Curry2(CheckForMethod2("Intersperse", new Func<object, IList, IList>((separator, list) => {
             var idx = 0;
@@ -402,9 +307,9 @@ namespace Ramda.NET
             return result;
         })));
 
-        internal readonly static dynamic IsArrayLike = Curry1<object, bool>(x => x.IsList());
+        internal readonly static dynamic IsArrayLike = Curry1(new Func<object, bool>(x => x.IsList()));
 
-        internal readonly static dynamic Is = Curry2<Type, object, bool>((type, val) => {
+        internal readonly static dynamic Is = Curry2(new Func<Type, object, bool>((type, val) => {
             if (val.IsNotNull()) {
                 var valueType = val.GetType();
 
@@ -412,35 +317,35 @@ namespace Ramda.NET
             }
 
             return false;
-        });
+        }));
 
-        internal readonly static dynamic IsNil = Curry1<object, bool>(val => ReferenceEquals(val, null));
+        internal readonly static dynamic IsNil = Curry1(new Func<object, bool>(val => ReferenceEquals(val, null)));
 
-        internal readonly static dynamic Keys = Curry1<object, IEnumerable<string>>(val => val.ToMemberDictionary().Select(kv => kv.Key));
+        internal readonly static dynamic Keys = Curry1(new Func<object, IEnumerable<string>>(val => val.ToMemberDictionary().Select(kv => kv.Key)));
 
-        internal readonly static dynamic Length = Curry1<IList, int>(list => list.Count);
+        internal readonly static dynamic Length = Curry1(new Func<IList, int>(list => list.Count));
 
-        internal readonly static dynamic Lt = Curry2<dynamic, dynamic, bool>((a, b) => a < b);
+        internal readonly static dynamic Lt = Curry2(new Func<dynamic, dynamic, bool>((a, b) => a < b));
 
-        internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => a <= b);
+        internal readonly static dynamic Lte = Curry2(new Func<dynamic, dynamic, bool>((a, b) => a <= b));
 
-        internal readonly static dynamic MapAccum = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list));
+        internal readonly static dynamic MapAccum = Curry3(new Func<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list)));
 
-        internal readonly static dynamic MapAccumRight = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(list.Count - 1, -1, from => from >= 0, fn, acc, list));
+        internal readonly static dynamic MapAccumRight = Curry3(new Func<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(list.Count - 1, -1, from => from >= 0, fn, acc, list)));
 
-        internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
+        internal readonly static dynamic Match = Curry2(new Func<Regex, string, MatchCollection>((rx, str) => rx.Matches(str)));
 
-        internal readonly static dynamic MathMod = Curry2<dynamic, dynamic, dynamic>((m, p) => (m % p + p) % p);
+        internal readonly static dynamic MathMod = Curry2(new Func<dynamic, dynamic, dynamic>((m, p) => (m % p + p) % p));
 
-        internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a);
+        internal readonly static dynamic Max = Curry2(new Func<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a));
 
-        internal readonly static dynamic MaxBy = Curry3<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) > f.DynamicInvoke(a) ? b : a);
+        internal readonly static dynamic MaxBy = Curry3(new Func<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) > f.DynamicInvoke(a) ? b : a));
 
-        internal readonly static dynamic Merge = Curry2<object, object, object>((l, r) => Assign(l, r));
+        internal readonly static dynamic Merge = Curry2(new Func<object, object, object>((l, r) => Assign(l, r)));
 
-        internal readonly static dynamic MergeAll = Curry1<IList, object>(Assign);
+        internal readonly static dynamic MergeAll = Curry1(new Func<IList, object>(Assign));
 
-        internal readonly static dynamic MergeWithKey = Curry3<Delegate, object, object, object>((fn, l, r) => {
+        internal readonly static dynamic MergeWithKey = Curry3(new Func<Delegate, object, object, object>((fn, l, r) => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in l.ToMemberDictionary()) {
@@ -456,17 +361,17 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic Min = Curry2<dynamic, dynamic, dynamic>((a, b) => b < a ? b : a);
+        internal readonly static dynamic Min = Curry2(new Func<dynamic, dynamic, dynamic>((a, b) => b < a ? b : a));
 
-        internal readonly static dynamic MinBy = Curry3<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) < f.DynamicInvoke(a) ? b : a);
+        internal readonly static dynamic MinBy = Curry3(new Func<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) < f.DynamicInvoke(a) ? b : a));
 
-        internal readonly static dynamic Modulo = Curry2<dynamic, dynamic, dynamic>((a, b) => a % b);
+        internal readonly static dynamic Modulo = Curry2(new Func<dynamic, dynamic, dynamic>((a, b) => a % b));
 
-        internal readonly static dynamic Multiply = Curry2<dynamic, dynamic, dynamic>((a, b) => a * b);
+        internal readonly static dynamic Multiply = Curry2(new Func<dynamic, dynamic, dynamic>((a, b) => a * b));
 
-        internal readonly static dynamic NAry = Curry2<int, Delegate, Delegate>((length, fn) => {
+        internal readonly static dynamic NAry = Curry2(new Func<int, Delegate, Delegate>((length, fn) => {
             if (length <= 10) {
                 return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     object[] args;
@@ -482,40 +387,40 @@ namespace Ramda.NET
             else {
                 throw new ArgumentOutOfRangeException("length", "First argument to Arity must be a non-negative integer no greater than ten");
             }
-        });
+        }));
 
-        internal readonly static dynamic Negate = Curry1<dynamic, dynamic>(n => -n);
+        internal readonly static dynamic Negate = Curry1(new Func<dynamic, dynamic>(n => -n));
 
         internal readonly static dynamic None = Curry2(new Func<object, object, dynamic>(Dispatchable2("Any", (Delegate)XAny, new Func<object, object, dynamic>((a, b) => Any(a, b)))));
 
-        internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
+        internal readonly static dynamic Not = Curry1(new Func<bool, bool>(a => !a));
 
-        internal readonly static dynamic Nth = Curry2<int, dynamic, object>((offset, list) => {
+        internal readonly static dynamic Nth = Curry2(new Func<int, dynamic, object>((offset, list) => {
             var count = list.GetType().Equals(typeof(string)) ? ((string)list).Length : ((IList)list).Count;
             var idx = offset < 0 ? count + offset : offset;
 
             return count > 0 && idx <= count ? list[idx] : null;
-        });
+        }));
 
-        internal readonly static dynamic NthArg = Curry1<int, LambdaN>(n => {
+        internal readonly static dynamic NthArg = Curry1(new Func<int, LambdaN>(n => {
             var arity = n < 0 ? 1 : n + 1;
 
             return CurryN(arity, new Lambda1(arguments => {
                 return Nth(n, arguments);
             }));
-        });
+        }));
 
-        internal readonly static dynamic ObjOf = Curry2<string, object, object>((key, val) => {
+        internal readonly static dynamic ObjOf = Curry2(new Func<string, object, object>((key, val) => {
             IDictionary<string, object> obj = new ExpandoObject();
 
             obj[key] = val;
 
             return obj;
-        });
+        }));
 
-        internal readonly static dynamic Of = Curry1<object, dynamic>(OfInternal);
+        internal readonly static dynamic Of = Curry1(new Func<object, dynamic>(OfInternal));
 
-        internal readonly static dynamic Once = Curry1<Delegate, Delegate>(fn => {
+        internal readonly static dynamic Once = Curry1(new Func<Delegate, Delegate>(fn => {
             var called = false;
             object result = null;
             var arity = fn.Arity();
@@ -530,17 +435,17 @@ namespace Ramda.NET
                 result = fn.DynamicInvoke(Pad(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10));
                 return result;
             }));
-        });
+        }));
 
-        internal readonly static dynamic Or = Curry2<bool, bool, bool>((a, b) => a || b);
+        internal readonly static dynamic Or = Curry2(new Func<bool, bool, bool>((a, b) => a || b));
 
-        internal readonly static dynamic Over = Curry3<Func<Func<object, Functor>, Func<object, Functor>>, Delegate, object, object>((lens, f, x) => {
+        internal readonly static dynamic Over = Curry3(new Func<Func<Func<object, Functor>, Func<object, Functor>>, Delegate, object, object>((lens, f, x) => {
             return lens(y => IdentityFunctor(f.Invoke(y)))(x).Value;
-        });
+        }));
 
-        internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => new object[2] { fst, snd });
+        internal readonly static dynamic Pair = Curry2(new Func<object, object, object[]>((fst, snd) => new object[2] { fst, snd }));
 
-        internal readonly static dynamic Path = Curry2<IList<string>, object, object>((paths, obj) => {
+        internal readonly static dynamic Path = Curry2(new Func<IList<string>, object, object>((paths, obj) => {
             var idx = 0;
             var val = obj;
 
@@ -554,17 +459,17 @@ namespace Ramda.NET
             }
 
             return val;
-        });
+        }));
 
-        internal readonly static dynamic PathOr = Curry3<object, IList<string>, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj)));
+        internal readonly static dynamic PathOr = Curry3(new Func<object, IList<string>, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj))));
 
-        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList<string>, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj)));
+        internal readonly static dynamic PathSatisfies = Curry3(new Func<Delegate, IList<string>, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj))));
 
-        internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
+        internal readonly static dynamic Pick = Curry2(new Func<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj)));
 
-        internal readonly static dynamic PickAll = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj, true));
+        internal readonly static dynamic PickAll = Curry2(new Func<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj, true)));
 
-        internal readonly static dynamic PickBy = Curry2<Delegate, object, IDictionary<string, object>>((pred, obj) => {
+        internal readonly static dynamic PickBy = Curry2(new Func<Delegate, object, IDictionary<string, object>>((pred, obj) => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in obj.ToMemberDictionary()) {
@@ -574,19 +479,19 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic Prepend = Curry2<object, IList, IList>((el, list) => new[] { el }.Concat(list));
+        internal readonly static dynamic Prepend = Curry2(new Func<object, IList, IList>((el, list) => new[] { el }.Concat(list)));
 
-        internal readonly static dynamic Prop = Curry2<dynamic, object, object>((p, obj) => Object.Member(obj, p));
+        internal readonly static dynamic Prop = Curry2(new Func<dynamic, object, object>((p, obj) => Object.Member(obj, p)));
 
-        internal readonly static dynamic PropIs = Curry3<Type, dynamic, object, bool>((type, name, obj) => Is(type, Object.Member(obj, name)));
+        internal readonly static dynamic PropIs = Curry3(new Func<Type, dynamic, object, bool>((type, name, obj) => Is(type, Object.Member(obj, name))));
 
-        internal readonly static dynamic PropOr = Curry3<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Object.Member(obj, p) ?? val : val);
+        internal readonly static dynamic PropOr = Curry3(new Func<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Object.Member(obj, p) ?? val : val));
 
-        internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.Invoke((object)Object.Member(obj, name)));
+        internal readonly static dynamic PropSatisfies = Curry3(new Func<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.Invoke((object)Object.Member(obj, name))));
 
-        internal readonly static dynamic Props = Curry2<IEnumerable<dynamic>, object, object>((ps, obj) => {
+        internal readonly static dynamic Props = Curry2(new Func<IEnumerable<dynamic>, object, object>((ps, obj) => {
             var result = new List<object>();
 
             foreach (var prop in ps) {
@@ -598,9 +503,9 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic Range = Curry2<int, int, IList>((from, to) => {
+        internal readonly static dynamic Range = Curry2(new Func<int, int, IList>((from, to) => {
             var start = 0;
             var count = 0;
 
@@ -610,9 +515,9 @@ namespace Ramda.NET
             }
 
             return Enumerable.Range(start, count).ToArray();
-        });
+        }));
 
-        internal readonly static dynamic ReduceRight = Curry3<Delegate, object, IList, object>((fn, acc, list) => {
+        internal readonly static dynamic ReduceRight = Curry3(new Func<Delegate, object, IList, object>((fn, acc, list) => {
             var idx = list.Count - 1;
 
             while (idx >= 0) {
@@ -621,17 +526,17 @@ namespace Ramda.NET
             }
 
             return acc;
-        });
+        }));
 
-        internal readonly static dynamic Reduced = Currying.Curry1<object, IReduced>(ReducedInternal);
+        internal readonly static dynamic Reduced = Currying.Curry1(new Func<object, IReduced>(ReducedInternal));
 
-        internal readonly static dynamic Remove = Curry3<int, int, IList, IList>((start, count, list) => {
+        internal readonly static dynamic Remove = Curry3(new Func<int, int, IList, IList>((start, count, list) => {
             return Slice(list, 0, Math.Min(start, list.Count)).Concat(Slice(list, Math.Min(list.Count, start + count)));
-        });
+        }));
 
-        internal readonly static dynamic Replace = Curry3<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement));
+        internal readonly static dynamic Replace = Curry3(new Func<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement)));
 
-        internal readonly static dynamic Reverse = Curry1<IEnumerable, IEnumerable>(enumerable => {
+        internal readonly static dynamic Reverse = Curry1(new Func<IEnumerable, IEnumerable>(enumerable => {
             var list = enumerable.CreateNewList();
             var enumerator = enumerable.GetEnumerator();
 
@@ -640,9 +545,9 @@ namespace Ramda.NET
             }
 
             return list;
-        });
+        }));
 
-        internal readonly static dynamic Scan = Curry3<Delegate, object, IList, IList>((fn, acc, list) => {
+        internal readonly static dynamic Scan = Curry3(new Func<Delegate, object, IList, IList>((fn, acc, list) => {
             var idx = 0;
             var len = list.Count;
             var result = new List<object>() { acc };
@@ -654,28 +559,28 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic Set = Curry3<Func<Func<object, Functor>>, object, object, object>((lens, v, x) => {
+        internal readonly static dynamic Set = Curry3(new Func<Func<Func<object, Functor>>, object, object, object>((lens, v, x) => {
             return Over(lens, Always(v), x);
-        });
+        }));
 
         internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => list.Slice(fromIndex, toIndex))));
 
-        internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
+        internal readonly static dynamic Sort = Curry2(new Func<Delegate, IList, IList>((comparator, list) => {
             return SortInternal(list, comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
-        });
+        }));
 
-        internal readonly static dynamic SortBy = Curry2<Delegate, IList, IList>((fn, list) => {
+        internal readonly static dynamic SortBy = Curry2(new Func<Delegate, IList, IList>((fn, list) => {
             return SortInternal(list, fn.ToComparer((x, y) => {
                 var xx = (dynamic)fn.DynamicInvoke(x.ToArgumentsArray());
                 var yy = (dynamic)fn.DynamicInvoke(y.ToArgumentsArray());
 
                 return xx < yy ? -1 : xx > yy ? 1 : 0;
             }));
-        });
+        }));
 
-        internal readonly static dynamic SplitEvery = Curry2<int, IList, IList>((n, list) => {
+        internal readonly static dynamic SplitEvery = Curry2(new Func<int, IList, IList>((n, list) => {
             if (n <= 0) {
                 throw new ArgumentOutOfRangeException(nameof(n), "First argument to splitEvery must be a positive integer");
             }
@@ -688,9 +593,9 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic SplitWhen = Curry2<Delegate, IList, IList>((pred, list) => {
+        internal readonly static dynamic SplitWhen = Curry2(new Func<Delegate, IList, IList>((pred, list) => {
             var idx = 0;
             var len = list.Count;
             var prefix = list.CreateNewList();
@@ -709,9 +614,9 @@ namespace Ramda.NET
             result.Add(list.Slice(idx));
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic Subtract = Curry2<double, double, double>((arg1, arg2) => arg1 - arg2);
+        internal readonly static dynamic Subtract = Curry2(new Func<double, double, double>((arg1, arg2) => arg1 - arg2));
 
         internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MinValue));
 
@@ -719,20 +624,20 @@ namespace Ramda.NET
             return Slice(0, n < 0 ? int.MaxValue : n, xs);
         }))));
 
-        internal readonly static dynamic TakeLastWhile = Curry2<Delegate, IList, IList>((fn, list) => {
+        internal readonly static dynamic TakeLastWhile = Curry2(new Func<Delegate, IList, IList>((fn, list) => {
             return TakeWhileInternal(list.Count - 1, -1, idx => idx >= 0, fn, list, idx => idx + 1, idx => int.MaxValue);
-        });
+        }));
 
         internal readonly static dynamic TakeWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("TakeWhile", (Delegate)XTakeWhile, new Func<Delegate, IList, IList>((fn, list) => {
             return TakeWhileInternal(0, 1, idx => idx < list.Count, fn, list, idx => 0, idx => idx);
         }))));
 
-        internal readonly static dynamic Tap = Curry2<Delegate, object, object>((fn, value) => {
+        internal readonly static dynamic Tap = Curry2(new Func<Delegate, object, object>((fn, value) => {
             fn.DynamicInvoke(value);
             return value;
-        });
+        }));
 
-        internal readonly static dynamic Times = Curry2<Delegate, int, IList>((fn, n) => {
+        internal readonly static dynamic Times = Curry2(new Func<Delegate, int, IList>((fn, n) => {
             if (n < 0) {
                 throw new ArgumentOutOfRangeException("n must be a non-negative number");
             }
@@ -746,15 +651,15 @@ namespace Ramda.NET
             }
 
             return list.ToArray<Array>();
-        });
+        }));
 
-        internal readonly static dynamic ToPairs = Curry1<object, object[]>((obj) => {
+        internal readonly static dynamic ToPairs = Curry1(new Func<object, object[]>((obj) => {
             return obj.ToMemberDictionary()
                       .Select(prop => new[] { prop.Key, prop.Value })
                       .ToArray();
-        });
+        }));
 
-        internal readonly static dynamic Transpose = Curry1<IList, IList>((outerlist) => {
+        internal readonly static dynamic Transpose = Curry1(new Func<IList, IList>((outerlist) => {
             var i = 0;
             var result = new List<IList>();
 
@@ -779,11 +684,11 @@ namespace Ramda.NET
             }
 
             return outerlist.CreateNewArray(result.Select(list => list.ToArray<Array>()).ToArray());
-        });
+        }));
 
-        internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
+        internal readonly static dynamic Trim = Curry1(new Func<string, string>(str => str.Trim()));
 
-        internal readonly static dynamic TryCatch = Curry2<Delegate, Delegate, LambdaN>((tryer, catcher) => {
+        internal readonly static dynamic TryCatch = Curry2(new Func<Delegate, Delegate, LambdaN>((tryer, catcher) => {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -794,21 +699,21 @@ namespace Ramda.NET
                     return catcher.Invoke(new object[] { e }.Concat(arguments));
                 }
             });
-        });
+        }));
 
-        internal readonly static dynamic Type = Curry1<object, string>(obj => obj?.GetType().Name ?? "null");
+        internal readonly static dynamic Type = Curry1(new Func<object, string>(obj => obj?.GetType().Name ?? "null"));
 
-        internal readonly static dynamic Unapply = Curry1<Delegate, object>(fn => {
+        internal readonly static dynamic Unapply = Curry1(new Func<Delegate, object>(fn => {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return fn.DynamicInvoke(arguments.Slice());
             });
-        });
+        }));
 
-        internal readonly static dynamic Unary = Curry1<Delegate, Delegate>(fn => NAry(1, fn));
+        internal readonly static dynamic Unary = Curry1(new Func<Delegate, Delegate>(fn => NAry(1, fn)));
 
-        internal readonly static dynamic UncurryN = Curry2<int, Delegate, object>((depth, fn) => {
+        internal readonly static dynamic UncurryN = Curry2(new Func<int, Delegate, object>((depth, fn) => {
             return CurryN(depth, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 int endIdx;
                 var idx = 0;
@@ -828,9 +733,9 @@ namespace Ramda.NET
 
                 return value;
             }));
-        });
+        }));
 
-        internal readonly static dynamic Unfold = Curry2<Delegate, int, IList>((fn, seed) => {
+        internal readonly static dynamic Unfold = Curry2(new Func<Delegate, int, IList>((fn, seed) => {
             IList list;
             var pair = fn.DynamicInvoke(seed);
             IList result = new List<int>();
@@ -841,9 +746,9 @@ namespace Ramda.NET
             }
 
             return result.ToArray<Array>();
-        });
+        }));
 
-        internal readonly static dynamic UniqWith = Curry2<Delegate, IList, IList>((pred, list) => {
+        internal readonly static dynamic UniqWith = Curry2(new Func<Delegate, IList, IList>((pred, list) => {
             var result = list.CreateNewList();
             var prediacte = new Func<object, object, bool>((a, b) => (bool)pred.Invoke(a, b));
 
@@ -858,13 +763,13 @@ namespace Ramda.NET
             }
 
             return result.ToList<IList>();
-        });
+        }));
 
-        internal readonly static dynamic Unless = Curry3<Delegate, Delegate, object, object>((pred, whenFalseFn, x) => {
+        internal readonly static dynamic Unless = Curry3(new Func<Delegate, Delegate, object, object>((pred, whenFalseFn, x) => {
             return (bool)pred.DynamicInvoke(x) ? x : whenFalseFn.DynamicInvoke(x);
-        });
+        }));
 
-        internal readonly static dynamic Until = Curry3<Delegate, Delegate, object, object>((pred, fn, init) => {
+        internal readonly static dynamic Until = Curry3(new Func<Delegate, Delegate, object, object>((pred, fn, init) => {
             var val = init;
 
             while (!(bool)pred.Invoke(val)) {
@@ -872,11 +777,11 @@ namespace Ramda.NET
             }
 
             return val;
-        });
+        }));
 
-        internal readonly static dynamic Update = Curry3<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list));
+        internal readonly static dynamic Update = Curry3(new Func<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list)));
 
-        internal readonly static dynamic UseWith = Curry2<Delegate, IList<Delegate>, object>((fn, transformers) => {
+        internal readonly static dynamic UseWith = Curry2(new Func<Delegate, IList<Delegate>, object>((fn, transformers) => {
             var length = transformers.Count;
 
             return CurryN(length, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
@@ -891,9 +796,9 @@ namespace Ramda.NET
 
                 return fn.Invoke((object[])args.Concat(arguments.Slice(length)));
             }));
-        });
+        }));
 
-        internal readonly static dynamic Values = Curry1<object, IList>(obj => {
+        internal readonly static dynamic Values = Curry1(new Func<object, IList>(obj => {
             Type firstType = null;
             bool sameTypeForAll = true;
             var pairs = obj.ToMemberDictionary();
@@ -918,15 +823,15 @@ namespace Ramda.NET
             }
 
             return vals.ToArray<Array>();
-        });
+        }));
 
-        internal readonly static dynamic View = Curry2<Func<Func<object, Functor>, Func<object, Functor>>, object, object>((lens, x) => lens(Const)(x).Value);
+        internal readonly static dynamic View = Curry2(new Func<Func<Func<object, Functor>, Func<object, Functor>>, object, object>((lens, x) => lens(Const)(x).Value));
 
-        internal readonly static dynamic When = Curry3<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
+        internal readonly static dynamic When = Curry3(new Func<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
             return (bool)pred.Invoke(x) ? whenTrueFn.Invoke(x) : x;
-        });
+        }));
 
-        internal readonly static dynamic Where = Curry2<IDictionary<string, object>, object, bool>((spec, testObj) => {
+        internal readonly static dynamic Where = Curry2(new Func<IDictionary<string, object>, object, bool>((spec, testObj) => {
             foreach (var pair in spec.ToMemberDictionary()) {
                 var testObjMember = testObj.Member(pair.Key);
                 var @delegate = (Delegate)pair.Value;
@@ -937,9 +842,9 @@ namespace Ramda.NET
             }
 
             return true;
-        });
+        }));
 
-        internal readonly static dynamic XProd = Curry2<IList, IList, IList>((a, b) => {
+        internal readonly static dynamic XProd = Curry2(new Func<IList, IList, IList>((a, b) => {
             var idx = 0;
             var ilen = a.Count;
             var jlen = b.Count;
@@ -951,13 +856,13 @@ namespace Ramda.NET
             }
 
             return result.SelectMany(list => list.AsEnumerable()).ToList();
-        });
+        }));
 
-        internal readonly static dynamic Zip = Curry2<IList, IList, IList>((a, b) => {
+        internal readonly static dynamic Zip = Curry2(new Func<IList, IList, IList>((a, b) => {
             return ZipInternal(a, b, Math.Min(a.Count, b.Count));
-        });
+        }));
 
-        internal readonly static dynamic ZipObj = Curry2<IList<string>, IList, IDictionary<string, object>>((keys, values) => {
+        internal readonly static dynamic ZipObj = Curry2(new Func<IList<string>, IList, IDictionary<string, object>>((keys, values) => {
             var idx = 0;
             var len = Math.Min(keys.Count, values.Count);
             IDictionary<string, object> result = new ExpandoObject();
@@ -968,9 +873,9 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic ZipWith = Curry3<Delegate, IList, IList, IList>((fn, a, b) => {
+        internal readonly static dynamic ZipWith = Curry3(new Func<Delegate, IList, IList, IList>((fn, a, b) => {
             var idx = 0;
             Type type = null;
             var allSameType = true;
@@ -997,15 +902,15 @@ namespace Ramda.NET
             }
 
             return rv.ToArray();
-        });
+        }));
 
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);
 
-        internal readonly static dynamic Clone = Curry1<object, object>(DeepCloner.Clone);
+        internal readonly static dynamic Clone = Curry1(new Func<object, object>(DeepCloner.Clone));
 
-        internal readonly static dynamic Curry = Curry1<Delegate, Delegate>(fn => CurryN(fn.Arity(), fn));
+        internal readonly static dynamic Curry = Curry1(new Func<DynamicDelegate, DynamicDelegate>(fn => CurryN(fn.Length, fn)));
 
         internal readonly static dynamic Drop = Curry2(new Func<object, object, dynamic>(Dispatchable2("Drop", (Delegate)XDrop, new Func<int, IList, IList>((n, xs) => Slice(Math.Max(0, n), int.MaxValue, xs)))));
 
@@ -1013,7 +918,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic DropLastWhile = Curry2(new Func<object, object, dynamic>(Dispatchable2("DropLastWhile", (Delegate)XDropLastWhile, new Func<Delegate, IList, IList>(DropLastWhileInternal))));
 
-        internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
+        internal new readonly static dynamic Equals = Curry2(new Func<object, object, bool>(EqualsInternal));
 
         internal readonly static dynamic Filter = Curry2(new Func<object, object, dynamic>(Dispatchable2("Filter", (Delegate)XFilter, new Func<Delegate, object, object>((pred, filterable) => {
             return !filterable.IsEnumerable() ? ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
@@ -1029,7 +934,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Flatten = Curry1(MakeFlat(true));
 
-        internal readonly static dynamic Flip = Curry1<Delegate, Delegate>(fn => {
+        internal readonly static dynamic Flip = Curry1(new Func<Delegate, Delegate>(fn => {
             return CurryN(2, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                 var args = arguments.Slice();
@@ -1039,13 +944,13 @@ namespace Ramda.NET
 
                 return fn.InvokeWithArray(args.ToArray<object[]>(typeof(object)));
             }));
-        });
+        }));
 
         internal readonly static dynamic Head = Nth(0);
 
-        internal readonly static dynamic Init = Curry1<IList, IList>(list => list.Slice(0, list.Count - 1));
+        internal readonly static dynamic Init = Curry1(new Func<IList, IList>(list => list.Slice(0, list.Count - 1)));
 
-        internal readonly static dynamic IntersectionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => {
+        internal readonly static dynamic IntersectionWith = Curry3(new Func<Delegate, IList, IList, IList>((pred, list1, list2) => {
             IList lookupList;
             IList filteredList;
             var results = new ArrayList();
@@ -1067,9 +972,9 @@ namespace Ramda.NET
             }
 
             return UniqWith(pred, results);
-        });
+        }));
 
-        internal readonly static dynamic Into = Curry3<object, Func<ITransformer, ITransformer>, IList, object>((acc, xf, list) => {
+        internal readonly static dynamic Into = Curry3(new Func<object, Func<ITransformer, ITransformer>, IList, object>((acc, xf, list) => {
             var transformer = acc as ITransformer;
 
             if (transformer.IsNotNull()) {
@@ -1077,9 +982,9 @@ namespace Ramda.NET
             }
 
             return ReduceInternal(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
-        });
+        }));
 
-        internal readonly static dynamic Invert = Curry1<object, IDictionary<string, object>>(obj => {
+        internal readonly static dynamic Invert = Curry1(new Func<object, IDictionary<string, object>>(obj => {
             var inverted = new Dictionary<string, ArrayList>();
             IDictionary<string, object> result = new ExpandoObject();
 
@@ -1095,9 +1000,9 @@ namespace Ramda.NET
             });
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic InvertObj = Curry1<object, IDictionary<string, object>>(obj => {
+        internal readonly static dynamic InvertObj = Curry1(new Func<object, IDictionary<string, object>>(obj => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var prop in obj.Keys()) {
@@ -1107,13 +1012,13 @@ namespace Ramda.NET
             }
 
             return result;
-        });
+        }));
 
-        internal readonly static dynamic IsEmpty = Curry1<object, bool>(x => x.IsNotNull() && Equals(x, Empty(x)));
+        internal readonly static dynamic IsEmpty = Curry1(new Func<object, bool>(x => x.IsNotNull() && Equals(x, Empty(x))));
 
         internal readonly static dynamic Last = Nth(-1);
 
-        internal readonly static dynamic LastIndexOf = Curry2<object, IList, int>((target, xs) => {
+        internal readonly static dynamic LastIndexOf = Curry2(new Func<object, IList, int>((target, xs) => {
             if (!xs.IsArray() && xs.HasMemberWhere("LastIndexOf", m => m.IsFunction())) {
                 return ((dynamic)xs).LastIndexOf(target);
             }
@@ -1130,7 +1035,7 @@ namespace Ramda.NET
 
                 return -1;
             }
-        });
+        }));
 
         internal readonly static dynamic Map = Curry2(new Func<object, object, dynamic>(Dispatchable2("Map", (Delegate)XMap, new Func<Delegate, object, object>((fn, functor) => {
             IList listFunctor = null;
@@ -1156,30 +1061,30 @@ namespace Ramda.NET
             return MapInternal(fn, listFunctor);
         }))));
 
-        internal readonly static dynamic MapObjIndexed = Curry2<Delegate, object, object>((fn, obj) => {
+        internal readonly static dynamic MapObjIndexed = Curry2(new Func<Delegate, object, object>((fn, obj) => {
             return ReduceInternal(new Func<IDictionary<string, object>, string, object>((acc, key) => {
                 acc[key] = fn.Invoke(obj.Member(key), key, obj);
                 return acc;
             }), new ExpandoObject(), obj.Keys());
-        });
+        }));
 
-        internal readonly static dynamic MergeWith = Curry3<Delegate, object, object, object>((fn, l, r) => {
+        internal readonly static dynamic MergeWith = Curry3(new Func<Delegate, object, object, object>((fn, l, r) => {
             return MergeWithKey(new Func<object, object, object, object>((_, _l, _r) => fn.Invoke(_l, _r)), l, r);
-        });
+        }));
 
         internal readonly static dynamic Partial = CreatePartialApplicator(new Func<IList, IList, IList>(Core.Concat));
 
         internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(Core.Concat)));
 
-        internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
+        internal readonly static dynamic PathEq = Curry3(new Func<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val)));
 
-        internal readonly static dynamic Pluck = Curry2<object, IList, IList>((p, list) => Map(Prop(p), list));
+        internal readonly static dynamic Pluck = Curry2(new Func<object, IList, IList>((p, list) => Map(Prop(p), list)));
 
         internal readonly static dynamic Project = UseWith(new Func<Delegate, IList, object>(MapInternal), new[] { (Delegate)PickAll, (Delegate)Identity });
 
-        internal readonly static dynamic PropEq = Curry3<string, object, object, bool>((name, val, obj) => Equals(val, obj.Member(name)));
+        internal readonly static dynamic PropEq = Curry3(new Func<string, object, object, bool>((name, val, obj) => Equals(val, obj.Member(name))));
 
-        internal readonly static dynamic Reduce = Curry3<object, object, object, object>(ReduceInternal);
+        internal readonly static dynamic Reduce = Curry3(new Func<object, object, object, object>(ReduceInternal));
 
         internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", (Delegate)XReduceBy, new Func<Delegate, object, Delegate, IList, object>((valueFn, valueAcc, keyFn, list) => {
             return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
@@ -1197,29 +1102,29 @@ namespace Ramda.NET
             }), a, list);
         }));
 
-        internal readonly static dynamic Reject = Curry2<Delegate, object, object>((pred, filterable) => {
+        internal readonly static dynamic Reject = Curry2(new Func<Delegate, object, object>((pred, filterable) => {
             return Filter(Complement(pred), filterable);
-        });
+        }));
 
-        internal readonly static dynamic Repeat = Curry2<object, int, IList>((value, n) => Times(Always(value), n));
+        internal readonly static dynamic Repeat = Curry2(new Func<object, int, IList>((value, n) => Times(Always(value), n)));
 
         internal readonly static dynamic Sum = Reduce(Add, 0);
 
-        internal readonly static dynamic TakeLast = Curry2<int, IList, IList>((n, xs) => Drop(n >= 0 ? xs.Count - n : 0, xs));
+        internal readonly static dynamic TakeLast = Curry2(new Func<int, IList, IList>((n, xs) => Drop(n >= 0 ? xs.Count - n : 0, xs)));
 
         internal readonly static dynamic Transduce = CurryN(4, new Func<Delegate, object, object, object, object>((xf, fn, acc, list) => {
             return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((Delegate)fn) : fn), acc, list);
         }));
 
-        internal readonly static dynamic UnionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2)));
+        internal readonly static dynamic UnionWith = Curry3(new Func<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2))));
 
-        internal readonly static dynamic WhereEq = Curry2<object, object, bool>((spec, testObj) => Where(Map(Equals, spec), testObj));
+        internal readonly static dynamic WhereEq = Curry2(new Func<object, object, bool>((spec, testObj) => Where(Map(Equals, spec), testObj)));
 
-        internal readonly static dynamic AllPass = Curry1<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, false)));
+        internal readonly static dynamic AllPass = Curry1(new Func<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, false))));
 
-        internal readonly static dynamic AnyPass = Curry1<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, true)));
+        internal readonly static dynamic AnyPass = Curry1(new Func<IList, Delegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, true))));
 
-        internal readonly static dynamic Ap = Curry2<object, object, object>((applicative, fn) => {
+        internal readonly static dynamic Ap = Curry2(new Func<object, object, object>((applicative, fn) => {
             Delegate applicativeFn = null;
             var ap = applicative.Member("Ap");
 
@@ -1242,9 +1147,9 @@ namespace Ramda.NET
             }
 
             return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => acc.Concat((IList)Map(f, fn))), new object[0], applicative);
-        });
+        }));
 
-        internal readonly static dynamic ApplySpec = Curry1<object, object>(ApplySpecInternal);
+        internal readonly static dynamic ApplySpec = Curry1(new Func<object, object>(ApplySpecInternal));
 
         internal readonly static dynamic Call = CurryParams(new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             var fn = (Delegate)arg1;
@@ -1268,7 +1173,7 @@ namespace Ramda.NET
             return MakeFlat(false)(Map(fn, monad));
         }))));
 
-        internal readonly static dynamic Cond = Curry1<IList, object>(pairs => {
+        internal readonly static dynamic Cond = Curry1(new Func<IList, object>(pairs => {
             int arity = Reduce(Max, 0, Map(new Func<IList, int>(pair => ((Delegate)pair[0]).Arity()), pairs));
 
             return Arity(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
@@ -1286,9 +1191,9 @@ namespace Ramda.NET
 
                 return null;
             }));
-        });
+        }));
 
-        internal readonly static dynamic ConstructN = Curry2<int, Type, object>((n, Fn) => {
+        internal readonly static dynamic ConstructN = Curry2(new Func<int, Type, object>((n, Fn) => {
             if (n > 10) {
                 throw new ArgumentOutOfRangeException("Constructor with greater than ten arguments");
             }
@@ -1304,15 +1209,15 @@ namespace Ramda.NET
 
                 return Fn.GetFactory(n).DynamicInvoke((object[])arguments.Slice(0, n));
             }));
-        });
+        }));
 
-        internal readonly static dynamic Converge = Curry2<Delegate, IList<Delegate>, object>((after, fns) => {
+        internal readonly static dynamic Converge = Curry2(new Func<Delegate, IList<Delegate>, object>((after, fns) => {
             return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return after.Invoke(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
             }));
-        });
+        }));
 
         internal readonly static dynamic CountBy = ReduceBy(new Func<int, object, int>((acc, elem) => acc + 1), 0);
 
@@ -1336,9 +1241,9 @@ namespace Ramda.NET
             return result.ToArray<Array>();
         }))));
 
-        internal readonly static dynamic EqBy = Curry3<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y)));
+        internal readonly static dynamic EqBy = Curry3(new Func<Delegate, object, object, bool>((f, x, y) => Equals(f.Invoke(x), f.Invoke(y))));
 
-        internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
+        internal readonly static dynamic EqProps = Curry3(new Func<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop))));
 
         internal readonly static dynamic GroupBy = Curry2(CheckForMethod2("GroupBy", ReduceBy(new Func<object, object, IList>((acc, item) => {
             var result = acc as IList;
@@ -1354,7 +1259,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic IndexBy = ReduceBy(new Func<object, object, object>((acc, elem) => elem), R.Null);
 
-        internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
+        internal readonly static dynamic IndexOf = Curry2(new Func<object, object, int>((target, xs) => {
             if (xs.IsList()) {
                 return ((IList)xs).IndexOf(target);
             }
@@ -1364,25 +1269,25 @@ namespace Ramda.NET
             }
 
             return -1;
-        });
+        }));
 
-        internal readonly static dynamic Juxt = Curry1<IList<Delegate>, Delegate>(fns => Converge(ArrayOf, fns));
+        internal readonly static dynamic Juxt = Curry1(new Func<IList<Delegate>, Delegate>(fns => Converge(ArrayOf, fns)));
 
-        internal readonly static dynamic Lens = Curry2<Delegate, Delegate, Delegate>((getter, setter) => {
+        internal readonly static dynamic Lens = Curry2(new Func<Delegate, Delegate, Delegate>((getter, setter) => {
             return new Func<Func<object, Functor>, Func<object, Functor>>(toFunctorFn => {
                 return new Func<object, Functor>(target => {
                     return Map(new Func<object, object>(focus => setter.Invoke(focus, target)), toFunctorFn(getter.Invoke(target)));
                 });
             });
-        });
+        }));
 
-        internal readonly static dynamic LensIndex = Curry1<int, Delegate>(n => Lens(Nth(n), Update(n)));
+        internal readonly static dynamic LensIndex = Curry1(new Func<int, Delegate>(n => Lens(Nth(n), Update(n))));
 
-        internal readonly static dynamic LensPath = Curry1<IList<string>, Delegate>(p => Lens(Path(p), AssocPath(p)));
+        internal readonly static dynamic LensPath = Curry1(new Func<IList<string>, Delegate>(p => Lens(Path(p), AssocPath(p))));
 
-        internal readonly static dynamic LensProp = Curry1<string, Delegate>(k => Lens(Prop(k), Assoc(k)));
+        internal readonly static dynamic LensProp = Curry1(new Func<string, Delegate>(k => Lens(Prop(k), Assoc(k))));
 
-        internal readonly static dynamic LiftN = Curry2<int, Delegate, Delegate>((arity, fn) => {
+        internal readonly static dynamic LiftN = Curry2(new Func<int, Delegate, Delegate>((arity, fn) => {
             var lifted = CurryN(arity, fn);
 
             return CurryN(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
@@ -1390,11 +1295,11 @@ namespace Ramda.NET
 
                 return ReduceInternal(Ap, Map(lifted, arguments[0]), arguments.Slice(1));
             }));
-        });
+        }));
 
-        internal readonly static dynamic Mean = Curry1<IList<double>, double>(list => Sum(list) / list.Count);
+        internal readonly static dynamic Mean = Curry1(new Func<IList<double>, double>(list => Sum(list) / list.Count));
 
-        internal readonly static dynamic Median = Curry1<IList, double>(list => {
+        internal readonly static dynamic Median = Curry1(new Func<IList, double>(list => {
             var len = list.Count;
 
             if (len == 0) {
@@ -1407,13 +1312,13 @@ namespace Ramda.NET
             return Mean(list.Slice().Sort<double>((a, b) => {
                 return a < b ? -1 : a > b ? 1 : 0;
             }).Slice(idx, idx + width));
-        });
+        }));
 
         internal readonly static dynamic Partition = Juxt(new Delegate[] { Filter, Reject });
 
-        internal readonly static dynamic Contains = Curry2<object, object, bool>(ContainsInternal);
+        internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 
-        internal readonly static dynamic Difference = Curry2<IList, IList, IList>((first, second) => {
+        internal readonly static dynamic Difference = Curry2(new Func<IList, IList, IList>((first, second) => {
             var result = new ArrayList();
 
             foreach (var item in first) {
@@ -1423,13 +1328,13 @@ namespace Ramda.NET
             }
 
             return result.ToArray<Array>();
-        });
+        }));
 
         internal readonly static dynamic DropRepeats = Curry1(new Func<object, dynamic>(Dispatchable1("DropRepeats", (Delegate)XDropRepeatsWith(Equals), DropRepeatsWith(Equals))));
 
-        internal readonly static dynamic Lift = Curry1<Delegate, Delegate>(fn => LiftN(fn.Arity(), fn));
+        internal readonly static dynamic Lift = Curry1(new Func<Delegate, Delegate>(fn => LiftN(fn.Arity(), fn)));
 
-        internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
+        internal readonly static dynamic Concat = Curry2(new Func<object, object, IEnumerable>((a, b) => {
             IList firstList = null;
             string firstString = null;
 
@@ -1466,6 +1371,6 @@ namespace Ramda.NET
             }
 
             throw new ArgumentException($"{a.GetType().Name} is not a list or string");
-        });
+        }));
     }
 }

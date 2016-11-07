@@ -137,9 +137,9 @@ namespace Ramda.NET
         }
 
         private static LambdaN CheckForMethod1(string methodName, Delegate fn) {
-            return Currying.Curry1<IList, IList>(list => {
+            return Currying.Curry1(new Func<IList, IList>(list => {
                 return (IList)CheckForMethodN(methodName, fn, list);
-            });
+            }));
         }
 
         private static Func<object, object, object> CheckForMethod2(string methodName, Delegate fn) {
@@ -262,43 +262,43 @@ namespace Ramda.NET
             return list.Slice(0, idx + 1);
         }
 
-        private readonly static dynamic XAll = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAll((o => (bool)f.Invoke(o)), xf));
+        private readonly static dynamic XAll = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAll((o => (bool)f.Invoke(o)), xf)));
 
-        private readonly static dynamic XAny = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAny(f, xf));
+        private readonly static dynamic XAny = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAny(f, xf)));
 
-        private readonly static dynamic XAperture = Curry2<int, ITransformer, ITransformer>((n, xf) => new XAperture(n, xf));
+        private readonly static dynamic XAperture = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XAperture(n, xf)));
 
-        private readonly static dynamic XDrop = Curry2<int, ITransformer, ITransformer>((n, xf) => new XDrop(n, xf));
+        private readonly static dynamic XDrop = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XDrop(n, xf)));
 
-        private readonly static dynamic XDropLast = Curry2<int, ITransformer, ITransformer>((n, xf) => new XDropLast(n, xf));
+        private readonly static dynamic XDropLast = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XDropLast(n, xf)));
 
-        private readonly static dynamic XDropRepeatsWith = Curry2<Func<object, object, bool>, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf));
+        private readonly static dynamic XDropRepeatsWith = Curry2(new Func<Func<object, object, bool>, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf)));
 
-        private readonly static dynamic XDropWhile = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf));
+        private readonly static dynamic XDropWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf)));
 
-        private readonly static dynamic XFilter = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf));
+        private readonly static dynamic XFilter = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf)));
 
-        private readonly static dynamic XFind = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFind(f, xf));
+        private readonly static dynamic XFind = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFind(f, xf)));
 
-        private readonly static dynamic XFindIndex = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf));
+        private readonly static dynamic XFindIndex = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf)));
 
-        private readonly static dynamic XFindLast = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf));
+        private readonly static dynamic XFindLast = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf)));
 
-        private readonly static dynamic XFindLastIndex = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf));
+        private readonly static dynamic XFindLastIndex = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf)));
 
-        private readonly static dynamic XMap = Curry2<Func<object, object>, ITransformer, ITransformer>((f, xf) => new XMap(f, xf));
+        private readonly static dynamic XMap = Curry2(new Func<Func<object, object>, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
         private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<Func<object, object, object>, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
             return new XReduceBy(valueFn, valueAcc, keyFn, xf);
         }));
 
-        private readonly static dynamic XTake = Curry2<int, ITransformer, ITransformer>((n, xf) => new XTake(n, xf));
+        private readonly static dynamic XTake = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XTake(n, xf)));
 
-        private readonly static dynamic XTakeWhile = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XTakeWhile(f, xf));
+        private readonly static dynamic XTakeWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XTakeWhile(f, xf)));
 
-        private readonly static dynamic XDropLastWhile = Curry2<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf));
+        private readonly static dynamic XDropLastWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
 
-        private readonly static dynamic XChain = Curry2<Delegate, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf)));
+        private readonly static dynamic XChain = Curry2(new Func<Delegate, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
 
         internal class ComparerFactory : IComparer
         {
@@ -478,41 +478,12 @@ namespace Ramda.NET
             return rv.ToArray();
         }
 
-        private static bool IsPlaceholder(object param) {
+        internal static bool IsPlaceholder(object param) {
             return param != null && R.__.Equals(param);
         }
 
-        private static LambdaN CurryNInternal(int length, object[] received, Delegate fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var argsIdx = 0;
-                var left = length;
-                var combinedIdx = 0;
-                var combined = new List<object>();
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                var argumentsLength = arguments?.Length ?? 0;
-
-                while (combinedIdx < received.Length || argsIdx < argumentsLength) {
-                    object result = null;
-
-                    if (combinedIdx < received.Length && (!IsPlaceholder(received[combinedIdx]) || argsIdx >= argumentsLength)) {
-                        result = received[combinedIdx];
-                    }
-                    else {
-                        result = arguments[argsIdx];
-                        argsIdx += 1;
-                    }
-
-                    combined.Insert(combinedIdx, result);
-
-                    if (!IsPlaceholder(result)) {
-                        left -= 1;
-                    }
-
-                    combinedIdx += 1;
-                }
-
-                return left <= 0 ? fn.Invoke(combined.ToArray()) : Arity(left, CurryNInternal(length, combined.ToArray(), fn));
-            });
+        private static CurryN CurryNInternal(int length, object[] received, Delegate fn) {
+            return new CurryN(fn, received, length);
         }
 
         private static Functor IdentityFunctor(object x) {
@@ -535,14 +506,14 @@ namespace Ramda.NET
         }
 
         private static Delegate CreatePartialApplicator(Delegate concat) {
-            return Curry2<Delegate, IList, Delegate>((fn, args) => {
+            return Curry2(new Func<Delegate, IList, Delegate>((fn, args) => {
                 return Arity(Math.Max(0, fn.Arity() - args.Count), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
 
                     return fn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
                 }));
-            });
+            }));
         }
 
         private static IList DropLastInternal(int n, IList xs) {

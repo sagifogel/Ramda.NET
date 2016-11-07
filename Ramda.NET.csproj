@@ -43,9 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicDelegate.cs" />
+    <Compile Include="DelegateDecorator.cs" />
+    <Compile Include="AbstractLambda.cs" />
+    <Compile Include="CurryParams.cs" />
     <Compile Include="DeepCloner.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Functor.cs" />
+    <Compile Include="Curry3.cs" />
+    <Compile Include="Curry2.cs" />
+    <Compile Include="Curry1.cs" />
+    <Compile Include="CurryN.cs" />
     <Compile Include="MemberComparer.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />

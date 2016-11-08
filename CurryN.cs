@@ -10,7 +10,7 @@ namespace Ramda.NET
         private int left;
         private readonly object[] received;
 
-        public CurryN(Delegate fn, object[] received = null, int? left = null) : base(fn) {
+        public CurryN(DynamicDelegate fn, object[] received = null, int? left = null) : base(fn) {
             this.received = received ?? new object[0];
             this.left = left ?? length;
         }
@@ -40,8 +40,8 @@ namespace Ramda.NET
 
                 combinedIdx += 1;
             }
-            
-            return left <= 0 ? fn.DynamicInvoke(combined.ToArray()) : new CurryN(fn, combined.ToArray(), left);
+
+            return left <= 0 ? fn(combined.ToArray()) : new CurryN(fn, combined.ToArray(), left);
         }
     }
 }

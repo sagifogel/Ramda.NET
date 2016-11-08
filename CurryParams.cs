@@ -6,7 +6,10 @@ namespace Ramda.NET
 {
     public class CurryParams : AbstractLambda
     {
-        public CurryParams(Delegate fn) : base(fn, 2) {
+        public CurryParams(DynamicDelegate fn) : base(fn, 2) {
+        }
+
+        public CurryParams(Delegate fn) : this(new DelegateDecorator(fn)) {
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
@@ -23,7 +26,7 @@ namespace Ramda.NET
 
                 switch (arguments.Length) {
                     case 1:
-                        return IsPlaceholder(arg1) ? (AbstractLambda)new Curry2(fn) : new Curry1(new Func<object, object>(_arg2 => fn.Invoke(arg1, _arg2)));
+                        return IsPlaceholder(arg1) ? (AbstractLambda)new Curry2(fn) : new Curry1(new Func<object, object>(_arg2 => fn(arg1, _arg2)));
                     default:
                         var arg2 = arguments[1];
 
@@ -31,10 +34,10 @@ namespace Ramda.NET
                         arg2IsPlaceHolder = IsPlaceholder(arg2);
 
                         return arg1IsPlaceHolder && arg2IsPlaceHolder ? (AbstractLambda)new Curry2(fn) : arg1IsPlaceHolder ? new Curry1(new Func<object, object>(_arg1 => {
-                            return fn.Invoke(_arg1, arg2);
+                            return fn(_arg1, arg2);
                         })) : arg2IsPlaceHolder ? new Curry1(new Func<object, object>(_arg2 => {
-                            return fn.Invoke(arg1, _arg2);
-                        })) : fn.Invoke(arg1, arg2);
+                            return fn(arg1, _arg2);
+                        })) : fn(arg1, arg2);
                 }
             }
         }

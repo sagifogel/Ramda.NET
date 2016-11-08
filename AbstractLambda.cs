@@ -10,19 +10,13 @@ namespace Ramda.NET
         protected readonly int length;
         protected readonly dynamic fn;
 
-        public AbstractLambda(object fn, int? length = null) {
-            if (fn.IsFunction()) {
-                this.fn = new DelegateDecorator((Delegate)fn);
-            }
-            else {
-                this.fn = (dynamic)fn;
-            }
-
-            Length = length ?? this.fn.Length;
+        public AbstractLambda(DynamicDelegate fn, int? length = null) {
+            this.fn = fn;
+            Length = length ?? fn.Length;
         }
 
         public override bool TryInvoke(InvokeBinder binder, object[] args, out object result) {
-            result = TryInvoke(binder, args, out result);
+            result = TryInvoke(binder, args);
             return true;
         }
 

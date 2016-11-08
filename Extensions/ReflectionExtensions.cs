@@ -366,7 +366,7 @@ namespace Ramda.NET
         }
 
         internal static object Invoke(this Delegate target, params object[] arguments) {
-            return target.DynamicInvoke(arguments.Pad(target));
+            return target.DynamicInvoke(arguments);
         }
 
         internal static object InvokeWithArray(this Delegate target, object[] arguments) {

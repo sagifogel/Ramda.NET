@@ -1743,7 +1743,7 @@
     <Content Include="Ramda\Median.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Median.cs</LastGenOutput>
-      <LastOutputs>.\Median.double.cs</LastOutputs>
+      <LastOutputs>.\Median.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MergeWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

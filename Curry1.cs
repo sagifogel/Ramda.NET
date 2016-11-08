@@ -7,7 +7,10 @@ namespace Ramda.NET
 {
     public class Curry1 : AbstractLambda
     {
-        public Curry1(object fn) : base(fn, 1) {
+        public Curry1(DynamicDelegate fn) : base(fn, 1) {
+        }
+
+        public Curry1(Delegate fn) : base(new DelegateDecorator(fn)) {
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
@@ -15,7 +18,7 @@ namespace Ramda.NET
                 return new Curry1(fn);
             }
 
-            return fn.Invoke(arguments[0]);
+            return fn(arguments[0]);
         }
     }
 }

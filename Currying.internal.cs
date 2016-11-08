@@ -15,11 +15,11 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
-        private static Delegate Complement(Delegate fn) {
+        private static dynamic Complement(dynamic fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                return !(bool)fn.Invoke(arguments);
+                return !(bool)fn(arguments);
             });
         }
 
@@ -68,13 +68,13 @@ namespace Ramda.NET
 
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
-        private static object[] MapInternal(Delegate fn, IList functor) {
+        private static object[] MapInternal(dynamic fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
             var result = new object[len];
 
             while (idx < len) {
-                result[idx] = fn.Invoke(functor[idx]);
+                result[idx] = fn(functor[idx]);
                 idx += 1;
             }
 
@@ -90,7 +90,7 @@ namespace Ramda.NET
             return list.ToArray<Array>();
         }
 
-        private static LambdaN PipeInternal(Delegate f, Delegate g) {
+        private static LambdaN PipeInternal(dynamic f, dynamic g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -98,7 +98,7 @@ namespace Ramda.NET
             });
         }
 
-        private static LambdaN PipePInternal(Delegate f, Delegate g) {
+        private static LambdaN PipePInternal(dynamic f, dynamic g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
@@ -136,13 +136,13 @@ namespace Ramda.NET
             return ObjectAssigner.Assign(new ExpandoObject(), list.Cast<object>().ToArray());
         }
 
-        private static LambdaN CheckForMethod1(string methodName, Delegate fn) {
-            return Currying.Curry1(new Func<IList, IList>(list => {
+        private static Curry1 CheckForMethod1(string methodName, dynamic fn) {
+            return Curry1(new Func<IList, IList>(list => {
                 return (IList)CheckForMethodN(methodName, fn, list);
             }));
         }
 
-        private static Func<object, object, object> CheckForMethod2(string methodName, Delegate fn) {
+        private static Func<object, object, object> CheckForMethod2(string methodName, dynamic fn) {
             return new Func<object, object, object>((arg1, arg2) => CheckForMethodN(methodName, fn, arg1, arg2));
         }
 
@@ -150,14 +150,14 @@ namespace Ramda.NET
             return (arg1, arg2, arg3) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2, arg3);
         }
 
-        private static object CheckForMethodN(string methodName, Delegate fn, params object[] arguments) {
+        private static object CheckForMethodN(string methodName, dynamic fn, params object[] arguments) {
             object obj;
             object member;
             var invokeFn = false;
             var length = arguments.Length;
 
             if (length == 0) {
-                return fn.DynamicInvoke(new object[0]);
+                return fn(new object[0]);
             }
 
             obj = arguments[length - 1];
@@ -165,35 +165,35 @@ namespace Ramda.NET
             invokeFn = member.IsNotNull() && !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
-                return fn.Invoke(arguments);
+                return fn(arguments);
             }
 
-            return ((Delegate)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));
+            return ((dynamic)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));
         }
 
-        private static Func<object, object> Dispatchable1(string methodName, Delegate xf, Delegate fn) {
+        private static Func<object, object> Dispatchable1(string methodName, dynamic xf, dynamic fn) {
             return new Func<object, object>(arg => {
                 return Dispatchable(methodName, xf, fn, arg);
             });
         }
 
-        private static Lambda2 Dispatchable2(string methodName, Delegate xf, Delegate fn) {
-            return new Lambda2((arg1, arg2) => {
+        private static Curry2 Dispatchable2(string methodName, dynamic xf, dynamic fn) {
+            return new Curry2(new Func<object, object, object>((arg1, arg2) => {
                 var arguments = Currying.Arity(arg1, arg2);
 
                 return Dispatchable(methodName, xf, fn, arguments);
-            });
+            }));
         }
 
-        private static Func<object, object, object, object, object> Dispatchable4(string methodName, Delegate xf, Delegate fn) {
-            return new Func<object, object, object, object, object>((arg1, arg2, arg3, arg4) => {
+        private static Delegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
+            return new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
                 var arguments = Currying.Arity(arg1, arg2, arg3, arg4);
 
                 return Dispatchable(methodName, xf, fn, arguments);
             });
         }
 
-        private static object Dispatchable(string methodName, Delegate xf, Delegate fn, params object[] arguments) {
+        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, params object[] arguments) {
             object obj;
 
             if (arguments.Length == 0) {
@@ -219,13 +219,13 @@ namespace Ramda.NET
             return fn.Invoke(arguments);
         }
 
-        private static Delegate GetMapFunction(this object obj) {
-            Delegate @delegate = null;
+        private static dynamic GetMapFunction(this object obj) {
+            dynamic @dynamic = null;
 
             obj.GetMemberWhen<MemberInfo>("Map", m => {
                 switch (m.MemberType) {
                     case MemberTypes.Method:
-                        Type delegateType = null;
+                        Type dynamicType = null;
                         var method = (MethodInfo)m;
                         IEnumerable<Type> @params = method.GetParameters().Select(p => p.ParameterType);
 
@@ -233,14 +233,14 @@ namespace Ramda.NET
                             @params = @params.Concat(new[] { method.ReturnType });
                         }
 
-                        delegateType = Expression.GetFuncType(@params.ToArray());
+                        dynamicType = Expression.GetFuncType(@params.ToArray());
 
-                        @delegate = Delegate.CreateDelegate(delegateType, method);
+                        @dynamic = dynamic.Createdynamic(dynamicType, method);
                         break;
                     case MemberTypes.Property:
                         var prop = (PropertyInfo)m;
 
-                        @delegate = prop.GetGetMethod(true).Invoke(obj, null) as Delegate;
+                        @dynamic = prop.GetGetMethod(true).Invoke(obj, null) as dynamic;
                         break;
                     default:
                         return false;
@@ -249,10 +249,10 @@ namespace Ramda.NET
                 return true;
             });
 
-            return @delegate;
+            return @dynamic;
         }
 
-        private static IList DropLastWhileInternal(Delegate pred, IList list) {
+        private static IList DropLastWhileInternal(dynamic pred, IList list) {
             var idx = list.Count - 1;
 
             while (idx >= 0 && (bool)pred.Invoke(list[idx])) {
@@ -298,7 +298,7 @@ namespace Ramda.NET
 
         private readonly static dynamic XDropLastWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
 
-        private readonly static dynamic XChain = Curry2(new Func<Delegate, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
+        private readonly static dynamic XChain = Curry2(new Func<dynamic, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
 
         internal class ComparerFactory : IComparer
         {
@@ -313,7 +313,7 @@ namespace Ramda.NET
             }
         }
 
-        private static Tuple<object, IList> MapAccumInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, object acc, IList list) {
+        private static Tuple<object, IList> MapAccumInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, dynamic fn, object acc, IList list) {
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
 
@@ -354,7 +354,7 @@ namespace Ramda.NET
             return -1;
         }
 
-        private static object InternalIfElse(Delegate condition, Delegate onTrue, Delegate onFalse, params object[] arguments) {
+        private static object InternalIfElse(dynamic condition, dynamic onTrue, dynamic onFalse, params object[] arguments) {
             return (bool)((LambdaN)condition).Invoke(arguments) ? ((LambdaN)onTrue).Invoke(arguments) : ((LambdaN)onFalse).Invoke(arguments);
         }
 
@@ -368,7 +368,7 @@ namespace Ramda.NET
 
                 if (transformations.TryGetValue(key, out transformation)) {
                     if (transformation.IsFunction()) {
-                        result[key] = ((Delegate)transformation).Invoke(value);
+                        result[key] = ((dynamic)transformation).Invoke(value);
                         continue;
                     }
                     else if (value is object) {
@@ -402,7 +402,7 @@ namespace Ramda.NET
             }
         }
 
-        private static bool AllOrAny(Delegate fn, IList list, bool returnValue) {
+        private static bool AllOrAny(dynamic fn, IList list, bool returnValue) {
             foreach (var item in list) {
                 if ((bool)fn.Invoke(item) == returnValue) {
                     return returnValue;
@@ -441,7 +441,7 @@ namespace Ramda.NET
             return array.CreateNewList(array);
         }
 
-        private static IList TakeWhileInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Delegate fn, IList list, Func<int, int> sliceFrom, Func<int, int> sliceTo) {
+        private static IList TakeWhileInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, dynamic fn, IList list, Func<int, int> sliceFrom, Func<int, int> sliceTo) {
             var idx = from;
 
             while (loopPredicate(idx) && (bool)fn.DynamicInvoke(list[idx])) {
@@ -482,14 +482,18 @@ namespace Ramda.NET
             return param != null && R.__.Equals(param);
         }
 
-        private static CurryN CurryNInternal(int length, object[] received, Delegate fn) {
+        private static CurryN CurryNInternal(int length, object[] received, DynamicDelegate fn) {
             return new CurryN(fn, received, length);
+        }
+
+        private static CurryN CurryNInternal(int length, object[] received, Delegate fn) {
+            return CurryNInternal(length, received, new DelegateDecorator(fn));
         }
 
         private static Functor IdentityFunctor(object x) {
             return new Functor {
                 Value = x,
-                Map = new Func<Delegate, Functor>(f => {
+                Map = new Func<dynamic, Functor>(f => {
                     return IdentityFunctor(f.DynamicInvoke(x));
                 })
             };
@@ -498,15 +502,15 @@ namespace Ramda.NET
         private static Functor Const(object x) {
             var functor = new Functor { Value = x };
 
-            functor.Map = new Func<Delegate, Functor>(f => {
+            functor.Map = new Func<dynamic, Functor>(f => {
                 return functor;
             });
 
             return functor;
         }
 
-        private static Delegate CreatePartialApplicator(Delegate concat) {
-            return Curry2(new Func<Delegate, IList, Delegate>((fn, args) => {
+        private static dynamic CreatePartialApplicator(dynamic concat) {
+            return Curry2(new Func<dynamic, IList, dynamic>((fn, args) => {
                 return Arity(Math.Max(0, fn.Arity() - args.Count), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
@@ -585,7 +589,7 @@ namespace Ramda.NET
             ITransformer transformer = null;
 
             if (fn.IsFunction()) {
-                transformer = new XWrap((Delegate)fn);
+                transformer = new XWrap((dynamic)fn);
             }
 
             if (list.IsEnumerable()) {
@@ -648,7 +652,7 @@ namespace Ramda.NET
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
-                foreach (Delegate pred in preds) {
+                foreach (dynamic pred in preds) {
                     if ((bool)pred.Invoke(arguments) == comparend) {
                         return comparend;
                     }

@@ -7,7 +7,7 @@ namespace Ramda.NET
 {
     internal class DelegateDecorator : DynamicDelegate
     {
-        private Delegate @delegate;
+        private readonly Delegate @delegate;
 
         internal DelegateDecorator(Delegate fn) {
             @delegate = fn;

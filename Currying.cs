@@ -42,9 +42,9 @@ namespace Ramda.NET
             return new CurryParams(fn);
         }
 
-        internal static dynamic CurryN = Curry2(new Func<int, Delegate, dynamic>((length, fn) => {
+        internal static dynamic CurryN = Curry2(new Func<int, dynamic, dynamic>((length, fn) => {
             if (length == 1) {
-                return Curry1(new Func<object, object>(arg => fn.Invoke(arg)));
+                return Curry1(new Func<object, object>(arg => fn(arg)));
             }
 
             return Arity(length, CurryNInternal(length, new object[0], fn));
@@ -387,7 +387,7 @@ namespace Ramda.NET
             if (length <= 10) {
                 return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                     object[] args;
-                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                     length = Math.Min(length, arguments.Length);
                     args = new object[length];
@@ -432,7 +432,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Of = Curry1(new Func<object, dynamic>(OfInternal));
 
-        internal readonly static dynamic Once = Curry1(new Func<Delegate, Delegate>(fn => {
+        internal readonly static dynamic Once = Curry1(new Func<Delegate, DynamicDelegate>(fn => {
             var called = false;
             object result = null;
             var arity = fn.Arity();
@@ -702,7 +702,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic TryCatch = Curry2(new Func<Delegate, Delegate, LambdaN>((tryer, catcher) => {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 try {
                     return tryer.Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
@@ -717,7 +717,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Unapply = Curry1(new Func<Delegate, object>(fn => {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return fn.DynamicInvoke(arguments.Slice());
             });
@@ -731,7 +731,7 @@ namespace Ramda.NET
                 var idx = 0;
                 object value = fn;
                 var currentDepth = 1;
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 while (currentDepth <= depth && value.IsFunction()) {
                     var @delegate = value as Delegate;
@@ -799,7 +799,7 @@ namespace Ramda.NET
             return CurryN(length, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
                 var idx = 0;
                 var args = new List<object>();
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 while (idx < length) {
                     args.Add(transformers[idx].Invoke(arguments[idx]));
@@ -1049,7 +1049,7 @@ namespace Ramda.NET
 
             if (functionFunctor.IsNotNull()) {
                 return CurryN(functionFunctor.Arity(), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                     return fn.Invoke(functionFunctor.Invoke(arguments));
                 }));
@@ -1159,7 +1159,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Call = CurryParams(new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
             var fn = (Delegate)arg1;
-            var arguments = Arity(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+            var arguments = Arguments(arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
             return fn.InvokeWithArray(arguments);
         }));
@@ -1169,7 +1169,7 @@ namespace Ramda.NET
                 var monadFn = (Delegate)monad;
 
                 return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                     var resultFn = (Delegate)monadFn.Invoke(fn.Invoke(arguments));
 
                     return resultFn.Invoke(arguments);
@@ -1183,7 +1183,7 @@ namespace Ramda.NET
             int arity = Reduce(Max, 0, Map(new Func<IList, int>(pair => ((Delegate)pair[0]).Arity()), pairs));
 
             return Arity(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 foreach (IList pair in pairs) {
                     var @delegate = (Delegate)pair[0];
@@ -1211,18 +1211,16 @@ namespace Ramda.NET
             }
 
             return CurryN(n, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return Fn.GetFactory(n).DynamicInvoke((object[])arguments.Slice(0, n));
             }));
         }));
 
-        internal readonly static dynamic Converge = Curry2(new Func<Delegate, IList<Delegate>, object>((after, fns) => {
-            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
-                return after.Invoke(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
-            }));
+        internal readonly static dynamic Converge = Curry2(new Func<dynamic, IList<DynamicDelegate>, object>((after, fns) => {
+            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new DelegateDecorator(new Func<object[], object>(arguments => {
+                return after(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
+            })));
         }));
 
         internal readonly static dynamic CountBy = ReduceBy(new Func<int, object, int>((acc, elem) => acc + 1), 0);
@@ -1277,7 +1275,7 @@ namespace Ramda.NET
             return -1;
         }));
 
-        internal readonly static dynamic Juxt = Curry1(new Func<IList<Delegate>, Delegate>(fns => Converge(ArrayOf, fns)));
+        internal readonly static dynamic Juxt = Curry1(new Func<IList<DynamicDelegate>, DynamicDelegate>(fns => Converge(ArrayOf, fns)));
 
         internal readonly static dynamic Lens = Curry2(new Func<Delegate, Delegate, Delegate>((getter, setter) => {
             return new Func<Func<object, Functor>, Func<object, Functor>>(toFunctorFn => {
@@ -1297,7 +1295,7 @@ namespace Ramda.NET
             var lifted = CurryN(arity, fn);
 
             return CurryN(arity, new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return ReduceInternal(Ap, Map(lifted, arguments[0]), arguments.Slice(1));
             }));
@@ -1320,7 +1318,7 @@ namespace Ramda.NET
             }).Slice(idx, idx + width));
         }));
 
-        internal readonly static dynamic Partition = Juxt(new Delegate[] { Filter, Reject });
+        internal readonly static dynamic Partition = Juxt(new DynamicDelegate[] { Filter, Reject });
 
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 

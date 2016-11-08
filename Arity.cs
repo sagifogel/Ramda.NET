@@ -7,8 +7,12 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
-        internal static object[] Arity(params object[] arguments) {
+        internal static object[] Arguments(params object[] arguments) {
             return ReflectionExtensions.Arity(arguments);
+        }
+
+        internal static int Arity(this DynamicDelegate @delegate) {
+            return @delegate.Length;
         }
 
         internal static int Arity(this Delegate @delegate) {
@@ -43,11 +47,13 @@ namespace Ramda.NET
             return Pad(arguments.ToArray());
         }
 
-        internal static Delegate Arity(int length, Delegate fn) {
+        internal static DynamicDelegate Arity(int length, Delegate fn) {
+            return Arity(length, new DelegateDecorator(fn));
+        }
+
+        internal static DynamicDelegate Arity(int length, DynamicDelegate fn) {
             if (length <= 10) {
-                return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    return fn.Invoke(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-                });
+                return new CurriedDelegate(length, fn);
             }
             else {
                 throw new ArgumentOutOfRangeException("length", "First argument to Arity must be a non-negative integer no greater than ten");

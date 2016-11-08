@@ -17,7 +17,7 @@ namespace Ramda.NET
     {
         private static dynamic Complement(dynamic fn) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return !(bool)fn(arguments);
             });
@@ -92,7 +92,7 @@ namespace Ramda.NET
 
         private static LambdaN PipeInternal(dynamic f, dynamic g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return g.Invoke(f.Invoke(arguments));
             });
@@ -100,7 +100,7 @@ namespace Ramda.NET
 
         private static LambdaN PipePInternal(dynamic f, dynamic g) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return Task<object>.Factory.StartNew(() => f.Invoke(arguments)).ContinueWith(result => g.Invoke(result));
             });
@@ -177,20 +177,14 @@ namespace Ramda.NET
             });
         }
 
-        private static Curry2 Dispatchable2(string methodName, dynamic xf, dynamic fn) {
-            return new Curry2(new Func<object, object, object>((arg1, arg2) => {
-                var arguments = Currying.Arity(arg1, arg2);
-
-                return Dispatchable(methodName, xf, fn, arguments);
-            }));
+        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, dynamic fn) {
+            return Curry2(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, arg1, arg2)));
         }
 
-        private static Delegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
-            return new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
-                var arguments = Currying.Arity(arg1, arg2, arg3, arg4);
-
-                return Dispatchable(methodName, xf, fn, arguments);
-            });
+        private static DynamicDelegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
+            return CurryN(4, new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
+                return Dispatchable(methodName, xf, fn, arg1, arg2, arg3, arg4);
+            }));
         }
 
         private static object Dispatchable(string methodName, dynamic xf, dynamic fn, params object[] arguments) {
@@ -482,11 +476,11 @@ namespace Ramda.NET
             return param != null && R.__.Equals(param);
         }
 
-        private static CurryN CurryNInternal(int length, object[] received, DynamicDelegate fn) {
+        private static DynamicDelegate CurryNInternal(int length, object[] received, DynamicDelegate fn) {
             return new CurryN(fn, received, length);
         }
 
-        private static CurryN CurryNInternal(int length, object[] received, Delegate fn) {
+        private static DynamicDelegate CurryNInternal(int length, object[] received, Delegate fn) {
             return CurryNInternal(length, received, new DelegateDecorator(fn));
         }
 
@@ -512,7 +506,7 @@ namespace Ramda.NET
         private static dynamic CreatePartialApplicator(dynamic concat) {
             return Curry2(new Func<dynamic, IList, dynamic>((fn, args) => {
                 return Arity(Math.Max(0, fn.Arity() - args.Count), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
 
                     return fn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
@@ -650,7 +644,7 @@ namespace Ramda.NET
 
         private static LambdaN AnyOrAllPass(IList preds, bool comparend) {
             return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 foreach (dynamic pred in preds) {
                     if ((bool)pred.Invoke(arguments) == comparend) {
@@ -666,15 +660,13 @@ namespace Ramda.NET
             spec = Map(new Func<object, object>(v => v.IsFunction() ? v : ApplySpecInternal(v)), spec);
 
             return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
 
                 return Map(new Func<object, object>(f => Apply(f, arguments)), spec);
             }));
         }
 
-        private static object ArrayOf = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-            return Arity(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-        });
+        private static object ArrayOf = new DelegateDecorator(new Func<object[], object[]>(arguments => arguments));
 
         private static bool ContainsInternal(object item, object list) {
             if (list.IsList()) {

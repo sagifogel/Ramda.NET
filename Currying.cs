@@ -22,12 +22,28 @@ namespace Ramda.NET
             return new Curry1(fn);
         }
 
+        internal static dynamic Curry1(Func<object, object> fn) {
+            return Curry1((Delegate)fn);
+        }
+
+        internal static dynamic Curry1<TArg1, TResult>(Func<TArg1, TResult> fn) {
+            return Curry1((Delegate)fn);
+        }
+
         internal static dynamic Curry2(DynamicDelegate fn) {
             return new Curry2(fn);
         }
 
         internal static dynamic Curry2(Delegate fn) {
             return new Curry2(fn);
+        }
+
+        internal static dynamic Curry2(Func<object, object, object> fn) {
+            return Curry2((Delegate)fn);
+        }
+
+        internal static dynamic Curry2<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn) {
+            return Curry2((Delegate)fn);
         }
 
         internal static dynamic Curry3(DynamicDelegate fn) {
@@ -38,21 +54,29 @@ namespace Ramda.NET
             return new Curry3(fn);
         }
 
+        internal static dynamic Curry3(Func<object, object, object, object> fn) {
+            return Curry3((Delegate)fn);
+        }
+
+        internal static dynamic Curry3<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> fn) {
+            return Curry3((Delegate)fn);
+        }
+
         internal static dynamic CurryParams(Delegate fn) {
             return new CurryParams(fn);
         }
 
-        internal static dynamic CurryN = Curry2(new Func<int, dynamic, dynamic>((length, fn) => {
+        internal static dynamic CurryN = Curry2<int, dynamic, dynamic>((length, fn) => {
             if (length == 1) {
-                return Curry1(new Func<object, object>(arg => fn(arg)));
+                return Curry1(arg => fn(arg));
             }
 
             return Arity(length, CurryNInternal(length, new object[0], fn));
-        }));
+        });
 
-        internal readonly static dynamic Add = Curry2(new Func<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 + arg2));
+        internal readonly static dynamic Add = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => Convert.ToDouble(arg1) + Convert.ToDouble(arg2));
 
-        public readonly static dynamic Adjust = Curry3(new Func<Delegate, int, IList, IList>((fn, idx, list) => {
+        public readonly static dynamic Adjust = Curry3<dynamic, int, IList, IList>((fn, idx, list) => {
             var start = 0;
             var index = 0;
             Type elementType;
@@ -67,7 +91,7 @@ namespace Ramda.NET
             index = start + idx;
             concatedList = list.Concat();
             elementType = concatedList.GetElementType();
-            adjustedValue = fn.Invoke(list[index]);
+            adjustedValue = fn(list[index]);
 
             if (!elementType.Equals(adjustedValue.GetType())) {
                 adjustedValue = adjustedValue.Cast(elementType);
@@ -76,7 +100,7 @@ namespace Ramda.NET
             concatedList[index] = adjustedValue;
 
             return concatedList;
-        }));
+        });
 
 
         internal readonly static dynamic Always = Curry1(new Func<dynamic, LambdaN>(value => new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => value)));
@@ -265,7 +289,7 @@ namespace Ramda.NET
         internal readonly static dynamic Identity = Curry1(new Func<object, object>(IdentityInternal));
 
         internal readonly static dynamic IfElse = Curry3(new Func<Delegate, Delegate, Delegate, LambdaN>((condition, onTrue, onFalse) => {
-            return CurryN(1, new Lambda1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
+            return CurryN(1, Curry1(arg1 => InternalIfElse(condition, onTrue, onFalse, arg1)));
         }));
 
         internal readonly static dynamic Inc = Add(1);
@@ -417,7 +441,7 @@ namespace Ramda.NET
         internal readonly static dynamic NthArg = Curry1(new Func<int, LambdaN>(n => {
             var arity = n < 0 ? 1 : n + 1;
 
-            return CurryN(arity, new Lambda1(arguments => {
+            return CurryN(arity, Curry1(arguments => {
                 return Nth(n, arguments);
             }));
         }));
@@ -1045,7 +1069,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Map = Curry2(Dispatchable2("Map", XMap, new Func<dynamic, object, object>((fn, functor) => {
             IList listFunctor = null;
-            var functionFunctor = functor as DynamicDelegate;   
+            var functionFunctor = functor as DynamicDelegate;
 
             if (functionFunctor.IsNotNull()) {
                 return CurryN(functionFunctor.Arity(), new DelegateDecorator(new Func<object[], object>(arguments => {

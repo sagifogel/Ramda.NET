@@ -15,7 +15,7 @@ namespace Ramda.NET
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
             if (arguments.Length == 0 || R.__.Equals(arguments[0])) {
-                return new Curry1(fn);
+                return Curry1(fn);
             }
 
             return fn(arguments[0]);

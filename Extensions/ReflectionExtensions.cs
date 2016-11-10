@@ -15,8 +15,8 @@ namespace Ramda.NET
     {
         private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
-        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
         private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
+        internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
 
         internal static object[] Arity(params object[] arguments) {
             object[] result;

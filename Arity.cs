@@ -11,6 +11,10 @@ namespace Ramda.NET
             return ReflectionExtensions.Arity(arguments);
         }
 
+        internal static int Arity(params object[] arguments) {
+            return Arguments(arguments)?.Length ?? 0;
+        }
+
         internal static int Arity(this DynamicDelegate @delegate) {
             return @delegate.Length;
         }

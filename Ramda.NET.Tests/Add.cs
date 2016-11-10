@@ -22,5 +22,27 @@ namespace Ramda.NET.Tests
 
             Assert.AreEqual(incr(42), 43);
         }
+
+        [TestMethod]
+        public void Add_Is_Commutative() {
+            int a = 10;
+            int b = 10;
+            Assert.AreEqual(R.Add(a, b), R.Add(b, a));
+        }
+
+        [TestMethod]
+        public void Add_Is_Transitive() {
+            int a = 10;
+            int b = 10;
+            int c = 15;
+            Assert.AreEqual(R.Add(a, R.Add(b, c)), R.Add(R.Add(a, b), c));
+        }
+
+        public void Add_IsIdentity() {
+            var a = 9;
+
+            Assert.AreEqual(R.Add(a, 0), a);
+            Assert.AreEqual(R.Add(0, a), a);
+        }
     }
 }

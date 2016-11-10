@@ -14,32 +14,24 @@ namespace Ramda.NET
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
-            var arg1IsPlaceHolder = false;
-            var arg2IsPlaceHolder = false;
-            var length = arguments.Length;
+            object arg1;
+            var length = Arity(arguments);
 
-            if (length == 0) {
-                return new Curry2(fn);
+            switch (length) {
+                case 0:
+                    return Curry2(fn);
+                case 1:
+                    return IsPlaceholder(arg1 = arguments[0]) ? Curry2(fn) : Curry1(_arg2 => fn(arg1, _arg2));
+                default:
+                    var arg2 = arguments[1];
+                    var arg2IsPlaceHolder = IsPlaceholder(arg2);
+                    var arg1IsPlaceHolder = IsPlaceholder(arg1 = arguments[0]);
 
-            }
-            else {
-                var arg1 = arguments[0];
-
-                switch (arguments.Length) {
-                    case 1:
-                        return IsPlaceholder(arg1) ? (DynamicDelegate)new Curry2(fn) : new Curry1(new Func<object, object>(_arg2 => fn(arg1, _arg2)));
-                    default:
-                        var arg2 = arguments[1];
-
-                        arg1IsPlaceHolder = IsPlaceholder(arg1);
-                        arg2IsPlaceHolder = IsPlaceholder(arg2);
-
-                        return arg1IsPlaceHolder && arg2IsPlaceHolder ? (AbstractLambda)new Curry2(fn) : arg1IsPlaceHolder ? new Curry1(new Func<object, object>(_arg1 => {
-                            return fn(_arg1, arg2);
-                        })) : arg2IsPlaceHolder ? new Curry1(new Func<object, object>(_arg2 => {
-                            return fn(arg1, _arg2);
-                        })) : fn(arg1, arg2);
-                }
+                    return arg1IsPlaceHolder && arg2IsPlaceHolder ? Curry2(fn) : arg1IsPlaceHolder ? Curry1(_arg1 => {
+                        return fn(_arg1, arg2);
+                    }) : arg2IsPlaceHolder ? Curry1(_arg2 => {
+                        return fn(arg1, _arg2);
+                    }) : fn(arg1, arg2);
             }
         }
     }

@@ -83,7 +83,7 @@ namespace Ramda.NET
         }
 
         internal static bool IsFunction(this object value) {
-            return value.GetType().IsDelegate();
+            return typeof(DynamicDelegate).IsAssignableFrom(value.GetType()) || value.GetType().IsDelegate();
         }
 
         internal static bool IsNull(this object target) {
@@ -366,7 +366,7 @@ namespace Ramda.NET
         }
 
         internal static object Invoke(this Delegate target, params object[] arguments) {
-            return target.DynamicInvoke(arguments);
+            return target.DynamicInvoke(arguments.Pad(target));
         }
 
         internal static object InvokeWithArray(this Delegate target, object[] arguments) {

@@ -173,21 +173,25 @@ namespace Ramda.NET
 
         private static Func<object, object> Dispatchable1(string methodName, dynamic xf, dynamic fn) {
             return new Func<object, object>(arg => {
-                return Dispatchable(methodName, xf, fn, arg);
+                return Dispatchable(methodName, xf, fn, Arguments(arg));
             });
         }
 
-        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, dynamic fn) {
-            return Curry2(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, arg1, arg2)));
+        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, Delegate fn) {
+            return Dispatchable2(methodName, xf, new DelegateDecorator(fn));
+        }
+
+        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, DynamicDelegate fn) {
+            return Curry2(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, Arguments(arg1, arg2))));
         }
 
         private static DynamicDelegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
             return CurryN(4, new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
-                return Dispatchable(methodName, xf, fn, arg1, arg2, arg3, arg4);
+                return Dispatchable(methodName, xf, fn, Arguments(arg1, arg2, arg3, arg4));
             }));
         }
 
-        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, params object[] arguments) {
+        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, object[] arguments) {
             object obj;
 
             if (arguments.Length == 0) {
@@ -210,7 +214,7 @@ namespace Ramda.NET
                 }
             }
 
-            return fn.Invoke(arguments);
+            return fn.InvokeWithArray(arguments);
         }
 
         private static dynamic GetMapFunction(this object obj) {

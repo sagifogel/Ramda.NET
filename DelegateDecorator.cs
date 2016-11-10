@@ -14,8 +14,15 @@ namespace Ramda.NET
             Length = fn.Method.GetParameters().Length;
         }
 
+        internal DelegateDecorator(Func<object[], object> fn) : this((Delegate)fn) {
+        }
+
+        public object InvokeWithArray(object[] arguments) {
+            return @delegate.InvokeWithArray(arguments);
+        }
+
         public override bool TryInvoke(InvokeBinder binder, object[] arguments, out object result) {
-            result = @delegate.Invoke(arguments);
+            result = @delegate.DynamicInvoke(arguments);
             return true;
         }
     }

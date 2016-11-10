@@ -1043,16 +1043,14 @@ namespace Ramda.NET
             }
         }));
 
-        internal readonly static dynamic Map = Curry2(Dispatchable2("Map", XMap, new Func<Delegate, object, object>((fn, functor) => {
+        internal readonly static dynamic Map = Curry2(Dispatchable2("Map", XMap, new Func<dynamic, object, object>((fn, functor) => {
             IList listFunctor = null;
-            var functionFunctor = functor as Delegate;
+            var functionFunctor = functor as DynamicDelegate;   
 
             if (functionFunctor.IsNotNull()) {
-                return CurryN(functionFunctor.Arity(), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
-                    return fn.Invoke(functionFunctor.Invoke(arguments));
-                }));
+                return CurryN(functionFunctor.Arity(), new DelegateDecorator(new Func<object[], object>(arguments => {
+                    return fn((dynamic)functionFunctor)(arguments);
+                })));
             }
 
             listFunctor = functor as IList;
@@ -1119,7 +1117,7 @@ namespace Ramda.NET
         internal readonly static dynamic TakeLast = Curry2(new Func<int, IList, IList>((n, xs) => Drop(n >= 0 ? xs.Count - n : 0, xs)));
 
         internal readonly static dynamic Transduce = CurryN(4, new Func<Delegate, object, object, object, object>((xf, fn, acc, list) => {
-            return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((Delegate)fn) : fn), acc, list);
+            return ReduceInternal(xf.Invoke(fn.IsFunction() ? new XWrap((DynamicDelegate)fn) : fn), acc, list);
         }));
 
         internal readonly static dynamic UnionWith = Curry3(new Func<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2))));
@@ -1218,9 +1216,9 @@ namespace Ramda.NET
         }));
 
         internal readonly static dynamic Converge = Curry2(new Func<dynamic, IList<DynamicDelegate>, object>((after, fns) => {
-            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new DelegateDecorator(new Func<object[], object>(arguments => {
+            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new Func<object[], object>(arguments => {
                 return after(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
-            })));
+            }));
         }));
 
         internal readonly static dynamic CountBy = ReduceBy(new Func<int, object, int>((acc, elem) => acc + 1), 0);
@@ -1334,7 +1332,7 @@ namespace Ramda.NET
             return result.ToArray<Array>();
         }));
 
-        internal readonly static dynamic DropRepeats = Curry1(new Func<object, dynamic>(Dispatchable1("DropRepeats", (Delegate)XDropRepeatsWith(Equals), DropRepeatsWith(Equals))));
+        internal readonly static dynamic DropRepeats = Curry1(new Func<object, dynamic>(Dispatchable1("DropRepeats", XDropRepeatsWith(Equals), DropRepeatsWith(Equals))));
 
         internal readonly static dynamic Lift = Curry1(new Func<Delegate, Delegate>(fn => LiftN(fn.Arity(), fn)));
 

@@ -4,9 +4,9 @@ namespace Ramda.NET
 {
     internal class XWrap : ITransformer
     {
-        private readonly Delegate f;
+        private readonly dynamic f;
 
-        internal XWrap(Delegate fn) {
+        internal XWrap(DynamicDelegate fn) {
             f = fn;
         }
 
@@ -19,7 +19,7 @@ namespace Ramda.NET
         }
 
         public dynamic Step(object acc, object x) {
-            return f.Invoke(acc, x);
+            return f(acc, x);
         }
     }
 }

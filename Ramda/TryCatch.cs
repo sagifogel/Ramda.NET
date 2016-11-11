@@ -13,15 +13,15 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic TryCatch<TSource>(Delegate tryer, Delegate catcher) {
-			return Currying.TryCatch(tryer, catcher);
+			return Currying.TryCatch(new DelegateDecorator(tryer), new DelegateDecorator(catcher));
 		}
 
 		public static dynamic TryCatch(RamdaPlaceholder tryer, Delegate catcher) {
-			return Currying.TryCatch(tryer, catcher);
+			return Currying.TryCatch(tryer, new DelegateDecorator(catcher));
 		}
 
 		public static dynamic TryCatch(Delegate tryer, RamdaPlaceholder catcher = null) {
-			return Currying.TryCatch(tryer, catcher);
+			return Currying.TryCatch(new DelegateDecorator(tryer), catcher);
 		}
 
 		public static dynamic TryCatch(RamdaPlaceholder tryer, dynamic catcher) {

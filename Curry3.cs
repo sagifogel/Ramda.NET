@@ -21,7 +21,7 @@ namespace Ramda.NET
             var arg2IsPlaceHolder = false;
             var arg3IsPlaceHolder = false;
 
-            switch (Arity(arguments)) {
+            switch (Currying.Arity(arguments)) {
                 case 0:
                     return Curry3(fn);
                 case 1:

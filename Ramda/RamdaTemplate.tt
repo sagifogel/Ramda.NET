@@ -148,7 +148,25 @@ public class RamdaTemplate : CSharpTemplate
 		return Tuple.Create("RamdaPlaceholder", string.Format("{0} = null", tuple.Item2), false);
 	}
 
-	private void Emit(List<Tuple<string, string, bool>> list, string name, string arguments) {
+	private string ToArguments(List<Tuple<string, string, bool>> tuples) {
+		var list = new List<string>();
+
+		for (int i = 0; i < tuples.Count; i++) {
+			var tuple = tuples[i];
+			var name = tuple.Item2.Replace(" = null", "");
+
+			if (tuple.Item3 && tuple.Item1 != "dynamic") {
+				list.Add(string.Format("new DelegateDecorator({0})", name));
+			}
+			else {
+				list.Add(name);
+			}
+		}
+
+		return string.Join(", ", list);
+	}
+
+	private void Emit(List<Tuple<string, string, bool>> list, string name) {
 		for (var i = 0; i < list.Count; i++)	 {
 			if (SkippedIndexedGaps.Contains(i)) {
 				continue;
@@ -163,7 +181,7 @@ public class RamdaTemplate : CSharpTemplate
 			joined = Join(shifted);
 
 			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
-				Emit(name, ResolveGenerics(shifted), joined, arguments);
+				Emit(name, ResolveGenerics(shifted), joined, ToArguments(shifted));
 			}
         }
 
@@ -173,7 +191,7 @@ public class RamdaTemplate : CSharpTemplate
 			var joined = taken.Concat(skipped.Select(FillNullablePlaceholder)).ToList();
 			var rightFilled = string.Join(", ", joined.Select(FormatTuple));		
 			
-			Emit(name, ResolveGenerics(joined), rightFilled, arguments);
+			Emit(name, ResolveGenerics(joined), rightFilled, ToArguments(joined));
 		}
 	}
 
@@ -205,14 +223,14 @@ namespace Ramda.NET
 		var dynamics = Parameters.ToList();
 		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
 		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
-		
-		Emit(name, generics, Join(Parameters), arguments, false);
-		Emit(Parameters.ToList(), name, arguments);
+
+		Emit(name, generics, Join(Parameters), ToArguments(Parameters), false);
+		Emit(Parameters.ToList(), name);
 		
 		if (TryGetDynamicParameters(dynamics)) {
 			var indexes = TryGetDynamicIndexes(dynamics);
 			
-			Emit(dynamics, name, arguments);
+			Emit(dynamics, name);
 
 			indexes.ForEach(i => {
 				dynamics = Parameters.ToList();

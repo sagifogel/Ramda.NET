@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic CountBy<TSource>(Func<TSource, string> fn, IList<TSource> list) {
-			return Currying.CountBy(fn, list);
+			return Currying.CountBy(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic CountBy<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic CountBy<TSource>(Func<TSource, string> fn, RamdaPlaceholder list = null) {
-			return Currying.CountBy(fn, list);
+			return Currying.CountBy(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic CountBy(dynamic fn, RamdaPlaceholder list = null) {

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, TArg x, TArg y) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(new DelegateDecorator(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(RamdaPlaceholder f, TArg x, TArg y) {
@@ -21,15 +21,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder x, TArg y) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(new DelegateDecorator(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, TArg x, RamdaPlaceholder y = null) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(new DelegateDecorator(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(new DelegateDecorator(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(dynamic f, RamdaPlaceholder x, TArg y) {

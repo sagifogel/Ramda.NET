@@ -5,7 +5,7 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TSource");
-	template.Parameters.Add(Tuple.Create("TSource", "target", true));	
+	template.Parameters.Add(Tuple.Create("TSource", "target", false));	
 	template.Parameters.Add(Tuple.Create("IList<TSource>", "xs", false));
 	template.Render();
 #>

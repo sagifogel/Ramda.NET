@@ -13,31 +13,31 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, new DelegateDecorator(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(fn, acc, new DelegateDecorator(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, RamdaPlaceholder acc, Func<TSource, string> keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, new DelegateDecorator(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, RamdaPlaceholder keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, Func<TSource, string> keyFn, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, new DelegateDecorator(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(new DelegateDecorator(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, dynamic keyFn, IList<TSource> list) {

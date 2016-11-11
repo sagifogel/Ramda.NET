@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic PartialRight<TSource, TReturn>(Func<TSource, TReturn> f, IList<TSource> args) {
-			return Currying.PartialRight(f, args);
+			return Currying.PartialRight(new DelegateDecorator(f), args);
 		}
 
 		public static dynamic PartialRight<TSource>(RamdaPlaceholder f, IList<TSource> args) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic PartialRight<TSource, TReturn>(Func<TSource, TReturn> f, RamdaPlaceholder args = null) {
-			return Currying.PartialRight(f, args);
+			return Currying.PartialRight(new DelegateDecorator(f), args);
 		}
 
 		public static dynamic PartialRight(dynamic f, RamdaPlaceholder args = null) {

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Find<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
-			return Currying.Find(fn, list);
+			return Currying.Find(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic Find<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Find<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.Find(fn, list);
+			return Currying.Find(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic Find(dynamic fn, RamdaPlaceholder list = null) {

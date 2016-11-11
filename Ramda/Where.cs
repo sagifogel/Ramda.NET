@@ -24,14 +24,6 @@ namespace Ramda.NET
 			return Currying.Where(spec, testObj);
 		}
 
-		public static dynamic Where(dynamic spec, RamdaPlaceholder testObj = null) {
-			return Currying.Where(spec, testObj);
-		}
-
-		public static dynamic Where<TTarget>(dynamic spec, TTarget testObj) {
-			return Currying.Where(spec, testObj);
-		}
-
 		public static dynamic Where(RamdaPlaceholder spec = null, RamdaPlaceholder testObj = null) {
 			return Currying.Where(spec, testObj);
 		}

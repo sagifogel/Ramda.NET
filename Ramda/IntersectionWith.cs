@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, IList<TSource> list2) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(new DelegateDecorator(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(RamdaPlaceholder pred, IList<TSource> list1, IList<TSource> list2) {
@@ -21,15 +21,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1, IList<TSource> list2) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(new DelegateDecorator(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(new DelegateDecorator(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(new DelegateDecorator(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(dynamic pred, RamdaPlaceholder list1, IList<TSource> list2) {

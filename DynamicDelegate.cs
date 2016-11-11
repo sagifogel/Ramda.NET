@@ -14,5 +14,9 @@ namespace Ramda.NET
 
             return base.TryGetMember(binder, out result);
         }
+
+        public int Arity() {
+            return Length;
+        }
     }
 }

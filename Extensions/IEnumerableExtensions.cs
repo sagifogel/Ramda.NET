@@ -57,9 +57,15 @@ namespace Ramda.NET
             return result.ToArray<Array>();
         }
 
-        internal static IEnumerable<TResult> Select<TResult>(IList source, Func<object, TResult> selector) {
+        internal static IEnumerable<TResult> Select<TResult>(this IList source, Func<object, TResult> selector) {
             foreach (var tSource in source) {
                 yield return selector(tSource);
+            }
+        }
+
+        internal static IEnumerable<TResult> Select<TResult>(this IList source, Func<object, int, TResult> selector) {
+            for (int i = 0; i < source.Count; i++) {
+                yield return selector(source[i], i);
             }
         }
 

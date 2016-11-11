@@ -13,23 +13,23 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(new DelegateDecorator(lens), new DelegateDecorator(v), x);
 		}
 
 		public static dynamic Over<TTarget, TElement>(RamdaPlaceholder lens, Func<TElement, TElement> v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(lens, new DelegateDecorator(v), x);
 		}
 
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(new DelegateDecorator(lens), v, x);
 		}
 
 		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, RamdaPlaceholder x = null) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(new DelegateDecorator(lens), new DelegateDecorator(v), x);
 		}
 
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(new DelegateDecorator(lens), v, x);
 		}
 
 		public static dynamic Over<TTarget>(RamdaPlaceholder lens, dynamic v, TTarget x) {

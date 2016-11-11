@@ -6,6 +6,6 @@
 
 	template.Generics.Add("TSource");
 	template.Parameters.Add(Tuple.Create("Delegate", "fn", true));	
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "transformers", true));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "transformers", false));
 	template.Render();
 #>

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Unapply(Delegate fn) {
-			return Currying.Unapply(fn);
+			return Currying.Unapply(new DelegateDecorator(fn));
 		}
 
 		public static dynamic Unapply(RamdaPlaceholder fn = null) {

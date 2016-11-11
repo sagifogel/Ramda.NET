@@ -7,20 +7,29 @@ using System.Collections;
 using static Ramda.NET.R;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
-using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 using Object = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
-    {
-        private static dynamic Complement(dynamic fn) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+    {   
+        internal static DynamicDelegate Delegate(Func<object[], object> fn) {
+            return new DelegateDecorator(fn);
+        }
 
-                return !(bool)fn(arguments);
-            });
+        private static DynamicDelegate Delegate(dynamic fn) {
+            Type type = fn.GetType();
+
+            if (type.IsDelegate()) {
+                return new DelegateDecorator((Delegate)fn);
+            }
+
+            return fn;
+        }
+
+        private static dynamic Complement(dynamic fn) {
+            return Delegate(arguments => !fn(arguments));
         }
 
         private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
@@ -90,20 +99,14 @@ namespace Ramda.NET
             return list.ToArray<Array>();
         }
 
-        private static LambdaN PipeInternal(dynamic f, dynamic g) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
-                return g.Invoke(f.Invoke(arguments));
-            });
+        private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
+            return new DelegateDecorator(new Func<object[], object>(arguments => g(f(arguments))));
         }
 
-        private static LambdaN PipePInternal(dynamic f, dynamic g) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
-                return Task<object>.Factory.StartNew(() => f.Invoke(arguments)).ContinueWith(result => g.Invoke(result));
-            });
+        private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
+            return new DelegateDecorator(new Func<object[], object>(arguments => {
+                return Task<object>.Factory.StartNew(() => f(arguments)).ContinueWith(result => g(result));
+            }));
         }
 
         internal static IReduced ReducedInternal(object x) {
@@ -353,7 +356,7 @@ namespace Ramda.NET
         }
 
         private static object InternalIfElse(dynamic condition, dynamic onTrue, dynamic onFalse, params object[] arguments) {
-            return (bool)((LambdaN)condition).Invoke(arguments) ? ((LambdaN)onTrue).Invoke(arguments) : ((LambdaN)onFalse).Invoke(arguments);
+            return condition(arguments) ? onTrue(arguments) : onFalse(arguments);
         }
 
         private static object InternalEvolve(IDictionary<string, object> transformations, object target) {
@@ -402,7 +405,7 @@ namespace Ramda.NET
 
         private static bool AllOrAny(dynamic fn, IList list, bool returnValue) {
             foreach (var item in list) {
-                if ((bool)fn.Invoke(item) == returnValue) {
+                if ((bool)fn(item) == returnValue) {
                     return returnValue;
                 }
             }
@@ -508,12 +511,12 @@ namespace Ramda.NET
         }
 
         private static dynamic CreatePartialApplicator(dynamic concat) {
-            return Curry2(new Func<dynamic, IList, dynamic>((fn, args) => {
-                return Arity(Math.Max(0, fn.Arity() - args.Count), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                    var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
+            return Curry2(new Func<DynamicDelegate, IList, dynamic>((fn, args) => {
+                return Arity(Math.Max(0, fn.Arity() - args.Count), Delegate(arguments => {
+                    dynamic dynamicFn = fn;
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
 
-                    return fn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
+                    return dynamicFn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
                 }));
             }));
         }
@@ -646,26 +649,22 @@ namespace Ramda.NET
             throw new ArgumentException($"Cannot create transformer for {obj.GetType().Name}");
         }
 
-        private static LambdaN AnyOrAllPass(IList preds, bool comparend) {
-            return new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
+        private static DynamicDelegate AnyOrAllPass(IList preds, bool comparend) {
+            return new DelegateDecorator(new Func<object[], object>(arguments => {
                 foreach (dynamic pred in preds) {
-                    if ((bool)pred.Invoke(arguments) == comparend) {
+                    if ((bool)pred(arguments) == comparend) {
                         return comparend;
                     }
                 }
 
                 return !comparend;
-            });
+            }));
         }
 
         private static object ApplySpecInternal(object spec) {
             spec = Map(new Func<object, object>(v => v.IsFunction() ? v : ApplySpecInternal(v)), spec);
 
-            return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-                var arguments = Arguments(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10);
-
+            return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), Delegate(arguments => {
                 return Map(new Func<object, object>(f => Apply(f, arguments)), spec);
             }));
         }

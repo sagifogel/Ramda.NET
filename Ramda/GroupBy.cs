@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic GroupBy<TSource>(Func<TSource, string> fn, IList<TSource> list) {
-			return Currying.GroupBy(fn, list);
+			return Currying.GroupBy(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic GroupBy<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic GroupBy<TSource>(Func<TSource, string> fn, RamdaPlaceholder list = null) {
-			return Currying.GroupBy(fn, list);
+			return Currying.GroupBy(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic GroupBy(dynamic fn, RamdaPlaceholder list = null) {

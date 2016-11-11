@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Converge(Delegate after, IList<Delegate> functions) {
-			return Currying.Converge(after, functions);
+			return Currying.Converge(new DelegateDecorator(after), functions);
 		}
 
 		public static dynamic Converge(RamdaPlaceholder after, IList<Delegate> functions) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Converge(Delegate after, RamdaPlaceholder functions = null) {
-			return Currying.Converge(after, functions);
+			return Currying.Converge(new DelegateDecorator(after), functions);
 		}
 
 		public static dynamic Converge(dynamic after, RamdaPlaceholder functions = null) {

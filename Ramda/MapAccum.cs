@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic MapAccum<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple> fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic MapAccum<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
@@ -21,15 +21,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MapAccum<TArg, TSource>(Func<TArg, TArg, Tuple> fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic MapAccum<TArg, TAccmulator>(Func<TArg, TArg, Tuple> fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic MapAccum<TArg>(Func<TArg, TArg, Tuple> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.MapAccum(fn, acc, list);
+			return Currying.MapAccum(new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic MapAccum<TSource>(dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {

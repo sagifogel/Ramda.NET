@@ -19,9 +19,5 @@ namespace Ramda.NET
 		public static dynamic ApplySpec(RamdaPlaceholder spec = null) {
 			return Currying.ApplySpec(spec);
 		}
-
-		public static dynamic ApplySpec(dynamic spec) {
-			return Currying.ApplySpec(spec);
-		}
 	}
 }

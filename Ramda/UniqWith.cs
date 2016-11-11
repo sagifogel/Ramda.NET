@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list) {
-			return Currying.UniqWith(pred, list);
+			return Currying.UniqWith(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic UniqWith<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list = null) {
-			return Currying.UniqWith(pred, list);
+			return Currying.UniqWith(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic UniqWith(dynamic pred, RamdaPlaceholder list = null) {

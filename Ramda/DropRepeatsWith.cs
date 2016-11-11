@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic DropRepeatsWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list) {
-			return Currying.DropRepeatsWith(pred, list);
+			return Currying.DropRepeatsWith(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic DropRepeatsWith<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic DropRepeatsWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list = null) {
-			return Currying.DropRepeatsWith(pred, list);
+			return Currying.DropRepeatsWith(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic DropRepeatsWith(dynamic pred, RamdaPlaceholder list = null) {

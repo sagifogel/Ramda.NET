@@ -15,7 +15,7 @@ namespace Ramda.NET
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
             object arg1;
-            var length = Arity(arguments);
+            var length = Currying.Arity(arguments);
 
             switch (length) {
                 case 0:

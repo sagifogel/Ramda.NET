@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Apply<TSource>(Delegate fn, IList<TSource> args) {
-			return Currying.Apply(fn, args);
+			return Currying.Apply(new DelegateDecorator(fn), args);
 		}
 
 		public static dynamic Apply<TSource>(RamdaPlaceholder fn, IList<TSource> args) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Apply(Delegate fn, RamdaPlaceholder args = null) {
-			return Currying.Apply(fn, args);
+			return Currying.Apply(new DelegateDecorator(fn), args);
 		}
 
 		public static dynamic Apply(dynamic fn, RamdaPlaceholder args = null) {

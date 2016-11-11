@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Reject<TTarget, TArg>(Func<TArg, bool> pred, TTarget filterable) {
-			return Currying.Reject(pred, filterable);
+			return Currying.Reject(new DelegateDecorator(pred), filterable);
 		}
 
 		public static dynamic Reject<TTarget>(RamdaPlaceholder pred, TTarget filterable) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Reject<TArg>(Func<TArg, bool> pred, RamdaPlaceholder filterable = null) {
-			return Currying.Reject(pred, filterable);
+			return Currying.Reject(new DelegateDecorator(pred), filterable);
 		}
 
 		public static dynamic Reject(dynamic pred, RamdaPlaceholder filterable = null) {

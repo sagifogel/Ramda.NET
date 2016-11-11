@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, TArg1 l, TArg2 r) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(new DelegateDecorator(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg1, TArg2>(RamdaPlaceholder fn, TArg1 l, TArg2 r) {
@@ -21,15 +21,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, RamdaPlaceholder l, TArg2 r) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(new DelegateDecorator(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, TArg1 l, RamdaPlaceholder r = null) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(new DelegateDecorator(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, RamdaPlaceholder l = null, RamdaPlaceholder r = null) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(new DelegateDecorator(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg2>(dynamic fn, RamdaPlaceholder l, TArg2 r) {

@@ -13,15 +13,15 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Lens(Delegate getter, Delegate setter) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(new DelegateDecorator(getter), new DelegateDecorator(setter));
 		}
 
 		public static dynamic Lens(RamdaPlaceholder getter, Delegate setter) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(getter, new DelegateDecorator(setter));
 		}
 
 		public static dynamic Lens(Delegate getter, RamdaPlaceholder setter = null) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(new DelegateDecorator(getter), setter);
 		}
 
 		public static dynamic Lens(RamdaPlaceholder getter, dynamic setter) {

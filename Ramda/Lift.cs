@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Lift(Delegate fn) {
-			return Currying.Lift(fn);
+			return Currying.Lift(new DelegateDecorator(fn));
 		}
 
 		public static dynamic Lift(RamdaPlaceholder fn = null) {

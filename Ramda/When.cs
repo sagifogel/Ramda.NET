@@ -13,23 +13,23 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic When<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenTrueFn, TArg x) {
-			return Currying.When(pred, whenTrueFn, x);
+			return Currying.When(new DelegateDecorator(pred), new DelegateDecorator(whenTrueFn), x);
 		}
 
 		public static dynamic When<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> whenTrueFn, TArg x) {
-			return Currying.When(pred, whenTrueFn, x);
+			return Currying.When(pred, new DelegateDecorator(whenTrueFn), x);
 		}
 
 		public static dynamic When<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenTrueFn, TArg x) {
-			return Currying.When(pred, whenTrueFn, x);
+			return Currying.When(new DelegateDecorator(pred), whenTrueFn, x);
 		}
 
 		public static dynamic When<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenTrueFn, RamdaPlaceholder x = null) {
-			return Currying.When(pred, whenTrueFn, x);
+			return Currying.When(new DelegateDecorator(pred), new DelegateDecorator(whenTrueFn), x);
 		}
 
 		public static dynamic When<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenTrueFn = null, RamdaPlaceholder x = null) {
-			return Currying.When(pred, whenTrueFn, x);
+			return Currying.When(new DelegateDecorator(pred), whenTrueFn, x);
 		}
 
 		public static dynamic When<TArg>(RamdaPlaceholder pred, dynamic whenTrueFn, TArg x) {

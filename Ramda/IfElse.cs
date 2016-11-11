@@ -13,23 +13,23 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic IfElse(Delegate condition, Delegate onTrue, Delegate onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);
+			return Currying.IfElse(new DelegateDecorator(condition), new DelegateDecorator(onTrue), new DelegateDecorator(onFalse));
 		}
 
 		public static dynamic IfElse(RamdaPlaceholder condition, Delegate onTrue, Delegate onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);
+			return Currying.IfElse(condition, new DelegateDecorator(onTrue), new DelegateDecorator(onFalse));
 		}
 
 		public static dynamic IfElse(Delegate condition, RamdaPlaceholder onTrue, Delegate onFalse) {
-			return Currying.IfElse(condition, onTrue, onFalse);
+			return Currying.IfElse(new DelegateDecorator(condition), onTrue, new DelegateDecorator(onFalse));
 		}
 
 		public static dynamic IfElse(Delegate condition, Delegate onTrue, RamdaPlaceholder onFalse = null) {
-			return Currying.IfElse(condition, onTrue, onFalse);
+			return Currying.IfElse(new DelegateDecorator(condition), new DelegateDecorator(onTrue), onFalse);
 		}
 
 		public static dynamic IfElse(Delegate condition, RamdaPlaceholder onTrue = null, RamdaPlaceholder onFalse = null) {
-			return Currying.IfElse(condition, onTrue, onFalse);
+			return Currying.IfElse(new DelegateDecorator(condition), onTrue, onFalse);
 		}
 
 		public static dynamic IfElse(RamdaPlaceholder condition, dynamic onTrue, dynamic onFalse) {

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic All<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
-			return Currying.All(fn, list);
+			return Currying.All(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic All<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic All<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.All(fn, list);
+			return Currying.All(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic All(dynamic fn, RamdaPlaceholder list = null) {

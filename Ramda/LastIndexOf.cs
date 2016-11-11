@@ -24,14 +24,6 @@ namespace Ramda.NET
 			return Currying.LastIndexOf(target, xs);
 		}
 
-		public static dynamic LastIndexOf(dynamic target, RamdaPlaceholder xs = null) {
-			return Currying.LastIndexOf(target, xs);
-		}
-
-		public static dynamic LastIndexOf<TSource>(dynamic target, IList<TSource> xs) {
-			return Currying.LastIndexOf(target, xs);
-		}
-
 		public static dynamic LastIndexOf(RamdaPlaceholder target = null, RamdaPlaceholder xs = null) {
 			return Currying.LastIndexOf(target, xs);
 		}

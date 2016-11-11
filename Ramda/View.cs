@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic View<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, TTarget x) {
-			return Currying.View(lens, x);
+			return Currying.View(new DelegateDecorator(lens), x);
 		}
 
 		public static dynamic View<TTarget>(RamdaPlaceholder lens, TTarget x) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic View<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder x = null) {
-			return Currying.View(lens, x);
+			return Currying.View(new DelegateDecorator(lens), x);
 		}
 
 		public static dynamic View(dynamic lens, RamdaPlaceholder x = null) {

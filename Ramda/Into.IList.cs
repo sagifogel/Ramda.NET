@@ -13,11 +13,11 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Into<TSource, TAccumulator>(IList<TAccumulator> acc, Func<ITransformer, ITransformer> xf, IList<TSource> list) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, new DelegateDecorator(xf), list);
 		}
 
 		public static dynamic Into<TSource>(RamdaPlaceholder acc, Func<ITransformer, ITransformer> xf, IList<TSource> list) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, new DelegateDecorator(xf), list);
 		}
 
 		public static dynamic Into<TSource, TAccumulator>(IList<TAccumulator> acc, RamdaPlaceholder xf, IList<TSource> list) {
@@ -25,7 +25,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Into<TAccumulator>(IList<TAccumulator> acc, Func<ITransformer, ITransformer> xf, RamdaPlaceholder list = null) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, new DelegateDecorator(xf), list);
 		}
 
 		public static dynamic Into<TAccumulator>(IList<TAccumulator> acc, RamdaPlaceholder xf = null, RamdaPlaceholder list = null) {

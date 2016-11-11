@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic SplitWhen<TValue>(Func<TValue, bool> pred, IList<TValue> list) {
-			return Currying.SplitWhen(pred, list);
+			return Currying.SplitWhen(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic SplitWhen<TValue>(RamdaPlaceholder pred, IList<TValue> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic SplitWhen<TValue>(Func<TValue, bool> pred, RamdaPlaceholder list = null) {
-			return Currying.SplitWhen(pred, list);
+			return Currying.SplitWhen(new DelegateDecorator(pred), list);
 		}
 
 		public static dynamic SplitWhen(dynamic pred, RamdaPlaceholder list = null) {

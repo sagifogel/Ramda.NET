@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Times<TReturn>(Func<int, TReturn> fn, int n) {
-			return Currying.Times(fn, n);
+			return Currying.Times(new DelegateDecorator(fn), n);
 		}
 
 		public static dynamic Times(RamdaPlaceholder fn, int n) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Times<TReturn>(Func<int, TReturn> fn, RamdaPlaceholder n = null) {
-			return Currying.Times(fn, n);
+			return Currying.Times(new DelegateDecorator(fn), n);
 		}
 
 		public static dynamic Times(dynamic fn, RamdaPlaceholder n = null) {

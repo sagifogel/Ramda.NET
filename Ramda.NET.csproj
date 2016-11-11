@@ -365,7 +365,6 @@
     <Compile Include="Extensions\CurryingExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
-    <Compile Include="Lambda.cs" />
     <Compile Include="Ramda\AssocPath.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, TTarget x) {
-			return Currying.Tap(fn, x);
+			return Currying.Tap(new DelegateDecorator(fn), x);
 		}
 
 		public static dynamic Tap<TTarget>(RamdaPlaceholder fn, TTarget x) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, RamdaPlaceholder x = null) {
-			return Currying.Tap(fn, x);
+			return Currying.Tap(new DelegateDecorator(fn), x);
 		}
 
 		public static dynamic Tap(dynamic fn, RamdaPlaceholder x = null) {

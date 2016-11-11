@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Comparator<TArg>(Func<TArg, TArg, bool> pred) {
-			return Currying.Comparator(pred);
+			return Currying.Comparator(new DelegateDecorator(pred));
 		}
 
 		public static dynamic Comparator(RamdaPlaceholder pred = null) {

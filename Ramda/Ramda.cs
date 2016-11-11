@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Collections;
-using static Ramda.NET.Lambda;
 using System.Collections.Generic;
 
 namespace Ramda.NET
@@ -123,13 +122,9 @@ namespace Ramda.NET
             return Currying.Take(n, list.ToCharArray());
         }
 
-        public static dynamic F = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-            return Currying.F();
-        });
+        public static dynamic F = Currying.Delegate(_ => Currying.F());
 
-        public static dynamic T = new LambdaN((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => {
-            return Currying.T();
-        });
+        public static dynamic T = Currying.Delegate(_ => Currying.T());
 
         public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
             return Currying.Filter(pred, filterable);
@@ -193,6 +188,14 @@ namespace Ramda.NET
 
         public static dynamic Juxt(IList<dynamic> fns) {
             return Currying.Juxt(fns);
+        }
+
+        public static dynamic UseWith<TSource>(Delegate fn, IList<dynamic> transformers) {
+            return Currying.UseWith(fn, transformers);
+        }
+
+        public static dynamic UseWith<TSource>(RamdaPlaceholder fn, IList<dynamic> transformers) {
+            return Currying.UseWith(fn, transformers);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic DropLastWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
-			return Currying.DropLastWhile(fn, list);
+			return Currying.DropLastWhile(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic DropLastWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic DropLastWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.DropLastWhile(fn, list);
+			return Currying.DropLastWhile(new DelegateDecorator(fn), list);
 		}
 
 		public static dynamic DropLastWhile(dynamic fn, RamdaPlaceholder list = null) {

@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Curry(Delegate fn) {
-			return Currying.Curry(fn);
+			return Currying.Curry(new DelegateDecorator(fn));
 		}
 
 		public static dynamic Curry(RamdaPlaceholder fn = null) {

@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TTarget");
 	template.Generics.Add("TElement");
-	template.Parameters.Add(Tuple.Create("Func<Func<TTarget, IdentityObj>, Func<TTarget, IdentityObj>>", "lens", true));	
+	template.Parameters.Add(Tuple.Create("Func<Func<TTarget, Functor>, Func<TTarget, Functor>>", "lens", true));	
 	template.Parameters.Add(Tuple.Create("Func<TElement, TElement>", "v", true));
 	template.Parameters.Add(Tuple.Create("TTarget", "x", false));
 	template.Render();

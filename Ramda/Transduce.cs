@@ -13,27 +13,27 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, TAccumulator acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, RamdaPlaceholder fn, TAccumulator acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), fn, acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, TAccumulator acc, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic Transduce(Func<ITransformer, ITransformer> xf, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), fn, acc, list);
 		}
 
 		public static dynamic Transduce<TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(new DelegateDecorator(xf), new DelegateDecorator(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, RamdaPlaceholder fn, TAccumulator acc, IList<TSource> list) {

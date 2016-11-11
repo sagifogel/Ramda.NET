@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, IList<TSource> array) {
-			return Currying.IndexBy(fn, array);
+			return Currying.IndexBy(new DelegateDecorator(fn), array);
 		}
 
 		public static dynamic IndexBy<TSource>(RamdaPlaceholder fn, IList<TSource> array) {
@@ -21,7 +21,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, RamdaPlaceholder array = null) {
-			return Currying.IndexBy(fn, array);
+			return Currying.IndexBy(new DelegateDecorator(fn), array);
 		}
 
 		public static dynamic IndexBy(dynamic fn, RamdaPlaceholder array = null) {

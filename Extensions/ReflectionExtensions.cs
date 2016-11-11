@@ -4,7 +4,6 @@ using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using System.Linq.Expressions;
-using static Ramda.NET.Lambda;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -136,7 +135,7 @@ namespace Ramda.NET
                 }
             }
             else if (type.IsDelegate() && name.Equals("Length")) {
-                return ((Delegate)target).GetFunctionArity();
+                return FunctionArity(target);
             }
             else {
                 var member = type.TryGetMemberInfoFromType(name);
@@ -156,24 +155,14 @@ namespace Ramda.NET
             return R.Null;
         }
 
-        internal static int GetFunctionArity(this Delegate @delegate) {
-            if (typeof(AbstractLambda).IsAssignableFrom(@delegate.GetType())) {
-                var methodName = "Invoke";
-                var traget = @delegate.Target;
-                var fn = traget.GetMemberWhen<FieldInfo>("fn", m => {
-                    return m.MemberType == MemberTypes.Field && ((FieldInfo)m).FieldType.IsDelegate();
-                });
+        internal static int FunctionArity(dynamic @delegate) {
+            var dynamicDelegate = @delegate as DynamicDelegate;
 
-                if (fn.IsNotNull()) {
-                    if (fn.FieldType.Equals(typeof(Delegate))) {
-                        methodName = $"Dynamic{methodName}";
-                    }
-
-                    return fn.FieldType.GetMethod(methodName).Arity();
-                }
+            if (dynamicDelegate.IsNotNull()) {
+                return dynamicDelegate.Length;
             }
 
-            return @delegate.Method.Arity();
+            return ((Delegate)@delegate).Method.Arity();
         }
 
         internal static object Member(this Array target, int index) {

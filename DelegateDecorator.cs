@@ -22,7 +22,7 @@ namespace Ramda.NET
         }
 
         public override bool TryInvoke(InvokeBinder binder, object[] arguments, out object result) {
-            result = @delegate.DynamicInvoke(arguments);
+            result = @delegate.Invoke(arguments);
             return true;
         }
     }

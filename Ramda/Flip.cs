@@ -13,7 +13,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Flip(Delegate fn) {
-			return Currying.Flip(fn);
+			return Currying.Flip(new DelegateDecorator(fn));
 		}
 
 		public static dynamic Flip(RamdaPlaceholder fn = null) {

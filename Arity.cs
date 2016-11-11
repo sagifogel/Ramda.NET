@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Reflection;
-using static Ramda.NET.Lambda;
 using System.Collections.Generic;
+using Reflection =  Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
     {
         internal static object[] Arguments(params object[] arguments) {
-            return ReflectionExtensions.Arity(arguments);
+            return Reflection.Arity(arguments);
         }
 
         internal static int Arity(params object[] arguments) {
@@ -20,6 +20,10 @@ namespace Ramda.NET
         }
 
         internal static int Arity(this Delegate @delegate) {
+            return Reflection.FunctionArity(@delegate);
+        }
+
+        internal static int Arity(dynamic @delegate) {
             return @delegate.GetFunctionArity();
         }
 

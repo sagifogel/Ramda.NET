@@ -7,7 +7,6 @@ namespace Ramda.NET
 {
     public abstract class AbstractLambda : DynamicDelegate
     {
-        protected readonly int length;
         protected readonly dynamic fn;
 
         public AbstractLambda(DynamicDelegate fn, int? length = null) {

@@ -122,9 +122,9 @@ namespace Ramda.NET
             return Currying.Take(n, list.ToCharArray());
         }
 
-        public static dynamic F = Currying.Delegate(_ => Currying.F());
+        public static dynamic F = Currying.Delegate(() => Currying.F());
 
-        public static dynamic T = Currying.Delegate(_ => Currying.T());
+        public static dynamic T = Currying.Delegate(() => Currying.T());
 
         public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
             return Currying.Filter(pred, filterable);

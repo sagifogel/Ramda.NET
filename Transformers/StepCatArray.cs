@@ -15,9 +15,11 @@ namespace Ramda.NET
         }
 
         public object Step(object result, object input) {
-            ((ArrayList)result).Add(input);
+            var arrayList = result.IsArray() ? new ArrayList((Array)result) : (ArrayList)result;
 
-            return result;
+            arrayList.Add(input);
+
+            return arrayList;
         }
     }
 }

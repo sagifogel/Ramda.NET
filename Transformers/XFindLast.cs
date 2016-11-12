@@ -6,7 +6,7 @@ namespace Ramda.NET
     {
         protected override object last { get; set; }
 
-        internal XFindLast(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XFindLast(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
 
         protected override object GetStepLastValue(object input) => input;

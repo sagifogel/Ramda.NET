@@ -6,7 +6,7 @@ namespace Ramda.NET
     {
         protected override object defaultValue { get; } = null;
 
-        internal XFind(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XFind(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
 
         protected override object GetStepInputValue(object input) => input;

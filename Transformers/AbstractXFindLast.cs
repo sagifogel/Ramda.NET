@@ -6,7 +6,7 @@ namespace Ramda.NET
     {
         protected abstract object last { get; set; }
 
-        internal AbstractXFindLast(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal AbstractXFindLast(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
 
         public override object Result(object result) {

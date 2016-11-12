@@ -8,13 +8,28 @@ using static Ramda.NET.R;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using Object = Ramda.NET.ReflectionExtensions;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
-    {   
+    {
         internal static DynamicDelegate Delegate(Func<object[], object> fn) {
+            return new DelegateDecorator(fn);
+        }
+
+        internal static DynamicDelegate Delegate(Func<object> fn) {
+            return new DelegateDecorator(fn);
+        }
+        internal static DynamicDelegate Delegate(Func<object, object> fn) {
+            return new DelegateDecorator(fn);
+        }
+
+        internal static DynamicDelegate Delegate(Func<object, object, object> fn) {
+            return new DelegateDecorator(fn);
+        }
+
+        internal static DynamicDelegate Delegate(Func<object, object, object, object> fn) {
             return new DelegateDecorator(fn);
         }
 
@@ -29,7 +44,7 @@ namespace Ramda.NET
         }
 
         private static dynamic Complement(dynamic fn) {
-            return Delegate(arguments => !fn(arguments));
+            return Delegate((object[] arguments) => !fn(arguments));
         }
 
         private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
@@ -185,7 +200,7 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, DynamicDelegate fn) {
-            return Curry2(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, Arguments(arg1, arg2))));
+            return Delegate(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, Arguments(arg1, arg2))));
         }
 
         private static DynamicDelegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
@@ -202,22 +217,23 @@ namespace Ramda.NET
             }
 
             obj = arguments[arguments.Length - 1];
-            if (!obj.IsArray()) {
-                var args = (object[])arguments.Slice(0, arguments.Length - 1);
-                var member = GetMapFunction(obj);
 
-                if (member.IsNotNull()) {
-                    return member.Invoke(args);
+            if (!obj.IsList()) {
+                var args = (object[])arguments.Slice(0, arguments.Length - 1);
+                dynamic member = GetMapFunction(obj);
+
+                if (member != null) {
+                    return member(args);
                 }
 
                 if (obj is ITransformer) {
-                    var transformer = (dynamic)xf.Invoke(args);
+                    var transformer = DynamicInvoke(xf, args);
 
                     return transformer(obj);
                 }
             }
 
-            return fn.InvokeWithArray(arguments);
+            return DynamicInvoke(fn, arguments);
         }
 
         private static dynamic GetMapFunction(this object obj) {
@@ -273,31 +289,31 @@ namespace Ramda.NET
 
         private readonly static dynamic XDropLast = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XDropLast(n, xf)));
 
-        private readonly static dynamic XDropRepeatsWith = Curry2(new Func<Func<object, object, bool>, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf)));
+        private readonly static dynamic XDropRepeatsWith = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf)));
 
-        private readonly static dynamic XDropWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf)));
+        private readonly static dynamic XDropWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf)));
 
-        private readonly static dynamic XFilter = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf)));
+        private readonly static dynamic XFilter = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf)));
 
-        private readonly static dynamic XFind = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFind(f, xf)));
+        private readonly static dynamic XFind = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFind(f, xf)));
 
-        private readonly static dynamic XFindIndex = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf)));
+        private readonly static dynamic XFindIndex = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf)));
 
-        private readonly static dynamic XFindLast = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf)));
+        private readonly static dynamic XFindLast = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf)));
 
-        private readonly static dynamic XFindLastIndex = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf)));
+        private readonly static dynamic XFindLastIndex = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf)));
 
-        private readonly static dynamic XMap = Curry2(new Func<Func<object, object>, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
+        private readonly static dynamic XMap = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
-        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<Func<object, object, object>, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
+        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<DynamicDelegate, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
             return new XReduceBy(valueFn, valueAcc, keyFn, xf);
         }));
 
         private readonly static dynamic XTake = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XTake(n, xf)));
 
-        private readonly static dynamic XTakeWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XTakeWhile(f, xf)));
+        private readonly static dynamic XTakeWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XTakeWhile(f, xf)));
 
-        private readonly static dynamic XDropLastWhile = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
+        private readonly static dynamic XDropLastWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
 
         private readonly static dynamic XChain = Curry2(new Func<dynamic, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
 
@@ -419,7 +435,7 @@ namespace Ramda.NET
             foreach (var name in names) {
                 object member;
 
-                if (!Object.TryGetMember(name, obj, out member) && !setIfNull) {
+                if (!TryGetMember(name, obj, out member) && !setIfNull) {
                     continue;
                 }
 
@@ -512,7 +528,7 @@ namespace Ramda.NET
 
         private static dynamic CreatePartialApplicator(dynamic concat) {
             return Curry2(new Func<DynamicDelegate, IList, dynamic>((fn, args) => {
-                return Arity(Math.Max(0, fn.Arity() - args.Count), Delegate(arguments => {
+                return Arity(Math.Max(0, fn.Arity() - args.Count), Delegate((object[] arguments) => {
                     dynamic dynamicFn = fn;
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
 
@@ -587,7 +603,7 @@ namespace Ramda.NET
         }
 
         internal static object ReduceInternal(object fn, object acc, object list) {
-            ITransformer transformer = null;
+            var transformer = fn as ITransformer;
 
             if (fn.IsFunction()) {
                 transformer = new XWrap((dynamic)fn);
@@ -639,7 +655,7 @@ namespace Ramda.NET
             objType = obj.GetType();
 
             if (objType.Equals(typeof(string))) {
-                return transformer;
+                return new StepCatString();
             }
 
             if (objType.Equals(typeof(object))) {
@@ -664,7 +680,7 @@ namespace Ramda.NET
         private static object ApplySpecInternal(object spec) {
             spec = Map(new Func<object, object>(v => v.IsFunction() ? v : ApplySpecInternal(v)), spec);
 
-            return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), Delegate(arguments => {
+            return CurryN(Reduce(Max, 0, Pluck("Length", Values(spec))), Delegate((object[] arguments) => {
                 return Map(new Func<object, object>(f => Apply(f, arguments)), spec);
             }));
         }

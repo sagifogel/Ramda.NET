@@ -4,7 +4,7 @@ namespace Ramda.NET
 {
     internal class XDropWhile : AbstractXPredicate
     {
-        internal XDropWhile(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XDropWhile(DynamicDelegate f, ITransformer xf) : base(f, xf) {
             this.f = f;
         }
 

@@ -7,7 +7,7 @@ namespace Ramda.NET
         private int idx;
         protected override object last { get; set; } = -1;
 
-        internal XFindLastIndex(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XFindLastIndex(DynamicDelegate f, ITransformer xf) : base(f, xf) {
             idx = -1;
         }
 

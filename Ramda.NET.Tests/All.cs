@@ -7,6 +7,7 @@ namespace Ramda.NET.Tests
     public class All
     {
         private Func<bool> T = () => true;
+        private dynamic intoArray = R.Into(new object[0]);
         private Func<int, bool> even = n => n % 2 == 0;
         private Func<bool, bool> isFalse = x => x == false;
 
@@ -24,6 +25,13 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void All_Returns_True_For_An_Empty_List() {
             Assert.AreEqual(R.All(T, new int[0]), true);
+        }
+
+
+        [TestMethod]
+        public void All_Returns_True_Into_Array_If_All_Elements_Satisfy_The_Predicate() {
+            CollectionAssert.AreEqual(intoArray(R.All(even), new[] { 2, 4, 6, 8, 10, 12 }), new[] { true });
+            CollectionAssert.AreEqual(intoArray(R.All(isFalse), new[] { false, false, false }), new[] { true });
         }
 
         [TestMethod]

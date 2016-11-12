@@ -11,7 +11,7 @@ namespace Ramda.NET
 
         public CurryN(DynamicDelegate fn, object[] received = null, int? left = null) : base(fn) {
             this.received = received ?? new object[0];
-            this.left = left ?? length;
+            this.left = left ?? Length;
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {

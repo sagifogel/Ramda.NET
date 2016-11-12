@@ -8,7 +8,7 @@ namespace Ramda.NET
         private bool found = false;
         protected abstract object defaultValue { get; }
 
-        internal AbstractXFind(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal AbstractXFind(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
 
         public override object Result(object result) {

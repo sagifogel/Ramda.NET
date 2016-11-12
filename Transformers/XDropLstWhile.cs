@@ -8,7 +8,7 @@ namespace Ramda.NET
     {
         private ArrayList retained = new ArrayList();
         
-        internal XDropLstWhile(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XDropLstWhile(DynamicDelegate f, ITransformer xf) : base(f, xf) {
             this.f = f;
         }
 

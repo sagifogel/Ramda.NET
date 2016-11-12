@@ -7,7 +7,7 @@ namespace Ramda.NET
         private int idx;
         protected override object defaultValue { get; } = -1;
 
-        internal XFindIndex(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal XFindIndex(DynamicDelegate f, ITransformer xf) : base(f, xf) {
             idx = -1;
         }
 

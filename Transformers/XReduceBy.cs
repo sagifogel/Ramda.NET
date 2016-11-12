@@ -8,11 +8,11 @@ namespace Ramda.NET
     internal class XReduceBy : XFBase<ITransformer>, ITransformer
     {
         private readonly IList valueAcc;
+        private readonly dynamic valueFn;
         private readonly Func<object, string> keyFn;
         private IDictionary<string, object[]> inputs;
-        private readonly Func<object, object, object> valueFn;
 
-        internal XReduceBy(Func<object, object, object> valueFn, IList valueAcc, Func<object, string> keyFn, ITransformer xf) : base(xf) {
+        internal XReduceBy(DynamicDelegate valueFn, IList valueAcc, Func<object, string> keyFn, ITransformer xf) : base(xf) {
             this.keyFn = keyFn;
             this.valueFn = valueFn;
             this.valueAcc = valueAcc;

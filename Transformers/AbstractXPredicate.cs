@@ -4,7 +4,7 @@ namespace Ramda.NET
 {
     internal abstract class AbstractXPredicate : AbstractXFn<bool>
     {
-        internal AbstractXPredicate(Func<object, bool> f, ITransformer xf) : base(f, xf) {
+        internal AbstractXPredicate(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
     }
 }

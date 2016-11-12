@@ -4,7 +4,7 @@ namespace Ramda.NET
 {
     internal abstract class AbstractXTransform : AbstractXFn<object>
     {
-        internal AbstractXTransform(Func<object, object> f, ITransformer xf) : base(f, xf) {
+        internal AbstractXTransform(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
     }
 }

@@ -362,6 +362,37 @@ namespace Ramda.NET
             return target.DynamicInvoke(arguments.Pad(target));
         }
 
+        internal static object DynamicInvoke(dynamic target, object[] arguments) {
+            var args = Arguments(arguments);
+
+            switch (arguments.Length) {
+                case 0:
+                    return target();
+                case 1:
+                    return target(args[0]);
+                case 2:
+                    return target(args[0], args[1]);
+                case 3:
+                    return target(args[0], args[1], args[2]);
+                case 4:
+                    return target(args[0], args[1], args[2], args[3]);
+                case 5:
+                    return target(args[0], args[1], args[2], args[3], args[4]);
+                case 6:
+                    return target(args[0], args[1], args[2], args[3], args[4], args[5]);
+                case 7:
+                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                case 8:
+                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                case 9:
+                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                case 10:
+                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+                default:
+                    throw new ArgumentOutOfRangeException("Argument length must be a non-negative integer no greater than ten");
+            }
+        }
+
         internal static bool Is<TCompareTo>(this object @object) {
             return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
         }

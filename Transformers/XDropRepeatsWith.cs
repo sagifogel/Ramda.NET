@@ -4,11 +4,11 @@ namespace Ramda.NET
 {
     internal class XDropRepeatsWith : XFBase<ITransformer>, ITransformer
     {
+        private dynamic pred;
         private object lastValue;
         private bool seenFirstValue = false;
-        private Func<object, object, bool> pred;
 
-        internal XDropRepeatsWith(Func<object, object, bool> pred, ITransformer xf) : base(xf) {
+        internal XDropRepeatsWith(DynamicDelegate pred, ITransformer xf) : base(xf) {
             this.pred = pred;
         }
 

@@ -4,7 +4,7 @@ namespace Ramda.NET
 {
     internal class XMap : AbstractXTransform
     {
-        internal XMap(Func<object, object> f, ITransformer xf) : base(f, xf) {
+        internal XMap(DynamicDelegate f, ITransformer xf) : base(f, xf) {
         }
 
         public override object Step(object result, object input) {

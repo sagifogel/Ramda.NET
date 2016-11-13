@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using static Ramda.NET.Currying;
-
-namespace Ramda.NET
+﻿namespace Ramda.NET
 {
     internal class StepCatString : ITransformer
     {

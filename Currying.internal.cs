@@ -658,8 +658,8 @@ namespace Ramda.NET
                 return new StepCatString();
             }
 
-            if (objType.Equals(typeof(object))) {
-                return transformer;
+            if (typeof(object).IsAssignableFrom(objType)) {
+                return new StepCatObject();
             }
 
             throw new ArgumentException($"Cannot create transformer for {obj.GetType().Name}");

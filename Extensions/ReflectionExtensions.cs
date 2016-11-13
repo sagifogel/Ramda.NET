@@ -46,13 +46,16 @@ namespace Ramda.NET
         internal static bool IsDictionary(this object target) {
             return target.GetType().TypeIsDictionary();
         }
+        internal static bool IsExpandoObject(this object target) {
+            return target.GetType().TypeIsExpandoObject();
+        }
 
-        internal static bool IsExpandoObject(this Type type) {
+        internal static bool TypeIsExpandoObject(this Type type) {
             return type.Equals(typeof(ExpandoObject));
         }
 
         internal static bool TypeIsDictionary(this Type type) {
-            if (typeof(IDictionary).IsAssignableFrom(type) || type.IsExpandoObject()) {
+            if (typeof(IDictionary).IsAssignableFrom(type) || type.TypeIsExpandoObject()) {
                 return true;
             }
 

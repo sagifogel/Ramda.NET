@@ -18,39 +18,50 @@ namespace Ramda.NET
 
         internal static ExpandoObject Assign(ExpandoObject target, params object[] objectN) {
             objectN.ForEach(source => {
-                var lambdaType = Expression.GetActionType(typeof(ExpandoObject), source.GetType());
+                Delegate @delegate = null;
+                var sourceType = source.GetType();
+                var lambdaType = Expression.GetActionType(typeof(ExpandoObject), sourceType);
 
-                var @delegate = cache.GetOrAdd(lambdaType, () => {
-                    var targetParameter = Expression.Parameter(typeofDictionary, "target");
-                    var sourceParameter = Expression.Parameter(source.GetType(), "source");
-                    var lambda = Expression.Lambda(lambdaType,
-                                        Expression.Block(GetAssignExpressions(source, targetParameter, sourceParameter)),
-                                        targetParameter,
-                                        sourceParameter);
+                if (sourceType.TypeIsExpandoObject()) {
+                    @delegate = CompileLambdaExpression(source, lambdaType, sourceType);
+                }
+                else {
+                    @delegate = cache.GetOrAdd(lambdaType, () => CompileLambdaExpression(source, lambdaType, sourceType));
+                }
 
-                    return lambda.Compile();
-                });
-
-                @delegate.DynamicInvoke(target, source);
+                @delegate.DynamicInvoke(source, target);
             });
 
             return target;
         }
 
-        private static IEnumerable<Expression> GetAssignExpressions(object source, ParameterExpression target, ParameterExpression sourceParameter) {
-            foreach (var member in source.ToMemberInfos()) {
+        private static Delegate CompileLambdaExpression(object source, Type lambdaType, Type sourceType) {
+            var sourceParameter = Expression.Parameter(sourceType, "source");
+            var targetParameter = Expression.Parameter(typeofDictionary, "target");
+            var lambda = Expression.Lambda(lambdaType,
+                                Expression.Block(GetAssignExpressions(source, targetParameter, sourceParameter)),
+                                sourceParameter,
+                                targetParameter);
+
+            return lambda.Compile();
+        }
+
+        private static IEnumerable<Expression> GetAssignExpressions(object source, ParameterExpression targetParameter, ParameterExpression sourceParameter) {
+            var assignExporession = GetAssignExpression(source, sourceParameter);
+
+            foreach (var pair in source.ToMemberDictionary()) {
                 yield return Expression.Assign(
-                                Expression.Property(target, "Item", Expression.Constant(member.Name)),
-                                Expression.Convert(Expression.PropertyOrField(sourceParameter, member.Name), typeofObject));
+                                Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
+                                assignExporession(pair.Key));
             }
         }
 
-        private static Expression GetAssignExpression(object source, ParameterExpression target, ParameterExpression sourceParameter) {
-            var member = source.ToMemberInfos().Single(m => m.Name.Equals("b"));
+        private static Func<string, Expression> GetAssignExpression(object target, ParameterExpression sourceParameter) {
+            if (target.IsExpandoObject()) {
+                return (string key) => Expression.Convert(Expression.Property(Expression.Convert(sourceParameter, typeofDictionary), "Item", Expression.Constant(key)), typeofObject);
+            }
 
-            return Expression.Assign(
-                            Expression.Property(target, "Item", Expression.Constant(member.Name)),
-                            Expression.PropertyOrField(sourceParameter, member.Name));
+            return (string key) => Expression.Convert(Expression.PropertyOrField(sourceParameter, key), typeofObject);
         }
     }
 }

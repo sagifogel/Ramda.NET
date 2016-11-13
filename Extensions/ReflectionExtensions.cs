@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Sys = System;
 using System.Dynamic;
 using System.Reflection;
 using System.Collections;
@@ -199,6 +200,9 @@ namespace Ramda.NET
                     case MemberTypes.Property:
                         memberVal = ((PropertyInfo)member).GetValue(target, null);
                         return true;
+                    case MemberTypes.Method:
+                        memberVal = ((MethodInfo)member).CreateDelegate(target);
+                        return true;
                 }
             }
 
@@ -213,10 +217,14 @@ namespace Ramda.NET
             return target.Member(name).IsNotNull();
         }
 
-        internal static bool HasMemberWhere(this object target, string name, Func<Type, bool> predicate) {
-            var member = target.GetType().TryGetMemberInfoFromType(name);
+        internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
+            object value;
 
-            return member.IsNotNull() && predicate(member.ReflectedType);
+            if (TryGetMember((dynamic)name, target, out value)) {
+                return predicate(value);
+            }
+
+            return false;
         }
 
         internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<MemberInfo, bool> predicate) where TMemberInfo : MemberInfo {
@@ -403,5 +411,25 @@ namespace Ramda.NET
         internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {
             return new ComparerFactory(comparator);
         }
+
+    private static Delegate CreateDelegate(this MethodInfo methodInfo, object target) {
+        Func<Type[], Type> getType;
+        bool isAction = methodInfo.ReturnType.Equals((typeof(void)));
+        var types = methodInfo.GetParameters().Select(p => p.ParameterType);
+
+        if (isAction) {
+            getType = Expression.GetActionType;
+        }
+        else {
+            getType = Expression.GetFuncType;
+            types = types.Concat(new[] { methodInfo.ReturnType });
+        }
+
+        if (methodInfo.IsStatic) {
+            return Sys.Delegate.CreateDelegate(getType(types.ToArray()), methodInfo);
+        }
+
+        return Sys.Delegate.CreateDelegate(getType(types.ToArray()), target, methodInfo.Name);
+    }
     }
 }

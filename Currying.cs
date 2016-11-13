@@ -1005,7 +1005,7 @@ namespace Ramda.NET
             return UniqWith(pred, results);
         }));
 
-        internal readonly static dynamic Into = Curry3(new Func<object, dynamic, IList, object>((acc, xf, list) => {
+        internal readonly static dynamic Into = Curry3(new Func<object, dynamic, object, object>((acc, xf, list) => {
             var transformer = acc as ITransformer;
 
             if (transformer.IsNotNull()) {
@@ -1287,7 +1287,7 @@ namespace Ramda.NET
                 return ((IList)xs).IndexOf(target);
             }
 
-            if (xs.HasMemberWhere("IndexOf", t => t.IsDelegate())) {
+            if (xs.HasMemberWhere("IndexOf", t => t.IsFunction())) {
                 return ((dynamic)xs).IndexOf(target);
             }
 

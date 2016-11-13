@@ -7,7 +7,7 @@
 	template.Generics.Add("TSource");
 	template.SkippedIndexedGaps.Add(0);
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("object", "acc", false));
+	template.Parameters.Add(Tuple.Create("ExpandoObject", "acc", false));
 	template.Parameters.Add(Tuple.Create("Func<ITransformer, ITransformer>", "xf", true));	
 	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
 	template.Render();

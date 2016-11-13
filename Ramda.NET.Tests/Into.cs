@@ -11,6 +11,12 @@ namespace Ramda.NET.Tests
     {
         private Func<int, bool> isOdd = b => b % 2 == 1;
 
+        public class Reducible : R.IReducible
+        {
+            public int[] x { get; set; } = new[] { 1, 2, 3 };
+            public object Reduce(Func<object, object, object> step, object acc) => "Override";
+        }
+
         public class AddXfTransformer : ITransformer
         {
             public object Init() => R.Always(0);
@@ -56,13 +62,12 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Into_Dispatches_To_Objects_That_Implement_Reduce() {
-            var obj = new {
-                x = new[] { 1, 2, 3 },
-                Reduce = new Func<string>(() => "override")
+            var obj = new Reducible {
+                x = new[] { 1, 2, 3 }
             };
 
-            Assert.AreEqual(R.Into(new object[0], R.Map(R.Add(1)), obj), "override");
-            Assert.AreEqual(R.Into(new object[0], R.Filter(isOdd), obj), "override");
+            Assert.AreEqual((string)R.Into(new object[0], R.Map(R.Add(1)), obj), "Override");
+            Assert.AreEqual((string)R.Into(new object[0], R.Filter(isOdd), obj), "Override");
         }
 
         [TestMethod]
@@ -81,7 +86,7 @@ namespace Ramda.NET.Tests
             var add2 = R.Map(R.Add(2));
             var result = intoSum(add2);
 
-            Assert.AreEqual(result(new[] { 1, 2, 3, 4 }), 18);
+            Assert.AreEqual((int)result(new[] { 1, 2, 3, 4 }), 18);
         }
 
         [TestMethod]

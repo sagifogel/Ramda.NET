@@ -603,6 +603,7 @@ namespace Ramda.NET
         }
 
         internal static object ReduceInternal(object fn, object acc, object list) {
+            IReducible reducible = null;
             var transformer = fn as ITransformer;
 
             if (fn.IsFunction()) {
@@ -613,8 +614,10 @@ namespace Ramda.NET
                 return IterableReduce(transformer, acc, (IEnumerable)list);
             }
 
-            if (list.HasMemberWhere("Reduce", t => t.IsFunction())) {
-                return MethodReduce(transformer, acc, list);
+            reducible = list as IReducible;
+
+            if (reducible.IsNotNull()) {
+                return MethodReduce(transformer, acc, reducible);
             }
 
             throw new ArgumentException("Reduce: list must be array or iterable");
@@ -636,8 +639,8 @@ namespace Ramda.NET
             return xf.Result(acc);
         }
 
-        private static object MethodReduce(ITransformer xf, object acc, dynamic obj) {
-            return xf.Result(obj.Reduce(new Func<object, object, object>(xf.Step), acc));
+        private static object MethodReduce(ITransformer xf, object acc, IReducible obj) {
+            return xf.Result((object)obj.Reduce(new Func<object, object, object>(xf.Step), acc));
         }
 
         private static ITransformer StepCat(object obj) {

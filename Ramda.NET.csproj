@@ -55,6 +55,7 @@
     <Compile Include="Curry2.cs" />
     <Compile Include="Curry1.cs" />
     <Compile Include="CurryN.cs" />
+    <Compile Include="IReducible.cs" />
     <Compile Include="MemberComparer.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />
@@ -575,6 +576,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Into.reduce.cs" />
     <Compile Include="Ramda\Into.object.cs">
       <DependentUpon>Into.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections;
+using System.Dynamic;
+using System.Collections.Generic;
 
 namespace Ramda.NET.Tests
 {
@@ -37,8 +39,19 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Into_Transduces_Into_Objects() {
-            Assert.AreSame((object)R.Into(new { }, new Func<object, dynamic>(R.Identity), new object[] { new object[] { "a", 1 }, new object[] { "b", 2 } }), new { a = 1, b = 2 });
-            Assert.AreSame((object)R.Into(new { }, new Func<object, dynamic>(R.Identity), new object[] { new { a = 1 }, new { b = 2 }, new { c = 3 } }), new { a = 1, b = 2, c = 3 });
+            var expected = new Dictionary<string, object> {
+                ["a"] = 1,
+                ["b"] = 2
+            };
+
+            IDictionary<string, object> traget = R.Into(new ExpandoObject(), new Func<object, dynamic>(R.Identity), new object[] { new object[] { "a", 1 }, new object[] { "b", 2 } });
+
+            CollectionAssert.AreEqual(new Dictionary<string, object>(traget), expected);
+
+            expected.Add("c", 3);
+            traget = R.Into(new ExpandoObject(), new Func<object, dynamic>(R.Identity), new object[] { new { a = 1 }, new { b = 2 }, new { c = 3 } });
+
+            CollectionAssert.AreEqual(new Dictionary<string, object>(traget), expected);
         }
 
         [TestMethod]

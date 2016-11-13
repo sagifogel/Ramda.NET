@@ -20,7 +20,7 @@ namespace Ramda.NET
             objectN.ForEach(source => {
                 Delegate @delegate = null;
                 var sourceType = source.GetType();
-                var lambdaType = Expression.GetActionType(typeof(ExpandoObject), sourceType);
+                var lambdaType = Expression.GetActionType(sourceType, typeof(ExpandoObject));
 
                 if (sourceType.TypeIsExpandoObject()) {
                     @delegate = CompileLambdaExpression(source, lambdaType, sourceType);
@@ -47,12 +47,12 @@ namespace Ramda.NET
         }
 
         private static IEnumerable<Expression> GetAssignExpressions(object source, ParameterExpression targetParameter, ParameterExpression sourceParameter) {
-            var assignExporession = GetAssignExpression(source, sourceParameter);
+            var assignExpression = GetAssignExpression(source, sourceParameter);
 
             foreach (var pair in source.ToMemberDictionary()) {
                 yield return Expression.Assign(
                                 Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
-                                assignExporession(pair.Key));
+                                assignExpression(pair.Key));
             }
         }
 

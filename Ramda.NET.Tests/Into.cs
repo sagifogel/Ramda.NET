@@ -19,17 +19,17 @@ namespace Ramda.NET.Tests
 
         public class AddXfTransformer : ITransformer
         {
-            public object Init() => R.Always(0);
+            public object Init() => 0;
 
-            public object Result(object result) => R.Identity(R.__);
+            public object Result(object result) => R.Identity(result);
 
-            public object Step(object result, object input) => R.Add(R.__);
+            public object Step(object result, object input) => R.Add((dynamic)result, (dynamic)input);
         }
 
         [TestMethod]
         public void Into_Transduces_Into_Arrays() {
-            var res1 = (double[])R.Into(new object[0], R.Map(R.Add(1)), new[] { 1, 2, 3, 4 });
-            var res2 = (int[])R.Into(new object[0], R.Filter(isOdd), new[] { 1, 2, 3, 4 });
+            var res1 = (ICollection)R.Into(new object[0], R.Map(R.Add(1)), new[] { 1, 2, 3, 4 });
+            var res2 = (ICollection)R.Into(new object[0], R.Filter(isOdd), new[] { 1, 2, 3, 4 });
 
             CollectionAssert.AreEqual(res1, new double[] { 2, 3, 4, 5 });
             CollectionAssert.AreEqual(res2, new[] { 1, 3 });
@@ -75,7 +75,7 @@ namespace Ramda.NET.Tests
             var intoArray = R.Into(new object[0]);
             var add2 = R.Map(R.Add(2));
             var result = intoArray(add2);
-            var res = (double[])result(new[] { 1, 2, 3, 4 });
+            var res = (ICollection)result(new[] { 1, 2, 3, 4 });
 
             CollectionAssert.AreEqual(res, new double[] { 3, 4, 5, 6 });
         }

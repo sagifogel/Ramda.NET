@@ -11,13 +11,21 @@ namespace Ramda.NET
         }
 
         public object Result(object result) {
+            IList list;
             var arrayList = result as ArrayList;
 
             if (arrayList.IsNotNull()) {
                 result = arrayList.ToArray();
             }
 
-            return IdentityInternal(result);
+            result = IdentityInternal(result);
+            list = result as IList;
+
+            if (list.IsNotNull()) {
+                return list.ToArray<Array>();
+            }
+
+            return result;
         }
 
         public object Step(object result, object input) {

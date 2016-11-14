@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections;
 
 namespace Ramda.NET.Tests
 {
@@ -30,8 +31,8 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void All_Returns_True_Into_Array_If_All_Elements_Satisfy_The_Predicate() {
-            CollectionAssert.AreEqual(intoArray(R.All(even), new[] { 2, 4, 6, 8, 10, 12 }), new[] { true });
-            CollectionAssert.AreEqual(intoArray(R.All(isFalse), new[] { false, false, false }), new[] { true });
+            CollectionAssert.AreEqual((ICollection)intoArray(R.All(even), new[] { 2, 4, 6, 8, 10, 12 }), new[] { true });
+            CollectionAssert.AreEqual((ICollection)intoArray(R.All(isFalse), new[] { false, false, false }), new[] { true });
         }
 
         [TestMethod]

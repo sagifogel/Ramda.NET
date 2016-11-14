@@ -279,9 +279,9 @@ namespace Ramda.NET
             return list.Slice(0, idx + 1);
         }
 
-        private readonly static dynamic XAll = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAll((o => (bool)f.Invoke(o)), xf)));
+        private readonly static dynamic XAll = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XAll((o => f(o)), xf)));
 
-        private readonly static dynamic XAny = Curry2(new Func<Func<object, bool>, ITransformer, ITransformer>((f, xf) => new XAny(f, xf)));
+        private readonly static dynamic XAny = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XAny((o => f(o)), xf)));
 
         private readonly static dynamic XAperture = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XAperture(n, xf)));
 
@@ -289,19 +289,19 @@ namespace Ramda.NET
 
         private readonly static dynamic XDropLast = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XDropLast(n, xf)));
 
-        private readonly static dynamic XDropRepeatsWith = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf)));
+        private readonly static dynamic XDropRepeatsWith = Curry2(new Func<dynamic, ITransformer, ITransformer>((pred, xf) => new XDropRepeatsWith(pred, xf)));
 
-        private readonly static dynamic XDropWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf)));
+        private readonly static dynamic XDropWhile = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XDropWhile(f, xf)));
 
-        private readonly static dynamic XFilter = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf)));
+        private readonly static dynamic XFilter = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XFilter(f, xf)));
 
-        private readonly static dynamic XFind = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFind(f, xf)));
+        private readonly static dynamic XFind = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XFind(f, xf)));
 
-        private readonly static dynamic XFindIndex = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf)));
+        private readonly static dynamic XFindIndex = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XFindIndex(f, xf)));
 
-        private readonly static dynamic XFindLast = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf)));
+        private readonly static dynamic XFindLast = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XFindLast(f, xf)));
 
-        private readonly static dynamic XFindLastIndex = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf)));
+        private readonly static dynamic XFindLastIndex = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XFindLastIndex(f, xf)));
 
         private readonly static dynamic XMap = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
@@ -421,7 +421,7 @@ namespace Ramda.NET
 
         private static bool AllOrAny(dynamic fn, IList list, bool returnValue) {
             foreach (var item in list) {
-                if ((bool)fn(item) == returnValue) {
+                if (fn(item) == returnValue) {
                     return returnValue;
                 }
             }
@@ -669,15 +669,17 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate AnyOrAllPass(IList preds, bool comparend) {
-            return new DelegateDecorator(new Func<object[], object>(arguments => {
+            return Delegate((object[] arguments) => {
                 foreach (dynamic pred in preds) {
-                    if ((bool)pred(arguments) == comparend) {
+                    var dynamicPred = Delegate(pred);
+
+                    if (dynamicPred.InvokeWithArray(arguments) == comparend) {
                         return comparend;
                     }
                 }
 
                 return !comparend;
-            }));
+            });
         }
 
         private static object ApplySpecInternal(object spec) {

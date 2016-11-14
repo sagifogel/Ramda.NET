@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Add.cs" />
     <Compile Include="Adjust.cs" />
+    <Compile Include="AllPass.cs" />
     <Compile Include="Any.cs" />
     <Compile Include="All.cs" />
     <Compile Include="Always.cs" />

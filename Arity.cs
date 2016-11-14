@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
-using Reflection =  Ramda.NET.ReflectionExtensions;
+using Reflection = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -58,13 +58,35 @@ namespace Ramda.NET
         internal static DynamicDelegate Arity(int length, Delegate fn) {
             return Arity(length, new DelegateDecorator(fn));
         }
-
+        
         internal static DynamicDelegate Arity(int length, DynamicDelegate fn) {
-            if (length <= 10) {
-                return new CurriedDelegate(length, fn);
-            }
-            else {
-                throw new ArgumentOutOfRangeException("length", "First argument to Arity must be a non-negative integer no greater than ten");
+            dynamic @delegate = fn;
+
+            switch (length) {
+                case 0:
+                    return Delegate(new Func<object>(() => @delegate()));
+                case 1:
+                    return Delegate(new Func<object, object>(arg1 => @delegate(arg1)));
+                case 2:
+                    return Delegate(new Func<object, object, object>((arg1, arg2) => @delegate(arg1, arg2)));
+                case 3:
+                    return Delegate(new Func<object, object, object, object>((arg1, arg2, arg3) => @delegate(arg1, arg2, arg3)));
+                case 4:
+                    return Delegate(new Func<object, object, object, object, object>((arg1, arg2, arg3, arg4) => @delegate(arg1, arg2, arg3, arg4)));
+                case 5:
+                    return Delegate(new Func<object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5) => @delegate(arg1, arg2, arg3, arg4, arg5)));
+                case 6:
+                    return Delegate(new Func<object, object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5, arg6) => @delegate(arg1, arg2, arg3, arg4, arg5, arg6)));
+                case 7:
+                    return Delegate(new Func<object, object, object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5, arg6, arg7) => @delegate(arg1, arg2, arg3, arg4, arg5, arg6, arg7)));
+                case 8:
+                    return Delegate(new Func<object, object, object, object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8) => @delegate(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)));
+                case 9:
+                    return Delegate(new Func<object, object, object, object, object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) => @delegate(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)));
+                case 10:
+                    return Delegate(new Func<object, object, object, object, object, object, object, object, object, object, object>((arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10) => @delegate(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10)));
+                default:
+                    throw new ArgumentOutOfRangeException("Length", "First argument to Arity must be a non - negative integer no greater than ten");
             }
         }
     }

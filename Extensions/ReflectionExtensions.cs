@@ -366,6 +366,14 @@ namespace Ramda.NET
         }
 
         internal static object Invoke(this Delegate target, params object[] arguments) {
+            if (target.Arity() == 1) {
+                var param = target.Method.GetParameters()[0];
+
+                if (param.ParameterType.IsArray && (arguments.Length > 0 && !arguments[0].IsArray())) {
+                    arguments = new object[1] { arguments };
+                }
+            }
+
             return target.DynamicInvoke(arguments.Pad(target));
         }
 
@@ -376,29 +384,35 @@ namespace Ramda.NET
         internal static object DynamicInvoke(dynamic target, object[] arguments) {
             var args = Arguments(arguments);
 
-            switch (arguments.Length) {
+            return DynamicInvoke(target, args, args.Length);
+        }
+
+        internal static object DynamicInvoke(dynamic invoke, object[] arguments, int length) {
+            var args = Arguments(arguments);
+
+            switch (length) {
                 case 0:
-                    return target();
+                    return invoke();
                 case 1:
-                    return target(args[0]);
+                    return invoke(args[0]);
                 case 2:
-                    return target(args[0], args[1]);
+                    return invoke(args[0], args[1]);
                 case 3:
-                    return target(args[0], args[1], args[2]);
+                    return invoke(args[0], args[1], args[2]);
                 case 4:
-                    return target(args[0], args[1], args[2], args[3]);
+                    return invoke(args[0], args[1], args[2], args[3]);
                 case 5:
-                    return target(args[0], args[1], args[2], args[3], args[4]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4]);
                 case 6:
-                    return target(args[0], args[1], args[2], args[3], args[4], args[5]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4], args[5]);
                 case 7:
-                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
                 case 8:
-                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
                 case 9:
-                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
                 case 10:
-                    return target(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
+                    return invoke(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);
                 default:
                     throw new ArgumentOutOfRangeException("Argument length must be a non-negative integer no greater than ten");
             }
@@ -412,24 +426,24 @@ namespace Ramda.NET
             return new ComparerFactory(comparator);
         }
 
-    private static Delegate CreateDelegate(this MethodInfo methodInfo, object target) {
-        Func<Type[], Type> getType;
-        bool isAction = methodInfo.ReturnType.Equals((typeof(void)));
-        var types = methodInfo.GetParameters().Select(p => p.ParameterType);
+        private static Delegate CreateDelegate(this MethodInfo methodInfo, object target) {
+            Func<Type[], Type> getType;
+            bool isAction = methodInfo.ReturnType.Equals((typeof(void)));
+            var types = methodInfo.GetParameters().Select(p => p.ParameterType);
 
-        if (isAction) {
-            getType = Expression.GetActionType;
-        }
-        else {
-            getType = Expression.GetFuncType;
-            types = types.Concat(new[] { methodInfo.ReturnType });
-        }
+            if (isAction) {
+                getType = Expression.GetActionType;
+            }
+            else {
+                getType = Expression.GetFuncType;
+                types = types.Concat(new[] { methodInfo.ReturnType });
+            }
 
-        if (methodInfo.IsStatic) {
-            return Sys.Delegate.CreateDelegate(getType(types.ToArray()), methodInfo);
-        }
+            if (methodInfo.IsStatic) {
+                return Sys.Delegate.CreateDelegate(getType(types.ToArray()), methodInfo);
+            }
 
-        return Sys.Delegate.CreateDelegate(getType(types.ToArray()), target, methodInfo.Name);
-    }
+            return Sys.Delegate.CreateDelegate(getType(types.ToArray()), target, methodInfo.Name);
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Ramda.NET
 {
     internal class XAny : AbstractXAnyOrAll
     {
-        internal XAny(Func<object, bool> f, ITransformer xf) : base(f, xf, false, any => any == false, step => step) {
+        internal XAny(Func<object, bool> f, ITransformer xf) : base(f, xf, false, any => any, step => step == false) {
         }
     }
 }

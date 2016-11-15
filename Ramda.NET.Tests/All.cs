@@ -6,26 +6,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class All
+    public class All : AbstractAnyOrAll
     {
-        private Func<bool> T = () => true;
-        private dynamic intoArray = R.Into(new object[0]);
-        private Func<object, bool> even = n => ((int)n) % 2 == 0;
-        private Func<bool, bool> isFalse = x => x == false;
-
-        private class ListXf : ITransformer
-        {
-            public object Init() {
-                return new object[0];
-            }
-
-            public object Result(object result) => result;
-
-            public object Step(object result, object input) {
-                return ((object[])result).Concat(new[] { input });
-            }
-        }
-
         [TestMethod]
         public void All_Returns_True_If_All_Elements_Satisfy_The_Predicate() {
             Assert.AreEqual(R.All(even, new[] { 2, 4, 6, 8, 10, 12 }), true);

@@ -26,5 +26,14 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(R.Always(obj)(), obj);
             Assert.AreEqual(R.Always(now)(), new DateTime(1776, 6, 4));
         }
+
+        [TestMethod]
+        public void Aalways_Returns_Initial_Argument() {
+            var a = 10;
+            var f = R.Always(a);
+
+            Assert.AreEqual((int)f(), a);
+            Assert.AreEqual((int)f(10), a);
+        }
     }
 }

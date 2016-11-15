@@ -1,16 +1,13 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class Any
+    public class Any : AbstractAnyOrAll
     {
-        private Func<bool> T = () => true;
-        private Func<int, bool> odd = n => n % 2 == 1;
-        private Func<bool, bool> isFalse = x => x == false;
-
         [TestMethod]
         public void Any_Returns_True_If_Any_Element_Satisfy_The_Predicate() {
             Assert.AreEqual(R.Any(odd, new[] { 2, 4, 6, 8, 10, 11, 12 }), true);
@@ -22,8 +19,13 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        public void Any_Returns_False_For_An_Empty_List() {
-            Assert.AreEqual(R.Any(T, new int[0]), false);
+        public void Any_Returns_True_Into_Array_If_Any_Element_Satisfies_The_Predicate() {
+            CollectionAssert.AreEqual((ICollection)intoArray(R.Any(odd), new[] { 2, 4, 6, 8, 10, 11, 12 }), new[] { true });
+        }
+
+        [TestMethod]
+        public void Any_Returns_False_If_All_Elements_Fails_To_Satisfy_The_Predicate() {
+            CollectionAssert.AreEqual((ICollection)intoArray(R.Any(odd), new[] { 2, 4, 6, 8, 10, 12 }), new[] { false });
         }
 
         [TestMethod]
@@ -44,6 +46,22 @@ namespace Ramda.NET.Tests
 
             Assert.AreEqual(R.Any(atLeast(16), teens), true);
             Assert.AreEqual(R.Any(atLeast(21), teens), false);
+        }
+
+
+        [TestMethod]
+        public void Any_Returns_False_For_An_Empty_List() {
+            Assert.AreEqual(R.Any(T, new int[0]), false);
+        }
+
+        [TestMethod]
+        public void Any_Returns_False_Into_Array_For_An_Empty_List() {
+            CollectionAssert.AreEqual((ICollection)intoArray(R.Any(T), new int[0]), new[] { false });
+        }
+
+        [TestMethod]
+        public void Any_Dispatches_When_Given_A_Transformer_In_List_Position() {
+            Assert.IsInstanceOfType(R.All(even, new ListXf()), typeof(XAll));
         }
 
         [TestMethod]

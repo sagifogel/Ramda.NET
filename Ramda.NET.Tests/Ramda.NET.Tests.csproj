@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AbstractAnyOrAll.cs" />
     <Compile Include="Add.cs" />
     <Compile Include="Adjust.cs" />
     <Compile Include="AllPass.cs" />

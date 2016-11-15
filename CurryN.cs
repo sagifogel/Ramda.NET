@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
+﻿using System.Dynamic;
+using System.Collections.Generic;
 using static Ramda.NET.Currying;
 
 namespace Ramda.NET

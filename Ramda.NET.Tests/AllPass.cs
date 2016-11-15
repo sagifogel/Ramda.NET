@@ -4,13 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class AllPass
+    public class AllPass : AbstractAnyOrAllPass
     {
-        private Func<int, bool> gt5 = n => n > 5;
-        private Func<int, bool> lt20 = n => n < 20;
-        private Func<int, bool> odd = n => n % 2 != 0;
-        private Func<int, int, int, int, bool> plusEq = (w, x, y, z) => w + x == y + z;
-
         [TestMethod]
         public void AllPass_Reports_Whether_All_Predicates_Are_Satisfied_By_A_Given_Value() {
             var ok = R.AllPass(new Delegate[] { odd, lt20, gt5 });
@@ -28,7 +23,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        public void AllPass_Returns_A_Curried_Function_Whose_Arity_Matches_That_Of_The_Highest() {
+        public void AllPass_Returns_A_Curried_Function_Whose_Arity_Matches_That_Of_The_Highest_Arity_Predicate() {
             Assert.AreEqual((int)R.AllPass(new Delegate[] { odd, gt5, plusEq }).Length, 4);
             Assert.AreEqual((bool)R.AllPass(new Delegate[] { odd, gt5, plusEq })(9, 9, 9, 9), true);
             Assert.AreEqual((bool)R.AllPass(new Delegate[] { odd, gt5, plusEq })(9)(9)(9)(9), true);

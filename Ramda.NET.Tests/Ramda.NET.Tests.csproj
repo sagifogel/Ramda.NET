@@ -54,8 +54,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AbstractAnyOrAll.cs" />
+    <Compile Include="AbstractAnyOrAllPass.cs" />
     <Compile Include="Add.cs" />
     <Compile Include="Adjust.cs" />
+    <Compile Include="AnyPass.cs" />
     <Compile Include="AllPass.cs" />
     <Compile Include="Any.cs" />
     <Compile Include="All.cs" />

@@ -1153,30 +1153,36 @@ namespace Ramda.NET
 
         internal readonly static dynamic AnyPass = Curry1(new Func<IList, DynamicDelegate>(preds => CurryN(Reduce(Max, 0, Pluck("Length", preds)), AnyOrAllPass(preds, true))));
 
-        internal readonly static dynamic Ap = Curry2(new Func<object, object, object>((applicative, fn) => {
-            Delegate applicativeFn = null;
+        internal readonly static dynamic Ap = Curry2<object, object, object>((applicative, fn) => {
+            dynamic applicativeFn = null;
             var ap = applicative.Member("Ap");
 
             if (ap.IsNotNull()) {
-                applicativeFn = (Delegate)ap;
+                applicativeFn = Delegate(ap);
 
-                return applicativeFn.Invoke(fn);
+                return applicativeFn(fn);
             }
 
             if (applicative.IsFunction()) {
-                var @delegete = (Delegate)fn;
+                dynamic @delegete = Delegate(fn);
 
-                applicativeFn = (Delegate)applicative;
+                applicativeFn = Delegate(applicative);
 
-                return new Func<object, object>((object x) => {
-                    var result = (Delegate)applicativeFn.Invoke(x);
+                return Delegate(new Func<object, object>(x => {
+                    var result = Delegate(applicativeFn(x));
 
-                    return result.Invoke(@delegete.Invoke(x));
-                });
+                    return result(@delegete(x));
+                }));
             }
 
-            return ReduceInternal(new Func<IList, Delegate, IList>((acc, f) => acc.Concat((IList)Map(f, fn))), new object[0], applicative);
-        }));
+            return ReduceInternal(Delegate(new Func<IList, dynamic, IList>((acc, f) => {
+                if (fn.IsFunction()) {
+                    fn = Delegate(fn);
+                }
+
+                return acc.Concat((IList)Map(Delegate(f), fn));
+            })), new object[0], applicative);
+        });
 
         internal readonly static dynamic ApplySpec = Curry1(new Func<object, object>(ApplySpecInternal));
 

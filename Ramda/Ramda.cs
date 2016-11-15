@@ -166,6 +166,18 @@ namespace Ramda.NET
             return Currying.Ap(fns, vs);
         }
 
+        public static dynamic Ap(dynamic fns, RamdaPlaceholder vs = null) {
+            return Currying.Ap(fns, vs);
+        }
+
+        public static dynamic Ap(RamdaPlaceholder fns, dynamic vs) {
+            return Currying.Ap(fns, vs);
+        }
+
+        public static dynamic Ap<TSource>(dynamic fns, dynamic vs) {
+            return Currying.Ap(fns, vs);
+        }
+
         public static dynamic Cond(IList<dynamic> pairs) {
             return Currying.Cond(pairs);
         }

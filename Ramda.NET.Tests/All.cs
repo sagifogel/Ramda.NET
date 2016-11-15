@@ -1,6 +1,7 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using System.Collections;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ramda.NET.Tests
 {
@@ -9,8 +10,21 @@ namespace Ramda.NET.Tests
     {
         private Func<bool> T = () => true;
         private dynamic intoArray = R.Into(new object[0]);
-        private Func<int, bool> even = n => n % 2 == 0;
+        private Func<object, bool> even = n => ((int)n) % 2 == 0;
         private Func<bool, bool> isFalse = x => x == false;
+
+        private class ListXf : ITransformer
+        {
+            public object Init() {
+                return new object[0];
+            }
+
+            public object Result(object result) => result;
+
+            public object Step(object result, object input) {
+                return ((object[])result).Concat(new[] { input });
+            }
+        }
 
         [TestMethod]
         public void All_Returns_True_If_All_Elements_Satisfy_The_Predicate() {
@@ -36,6 +50,16 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
+        public void All_Returns_False_Into_Array_If_Any_Element_Fails_To_Satisfy_The_Predicate() {
+            CollectionAssert.AreEqual((ICollection)intoArray(R.All(even), new[] { 2, 4, 6, 8, 9, 10 }), new[] { false });
+        }
+
+        [TestMethod]
+        public void All_Returns_True_Into_Array_For_An_Empty_List() {
+            CollectionAssert.AreEqual(intoArray(R.All(T), new int[0]), new [] { true });
+        }
+
+        [TestMethod]
         public void All_Works_With_More_Complex_Objects() {
             Func<object, bool> len3 = o => ((dynamic)o).x.Length == 3;
             Func<object, bool> hasA = o => ((dynamic)o).x.IndexOf("a") > -1;
@@ -43,6 +67,11 @@ namespace Ramda.NET.Tests
 
             Assert.AreEqual(R.All(len3, xs), false);
             Assert.AreEqual(R.All(hasA, xs), true);
+        }
+
+        [TestMethod]
+        public void All_Dispatches_When_Given_A_Transformer_In_List_Position() {
+            Assert.IsInstanceOfType(R.All(even, new ListXf()), typeof(XAll));
         }
 
         [TestMethod]

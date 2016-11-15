@@ -31,7 +31,7 @@ namespace Ramda.NET.Tests
         public void AllPass_Returns_A_Curried_Function_Whose_Arity_Matches_That_Of_The_Highest() {
             Assert.AreEqual((int)R.AllPass(new Delegate[] { odd, gt5, plusEq }).Length, 4);
             Assert.AreEqual((bool)R.AllPass(new Delegate[] { odd, gt5, plusEq })(9, 9, 9, 9), true);
-            //Assert.AreEqual((bool)R.AllPass(new Delegate[] { odd, gt5, plusEq })(9)(9)(9)(9), true);
+            Assert.AreEqual((bool)R.AllPass(new Delegate[] { odd, gt5, plusEq })(9)(9)(9)(9), true);
         }
     }
 }

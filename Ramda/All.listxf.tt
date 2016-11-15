@@ -1,0 +1,13 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TSource");
+	template.SkippedIndexedGaps.Add(1);
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("Func<TSource, bool>", "fn", true));	
+	template.Parameters.Add(Tuple.Create("ITransformer", "list", false));
+	template.Render();
+#>

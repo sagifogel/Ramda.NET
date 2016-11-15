@@ -66,6 +66,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Ramda\All.listxf.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>All.listxf.cs</LastGenOutput>
+      <LastOutputs>.\All.listxf.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\AnyPass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AnyPass.cs</LastGenOutput>
@@ -76,6 +81,11 @@
       <LastGenOutput>AllPass1.cs</LastGenOutput>
       <LastOutputs>.\AllPass1.cs</LastOutputs>
     </Content>
+    <Compile Include="Ramda\All.listxf.cs">
+      <DependentUpon>All.listxf.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\AnyPass.cs">
       <DependentUpon>AnyPass.tt</DependentUpon>
       <AutoGen>True</AutoGen>

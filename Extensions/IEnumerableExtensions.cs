@@ -134,6 +134,11 @@ namespace Ramda.NET
 
             if (elements != null) {
                 IList list = null;
+                var elementType = elements.GetElementType();
+
+                if (!elementType.Equals(type)) {
+                    type = typeof(object);
+                }
 
                 elements.Cast<object>().Select(e => e.Cast(type));
                 list = (IList)typeof(List<>).MakeGenericType(type).GetConstructor(Type.EmptyTypes).Invoke(null);

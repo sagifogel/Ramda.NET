@@ -64,11 +64,13 @@
     <Compile Include="Always.cs" />
     <Compile Include="And.cs" />
     <Compile Include="Ap.cs" />
+    <Compile Include="CollectionAssertTest.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Aperture.cs" />
+    <Compile Include="Append.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

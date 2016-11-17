@@ -1355,7 +1355,20 @@ namespace Ramda.NET
 
         internal readonly static dynamic DropRepeats = Curry1(new Func<object, dynamic>(Dispatchable1("DropRepeats", XDropRepeatsWith(Equals), DropRepeatsWith(Equals))));
 
-        internal readonly static dynamic Lift = Curry1(new Func<Delegate, Delegate>(fn => LiftN(fn.Arity(), fn)));
+        internal readonly static dynamic Lift = Curry1(new Func<DynamicDelegate, DynamicDelegate>(fn => LiftN(fn.Arity(), fn)));
+
+        internal readonly static dynamic Omit = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => {
+            IDictionary<string, object> result = new ExpandoObject();
+
+            foreach (var pair in obj.ToMemberDictionary()) {
+                if (!names.Contains(pair.Key)) {
+                    result[pair.Key] = pair.Value;
+                }
+            }
+
+            return result;
+        });
+
 
         internal readonly static dynamic Concat = Curry2(new Func<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

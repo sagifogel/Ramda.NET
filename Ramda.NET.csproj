@@ -867,6 +867,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjOf.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Omit.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Omit.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Once.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1878,6 +1883,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ObjOf.cs</LastGenOutput>
       <LastOutputs>.\ObjOf.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Omit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Omit.cs</LastGenOutput>
+      <LastOutputs>.\Omit.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Once.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

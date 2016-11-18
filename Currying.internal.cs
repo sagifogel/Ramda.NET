@@ -115,13 +115,13 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
-            return new DelegateDecorator(new Func<object[], object>(arguments => g(f(arguments))));
+            return Delegate((object[] arguments) => g(DynamicInvoke(f, arguments)));
         }
 
         private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
-            return new DelegateDecorator(new Func<object[], object>(arguments => {
+            return Delegate((object[] arguments) => {
                 return Task<object>.Factory.StartNew(() => f(arguments)).ContinueWith(result => g(result));
-            }));
+            });
         }
 
         internal static IReduced ReducedInternal(object x) {
@@ -155,9 +155,7 @@ namespace Ramda.NET
         }
 
         private static Curry1 CheckForMethod1(string methodName, dynamic fn) {
-            return Curry1(new Func<IList, IList>(list => {
-                return (IList)CheckForMethodN(methodName, fn, list);
-            }));
+            return Curry1<IList, IList>(list => (IList)CheckForMethodN(methodName, fn, list));
         }
 
         private static Func<object, object, object> CheckForMethod2(string methodName, dynamic fn) {
@@ -165,7 +163,7 @@ namespace Ramda.NET
         }
 
         private static Func<TArg1, TArg2, TArg3, TResult> CheckForMethod3<TArg1, TArg2, TArg3, TResult>(string methodName, Func<TArg1, TArg2, TArg3, TResult> fn) {
-            return (arg1, arg2, arg3) => (TResult)CheckForMethodN(methodName, fn, arg1, arg2, arg3);
+            return (arg1, arg2, arg3) => (TResult)CheckForMethodN(methodName, Delegate(fn), arg1, arg2, arg3);
         }
 
         private static object CheckForMethodN(string methodName, dynamic fn, params object[] arguments) {
@@ -183,7 +181,7 @@ namespace Ramda.NET
             invokeFn = member.IsNotNull() && !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
-                return fn(arguments);
+                return DynamicInvoke(fn, arguments);
             }
 
             return ((dynamic)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));

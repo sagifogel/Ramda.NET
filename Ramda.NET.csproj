@@ -942,6 +942,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PickBy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Pipe.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Pipe.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Pluck.string.cs">
       <DependentUpon>Pluck.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1958,6 +1963,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PickBy.cs</LastGenOutput>
       <LastOutputs>.\PickBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Pipe.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Pipe.cs</LastGenOutput>
+      <LastOutputs>.\Pipe.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Pluck.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

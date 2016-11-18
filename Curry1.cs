@@ -2,6 +2,7 @@
 using System.Dynamic;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -14,11 +15,16 @@ namespace Ramda.NET
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
-            if (arguments.Length == 0 || R.__.Equals(arguments[0])) {
+            object arg1 = null;
+            var length = Currying.Arity(arguments);
+
+            arguments = Arguments(arguments);
+            
+            if (length == 0 || R.__.Equals(arg1 = arguments[0])) {
                 return Curry1(fn);
             }
 
-            return fn(arguments[0]);
+            return fn(arg1);
         }
     }
 }

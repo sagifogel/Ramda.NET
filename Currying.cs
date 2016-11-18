@@ -664,7 +664,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Subtract = Curry2(new Func<double, double, double>((arg1, arg2) => arg1 - arg2));
 
-        internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MinValue));
+        internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MaxValue));
 
         internal readonly static dynamic Take = Curry2(Dispatchable2("Take", XTake, new Func<int, IList, IList>((n, xs) => {
             return Slice(0, n < 0 ? int.MaxValue : n, xs);
@@ -1113,7 +1113,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PropEq = Curry3(new Func<string, object, object, bool>((name, val, obj) => Equals(val, obj.Member(name))));
 
-        internal readonly static dynamic Reduce = Curry3(new Func<object, object, object, object>(ReduceInternal));
+        internal readonly static dynamic Reduce = Curry3< object, object, object, object>(ReduceInternal);
 
         internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", XReduceBy, new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
             return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
@@ -1339,6 +1339,16 @@ namespace Ramda.NET
 
         internal readonly static dynamic Partition = Juxt(new object[] { Filter, Reject });
 
+        internal readonly static dynamic Pipe = Delegate((object[] arguments) => {
+            if (arguments.Length == 0) {
+                throw new ArgumentNullException("pipe requires at least one argument");
+            }
+
+            var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
+
+            return Arity(delegates[0].Length, (DynamicDelegate)Reduce(Delegate(PipeInternal), delegates[0], Tail(delegates)));
+        });
+
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 
         internal readonly static dynamic Difference = Curry2(new Func<IList, IList, IList>((first, second) => {
@@ -1368,7 +1378,6 @@ namespace Ramda.NET
 
             return result;
         });
-
 
         internal readonly static dynamic Concat = Curry2(new Func<object, object, IEnumerable>((a, b) => {
             IList firstList = null;

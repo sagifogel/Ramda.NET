@@ -1078,6 +1078,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lens.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Sequence.traversable.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sequence.traversable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Sequence.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sequence.list.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Slice.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1173,6 +1183,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Transpose.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Traverse.list..cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Traverse.list..tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Traverse.traversable.cs" />
     <Compile Include="Ramda\Trim.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2116,6 +2132,16 @@
       <LastGenOutput>Lens.cs</LastGenOutput>
       <LastOutputs>.\Lens.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Sequence.traversable.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sequence.traversable.cs</LastGenOutput>
+      <LastOutputs>.\Sequence.traversable.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Sequence.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sequence.list.cs</LastGenOutput>
+      <LastOutputs>.\Sequence.list.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Slice.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Slice.cs</LastGenOutput>
@@ -2210,6 +2236,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Transpose.cs</LastGenOutput>
       <LastOutputs>.\Transpose.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Traverse.list..tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Traverse.list..cs</LastGenOutput>
+      <LastOutputs>.\Traverse.list..cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Trim.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

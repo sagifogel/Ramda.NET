@@ -1,0 +1,13 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TSource");
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("DynamicDelegate", "of", false));	
+	template.Parameters.Add(Tuple.Create("Func<TSource, TSource>", "f", true));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "traversable", false));
+	template.Render();
+#>

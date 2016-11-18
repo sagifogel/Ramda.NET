@@ -563,16 +563,17 @@ namespace Ramda.NET
             return Enumerable.Range(start, count).ToArray();
         }));
 
-        internal readonly static dynamic ReduceRight = Curry3(new Func<Delegate, object, IList, object>((fn, acc, list) => {
+        internal readonly static dynamic ReduceRight = Curry3<DynamicDelegate, object, IList, object>((fn, acc, list) => {
             var idx = list.Count - 1;
+            dynamic dynamicFn = fn;
 
             while (idx >= 0) {
-                acc = fn.Invoke(acc, list[idx]);
+                acc = dynamicFn(acc, list[idx]);
                 idx -= 1;
             }
 
             return acc;
-        }));
+        });
 
         internal readonly static dynamic Reduced = Currying.Curry1(new Func<object, IReduced>(ReducedInternal));
 
@@ -1192,7 +1193,7 @@ namespace Ramda.NET
             return Delegate(fn).InvokeWithArray(arguments);
         }));
 
-        internal readonly static dynamic Chain = Curry2(Dispatchable2("Chain", XChain, new Func<Delegate, object, object>((fn, monad) => {
+        internal readonly static dynamic Chain = Curry2(Dispatchable2("Chain", XChain, new Func<DynamicDelegate, object, object>((fn, monad) => {
             if (monad.IsFunction()) {
                 dynamic monadFn = Delegate((dynamic)monad);
 
@@ -1344,6 +1345,19 @@ namespace Ramda.NET
         internal readonly static dynamic PipeP = PipeFactory(PipePInternal, "Pipe");
 
         internal readonly static dynamic Product = Reduce(Multiply, 1);
+
+        internal readonly static dynamic Sequence = Curry2<DynamicDelegate, IList, object>((of, traversable) => {
+            if (!traversable.IsArray() && traversable.HasMemberWhere("Sequence", m => m.IsFunction())) {
+                return ((dynamic)traversable).Sequence(of);
+            }
+
+            return ReduceRight(Delegate((acc, x) => Ap(Map(Prepend, x), acc)), Of(new object[0]), traversable);
+        });
+
+        internal readonly static dynamic Traverse = Curry3<DynamicDelegate, DynamicDelegate, object, IList>((of, f, traversable) => Sequence(Of, Map(f, traversable)));
+
+
+        internal readonly static dynamic Unnest = Chain(Delegate(IdentityInternal));
 
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 

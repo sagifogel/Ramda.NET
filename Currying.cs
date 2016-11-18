@@ -1113,7 +1113,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PropEq = Curry3(new Func<string, object, object, bool>((name, val, obj) => Equals(val, obj.Member(name))));
 
-        internal readonly static dynamic Reduce = Curry3< object, object, object, object>(ReduceInternal);
+        internal readonly static dynamic Reduce = Curry3<object, object, object, object>(ReduceInternal);
 
         internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", XReduceBy, new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
             return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
@@ -1339,15 +1339,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Partition = Juxt(new object[] { Filter, Reject });
 
-        internal readonly static dynamic Pipe = Delegate((object[] arguments) => {
-            if (arguments.Length == 0) {
-                throw new ArgumentNullException("pipe requires at least one argument");
-            }
+        internal readonly static dynamic Pipe = PipeFactory(PipeInternal, "Pipe");
 
-            var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
+        internal readonly static dynamic PipeP = PipeFactory(PipePInternal, "Pipe");
 
-            return Arity(delegates[0].Length, (DynamicDelegate)Reduce(Delegate(PipeInternal), delegates[0], Tail(delegates)));
-        });
+        internal readonly static dynamic Product = Reduce(Multiply, 1);
 
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 

@@ -120,7 +120,19 @@ namespace Ramda.NET
 
         private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
             return Delegate((object[] arguments) => {
-                return Task<object>.Factory.StartNew(() => f(arguments)).ContinueWith(result => g(result));
+                return new Task<object>(() => DynamicInvoke(f, arguments)).Then(result => g(result));
+            });
+        }
+
+        private static DynamicDelegate PipeFactory(Func<dynamic, dynamic, DynamicDelegate> pipe, string name) {
+            return Delegate((object[] arguments) => {
+                if (arguments.Length == 0) {
+                    throw new ArgumentNullException($"{name} requires at least one argument");
+                }
+
+                var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
+
+                return Arity(delegates[0].Length, (DynamicDelegate)Reduce(Delegate(pipe), delegates[0], Tail(delegates)));
             });
         }
 

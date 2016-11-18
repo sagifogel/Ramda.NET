@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ramda.NET</RootNamespace>
     <AssemblyName>Ramda.NET</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="CurryParams.cs" />
     <Compile Include="DeepCloner.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Functor.cs" />
     <Compile Include="Curry3.cs" />
     <Compile Include="Curry2.cs" />
@@ -947,6 +948,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pipe.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\PipeP.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PipeP.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Pluck.string.cs">
       <DependentUpon>Pluck.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -961,6 +967,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Prepend.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Product.int.cs">
+      <DependentUpon>Product.int.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Product.double.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.double.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Project.cs">
       <AutoGen>True</AutoGen>
@@ -1969,6 +1985,11 @@
       <LastGenOutput>Pipe.cs</LastGenOutput>
       <LastOutputs>.\Pipe.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\PipeP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeP.cs</LastGenOutput>
+      <LastOutputs>.\PipeP.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Pluck.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pluck.string.cs</LastGenOutput>
@@ -1983,6 +2004,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Prepend.cs</LastGenOutput>
       <LastOutputs>.\Prepend.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Product.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Product.int.cs</LastGenOutput>
+      <LastOutputs>.\Product.int.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Product.double.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Product.double.cs</LastGenOutput>
+      <LastOutputs>.\Product.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Project.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

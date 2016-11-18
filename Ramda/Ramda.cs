@@ -217,5 +217,13 @@ namespace Ramda.NET
         public static dynamic Pipe(params dynamic[] functions) {
             return Currying.Pipe(functions);
         }
+
+        public static dynamic PipeP(IList<dynamic> functions) {
+            return Currying.PipeP(functions);
+        }
+
+        public static dynamic PipeP(params dynamic[] functions) {
+            return Currying.PipeP(functions);
+        }
     }
 }

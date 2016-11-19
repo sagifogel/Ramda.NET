@@ -150,6 +150,8 @@ namespace Ramda.NET
                             return ((FieldInfo)member).GetValue(target);
                         case MemberTypes.Property:
                             return ((PropertyInfo)member).GetValue(target, null);
+                        case MemberTypes.Method:
+                            return ((MethodInfo)member).CreateDelegate(target);
                         default:
                             break;
                     }
@@ -377,10 +379,6 @@ namespace Ramda.NET
             return target.DynamicInvoke(arguments.Pad(target));
         }
 
-        internal static object InvokeWithArray(this Delegate target, object[] arguments) {
-            return target.DynamicInvoke(arguments.Pad(target));
-        }
-
         internal static object DynamicInvoke(dynamic target, object[] arguments) {
             var args = Arguments(arguments);
 
@@ -426,7 +424,7 @@ namespace Ramda.NET
             return new ComparerFactory(comparator);
         }
 
-        private static Delegate CreateDelegate(this MethodInfo methodInfo, object target) {
+        internal static Delegate CreateDelegate(this MethodInfo methodInfo, object target) {
             Func<Type[], Type> getType;
             bool isAction = methodInfo.ReturnType.Equals((typeof(void)));
             var types = methodInfo.GetParameters().Select(p => p.ParameterType);

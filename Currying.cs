@@ -420,12 +420,13 @@ namespace Ramda.NET
             if (length <= 10) {
                 return Delegate(arguments => {
                     object[] args;
+                    dynamic dynamicFn = fn;
 
                     length = Math.Min(length, arguments.Length);
                     args = new object[length];
                     Array.Copy(arguments, (Array)args, length);
 
-                    return ((dynamic)fn).InvokeWithArray(args);
+                    return dynamicFn(args);
                 });
             }
             else {
@@ -591,7 +592,7 @@ namespace Ramda.NET
                 list.Insert(0, enumerator.Current);
             }
 
-            return list;
+            return list.ToArray<Array>();
         }));
 
         internal readonly static dynamic Scan = Curry3(new Func<Delegate, object, IList, IList>((fn, acc, list) => {
@@ -1006,7 +1007,7 @@ namespace Ramda.NET
             return UniqWith(pred, results);
         }));
 
-        internal readonly static dynamic Into = Curry3(new Func<object, dynamic, object, object>((acc, xf, list) => {
+        internal readonly static dynamic Into = Curry3<object, dynamic, object, object>((acc, xf, list) => {
             var transformer = acc as ITransformer;
 
             if (transformer.IsNotNull()) {
@@ -1014,7 +1015,7 @@ namespace Ramda.NET
             }
 
             return ReduceInternal(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
-        }));
+        });
 
         internal readonly static dynamic Invert = Curry1(new Func<object, IDictionary<string, object>>(obj => {
             var inverted = new Dictionary<string, ArrayList>();
@@ -1074,7 +1075,7 @@ namespace Ramda.NET
             var functionFunctor = functor as DynamicDelegate;
 
             if (functionFunctor.IsNotNull()) {
-                return CurryN(functionFunctor.Length, new DelegateDecorator(new Func<object[], object>(arguments => {
+                return CurryN(functionFunctor.Length, Delegate(((object[] arguments) => {
                     return fn((dynamic)functionFunctor)(arguments);
                 })));
             }
@@ -1082,20 +1083,20 @@ namespace Ramda.NET
             listFunctor = functor as IList;
 
             if (listFunctor.IsNull()) {
-                return ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
+                return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
                     acc[key] = fn.Invoke(functor.Member(key));
                     return acc;
-                }), new ExpandoObject(), functor.Keys());
+                })), new ExpandoObject(), functor.Keys());
             }
 
             return MapInternal(fn, listFunctor);
         })));
 
         internal readonly static dynamic MapObjIndexed = Curry2(new Func<Delegate, object, object>((fn, obj) => {
-            return ReduceInternal(new Func<IDictionary<string, object>, string, object>((acc, key) => {
+            return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, object>((acc, key) => {
                 acc[key] = fn.Invoke(obj.Member(key), key, obj);
                 return acc;
-            }), new ExpandoObject(), obj.Keys());
+            })), new ExpandoObject(), obj.Keys());
         }));
 
         internal readonly static dynamic MergeWith = Curry3(new Func<Delegate, object, object, object>((fn, l, r) => {
@@ -1190,7 +1191,7 @@ namespace Ramda.NET
         internal readonly static dynamic Call = CurryParams(Delegate(arguments => {
             dynamic fn = arguments[0];
 
-            return Delegate(fn).InvokeWithArray(arguments);
+            return Reflection.DynamicInvoke(Delegate(fn), arguments);
         }));
 
         internal readonly static dynamic Chain = Curry2(Dispatchable2("Chain", XChain, new Func<DynamicDelegate, object, object>((fn, monad) => {
@@ -1356,8 +1357,17 @@ namespace Ramda.NET
 
         internal readonly static dynamic Traverse = Curry3<DynamicDelegate, DynamicDelegate, object, IList>((of, f, traversable) => Sequence(Of, Map(f, traversable)));
 
-
         internal readonly static dynamic Unnest = Chain(Delegate(IdentityInternal));
+
+        internal readonly static dynamic Compose = ComposeFactory(Pipe, "Compose");
+
+        internal readonly static dynamic ComposeK = Delegate((object[] arguments) => {
+            arguments = arguments.Select(arg => Delegate(arg)).ToArray();
+
+            return Compose(Prepend(Identity, Map(Chain, arguments)));
+        });
+
+        internal readonly static dynamic ComposeP = ComposeFactory(PipeP, "ComposeP");
 
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 

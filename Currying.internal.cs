@@ -230,10 +230,10 @@ namespace Ramda.NET
 
             if (!obj.IsList()) {
                 var args = (object[])arguments.Slice(0, arguments.Length - 1);
-                dynamic member = GetMapFunction(obj);
+                var member = obj.Member(methodName) as Delegate;
 
-                if (member != null) {
-                    return member(args);
+                if (member.IsNotNull()) {
+                    return member.DynamicInvoke(args);
                 }
 
                 if (obj is ITransformer) {
@@ -244,39 +244,6 @@ namespace Ramda.NET
             }
 
             return DynamicInvoke(fn, arguments);
-        }
-
-        private static dynamic GetMapFunction(this object obj) {
-            dynamic @dynamic = null;
-
-            obj.GetMemberWhen<MemberInfo>("Map", m => {
-                switch (m.MemberType) {
-                    case MemberTypes.Method:
-                        Type dynamicType = null;
-                        var method = (MethodInfo)m;
-                        IEnumerable<Type> @params = method.GetParameters().Select(p => p.ParameterType);
-
-                        if (!method.ReturnType.Equals(typeof(void))) {
-                            @params = @params.Concat(new[] { method.ReturnType });
-                        }
-
-                        dynamicType = Expression.GetFuncType(@params.ToArray());
-
-                        @dynamic = dynamic.Createdynamic(dynamicType, method);
-                        break;
-                    case MemberTypes.Property:
-                        var prop = (PropertyInfo)m;
-
-                        @dynamic = prop.GetGetMethod(true).Invoke(obj, null) as dynamic;
-                        break;
-                    default:
-                        return false;
-                }
-
-                return true;
-            });
-
-            return @dynamic;
         }
 
         private static IList DropLastWhileInternal(dynamic pred, IList list) {
@@ -542,7 +509,7 @@ namespace Ramda.NET
                     dynamic dynamicFn = fn;
                     var concatedArgs = (IList)concat.Invoke(args, arguments);
 
-                    return dynamicFn.InvokeWithArray(concatedArgs.ToArray<object[]>(typeof(object)));
+                    return dynamicFn(concatedArgs.ToArray<object[]>(typeof(object)));
                 }));
             }));
         }
@@ -683,7 +650,7 @@ namespace Ramda.NET
                 foreach (dynamic pred in preds) {
                     var dynamicPred = Delegate(pred);
 
-                    if (dynamicPred.InvokeWithArray(arguments) == comparend) {
+                    if (DynamicInvoke(dynamicPred, arguments) == comparend) {
                         return comparend;
                     }
                 }
@@ -714,6 +681,16 @@ namespace Ramda.NET
             }
 
             return false;
+        }
+
+        private static DynamicDelegate ComposeFactory(dynamic pipe, string name) {
+            return Delegate((object[] arguments) => {
+                if (arguments.Length == 0) {
+                    throw new ArgumentNullException($"{name} requires at least one argument");
+                }
+
+                return DynamicInvoke(pipe, Reverse(arguments));
+            });
         }
     }
 }

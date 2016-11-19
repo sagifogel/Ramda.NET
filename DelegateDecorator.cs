@@ -14,10 +14,6 @@ namespace Ramda.NET
             Length = fn.Method.GetParameters().Length;
         }
 
-        public object InvokeWithArray(object[] arguments) {
-            return @delegate.InvokeWithArray(arguments);
-        }
-
         public override bool TryInvoke(InvokeBinder binder, object[] arguments, out object result) {
             result = @delegate.Invoke(arguments);
             return true;

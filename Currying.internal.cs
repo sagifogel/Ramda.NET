@@ -43,7 +43,7 @@ namespace Ramda.NET
             return fn;
         }
 
-        private static dynamic Complement(dynamic fn) {
+        private static dynamic ComplementInternal(dynamic fn) {
             return Delegate((object[] arguments) => !fn(arguments));
         }
 
@@ -691,6 +691,14 @@ namespace Ramda.NET
 
                 return DynamicInvoke(pipe, Reverse(arguments));
             });
+        }
+
+        private static object BothOrEither(dynamic f, dynamic g, Func<bool, bool, bool> operand, dynamic liftBy) {
+            if (f.IsFunction()) {
+                return Delegate((object[] arguments) => operand(Delegate(f), Delegate(g)));
+            }
+
+            return Lift(liftBy)(f, g);
         }
     }
 }

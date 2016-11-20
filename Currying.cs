@@ -102,9 +102,9 @@ namespace Ramda.NET
         });
 
 
-        internal readonly static dynamic Always = Curry1(new Func<dynamic, DynamicDelegate>(value => Delegate(new Func<object>(() => value))));
+        internal readonly static dynamic Always = Curry1(new Func<dynamic, DynamicDelegate>(value => Delegate(() => value)));
 
-        internal readonly static dynamic And = Curry2(new Func<bool, bool, bool>((a, b) => a && b));
+        internal readonly static dynamic And = Curry2< bool, bool, bool>((a, b) => a && b);
 
         internal readonly static dynamic All = Curry2(Dispatchable2("All", XAll, new Func<dynamic, IList, bool>((fn, list) => AllOrAny(Delegate(fn), list, false))));
 
@@ -1228,21 +1228,19 @@ namespace Ramda.NET
             }));
         }));
 
-        internal readonly static dynamic ConstructN = Curry2(new Func<int, Type, object>((n, Fn) => {
+        internal readonly static dynamic ConstructN = Curry2<int, dynamic, object>((n, Fn) => {
             if (n > 10) {
                 throw new ArgumentOutOfRangeException("Constructor with greater than ten arguments");
             }
 
             if (n == 0) {
-                return Delegate(() => {
-                    return Fn.GetFactory(n).DynamicInvoke();
-                });
+                return Delegate(() => Reflection.DynamicInvoke(Fn));
             }
 
             return CurryN(n, Delegate(arguments => {
-                return Fn.GetFactory(n).DynamicInvoke((object[])arguments.Slice(0, n));
+                return Reflection.DynamicInvoke(Fn, (object[])arguments.Slice(0, n));
             }));
-        }));
+        });
 
         internal readonly static dynamic Converge = Curry2(new Func<dynamic, IList, object>((after, fns) => {
             return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new Func<object[], object>(arguments => {
@@ -1368,6 +1366,8 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic ComposeP = ComposeFactory(PipeP, "ComposeP");
+
+        internal readonly static dynamic Construct = Curry1<DynamicDelegate, object>(Fn => ConstructN(Fn.Length, Fn));
 
         internal readonly static dynamic Contains = Curry2(new Func<object, object, bool>(ContainsInternal));
 

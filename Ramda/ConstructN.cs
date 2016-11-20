@@ -13,15 +13,23 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic ConstructN(int n, Type Fn) {
-			return Currying.ConstructN(n, Fn);
+		public static dynamic ConstructN(int n, Delegate Fn) {
+			return Currying.ConstructN(n, new DelegateDecorator(Fn));
 		}
 
-		public static dynamic ConstructN(RamdaPlaceholder n, Type Fn) {
-			return Currying.ConstructN(n, Fn);
+		public static dynamic ConstructN(RamdaPlaceholder n, Delegate Fn) {
+			return Currying.ConstructN(n, new DelegateDecorator(Fn));
 		}
 
 		public static dynamic ConstructN(int n, RamdaPlaceholder Fn = null) {
+			return Currying.ConstructN(n, Fn);
+		}
+
+		public static dynamic ConstructN(RamdaPlaceholder n, dynamic Fn) {
+			return Currying.ConstructN(n, Fn);
+		}
+
+		public static dynamic ConstructN(int n, dynamic Fn) {
 			return Currying.ConstructN(n, Fn);
 		}
 

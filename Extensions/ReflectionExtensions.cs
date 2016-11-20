@@ -13,6 +13,7 @@ namespace Ramda.NET
 {
     internal static class ReflectionExtensions
     {
+        private static object[] emptyArray = new object[0];
         private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
@@ -379,8 +380,8 @@ namespace Ramda.NET
             return target.DynamicInvoke(arguments.Pad(target));
         }
 
-        internal static object DynamicInvoke(dynamic target, object[] arguments) {
-            var args = Arguments(arguments);
+        internal static object DynamicInvoke(dynamic target, object[] arguments = null) {
+            var args = Arguments(arguments) ?? emptyArray;
 
             return DynamicInvoke(target, args, args.Length);
         }

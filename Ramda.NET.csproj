@@ -662,6 +662,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IsNil.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Without.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Without.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Juxt.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1202,6 +1207,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToPairs.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\ToString.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToString.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Transduce.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1719,6 +1729,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNil.cs</LastGenOutput>
       <LastOutputs>.\IsNil.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Without.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Without.cs</LastGenOutput>
+      <LastOutputs>.\Without.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Juxt.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2260,6 +2275,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToPairs.cs</LastGenOutput>
       <LastOutputs>.\ToPairs.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ToString.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToString.cs</LastGenOutput>
+      <LastOutputs>.\ToString.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Transduce.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

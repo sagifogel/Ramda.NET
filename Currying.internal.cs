@@ -14,8 +14,8 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
-        internal static DynamicDelegate Delegate(Func<object[], object> fn) {
-            return new DelegateDecorator(fn);
+        internal static DynamicDelegate Delegate(Func<object[], object> fn, int? length = null) {
+            return new DelegateDecorator(fn, length);
         }
 
         internal static DynamicDelegate Delegate(Func<object> fn) {
@@ -44,7 +44,7 @@ namespace Ramda.NET
         }
 
         private static dynamic ComplementInternal(dynamic fn) {
-            return Delegate((object[] arguments) => !fn(arguments));
+            return Delegate((object[] arguments) => !DynamicInvoke(fn, arguments));
         }
 
         private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {

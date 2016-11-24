@@ -959,24 +959,37 @@ namespace Ramda.NET
 
         internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
 
-        internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<Delegate, object, object>((pred, filterable) => {
+        internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<DynamicDelegate, object, object>((pred, filterable) => {
+            dynamic dynamicPred = pred;
+
             return !filterable.IsEnumerable() ? ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
                 var value = filterable.Member(key);
 
-                if ((bool)pred.Invoke(value)) {
+                if (dynamicPred(value)) {
                     acc[key] = value;
                 }
 
                 return acc;
-            }), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => (bool)pred.Invoke(item), (IList)filterable);
+            }), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => dynamicPred(item), (IList)filterable);
         })));
 
         internal readonly static dynamic Flatten = Curry1(MakeFlat(true));
 
         internal readonly static dynamic Flip = Curry1<dynamic, dynamic>(fn => {
-            return Curry(Delegate((object[] args) => {
-                return args;
-            }));
+            return Curry(Delegate((object[] arguments) => {
+                var args = (object[])arguments.Slice();
+                var dynamicFn = Delegate(fn);
+
+                if (args.Length > 1) {
+                    var a = args[0];
+                    var b = args[1];
+
+                    args[0] = b;
+                    args[1] = a;
+                }
+
+                return Reflection.DynamicInvoke(dynamicFn, args);
+            }, 2));
         });
 
         internal readonly static dynamic Head = Nth(0);
@@ -1133,7 +1146,7 @@ namespace Ramda.NET
             }), a, list);
         }));
 
-        internal readonly static dynamic Reject = Curry2<Delegate, object, object>((pred, filterable) => Filter(ComplementInternal(pred), filterable));
+        internal readonly static dynamic Reject = Curry2<DynamicDelegate, object, object>((pred, filterable) => Filter(ComplementInternal(pred), filterable));
 
         internal readonly static dynamic Repeat = Curry2<object, int, IList>((value, n) => Times(Always(value), n));
 

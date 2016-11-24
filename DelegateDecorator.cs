@@ -9,9 +9,9 @@ namespace Ramda.NET
     {
         private readonly Delegate @delegate;
 
-        internal DelegateDecorator(Delegate fn) {
+        internal DelegateDecorator(Delegate fn, int? length = null) {
             @delegate = fn;
-            Length = fn.Method.GetParameters().Length;
+            Length = length ?? fn.Method.GetParameters().Length;
         }
 
         public override bool TryInvoke(InvokeBinder binder, object[] arguments, out object result) {

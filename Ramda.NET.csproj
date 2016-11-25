@@ -122,6 +122,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Both.Func.cs">
+      <DependentUpon>Both.Func.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Both.delegate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Both.delegate.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Call.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -252,6 +262,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Both.Func.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Both.Func.cs</LastGenOutput>
+      <LastOutputs>.\Both.Func.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Both.delegate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Both.delegate.cs</LastGenOutput>
+      <LastOutputs>.\Both.delegate.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Call.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

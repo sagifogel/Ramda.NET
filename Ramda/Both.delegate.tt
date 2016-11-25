@@ -1,0 +1,11 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("Delegate", "f", false));	
+	template.Parameters.Add(Tuple.Create("Delegate", "g", false));
+	template.Render();
+#>

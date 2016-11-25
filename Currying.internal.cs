@@ -694,8 +694,10 @@ namespace Ramda.NET
         }
 
         private static object BothOrEither(dynamic f, dynamic g, Func<bool, bool, bool> operand, dynamic liftBy) {
-            if (f.IsFunction()) {
-                return Delegate((object[] arguments) => operand(Delegate(f), Delegate(g)));
+            var fn = f as DynamicDelegate;
+             
+            if (fn.IsNotNull()) {
+                return Delegate((object[] arguments) => operand(DynamicInvoke(f, arguments), DynamicInvoke(g, arguments)));
             }
 
             return Lift(liftBy)(f, g);

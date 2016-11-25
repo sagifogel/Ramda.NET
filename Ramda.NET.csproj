@@ -147,6 +147,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Clone.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Complement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Complement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\ComposeK.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -282,6 +287,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Chain.cs</LastGenOutput>
       <LastOutputs>.\Chain.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Complement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Complement.cs</LastGenOutput>
+      <LastOutputs>.\Complement.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ComposeK.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

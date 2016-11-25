@@ -1089,7 +1089,9 @@ namespace Ramda.NET
 
             if (functionFunctor.IsNotNull()) {
                 return CurryN(functionFunctor.Length, Delegate(((object[] arguments) => {
-                    return fn((dynamic)functionFunctor)(arguments);
+                    dynamic dynamicFunctor = functionFunctor;
+
+                    return fn(Reflection.DynamicInvoke(functionFunctor, arguments));
                 })));
             }
 

@@ -249,5 +249,9 @@ namespace Ramda.NET
         public static dynamic ComposeK(params dynamic[] functions) {
             return Currying.ComposeK(functions);
         }
+
+        public static dynamic Both(dynamic f, dynamic g) {
+            return Currying.Both(f, g);
+        }
     }
 }

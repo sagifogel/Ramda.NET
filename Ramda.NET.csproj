@@ -122,8 +122,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Both.Func.cs">
-      <DependentUpon>Both.Func.tt</DependentUpon>
+    <Compile Include="Ramda\Both.func1.cs">
+      <DependentUpon>Both.func.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -238,6 +238,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DropRepeatsWith.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Either.delegate.cs">
+      <DependentUpon>Either.delegate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Either.func.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Either.func.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\EqBy.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -268,9 +278,9 @@
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Both.Func.tt">
+    <Content Include="Ramda\Both.func.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Both.Func.cs</LastGenOutput>
+      <LastGenOutput>Both.func1.cs</LastGenOutput>
       <LastOutputs>.\Both.Func.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Both.delegate.tt">
@@ -356,6 +366,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DropRepeatsWith.cs</LastGenOutput>
       <LastOutputs>.\DropRepeatsWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Either.delegate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Either.delegate.cs</LastGenOutput>
+      <LastOutputs>.\Either.delegate.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Either.func.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Either.func.cs</LastGenOutput>
+      <LastOutputs>.\Either.func.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\EqBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

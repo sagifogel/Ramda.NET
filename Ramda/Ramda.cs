@@ -253,5 +253,9 @@ namespace Ramda.NET
         public static dynamic Both(dynamic f, dynamic g) {
             return Currying.Both(f, g);
         }
+
+        public static dynamic Either(dynamic f, dynamic g) {
+            return Currying.Either(f, g);
+        }
     }
 }

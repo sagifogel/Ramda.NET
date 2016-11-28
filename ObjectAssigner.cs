@@ -17,7 +17,7 @@ namespace Ramda.NET
         private static readonly MethodInfo setValueMethod = typeofFieldInfo.GetMethod("SetValue", new[] { typeofObject, typeofObject });
 
         internal static ExpandoObject Assign(ExpandoObject target, params object[] objectN) {
-            objectN.ForEach(source => {
+            objectN.ForEach<object>(source => {
                 Delegate @delegate = null;
                 var sourceType = source.GetType();
                 var lambdaType = Expression.GetActionType(sourceType, typeof(ExpandoObject));

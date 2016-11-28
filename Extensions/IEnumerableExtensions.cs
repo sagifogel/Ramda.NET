@@ -103,6 +103,12 @@ namespace Ramda.NET
             }
         }
 
+        internal static void ForEach(this IList source, Action<object> action) {
+            foreach (var item in source) {
+                action(item);
+            }
+        }
+
         public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> predicate) {
             var keys = new HashSet<TKey>();
 

@@ -154,13 +154,15 @@ namespace Ramda.NET
             return value == type.GetDefaultValue() ? defaultValue : value;
         });
 
-        internal readonly static dynamic DifferenceWith = Curry3<Func<object, object, bool>, IList, IList, IList>((pred, first, second) => {
+        internal readonly static dynamic DifferenceWith = Curry3<DynamicDelegate, IList, IList, IList>((pred, first, second) => {
             var idx = 0;
             var firstLen = first.Count;
             var result = new ArrayList();
+            dynamic dynamicPred = pred;
+            Func<object, object, bool> containsPredicate = (a, b) => (bool)dynamicPred(a, b);
 
             while (idx < firstLen) {
-                if (!ContainsWith(pred, first[idx], second) && !ContainsWith(pred, first[idx], result)) {
+                if (!ContainsWith(containsPredicate, first[idx], second) && !ContainsWith(containsPredicate, first[idx], result)) {
                     result.Add(first[idx]);
                 }
 
@@ -1415,7 +1417,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PipeK = Delegate((object[] arguments) => Reflection.DynamicInvoke(ComposeK, Reverse(arguments)));
 
-        internal new readonly static dynamic ToString = Curry1<object, string>(val => val.ToString());
+        internal new readonly static dynamic ToString = Curry1<object, string>(ToStringInternal);
 
         internal readonly static dynamic Without = Curry2<IList, IList, IList>((xs, list) => Reject(Flip(new Func<object, object, bool>(ContainsInternal))(xs), list));
 
@@ -1483,6 +1485,31 @@ namespace Ramda.NET
 
         internal static dynamic Join = Curry2<string, IList, string>((separator, xs) => {
             return string.Join(separator, xs.Select<string>(item => item.ToString()));
+        });
+
+        internal static dynamic Memoize = Curry1<DynamicDelegate, DynamicDelegate>(fn => {
+            dynamic dynamicFn = fn;
+            var cache = new Dictionary<string, object>();
+            var a = "A".Split();
+
+            return Arity(fn.Length, Delegate((object[] arguments) => {
+                var key = (string)ToString(arguments);
+
+                return cache.GetOrAdd<string, object>(key, () => {
+                    return Reflection.DynamicInvoke(dynamicFn, arguments);
+                });
+            }));
+
+        });
+
+        internal static dynamic Split = Invoker(1, "Split");
+
+        internal static dynamic SymmetricDifference = Curry2<IList, IList, IList>((list1, list2) => {
+            return Concat(Difference(list1, list2), Difference(list2, list1));
+        });
+
+        internal static dynamic SymmetricDifferenceWith = Curry3<DynamicDelegate, IList, IList, IList>((pred, list1, list2) => {
+            return Concat(DifferenceWith(pred, list1, list2), DifferenceWith(pred, list2, list1));
         });
     }
 }

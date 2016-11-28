@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using static Ramda.NET.ReflectionExtensions;
+using System.Text;
 
 namespace Ramda.NET
 {
@@ -683,6 +684,19 @@ namespace Ramda.NET
             return false;
         }
 
+        private static string ToStringInternal(object x) {
+            if (x.IsList()) {
+                var list = (IList)x;
+                var stringBuilder = new StringBuilder("[");
+
+                list.ForEach(item => stringBuilder.Append(ToStringInternal(item)));
+
+                return stringBuilder.Append("]").ToString();
+            }
+
+            return x.ToString();
+        }
+
         private static DynamicDelegate ComposeFactory(dynamic pipe, string name) {
             return Delegate((object[] arguments) => {
                 if (arguments.Length == 0) {
@@ -695,7 +709,7 @@ namespace Ramda.NET
 
         private static object BothOrEither(dynamic f, dynamic g, Func<bool, bool, bool> operand, dynamic liftBy) {
             var fn = f as DynamicDelegate;
-             
+
             if (fn.IsNotNull()) {
                 return Delegate((object[] arguments) => operand(DynamicInvoke(f, arguments), DynamicInvoke(g, arguments)));
             }

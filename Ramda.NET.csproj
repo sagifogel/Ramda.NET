@@ -722,6 +722,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Join.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Memoize.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Memoize.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Split.reverse.cs">
+      <DependentUpon>Split.reverse.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Split.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Split.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\SymmetricDifferenceWith.cs">
+      <DependentUpon>SymmetricDifferenceWith.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\SymmetricDifference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SymmetricDifference.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Without.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1799,6 +1824,31 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Join.cs</LastGenOutput>
       <LastOutputs>.\Join.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Memoize.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Memoize.cs</LastGenOutput>
+      <LastOutputs>.\Memoize.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Split.reverse.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Split.reverse.cs</LastGenOutput>
+      <LastOutputs>.\Split.reverse.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Split.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Split.cs</LastGenOutput>
+      <LastOutputs>.\Split.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SymmetricDifferenceWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SymmetricDifferenceWith.cs</LastGenOutput>
+      <LastOutputs>.\SymmetricDifferenceWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SymmetricDifference.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SymmetricDifference.cs</LastGenOutput>
+      <LastOutputs>.\SymmetricDifference.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -692,6 +692,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InvertObj.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Invoker.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invoker.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Is.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -711,6 +716,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IsNil.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Join.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Join.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Without.cs">
       <AutoGen>True</AutoGen>
@@ -1760,6 +1770,11 @@
       <LastGenOutput>InvertObj.cs</LastGenOutput>
       <LastOutputs>.\InvertObj.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Invoker.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Invoker.cs</LastGenOutput>
+      <LastOutputs>.\Invoker.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Is.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Is.cs</LastGenOutput>
@@ -1779,6 +1794,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IsNil.cs</LastGenOutput>
       <LastOutputs>.\IsNil.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Join.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Join.cs</LastGenOutput>
+      <LastOutputs>.\Join.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

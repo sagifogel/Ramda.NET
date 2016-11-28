@@ -110,7 +110,7 @@ namespace Ramda.NET
             return target.Member((string)member);
         }
 
-        internal static object Member(this object target, string name) {
+        internal static object Member(this object target, string name, int length = 0) {
             var type = target.GetType();
 
             if (type.TypeIsDictionary()) {
@@ -143,7 +143,7 @@ namespace Ramda.NET
                 return FunctionArity(target);
             }
             else {
-                var member = type.TryGetMemberInfoFromType(name);
+                var member = type.TryGetMemberInfoFromType(name, length);
 
                 if (member.IsNotNull()) {
                     switch (member.MemberType) {
@@ -279,14 +279,14 @@ namespace Ramda.NET
             return target.GetType().TryGetMemberInfoFromType(name);
         }
 
-        internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name) {
+        internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name, int length = 0) {
             var members = type.GetMember(name, bindingFlags);
 
             if (members.Length == 1) {
                 return members[0];
             }
 
-            return null;
+            return members.Cast<MethodInfo>().SingleOrDefault(m => m.GetParameters().Length == length);
         }
 
         internal static object Cast(this object target, Type to) {

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core = Ramda.NET.IEnumerableExtensions;
 using Reflection = Ramda.NET.ReflectionExtensions;
+using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -1462,5 +1463,26 @@ namespace Ramda.NET
         });
 
         internal static dynamic Either = Curry2<object, object, object>((f, g) => BothOrEither(f, g, new Func<bool, bool, bool>((a, b) => a || b), Or));
+
+        internal static dynamic Invoker = Curry2<int, string, object>((arity, method) => {
+            return CurryN(arity + 1, Delegate((object[] arguments) => {
+                var target = arguments[arity];
+
+                if (target.IsNotNull()) {
+                    var methodMember = target.Member(method, arity);
+                    var @delegate = methodMember as Delegate;
+
+                    if (methodMember.IsNotNull()) {
+                        return @delegate.DynamicInvoke((object[])arguments.Slice(0, arity));
+                    }
+                }
+
+                throw new MissingMethodException($"{nameof(target)} does not have a method named '{method}'");
+            }));
+        });
+
+        internal static dynamic Join = Curry2<string, IList, string>((separator, xs) => {
+            return string.Join(separator, xs.Select<string>(item => item.ToString()));
+        });
     }
 }

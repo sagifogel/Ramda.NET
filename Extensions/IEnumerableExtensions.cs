@@ -151,27 +151,30 @@ namespace Ramda.NET
         }
 
         internal static Type GetElementType(this IEnumerable enumerable) {
-            var elementType = typeof(object);
             var enumerableType = enumerable.GetType();
 
             if (enumerableType.HasElementType) {
-                elementType = enumerableType.GetElementType();
+                return enumerableType.GetElementType();
             }
-            else if (enumerableType.IsGenericType) {
-                elementType = enumerableType.GetGenericArguments()[0];
+
+            if (enumerableType.IsGenericType) {
+                return enumerableType.GetGenericArguments()[0];
             }
-            else {
-                Type firstElementType = null;
-                var list = enumerable.Cast<object>();
-                var allSameType = list.Aggregate(true, (e1, e2) => {
-                    firstElementType = firstElementType ?? e2.GetType();
+            return FindElementType(enumerable);
+        }
 
-                    return e1 && firstElementType.Equals(e2.GetType());
-                });
+        private static Type FindElementType(this IEnumerable enumerable) {
+            Type firstElementType = null;
+            var elementType = typeof(object);
+            var list = enumerable.Cast<object>();
+            var allSameType = list.Aggregate(true, (e1, e2) => {
+                firstElementType = firstElementType ?? e2.GetType();
 
-                if (allSameType) {
-                    elementType = firstElementType;
-                }
+                return e1 && firstElementType.Equals(e2.GetType());
+            });
+
+            if (allSameType) {
+                elementType = firstElementType;
             }
 
             return elementType;
@@ -199,6 +202,17 @@ namespace Ramda.NET
             }
 
             return (TArray)arr;
+        }
+
+        internal static Array NormalizeArray(this IList list)  {
+            var type = list.FindElementType();
+            IList arr = list.CreateNewArray(list.Count, type);
+
+            for (int i = 0; i < list.Count; i++) {
+                arr[i] = list[i];
+            }
+
+            return (Array)arr;
         }
 
         internal static TList ToList<TList>(this IEnumerable list, Type type = null) where TList : IList {
@@ -235,7 +249,7 @@ namespace Ramda.NET
 
         internal static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
             var newList = new List<TResult>(list.Cast<TResult>());
-            
+
             newList.Sort(comparison);
 
             return newList.ToArray();

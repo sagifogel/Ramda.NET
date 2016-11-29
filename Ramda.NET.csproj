@@ -747,6 +747,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SymmetricDifference.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Test.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ToUpper.cs">
+      <DependentUpon>ToUpper.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\ToLower.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToLower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UniqBy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UniqBy.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Without.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1849,6 +1869,25 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SymmetricDifference.cs</LastGenOutput>
       <LastOutputs>.\SymmetricDifference.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Test.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Test.cs</LastGenOutput>
+      <LastOutputs>.\Test.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ToUpper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToUpper.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ramda\ToLower.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToLower.cs</LastGenOutput>
+      <LastOutputs>.\ToLower.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UniqBy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UniqBy.cs</LastGenOutput>
+      <LastOutputs>.\UniqBy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

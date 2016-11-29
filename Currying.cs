@@ -1511,5 +1511,27 @@ namespace Ramda.NET
         internal static dynamic SymmetricDifferenceWith = Curry3<DynamicDelegate, IList, IList, IList>((pred, list1, list2) => {
             return Concat(DifferenceWith(pred, list1, list2), DifferenceWith(pred, list2, list1));
         });
+
+        internal static dynamic Test = Curry2<Regex, string, bool>((pattern, str) => pattern.IsMatch(str));
+
+        internal static dynamic ToLower = Invoker(0, "ToLower");
+
+        internal static dynamic ToUpper = Invoker(0, "ToUpper");
+
+        internal static dynamic UniqBy = Curry2<DynamicDelegate, IList, IList>((fn, list) => {
+            dynamic dynamicFn = fn;
+            var result = new ArrayList();
+            var set = new HashSet<object>();
+
+            foreach (var item in list) {
+                var appliedItem = dynamicFn(item);
+
+                if (set.Add(appliedItem)) {
+                    result.Add(item);
+                }
+            }
+            
+            return result.ToArray<Array>();
+        });
     }
 }

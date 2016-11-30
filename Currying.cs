@@ -1530,8 +1530,31 @@ namespace Ramda.NET
                     result.Add(item);
                 }
             }
-            
+
             return result.ToArray<Array>();
         });
+
+        internal static dynamic Uniq = UniqBy(Identity);
+
+        internal static dynamic Intersection = Curry2<IList, IList, IList>((list1, list2) => {
+            dynamic flipped;
+            IList lookupList;
+            IList filteredList;
+
+            if (list1.Count > list2.Count) {
+                lookupList = list1;
+                filteredList = list2;
+            }
+            else {
+                lookupList = list2;
+                filteredList = list1;
+            }
+
+            flipped = Flip(new Func<object, object, bool>(ContainsInternal))(lookupList);
+
+            return Uniq(FilterInternal(a => flipped(a), filteredList));
+        });
+
+        internal static dynamic Union = Curry2(Compose(Uniq, new Func<IList, IList, IList>(Core.ConcatInternal)));
     }
 }

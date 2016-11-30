@@ -651,6 +651,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InsertAll.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Intersection.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Intersection.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\IntersectionWith.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -761,6 +766,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ToLower.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Union.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Union.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Uniq.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Uniq.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\UniqBy.cs">
       <AutoGen>True</AutoGen>
@@ -1775,6 +1790,11 @@
       <LastGenOutput>InsertAll.cs</LastGenOutput>
       <LastOutputs>.\InsertAll.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Intersection.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Intersection.cs</LastGenOutput>
+      <LastOutputs>.\Intersection.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\IntersectionWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IntersectionWith.cs</LastGenOutput>
@@ -1883,6 +1903,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToLower.cs</LastGenOutput>
       <LastOutputs>.\ToLower.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Union.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Union.cs</LastGenOutput>
+      <LastOutputs>.\Union.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Uniq.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Uniq.cs</LastGenOutput>
+      <LastOutputs>.\Uniq.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\UniqBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -31,11 +31,11 @@ namespace Ramda.NET
             return methodInfo.GetParameters().Length;
         }
 
-        internal static object[] Pad(params object[] arguments) {
-            return Pad(arguments, 10);
+        internal static object[] Clip(params object[] arguments) {
+            return Clip(arguments, 10);
         }
 
-        internal static object[] Pad(this object[] arguments, int length = 10) {
+        internal static object[] Clip(this object[] arguments, int length = 10) {
             var copied = new object[length];
 
             if (arguments.IsNotNull()) {
@@ -47,18 +47,18 @@ namespace Ramda.NET
             return copied;
         }
 
-        internal static object[] Pad(this object[] arguments, Delegate @delegate) {
-            return arguments.Pad(@delegate.Method.GetParameters().Length);
+        internal static object[] Clip(this object[] arguments, Delegate @delegate) {
+            return arguments.Clip(@delegate.Method.GetParameters().Length);
         }
 
-        internal static object[] Pad(this List<object> arguments) {
-            return Pad(arguments.ToArray());
+        internal static object[] Clip(this List<object> arguments) {
+            return Clip(arguments.ToArray());
         }
 
         internal static DynamicDelegate Arity(int length, Delegate fn) {
             return Arity(length, new DelegateDecorator(fn));
         }
-        
+
         internal static DynamicDelegate Arity(int length, DynamicDelegate fn) {
             dynamic @delegate = fn;
 

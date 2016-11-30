@@ -372,12 +372,12 @@ namespace Ramda.NET
             if (target.Arity() == 1) {
                 var param = target.Method.GetParameters()[0];
 
-                if (param.ParameterType.IsArray && (arguments.Length > 0 && !arguments[0].IsArray())) {
+                if (param.ParameterType.IsArray && (arguments.Length > 1 || arguments.Length == 1 && !arguments[0].IsArray())) {
                     arguments = new object[1] { arguments };
                 }
             }
 
-            return target.DynamicInvoke(arguments.Pad(target));
+            return target.DynamicInvoke(arguments.Clip(target));
         }
 
         internal static object DynamicInvoke(dynamic target, object[] arguments = null) {

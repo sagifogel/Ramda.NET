@@ -115,7 +115,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new[] { el })));
 
-        internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => fn(args));
+        internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => Reflection.DynamicInvoke(fn ,args));
 
         internal readonly static dynamic Assoc = Curry3<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
 

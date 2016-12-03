@@ -190,10 +190,6 @@ namespace Ramda.NET
             return elementType;
         }
 
-        internal static bool IsJaggedArray(this object[] arr) {
-            return arr.GetType().GetElementType().IsArray;
-        }
-
         internal static object[] ToArgumentsArray(this object value, Type type = null) {
             type = type ?? value.GetType();
 
@@ -212,17 +208,6 @@ namespace Ramda.NET
             }
 
             return (TArray)arr;
-        }
-
-        internal static Array NormalizeArray(this IList list)  {
-            var type = list.FindElementType();
-            IList arr = list.CreateNewArray(list.Count, type);
-
-            for (int i = 0; i < list.Count; i++) {
-                arr[i] = list[i];
-            }
-
-            return (Array)arr;
         }
 
         internal static TList ToList<TList>(this IEnumerable list, Type type = null) where TList : IList {

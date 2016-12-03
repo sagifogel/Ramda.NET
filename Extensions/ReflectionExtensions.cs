@@ -212,14 +212,6 @@ namespace Ramda.NET
             return false;
         }
 
-        internal static bool HasMember(this object target, string name) {
-            if (target.IsDictionary()) {
-                return ((IDictionary)target).Contains(name);
-            }
-
-            return target.Member(name).IsNotNull();
-        }
-
         internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
             object value;
 
@@ -259,10 +251,6 @@ namespace Ramda.NET
                        .Cast<MemberInfo>()
                        .Concat(type.GetFields(bindingFlags))
                        .ToDictionary(member => member.Name, m => target.Member(m.Name));
-        }
-
-        internal static IEnumerable<MemberInfo> ToMemberInfos(this object target) {
-            return target.GetType().ToMembersInfoFromType();
         }
 
         internal static IEnumerable<MemberInfo> ToMembersInfoFromType(this Type type) {
@@ -415,10 +403,6 @@ namespace Ramda.NET
                 default:
                     throw new ArgumentOutOfRangeException("Argument length must be a non-negative integer no greater than ten");
             }
-        }
-
-        internal static bool Is<TCompareTo>(this object @object) {
-            return typeof(TCompareTo).IsAssignableFrom(@object.GetType());
         }
 
         internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {

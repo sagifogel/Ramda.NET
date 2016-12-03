@@ -19,6 +19,12 @@ namespace Ramda.NET
             return new DelegateDecorator(fn, length);
         }
 
+        internal static DynamicDelegate Delegate(object context, Delegate fn, int? length = null) {
+            var @delegate = fn.Method.CreateDelegate(context);
+
+            return Delegate((object[] arguments) => @delegate.DynamicInvoke(arguments), length);
+        }
+
         internal static DynamicDelegate Delegate(Func<object> fn) {
             return new DelegateDecorator(fn);
         }

@@ -130,6 +130,10 @@ namespace Ramda.NET
             }
         });
 
+        internal readonly static dynamic Bind = Curry2<Delegate, object, object>((fn, thisObj) => {
+            return Arity(fn.Arity(), Delegate(thisObj, fn));
+        });
+
         internal readonly static dynamic Clamp = Curry3<dynamic, dynamic, dynamic, dynamic>((min, max, value) => {
             if (min > max) {
                 throw new ArgumentOutOfRangeException("min must not be greater than max in Clamp(min, max, value)");

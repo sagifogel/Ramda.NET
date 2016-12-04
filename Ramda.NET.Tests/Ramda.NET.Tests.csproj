@@ -65,7 +65,9 @@
     <Compile Include="And.cs" />
     <Compile Include="Ap.cs" />
     <Compile Include="Apply.cs" />
+    <Compile Include="ApplySpec.cs" />
     <Compile Include="CollectionAssertTest.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />

@@ -434,7 +434,7 @@ namespace Ramda.NET
                     Array.Copy(arguments, (Array)args, length);
 
                     return dynamicFn(args);
-                });
+                }, length);
             }
             else {
                 throw new ArgumentOutOfRangeException("length", "First argument to NAry must be a non-negative integer no greater than ten");

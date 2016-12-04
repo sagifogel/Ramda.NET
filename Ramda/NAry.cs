@@ -14,14 +14,22 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic NAry(int n, Delegate fn) {
-			return Currying.NAry(n, fn);
+			return Currying.NAry(n, new DelegateDecorator(fn));
 		}
 
 		public static dynamic NAry(RamdaPlaceholder n, Delegate fn) {
-			return Currying.NAry(n, fn);
+			return Currying.NAry(n, new DelegateDecorator(fn));
 		}
 
 		public static dynamic NAry(int n, RamdaPlaceholder fn = null) {
+			return Currying.NAry(n, fn);
+		}
+
+		public static dynamic NAry(RamdaPlaceholder n, dynamic fn) {
+			return Currying.NAry(n, fn);
+		}
+
+		public static dynamic NAry(int n, dynamic fn) {
 			return Currying.NAry(n, fn);
 		}
 

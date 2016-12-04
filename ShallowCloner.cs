@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -31,7 +32,7 @@ namespace Ramda.NET
             var type = obj.GetType();
 
             if (type.IsAnonymousType()) {
-                target = AnonymousTypeCloneAndAssignValue(prop, _ => propValue, type, obj);
+                target = AnonymousTypeCloneAndAssignValue(prop, propValue, type, obj);
             }
             else {
                 target = WellKnownTypeCloneAndAssignValue(prop, obj, propValue);
@@ -45,7 +46,9 @@ namespace Ramda.NET
             var type = obj.GetType();
 
             if (type.IsAnonymousType()) {
-                target = AnonymousTypeCloneAndAssignValue(prop, (paramType) => paramType.GetDefaultValue(), type, obj);
+                var member = obj.Member(prop);
+
+                target = AnonymousTypeCloneAndAssignValue(prop, member.GetType().GetDefaultValue(), type, obj);
             }
             else {
                 target = WellKnownTypeCloneAndAssignValue(prop, obj, null);
@@ -54,21 +57,41 @@ namespace Ramda.NET
             return target;
         }
 
-        private static object AnonymousTypeCloneAndAssignValue(string prop, Func<Type, object> propValueFactory, Type type, object obj) {
-            ConstructorInfo ctor = null;
-            ParameterInfo[] parameters = null;
+        private static object AnonymousTypeCloneAndAssignValue(string prop, object propValue, Type type, object obj) {
+            var propHasBeenSet = false;
+            bool shouldCreateExpando = false;
             var arguments = new List<object>();
+            var ctor = type.GetConstructors()[0];
+            var tuples = ctor.GetParameters().Select((param, i) => {
+                object result = null;
+                var paramType = param.ParameterType;
 
-            ctor = type.GetConstructors()[0];
-            parameters = ctor.GetParameters();
-
-            arguments.AddRange(parameters.Select(param => {
                 if (param.Name.Equals(prop)) {
-                    return propValueFactory(param.ParameterType);
+                    propHasBeenSet = true;
+                    result = propValue;
+                }
+                else {
+                    result = obj.Member(param.Name);
                 }
 
-                return obj.Member(param.Name).Clone();
-            }));
+                shouldCreateExpando |= !paramType.Equals(result.GetType());
+
+                return new {
+                    Value = result,
+                    Name = param.Name
+                };
+            }).ToList();
+
+            if (shouldCreateExpando || !propHasBeenSet) {
+                IDictionary<string, object> expando = new ExpandoObject();
+
+                tuples.ForEach(tuple => expando[tuple.Name] = tuple.Value);
+                expando[prop] = propValue;
+
+                return expando;
+            }
+
+            arguments.AddRange(tuples.Select(tuple => tuple.Value));
 
             return ctor.Invoke(arguments.ToArray());
         }

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core = Ramda.NET.IEnumerableExtensions;
 using Reflection = Ramda.NET.ReflectionExtensions;
-using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -115,18 +114,18 @@ namespace Ramda.NET
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new[] { el })));
 
-        internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => Reflection.DynamicInvoke(fn ,args));
+        internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => Reflection.DynamicInvoke(fn, args));
 
-        internal readonly static dynamic Assoc = Curry3<string, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
+        internal readonly static dynamic Assoc = Curry3<object, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
 
-        internal readonly static dynamic AssocPath = Curry3<IList<string>, object, object, object>((path, val, obj) => {
+        internal readonly static dynamic AssocPath = Curry3<IList, object, object, object>((path, val, obj) => {
             switch (path.Count) {
                 case 0:
                     return val;
                 case 1:
                     return Assoc(path[0], val, obj);
                 default:
-                    return Assoc(path[0], AssocPath(Slice((IList)path, 1), val, obj.Member(path[0])), obj);
+                    return Assoc(path[0], AssocPath(path.Slice(1), val, Reflection.MemberOr(obj, path[0], () => new ExpandoObject())), obj);
             }
         });
 

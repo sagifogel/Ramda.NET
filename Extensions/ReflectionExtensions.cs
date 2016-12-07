@@ -103,11 +103,21 @@ namespace Ramda.NET
         }
 
         internal static object Member(object target, dynamic member) {
-            if (member.GetType().Equals(typeof(int)) && target.IsArray()) {
-                return ((Array)target).Member((int)member);
+            if (member.GetType().Equals(typeof(int))) {
+                if (target.IsArray()) {
+                    return ((Array)target).Member((int)member);
+                }
+
+                return R.Null;
             }
 
             return target.Member((string)member);
+        }
+
+        internal static object MemberOr(object target, dynamic member, Func<object> orFn) {
+            object result = Member(target, member);
+
+            return result.IsNotNull() ? result : orFn();
         }
 
         internal static object Member(this object target, string name, int length = 0) {

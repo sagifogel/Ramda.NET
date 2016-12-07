@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Collections;
 
 namespace Ramda.NET
 {
@@ -27,7 +28,7 @@ namespace Ramda.NET
             return @delegate.DynamicInvoke(source);
         }
 
-        internal static object CloneAndAssignValue(string prop, object propValue, object obj) {
+        internal static object CloneAndAssignValue(dynamic prop, object propValue, object obj) {
             object target = null;
             var type = obj.GetType();
 
@@ -57,7 +58,7 @@ namespace Ramda.NET
             return target;
         }
 
-        private static object AnonymousTypeCloneAndAssignValue(string prop, object propValue, Type type, object obj) {
+        private static object AnonymousTypeCloneAndAssignValue(object prop, object propValue, Type type, object obj) {
             var propHasBeenSet = false;
             bool shouldCreateExpando = false;
             var arguments = new List<object>();
@@ -86,7 +87,7 @@ namespace Ramda.NET
                 IDictionary<string, object> expando = new ExpandoObject();
 
                 tuples.ForEach(tuple => expando[tuple.Name] = tuple.Value);
-                expando[prop] = propValue;
+                expando[prop.ToString()] = propValue;
 
                 return expando;
             }
@@ -96,27 +97,43 @@ namespace Ramda.NET
             return ctor.Invoke(arguments.ToArray());
         }
 
-        private static object WellKnownTypeCloneAndAssignValue(string prop, object obj, object value) {
+        private static object WellKnownTypeCloneAndAssignValue(object prop, object obj, object value) {
             var target = obj.Clone();
-            MemberInfo member = obj.TryGetMemberInfo(prop);
 
-            switch (member.MemberType) {
-                case MemberTypes.Field:
-                    var property = (PropertyInfo)member;
+            if (target.IsList() && prop.GetType().Equals(typeof(int))) {
+                var index = (int)prop;
+                var list = target as IList;
 
-                    if (property.CanWrite) {
-                        property.SetValue(target, value, null);
+                list[index] = value;
+            }
+            else if (target.IsExpandoObject()) {
+                var expando = target as IDictionary<string, object>;
+
+                expando[prop.ToString()] = value;
+            }
+            else {
+                var member = obj.TryGetMemberInfo(prop.ToString());
+
+                if (member.IsNotNull()) {
+                    switch (member.MemberType) {
+                        case MemberTypes.Field:
+                            var property = (PropertyInfo)member;
+
+                            if (property.CanWrite) {
+                                property.SetValue(target, value, null);
+                            }
+
+                            break;
+                        case MemberTypes.Property:
+                            var field = (FieldInfo)member;
+
+                            if (!field.IsInitOnly) {
+                                field.SetValue(target, value);
+                            }
+
+                            break;
                     }
-
-                    break;
-                case MemberTypes.Property:
-                    var field = (FieldInfo)member;
-
-                    if (!field.IsInitOnly) {
-                        field.SetValue(target, value);
-                    }
-
-                    break;
+                }
             }
 
             return target;

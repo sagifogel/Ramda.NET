@@ -1445,7 +1445,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Without = Curry2<IList, IList, IList>((xs, list) => Reject(Flip(new Func<object, object, bool>(ContainsInternal))(xs), list));
 
-        internal static dynamic Both = Curry2<object, object, object>((f, g) => BothOrEither(f, g, new Func<bool, bool, bool>((a, b) => a && b), And));
+        internal static dynamic Both = Curry2<object, object, object>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() && b()), And));
 
         internal readonly static dynamic Complement = Lift(Not);
 
@@ -1488,7 +1488,7 @@ namespace Ramda.NET
             throw new ArgumentException($"{a.GetType().Name} is not a list or string");
         });
 
-        internal static dynamic Either = Curry2<object, object, object>((f, g) => BothOrEither(f, g, new Func<bool, bool, bool>((a, b) => a || b), Or));
+        internal static dynamic Either = Curry2<object, object, object>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() || b()), Or));
 
         internal static dynamic Invoker = Curry2<int, string, object>((arity, method) => {
             return CurryN(arity + 1, Delegate((object[] arguments) => {

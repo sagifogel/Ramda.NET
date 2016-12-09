@@ -38,6 +38,7 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(R.Add(a, R.Add(b, c)), R.Add(R.Add(a, b), c));
         }
 
+        [TestMethod]
         public void Add_IsIdentity() {
             var a = 9;
 

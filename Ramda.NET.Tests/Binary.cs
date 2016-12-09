@@ -8,7 +8,7 @@ namespace Ramda.NET.Tests
     public class Binary
     {
         [TestMethod]
-        [Description("Binary_Turns_Multiple-argument_Function_Into_Binary_One")]
+        [Description("Binary_Turns_Multiple-Argument_Function_Into_Binary_One")]
         public void Binary_Turns_Multiple_argument_Function_Into_Binary_One() {
             R.Binary(new Func<int, int, int?, int>((x, y, z) => {
                 Assert.AreEqual(Arity(x, x, z).Length, 2);

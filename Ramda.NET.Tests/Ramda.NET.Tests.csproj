@@ -70,6 +70,7 @@
     <Compile Include="Assoc.cs" />
     <Compile Include="AssocPath.cs" />
     <Compile Include="Binary.cs" />
+    <Compile Include="Bind.cs" />
     <Compile Include="CollectionAssertTest.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />

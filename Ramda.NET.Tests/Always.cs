@@ -28,7 +28,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        public void Aalways_Returns_Initial_Argument() {
+        public void Always_Returns_Initial_Argument() {
             var a = 10;
             var f = R.Always(a);
 

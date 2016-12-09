@@ -2,11 +2,15 @@
 using System.Reflection;
 using System.Collections.Generic;
 using Reflection = Ramda.NET.ReflectionExtensions;
+using System.Collections;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
     {
+        private static readonly Type typeofList = typeof(IList);
+        private static readonly Type typeofObjectArray = typeof(object[]);
+
         internal static object[] Arguments(params object[] arguments) {
             return Reflection.Arity(arguments);
         }
@@ -23,19 +27,11 @@ namespace Ramda.NET
             return Reflection.FunctionArity(@delegate);
         }
 
-        internal static int Arity(dynamic @delegate) {
-            return @delegate.GetFunctionArity();
-        }
-
         internal static int Arity(this MethodInfo methodInfo) {
             return methodInfo.GetParameters().Length;
         }
 
-        internal static object[] Clip(params object[] arguments) {
-            return Clip(arguments, 10);
-        }
-
-        internal static object[] Clip(this object[] arguments, int length = 10) {
+        internal static object[] Copy(int length, Array arguments) {
             var copied = new object[length];
 
             if (arguments.IsNotNull()) {
@@ -48,11 +44,26 @@ namespace Ramda.NET
         }
 
         internal static object[] Clip(this object[] arguments, Delegate @delegate) {
-            return arguments.Clip(@delegate.Method.GetParameters().Length);
-        }
+            var @params = @delegate.Method.GetParameters();
+            var clipped = Copy(@params.Length, arguments);
 
-        internal static object[] Clip(this List<object> arguments) {
-            return Clip(arguments.ToArray());
+            if (arguments.Length == 1 && clipped.Length == 1) {
+                object item = clipped[0];
+
+                if (item.IsNotNull()) {
+                    var itemType = item.GetType();
+
+                    if (itemType.IsArray) {
+                        var paramIsArray = @params[0].ParameterType.Equals(typeofObjectArray);
+
+                        if (paramIsArray && !itemType.Equals(typeofObjectArray)) {
+                            clipped[0] = Copy(((IList)item).Count, (Array)clipped[0]);
+                        }
+                    }
+                }
+            }
+
+            return clipped;
         }
 
         internal static DynamicDelegate Arity(int length, Delegate fn) {

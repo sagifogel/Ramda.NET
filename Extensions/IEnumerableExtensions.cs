@@ -37,11 +37,11 @@ namespace Ramda.NET
             }
         }
 
-        internal static IList Concat(this IList set1, IList set2 = null) {
+        internal static Array Concat(this IList set1, IList set2 = null) {
             return ConcatInternal(set1, set2);
         }
 
-        internal static IList ConcatInternal(IList set1, IList set2 = null) {
+        internal static Array ConcatInternal(IList set1, IList set2 = null) {
             var list1ElemType = set1.GetElementType();
             var list2ElemType = set2?.GetElementType() ?? list1ElemType;
             var result = list1ElemType.Equals(list2ElemType) ? set1.CreateNewList() : new List<object>();

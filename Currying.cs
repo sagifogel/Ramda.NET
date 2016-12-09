@@ -432,7 +432,7 @@ namespace Ramda.NET
                     args = new object[length];
                     Array.Copy(arguments, (Array)args, length);
 
-                    return dynamicFn(args);
+                    return Reflection.DynamicInvoke(dynamicFn, args);
                 }, length);
             }
             else {
@@ -952,6 +952,27 @@ namespace Ramda.NET
         internal readonly static dynamic F = Always(false);
 
         internal readonly static dynamic T = Always(true);
+
+        internal readonly static dynamic AddIndex = Curry1<DynamicDelegate, DynamicDelegate>(fn => {
+            return CurryN(fn.Length, Delegate((object[] arguments) => {
+                var idx = 0;
+                var origFn = Delegate(arguments[0]);
+                var args = (object[])arguments.Slice();
+                var list = arguments[arguments.Length - 1];
+
+                args[0] = Delegate((object[] innerArguments) => {
+                    var result = Reflection.DynamicInvoke(origFn, (object[])innerArguments.Concat(new[] { idx, list }));
+
+                    idx += 1;
+
+                    return result;
+                });
+
+                return Reflection.DynamicInvoke(fn, args);
+            }));
+        });
+
+        internal readonly static dynamic Binary = Curry1<DynamicDelegate, DynamicDelegate>(fn => NAry(2, fn));
 
         internal readonly static dynamic Clone = Curry1<object, object>(DeepCloner.Clone);
 

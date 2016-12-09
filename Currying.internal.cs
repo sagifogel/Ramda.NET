@@ -28,6 +28,7 @@ namespace Ramda.NET
         internal static DynamicDelegate Delegate(Func<object> fn) {
             return new DelegateDecorator(fn);
         }
+
         internal static DynamicDelegate Delegate(Func<object, object> fn) {
             return new DelegateDecorator(fn);
         }
@@ -65,7 +66,7 @@ namespace Ramda.NET
         }
 
         private static IList FilterInternal(Func<object, bool> fn, IList list) {
-            var result = new List<object>();
+            var result = new ArrayList();
 
             foreach (var item in list) {
                 if (fn(item)) {
@@ -73,7 +74,7 @@ namespace Ramda.NET
                 }
             }
 
-            return result;
+            return result.ToArray<Array>();
         }
 
         internal static IReduced ForceReduced(object x) => new ReducedImpl(x);

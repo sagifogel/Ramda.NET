@@ -70,5 +70,9 @@ namespace Ramda.NET.Tests
 
             return expando as ExpandoObject;
         }
+
+        public static ExpandoObject ToExpando(this object value) {
+            return value.ToDynamic();
+        }
     }
 }

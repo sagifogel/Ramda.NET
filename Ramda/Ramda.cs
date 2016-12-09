@@ -130,7 +130,7 @@ namespace Ramda.NET
             return Currying.Filter(pred, filterable);
         }
 
-        public static dynamic Filter<TSource>(dynamic pred, object filterable) {
+        public static dynamic Filter(dynamic pred, object filterable) {
             return Currying.Filter(pred, filterable);
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Dynamic;
 using System.Collections.Generic;
 using static Ramda.NET.Currying;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -39,7 +40,7 @@ namespace Ramda.NET
                 combinedIdx += 1;
             }
 
-            return left <= 0 ? fn(combined.ToArray()) : Currying.Arity(left, new CurryN(fn, combined.ToArray(), Length));
+            return left <= 0 ? DynamicInvoke(fn, combined.ToArray()) : Currying.Arity(left, new CurryN(fn, combined.ToArray(), Length));
         }
     }
 }

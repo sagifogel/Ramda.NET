@@ -29,7 +29,7 @@ namespace Ramda.NET
             int i = arguments.Length - 1;
 
             while (i >= 0) {
-                if (!object.Equals(arguments[i], null)) {
+                if (!Equals(arguments[i], null)) {
                     break;
                 }
 
@@ -288,6 +288,10 @@ namespace Ramda.NET
         }
 
         internal static object Cast(this object target, Type to) {
+            if (target is IConvertible) {
+                return Convert.ChangeType(target, to);
+            }
+
             var from = target.GetType();
             var key = typeof(Func<,>).MakeGenericType(from, to);
 

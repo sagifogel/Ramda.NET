@@ -67,6 +67,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Ramda\AddIndex.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddIndex.cs</LastGenOutput>
+      <LastOutputs>.\AddIndex.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\All.listxf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>All.listxf.cs</LastGenOutput>
@@ -82,6 +87,11 @@
       <LastGenOutput>AllPass1.cs</LastGenOutput>
       <LastOutputs>.\AllPass1.cs</LastOutputs>
     </Content>
+    <Compile Include="Ramda\AddIndex.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddIndex.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\All.listxf.cs">
       <DependentUpon>All.listxf.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -121,6 +131,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Binary.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Binary.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Bind.cs">
       <AutoGen>True</AutoGen>
@@ -282,6 +297,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Binary.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Binary.cs</LastGenOutput>
+      <LastOutputs>.\Binary.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Bind.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

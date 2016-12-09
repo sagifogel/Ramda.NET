@@ -142,12 +142,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Bind.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Both.Func.cs">
-      <DependentUpon>Both.Func.tt</DependentUpon>
+    <Compile Include="Ramda\Both.delegate.cs" />
+    <Compile Include="Ramda\Both.func.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Both.func.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Both.delegate.cs" />
     <Compile Include="Ramda\Call.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -304,10 +304,10 @@
       <LastGenOutput>Bind.cs</LastGenOutput>
       <LastOutputs>.\Bind.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Both.Func.tt">
+    <Content Include="Ramda\Both.func.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Both.Func.cs</LastGenOutput>
-      <LastOutputs>.\Both.func1.cs</LastOutputs>
+      <LastGenOutput>Both.func.cs</LastGenOutput>
+      <LastOutputs>.\Both.func.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Call.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

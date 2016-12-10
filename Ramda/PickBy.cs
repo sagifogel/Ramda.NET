@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, TTarget obj) {
-			return Currying.PickBy(new DelegateDecorator(pred), obj);
+			return Currying.PickBy(Delegate(pred), obj);
 		}
 
 		public static dynamic PickBy<TTarget>(RamdaPlaceholder pred, TTarget obj) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, RamdaPlaceholder obj = null) {
-			return Currying.PickBy(new DelegateDecorator(pred), obj);
+			return Currying.PickBy(Delegate(pred), obj);
 		}
 
 		public static dynamic PickBy(dynamic pred, RamdaPlaceholder obj = null) {

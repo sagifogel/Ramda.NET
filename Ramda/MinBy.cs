@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, TArg a, TArg b) {
-			return Currying.MinBy(new DelegateDecorator(f), a, b);
+			return Currying.MinBy(Delegate(f), a, b);
 		}
 
 		public static dynamic MinBy<TArg>(RamdaPlaceholder f, TArg a, TArg b) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a, TArg b) {
-			return Currying.MinBy(new DelegateDecorator(f), a, b);
+			return Currying.MinBy(Delegate(f), a, b);
 		}
 
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, TArg a, RamdaPlaceholder b = null) {
-			return Currying.MinBy(new DelegateDecorator(f), a, b);
+			return Currying.MinBy(Delegate(f), a, b);
 		}
 
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
-			return Currying.MinBy(new DelegateDecorator(f), a, b);
+			return Currying.MinBy(Delegate(f), a, b);
 		}
 
 		public static dynamic MinBy<TArg>(dynamic f, RamdaPlaceholder a, TArg b) {

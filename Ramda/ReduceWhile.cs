@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,31 +15,31 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), new DelegateDecorator(fn), acc, list);
+			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(RamdaPlaceholder pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.ReduceWhile(pred, new DelegateDecorator(fn), acc, list);
+			return Currying.ReduceWhile(pred, Delegate(fn), acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), fn, acc, list);
+			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), new DelegateDecorator(fn), acc, list);
+			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), new DelegateDecorator(fn), acc, list);
+			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), fn, acc, list);
+			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceWhile(new DelegateDecorator(pred), new DelegateDecorator(fn), acc, list);
+			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
 		public static dynamic ReduceWhile<TSource, TAccmulator>(RamdaPlaceholder pred, dynamic fn, TAccmulator acc, IList<TSource> list) {

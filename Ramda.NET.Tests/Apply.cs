@@ -24,9 +24,11 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Apply_Provides_No_Way_To_Specify_Context() {
-            var obj = new Test();
+            var obj1 = new Test();
+            var obj2 = new Test();
 
-            Assert.IsTrue(R.Apply(R.Bind((Func<object, bool>)obj.Equals, obj), new[] { obj }));
+            Assert.IsFalse(R.Apply((Func<object, bool>)obj2.Equals, new[] { obj1 }));
+            Assert.IsTrue(R.Apply(R.Bind((Func<object, bool>)obj2.Equals, obj1), new[] { obj1 }));
         }
     }
 }

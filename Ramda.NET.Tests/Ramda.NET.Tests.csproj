@@ -72,6 +72,7 @@
     <Compile Include="Binary.cs" />
     <Compile Include="Bind.cs" />
     <Compile Include="Both.cs" />
+    <Compile Include="Call.cs" />
     <Compile Include="CollectionAssertTest.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />

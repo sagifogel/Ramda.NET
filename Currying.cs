@@ -1231,7 +1231,7 @@ namespace Ramda.NET
         internal readonly static dynamic Call = CurryParams(Delegate(arguments => {
             dynamic fn = arguments[0];
 
-            return Reflection.DynamicInvoke(Delegate(fn), arguments);
+            return Reflection.DynamicInvoke(Delegate(fn), (object[])arguments[1]);
         }));
 
         internal readonly static dynamic Chain = Curry2(Dispatchable2("Chain", XChain, new Func<DynamicDelegate, object, object>((fn, monad) => {

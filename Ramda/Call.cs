@@ -13,20 +13,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Call<TTarget>(TTarget x, params object[] args) {
-			return Currying.Call(x, args);
+		public static dynamic Call(Delegate fn, params object[] args) {
+			return Currying.Call(new DelegateDecorator(fn), args);
 		}
 
-		public static dynamic Call(RamdaPlaceholder x, params object[] args) {
-			return Currying.Call(x, args);
+		public static dynamic Call(RamdaPlaceholder fn, params object[] args) {
+			return Currying.Call(fn, args);
 		}
 
-		public static dynamic Call<TTarget>(TTarget x, RamdaPlaceholder args = null) {
-			return Currying.Call(x, args);
+		public static dynamic Call(Delegate fn, RamdaPlaceholder args = null) {
+			return Currying.Call(new DelegateDecorator(fn), args);
 		}
 
-		public static dynamic Call(RamdaPlaceholder x = null, RamdaPlaceholder args = null) {
-			return Currying.Call(x, args);
+		public static dynamic Call(dynamic fn, RamdaPlaceholder args = null) {
+			return Currying.Call(fn, args);
+		}
+
+		public static dynamic Call(dynamic fn, params object[] args) {
+			return Currying.Call(fn, args);
+		}
+
+		public static dynamic Call(RamdaPlaceholder fn = null, RamdaPlaceholder args = null) {
+			return Currying.Call(fn, args);
 		}
 	}
 }

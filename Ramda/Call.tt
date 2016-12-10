@@ -4,8 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 		
-	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("TTarget", "x", false));
+	template.Parameters.Add(Tuple.Create("Delegate", "fn", true));
 	template.Parameters.Add(Tuple.Create("params object[]", "args", false));
 	template.Render();
 #>

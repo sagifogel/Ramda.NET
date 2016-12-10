@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic All<TSource>(Func<TSource, bool> fn, ITransformer list) {
-			return Currying.All(new DelegateDecorator(fn), list);
+			return Currying.All(Delegate(fn), list);
 		}
 
 		public static dynamic All(RamdaPlaceholder fn, ITransformer list) {

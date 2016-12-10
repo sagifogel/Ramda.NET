@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
-			return Currying.FindIndex(new DelegateDecorator(fn), list);
+			return Currying.FindIndex(Delegate(fn), list);
 		}
 
 		public static dynamic FindIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.FindIndex(new DelegateDecorator(fn), list);
+			return Currying.FindIndex(Delegate(fn), list);
 		}
 
 		public static dynamic FindIndex(dynamic fn, RamdaPlaceholder list = null) {

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,15 +15,15 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Both<TSource>(Func<TSource, bool> f, Func<TSource, bool> g) {
-			return Currying.Both(new DelegateDecorator(f), new DelegateDecorator(g));
+			return Currying.Both(Delegate(f), Delegate(g));
 		}
 
 		public static dynamic Both<TSource>(RamdaPlaceholder f, Func<TSource, bool> g) {
-			return Currying.Both(f, new DelegateDecorator(g));
+			return Currying.Both(f, Delegate(g));
 		}
 
 		public static dynamic Both<TSource>(Func<TSource, bool> f, RamdaPlaceholder g = null) {
-			return Currying.Both(new DelegateDecorator(f), g);
+			return Currying.Both(Delegate(f), g);
 		}
 
 		public static dynamic Both(RamdaPlaceholder f, dynamic g) {

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic AddIndex(Delegate fn) {
-			return Currying.AddIndex(new DelegateDecorator(fn));
+			return Currying.AddIndex(Delegate(fn));
 		}
 
 		public static dynamic AddIndex(RamdaPlaceholder fn = null) {

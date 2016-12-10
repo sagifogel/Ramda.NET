@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Filter<TSource>(Func<TSource, bool> pred, IList<TSource> filterable) {
-			return Currying.Filter(new DelegateDecorator(pred), filterable);
+			return Currying.Filter(Delegate(pred), filterable);
 		}
 
 		public static dynamic Filter<TSource>(RamdaPlaceholder pred, IList<TSource> filterable) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Filter<TSource>(Func<TSource, bool> pred, RamdaPlaceholder filterable = null) {
-			return Currying.Filter(new DelegateDecorator(pred), filterable);
+			return Currying.Filter(Delegate(pred), filterable);
 		}
 
 		public static dynamic Filter(dynamic pred, RamdaPlaceholder filterable = null) {

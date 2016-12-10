@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,11 +15,11 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic UncurryN(int length, Delegate fn) {
-			return Currying.UncurryN(length, new DelegateDecorator(fn));
+			return Currying.UncurryN(length, Delegate(fn));
 		}
 
 		public static dynamic UncurryN(RamdaPlaceholder length, Delegate fn) {
-			return Currying.UncurryN(length, new DelegateDecorator(fn));
+			return Currying.UncurryN(length, Delegate(fn));
 		}
 
 		public static dynamic UncurryN(int length, RamdaPlaceholder fn = null) {

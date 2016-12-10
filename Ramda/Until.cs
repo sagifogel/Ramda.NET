@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,23 +15,23 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> fn, TArg init) {
-			return Currying.Until(new DelegateDecorator(pred), new DelegateDecorator(fn), init);
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
 		public static dynamic Until<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> fn, TArg init) {
-			return Currying.Until(pred, new DelegateDecorator(fn), init);
+			return Currying.Until(pred, Delegate(fn), init);
 		}
 
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn, TArg init) {
-			return Currying.Until(new DelegateDecorator(pred), fn, init);
+			return Currying.Until(Delegate(pred), fn, init);
 		}
 
 		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> fn, RamdaPlaceholder init = null) {
-			return Currying.Until(new DelegateDecorator(pred), new DelegateDecorator(fn), init);
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
-			return Currying.Until(new DelegateDecorator(pred), fn, init);
+			return Currying.Until(Delegate(pred), fn, init);
 		}
 
 		public static dynamic Until<TArg>(RamdaPlaceholder pred, dynamic fn, TArg init) {

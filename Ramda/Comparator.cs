@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Comparator<TArg>(Func<TArg, TArg, bool> pred) {
-			return Currying.Comparator(new DelegateDecorator(pred));
+			return Currying.Comparator(Delegate(pred));
 		}
 
 		public static dynamic Comparator(RamdaPlaceholder pred = null) {

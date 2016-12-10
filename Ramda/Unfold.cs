@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Unfold(Func<int, dynamic> fn, int seed) {
-			return Currying.Unfold(new DelegateDecorator(fn), seed);
+			return Currying.Unfold(Delegate(fn), seed);
 		}
 
 		public static dynamic Unfold(RamdaPlaceholder fn, int seed) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Unfold(Func<int, dynamic> fn, RamdaPlaceholder seed = null) {
-			return Currying.Unfold(new DelegateDecorator(fn), seed);
+			return Currying.Unfold(Delegate(fn), seed);
 		}
 
 		public static dynamic Unfold(dynamic fn, RamdaPlaceholder seed = null) {

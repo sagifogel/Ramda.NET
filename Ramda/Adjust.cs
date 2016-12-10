@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, IList<TSource> list) {
-			return Currying.Adjust(new DelegateDecorator(fn), idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust<TSource>(RamdaPlaceholder fn, int idx, IList<TSource> list) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx, IList<TSource> list) {
-			return Currying.Adjust(new DelegateDecorator(fn), idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, int idx, RamdaPlaceholder list = null) {
-			return Currying.Adjust(new DelegateDecorator(fn), idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust<TSource>(Func<TSource, TSource> fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null) {
-			return Currying.Adjust(new DelegateDecorator(fn), idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust<TSource>(dynamic fn, RamdaPlaceholder idx, IList<TSource> list) {

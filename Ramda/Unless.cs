@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,23 +15,23 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Unless<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenFalseFn, TArg x) {
-			return Currying.Unless(new DelegateDecorator(pred), new DelegateDecorator(whenFalseFn), x);
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> whenFalseFn, TArg x) {
-			return Currying.Unless(pred, new DelegateDecorator(whenFalseFn), x);
+			return Currying.Unless(pred, Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn, TArg x) {
-			return Currying.Unless(new DelegateDecorator(pred), whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), whenFalseFn, x);
 		}
 
 		public static dynamic Unless<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenFalseFn, RamdaPlaceholder x = null) {
-			return Currying.Unless(new DelegateDecorator(pred), new DelegateDecorator(whenFalseFn), x);
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
-			return Currying.Unless(new DelegateDecorator(pred), whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), whenFalseFn, x);
 		}
 
 		public static dynamic Unless<TArg>(RamdaPlaceholder pred, dynamic whenFalseFn, TArg x) {

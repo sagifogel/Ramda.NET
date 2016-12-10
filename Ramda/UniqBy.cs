@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic UniqBy<TSource, TReturn>(Func<TSource, TReturn> fn, IList<TSource> list) {
-			return Currying.UniqBy(new DelegateDecorator(fn), list);
+			return Currying.UniqBy(Delegate(fn), list);
 		}
 
 		public static dynamic UniqBy<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UniqBy<TSource, TReturn>(Func<TSource, TReturn> fn, RamdaPlaceholder list = null) {
-			return Currying.UniqBy(new DelegateDecorator(fn), list);
+			return Currying.UniqBy(Delegate(fn), list);
 		}
 
 		public static dynamic UniqBy(dynamic fn, RamdaPlaceholder list = null) {

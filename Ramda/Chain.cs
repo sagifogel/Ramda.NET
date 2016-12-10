@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Chain<TSource, TReturn>(Func<TSource, TReturn> fn, IList<TSource> list) {
-			return Currying.Chain(new DelegateDecorator(fn), list);
+			return Currying.Chain(Delegate(fn), list);
 		}
 
 		public static dynamic Chain<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Chain<TSource, TReturn>(Func<TSource, TReturn> fn, RamdaPlaceholder list = null) {
-			return Currying.Chain(new DelegateDecorator(fn), list);
+			return Currying.Chain(Delegate(fn), list);
 		}
 
 		public static dynamic Chain(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.Chain(fn, list);
+			return Currying.Chain(Delegate(fn), list);
 		}
 
 		public static dynamic Chain<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.Chain(fn, list);
+			return Currying.Chain(Delegate(fn), list);
 		}
 
 		public static dynamic Chain(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

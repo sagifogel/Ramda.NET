@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic ForEach<TSource>(Action<TSource> fn, IList<TSource> list) {
-			return Currying.ForEach(new DelegateDecorator(fn), list);
+			return Currying.ForEach(Delegate(fn), list);
 		}
 
 		public static dynamic ForEach<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ForEach<TSource>(Action<TSource> fn, RamdaPlaceholder list = null) {
-			return Currying.ForEach(new DelegateDecorator(fn), list);
+			return Currying.ForEach(Delegate(fn), list);
 		}
 
 		public static dynamic ForEach(dynamic fn, RamdaPlaceholder list = null) {

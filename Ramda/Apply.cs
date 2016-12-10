@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Apply(Delegate fn, object[] args) {
-			return Currying.Apply(new DelegateDecorator(fn), args);
+			return Currying.Apply(Delegate(fn), args);
 		}
 
 		public static dynamic Apply(RamdaPlaceholder fn, object[] args) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Apply(Delegate fn, RamdaPlaceholder args = null) {
-			return Currying.Apply(new DelegateDecorator(fn), args);
+			return Currying.Apply(Delegate(fn), args);
 		}
 
 		public static dynamic Apply(dynamic fn, RamdaPlaceholder args = null) {

@@ -332,6 +332,7 @@
     <Content Include="Ramda\ComposeP.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ComposeP.cs</LastGenOutput>
+      <LastOutputs>.\ComposeP.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Compose.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1919,6 +1920,7 @@
     <Content Include="Ramda\ToUpper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToUpper.cs</LastGenOutput>
+      <LastOutputs>.\ToUpper.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ToLower.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2288,7 +2290,7 @@
     <Content Include="Ramda\Product.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Product.double.cs</LastGenOutput>
-      <LastOutputs>.\Product.cs</LastOutputs>
+      <LastOutputs>.\Product.double.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Project.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

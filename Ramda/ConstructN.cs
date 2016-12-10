@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,11 +15,11 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic ConstructN(int n, Delegate Fn) {
-			return Currying.ConstructN(n, new DelegateDecorator(Fn));
+			return Currying.ConstructN(n, Delegate(Fn));
 		}
 
 		public static dynamic ConstructN(RamdaPlaceholder n, Delegate Fn) {
-			return Currying.ConstructN(n, new DelegateDecorator(Fn));
+			return Currying.ConstructN(n, Delegate(Fn));
 		}
 
 		public static dynamic ConstructN(int n, RamdaPlaceholder Fn = null) {

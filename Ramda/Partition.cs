@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Partition<TTarget, TArg>(Func<TArg, bool> pred, TTarget filterable) {
-			return Currying.Partition(new DelegateDecorator(pred), filterable);
+			return Currying.Partition(Delegate(pred), filterable);
 		}
 
 		public static dynamic Partition<TTarget>(RamdaPlaceholder pred, TTarget filterable) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Partition<TArg>(Func<TArg, bool> pred, RamdaPlaceholder filterable = null) {
-			return Currying.Partition(new DelegateDecorator(pred), filterable);
+			return Currying.Partition(Delegate(pred), filterable);
 		}
 
 		public static dynamic Partition(dynamic pred, RamdaPlaceholder filterable = null) {

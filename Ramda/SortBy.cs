@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic SortBy<TSource>(Func<TSource, int> pred, IList<TSource> list) {
-			return Currying.SortBy(new DelegateDecorator(pred), list);
+			return Currying.SortBy(Delegate(pred), list);
 		}
 
 		public static dynamic SortBy<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic SortBy<TSource>(Func<TSource, int> pred, RamdaPlaceholder list = null) {
-			return Currying.SortBy(new DelegateDecorator(pred), list);
+			return Currying.SortBy(Delegate(pred), list);
 		}
 
 		public static dynamic SortBy(dynamic pred, RamdaPlaceholder list = null) {

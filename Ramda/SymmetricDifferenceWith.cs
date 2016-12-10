@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, IList<TSource2> list2) {
-			return Currying.SymmetricDifferenceWith(new DelegateDecorator(pred), list1, list2);
+			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(RamdaPlaceholder pred, IList<TSource1> list1, IList<TSource2> list2) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1, IList<TSource2> list2) {
-			return Currying.SymmetricDifferenceWith(new DelegateDecorator(pred), list1, list2);
+			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
-			return Currying.SymmetricDifferenceWith(new DelegateDecorator(pred), list1, list2);
+			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.SymmetricDifferenceWith(new DelegateDecorator(pred), list1, list2);
+			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic SymmetricDifferenceWith<TSource2>(dynamic pred, RamdaPlaceholder list1, IList<TSource2> list2) {

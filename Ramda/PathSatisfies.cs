@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, TTarget obj) {
-			return Currying.PathSatisfies(new DelegateDecorator(pred), propPath, obj);
+			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
 		public static dynamic PathSatisfies<TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder propPath, TTarget obj) {
-			return Currying.PathSatisfies(new DelegateDecorator(pred), propPath, obj);
+			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
 		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
-			return Currying.PathSatisfies(new DelegateDecorator(pred), propPath, obj);
+			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
 		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, RamdaPlaceholder propPath = null, RamdaPlaceholder obj = null) {
-			return Currying.PathSatisfies(new DelegateDecorator(pred), propPath, obj);
+			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
 		public static dynamic PathSatisfies<TTarget>(dynamic pred, RamdaPlaceholder propPath, TTarget obj) {

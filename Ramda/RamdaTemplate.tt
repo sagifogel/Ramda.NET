@@ -155,8 +155,8 @@ public class RamdaTemplate : CSharpTemplate
 			var tuple = tuples[i];
 			var name = tuple.Item2.Replace(" = null", "");
 
-			if (tuple.Item3 && tuple.Item1 != "dynamic") {
-				list.Add(string.Format("new DelegateDecorator({0})", name));
+			if (tuple.Item3) {
+				list.Add(string.Format("Delegate({0})", name));
 			}
 			else {
 				list.Add(name);
@@ -207,12 +207,17 @@ public class RamdaTemplate : CSharpTemplate
 		}
 	}
 
+	private string GenerateDynamicArguments(List<Tuple<string, string, bool>> dynamics) {
+		return string.Join(", ", dynamics.Select(d => d.Item1.Equals("dynamic") ? string.Format("Delegate({0})", d.Item2) : d.Item2));
+	}
+
 	public override string TransformText() {
 		base.TransformText();
 #>
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -238,8 +243,8 @@ namespace Ramda.NET
 
 				if (TryGetDynamicParameters(dynamics, i)) {
 					var joined = string.Join(", ", dynamics.Select(FormatTuple));
-					
-					Emit(name, ResolveGenerics(dynamics), joined, arguments);
+
+					Emit(name, ResolveGenerics(dynamics), joined, GenerateDynamicArguments(dynamics));
 				}
 			});
 		}

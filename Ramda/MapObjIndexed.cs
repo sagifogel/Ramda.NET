@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic MapObjIndexed<TTarget, TReturn>(Func<TTarget, TReturn> fn, TTarget obj) {
-			return Currying.MapObjIndexed(new DelegateDecorator(fn), obj);
+			return Currying.MapObjIndexed(Delegate(fn), obj);
 		}
 
 		public static dynamic MapObjIndexed<TTarget>(RamdaPlaceholder fn, TTarget obj) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MapObjIndexed<TTarget, TReturn>(Func<TTarget, TReturn> fn, RamdaPlaceholder obj = null) {
-			return Currying.MapObjIndexed(new DelegateDecorator(fn), obj);
+			return Currying.MapObjIndexed(Delegate(fn), obj);
 		}
 
 		public static dynamic MapObjIndexed(dynamic fn, RamdaPlaceholder obj = null) {

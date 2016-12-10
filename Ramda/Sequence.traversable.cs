@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Sequence<TTraversable>(Delegate of, TTraversable traversable) {
-			return Currying.Sequence(new DelegateDecorator(of), traversable);
+			return Currying.Sequence(Delegate(of), traversable);
 		}
 
 		public static dynamic Sequence<TTraversable>(RamdaPlaceholder of, TTraversable traversable) {

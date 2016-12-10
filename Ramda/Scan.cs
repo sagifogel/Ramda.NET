@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, IEnumerable<TSource> list) {
-			return Currying.Scan(new DelegateDecorator(fn), acc, list);
+			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Scan<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IEnumerable<TSource> list) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
-			return Currying.Scan(new DelegateDecorator(fn), acc, list);
+			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.Scan(new DelegateDecorator(fn), acc, list);
+			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Scan(new DelegateDecorator(fn), acc, list);
+			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Scan<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, TTarget x) {
-			return Currying.Tap(new DelegateDecorator(fn), x);
+			return Currying.Tap(Delegate(fn), x);
 		}
 
 		public static dynamic Tap<TTarget>(RamdaPlaceholder fn, TTarget x) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, RamdaPlaceholder x = null) {
-			return Currying.Tap(new DelegateDecorator(fn), x);
+			return Currying.Tap(Delegate(fn), x);
 		}
 
 		public static dynamic Tap(dynamic fn, RamdaPlaceholder x = null) {

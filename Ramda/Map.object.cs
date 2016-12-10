@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Map<TSource, TReturn>(Func<TSource, TReturn> fn, object list) {
-			return Currying.Map(new DelegateDecorator(fn), list);
+			return Currying.Map(Delegate(fn), list);
 		}
 
 		public static dynamic Map(RamdaPlaceholder fn, object list) {

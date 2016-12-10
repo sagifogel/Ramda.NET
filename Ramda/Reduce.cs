@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Reduce<TSource, TAccmulator, TReturn>(Func<TSource, TAccmulator, TReturn> fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.Reduce(new DelegateDecorator(fn), acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
@@ -22,15 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Reduce<TSource, TAccmulator, TReturn>(Func<TSource, TAccmulator, TReturn> fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.Reduce(new DelegateDecorator(fn), acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TSource, TAccmulator, TReturn>(Func<TSource, TAccmulator, TReturn> fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.Reduce(new DelegateDecorator(fn), acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TSource, TAccmulator, TReturn>(Func<TSource, TAccmulator, TReturn> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Reduce(new DelegateDecorator(fn), acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TSource>(dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {

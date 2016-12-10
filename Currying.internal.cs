@@ -41,7 +41,7 @@ namespace Ramda.NET
             return new DelegateDecorator(fn);
         }
 
-        private static DynamicDelegate Delegate(dynamic fn) {
+        internal static DynamicDelegate Delegate(dynamic fn) {
             Type type = fn.GetType();
 
             if (type.IsDelegate()) {

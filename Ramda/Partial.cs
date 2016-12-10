@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -14,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Partial<TSource, TReturn>(Func<TSource, TReturn> f, IList<TSource> args) {
-			return Currying.Partial(new DelegateDecorator(f), args);
+			return Currying.Partial(Delegate(f), args);
 		}
 
 		public static dynamic Partial<TSource>(RamdaPlaceholder f, IList<TSource> args) {
@@ -22,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Partial<TSource, TReturn>(Func<TSource, TReturn> f, RamdaPlaceholder args = null) {
-			return Currying.Partial(new DelegateDecorator(f), args);
+			return Currying.Partial(Delegate(f), args);
 		}
 
 		public static dynamic Partial(dynamic f, RamdaPlaceholder args = null) {

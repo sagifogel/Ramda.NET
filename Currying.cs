@@ -1242,7 +1242,7 @@ namespace Ramda.NET
                     dynamic dynamicFn = fn;
                     var dynamicResult = Reflection.DynamicInvoke(dynamicFn, arguments);
                     var resultFn = Delegate(Reflection.DynamicInvoke(monadFn, new[] { dynamicResult }));
-                    
+
                     return Reflection.DynamicInvoke(resultFn, arguments);
                 });
             }

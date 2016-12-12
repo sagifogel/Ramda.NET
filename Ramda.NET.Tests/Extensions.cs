@@ -74,5 +74,15 @@ namespace Ramda.NET.Tests
         public static ExpandoObject ToExpando(this object value) {
             return value.ToDynamic();
         }
+
+        public static bool SequenceEqual(this IEnumerable first, IEnumerable second) {
+            return first.SequenceEqual(second, (a, b) => {
+                if (a.IsEnumerable() && b.IsEnumerable()) {
+                    return ((IEnumerable)a).SequenceEqual((IEnumerable)b);
+                }
+
+                return a.Equals(b);
+            });
+        }
     }
 }

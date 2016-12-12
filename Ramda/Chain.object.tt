@@ -4,8 +4,11 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TSource");
+	template.SkippedIndexedGaps.Add(1);
+
+	template.Generics.Add("TTarget");
+	template.AllGapsFunctionAlreadyExists = true;
 	template.Parameters.Add(Tuple.Create("Delegate", "fn", true));	
-	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
+	template.Parameters.Add(Tuple.Create("TTarget", "list", false));
 	template.Render();
 #>

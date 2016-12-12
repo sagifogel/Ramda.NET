@@ -77,6 +77,7 @@
     <Compile Include="CollectionAssertTest.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
+    <Compile Include="ListXf.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

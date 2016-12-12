@@ -1236,13 +1236,14 @@ namespace Ramda.NET
 
         internal readonly static dynamic Chain = Curry2(Dispatchable2("Chain", XChain, new Func<DynamicDelegate, object, object>((fn, monad) => {
             if (monad.IsFunction()) {
-                dynamic monadFn = Delegate((dynamic)monad);
+                dynamic monadFn = monad;
 
                 return Delegate((object[] arguments) => {
-                    dynamic dynamicFn = Delegate((dynamic)fn);
-                    dynamic resultFn = Delegate(monadFn(dynamicFn(arguments)));
-
-                    return resultFn(arguments);
+                    dynamic dynamicFn = fn;
+                    var dynamicResult = Reflection.DynamicInvoke(dynamicFn, arguments);
+                    var resultFn = Delegate(Reflection.DynamicInvoke(monadFn, new[] { dynamicResult }));
+                    
+                    return Reflection.DynamicInvoke(resultFn, arguments);
                 });
             }
 
@@ -1260,7 +1261,7 @@ namespace Ramda.NET
                     if (@delegate(arguments)) {
                         @delegate = Delegate(pair[1]);
 
-                        return @delegate.Invoke(arguments);
+                        return Reflection.DynamicInvoke(@delegate, arguments);
                     }
                 }
 

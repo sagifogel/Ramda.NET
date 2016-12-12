@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Chain<TSource, TReturn>(Func<TSource, TReturn> fn, IList<TSource> list) {
+		public static dynamic Chain<TSource>(Delegate fn, IList<TSource> list) {
 			return Currying.Chain(Delegate(fn), list);
 		}
 
@@ -22,7 +22,7 @@ namespace Ramda.NET
 			return Currying.Chain(fn, list);
 		}
 
-		public static dynamic Chain<TSource, TReturn>(Func<TSource, TReturn> fn, RamdaPlaceholder list = null) {
+		public static dynamic Chain(Delegate fn, RamdaPlaceholder list = null) {
 			return Currying.Chain(Delegate(fn), list);
 		}
 

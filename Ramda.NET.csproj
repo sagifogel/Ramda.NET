@@ -153,6 +153,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Call.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Chain.object.cs">
+      <DependentUpon>Chain.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Chain.monad.cs">
+      <DependentUpon>Chain.monad.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Chain.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,6 +323,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Call.cs</LastGenOutput>
       <LastOutputs>.\Call.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Chain.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Chain.object.cs</LastGenOutput>
+      <LastOutputs>.\Chain.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Chain.monad.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Chain.monad.cs</LastGenOutput>
+      <LastOutputs>.\Chain.monad.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Chain.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

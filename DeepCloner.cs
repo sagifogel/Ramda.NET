@@ -34,7 +34,7 @@ namespace Ramda.NET
             var type = original.GetType();
 
             if (type.IsDelegate()) {
-                return null;
+                return original;
             }
 
             if (!forceDeepCopy && !IsTypeToDeepCopy(type)) {
@@ -239,12 +239,7 @@ namespace Ramda.NET
             }
 
             foreach (var field in readonlyFields) {
-                if (field.FieldType.IsDelegate()) {
-                    ReadonlyFieldToNullExpression(field, boxingVariable, expressions);
-                }
-                else {
-                    ReadonlyFieldCopyExpression(type, field, inputParameter, inputDictionary, boxingVariable, expressions);
-                }
+                ReadonlyFieldCopyExpression(type, field, inputParameter, inputDictionary, boxingVariable, expressions);
             }
 
             if (shouldUseBoxing) {
@@ -252,12 +247,7 @@ namespace Ramda.NET
             }
 
             foreach (var field in writableFields) {
-                if (field.FieldType.IsDelegate()) {
-                    WritableFieldToNullExpression(field, outputVariable, expressions);
-                }
-                else {
-                    WritableFieldCopyExpression(type, field, inputParameter, inputDictionary, outputVariable, expressions);
-                }
+                WritableFieldCopyExpression(type, field, inputParameter, inputDictionary, outputVariable, expressions);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
@@ -57,18 +58,30 @@ namespace Ramda.NET.Tests
         }
 
         public static dynamic ToDynamic(this object value) {
+            Type type;
+
             if (value.IsExpandoObject()) {
                 return value;
-
             }
 
-            IDictionary<string, object> expando = new ExpandoObject();
+            type = value.GetType();
 
-            foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(value.GetType())) {
-                expando.Add(property.Name, property.GetValue(value));
+            if (type.Assembly.Equals(typeof(object).Assembly)) {
+                return value;
             }
+            else {
+                IDictionary<string, object> expando = new ExpandoObject();
 
-            return expando as ExpandoObject;
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(type)) {
+                    expando.Add(property.Name, property.GetValue(value).ToDynamic());
+                }
+
+                if (expando.Count == 0) {
+                    return value;
+                }
+
+                return expando as ExpandoObject;
+            }
         }
 
         public static ExpandoObject ToExpando(this object value) {

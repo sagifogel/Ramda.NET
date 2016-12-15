@@ -247,13 +247,13 @@ namespace Ramda.NET
             return FindIndexInternal(list.Count - 1, -1, idx => idx >= 0, obj => dynamicFn(obj), list);
         })));
 
-        internal readonly static dynamic ForEach = Curry2(CheckForMethod2("ForEach", new Func<dynamic, IList, IList>((fn, list) => {
+        internal readonly static dynamic ForEach = Curry2(CheckForMethod2("ForEach", Delegate(new Func<dynamic, IList, IList>((fn, list) => {
             foreach (var item in list) {
-                fn(item);
+                Reflection.DynamicInvoke(fn, new[] { item });
             }
 
             return list;
-        })));
+        }))));
 
         internal readonly static dynamic FromPairs = Curry1<object[][], IDictionary<string, object>>(pairs => {
             IDictionary<string, object> result = new ExpandoObject();

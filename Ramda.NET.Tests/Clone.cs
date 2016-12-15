@@ -1,9 +1,10 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Dynamic;
-using FluentAssertions;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Reflection;
 
 namespace Ramda.NET.Tests
 {
@@ -119,7 +120,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        public void Clone_Deep_Clone_Objects_Deep_Clone_Arrays_Clones_Shallow_Arrays() {
+        public void Clone_Deep_Clone_Arrays_Clones_Shallow_Arrays() {
             var list = new List<int> { 1, 2, 3 };
             var clone = R.Clone(list);
 
@@ -130,7 +131,7 @@ namespace Ramda.NET.Tests
 
 
         [TestMethod]
-        public void Clone_Deep_Clone_Objects_Deep_Clone_Arrays_Clones_Deep_Arrays() {
+        public void Clone_Deep_Clone_Arrays_Clones_Deep_Arrays() {
             var list = new object[] { 1, new[] { 1, 2, 3 }, new object[] { new object[] { new[] { 5 } } } };
             var cloned = (IList)R.Clone(list);
             var third = (IList)list[2];
@@ -141,13 +142,42 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        public void Clone_Deep_Clone_Objects_Deep_Clone_Functions_Keep_Reference_To_Function() {
+        public void Clone_Deep_Clone_Functions_Keep_Reference_To_Function() {
             Func<int, int> fn = x => x + x;
             var list = new object[] { new { a = fn } };
             var clone = R.Clone(list);
 
             Assert.AreEqual(clone[0].a(10), 20);
             Assert.AreSame(((dynamic)list[0]).a, clone[0].a);
+        }
+
+        [TestMethod]
+        [Description("Clone_Deep_Built-in_Types_Clones_Date_Object")]
+        public void Clone_Deep_Built_In_Types_Clones_Date_Object() {
+            var date = new DateTime(2014, 11, 14, 23, 59, 59, DateTimeKind.Local);
+            var clone = R.Clone(date);
+
+            Assert.AreNotSame(date, clone);
+            Assert.AreEqual(clone, new DateTime(2014, 11, 14, 23, 59, 59, DateTimeKind.Local));
+            Assert.AreEqual(clone.DayOfWeek, DayOfWeek.Friday);
+        }
+
+        [TestMethod]
+        [Description("Clone_Deep_Built-in_Types_Regex_Object")]
+        public void Clone_Deep_Built_in_Types_Clones_Regex_Object() {
+            var typeofRegex = typeof(Regex);
+            Func<Regex, string> extractPattern = regex => {
+                return (string)typeofRegex.GetField("pattern", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(regex);
+            };
+
+            R.ForEach(regex => {
+                var clone = (Regex)R.Clone(regex);
+
+                Assert.AreNotSame(clone, regex);
+                Assert.IsInstanceOfType(clone, typeofRegex);
+                Assert.AreEqual(clone.Options, regex.Options);
+                Assert.AreEqual(extractPattern(clone), extractPattern(regex));
+            }, new[] { new Regex("x"), new Regex("x", RegexOptions.IgnoreCase), new Regex("x", RegexOptions.Multiline), new Regex("x", RegexOptions.IgnoreCase | RegexOptions.Multiline) });
         }
     }
 }

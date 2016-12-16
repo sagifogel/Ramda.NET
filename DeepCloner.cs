@@ -27,7 +27,7 @@ namespace Ramda.NET
         }
 
         private static object CloneInternal(object original, bool forceDeepCopy, Dictionary<object, object> copiedReferences) {
-            if (original.IsNull()) {
+            if (original == null) {
                 return null;
             }
 

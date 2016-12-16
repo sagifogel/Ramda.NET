@@ -76,10 +76,6 @@ namespace Ramda.NET.Tests
                     expando.Add(property.Name, property.GetValue(value).ToDynamic());
                 }
 
-                if (expando.Count == 0) {
-                    return value;
-                }
-
                 return expando as ExpandoObject;
             }
         }

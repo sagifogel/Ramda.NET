@@ -11,6 +11,35 @@ namespace Ramda.NET.Tests
     [TestClass]
     public class Clone
     {
+        class ArbitraryClone : ICloneable, IEquatable<ArbitraryClone>
+        {
+            public int Value { get; set; }
+
+            public ArbitraryClone(int x) {
+                Value = x;
+            }
+
+            public object Clone() {
+                return new ArbitraryClone(Value);
+            }
+
+            public override bool Equals(object obj) {
+                return Equals((ArbitraryClone)obj);
+            }
+
+            public bool Equals(ArbitraryClone other) {
+                if (other != null) {
+                    return Value == other.Value;
+                }
+
+                return false;
+            }
+
+            public override int GetHashCode() {
+                return Value.GetHashCode();
+            }
+        }
+
         public class Obj
         {
             public int X { get; set; }
@@ -178,6 +207,55 @@ namespace Ramda.NET.Tests
                 Assert.AreEqual(clone.Options, regex.Options);
                 Assert.AreEqual(extractPattern(clone), extractPattern(regex));
             }, new[] { new Regex("x"), new Regex("x", RegexOptions.IgnoreCase), new Regex("x", RegexOptions.Multiline), new Regex("x", RegexOptions.IgnoreCase | RegexOptions.Multiline) });
+        }
+
+        [TestMethod]
+        public void Clone_Deep_Clone_Deep_Nested_Mixed_Objects_Clones_Array_With_Objects() {
+            var list = new object[] { new { a = new { b = 1 } }, new object[] { new { c = new { d = 1 } } } };
+            var clone = R.Clone(list);
+
+            ((IList)list[1])[0] = null;
+            Assert.IsTrue(((ICollection)clone).SequenceEqual(new object[] { new { a = new { b = 1 } }, new object[] { new { c = new { d = 1 } } } }));
+        }
+
+        [TestMethod]
+        public void Clone_Deep_Clone_Deep_Nested_Mixed_Objects_Clones_Array_With_Mutual_Ref_Object() {
+            var obj = new Test2 { a = 1 };
+            var list = new object[] { new { b = obj }, new { b = obj } };
+            var clone = R.Clone(list);
+            var dynamicList = (dynamic)list;
+            var excpected = new { a = 1 }.ToExpando();
+
+            Assert.AreEqual(dynamicList[0].b, dynamicList[1].b);
+            Assert.AreEqual(clone[0].b, clone[1].b);
+            Assert.AreNotEqual(clone[0].b, dynamicList[0].b);
+            Assert.AreNotEqual(clone[1].b, dynamicList[1].b);
+            Assert.IsTrue(((object)clone[0].b).ToExpando().ContentEquals(excpected));
+            Assert.IsTrue(((object)clone[1].b).ToExpando().ContentEquals(excpected));
+            obj.a = 2;
+            Assert.IsTrue(((object)clone[0].b).ToExpando().ContentEquals(excpected));
+            Assert.IsTrue(((object)clone[1].b).ToExpando().ContentEquals(excpected));
+        }
+
+        [TestMethod]
+
+        public void Clone_Deep_Clone_Edge_Cases_Nulls_And_Empty_Objects_And_Arrays() {
+            var obj = new { };
+            var list = new object[0];
+
+            Assert.AreEqual(R.Clone(R.Null), new Nothing());
+            Assert.IsTrue(((object)R.Clone(obj)).ToExpando().ContentEquals(obj.ToExpando()));
+            Assert.AreNotSame(R.Clone(list), list);
+        }
+
+        [TestMethod]
+        [Description("Clone_Let_`R.Clone`_Use_An_Arbitrary_User_Defined_`Clone`_Method")]
+        public void Clone_Let_Clone_Use_An_Arbitrary_User_Defined_Clone_Method() {
+            var obj = new ArbitraryClone(42);
+            var arbitraryClonedObj = R.Clone(obj);
+
+            Assert.AreEqual(arbitraryClonedObj, new ArbitraryClone(42));
+            Assert.IsInstanceOfType(arbitraryClonedObj, typeof(ArbitraryClone));
         }
     }
 }

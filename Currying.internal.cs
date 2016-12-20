@@ -609,6 +609,7 @@ namespace Ramda.NET
         }
 
         private static object IterableReduce(ITransformer xf, object acc, IEnumerable list) {
+            object result;
             IReduced reduced;
 
             foreach (var item in list) {
@@ -621,7 +622,13 @@ namespace Ramda.NET
                 }
             }
 
-            return xf.Result(acc);
+            result = xf.Result(acc);
+
+            if (result.IsList()) {
+                return new ArrayList((ICollection)result).ToArray<Array>();  
+            }
+
+            return result;
         }
 
         private static object MethodReduce(ITransformer xf, object acc, IReducible obj) {

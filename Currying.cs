@@ -73,7 +73,7 @@ namespace Ramda.NET
             return Arity(length, CurryNInternal(length, new object[0], fn));
         });
 
-        internal readonly static dynamic Add = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => Convert.ToDouble(arg1) + Convert.ToDouble(arg2));
+        internal readonly static dynamic Add = Curry2<object, object, dynamic>((arg1, arg2) => arg1.ToNumber() + arg2.ToNumber());
 
         internal readonly static dynamic Adjust = Curry3<DynamicDelegate, int, IList, IList>((fn, idx, list) => {
             var start = 0;

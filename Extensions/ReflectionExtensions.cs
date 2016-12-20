@@ -442,5 +442,23 @@ namespace Ramda.NET
 
             return Sys.Delegate.CreateDelegate(getType(types.ToArray()), target, methodInfo.Name);
         }
+
+        internal static dynamic ToNumber(this object obj) {
+            var type = obj.GetType();
+
+            if (type.Equals(typeof(string))) {
+                return Convert.ToDouble(obj);
+            }
+
+            if (type.Equals(typeof(bool))) {
+                return Convert.ToInt32(obj);
+            }
+
+            if (obj.IsNull()) {
+                return 0;
+            }
+
+            return (dynamic)obj;
+        }
     }
 }

@@ -67,6 +67,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Content Include="Ramda\Add.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.object.cs</LastGenOutput>
+      <LastOutputs>.\Add.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Add.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Add.string.cs</LastGenOutput>
+      <LastOutputs>.\Add.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\AddIndex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AddIndex.cs</LastGenOutput>
@@ -87,6 +97,16 @@
       <LastGenOutput>AllPass1.cs</LastGenOutput>
       <LastOutputs>.\AllPass1.cs</LastOutputs>
     </Content>
+    <Compile Include="Ramda\Add.object.cs">
+      <DependentUpon>Add.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Add.string.cs">
+      <DependentUpon>Add.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\AddIndex.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

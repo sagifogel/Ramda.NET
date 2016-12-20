@@ -13,7 +13,10 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Add_Coerces_Its_Arguments_To_Numbers() {
+            Assert.AreEqual(R.Add("1", "2"), 3);
+            Assert.AreEqual(R.Add(1, "2"), 3);
             Assert.AreEqual(R.Add(true, false), 1);
+            Assert.AreEqual(R.Add(R.Null, R.Null), 0);
         }
 
         [TestMethod]

@@ -31,16 +31,16 @@ namespace Ramda.NET.Tests
             var res1 = (ICollection)R.Into(new object[0], R.Map(R.Add(1)), new[] { 1, 2, 3, 4 });
             var res2 = (ICollection)R.Into(new object[0], R.Filter(isOdd), new[] { 1, 2, 3, 4 });
 
-            CollectionAssert.AreEqual(res1, new double[] { 2, 3, 4, 5 });
+            CollectionAssert.AreEqual(res1, new int[] { 2, 3, 4, 5 });
             CollectionAssert.AreEqual(res2, new[] { 1, 3 });
-            //Assert.AreEqual(R.Into(new object[0], R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), new[] { 2, 3 });
+            CollectionAssert.AreEqual((ICollection)R.Into(new object[0], R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), new[] { 2, 3 });
         }
 
         [TestMethod]
         public void Into_Transduces_Into_Strings() {
             Assert.AreEqual((string)R.Into(string.Empty, R.Map(R.Add(1)), new[] { 1, 2, 3, 4 }), "2345");
             Assert.AreEqual((string)R.Into(string.Empty, R.Filter(isOdd), new[] { 1, 2, 3, 4 }), "13");
-            //Assert.AreEqual(R.Into(string.Empty, R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { '2', '3', '4' }), new[] { '2', '3' });
+            Assert.AreEqual(R.Into(string.Empty, R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), "23");
         }
 
         [TestMethod]

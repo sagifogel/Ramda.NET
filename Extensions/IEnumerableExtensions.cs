@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Ramda.NET
 {
-    internal static class IEnumerableExtensions
+    public static class IEnumerableExtensions
     {
         internal static IList Slice(this IList arguments, int from = int.MinValue, int to = int.MaxValue) {
             if (from == int.MinValue) {
@@ -242,7 +242,7 @@ namespace Ramda.NET
             return flag;
         }
 
-        internal static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
+        public static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
             var newList = new List<TResult>(list.Cast<TResult>());
 
             newList.Sort(comparison);

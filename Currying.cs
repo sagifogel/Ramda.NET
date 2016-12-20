@@ -141,8 +141,10 @@ namespace Ramda.NET
             return value < min ? min : value > max ? max : value;
         });
 
-        internal readonly static dynamic Comparator = Curry1<Func<object, object, bool>, Func<object, object, object>>(pred => {
-            return new Func<object, object, object>((a, b) => pred(a, b) ? -1 : pred(b, a) ? 1 : 0);
+        internal readonly static dynamic Comparator = Curry1<DynamicDelegate, DynamicDelegate>(pred => {
+            dynamic dynamicPred = pred;
+
+            return Delegate((a, b) => dynamicPred(a, b) ? -1 : dynamicPred(b, a) ? 1 : 0);
         });
 
         internal readonly static dynamic Dec = Add(-1);

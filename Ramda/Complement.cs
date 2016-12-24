@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Complement(dynamic f) {
-			return Currying.Complement(f);
+			return Currying.Complement(Delegate(f));
 		}
 	}
 }

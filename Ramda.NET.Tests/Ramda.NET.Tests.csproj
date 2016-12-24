@@ -79,6 +79,7 @@
     <Compile Include="Clamp.cs" />
     <Compile Include="CollectionAssertTest.cs" />
     <Compile Include="Comparator.cs" />
+    <Compile Include="Complement.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

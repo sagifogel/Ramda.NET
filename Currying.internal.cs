@@ -625,7 +625,7 @@ namespace Ramda.NET
             result = xf.Result(acc);
 
             if (result.IsList()) {
-                return new ArrayList((ICollection)result).ToArray<Array>();  
+                return new ArrayList((ICollection)result).ToArray<Array>();
             }
 
             return result;
@@ -713,7 +713,7 @@ namespace Ramda.NET
 
         private static DynamicDelegate ComposeFactory(dynamic pipe, string name) {
             return Delegate((object[] arguments) => {
-                if (arguments.Length == 0) {
+                if (arguments.IsNull() || arguments.Length == 0) {
                     throw new ArgumentNullException($"{name} requires at least one argument");
                 }
 

@@ -19,8 +19,8 @@ namespace Ramda.NET.Tests
             dynamic expando = new ExpandoObject();
             IDictionary<string, object> applied = R.ApplySpec(new { v = R.Inc(R.__), u = R.Dec(R.__) })(1);
 
-            expando.v = (double)2;
-            expando.u = (double)0;
+            expando.v = 2;
+            expando.u = 0;
 
             Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
         }
@@ -30,7 +30,7 @@ namespace Ramda.NET.Tests
             dynamic expando = new ExpandoObject();
             IDictionary<string, object> applied = R.ApplySpec(new { sum = R.Add(R.__) })(1, 2);
 
-            expando.sum = (double)3;
+            expando.sum = 3;
 
             Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
         }
@@ -39,7 +39,7 @@ namespace Ramda.NET.Tests
         public void ApplySpec_Works_With_Nested_Specs() {
             dynamic expando = new ExpandoObject();
             var anonymous = new {
-                unnested = R.Always((double)0),
+                unnested = R.Always(0),
                 nested = new {
                     sum = R.Add(R.__)
                 }
@@ -47,9 +47,9 @@ namespace Ramda.NET.Tests
 
             IDictionary<string, object> applied = R.ApplySpec(anonymous)(1, 2);
 
-            expando.unnested = (double)0;
+            expando.unnested = 0;
             expando.nested = new ExpandoObject();
-            expando.nested.sum = (double)3;
+            expando.nested.sum = 3;
 
             Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
         }
@@ -66,7 +66,7 @@ namespace Ramda.NET.Tests
             dynamic expando = new ExpandoObject();
             IDictionary<string, object> f = R.ApplySpec(new { sum = R.Add(R.__) })(1)(2);
 
-            expando.sum = (double)3;
+            expando.sum = 3;
             Assert.IsTrue(f.ContentEquals((ExpandoObject)expando));
         }
     }

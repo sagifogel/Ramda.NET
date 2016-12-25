@@ -77,7 +77,7 @@ namespace Ramda.NET.Tests
             var result = intoArray(add2);
             var res = (ICollection)result(new[] { 1, 2, 3, 4 });
 
-            CollectionAssert.AreEqual(res, new double[] { 3, 4, 5, 6 });
+            CollectionAssert.AreEqual(res, new [] { 3, 4, 5, 6 });
         }
 
         [TestMethod]

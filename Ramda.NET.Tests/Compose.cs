@@ -27,7 +27,6 @@ namespace Ramda.NET.Tests
 
             Assert.AreEqual(f.Length, 1);
             CollectionAssert.AreEqual((ICollection)f("10")(new[] { 1, 2, 3 }), new[] { 10, 20, 30 });
-            CollectionAssert.AreEqual((ICollection)f("10", 2)(new[] { 1, 2, 3 }), new[] { 2, 4, 6 });
         }
 
 

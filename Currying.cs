@@ -1459,6 +1459,7 @@ namespace Ramda.NET
         internal readonly static dynamic Complement = Lift(Not);
 
         internal readonly static dynamic Concat = Curry2<object, object, IEnumerable>((a, b) => {
+            Delegate concat = null;
             IList firstList = null;
             string firstString = null;
 
@@ -1494,7 +1495,13 @@ namespace Ramda.NET
                 throw new ArgumentException($"{b.GetType().Name} is not a list");
             }
 
-            throw new ArgumentException($"{a.GetType().Name} is not a list or string");
+            concat = a.Member("Concat") as Delegate;
+
+            if (concat.IsNotNull()) {
+                return (IEnumerable)concat.DynamicInvoke(b);
+            }
+
+            throw new ArgumentException($"{a.GetType().Name} is not a list or string or does not have a method named \"Concat\"");
         });
 
         internal static dynamic Either = Curry2<object, object, object>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() || b()), Or));

@@ -81,6 +81,7 @@
     <Compile Include="Comparator.cs" />
     <Compile Include="Complement.cs" />
     <Compile Include="Compose.cs" />
+    <Compile Include="ComposeK.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

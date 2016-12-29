@@ -1403,7 +1403,13 @@ namespace Ramda.NET
         internal readonly static dynamic Compose = ComposeFactory(Pipe, "Compose");
 
         internal readonly static dynamic ComposeK = Delegate((object[] arguments) => {
-            arguments = arguments.Select(arg => Delegate(arg)).ToArray();
+            arguments = arguments.Select(arg => {
+                if (arg.IsFunction()) {
+                    return Delegate(arg);
+                }
+
+                return arg;
+            }).ToArray();
 
             return Compose(Prepend(Identity, Map(Chain, arguments)));
         });

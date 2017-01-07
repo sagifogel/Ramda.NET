@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurriedDelegate.cs" />
     <Compile Include="DynamicDelegate.cs" />
     <Compile Include="DelegateDecorator.cs" />
     <Compile Include="AbstractLambda.cs" />

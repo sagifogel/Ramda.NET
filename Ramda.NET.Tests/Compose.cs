@@ -31,13 +31,9 @@ namespace Ramda.NET.Tests
 
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void Compose_Throws_If_Given_No_Arguments() {
-            try {
-                var f = R.Compose();
-            }
-            catch (TargetInvocationException ex) {
-                Assert.IsInstanceOfType(ex.InnerException, typeof(ArgumentNullException));
-            }
+            var f = R.Compose();
         }
 
         [TestMethod]

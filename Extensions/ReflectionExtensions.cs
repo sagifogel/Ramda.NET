@@ -379,7 +379,12 @@ namespace Ramda.NET
                 }
             }
 
-            return target.DynamicInvoke(arguments.Clip(target));
+            try {
+                return target.DynamicInvoke(arguments.Clip(target));
+            }
+            catch (TargetInvocationException ex) {
+                throw ex.InnerException;
+            }
         }
 
         internal static object DynamicInvoke(dynamic target, object[] arguments = null) {

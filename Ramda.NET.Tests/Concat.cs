@@ -63,24 +63,15 @@ namespace Ramda.NET.Tests
         [ExpectedException(typeof(ArgumentException))]
         [Description("Concat_Throws_If_Attempting_To_Combine_An_Array_With_A_Non-array")]
         public void Concat_Throws_If_Attempting_To_Combine_An_Array_With_A_Non_Array() {
-            try {
-                R.Concat(new[] { 1 }, 2);
-            }
-            catch (Exception ex) {
-                throw ex.InnerException;
-            }
+            R.Concat(new[] { 1 }, 2);
+
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         [Description("Concat_Throws_If_Not_An_Array,_String,_Or_Object_With_A_Concat_Method")]
         public void Concat_Throws_If_Not_An_Array_String_Or_Object_With_A_Concat_Method() {
-            try {
-                R.Concat(new { }, new { });
-            }
-            catch (Exception ex) {
-                throw ex.InnerException;
-            }
+            R.Concat(new { }, new { });
         }
     }
 }

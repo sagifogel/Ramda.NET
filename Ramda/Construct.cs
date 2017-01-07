@@ -49,7 +49,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Construct(dynamic Fn) {
-            return Currying.Construct(Fn);
+            return Currying.Construct(new DelegateDecorator(Fn));
         }
     }
 }

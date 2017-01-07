@@ -1253,17 +1253,15 @@ namespace Ramda.NET
         })));
 
         internal readonly static dynamic Cond = Curry1<IList, object>(pairs => {
-            var dynamicPairs = pairs.Cast<IList>().Select(pair => pair[0] = Delegate((dynamic)pair[0]));
-            int arity = Reduce(Max, 0, Map(new Func<IList, int>(pair => ((DynamicDelegate)pair[0]).Length), pairs));
+            var dynamicPairs = pairs.Cast<IList>().Select(pair => new[] { Delegate(pair[0]), Delegate(pair[1]) }).ToList();
+            int arity = Reduce(Max, 0, Map(Delegate(pair => ((DynamicDelegate)pair[0]).Length), dynamicPairs));
 
             return Arity(arity, Delegate((object[] arguments) => {
                 foreach (IList pair in dynamicPairs) {
                     dynamic @delegate = pair[0];
 
-                    if (@delegate(arguments)) {
-                        @delegate = Delegate(pair[1]);
-
-                        return Reflection.DynamicInvoke(@delegate, arguments);
+                    if (Reflection.DynamicInvoke(@delegate, arguments)) {
+                        return Reflection.DynamicInvoke(pair[1], arguments);
                     }
                 }
 

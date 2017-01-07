@@ -83,6 +83,7 @@
     <Compile Include="Compose.cs" />
     <Compile Include="ComposeK.cs" />
     <Compile Include="Concat.cs" />
+    <Compile Include="Cond.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

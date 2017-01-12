@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="AbstractAnyOrAll.cs" />
     <Compile Include="AbstractAnyOrAllPass.cs" />
+    <Compile Include="AbstractConstruct.cs" />
     <Compile Include="Add.cs" />
     <Compile Include="AddIndex.cs" />
     <Compile Include="Adjust.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Concat.cs" />
     <Compile Include="Cond.cs" />
     <Compile Include="Construct.cs" />
+    <Compile Include="ConstructN.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

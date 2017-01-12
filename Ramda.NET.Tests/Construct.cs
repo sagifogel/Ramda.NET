@@ -6,37 +6,8 @@ using System.Reflection;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class Construct
+    public class Construct : AbstractConstruct
     {
-        class Foo
-        {
-            public Foo() {
-
-            }
-
-            public Foo(object a0, object a1, object a2, object a3, object a4, object a5, object a6, object a7, object a8, object a9, object a10) {
-
-            }
-        }
-
-        class Rectangle
-        {
-            public int Width;
-            public int Height;
-
-            public Rectangle(int w, int h) {
-                Width = w;
-                Height = h;
-            }
-
-            public Rectangle() : this(1, 1) {
-            }
-
-            public int Area() {
-                return Width * Height;
-            }
-        }
-
         [TestMethod]
         [Description("Construct_Turns_A_Constructor_Function_Into_One_That_Can_Be_Called_Without_`new`")]
         public void Construct_Turns_A_Constructor_Function_Into_One_That_Can_Be_Called_Without_New() {

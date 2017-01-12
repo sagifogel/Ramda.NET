@@ -8,8 +8,8 @@ namespace Ramda.NET.Tests
     [TestClass]
     public class Compose
     {
-        private readonly Func<bool, bool> f = s => false;
         private readonly Func<bool, bool> g = s => true;
+        private readonly Func<bool, bool> f = s => false;
         private readonly Func<string, bool> h = s => false;
 
         [TestMethod]

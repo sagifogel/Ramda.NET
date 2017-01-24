@@ -1284,8 +1284,10 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Converge = Curry2<dynamic, IList, object>((after, fns) => {
-            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), new Func<object[], object>(arguments => {
-                return after(MapInternal(new Func<Delegate, object>(fn => fn.Invoke(arguments)), fns.ToList<IList>()));
+            var dynamicFns = fns.Select(Delegate).ToList();
+
+            return CurryN(Reduce(Max, 0, Pluck("Length", fns)), Delegate(arguments => {
+                return Reflection.DynamicInvoke(after, MapInternal(Delegate(fn => Reflection.DynamicInvoke(fn, arguments)), dynamicFns));
             }));
         });
 

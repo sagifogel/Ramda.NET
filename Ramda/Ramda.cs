@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections;
+using static Ramda.NET.Currying;
 using System.Collections.Generic;
 
 namespace Ramda.NET
@@ -15,7 +16,7 @@ namespace Ramda.NET
         }
 
         public static dynamic CurryN(int length, Delegate fn) {
-            return Currying.CurryN(length, fn);
+            return Currying.CurryN(length, Delegate(fn));
         }
 
         public static dynamic Nth<TValue>(int offset, IList<TValue> list) {
@@ -91,7 +92,7 @@ namespace Ramda.NET
         }
 
         public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, RamdaPlaceholder obj = null) where TTarget : IList {
-            return Currying.PropSatisfies(pred, p, obj);
+            return Currying.PropSatisfies(Delegate(pred), p, obj);
         }
 
         public static dynamic SplitEvery<TValue>(int n, string list) {
@@ -107,7 +108,7 @@ namespace Ramda.NET
         }
 
         public static dynamic SplitWhen(Func<char, bool> pred, string list) {
-            return Currying.SplitWhen(pred, list.ToCharArray());
+            return Currying.SplitWhen(Delegate(pred), list.ToCharArray());
         }
 
         public static dynamic Tail(string list) {
@@ -122,12 +123,12 @@ namespace Ramda.NET
             return Currying.Take(n, list.ToCharArray());
         }
 
-        public static dynamic F = Currying.Delegate(() => Currying.F());
+        public static dynamic F = Delegate(() => Currying.F());
 
-        public static dynamic T = Currying.Delegate(() => Currying.T());
+        public static dynamic T = Delegate(() => Currying.T());
 
         public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
-            return Currying.Filter(pred, filterable);
+            return Currying.Filter(Delegate(pred), filterable);
         }
 
         public static dynamic Filter(dynamic pred, object filterable) {
@@ -191,7 +192,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Converge(Delegate after, IList<dynamic> functions) {
-            return Currying.Converge(after, functions);
+            return Currying.Converge(Delegate(after), functions);
         }
 
         public static dynamic Converge(RamdaPlaceholder after, IList<dynamic> functions) {
@@ -203,7 +204,7 @@ namespace Ramda.NET
         }
 
         public static dynamic UseWith<TSource>(Delegate fn, IList<dynamic> transformers) {
-            return Currying.UseWith(fn, transformers);
+            return Currying.UseWith(Delegate(fn), transformers);
         }
 
         public static dynamic UseWith<TSource>(RamdaPlaceholder fn, IList<dynamic> transformers) {

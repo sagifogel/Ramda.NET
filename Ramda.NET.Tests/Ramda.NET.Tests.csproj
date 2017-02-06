@@ -89,6 +89,7 @@
     <Compile Include="ConstructN.cs" />
     <Compile Include="Contains.cs" />
     <Compile Include="Converge.cs" />
+    <Compile Include="CountBy.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

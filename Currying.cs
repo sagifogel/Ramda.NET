@@ -1161,15 +1161,15 @@ namespace Ramda.NET
 
         internal readonly static dynamic Reduce = Curry3<object, object, object, object>(ReduceInternal);
 
-        internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", XReduceBy, new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
-            return ReduceInternal(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
+        internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", XReduceBy, Delegate(new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
+            return ReduceInternal(Delegate(new Func<IDictionary<string, object>, object, object>((acc, elt) => {
                 var key = keyFn(elt).ToString();
 
                 acc[key] = valueFn(acc.ContainsKey(key) ? acc[key] : valueAcc, elt);
 
                 return acc;
-            }), new ExpandoObject(), list);
-        })));
+            })), new ExpandoObject(), list);
+        }))));
 
         internal readonly static dynamic ReduceWhile = CurryN(4, new Func<Delegate, Delegate, object, IList, object>((pred, fn, a, list) => {
             return ReduceInternal(new Func<object, object, object>((acc, x) => {
@@ -1291,7 +1291,7 @@ namespace Ramda.NET
             }));
         });
 
-        internal readonly static dynamic CountBy = ReduceBy(new Func<int, object, int>((acc, elem) => acc + 1), 0);
+        internal readonly static dynamic CountBy = ReduceBy(Delegate(new Func<int, object, int>((acc, elem) => acc + 1)), 0);
 
         internal readonly static dynamic DropRepeatsWith = Curry2(Dispatchable2("DropRepeatsWith", XDropRepeatsWith, new Func<Delegate, IList, IList>((pred, list) => {
             var idx = 1;

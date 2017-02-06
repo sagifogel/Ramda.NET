@@ -222,7 +222,7 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
-            return CurryN(4, new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
+            return Delegate(new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
                 return Dispatchable(methodName, xf, fn, Arguments(arg1, arg2, arg3, arg4));
             }));
         }
@@ -290,7 +290,7 @@ namespace Ramda.NET
 
         private readonly static dynamic XMap = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
-        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<DynamicDelegate, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
+        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<dynamic, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
             return new XReduceBy(valueFn, valueAcc, keyFn, xf);
         }));
 

@@ -1056,7 +1056,7 @@ namespace Ramda.NET
                 return ReduceInternal(xf(transformer), transformer.Init(), list);
             }
 
-            return ReduceInternal(xf(StepCat(acc)), ShallowCloner.Clone(acc), list);
+            return ReduceInternal(Reflection.DynamicInvoke(xf, new[] { StepCat(acc) }), ShallowCloner.Clone(acc), list);
         });
 
         internal readonly static dynamic Invert = Curry1<object, IDictionary<string, object>>(obj => {

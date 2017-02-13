@@ -64,5 +64,63 @@ namespace Ramda.NET.Tests
 
             Assert.IsTrue(countedBy.ContentEquals(result));
         }
+
+        [TestMethod]
+        public void CountBy_Counts_By_A_More_Complex_Function_On_The_Objects() {
+            ExpandoObject countedBy = R.CountBy(DerivedGenre, albums);
+            var result = new {
+                Classical = 5,
+                Rock = 3,
+                Jazz = 2,
+                Broadway = 1,
+                Folk = 1
+            }.ToExpando();
+
+            Assert.IsTrue(countedBy.ContentEquals(result));
+        }
+
+        [TestMethod]
+        public void CountBy_Is_Curried() {
+            var counter = R.CountBy(R.Prop("Genre"));
+            var result = new {
+                Baroque = 2,
+                Rock = 2,
+                Jazz = 2,
+                Romantic = 1,
+                Metal = 1,
+                Modern = 1,
+                Broadway = 1,
+                Folk = 1,
+                Classical = 1
+            }.ToExpando();
+
+            Assert.IsTrue(((ExpandoObject)counter(albums)).ContentEquals(result));
+        }
+
+        [TestMethod]
+        public void CountBy_Ignores_Inherited_Properties() {
+            dynamic result = R.CountBy(R.Identity(R.__), new[] { "Abc", "ToString" });
+
+            Assert.AreEqual(result.Abc, 1);
+            Assert.AreEqual(result.ToString, 1);
+        }
+
+        [TestMethod]
+        public void CountBy_Can_Act_As_A_Transducer() {
+            var transducer = R.Compose(R.CountBy(R.Prop("Genre")), R.Map(R.Adjust(R.ToString(R.__), 1)));
+            ExpandoObject into = R.Into<Album>(new ExpandoObject(), transducer, albums);
+
+            Assert.IsTrue(into.ContentEquals(new {
+                Baroque = "2",
+                Rock = "2",
+                Jazz = "2",
+                Romantic = "1",
+                Metal = "1",
+                Modern = "1",
+                Broadway = "1",
+                Folk = "1",
+                Classical = "1"
+            }.ToExpando()));
+        }
     }
 }

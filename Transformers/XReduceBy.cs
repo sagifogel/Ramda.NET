@@ -7,12 +7,12 @@ namespace Ramda.NET
 {
     internal class XReduceBy : XFBase<ITransformer>, ITransformer
     {
-        private readonly IList valueAcc;
+        private readonly dynamic keyFn;
+        private readonly object valueAcc;
         private readonly dynamic valueFn;
-        private readonly Func<object, string> keyFn;
         private IDictionary<string, object[]> inputs;
 
-        internal XReduceBy(DynamicDelegate valueFn, IList valueAcc, Func<object, string> keyFn, ITransformer xf) : base(xf) {
+        internal XReduceBy(DynamicDelegate valueFn, object valueAcc, dynamic keyFn, ITransformer xf) : base(xf) {
             this.keyFn = keyFn;
             this.valueFn = valueFn;
             this.valueAcc = valueAcc;
@@ -37,7 +37,7 @@ namespace Ramda.NET
         public object Step(object result, object input) {
             var key = keyFn(input);
 
-            inputs[key] = inputs[key] ?? new object[2] { key, valueAcc };
+            inputs[key] = inputs.ContainsKey(key) ? inputs[key] : new object[2] { key, valueAcc };
             inputs[key][1] = valueFn(inputs[key][1], input);
 
             return result;

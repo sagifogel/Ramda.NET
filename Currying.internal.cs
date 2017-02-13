@@ -123,7 +123,7 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
-            return Delegate((object[] arguments) => g(DynamicInvoke(f, arguments)));
+            return Delegate((object[] arguments) => g((object)DynamicInvoke(f, arguments)));
         }
 
         private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
@@ -290,9 +290,9 @@ namespace Ramda.NET
 
         private readonly static dynamic XMap = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
-        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<dynamic, IList, Func<object, string>, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
+        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], Delegate(new Func<dynamic, object, dynamic, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
             return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-        }));
+        })));
 
         private readonly static dynamic XTake = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XTake(n, xf)));
 

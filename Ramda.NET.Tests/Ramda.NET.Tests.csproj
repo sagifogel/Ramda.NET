@@ -91,6 +91,7 @@
     <Compile Include="Converge.cs" />
     <Compile Include="CountBy.cs" />
     <Compile Include="Curry.cs" />
+    <Compile Include="CurryN.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

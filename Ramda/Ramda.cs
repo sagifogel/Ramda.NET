@@ -19,6 +19,10 @@ namespace Ramda.NET
             return Currying.CurryN(length, Delegate(fn));
         }
 
+        public static dynamic CurryN(int length, RamdaPlaceholder fn = null) {
+            return Currying.CurryN(length, fn);
+        }
+
         public static dynamic Nth<TValue>(int offset, IList<TValue> list) {
             return Currying.Nth(offset, list);
         }

@@ -51,10 +51,10 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Curry_Supports_R.___Placeholder")]
         public void Curry_Supports_R___Placeholder() {
+            var _ = R.__;
             var f = new Func<int, int, int, int[]>((a, b, c) => new[] { a, b, c });
             var g = R.Curry(f);
             var arr = new[] { 1, 2, 3 };
-            var _ = R.__;
 
             CollectionAssert.AreEqual(g(1)(2)(3), arr);
             CollectionAssert.AreEqual(g(1)(2, 3), arr);

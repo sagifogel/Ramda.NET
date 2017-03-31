@@ -153,7 +153,7 @@ namespace Ramda.NET
             var type = value.GetType();
 
             if (type.IsClass) {
-                return ReferenceEquals(value, null) ? defaultValue : value;
+                return ReferenceEquals(value, Null) ? defaultValue : value;
             }
 
             return value == type.GetDefaultValue() ? defaultValue : value;

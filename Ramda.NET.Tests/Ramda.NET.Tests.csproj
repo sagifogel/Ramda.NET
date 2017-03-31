@@ -92,6 +92,8 @@
     <Compile Include="CountBy.cs" />
     <Compile Include="Curry.cs" />
     <Compile Include="CurryN.cs" />
+    <Compile Include="Dec.cs" />
+    <Compile Include="DefaultTo.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

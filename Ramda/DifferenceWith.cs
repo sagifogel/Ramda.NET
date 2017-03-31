@@ -14,20 +14,44 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, IList<TSource> list2) {
-			return Currying.DifferenceWith(list1, list2);
+		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, IList<TSource> list2) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
-		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder list1, IList<TSource> list2) {
-			return Currying.DifferenceWith(list1, list2);
+		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder pred, IList<TSource> list1, IList<TSource> list2) {
+			return Currying.DifferenceWith(pred, list1, list2);
 		}
 
-		public static dynamic DifferenceWith<TSource>(IList<TSource> list1, RamdaPlaceholder list2 = null) {
-			return Currying.DifferenceWith(list1, list2);
+		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1, IList<TSource> list2) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
-		public static dynamic DifferenceWith(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.DifferenceWith(list1, list2);
+		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith<TSource>(dynamic pred, RamdaPlaceholder list1, IList<TSource> list2) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith<TSource>(dynamic pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith<TSource>(dynamic pred, IList<TSource> list1, IList<TSource> list2) {
+			return Currying.DifferenceWith(Delegate(pred), list1, list2);
+		}
+
+		public static dynamic DifferenceWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
+			return Currying.DifferenceWith(pred, list1, list2);
 		}
 	}
 }

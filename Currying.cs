@@ -181,7 +181,7 @@ namespace Ramda.NET
             return result.ToArray();
         });
 
-        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => ShallowCloner.CloneAndAssignDefaultValue(prop, obj));
+        internal readonly static dynamic Dissoc = Curry2<string, object, object>((prop, obj) => ShallowCloner.CloneAndOmitValue(prop, obj));
 
         internal readonly static dynamic DissocPath = Curry2<IList, object, object>(InternalDissocPath);
 

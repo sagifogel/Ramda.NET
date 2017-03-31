@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Collections;
+using System.ComponentModel;
 
 namespace Ramda.NET
 {
@@ -42,20 +43,17 @@ namespace Ramda.NET
             return target;
         }
 
-        internal static object CloneAndAssignDefaultValue(string prop, object obj) {
-            object target = null;
-            var type = obj.GetType();
+        internal static object CloneAndOmitValue(string prop, object obj) {
+            Type type = obj.GetType();
+            IDictionary<string, object> expando = new ExpandoObject();
 
-            if (type.IsAnonymousType()) {
-                var member = obj.Member(prop);
-
-                target = AnonymousTypeCloneAndAssignValue(prop, member.GetType().GetDefaultValue(), type, obj);
-            }
-            else {
-                target = WellKnownTypeCloneAndAssignValue(prop, obj, null);
+            foreach (var pair in obj.ToMemberDictionary()) {
+                if (!pair.Key.Equals(prop)) {
+                    expando.Add(pair);
+                }
             }
 
-            return target;
+            return expando as ExpandoObject;
         }
 
         private static object AnonymousTypeCloneAndAssignValue(object prop, object propValue, Type type, object obj) {

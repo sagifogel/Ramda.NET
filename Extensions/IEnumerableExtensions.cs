@@ -161,6 +161,7 @@ namespace Ramda.NET
         }
 
         internal static Type GetElementType(this IEnumerable enumerable) {
+            Type elementType = null;
             var enumerableType = enumerable.GetType();
 
             if (enumerableType.HasElementType) {
@@ -170,7 +171,15 @@ namespace Ramda.NET
             if (enumerableType.IsGenericType) {
                 return enumerableType.GetGenericArguments()[0];
             }
-            return FindElementType(enumerable);
+
+
+            elementType = FindElementType(enumerable);
+
+            if (elementType == null) {
+                elementType = typeof(object);
+            }
+
+            return elementType;
         }
 
         private static Type FindElementType(this IEnumerable enumerable) {

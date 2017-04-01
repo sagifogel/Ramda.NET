@@ -99,6 +99,7 @@
     <Compile Include="Dissoc.cs" />
     <Compile Include="DissocPath.cs" />
     <Compile Include="Divide.cs" />
+    <Compile Include="Drop.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

@@ -980,7 +980,15 @@ namespace Ramda.NET
 
         internal readonly static dynamic Curry = Curry1<dynamic, DynamicDelegate>(fn => CurryN(Reflection.FunctionArity(fn), fn));
 
-        internal readonly static dynamic Drop = Curry2(Dispatchable2("Drop", XDrop, new Func<int, IList, IList>((n, xs) => Slice(Math.Max(0, n), int.MaxValue, xs))));
+        internal readonly static dynamic Drop = Curry2(Dispatchable2("Drop", XDrop, new Func<int, IEnumerable, IEnumerable>((n, xs) => {
+            string value = xs as string;
+
+            if (value != null) {
+                return value.Substring(Math.Min(n, value.Length));
+            }
+
+            return Slice(Math.Max(0, n), int.MaxValue, xs);
+        })));
 
         internal readonly static dynamic DropLast = Curry2(Dispatchable2("DropLast", XDropLast, new Func<int, IList, IList>(DropLastInternal)));
 

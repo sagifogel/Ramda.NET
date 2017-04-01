@@ -19,8 +19,10 @@ namespace Ramda.NET
                 var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
 
                 if (arguments.IsArray()) {
-                    result = arguments.CreateNewArray(len);
-                    Array.Copy((Array)arguments, from, (Array)result, 0, len);
+                    var arr = arguments.CreateNewArray(len);
+
+                    Array.Copy((Array)arguments, Math.Min(from, arguments.Count), arr, 0, len);
+                    result = arr;
                 }
                 else {
                     var idx = 0;

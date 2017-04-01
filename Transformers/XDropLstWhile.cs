@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using static Ramda.NET.Currying;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -13,13 +14,13 @@ namespace Ramda.NET
         }
 
         public override object Result(object result) {
-            this.retained = null;
+            retained = null;
 
             return base.Result(result);
         }
 
         public override object Step(object result, object input) {
-            return f.Invoke(input) ? Retain(result, input) : Flush(result, input);
+            return DynamicInvoke(f, new[] { input }) ? Retain(result, input) : Flush(result, input);
         }
 
         private object Retain(object result, object input) {
@@ -29,7 +30,7 @@ namespace Ramda.NET
         }
 
         private object Flush(object result, object input) {
-            result = ReducedInternal(xf.Step(result, retained));
+            result = ReduceInternal(Delegate(xf.Step), result, retained);
             retained = new ArrayList();
 
             return xf.Step(result, input);

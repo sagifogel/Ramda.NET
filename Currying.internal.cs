@@ -257,7 +257,7 @@ namespace Ramda.NET
         private static IList DropLastWhileInternal(dynamic pred, IList list) {
             var idx = list.Count - 1;
 
-            while (idx >= 0 && (bool)pred.Invoke(list[idx])) {
+            while (idx >= 0 && (bool)DynamicInvoke(pred, new[] { list[idx] })) {
                 idx -= 1;
             }
 

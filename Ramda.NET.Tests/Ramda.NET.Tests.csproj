@@ -101,6 +101,7 @@
     <Compile Include="Divide.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="DropLast.cs" />
+    <Compile Include="DropLastWhile.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="ListXf.cs" />

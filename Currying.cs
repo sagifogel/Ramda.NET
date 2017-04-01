@@ -992,7 +992,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic DropLast = Curry2(Dispatchable2("DropLast", XDropLast, new Func<int, IEnumerable, IEnumerable>(DropLastInternal)));
 
-        internal readonly static dynamic DropLastWhile = Curry2(Dispatchable2("DropLastWhile", XDropLastWhile, new Func<Delegate, IList, IList>(DropLastWhileInternal)));
+        internal readonly static dynamic DropLastWhile = Curry2(Dispatchable2("DropLastWhile", XDropLastWhile, new Func<DynamicDelegate, IList, IEnumerable>(DropLastWhileInternal)));
 
         internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
 

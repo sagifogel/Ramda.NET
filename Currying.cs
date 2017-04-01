@@ -990,7 +990,7 @@ namespace Ramda.NET
             return Slice(Math.Max(0, n), int.MaxValue, xs);
         })));
 
-        internal readonly static dynamic DropLast = Curry2(Dispatchable2("DropLast", XDropLast, new Func<int, IList, IList>(DropLastInternal)));
+        internal readonly static dynamic DropLast = Curry2(Dispatchable2("DropLast", XDropLast, new Func<int, IEnumerable, IEnumerable>(DropLastInternal)));
 
         internal readonly static dynamic DropLastWhile = Curry2(Dispatchable2("DropLastWhile", XDropLastWhile, new Func<Delegate, IList, IList>(DropLastWhileInternal)));
 

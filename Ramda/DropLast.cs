@@ -14,11 +14,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic DropLast<TSource>(int n, IList<TSource> xs) {
+		public static dynamic DropLast<TSource>(int n, IEnumerable<TSource> xs) {
 			return Currying.DropLast(n, xs);
 		}
 
-		public static dynamic DropLast<TSource>(RamdaPlaceholder n, IList<TSource> xs) {
+		public static dynamic DropLast<TSource>(RamdaPlaceholder n, IEnumerable<TSource> xs) {
 			return Currying.DropLast(n, xs);
 		}
 

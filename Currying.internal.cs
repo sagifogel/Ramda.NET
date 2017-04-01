@@ -522,8 +522,17 @@ namespace Ramda.NET
             }));
         }
 
-        private static IList DropLastInternal(int n, IList xs) {
-            return Take(n < xs.Count ? xs.Count - n : 0, xs);
+        private static IEnumerable DropLastInternal(int n, IEnumerable xs) {
+            IList list;
+            string value = xs as string;
+
+            if (value != null) {
+                return value.Substring(0, value.Length - Math.Min(value.Length, n));
+            }
+
+            list = xs as IList;
+
+            return Take(n < list.Count ? list.Count - n : 0, list);
         }
 
         private static bool EqualsInternal(object a, object b) {

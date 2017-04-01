@@ -32,10 +32,10 @@ namespace Ramda.NET.Tests
             var res1 = R.Drop(0, xs);
             var res2 = R.Drop(-1, xs);
 
-            Assert.AreNotEqual(R.Drop(0, xs), xs);
-            Assert.AreNotEqual(R.Drop(0, xs), xs);
+            Assert.AreNotEqual(res1, xs);
+            Assert.AreNotEqual(res2, xs);
             CollectionAssert.AreEqual(res1, xs);
-            CollectionAssert.AreEqual(res1, xs);
+            CollectionAssert.AreEqual(res2, xs);
         }
 
         [TestMethod]

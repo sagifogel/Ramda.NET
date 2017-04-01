@@ -114,7 +114,7 @@ namespace Ramda.NET
 
                 if (member.IsNotNull()) {
                     switch (member.MemberType) {
-                        case MemberTypes.Field:
+                        case MemberTypes.Property:
                             var property = (PropertyInfo)member;
 
                             if (property.CanWrite) {
@@ -122,7 +122,7 @@ namespace Ramda.NET
                             }
 
                             break;
-                        case MemberTypes.Property:
+                        case MemberTypes.Field:
                             var field = (FieldInfo)member;
 
                             if (!field.IsInitOnly) {

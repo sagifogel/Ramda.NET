@@ -33,7 +33,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("includes prototype properties")]
+        [Description("Dissoc_Includes_Prototype_Properties")]
         public void Dissoc_Includes_Well_Typed_Properties() {
             var rect = new Rectangle(7, 6);
             var area = rect.Area;
@@ -44,7 +44,6 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("includes prototype properties")]
         public void Dissoc_Is_Curried() {
             Assert.IsTrue(((ExpandoObject)R.Dissoc("B")(new { A = 1, B = 2, C = 3 })).ContentEquals(new { A = 1, C = 3 }.ToExpando()));
         }

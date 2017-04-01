@@ -397,7 +397,7 @@ namespace Ramda.NET
                     return Dissoc(path[0], obj);
                 default:
                     var head = (string)path[0];
-                    var tail = Slice(path, 1);
+                    var tail = path.Slice(1);
                     var headValue = obj.Member(head);
 
                     return headValue.IsNull() ? obj : Assoc(head, InternalDissocPath(tail, headValue), obj);

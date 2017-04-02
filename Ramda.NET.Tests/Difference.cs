@@ -14,31 +14,6 @@ namespace Ramda.NET.Tests
         private int[] N2 = new[] { 3, 3, 4, 4, 5, 5, 6, 6 };
         private int[] Z2 = new[] { 1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8 };
 
-        private class Just : IEquatable<Just>
-        {
-            public object Value { get; private set; }
-
-            public Just(object value) {
-                Value = value;
-            }
-
-            public override bool Equals(object obj) {
-                return Equals(obj as Just);
-            }
-
-            public bool Equals(Just other) {
-                if (other == null) {
-                    return false;
-                }
-
-                return R.Equals(other.Value, Value);
-            }
-
-            public override int GetHashCode() {
-                return Value.GetHashCode();
-            }
-        }
-
         [TestMethod]
         public void Difference_Finds_The_Set_Of_All_Elements_In_The_First_List_Not_Contained_In_The_Second() {
             CollectionAssert.AreEqual(R.Difference(M, N), new[] { 1, 2 });
@@ -46,6 +21,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Difference_Does_Not_Allow_Duplicates_In_The_Output_Even_If_The_Input_Lists_Had_Duplicates() {
+            Assert.AreEqual(R.Difference(new[] { R.Null }, new [] { R.Null }).Length, 0);
             CollectionAssert.AreEqual(R.Difference(M2, N2), new[] { 1, 2 });
         }
 

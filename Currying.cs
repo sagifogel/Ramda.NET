@@ -1301,7 +1301,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic CountBy = ReduceBy(Delegate(new Func<int, object, int>((acc, elem) => acc + 1)), 0);
 
-        internal readonly static dynamic DropRepeatsWith = Curry2(Dispatchable2("DropRepeatsWith", XDropRepeatsWith, new Func<Delegate, IList, IList>((pred, list) => {
+        internal readonly static dynamic DropRepeatsWith = Curry2(Dispatchable2("DropRepeatsWith", XDropRepeatsWith, new Func<DynamicDelegate, IList, IList>((pred, list) => {
             var idx = 1;
             var len = list.Count;
             var result = new List<object>();
@@ -1310,7 +1310,7 @@ namespace Ramda.NET
                 result.Add(list[0]);
 
                 while (idx < len) {
-                    if (!(bool)pred.Invoke((object)Last(result), list[idx])) {
+                    if (!(bool)Reflection.DynamicInvoke(pred, new[] { (object)Last(result), list[idx] })) {
                         result.Add(list[idx]);
                     }
 

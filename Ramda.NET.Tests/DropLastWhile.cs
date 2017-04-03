@@ -21,6 +21,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
+        [Description("DropLastWhile_Starts_At_The_Right_Arg_And_Acknowledges_Undefined")]
         public void DropLastWhile_Starts_At_The_Right_Arg_And_Acknowledges_Null() {
             var sublist = R.DropLastWhile(x => x != null, new object[] { 1, 3, null, 5, 7 });
 

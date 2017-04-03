@@ -104,6 +104,7 @@
     <Compile Include="DropLastWhile.cs" />
     <Compile Include="DropRepeats.cs" />
     <Compile Include="DropRepeatsWith.cs" />
+    <Compile Include="DropWhile.cs" />
     <Compile Include="EqProps.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />

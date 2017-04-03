@@ -308,6 +308,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EqBy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\EqProps.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EqProps.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Equals.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -462,6 +467,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EqBy.cs</LastGenOutput>
       <LastOutputs>.\EqBy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\EqProps.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EqProps.cs</LastGenOutput>
+      <LastOutputs>.\EqProps.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Filter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

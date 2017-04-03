@@ -1321,9 +1321,9 @@ namespace Ramda.NET
             return result.ToArray<Array>();
         })));
 
-        internal readonly static dynamic EqBy = Curry3<DynamicDelegate, object, object, bool>((f, x, y) => Equals(((dynamic)f)(x), ((dynamic)f)(y)));
+        internal readonly static dynamic EqBy = Curry3<DynamicDelegate, object, object, bool>((f, x, y) => R.Equals(((dynamic)f)(x), ((dynamic)f)(y)));
 
-        internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => Equals(obj1.Member(prop), obj2.Member(prop)));
+        internal readonly static dynamic EqProps = Curry3<string, object, object, bool>((prop, obj1, obj2) => R.Equals(obj1.Member(prop), obj2.Member(prop)));
 
         internal readonly static dynamic GroupBy = Curry2(CheckForMethod2("GroupBy", ReduceBy(new Func<object, object, IList>((acc, item) => {
             var result = acc as IList;

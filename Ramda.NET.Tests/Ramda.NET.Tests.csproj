@@ -106,7 +106,10 @@
     <Compile Include="DropRepeatsWith.cs" />
     <Compile Include="DropWhile.cs" />
     <Compile Include="Either.cs" />
+    <Compile Include="Empty.cs" />
+    <Compile Include="EqBy.cs" />
     <Compile Include="EqProps.cs" />
+    <Compile Include="Equals.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />

@@ -858,6 +858,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToLower.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Type.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Type.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Union.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1995,6 +2000,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToLower.cs</LastGenOutput>
       <LastOutputs>.\ToLower.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Type.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Type.cs</LastGenOutput>
+      <LastOutputs>.\Type.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Union.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

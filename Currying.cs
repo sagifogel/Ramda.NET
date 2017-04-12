@@ -201,7 +201,22 @@ namespace Ramda.NET
 
         internal readonly static dynamic Empty = Curry1<object, dynamic>(x => {
             if (x.IsNotNull()) {
-                var type = x.GetType();
+                Type type = null;
+                var @delegate = x.Member("Empty") as Delegate;
+
+                if (@delegate != null) {
+                    return @delegate.Invoke(new object[0]);
+                }
+
+                type = x.GetType();
+
+                if (x.IsArray()) {
+                    return ((Array)x).CreateNewArray(0);
+                }
+
+                if (x.IsList()) {
+                    return ((IEnumerable)x).CreateNewList();
+                }
 
                 if (type.Equals(typeof(string))) {
                     return string.Empty;
@@ -213,7 +228,7 @@ namespace Ramda.NET
 
                 if (type.IsClass && !type.IsDelegate()) {
                     if (type.IsAnonymousType()) {
-                        return new { };
+                        return new ExpandoObject();
                     }
 
                     return x.GetFactory().Invoke();
@@ -755,7 +770,15 @@ namespace Ramda.NET
             });
         });
 
-        internal readonly static dynamic Type = Curry1<object, string>(obj => obj?.GetType().Name ?? "null");
+        internal readonly static dynamic Type = Curry1<object, string>(obj => {
+            if (obj.IsNotNull()) {
+                var type = obj.GetType();
+
+                return type.IsAnonymousType() ? "anonymous" : type.Name;
+            }
+
+            return "null";
+        });
 
         internal readonly static dynamic Unapply = Curry1<DynamicDelegate, object>(fn => {
             return Delegate(arguments => ((dynamic)fn)(arguments.Slice()));
@@ -994,7 +1017,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic DropLastWhile = Curry2(Dispatchable2("DropLastWhile", XDropLastWhile, new Func<DynamicDelegate, IList, IEnumerable>(DropLastWhileInternal)));
 
-        internal new readonly static dynamic Equals = Curry2<object, object, bool>(EqualsInternal);
+        internal new readonly static dynamic Equals = Curry2<object, object, bool>((a, b) => EqualsInternal(a, b, new ArrayList(), new ArrayList()));
 
         internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<DynamicDelegate, object, object>((pred, filterable) => {
             dynamic dynamicPred = pred;

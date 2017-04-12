@@ -6,10 +6,10 @@ using System.Reflection;
 using System.Collections;
 using static Ramda.NET.R;
 using System.Threading.Tasks;
-using System.Linq.Expressions;
 using System.Collections.Generic;
 using static Ramda.NET.ReflectionExtensions;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
@@ -535,14 +535,26 @@ namespace Ramda.NET
             return Take(n < list.Count ? list.Count - n : 0, list);
         }
 
-        private static bool EqualsInternal(object a, object b) {
+        private static bool EqualsInternal(object a, object b, ArrayList stackA, ArrayList stackB) {
             Type typeA;
-            bool bothEnumerables;
-            Type typeB = b.GetType();
-            var typeofString = typeof(string);
+            Type typeB;
+            Delegate equalsA;
+            Delegate equalsB;
+            Type typeofObject = typeof(object);
+            Func<object, Type, Delegate> getEquals = (obj, objType) => {
+                if (!a.IsAnonymousType()) {
+                    return a.MemberWhere<Delegate>("Equals", del => del.IsOverridenMethod(objType));
+                }
+
+                return null;
+            };
 
             if (Identical(a, b)) {
                 return true;
+            }
+
+            if (R.Type(a) != R.Type(b)) {
+                return false;
             }
 
             if (a.IsNull() || b.IsNull()) {
@@ -550,25 +562,71 @@ namespace Ramda.NET
             }
 
             typeA = a.GetType();
-            bothEnumerables = a.IsEnumerable() && !typeA.Equals(typeofString) && b.IsEnumerable() && !typeA.Equals(typeofString);
+            typeB = b.GetType();
+            equalsA = getEquals(a, typeA);
+            equalsB = getEquals(b, typeB);
 
-            if (!typeA.Equals(typeB) && !bothEnumerables) {
-                var bothAnonymous = a.IsAnonymousType() && b.IsAnonymousType();
+            if (equalsA != null || equalsB != null) {
+                return (bool)equalsB.DynamicInvoke(new[] { b, a });
+            }
 
-                if (!bothAnonymous) {
+            if (typeA.IsPrimitive || typeA.Equals(typeof(string)) || typeA.Equals(typeof(DateTime)) || typeA.Equals(typeof(decimal)) || typeA.Equals(typeof(Guid))) {
+                return false;
+            }
+            else if (typeof(Exception).IsAssignableFrom(typeA)) {
+                return ((Exception)a).Message.Equals(((Exception)b).Message);
+            }
+            else if (typeA.Equals(typeof(Regex))) {
+                var sourceA = a.Member("pattern", @private: true);
+                var sourceB = b.Member("pattern", @private: true);
+
+                if (!sourceA.Equals(sourceB)) {
                     return false;
                 }
             }
-
-            if (bothEnumerables) {
-                return ((IEnumerable)a).SequenceEqual((IEnumerable)b, EqualsInternal);
+            else if (typeA.TypeIsDictionary() && !typeA.TypeIsExpandoObject()) {
+                return EqualsInternal(((IDictionary)a).Values.ToArray<Array>(typeofObject), ((IDictionary)b).Values.ToArray<Array>(typeofObject), stackA, stackB);
+            }
+            else if (typeA.TypeIsSet()) {
+                return EqualsInternal(((IEnumerable)a).ToArray<Array>(typeofObject), ((IEnumerable)b).ToArray<Array>(typeofObject), stackA, stackB);
             }
 
-            if (typeA.Equals(typeB) && (typeA.IsPrimitive || typeA.Equals(typeof(string)) || typeA.Equals(typeof(DateTime)) || typeA.Equals(typeof(decimal)) || typeA.Equals(typeof(Guid)))) {
+            var membersA = a.ToMemberDictionary();
+            var membersB = b.ToMemberDictionary();
+            var membersAKeys = membersA.Keys.ToArray();
+
+            if (membersA.Count != membersB.Count) {
                 return false;
             }
 
-            return MemberwiseComparer.Compare(a, b);
+            var idx = stackA.Count - 1;
+
+            while (idx >= 0) {
+                if (stackA[idx] == a) {
+                    return stackB[idx] == b;
+                }
+
+                idx -= 1;
+            }
+
+            stackA.Add(a);
+            stackB.Add(b);
+            idx = membersA.Count - 1;
+
+            while (idx >= 0) {
+                var key = membersAKeys[idx];
+
+                if (!(membersB.ContainsKey(key) && EqualsInternal(membersB[key], membersA[key], stackA, stackB))) {
+                    return false;
+                }
+
+                idx -= 1;
+            }
+
+            stackA.RemoveAt(stackA.Count - 1);
+            stackB.RemoveAt(stackB.Count - 1);
+
+            return true;
         }
 
         private static Func<IList, IList> MakeFlat(bool recursive) {

@@ -121,7 +121,7 @@ namespace Ramda.NET
             return source.Where(element => keys.Add(predicate(element)));
         }
 
-        internal static Array CreateNewArray(this IList list, int? len = null, Type type = null) {
+        internal static Array CreateNewArray(this ICollection list, int? len = null, Type type = null) {
             return (type ?? list.GetElementType()).CreateNewArray<Array>(len ?? list.Count);
         }
 
@@ -211,11 +211,13 @@ namespace Ramda.NET
             return new[] { value };
         }
 
-        internal static TArray ToArray<TArray>(this IList list, Type type = null) where TArray : IList {
+        internal static TArray ToArray<TArray>(this ICollection list, Type type = null) where TArray : IList {
+            int i = 0;
             IList arr = list.CreateNewArray(list.Count, type);
 
-            for (int i = 0; i < list.Count; i++) {
-                arr[i] = list[i];
+            foreach (var item in list) {
+                arr[i] = item;
+                i++;
             }
 
             return (TArray)arr;
@@ -229,6 +231,10 @@ namespace Ramda.NET
             }
 
             return (TList)result;
+        }
+
+        internal static TArray ToArray<TArray>(this IEnumerable list, Type type = null) where TArray : IList {
+            return list.ToList<IList>(type).ToArray<TArray>();
         }
 
         internal static bool SequenceEqual(this IEnumerable first, IEnumerable second, Func<object, object, bool> comparer) {
@@ -259,6 +265,20 @@ namespace Ramda.NET
             newList.Sort(comparison);
 
             return newList.ToArray();
+        }
+
+        internal static IEnumerable GetDictionaryValues(this object val) {
+            var dictionary = val as IDictionary;
+
+            if (dictionary != null) {
+                return dictionary.Values;
+            }
+
+            if (val.IsExpandoObject()) {
+                return ((IDictionary<string, object>)val).Values;
+            }
+
+            return ((dynamic)val).Values;
         }
     }
 }

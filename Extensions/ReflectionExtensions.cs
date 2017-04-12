@@ -16,8 +16,8 @@ namespace Ramda.NET
         private static object[] emptyArray = new object[0];
         private static Type[] EmptyTypes = System.Type.EmptyTypes;
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
-        private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
+        private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
 
         internal static object[] Arity(params object[] arguments) {
             object[] result;
@@ -70,6 +70,16 @@ namespace Ramda.NET
             return false;
         }
 
+        internal static bool TypeIsSet(this Type type) {
+            if (type.IsGenericType) {
+                var genericTypeDef = type.GetGenericTypeDefinition();
+
+                return genericTypeDef.Equals(typeof(HashSet<>));
+            }
+
+            return false;
+        }
+
         internal static bool IsDictionaryOf<TKey, TValue>(this Type type) {
             return typeof(IDictionary<TKey, TValue>).IsAssignableFrom(type);
         }
@@ -80,6 +90,10 @@ namespace Ramda.NET
 
         internal static bool IsList(this object value) {
             return typeof(IList).IsAssignableFrom(value.GetType());
+        }
+
+        internal static bool TypeIsList(this Type type) {
+            return typeof(IList).IsAssignableFrom(type);
         }
 
         internal static bool IsEnumerable(this object value) {
@@ -120,7 +134,7 @@ namespace Ramda.NET
             return result.IsNotNull() ? result : orFn();
         }
 
-        internal static object Member(this object target, string name, int length = 0) {
+        internal static object Member(this object target, string name, int length = 0, bool @private = false) {
             var type = target.GetType();
 
             if (type.TypeIsDictionary()) {
@@ -139,7 +153,7 @@ namespace Ramda.NET
                     }
                 }
             }
-            else if (type.IsArray) {
+            else if (type.TypeIsList()) {
                 int index;
                 var arr = (IList)target;
 
@@ -153,7 +167,7 @@ namespace Ramda.NET
                 return FunctionArity(target);
             }
             else {
-                var member = type.TryGetMemberInfoFromType(name, length);
+                var member = type.TryGetMemberInfoFromType(name, length, @private);
 
                 if (member.IsNotNull()) {
                     switch (member.MemberType) {
@@ -197,7 +211,9 @@ namespace Ramda.NET
         }
 
         internal static bool TryGetMember(dynamic name, object target, out object memberVal) {
-            if (target.IsArray()) {
+            Type typeOfName = name.GetType();
+
+            if (target.IsArray() && typeOfName.Equals(typeof(int))) {
                 return ((Array)target).TryGetMember((int)name, out memberVal);
             }
 
@@ -222,16 +238,24 @@ namespace Ramda.NET
             return false;
         }
 
-        internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
+        internal static TConvert MemberWhere<TConvert>(this object target, string name, Func<TConvert, bool> predicate) {
             object value;
 
             if (TryGetMember((dynamic)name, target, out value)) {
-                return predicate(value);
+                TConvert converted = (TConvert)value;
+
+                if (predicate(converted)) {
+                    return converted;
+                }
             }
 
-            return false;
+            return default(TConvert);
         }
 
+        internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
+            return target.MemberWhere(name, predicate) != null;
+        }
+        
         internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<MemberInfo, bool> predicate) where TMemberInfo : MemberInfo {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
@@ -277,8 +301,15 @@ namespace Ramda.NET
             return target.GetType().TryGetMemberInfoFromType(name);
         }
 
-        internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name, int length = 0) {
-            var members = type.GetMember(name, bindingFlags);
+        internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name, int length = 0, bool @private = false) {
+            MemberInfo[] members;
+            var flags = bindingFlags;
+
+            if (@private) {
+                flags |= BindingFlags.NonPublic;
+            }
+
+            members = type.GetMember(name, flags);
 
             if (members.Length == 1) {
                 return members[0];
@@ -464,6 +495,10 @@ namespace Ramda.NET
             }
 
             return (dynamic)obj;
+        }
+
+        internal static bool IsOverridenMethod(this Delegate @delegate, Type type) {
+            return @delegate.Method.DeclaringType.Equals(type);
         }
     }
 }

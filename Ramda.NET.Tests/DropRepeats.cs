@@ -26,7 +26,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("DropRepeats_Has_R.equals_Semantics")]
+        [Description("DropRepeats_Has_R.Equals_Semantics")]
         public void DropRepeats_Has_R_Equals_Semantics() {
             Assert.AreEqual(R.DropRepeats(new[] { R.Null, R.Null }).Length, 1);
             Assert.AreEqual(R.DropRepeats(new[] { new Just(new[] { 42 }), new Just(new[] { 42 }) }).Length, 1);

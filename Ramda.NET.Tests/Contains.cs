@@ -46,7 +46,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("Contains_Has_R.equals_Semantics")]
+        [Description("Contains_Has_R.Equals_Semantics")]
         public void Contains_Has_R_Equals_Semantics() {
             Assert.IsFalse(R.Contains(-0, new[] { new object() }));
             Assert.IsFalse(R.Contains(new Just(new[] { 42 }), new[] { new Just(new[] { 42 }) }));

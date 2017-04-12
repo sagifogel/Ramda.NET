@@ -13,7 +13,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("EqProps_Has_R.equals_Semantics")]
+        [Description("EqProps_Has_R.Equals_Semantics")]
         public void EqProps_Has_R_Equals_Semantics() {
             object nullObject = R.Null;
 

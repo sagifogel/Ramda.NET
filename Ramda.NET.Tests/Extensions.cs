@@ -45,39 +45,32 @@ namespace Ramda.NET.Tests
                                   });
         }
 
-        public static bool ContentEquals(this IDictionary<string, object> dictionary, ExpandoObject expando) {
-            var otherDictionary = expando as IDictionary<string, object>;
-
-            return dictionary.ContentEquals(otherDictionary);
-        }
-
-        public static bool ContentEquals(this ExpandoObject dictionary, ExpandoObject expando) {
-            var otherDictionary = expando as IDictionary<string, object>;
-
-            return ((IDictionary<string, object>)dictionary).ContentEquals(otherDictionary);
+        public static bool ContentEquals(object dictionary, object expando) {
+            return dictionary.ToExpando().ContentEquals(expando.ToExpando());
         }
 
         public static dynamic ToDynamic(this object value) {
-            Type type;
-
             if (value.IsExpandoObject()) {
                 return value;
             }
 
-            type = value.GetType();
+            Type type = value.GetType();
+            IDictionary<string, object> expando = new ExpandoObject();
 
-            if (type.Assembly.Equals(typeof(object).Assembly)) {
+            if (type.TypeIsDictionary()) {
+                value.ToMemberDictionary()
+                     .ForEach(kv => expando[kv.Key] = kv.Value);
+            }
+            else if (type.Assembly.Equals(typeof(object).Assembly)) {
                 return value;
             }
             else {
-                IDictionary<string, object> expando = new ExpandoObject();
-
                 foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(type)) {
                     expando.Add(property.Name, property.GetValue(value).ToDynamic());
                 }
-
-                return expando as ExpandoObject;
             }
+
+            return expando as ExpandoObject;
         }
 
         public static ExpandoObject ToExpando(this object value) {

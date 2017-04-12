@@ -70,6 +70,7 @@
     <Compile Include="Ap.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="ApplySpec.cs" />
+    <Compile Include="Assert.cs" />
     <Compile Include="Assoc.cs" />
     <Compile Include="AssocPath.cs" />
     <Compile Include="Binary.cs" />
@@ -110,7 +111,9 @@
     <Compile Include="EqBy.cs" />
     <Compile Include="EqProps.cs" />
     <Compile Include="Equals.cs" />
+    <Compile Include="Evolve.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

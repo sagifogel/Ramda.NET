@@ -49,7 +49,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void CountBy_Counts_By_A_Simple_Property_Of_The_Objects() {
-            ExpandoObject countedBy = R.CountBy(R.Prop("Genre"), albums);
+            var countedBy = R.CountBy(R.Prop("Genre"), albums);
             var result = new {
                 Baroque = 2,
                 Rock = 2,
@@ -60,23 +60,23 @@ namespace Ramda.NET.Tests
                 Broadway = 1,
                 Folk = 1,
                 Classical = 1
-            }.ToExpando();
+            };
 
-            Assert.IsTrue(countedBy.ContentEquals(result));
+            DynamicAssert.AreEqual(countedBy, result);
         }
 
         [TestMethod]
         public void CountBy_Counts_By_A_More_Complex_Function_On_The_Objects() {
-            ExpandoObject countedBy = R.CountBy(DerivedGenre, albums);
+            var countedBy = R.CountBy(DerivedGenre, albums);
             var result = new {
                 Classical = 5,
                 Rock = 3,
                 Jazz = 2,
                 Broadway = 1,
                 Folk = 1
-            }.ToExpando();
+            };
 
-            Assert.IsTrue(countedBy.ContentEquals(result));
+            DynamicAssert.AreEqual(countedBy, result);
         }
 
         [TestMethod]
@@ -92,9 +92,9 @@ namespace Ramda.NET.Tests
                 Broadway = 1,
                 Folk = 1,
                 Classical = 1
-            }.ToExpando();
+            };
 
-            Assert.IsTrue(((ExpandoObject)counter(albums)).ContentEquals(result));
+            DynamicAssert.AreEqual(counter(albums), result);
         }
 
         [TestMethod]
@@ -110,7 +110,7 @@ namespace Ramda.NET.Tests
             var transducer = R.Compose(R.CountBy(R.Prop("Genre")), R.Map(R.Adjust(R.ToString(R.__), 1)));
             ExpandoObject into = R.Into<Album>(new ExpandoObject(), transducer, albums);
 
-            Assert.IsTrue(into.ContentEquals(new {
+            DynamicAssert.AreEqual(into, new {
                 Baroque = "2",
                 Rock = "2",
                 Jazz = "2",
@@ -120,7 +120,7 @@ namespace Ramda.NET.Tests
                 Broadway = "1",
                 Folk = "1",
                 Classical = "1"
-            }.ToExpando()));
+            });
         }
     }
 }

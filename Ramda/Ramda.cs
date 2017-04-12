@@ -31,6 +31,10 @@ namespace Ramda.NET
             return Currying.Evolve(transformations, obj);
         }
 
+        public static dynamic Evolve(object transformations, RamdaPlaceholder obj = null) {
+            return Currying.Evolve(transformations, obj);
+        }
+
         public static dynamic Nth<TValue>(RamdaPlaceholder offset, IList<TValue> list) {
             return Currying.Nth(offset, list);
         }
@@ -131,12 +135,8 @@ namespace Ramda.NET
 
         public static dynamic T = Delegate(() => Currying.T());
 
-        public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
-            return Currying.Filter(Delegate(pred), filterable);
-        }
-
         public static dynamic Filter(dynamic pred, object filterable) {
-            return Currying.Filter(pred, filterable);
+            return Currying.Filter(Delegate(pred), filterable);
         }
 
         public static dynamic Head(string list) {

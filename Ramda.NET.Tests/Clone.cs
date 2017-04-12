@@ -96,7 +96,8 @@ namespace Ramda.NET.Tests
 
             dynamicObj.c = false;
             dynamicObj.d = dynamicObj.d.AddDays(6);
-            Assert.IsTrue(((ExpandoObject)expando).ContentEquals(new { a = 1, b = "ramda", c = true, d = new DateTime(2013, 12, 25) }.ToExpando()));
+
+            DynamicAssert.AreEqual(expando, new { a = 1, b = "ramda", c = true, d = new DateTime(2013, 12, 25) });
         }
 
         [TestMethod]
@@ -104,7 +105,7 @@ namespace Ramda.NET.Tests
             var obj = new { a = new { b = new { c = "ramda" } } };
             ExpandoObject cloned = ((object)R.Clone(obj)).ToDynamic();
 
-            Assert.IsTrue(cloned.ContentEquals(obj.ToExpando()));
+            DynamicAssert.AreEqual(cloned, obj);
         }
 
         [TestMethod]
@@ -131,6 +132,7 @@ namespace Ramda.NET.Tests
             Assert.AreNotSame(R.Keys(clone.c.b.a.c), R.Keys(dynamicX.c.b.a.c));
 
             dynamicX.c.b = 1;
+
             Assert.AreNotEqual(dynamicX.c.b, clone.c.b);
         }
 
@@ -230,11 +232,13 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(clone[0].b, clone[1].b);
             Assert.AreNotEqual(clone[0].b, dynamicList[0].b);
             Assert.AreNotEqual(clone[1].b, dynamicList[1].b);
-            Assert.IsTrue(((object)clone[0].b).ToExpando().ContentEquals(excpected));
-            Assert.IsTrue(((object)clone[1].b).ToExpando().ContentEquals(excpected));
+            DynamicAssert.AreEqual(clone[0].b, excpected);
+            DynamicAssert.AreEqual(clone[1].b, excpected);
+
             obj.a = 2;
-            Assert.IsTrue(((object)clone[0].b).ToExpando().ContentEquals(excpected));
-            Assert.IsTrue(((object)clone[1].b).ToExpando().ContentEquals(excpected));
+
+            DynamicAssert.AreEqual(clone[0].b, excpected);
+            DynamicAssert.AreEqual(clone[1].b, excpected);
         }
 
         [TestMethod]
@@ -244,7 +248,7 @@ namespace Ramda.NET.Tests
             var list = new object[0];
 
             Assert.AreEqual(R.Clone(R.Null), new Nothing());
-            Assert.IsTrue(((object)R.Clone(obj)).ToExpando().ContentEquals(obj.ToExpando()));
+            DynamicAssert.AreEqual(R.Clone(obj), obj);
             Assert.AreNotSame(R.Clone(list), list);
         }
 

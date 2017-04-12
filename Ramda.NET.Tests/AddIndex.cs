@@ -45,10 +45,9 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void AddIndex_Binary_Functions_Like_Reduce_Passes_The_Index_As_A_Third_Parameter_To_The_Predicate() {
             ExpandoObject reduced = reduceIndexed(objectify, new ExpandoObject(), new[] { "a", "b", "c", "d", "e" });
-            var expected = new { a = 0, b = 1, c = 2, d = 3, e = 4 }.ToExpando();
 
             Assert.AreEqual((int)reduceIndexed(timesIndexed, 0, new[] { 1, 2, 3, 4, 5 }), 40);
-            Assert.IsTrue(reduced.ContentEquals(expected));
+            DynamicAssert.AreEqual(reduced, new { a = 0, b = 1, c = 2, d = 3, e = 4 });
         }
 
         [TestMethod]

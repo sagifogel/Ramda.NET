@@ -24,7 +24,7 @@ namespace Ramda.NET.Tests
             var obj1 = new { A = new { B = 1, C = 2, D = new { E = 3 } }, F = new { G = new { H = 4, I = 5, J = new { K = 6, L = 7 } } }, M = 8 };
             dynamic obj2 = R.DissocPath(new[] { "F", "G", "I" }, obj1);
 
-            Assert.IsTrue(((ExpandoObject)obj2).ContentEquals(new { A = new { B = 1, C = 2, D = new { E = 3 } }, F = new { G = new { H = 4, J = new { K = 6, L = 7 } } }, M = 8 }.ToExpando()));
+            DynamicAssert.AreEqual(obj2, new { A = new { B = 1, C = 2, D = new { E = 3 } }, F = new { G = new { H = 4, J = new { K = 6, L = 7 } } }, M = 8 });
             Assert.AreEqual(obj2.A, obj1.A);
             Assert.AreEqual(obj2.M, obj1.M);
             Assert.AreEqual(obj2.F.G.H, obj1.F.G.H);
@@ -36,7 +36,7 @@ namespace Ramda.NET.Tests
             var obj1 = new { A = 1, B = new { C = 2, D = 3 }, E = 4, F = 5 };
             var obj2 = R.DissocPath(new[] { "X", "Y", "Z" }, obj1);
 
-            Assert.IsTrue(((object)obj2).ToExpando().ContentEquals(new { A = 1, B = new { C = 2, D = 3 }, E = 4, F = 5 }.ToExpando()));
+            DynamicAssert.AreEqual(obj2, new { A = 1, B = new { C = 2, D = 3 }, E = 4, F = 5 });
             Assert.AreEqual(obj2.A, obj1.A);
             Assert.AreEqual(obj2.B, obj1.B);
             Assert.AreEqual(obj2.F, obj1.F);
@@ -45,18 +45,18 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void DissocPath_Leaves_An_Empty_Object_When_All_Properties_Omitted() {
             var obj1 = new { A = 1, B = new { C = 2 }, D = 3 };
-            object obj2 = R.DissocPath(new[] { "B", "C" }, obj1);
+            var obj2 = R.DissocPath(new[] { "B", "C" }, obj1);
 
-            Assert.IsTrue(obj2.ToExpando().ContentEquals(new { A = 1, B = new { }, D = 3 }.ToExpando()));
+            DynamicAssert.AreEqual(obj2, new { A = 1, B = new { }, D = 3 });
         }
 
         [TestMethod]
         [Description("DissocPath_Flattens_Properties_From_Prototype")]
         public void DissocPath_Includes_Well_Typed_Properties() {
             var obj1 = new F { B = new { C = 2, D = 3 } };
-            object obj2 = R.DissocPath(new[] { "B", "C" }, obj1);
+            var obj2 = R.DissocPath(new[] { "B", "C" }, obj1);
 
-            Assert.IsTrue(obj2.ToExpando().ContentEquals(new { A = 1, B = new { D = 3 } }.ToExpando()));
+            DynamicAssert.AreEqual(obj2, new { A = 1, B = new { D = 3 } });
         }
 
         [TestMethod]
@@ -64,16 +64,16 @@ namespace Ramda.NET.Tests
             var obj1 = new { A = new { B = 1, C = 2, D = new { E = 3 } }, F = new { G = new { H = 4, I = 5, J = new { K = 6, L = 7 } } }, M = 8 };
             var expected = new { A = new { B = 1, C = 2, D = new { E = 3 } }, F = new { G = new { H = 4, J = new { K = 6, L = 7 } } }, M = 8 };
             var f = R.DissocPath(new[] { "F", "G", "I" });
-            object res = f(obj1);
+            var res = f(obj1);
 
-            Assert.IsTrue(res.ToExpando().ContentEquals(expected.ToExpando()));
+            DynamicAssert.AreEqual(res, expected);
         }
 
         [TestMethod]
         public void DissocPath_Accepts_Empty_Path() {
             object res = R.DissocPath(new string[0], new { a = 1, b = 2 });
 
-            Assert.IsTrue(res.ToExpando().ContentEquals(new { a = 1, b = 2 }.ToExpando()));
+            DynamicAssert.AreEqual(res, new { a = 1, b = 2 });
         }
     }
 }

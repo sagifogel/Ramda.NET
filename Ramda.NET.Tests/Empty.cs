@@ -41,7 +41,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Empty_Returns_Empty_Object_Given_Object() {
-            Assert.IsTrue(new ExpandoObject().ContentEquals((ExpandoObject)R.Empty(new { x = 1, y = 2 })));
+            DynamicAssert.AreEqual(R.Empty(new { x = 1, y = 2 }), new ExpandoObject());
         }
 
         [TestMethod]

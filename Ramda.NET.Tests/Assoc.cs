@@ -22,7 +22,7 @@ namespace Ramda.NET.Tests
             var obj1 = new { a = 1, b, e = 4, f = 5 };
             dynamic obj2 = R.Assoc("e", e, obj1);
 
-            Assert.IsTrue(dictionary.ContentEquals((ExpandoObject)obj2));
+            DynamicAssert.AreEqual(dictionary, obj2);
             Assert.AreEqual(obj2.a, obj1.a);
             Assert.AreEqual(obj2.b, obj1.b);
             Assert.AreEqual(obj2.f, obj1.f);
@@ -42,10 +42,11 @@ namespace Ramda.NET.Tests
             };
 
             var obj1 = new { a, b, e = 4, f };
-            dynamic obj2 = R.Assoc("z", z, obj1);
+            var obj2 = R.Assoc("z", z, obj1);
 
             dictionary["z"] = z;
-            Assert.IsTrue(dictionary.ContentEquals((ExpandoObject)obj2));
+
+            DynamicAssert.AreEqual(dictionary, obj2);
             Assert.AreEqual(obj2.a, obj1.a);
             Assert.AreEqual(obj2.b, obj1.b);
             Assert.AreEqual(obj2.f, obj1.f);
@@ -67,7 +68,8 @@ namespace Ramda.NET.Tests
             dynamic g = f(z);
 
             dictionary["e"] = z;
-            Assert.IsTrue(dictionary.ContentEquals((ExpandoObject)g(obj1)));
+
+            DynamicAssert.AreEqual(dictionary, g(obj1));
         }
     }
 }

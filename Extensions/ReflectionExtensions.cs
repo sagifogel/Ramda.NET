@@ -18,7 +18,13 @@ namespace Ramda.NET
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
         private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
-
+        private static ISet<Type> primitives = new HashSet<Type> {  typeof(Enum), typeof(string), typeof(char),
+                                                                    typeof(Guid), typeof(bool), typeof(byte),
+                                                                    typeof(short), typeof(int), typeof(long),
+                                                                    typeof(float), typeof(double), typeof(decimal),
+                                                                    typeof(sbyte), typeof(ushort), typeof(uint), typeof(ulong),
+                                                                    typeof(DateTime), typeof(DateTimeOffset), typeof(TimeSpan),
+                          };
         internal static object[] Arity(params object[] arguments) {
             object[] result;
 
@@ -255,7 +261,7 @@ namespace Ramda.NET
         internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
             return target.MemberWhere(name, predicate) != null;
         }
-        
+
         internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<MemberInfo, bool> predicate) where TMemberInfo : MemberInfo {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
@@ -499,6 +505,10 @@ namespace Ramda.NET
 
         internal static bool IsOverridenMethod(this Delegate @delegate, Type type) {
             return @delegate.Method.DeclaringType.Equals(type);
+        }
+
+        internal static bool IsPrimitive(this Type type) {
+            return primitives.Contains(type);
         }
     }
 }

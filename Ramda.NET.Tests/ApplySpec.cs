@@ -9,30 +9,28 @@ namespace Ramda.NET.Tests
     {
         [TestMethod]
         public void ApplySpec_Works_With_Empty_Spec() {
-            IDictionary<string, object> expando = new ExpandoObject();
-
-            Assert.IsTrue(expando.ContentEquals((IDictionary<string, object>)R.ApplySpec(new { })()));
+            DynamicAssert.AreEqual(R.ApplySpec(new { })(), new ExpandoObject());
         }
 
         [TestMethod]
         public void ApplySpec_Works_With_Unary_Functions() {
             dynamic expando = new ExpandoObject();
-            IDictionary<string, object> applied = R.ApplySpec(new { v = R.Inc(R.__), u = R.Dec(R.__) })(1);
+            var applied = R.ApplySpec(new { v = R.Inc(R.__), u = R.Dec(R.__) })(1);
 
             expando.v = 2;
             expando.u = 0;
 
-            Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
+            DynamicAssert.AreEqual(applied, expando);
         }
 
         [TestMethod]
         public void ApplySpec_Works_With_Binary_Functions() {
             dynamic expando = new ExpandoObject();
-            IDictionary<string, object> applied = R.ApplySpec(new { sum = R.Add(R.__) })(1, 2);
+            var applied = R.ApplySpec(new { sum = R.Add(R.__) })(1, 2);
 
             expando.sum = 3;
 
-            Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
+            DynamicAssert.AreEqual(applied, expando);
         }
 
         [TestMethod]
@@ -45,13 +43,13 @@ namespace Ramda.NET.Tests
                 }
             };
 
-            IDictionary<string, object> applied = R.ApplySpec(anonymous)(1, 2);
+           var applied = R.ApplySpec(anonymous)(1, 2);
 
             expando.unnested = 0;
             expando.nested = new ExpandoObject();
             expando.nested.sum = 3;
 
-            Assert.IsTrue(applied.ContentEquals((ExpandoObject)expando));
+            DynamicAssert.AreEqual(applied, expando);
         }
 
         [TestMethod]
@@ -64,10 +62,11 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void ApplySpec_Returns_A_Curried_Function() {
             dynamic expando = new ExpandoObject();
-            IDictionary<string, object> f = R.ApplySpec(new { sum = R.Add(R.__) })(1)(2);
+            var f = R.ApplySpec(new { sum = R.Add(R.__) })(1)(2);
 
             expando.sum = 3;
-            Assert.IsTrue(f.ContentEquals((ExpandoObject)expando));
+
+            DynamicAssert.AreEqual(f, expando);
         }
     }
 }

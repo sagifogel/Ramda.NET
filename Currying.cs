@@ -238,7 +238,7 @@ namespace Ramda.NET
             return null;
         });
 
-        internal readonly static dynamic Evolve = Curry2<IDictionary<string, object>, object, object>(InternalEvolve);
+        internal readonly static dynamic Evolve = Curry2<object, object, object>(InternalEvolve);
 
         internal readonly static dynamic Find = CurryN(Dispatchable2("Find", XFind, new Func<dynamic, IList, object>((fn, list) => {
             var dynamicFn = Delegate(fn);
@@ -1022,15 +1022,15 @@ namespace Ramda.NET
         internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<DynamicDelegate, object, object>((pred, filterable) => {
             dynamic dynamicPred = pred;
 
-            return !filterable.IsEnumerable() ? ReduceInternal(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
+            return !filterable.IsEnumerable() ? ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
                 var value = filterable.Member(key);
 
-                if (dynamicPred(value)) {
+                if (Reflection.DynamicInvoke(dynamicPred, new object[] { value })) {
                     acc[key] = value;
                 }
 
                 return acc;
-            }), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => dynamicPred(item), (IList)filterable);
+            })), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => dynamicPred(item), (IList)filterable);
         })));
 
         internal readonly static dynamic Flatten = Curry1(MakeFlat(true));

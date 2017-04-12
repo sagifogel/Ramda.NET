@@ -16,7 +16,8 @@ namespace Ramda.NET.Tests
             var expando2 = obj2.ToDynamic();
 
             expando.f.g.i[1] = 42;
-            Assert.IsTrue(((ExpandoObject)expando).ContentEquals((ExpandoObject)expando2));
+
+            DynamicAssert.AreEqual(expando, expando2);
         }
 
         [TestMethod]
@@ -24,25 +25,26 @@ namespace Ramda.NET.Tests
             var obj1 = new { a = 1, b = new { c = 2, d = 3 }, f = 4, e = 5 };
             var expando = obj1.ToDynamic();
             object obj2 = R.AssocPath(new object[] { "x", 0, "y" }, 42, obj1);
-            var x = (IDictionary<string, object>)new ExpandoObject();
-            var zero = (IDictionary<string, object>)new ExpandoObject();
+            IDictionary<string, object> x = new ExpandoObject();
+            IDictionary<string, object> zero = new ExpandoObject();
 
             expando.x = x;
             x["0"] = zero;
             zero["y"] = 42;
-            Assert.IsTrue(((ExpandoObject)expando).ContentEquals((ExpandoObject)obj2));
+
+            DynamicAssert.AreEqual(expando, obj2);
         }
 
         [TestMethod]
         public void AssocPath_Is_Curried() {
             var z = new { x = 42 };
             var obj1 = new { a = new { b = 1, c = 2, d = new { e = 3 } }, f = new { g = new { h = 4, i = 5, j = new { k = 6, l = 7 } } }, m = 8 };
-            ExpandoObject expected = new { a = new { b = 1, c = 2, d = new { e = 3 } }, f = new { g = new { h = 4, i = new { x = 42 }, j = new { k = 6, l = 7 } } }, m = 8 }.ToDynamic();
+            dynamic expected = new { a = new { b = 1, c = 2, d = new { e = 3 } }, f = new { g = new { h = 4, i = new { x = 42 }, j = new { k = 6, l = 7 } } }, m = 8 };
             var f = R.AssocPath(new[] { "f", "g", "i" });
             var g = f(z);
 
-            Assert.IsTrue(((ExpandoObject)f(z, obj1)).ContentEquals(expected));
-            Assert.IsTrue(((ExpandoObject)g(obj1)).ContentEquals(expected));
+            DynamicAssert.AreEqual(f(z, obj1), expected);
+            DynamicAssert.AreEqual(g(obj1), expected);
         }
 
         [TestMethod]

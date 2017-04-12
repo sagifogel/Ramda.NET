@@ -360,8 +360,9 @@ namespace Ramda.NET
             return condition(arguments) ? onTrue(arguments) : onFalse(arguments);
         }
 
-        private static object InternalEvolve(IDictionary<string, object> transformations, object target) {
+        private static object InternalEvolve(object transformationsObj, object target) {
             IDictionary<string, object> result = new ExpandoObject();
+            var transformations = transformationsObj.ToMemberDictionary();
 
             foreach (var keyValue in target.ToMemberDictionary()) {
                 object transformation;
@@ -369,17 +370,19 @@ namespace Ramda.NET
                 var value = keyValue.Value;
 
                 if (transformations.TryGetValue(key, out transformation)) {
-                    if (transformation.IsFunction()) {
-                        result[key] = ((dynamic)transformation).Invoke(value);
-                        continue;
-                    }
-                    else if (value is object) {
-                        if (!transformation.IsDictionary()) {
-                            transformation = transformation.ToMemberDictionary();
+                    if (transformation.IsNotNull()) {
+                        if (transformation.IsFunction()) {
+                            result[key] = DynamicInvoke(transformation, new object[] { value });
+                            continue;
                         }
+                        else if (!value.GetType().IsPrimitive()) {
+                            if (!transformation.IsDictionary()) {
+                                transformation = transformation.ToMemberDictionary();
+                            }
 
-                        result[key] = InternalEvolve((IDictionary<string, object>)transformation, value);
-                        continue;
+                            result[key] = InternalEvolve((IDictionary<string, object>)transformation, value);
+                            continue;
+                        }
                     }
                 }
 
@@ -536,11 +539,15 @@ namespace Ramda.NET
         }
 
         private static bool EqualsInternal(object a, object b, ArrayList stackA, ArrayList stackB) {
+            int idx;
             Type typeA;
             Type typeB;
             Delegate equalsA;
             Delegate equalsB;
+            string[] membersAKeys;
             Type typeofObject = typeof(object);
+            IDictionary<string, object> membersA;
+            IDictionary<string, object> membersB;
             Func<object, Type, Delegate> getEquals = (obj, objType) => {
                 if (!a.IsAnonymousType()) {
                     return a.MemberWhere<Delegate>("Equals", del => del.IsOverridenMethod(objType));
@@ -570,7 +577,7 @@ namespace Ramda.NET
                 return (bool)equalsB.DynamicInvoke(new[] { b, a });
             }
 
-            if (typeA.IsPrimitive || typeA.Equals(typeof(string)) || typeA.Equals(typeof(DateTime)) || typeA.Equals(typeof(decimal)) || typeA.Equals(typeof(Guid))) {
+            if (typeA.IsPrimitive()) {
                 return false;
             }
             else if (typeof(Exception).IsAssignableFrom(typeA)) {
@@ -591,15 +598,15 @@ namespace Ramda.NET
                 return EqualsInternal(((IEnumerable)a).ToArray<Array>(typeofObject), ((IEnumerable)b).ToArray<Array>(typeofObject), stackA, stackB);
             }
 
-            var membersA = a.ToMemberDictionary();
-            var membersB = b.ToMemberDictionary();
-            var membersAKeys = membersA.Keys.ToArray();
+            membersA = a.ToMemberDictionary();
+            membersB = b.ToMemberDictionary();
+            membersAKeys = membersA.Keys.ToArray();
 
             if (membersA.Count != membersB.Count) {
                 return false;
             }
 
-            var idx = stackA.Count - 1;
+            idx = stackA.Count - 1;
 
             while (idx >= 0) {
                 if (stackA[idx] == a) {

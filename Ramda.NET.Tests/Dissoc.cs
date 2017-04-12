@@ -28,8 +28,8 @@ namespace Ramda.NET.Tests
         public void Dissoc_Copies_An_Object_Omitting_The_Specified_Property() {
             var anonymous = new { A = 1, B = 2, C = 3 };
 
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("B", anonymous)).ContentEquals(new { A = 1, C = 3 }.ToExpando()));
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("D", anonymous)).ContentEquals(new { A = 1, B = 2, C = 3 }.ToExpando()));
+            DynamicAssert.AreEqual(R.Dissoc("B", anonymous), new { A = 1, C = 3 });
+            DynamicAssert.AreEqual(R.Dissoc("D", anonymous), new { A = 1, B = 2, C = 3 });
         }
 
         [TestMethod]
@@ -38,14 +38,14 @@ namespace Ramda.NET.Tests
             var rect = new Rectangle(7, 6);
             var area = rect.Area;
 
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("Area", rect)).ContentEquals(new { Width = 7, Height = 6 }.ToExpando()));
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("Width", rect)).ContentEquals(new { Height = 6, Area = area }.ToExpando()));
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("Depth", rect)).ContentEquals(new { Width = 7, Height = 6, Area = area }.ToExpando()));
+            DynamicAssert.AreEqual(R.Dissoc("Area", rect), new { Width = 7, Height = 6 });
+            DynamicAssert.AreEqual(R.Dissoc("Width", rect), new { Height = 6, Area = area });
+            DynamicAssert.AreEqual(R.Dissoc("Depth", rect), new { Width = 7, Height = 6, Area = area });
         }
 
         [TestMethod]
         public void Dissoc_Is_Curried() {
-            Assert.IsTrue(((ExpandoObject)R.Dissoc("B")(new { A = 1, B = 2, C = 3 })).ContentEquals(new { A = 1, C = 3 }.ToExpando()));
+            DynamicAssert.AreEqual(R.Dissoc("B")(new { A = 1, B = 2, C = 3 }), new { A = 1, C = 3 });
         }
     }
 }

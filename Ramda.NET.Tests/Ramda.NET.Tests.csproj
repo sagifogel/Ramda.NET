@@ -114,6 +114,7 @@
     <Compile Include="Evolve.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="Find.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

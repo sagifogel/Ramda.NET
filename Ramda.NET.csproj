@@ -483,15 +483,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Filter.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Find.cs">
+      <DependentUpon>Find.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="Ramda\FindLast.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FindLast.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ramda\Find.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Find.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Add.double.cs">
       <AutoGen>True</AutoGen>
@@ -1631,15 +1631,14 @@
       <LastGenOutput>Equals.cs</LastGenOutput>
       <LastOutputs>.\Equals.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Find.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Find.cs</LastGenOutput>
+    </Content>
     <Content Include="Ramda\FindLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FindLast.cs</LastGenOutput>
       <LastOutputs>.\FindLast.cs</LastOutputs>
-    </Content>
-    <Content Include="Ramda\Find.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Find.cs</LastGenOutput>
-      <LastOutputs>.\Find.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Add.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

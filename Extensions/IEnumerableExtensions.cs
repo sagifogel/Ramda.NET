@@ -189,9 +189,11 @@ namespace Ramda.NET
             var elementType = typeof(object);
             var list = enumerable.Cast<object>();
             var allSameType = list.Aggregate(true, (e1, e2) => {
-                firstElementType = firstElementType ?? e2.GetType();
+                Type type = e2?.GetType() ?? typeof(object);
 
-                return e1 && firstElementType.Equals(e2.GetType());
+                firstElementType = firstElementType ?? type;
+
+                return e1 && firstElementType.Equals(type);
             });
 
             if (allSameType) {

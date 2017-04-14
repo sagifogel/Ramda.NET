@@ -240,10 +240,10 @@ namespace Ramda.NET
 
         internal readonly static dynamic Evolve = Curry2<object, object, object>(InternalEvolve);
 
-        internal readonly static dynamic Find = CurryN(Dispatchable2("Find", XFind, new Func<dynamic, IList, object>((fn, list) => {
+        internal readonly static dynamic Find = Curry2(Dispatchable2("Find", XFind, new Func<dynamic, IList, object>((fn, list) => {
             var dynamicFn = Delegate(fn);
 
-            return FindInternal(0, 1, idx => idx < list.Count, obj => dynamicFn(obj), list);
+            return FindInternal(0, 1, idx => idx < list.Count, obj => Reflection.DynamicInvoke(dynamicFn, new[] { obj }), list);
         })));
 
         internal readonly static dynamic FindIndex = CurryN(Dispatchable2("FindIndex", XFindIndex, new Func<dynamic, IList, int>((fn, list) => {
@@ -387,7 +387,7 @@ namespace Ramda.NET
             return false;
         });
 
-        internal readonly static dynamic IsNil = Curry1<object, bool>(val => ReferenceEquals(val, null));
+        internal readonly static dynamic IsNil = Curry1<object, bool>(val => val.IsNull());
 
         internal readonly static dynamic Keys = Curry1<object, IEnumerable<string>>(val => val.ToMemberDictionary().Select(kv => kv.Key));
 

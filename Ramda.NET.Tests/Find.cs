@@ -4,35 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class Find
+    public class Find : BaseFind
     {
-        private static readonly object obj1 = new { X = 100 };
-        private static readonly object obj2 = new { X = 200 };
-        private static readonly dynamic isXNotNull = R.Compose(new dynamic[] { R.Not(R.__), R.IsNil(R.__), R.Prop("X") });
-        private static object[] a = new[] { 11, 10, 9, "cow", obj1, 8, 7, 100, 200, 300, obj2, 4, 3, 2, 1, 0 };
-        private static Func<object, Func<int, bool>, bool> parseAndExec = (n, f) => {
-            int result;
-            var str = n.ToString();
-
-            if (int.TryParse(str, out result)) {
-                return f(result);
-            }
-
-            return false;
-        };
-
-        private static readonly Func<object, bool> even = n => parseAndExec(n, result => result % 2 == 0);
-        private static readonly Func<object, bool> gt100 = n => parseAndExec(n, result => result > 100);
-        private static readonly dynamic intoArray = R.Into(new object[0]);
-        private static readonly Func<object, bool> isStr = x => x.GetType().Equals(typeof(string));
-        private static readonly Func<dynamic, bool> xGt100 = o => {
-            if (isXNotNull(o)) {
-                return (int)(o.X) > 100;
-            }
-
-            return false;
-        };
-
         [TestMethod]
         public void Find_Returns_The_First_Element_That_Satisfies_The_Predicate() {
             Assert.AreEqual(R.Find(even, a), 10);

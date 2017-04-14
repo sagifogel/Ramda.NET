@@ -246,19 +246,19 @@ namespace Ramda.NET
             return FindInternal(0, 1, idx => idx < list.Count, obj => Reflection.DynamicInvoke(dynamicFn, new[] { obj }), list);
         })));
 
-        internal readonly static dynamic FindIndex = CurryN(Dispatchable2("FindIndex", XFindIndex, new Func<dynamic, IList, int>((fn, list) => {
+        internal readonly static dynamic FindIndex = Curry2(Dispatchable2("FindIndex", XFindIndex, new Func<dynamic, IList, int>((fn, list) => {
             var dynamicFn = Delegate(fn);
 
             return FindIndexInternal(0, 1, idx => idx < list.Count, obj => dynamicFn(obj), list);
         })));
 
-        internal readonly static dynamic FindLast = CurryN(Dispatchable2("FindLast", XFindLast, new Func<dynamic, IList, object>((fn, list) => {
+        internal readonly static dynamic FindLast = Curry2(Dispatchable2("FindLast", XFindLast, new Func<dynamic, IList, object>((fn, list) => {
             var dynamicFn = Delegate(fn);
 
             return FindInternal(list.Count - 1, -1, idx => idx >= 0, obj => dynamicFn(obj), list);
         })));
 
-        internal readonly static dynamic FindLastIndex = CurryN(Dispatchable2("FindLastIndex", XFindLastIndex, new Func<dynamic, IList, int>((fn, list) => {
+        internal readonly static dynamic FindLastIndex = Curry2(Dispatchable2("FindLastIndex", XFindLastIndex, new Func<dynamic, IList, int>((fn, list) => {
             var dynamicFn = Delegate(fn);
 
             return FindIndexInternal(list.Count - 1, -1, idx => idx >= 0, obj => dynamicFn(obj), list);

@@ -73,6 +73,7 @@
     <Compile Include="Assert.cs" />
     <Compile Include="Assoc.cs" />
     <Compile Include="AssocPath.cs" />
+    <Compile Include="BaseFind.cs" />
     <Compile Include="Binary.cs" />
     <Compile Include="Bind.cs" />
     <Compile Include="Both.cs" />
@@ -114,7 +115,10 @@
     <Compile Include="Evolve.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Filter.cs" />
+    <Compile Include="FindLastIndex.cs" />
+    <Compile Include="FindIndex.cs" />
     <Compile Include="Find.cs" />
+    <Compile Include="FindLast.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

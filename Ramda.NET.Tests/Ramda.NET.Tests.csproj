@@ -119,6 +119,7 @@
     <Compile Include="FindIndex.cs" />
     <Compile Include="Find.cs" />
     <Compile Include="FindLast.cs" />
+    <Compile Include="Flatten.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

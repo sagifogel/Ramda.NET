@@ -172,20 +172,19 @@ namespace Ramda.NET
             else if (type.IsDelegate() && name.Equals("Length")) {
                 return FunctionArity(target);
             }
-            else {
-                var member = type.TryGetMemberInfoFromType(name, length, @private);
 
-                if (member.IsNotNull()) {
-                    switch (member.MemberType) {
-                        case MemberTypes.Field:
-                            return ((FieldInfo)member).GetValue(target);
-                        case MemberTypes.Property:
-                            return ((PropertyInfo)member).GetValue(target, null);
-                        case MemberTypes.Method:
-                            return ((MethodInfo)member).CreateDelegate(target);
-                        default:
-                            break;
-                    }
+            var member = type.TryGetMemberInfoFromType(name, length, @private);
+
+            if (member.IsNotNull()) {
+                switch (member.MemberType) {
+                    case MemberTypes.Field:
+                        return ((FieldInfo)member).GetValue(target);
+                    case MemberTypes.Property:
+                        return ((PropertyInfo)member).GetValue(target, null);
+                    case MemberTypes.Method:
+                        return ((MethodInfo)member).CreateDelegate(target);
+                    default:
+                        break;
                 }
             }
 

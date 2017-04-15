@@ -636,26 +636,33 @@ namespace Ramda.NET
             return true;
         }
 
-        private static Func<IList, IList> MakeFlat(bool recursive) {
+        private static Func<object, IList> MakeFlat(bool recursive) {
             return list => Flatt(list, recursive);
         }
 
-        private static IList Flatt(IList list, bool recursive) {
+        private static IList Flatt(object list, bool recursive) {
+            var idx = 0;
             var result = new ArrayList();
+            var ilen = (int)list.Member("Length");
 
-            foreach (var item in list) {
+            while (idx < ilen) {
+                var item = list.Member(idx.ToString());
+
                 if (IsArrayLike(item)) {
-                    var itemAsList = (IList)item;
-                    var value = recursive ? Flatt(itemAsList, recursive) : itemAsList;
-                    var list2 = itemAsList.CreateNewList(type: typeof(object));
+                    var j = 0;
+                    object value = recursive ? Flatt((dynamic)item, recursive) : item;
+                    var jlen = (int)value.Member("Length");
 
-                    foreach (var item2 in value) {
-                        result.Add(item2);
+                    while (j < jlen) {
+                        result.Add(value.Member(j.ToString()));
+                        j += 1;
                     }
                 }
                 else {
                     result.Add(item);
                 }
+
+                idx += 1;
             }
 
             return result.ToArray<IList>();

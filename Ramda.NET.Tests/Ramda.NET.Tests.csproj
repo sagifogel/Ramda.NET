@@ -120,6 +120,8 @@
     <Compile Include="Find.cs" />
     <Compile Include="FindLast.cs" />
     <Compile Include="Flatten.cs" />
+    <Compile Include="Flip.cs" />
+    <Compile Include="ForEach.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

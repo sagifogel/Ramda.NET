@@ -632,15 +632,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FindLastIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Flatten.object.cs">
+    <Compile Include="Ramda\Flatten.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flatten.object.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ramda\Flatten.list.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Flatten.list.tt</DependentUpon>
+      <DependentUpon>Flatten.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Flip.cs">
       <AutoGen>True</AutoGen>
@@ -1780,15 +1775,10 @@
       <LastGenOutput>FindLastIndex.cs</LastGenOutput>
       <LastOutputs>.\FindLastIndex.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Flatten.object.tt">
+    <Content Include="Ramda\Flatten.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Flatten.object.cs</LastGenOutput>
-      <LastOutputs>.\Flatten.object.cs</LastOutputs>
-    </Content>
-    <Content Include="Ramda\Flatten.list.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Flatten.list.cs</LastGenOutput>
-      <LastOutputs>.\Flatten.list - Copy.cs</LastOutputs>
+      <LastGenOutput>Flatten.cs</LastGenOutput>
+      <LastOutputs>.\Flatten.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Flip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

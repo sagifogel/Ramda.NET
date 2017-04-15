@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -261,6 +262,14 @@ namespace Ramda.NET
 
         public static dynamic Either(dynamic f, dynamic g) {
             return Currying.Either(f, g);
+        }
+
+        public static dynamic Flatten(IDictionary list) {
+            return Currying.Flatten(list);
+        }
+
+        public static dynamic Flatten(ExpandoObject list) {
+            return Currying.Flatten(list);
         }
     }
 }

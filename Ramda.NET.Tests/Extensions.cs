@@ -56,10 +56,10 @@ namespace Ramda.NET.Tests
 
             Type type = value.GetType();
             IDictionary<string, object> expando = new ExpandoObject();
+            var dictionary = value as IDictionary;
 
-            if (type.TypeIsDictionary()) {
-                value.ToMemberDictionary()
-                     .ForEach(kv => expando[kv.Key] = kv.Value);
+            if (dictionary != null) {
+                dictionary.Keys.ForEach(key => expando[key.ToString()] = dictionary[key]);
             }
             else if (type.Assembly.Equals(typeof(object).Assembly)) {
                 return value;

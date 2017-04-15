@@ -491,9 +491,8 @@ namespace Ramda.NET
         internal readonly static dynamic Once = Curry1<DynamicDelegate, DynamicDelegate>(fn => {
             var called = false;
             object result = null;
-            var arity = fn.Arity();
 
-            return Arity(arity, Delegate((object[] arguments) => {
+            return Arity(fn.Arity(), Delegate((object[] arguments) => {
                 dynamic dynamicFn = fn;
 
                 if (called) {
@@ -1039,7 +1038,6 @@ namespace Ramda.NET
             return Curry(Delegate((object[] arguments) => {
                 var args = (object[])arguments.Slice();
                 var dynamicFn = Delegate(fn);
-
                 if (args.Length > 1) {
                     var a = args[0];
                     var b = args[1];

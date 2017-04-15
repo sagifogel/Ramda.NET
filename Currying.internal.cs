@@ -22,7 +22,7 @@ namespace Ramda.NET
         internal static DynamicDelegate Delegate(object context, Delegate fn, int? length = null) {
             var @delegate = fn.Method.CreateDelegate(context);
 
-            return Delegate((object[] arguments) => @delegate.DynamicInvoke(arguments), length);
+            return Delegate((object[] arguments) => @delegate.Invoke(arguments), length);
         }
 
         internal static DynamicDelegate Delegate(Func<object> fn) {
@@ -42,10 +42,14 @@ namespace Ramda.NET
         }
 
         internal static DynamicDelegate Delegate(dynamic fn) {
+            return DelegateN(fn);
+        }
+
+        internal static DynamicDelegate DelegateN(dynamic fn, int? length = null) {
             Type type = fn.GetType();
 
             if (type.IsDelegate()) {
-                return new DelegateDecorator((Delegate)fn);
+                return new DelegateDecorator((Delegate)fn, length);
             }
 
             return fn;
@@ -644,17 +648,19 @@ namespace Ramda.NET
             var idx = 0;
             var result = new ArrayList();
             var ilen = (int)list.Member("Length");
+            var resolveItem = FlatResolveItemFactory(list);
 
             while (idx < ilen) {
-                var item = list.Member(idx.ToString());
+                var item = resolveItem(idx);
 
                 if (IsArrayLike(item)) {
                     var j = 0;
                     object value = recursive ? Flatt((dynamic)item, recursive) : item;
+                    var resolveInnerItem = FlatResolveItemFactory(value);
                     var jlen = (int)value.Member("Length");
 
                     while (j < jlen) {
-                        result.Add(value.Member(j.ToString()));
+                        result.Add(resolveInnerItem(j));
                         j += 1;
                     }
                 }
@@ -666,6 +672,24 @@ namespace Ramda.NET
             }
 
             return result.ToArray<IList>();
+        }
+
+        private static Func<int, object> FlatResolveItemFactory(object obj) {
+            var stringDictionary = obj as IDictionary<string, object>;
+
+            if (stringDictionary != null) {
+                return i => stringDictionary[i.ToString()];
+            }
+
+            var dictionary = obj as IDictionary;
+
+            if (dictionary != null) {
+                return i => dictionary[i];
+            }
+
+            var arr = obj as IList;
+
+            return i => arr[i];
         }
 
         internal static object ReduceInternal(object fn, object acc, object list) {

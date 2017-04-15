@@ -101,6 +101,12 @@ namespace Ramda.NET
             }
         }
 
+        internal static void ForEach(this ICollection source, Action<object> action) {
+            foreach (var item in source) {
+                action(item);
+            }
+        }
+
         internal static void ForEach(this IList source, Action<object, int> action) {
             var count = 0;
 

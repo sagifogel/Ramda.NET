@@ -86,7 +86,7 @@ namespace Ramda.NET
             return false;
         }
 
-        internal static bool IsDictionaryOf<TKey, TValue>(this Type type) {
+        internal static bool TypeIsDictionaryOf<TKey, TValue>(this Type type) {
             return typeof(IDictionary<TKey, TValue>).IsAssignableFrom(type);
         }
 
@@ -140,37 +140,32 @@ namespace Ramda.NET
             return result.IsNotNull() ? result : orFn();
         }
 
-        internal static object Member(this object target, string name, int length = 0, bool @private = false) {
+        internal static object Member(this object target, object key, int length = 0, bool @private = false) {
             var type = target.GetType();
+            var name = key.ToString();
 
             if (type.TypeIsDictionary()) {
-                if (type.Equals(typeof(ExpandoObject))) {
-                    var dictionary = (IDictionary<string, object>)target;
+                var result = target.DictionaryMember(key, type);
 
-                    if (dictionary.ContainsKey(name)) {
-                        return dictionary[name];
-                    }
+                if (result != null) {
+                    return result;
                 }
-                else {
-                    var dictionary = target as IDictionary;
-
-                    if (dictionary.Contains(name)) {
-                        return dictionary[name];
-                    }
-                }
-            }
-            else if (type.TypeIsList()) {
-                int index;
-                var arr = (IList)target;
-
-                if (int.TryParse(name, out index)) {
-                    if (arr.Count > index) {
-                        return arr[index];
-                    }
-                }
-            }
+            }            
             else if (type.IsDelegate() && name.Equals("Length")) {
                 return FunctionArity(target);
+            }
+            else {
+                var arr = target as IList;
+
+                if (arr != null) {
+                    int index;
+
+                    if (int.TryParse(name, out index)) {
+                        if (arr.Count > index) {
+                            return arr[index];
+                        }
+                    }
+                }
             }
 
             var member = type.TryGetMemberInfoFromType(name, length, @private);
@@ -189,6 +184,28 @@ namespace Ramda.NET
             }
 
             return R.Null;
+        }
+
+        internal static object DictionaryMember(this object target, object key, Type type = null) {
+            type = type ?? target.GetType();
+
+            if (type.TypeIsDictionaryOf<string, object>()) {
+                var name = key.ToString();
+                var dictionary = (IDictionary<string, object>)target;
+
+                if (dictionary.ContainsKey(name)) {
+                    return dictionary[name];
+                }
+            }
+            else {
+                var dictionary = target as IDictionary;
+
+                if (dictionary.Contains(key)) {
+                    return dictionary[key];
+                }
+            }
+
+            return null;
         }
 
         internal static int FunctionArity(dynamic @delegate) {
@@ -278,7 +295,7 @@ namespace Ramda.NET
         internal static IDictionary<string, object> ToMemberDictionary(this object target) {
             var type = target.GetType();
 
-            if (type.IsDictionaryOf<string, object>()) {
+            if (type.TypeIsDictionaryOf<string, object>()) {
                 return (IDictionary<string, object>)target;
             }
 

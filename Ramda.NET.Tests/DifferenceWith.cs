@@ -45,7 +45,6 @@ namespace Ramda.NET.Tests
             CollectionAssert.AreEqual(R.DifferenceWith(eqA, Ro2, So2), new[] { new Container { A = 1 }, new Container { A = 2 } });
         }
 
-
         [TestMethod]
         [Description("DifferenceWith_Does_Not_Return_A_\"Sparse\"_Array")]
         public void DifferenceWith_Does_Not_Return_A_Sparse_Array() {

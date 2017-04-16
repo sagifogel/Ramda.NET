@@ -652,10 +652,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FromPairs.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\GroupBy.cs">
+    <Compile Include="Ramda\GroupBy.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GroupBy.tt</DependentUpon>
+      <DependentUpon>GroupBy.list.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\GroupBy.transformer.cs">
+      <DependentUpon>GroupBy.transformer.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\GroupWith.cs">
       <AutoGen>True</AutoGen>
@@ -1795,9 +1800,14 @@
       <LastGenOutput>FromPairs.cs</LastGenOutput>
       <LastOutputs>.\FromPairs.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\GroupBy.tt">
+    <Content Include="Ramda\GroupBy.transformer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GroupBy.cs</LastGenOutput>
+      <LastGenOutput>GroupBy.transformer.cs</LastGenOutput>
+      <LastOutputs>.\GroupBy.transformer.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\GroupBy.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GroupBy.list.cs</LastGenOutput>
       <LastOutputs>.\GroupBy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\GroupWith.tt">

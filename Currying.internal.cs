@@ -202,7 +202,7 @@ namespace Ramda.NET
 
             obj = arguments[length - 1];
             member = obj.Member(methodName) as Delegate;
-            invokeFn = member.IsNotNull() && !member.IsFunction();
+            invokeFn = member.IsNull() || !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
                 return DynamicInvoke(Delegate(fn), arguments);
@@ -294,9 +294,9 @@ namespace Ramda.NET
 
         private readonly static dynamic XMap = Curry2(new Func<dynamic, ITransformer, ITransformer>((f, xf) => new XMap(f, xf)));
 
-        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], Delegate(new Func<dynamic, object, dynamic, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
+        private readonly static dynamic XReduceBy = CurryNInternal(4, new object[0], new Func<dynamic, object, dynamic, ITransformer, ITransformer>((valueFn, valueAcc, keyFn, xf) => {
             return new XReduceBy(valueFn, valueAcc, keyFn, xf);
-        })));
+        }));
 
         private readonly static dynamic XTake = Curry2(new Func<int, ITransformer, ITransformer>((n, xf) => new XTake(n, xf)));
 

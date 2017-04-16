@@ -38,7 +38,19 @@ namespace Ramda.NET.Tests
                                           var innerA = typedA.Value as IList;
                                           var innerB = typedB.Value as IList;
 
-                                          return innerA.SequenceEqual(innerB, (_a, _b) => _a.Equals(_b));
+                                          if (innerA.Count == innerB.Count) {
+                                              var hash = new HashSet<object>(innerA.Select(o => o));
+
+                                              foreach (var item in innerB) {
+                                                  if (!hash.Contains(item)) {
+                                                      return false;
+                                                  }
+                                              }
+
+                                              return true;
+                                          }
+
+                                          return false;
                                       }
 
                                       return typedA.Value.Equals(typedB.Value);
@@ -65,9 +77,10 @@ namespace Ramda.NET.Tests
                 return value;
             }
             else {
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(type)) {
-                    expando.Add(property.Name, property.GetValue(value).ToDynamic());
-                }
+                value.ToMemberDictionary()
+                     .ForEach(kv => {
+                         expando.Add(kv.Key, kv.Value);
+                     });
             }
 
             return expando as ExpandoObject;

@@ -122,6 +122,8 @@
     <Compile Include="Flatten.cs" />
     <Compile Include="Flip.cs" />
     <Compile Include="ForEach.cs" />
+    <Compile Include="FromPairs.cs" />
+    <Compile Include="GroupBy.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

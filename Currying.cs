@@ -226,7 +226,7 @@ namespace Ramda.NET
                     return new object[0];
                 }
 
-                if (type.IsClass && !type.IsDelegate()) {
+                if (type.IsClass && !type.TypeIsDelegate()) {
                     if (type.IsAnonymousType()) {
                         return new ExpandoObject();
                     }

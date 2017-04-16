@@ -47,7 +47,7 @@ namespace Ramda.NET
             return result.Length == 0 ? null : result;
         }
 
-        internal static bool IsDelegate(this Type type) {
+        internal static bool TypeIsDelegate(this Type type) {
             return typeof(Delegate).IsAssignableFrom(type);
         }
 
@@ -107,7 +107,13 @@ namespace Ramda.NET
         }
 
         internal static bool IsFunction(this object value) {
-            return typeof(DynamicDelegate).IsAssignableFrom(value.GetType()) || value.GetType().IsDelegate();
+            var type = value.GetType();
+
+            return type.TypeIsDynamicDelegate() || type.TypeIsDelegate();
+        }
+
+        internal static bool TypeIsDynamicDelegate(this Type type) {
+            return typeof(DynamicDelegate).IsAssignableFrom(type);
         }
 
         internal static bool IsNull(this object target) {
@@ -151,7 +157,7 @@ namespace Ramda.NET
                     return result;
                 }
             }            
-            else if (type.IsDelegate() && name.Equals("Length")) {
+            else if (type.TypeIsDelegate() && name.Equals("Length")) {
                 return FunctionArity(target);
             }
             else {
@@ -446,9 +452,13 @@ namespace Ramda.NET
             return DynamicInvoke(target, args, args.Length);
         }
 
-        internal static object DynamicInvoke(dynamic invoke, object[] arguments, int length) {
-            var args = Arguments(arguments);
+        internal static object InvokeNative(this Delegate @delegate, object[] arguments) {
+            var args = arguments.Unwrap(@delegate);
 
+            return DynamicInvoke(Delegate(@delegate), args, args.Length);
+        }
+
+        internal static object DynamicInvoke(dynamic invoke, object[] args, int length) {
             switch (length) {
                 case 0:
                     return invoke();

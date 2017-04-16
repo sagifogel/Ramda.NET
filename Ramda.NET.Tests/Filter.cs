@@ -38,7 +38,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Filter_Dispatches_To_Passed-in_Non-Array_Object_With_A_\"Filter\"_Method")]
         public void Filter_Dispatches_To_Passed_In_Non_Array_Object_With_A_Filter_Method() {
-            var func = new { Filter = new Func<dynamic, string>(f => f("called func.Filter")) };
+            var func = new { Filter = new Func<Func<string, string>, string>(f => f("called func.Filter")) };
 
             Assert.AreEqual(R.Filter(new Func<string, string>(s => s), func), "called func.Filter");
         }

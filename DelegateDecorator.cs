@@ -18,5 +18,9 @@ namespace Ramda.NET
             result = @delegate.Invoke(arguments);
             return true;
         }
+
+        public override Delegate Unwrap() {
+            return @delegate;
+        }
     }
 }

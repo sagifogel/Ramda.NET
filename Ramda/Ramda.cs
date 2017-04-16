@@ -271,5 +271,13 @@ namespace Ramda.NET
         public static dynamic Flatten(ExpandoObject list) {
             return Currying.Flatten(list);
         }
+
+        public static dynamic ForEach<TSource>(Action<TSource> fn, object list) {
+            return Currying.ForEach(Delegate(fn), list);
+        }
+
+        public static dynamic ForEach(RamdaPlaceholder fn, object list) {
+            return Currying.ForEach(Delegate(fn), list);
+        }
     }
 }

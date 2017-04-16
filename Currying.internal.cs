@@ -48,7 +48,7 @@ namespace Ramda.NET
         internal static DynamicDelegate DelegateN(dynamic fn, int? length = null) {
             Type type = fn.GetType();
 
-            if (type.IsDelegate()) {
+            if (type.TypeIsDelegate()) {
                 return new DelegateDecorator((Delegate)fn, length);
             }
 
@@ -192,7 +192,7 @@ namespace Ramda.NET
 
         private static object CheckForMethodN(string methodName, dynamic fn, params object[] arguments) {
             object obj;
-            object member;
+            Delegate member;
             var invokeFn = false;
             var length = arguments.Length;
 
@@ -201,14 +201,14 @@ namespace Ramda.NET
             }
 
             obj = arguments[length - 1];
-            member = obj.TryGetMemberInfo(methodName);
+            member = obj.Member(methodName) as Delegate;
             invokeFn = member.IsNotNull() && !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
-                return DynamicInvoke(fn, arguments);
+                return DynamicInvoke(Delegate(fn), arguments);
             }
 
-            return ((dynamic)member).DynamicInvoke(obj, arguments.Slice(0, length - 1));
+            return member.InvokeNative((object[])arguments.Slice(0, length - 1));
         }
 
         private static Func<object, object> Dispatchable1(string methodName, dynamic xf, dynamic fn) {
@@ -245,7 +245,7 @@ namespace Ramda.NET
                 var member = obj.Member(methodName) as Delegate;
 
                 if (member.IsNotNull()) {
-                    return member.DynamicInvoke(args);
+                    return member.InvokeNative(args);
                 }
 
                 if (obj is ITransformer) {

@@ -21,7 +21,7 @@ namespace Ramda.NET.Tests
                 X = x;
             }
 
-            public object Chain(dynamic f) {
+            public int[] Chain(Func<int, int[]> f) {
                 return f(X);
             }
         }
@@ -95,7 +95,7 @@ namespace Ramda.NET.Tests
         public void Chain_Is_Curried() {
             var flatInc = R.Chain(add1);
 
-            CollectionAssert.AreEqual((ICollection)flatInc(new[] { 1, 2, 3, 4, 5, 6}), new[] { 2, 3, 4, 5, 6, 7 });
+            CollectionAssert.AreEqual((ICollection)flatInc(new[] { 1, 2, 3, 4, 5, 6 }), new[] { 2, 3, 4, 5, 6, 7 });
         }
 
         [TestMethod]

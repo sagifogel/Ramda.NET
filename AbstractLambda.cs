@@ -20,5 +20,9 @@ namespace Ramda.NET
         }
 
         protected abstract object TryInvoke(InvokeBinder binder, object[] args);
+
+        public override Delegate Unwrap() {
+            return fn.Unwrap();
+        }
     }
 }

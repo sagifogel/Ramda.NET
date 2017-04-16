@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -287,6 +288,22 @@ namespace Ramda.NET
             }
 
             return ((dynamic)val).Values;
+        }
+
+        internal static object[] Unwrap(this object[] arr, Delegate @delegate) {
+            IEnumerable<ParameterInfo> delegateParams = @delegate.Method.GetParameters();
+            var @params = delegateParams.Select(p => p.ParameterType).ToArray();
+
+            for (int i = 0; i < arr.Length; i++) {
+                var dynamicDelegate = arr[i] as DynamicDelegate;
+                var param = @params[i];
+
+                if (dynamicDelegate != null && param.TypeIsDelegate()) {
+                    arr[i] = dynamicDelegate.Unwrap();
+                }
+            }
+
+            return arr;
         }
     }
 }

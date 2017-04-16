@@ -33,7 +33,7 @@ namespace Ramda.NET
 
             var type = original.GetType();
 
-            if (type.IsDelegate()) {
+            if (type.TypeIsDelegate()) {
                 return original;
             }
 

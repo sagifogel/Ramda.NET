@@ -13,7 +13,7 @@ namespace Ramda.NET.Tests
 
         public class Reducible : R.IReducible
         {
-            public int[] x { get; set; } = new[] { 1, 2, 3 };
+            public int[] X { get; set; } = new[] { 1, 2, 3 };
             public object Reduce(Func<object, object, object> step, object acc) => "Override";
         }
 
@@ -63,7 +63,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void Into_Dispatches_To_Objects_That_Implement_Reduce() {
             var obj = new Reducible {
-                x = new[] { 1, 2, 3 }
+                X = new[] { 1, 2, 3 }
             };
 
             Assert.AreEqual((string)R.Into(new object[0], R.Map(R.Add(1)), obj), "Override");

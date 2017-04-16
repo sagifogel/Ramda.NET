@@ -1,4 +1,5 @@
-﻿using System.Dynamic;
+﻿using System;
+using System.Dynamic;
 
 namespace Ramda.NET
 {
@@ -18,5 +19,7 @@ namespace Ramda.NET
         public int Arity() {
             return Length;
         }
+
+        public abstract Delegate Unwrap();
     }
 }

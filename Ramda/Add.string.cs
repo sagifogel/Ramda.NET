@@ -16,7 +16,7 @@ namespace Ramda.NET
 	{	
 		public static dynamic Add(string a, string b) {
 			return Currying.Add(a, b);
-		    }
+		}
 
 		public static dynamic Add(RamdaPlaceholder a, string b) {
 			return Currying.Add(a, b);

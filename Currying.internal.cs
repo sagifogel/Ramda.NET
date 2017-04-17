@@ -305,7 +305,7 @@ namespace Ramda.NET
         private readonly static dynamic XDropLastWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
 
         private readonly static dynamic XChain = Curry2(new Func<dynamic, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
-
+        
         internal class ComparerFactory : IComparer
         {
             private Func<object, object, int> comparator;

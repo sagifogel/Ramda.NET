@@ -55,8 +55,8 @@
     <Compile Include="Curry2.cs" />
     <Compile Include="Curry1.cs" />
     <Compile Include="CurryN.cs" />
+    <Compile Include="GroupWithStrategy.cs" />
     <Compile Include="IReducible.cs" />
-    <Compile Include="MemberComparer.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="ObjectAssigner.cs" />
@@ -662,10 +662,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\GroupWith.cs">
+    <Compile Include="Ramda\GroupWith.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>GroupWith.tt</DependentUpon>
+      <DependentUpon>GroupWith.list.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\GroupWith.string.cs">
+      <DependentUpon>GroupWith.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Gt.double.cs">
       <AutoGen>True</AutoGen>
@@ -681,6 +686,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Gte.double.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Gt.string.cs">
+      <DependentUpon>Gt.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Gte.string.cs">
+      <DependentUpon>Gte.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Gte.int.cs">
       <AutoGen>True</AutoGen>
@@ -1808,11 +1823,16 @@
     <Content Include="Ramda\GroupBy.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GroupBy.list.cs</LastGenOutput>
-      <LastOutputs>.\GroupBy.cs</LastOutputs>
+      <LastOutputs>.\GroupBy.list.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\GroupWith.tt">
+    <Content Include="Ramda\GroupWith.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>GroupWith.cs</LastGenOutput>
+      <LastGenOutput>GroupWith.string.cs</LastGenOutput>
+      <LastOutputs>.\GroupWith.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\GroupWith.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>GroupWith.list.cs</LastGenOutput>
       <LastOutputs>.\GroupWith.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Gt.double.tt">
@@ -1829,6 +1849,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Gte.double.cs</LastGenOutput>
       <LastOutputs>.\Gte.double.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gt.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gt.string.cs</LastGenOutput>
+      <LastOutputs>.\Gt.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Gte.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Gte.string.cs</LastGenOutput>
+      <LastOutputs>.\Gte.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Gte.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

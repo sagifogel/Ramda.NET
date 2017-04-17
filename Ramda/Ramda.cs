@@ -141,7 +141,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Head(string list) {
-            return Currying.Head(list.ToCharArray());
+            return Currying.Head(list);
         }
 
         public static dynamic Init(string list) {
@@ -278,6 +278,10 @@ namespace Ramda.NET
 
         public static dynamic ForEach(RamdaPlaceholder fn, object list) {
             return Currying.ForEach(Delegate(fn), list);
+        }
+
+        public static dynamic GroupWith(dynamic fn, string list) {
+            return Currying.GroupWith(fn, list);
         }
     }
 }

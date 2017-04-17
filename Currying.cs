@@ -286,20 +286,20 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic GroupWith = Curry2<Delegate, IList, IList>((fn, list) => {
+        internal readonly static dynamic GroupWith = Curry2<dynamic, IEnumerable, IEnumerable>((fn, list) => {
             var idx = 0;
-            var len = list.Count;
             var res = new ArrayList();
-            dynamic dynamicFn = Delegate(fn);
+            var strategy = GroupByStrategy.Resolve(list);
+            var len = strategy.Length;
 
             while (idx < len) {
                 var nextidx = idx + 1;
 
-                while (nextidx < len && dynamicFn(list[idx], list[nextidx])) {
+                while (nextidx < len && Reflection.DynamicInvoke(fn, new[] { strategy[idx], strategy[nextidx] })) {
                     nextidx += 1;
                 }
 
-                res.Add(Slice(list, idx, nextidx));
+                res.Add(strategy.Slice(idx, nextidx));
                 idx = nextidx;
             }
 
@@ -310,9 +310,25 @@ namespace Ramda.NET
             return res;
         });
 
-        internal readonly static dynamic Gt = Curry2<dynamic, dynamic, bool>((a, b) => a > b);
+        internal readonly static dynamic Gt = Curry2<dynamic, dynamic, bool>((a, b) => {
+            var strA = a as string;
 
-        internal readonly static dynamic Gte = Curry2<dynamic, dynamic, bool>((a, b) => a >= b);
+            if (strA != null) {
+                return string.Compare(strA, (string)b) > 0;
+            }
+
+            return a > b;
+        });
+
+        internal readonly static dynamic Gte = Curry2<dynamic, dynamic, bool>((a, b) => {
+            var strA = a as string;
+
+            if (strA != null) {
+                return string.Compare(strA, (string)b) >= 0;
+            }
+
+            return a >= b;
+        });
 
         internal readonly static dynamic Has = Curry2<string, object, bool>(HasInternal);
 
@@ -464,10 +480,24 @@ namespace Ramda.NET
         internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
 
         internal readonly static dynamic Nth = Curry2<int, dynamic, object>((offset, list) => {
-            var count = list.GetType().Equals(typeof(string)) ? ((string)list).Length : ((IList)list).Count;
+            object item = null;
+            var @string = list as string;
+            var isString = @string != null;
+            var count = isString ? @string.Length : ((IList)list).Count;
             var idx = offset < 0 ? count + offset : offset;
 
-            return count > 0 && idx <= count ? list[idx] : null;
+            if (isString) {
+                if (idx == 0 && string.IsNullOrEmpty(list)) {
+                    return string.Empty;
+                }
+
+                item = list[idx].ToString();
+            }
+            else if (count > 0 && idx <= count) {
+                item = list[idx];
+            }
+
+            return item;
         });
 
         internal readonly static dynamic NthArg = Curry1<int, DynamicDelegate>(n => {

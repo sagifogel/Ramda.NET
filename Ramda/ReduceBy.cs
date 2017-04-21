@@ -43,35 +43,35 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, dynamic keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(fn, acc, Delegate(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource>(dynamic fn, RamdaPlaceholder acc, dynamic keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TAccmulator>(dynamic fn, TAccmulator acc, dynamic keyFn, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
 		public static dynamic ReduceBy(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator>(dynamic fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, dynamic keyFn, IList<TSource> list) {
-			return Currying.ReduceBy(fn, acc, keyFn, list);
+			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
 		public static dynamic ReduceBy(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {

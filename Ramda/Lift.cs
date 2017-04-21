@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Lift(dynamic fn) {
-			return Currying.Lift(fn);
+			return Currying.Lift(Delegate(fn));
 		}
 	}
 }

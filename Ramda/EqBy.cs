@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic EqBy<TArg>(dynamic f, RamdaPlaceholder x, TArg y) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(Delegate(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(dynamic f, TArg x, RamdaPlaceholder y = null) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(Delegate(f), x, y);
 		}
 
 		public static dynamic EqBy(dynamic f, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(Delegate(f), x, y);
 		}
 
 		public static dynamic EqBy<TArg>(dynamic f, TArg x, TArg y) {
-			return Currying.EqBy(f, x, y);
+			return Currying.EqBy(Delegate(f), x, y);
 		}
 
 		public static dynamic EqBy(RamdaPlaceholder f = null, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {

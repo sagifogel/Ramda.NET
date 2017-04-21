@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic DropRepeatsWith(dynamic pred, RamdaPlaceholder list = null) {
-			return Currying.DropRepeatsWith(pred, list);
+			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
 		public static dynamic DropRepeatsWith<TSource>(dynamic pred, IList<TSource> list) {
-			return Currying.DropRepeatsWith(pred, list);
+			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
 		public static dynamic DropRepeatsWith(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {

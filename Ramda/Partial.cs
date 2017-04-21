@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Partial(dynamic f, RamdaPlaceholder args = null) {
-			return Currying.Partial(f, args);
+			return Currying.Partial(Delegate(f), args);
 		}
 
 		public static dynamic Partial<TSource>(dynamic f, IList<TSource> args) {
-			return Currying.Partial(f, args);
+			return Currying.Partial(Delegate(f), args);
 		}
 
 		public static dynamic Partial(RamdaPlaceholder f = null, RamdaPlaceholder args = null) {

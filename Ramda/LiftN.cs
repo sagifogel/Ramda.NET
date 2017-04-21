@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic LiftN(RamdaPlaceholder n, dynamic fn) {
-			return Currying.LiftN(n, fn);
+			return Currying.LiftN(n, Delegate(fn));
 		}
 
 		public static dynamic LiftN(int n, dynamic fn) {
-			return Currying.LiftN(n, fn);
+			return Currying.LiftN(n, Delegate(fn));
 		}
 
 		public static dynamic LiftN(RamdaPlaceholder n = null, RamdaPlaceholder fn = null) {

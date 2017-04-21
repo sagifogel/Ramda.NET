@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Map(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.Map(fn, list);
+			return Currying.Map(Delegate(fn), list);
 		}
 
 		public static dynamic Map<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.Map(fn, list);
+			return Currying.Map(Delegate(fn), list);
 		}
 
 		public static dynamic Map(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

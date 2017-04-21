@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UniqBy(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.UniqBy(fn, list);
+			return Currying.UniqBy(Delegate(fn), list);
 		}
 
 		public static dynamic UniqBy<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.UniqBy(fn, list);
+			return Currying.UniqBy(Delegate(fn), list);
 		}
 
 		public static dynamic UniqBy(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

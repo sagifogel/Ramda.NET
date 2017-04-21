@@ -35,15 +35,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Into<TSource>(RamdaPlaceholder acc, dynamic xf, IList<TSource> list) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, Delegate(xf), list);
 		}
 
 		public static dynamic Into<TAccumulator>(IList<TAccumulator> acc, dynamic xf, RamdaPlaceholder list = null) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, Delegate(xf), list);
 		}
 
 		public static dynamic Into<TSource, TAccumulator>(IList<TAccumulator> acc, dynamic xf, IList<TSource> list) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, Delegate(xf), list);
 		}
 
 		public static dynamic Into(RamdaPlaceholder acc = null, RamdaPlaceholder xf = null, RamdaPlaceholder list = null) {

@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UseWith(dynamic fn, RamdaPlaceholder transformers = null) {
-			return Currying.UseWith(fn, transformers);
+			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
 		public static dynamic UseWith<TSource>(dynamic fn, IList<TSource> transformers) {
-			return Currying.UseWith(fn, transformers);
+			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
 		public static dynamic UseWith(RamdaPlaceholder fn = null, RamdaPlaceholder transformers = null) {

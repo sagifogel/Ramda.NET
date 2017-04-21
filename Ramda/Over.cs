@@ -35,27 +35,27 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Over<TTarget>(RamdaPlaceholder lens, dynamic v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(lens, Delegate(v), x);
 		}
 
 		public static dynamic Over<TTarget>(dynamic lens, RamdaPlaceholder v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(Delegate(lens), v, x);
 		}
 
 		public static dynamic Over(dynamic lens, dynamic v, RamdaPlaceholder x = null) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
 		public static dynamic Over(dynamic lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(Delegate(lens), v, x);
 		}
 
 		public static dynamic Over<TTarget, TElement>(dynamic lens, Func<TElement, TElement> v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, dynamic v, TTarget x) {
-			return Currying.Over(lens, v, x);
+			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
 		public static dynamic Over(RamdaPlaceholder lens = null, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {

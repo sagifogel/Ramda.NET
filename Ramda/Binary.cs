@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Binary(dynamic fn) {
-			return Currying.Binary(fn);
+			return Currying.Binary(Delegate(fn));
 		}
 	}
 }

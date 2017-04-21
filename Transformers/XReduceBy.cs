@@ -2,6 +2,7 @@
 using System.Dynamic;
 using System.Collections;
 using System.Collections.Generic;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -38,7 +39,7 @@ namespace Ramda.NET
             var key = keyFn(input);
 
             inputs[key] = inputs.ContainsKey(key) ? inputs[key] : new object[2] { key, valueAcc };
-            inputs[key][1] = valueFn(inputs[key][1], input);
+            inputs[key][1] = DynamicInvoke(valueFn, new[] { inputs[key][1], input });
 
             return result;
         }

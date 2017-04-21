@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic IntersectionWith<TSource>(dynamic pred, RamdaPlaceholder list1, IList<TSource> list2) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(dynamic pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith<TSource>(dynamic pred, IList<TSource> list1, IList<TSource> list2) {
-			return Currying.IntersectionWith(pred, list1, list2);
+			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic IntersectionWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {

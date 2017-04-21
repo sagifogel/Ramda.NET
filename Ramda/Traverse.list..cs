@@ -35,15 +35,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Traverse<TSource>(RamdaPlaceholder of, dynamic f, IList<TSource> traversable) {
-			return Currying.Traverse(of, f, traversable);
+			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
 		public static dynamic Traverse(DynamicDelegate of, dynamic f, RamdaPlaceholder traversable = null) {
-			return Currying.Traverse(of, f, traversable);
+			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
 		public static dynamic Traverse<TSource>(DynamicDelegate of, dynamic f, IList<TSource> traversable) {
-			return Currying.Traverse(of, f, traversable);
+			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 	}
 }

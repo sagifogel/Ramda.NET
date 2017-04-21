@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Sequence(dynamic of, RamdaPlaceholder traversable = null) {
-			return Currying.Sequence(of, traversable);
+			return Currying.Sequence(Delegate(of), traversable);
 		}
 
 		public static dynamic Sequence<TSource>(dynamic of, IList<TSource> traversable) {
-			return Currying.Sequence(of, traversable);
+			return Currying.Sequence(Delegate(of), traversable);
 		}
 
 		public static dynamic Sequence(RamdaPlaceholder of = null, RamdaPlaceholder traversable = null) {

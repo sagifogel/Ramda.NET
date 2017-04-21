@@ -35,27 +35,27 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Until<TArg>(RamdaPlaceholder pred, dynamic fn, TArg init) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(pred, Delegate(fn), init);
 		}
 
 		public static dynamic Until<TArg>(dynamic pred, RamdaPlaceholder fn, TArg init) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(Delegate(pred), fn, init);
 		}
 
 		public static dynamic Until(dynamic pred, dynamic fn, RamdaPlaceholder init = null) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
 		public static dynamic Until(dynamic pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(Delegate(pred), fn, init);
 		}
 
 		public static dynamic Until<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> fn, TArg init) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, dynamic fn, TArg init) {
-			return Currying.Until(pred, fn, init);
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
 		public static dynamic Until(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {

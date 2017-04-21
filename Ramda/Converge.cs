@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Converge(dynamic after, RamdaPlaceholder functions = null) {
-			return Currying.Converge(after, functions);
+			return Currying.Converge(Delegate(after), functions);
 		}
 
 		public static dynamic Converge(dynamic after, IList<Delegate> functions) {
-			return Currying.Converge(after, functions);
+			return Currying.Converge(Delegate(after), functions);
 		}
 
 		public static dynamic Converge(RamdaPlaceholder after = null, RamdaPlaceholder functions = null) {

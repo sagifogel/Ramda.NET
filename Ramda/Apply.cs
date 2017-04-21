@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Apply(dynamic fn, RamdaPlaceholder args = null) {
-			return Currying.Apply(fn, args);
+			return Currying.Apply(Delegate(fn), args);
 		}
 
 		public static dynamic Apply(dynamic fn, object[] args) {
-			return Currying.Apply(fn, args);
+			return Currying.Apply(Delegate(fn), args);
 		}
 
 		public static dynamic Apply(RamdaPlaceholder fn = null, RamdaPlaceholder args = null) {

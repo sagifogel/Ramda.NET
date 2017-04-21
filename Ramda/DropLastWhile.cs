@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic DropLastWhile(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.DropLastWhile(fn, list);
+			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
 		public static dynamic DropLastWhile<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.DropLastWhile(fn, list);
+			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
 		public static dynamic DropLastWhile(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

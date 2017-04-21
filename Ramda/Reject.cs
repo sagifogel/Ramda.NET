@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Reject(dynamic pred, RamdaPlaceholder filterable = null) {
-			return Currying.Reject(pred, filterable);
+			return Currying.Reject(Delegate(pred), filterable);
 		}
 
 		public static dynamic Reject<TTarget>(dynamic pred, TTarget filterable) {
-			return Currying.Reject(pred, filterable);
+			return Currying.Reject(Delegate(pred), filterable);
 		}
 
 		public static dynamic Reject(RamdaPlaceholder pred = null, RamdaPlaceholder filterable = null) {

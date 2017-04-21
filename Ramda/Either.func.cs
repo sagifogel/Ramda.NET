@@ -27,19 +27,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Either(RamdaPlaceholder f, dynamic g) {
-			return Currying.Either(f, g);
+			return Currying.Either(f, Delegate(g));
 		}
 
 		public static dynamic Either(dynamic f, RamdaPlaceholder g = null) {
-			return Currying.Either(f, g);
+			return Currying.Either(Delegate(f), g);
 		}
 
 		public static dynamic Either<TSource>(dynamic f, Func<TSource, bool> g) {
-			return Currying.Either(f, g);
+			return Currying.Either(Delegate(f), Delegate(g));
 		}
 
 		public static dynamic Either<TSource>(Func<TSource, bool> f, dynamic g) {
-			return Currying.Either(f, g);
+			return Currying.Either(Delegate(f), Delegate(g));
 		}
 
 		public static dynamic Either(RamdaPlaceholder f = null, RamdaPlaceholder g = null) {

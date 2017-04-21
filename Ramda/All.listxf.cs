@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic All(dynamic fn, ITransformer list) {
-			return Currying.All(fn, list);
+			return Currying.All(Delegate(fn), list);
 		}
 	}
 }

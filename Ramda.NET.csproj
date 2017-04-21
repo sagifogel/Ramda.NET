@@ -722,11 +722,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Identity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\IfElse.dynamic.cs">
-      <DependentUpon>IfElse.dynamic.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Ramda\IfElse.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -742,10 +737,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Inc.int.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\IndexBy.cs">
+    <Compile Include="Ramda\IndexBy.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IndexBy.tt</DependentUpon>
+      <DependentUpon>IndexBy.list.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\IndexBy.object.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Ramda\IndexOf.cs">
       <AutoGen>True</AutoGen>
@@ -847,6 +846,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Memoize.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Omit.string.cs">
+      <DependentUpon>Omit.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Split.reverse.cs">
       <DependentUpon>Split.reverse.tt</DependentUpon>
@@ -1143,10 +1147,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjOf.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Omit.cs">
+    <Compile Include="Ramda\Omit.list..cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Omit.tt</DependentUpon>
+      <DependentUpon>Omit.list..tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Once.cs">
       <AutoGen>True</AutoGen>
@@ -1659,6 +1663,7 @@
     <Content Include="Ramda\Find.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Find.cs</LastGenOutput>
+      <LastOutputs>.\Find.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\FindLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1803,7 +1808,7 @@
     <Content Include="Ramda\Flatten.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Flatten.cs</LastGenOutput>
-      <LastOutputs>.\Flatten.list.cs</LastOutputs>
+      <LastOutputs>.\Flatten.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Flip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1838,7 +1843,7 @@
     <Content Include="Ramda\GroupWith.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GroupWith.list.cs</LastGenOutput>
-      <LastOutputs>.\GroupWith.cs</LastOutputs>
+      <LastOutputs>.\GroupWith.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Gt.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1890,10 +1895,6 @@
       <LastGenOutput>Identity.cs</LastGenOutput>
       <LastOutputs>.\Identity.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\IfElse.dynamic.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IfElse.dynamic.cs</LastGenOutput>
-    </Content>
     <Content Include="Ramda\IfElse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IfElse.cs</LastGenOutput>
@@ -1909,10 +1910,10 @@
       <LastGenOutput>Inc.int.cs</LastGenOutput>
       <LastOutputs>.\Inc.int.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\IndexBy.tt">
+    <Content Include="Ramda\IndexBy.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IndexBy.cs</LastGenOutput>
-      <LastOutputs>.\IndexBy.cs</LastOutputs>
+      <LastGenOutput>IndexBy.list.cs</LastGenOutput>
+      <LastOutputs>.\IndexBy.list - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IndexOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2013,6 +2014,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Memoize.cs</LastGenOutput>
       <LastOutputs>.\Memoize.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Omit.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Omit.string.cs</LastGenOutput>
+      <LastOutputs>.\Omit.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Split.reverse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2309,10 +2315,10 @@
       <LastGenOutput>ObjOf.cs</LastGenOutput>
       <LastOutputs>.\ObjOf.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Omit.tt">
+    <Content Include="Ramda\Omit.list..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Omit.cs</LastGenOutput>
-      <LastOutputs>.\Omit.cs</LastOutputs>
+      <LastGenOutput>Omit.list..cs</LastGenOutput>
+      <LastOutputs>.\Omit.list. - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Once.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2743,6 +2749,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ramda\IfElse.dynamic.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Adjust<TSource>(dynamic fn, RamdaPlaceholder idx, IList<TSource> list) {
-			return Currying.Adjust(fn, idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust(dynamic fn, int idx, RamdaPlaceholder list = null) {
-			return Currying.Adjust(fn, idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust(dynamic fn, RamdaPlaceholder idx = null, RamdaPlaceholder list = null) {
-			return Currying.Adjust(fn, idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust<TSource>(dynamic fn, int idx, IList<TSource> list) {
-			return Currying.Adjust(fn, idx, list);
+			return Currying.Adjust(Delegate(fn), idx, list);
 		}
 
 		public static dynamic Adjust(RamdaPlaceholder fn = null, RamdaPlaceholder idx = null, RamdaPlaceholder list = null) {

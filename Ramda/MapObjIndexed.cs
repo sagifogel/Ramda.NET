@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MapObjIndexed(dynamic fn, RamdaPlaceholder obj = null) {
-			return Currying.MapObjIndexed(fn, obj);
+			return Currying.MapObjIndexed(Delegate(fn), obj);
 		}
 
 		public static dynamic MapObjIndexed<TTarget>(dynamic fn, TTarget obj) {
-			return Currying.MapObjIndexed(fn, obj);
+			return Currying.MapObjIndexed(Delegate(fn), obj);
 		}
 
 		public static dynamic MapObjIndexed(RamdaPlaceholder fn = null, RamdaPlaceholder obj = null) {

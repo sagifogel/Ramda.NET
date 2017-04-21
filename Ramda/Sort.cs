@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Sort(dynamic pred, RamdaPlaceholder list = null) {
-			return Currying.Sort(pred, list);
+			return Currying.Sort(Delegate(pred), list);
 		}
 
 		public static dynamic Sort<TArg>(dynamic pred, IList<TArg> list) {
-			return Currying.Sort(pred, list);
+			return Currying.Sort(Delegate(pred), list);
 		}
 
 		public static dynamic Sort(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {

@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Times(dynamic fn, RamdaPlaceholder n = null) {
-			return Currying.Times(fn, n);
+			return Currying.Times(Delegate(fn), n);
 		}
 
 		public static dynamic Times(dynamic fn, int n) {
-			return Currying.Times(fn, n);
+			return Currying.Times(Delegate(fn), n);
 		}
 
 		public static dynamic Times(RamdaPlaceholder fn = null, RamdaPlaceholder n = null) {

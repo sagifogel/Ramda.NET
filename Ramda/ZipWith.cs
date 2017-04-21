@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ZipWith<TSource2>(dynamic fn, RamdaPlaceholder list1, IList<TSource2> list2) {
-			return Currying.ZipWith(fn, list1, list2);
+			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
 		public static dynamic ZipWith<TSource1>(dynamic fn, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
-			return Currying.ZipWith(fn, list1, list2);
+			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
 		public static dynamic ZipWith(dynamic fn, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.ZipWith(fn, list1, list2);
+			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
 		public static dynamic ZipWith<TSource1, TSource2>(dynamic fn, IList<TSource1> list1, IList<TSource2> list2) {
-			return Currying.ZipWith(fn, list1, list2);
+			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
 		public static dynamic ZipWith(RamdaPlaceholder fn = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {

@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Map(dynamic fn, object list) {
-			return Currying.Map(fn, list);
+			return Currying.Map(Delegate(fn), list);
 		}
 	}
 }

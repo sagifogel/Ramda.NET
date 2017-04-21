@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Curry(dynamic fn) {
-			return Currying.Curry(fn);
+			return Currying.Curry(Delegate(fn));
 		}
 	}
 }

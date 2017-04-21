@@ -27,19 +27,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Lens(RamdaPlaceholder getter, dynamic setter) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(getter, Delegate(setter));
 		}
 
 		public static dynamic Lens(dynamic getter, RamdaPlaceholder setter = null) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(Delegate(getter), setter);
 		}
 
 		public static dynamic Lens(dynamic getter, Delegate setter) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(Delegate(getter), Delegate(setter));
 		}
 
 		public static dynamic Lens(Delegate getter, dynamic setter) {
-			return Currying.Lens(getter, setter);
+			return Currying.Lens(Delegate(getter), Delegate(setter));
 		}
 
 		public static dynamic Lens(RamdaPlaceholder getter = null, RamdaPlaceholder setter = null) {

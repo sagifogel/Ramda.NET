@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic CountBy(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.CountBy(fn, list);
+			return Currying.CountBy(Delegate(fn), list);
 		}
 
 		public static dynamic CountBy<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.CountBy(fn, list);
+			return Currying.CountBy(Delegate(fn), list);
 		}
 
 		public static dynamic CountBy(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

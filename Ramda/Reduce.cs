@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Reduce<TSource>(dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.Reduce(fn, acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
-			return Currying.Reduce(fn, acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Reduce(fn, acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce<TSource, TAccmulator>(dynamic fn, TAccmulator acc, IList<TSource> list) {
-			return Currying.Reduce(fn, acc, list);
+			return Currying.Reduce(Delegate(fn), acc, list);
 		}
 
 		public static dynamic Reduce(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {

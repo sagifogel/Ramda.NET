@@ -28,18 +28,18 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Into_Transduces_Into_Arrays() {
-            var res1 = (ICollection)R.Into(new object[0], R.Map(R.Add(1)), new[] { 1, 2, 3, 4 });
-            var res2 = (ICollection)R.Into(new object[0], R.Filter(isOdd), new[] { 1, 2, 3, 4 });
+            var res1 = R.Into(new object[0], R.Map(R.Add(1)), new[] { 1, 2, 3, 4 });
+            var res2 = R.Into(new object[0], R.Filter(isOdd), new[] { 1, 2, 3, 4 });
 
             CollectionAssert.AreEqual(res1, new int[] { 2, 3, 4, 5 });
             CollectionAssert.AreEqual(res2, new[] { 1, 3 });
-            CollectionAssert.AreEqual((ICollection)R.Into(new object[0], R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), new[] { 2, 3 });
+            CollectionAssert.AreEqual(R.Into(new object[0], R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), new[] { 2, 3 });
         }
 
         [TestMethod]
         public void Into_Transduces_Into_Strings() {
-            Assert.AreEqual((string)R.Into(string.Empty, R.Map(R.Add(1)), new[] { 1, 2, 3, 4 }), "2345");
-            Assert.AreEqual((string)R.Into(string.Empty, R.Filter(isOdd), new[] { 1, 2, 3, 4 }), "13");
+            Assert.AreEqual(R.Into(string.Empty, R.Map(R.Add(1)), new[] { 1, 2, 3, 4 }), "2345");
+            Assert.AreEqual(R.Into(string.Empty, R.Filter(isOdd), new[] { 1, 2, 3, 4 }), "13");
             Assert.AreEqual(R.Into(string.Empty, R.Compose(R.Map(R.Add(1)), R.Take(2)), new[] { 1, 2, 3, 4 }), "23");
         }
 
@@ -66,8 +66,8 @@ namespace Ramda.NET.Tests
                 X = new[] { 1, 2, 3 }
             };
 
-            Assert.AreEqual((string)R.Into(new object[0], R.Map(R.Add(1)), obj), "Override");
-            Assert.AreEqual((string)R.Into(new object[0], R.Filter(isOdd), obj), "Override");
+            Assert.AreEqual(R.Into(new object[0], R.Map(R.Add(1)), obj), "Override");
+            Assert.AreEqual(R.Into(new object[0], R.Filter(isOdd), obj), "Override");
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Ramda.NET.Tests
             var intoArray = R.Into(new object[0]);
             var add2 = R.Map(R.Add(2));
             var result = intoArray(add2);
-            var res = (ICollection)result(new[] { 1, 2, 3, 4 });
+            var res = result(new[] { 1, 2, 3, 4 });
 
             CollectionAssert.AreEqual(res, new [] { 3, 4, 5, 6 });
         }
@@ -93,7 +93,7 @@ namespace Ramda.NET.Tests
         public void Into_Correctly_Reports_The_Arity_Of_Curried_Versions() {
             var sum = R.Into(new object[0], R.Map(new Func<int, int, dynamic>(R.Add)));
 
-            Assert.AreEqual((int)sum.Length, 1);
+            Assert.AreEqual(sum.Length, 1);
         }
     }
 }

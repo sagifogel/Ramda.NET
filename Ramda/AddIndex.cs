@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic AddIndex(dynamic fn) {
-			return Currying.AddIndex(fn);
+			return Currying.AddIndex(Delegate(fn));
 		}
 	}
 }

@@ -27,19 +27,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Both(RamdaPlaceholder f, dynamic g) {
-			return Currying.Both(f, g);
+			return Currying.Both(f, Delegate(g));
 		}
 
 		public static dynamic Both(dynamic f, RamdaPlaceholder g = null) {
-			return Currying.Both(f, g);
+			return Currying.Both(Delegate(f), g);
 		}
 
 		public static dynamic Both<TSource>(dynamic f, Func<TSource, bool> g) {
-			return Currying.Both(f, g);
+			return Currying.Both(Delegate(f), Delegate(g));
 		}
 
 		public static dynamic Both<TSource>(Func<TSource, bool> f, dynamic g) {
-			return Currying.Both(f, g);
+			return Currying.Both(Delegate(f), Delegate(g));
 		}
 
 		public static dynamic Both(RamdaPlaceholder f = null, RamdaPlaceholder g = null) {

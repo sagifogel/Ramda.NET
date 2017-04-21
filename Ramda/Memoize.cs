@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Memoize(dynamic fn) {
-			return Currying.Memoize(fn);
+			return Currying.Memoize(Delegate(fn));
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Comparator(dynamic pred) {
-			return Currying.Comparator(pred);
+			return Currying.Comparator(Delegate(pred));
 		}
 	}
 }

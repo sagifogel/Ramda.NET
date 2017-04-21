@@ -127,7 +127,7 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
-            return Delegate((object[] arguments) => g((object)DynamicInvoke(f, arguments)));
+            return Delegate((object[] arguments) => DynamicInvoke(g, new[] { (object)DynamicInvoke(f, arguments) }));
         }
 
         private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
@@ -700,7 +700,7 @@ namespace Ramda.NET
                 transformer = new XWrap((dynamic)fn);
             }
 
-            if (list.IsEnumerable()) {
+            if (R.IsArrayLike(list)) {
                 return IterableReduce(transformer, acc, (IEnumerable)list);
             }
 
@@ -790,11 +790,21 @@ namespace Ramda.NET
         private static object ArrayOf = new DelegateDecorator(new Func<object[], object[]>(arguments => arguments));
 
         private static bool ContainsInternal(object item, object list) {
-            if (list.IsList()) {
-                return ((IList)list).Contains(item);
+            string stringList = null;
+            MethodInfo contains = null;
+            var trueList = list as IList;
+
+            if (trueList != null) {
+                return trueList.Contains(item);
             }
 
-            var contains = list.GetMemberWhen<MethodInfo>("Contains", m => m.MemberType == MemberTypes.Method);
+            stringList = list as string;
+
+            if (stringList != null) {
+                return stringList.Contains(item.ToString());
+            }
+
+            contains = list.GetMemberWhen<MethodInfo>("Contains", m => m.MemberType == MemberTypes.Method);
 
             if (contains.IsNotNull()) {
                 return (bool)contains.Invoke(list, new[] { item });

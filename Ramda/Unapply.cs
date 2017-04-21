@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Unapply(dynamic fn) {
-			return Currying.Unapply(fn);
+			return Currying.Unapply(Delegate(fn));
 		}
 	}
 }

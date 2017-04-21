@@ -131,6 +131,8 @@
     <Compile Include="Identical.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="IfElse.cs" />
+    <Compile Include="Inc.cs" />
+    <Compile Include="IndexBy.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Find(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.Find(fn, list);
+			return Currying.Find(Delegate(fn), list);
 		}
 
 		public static dynamic Find<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.Find(fn, list);
+			return Currying.Find(Delegate(fn), list);
 		}
 
 		public static dynamic Find(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

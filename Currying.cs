@@ -1404,7 +1404,7 @@ namespace Ramda.NET
             return result;
         })), R.Null)));
 
-        internal readonly static dynamic IndexBy = ReduceBy(new Func<object, object, object>((acc, elem) => elem), R.Null);
+        internal readonly static dynamic IndexBy = ReduceBy(Delegate((acc, elem) => elem), R.Null);
 
         internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
             if (xs.IsList()) {
@@ -1511,11 +1511,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Lift = Curry1<DynamicDelegate, DynamicDelegate>(fn => LiftN(fn.Arity(), fn));
 
-        internal readonly static dynamic Omit = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => {
+        internal readonly static dynamic Omit = Curry2<object, object, IDictionary<string, object>>((names, obj) => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in obj.ToMemberDictionary()) {
-                if (!names.Contains(pair.Key)) {
+                if (!ContainsInternal(names, pair.Key)) {
                     result[pair.Key] = pair.Value;
                 }
             }

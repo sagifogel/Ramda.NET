@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Filter(dynamic pred, RamdaPlaceholder filterable = null) {
-			return Currying.Filter(pred, filterable);
+			return Currying.Filter(Delegate(pred), filterable);
 		}
 
 		public static dynamic Filter<TSource>(dynamic pred, IList<TSource> filterable) {
-			return Currying.Filter(pred, filterable);
+			return Currying.Filter(Delegate(pred), filterable);
 		}
 
 		public static dynamic Filter(RamdaPlaceholder pred = null, RamdaPlaceholder filterable = null) {

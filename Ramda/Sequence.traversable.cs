@@ -23,7 +23,7 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Sequence<TTraversable>(dynamic of, TTraversable traversable) {
-			return Currying.Sequence(of, traversable);
+			return Currying.Sequence(Delegate(of), traversable);
 		}
 	}
 }

@@ -31,11 +31,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Into(ITransformer acc, dynamic xf, RamdaPlaceholder list = null) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, Delegate(xf), list);
 		}
 
 		public static dynamic Into<TSource>(ITransformer acc, dynamic xf, IList<TSource> list) {
-			return Currying.Into(acc, xf, list);
+			return Currying.Into(acc, Delegate(xf), list);
 		}
 	}
 }

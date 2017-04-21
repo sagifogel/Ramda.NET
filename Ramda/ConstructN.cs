@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ConstructN(RamdaPlaceholder n, dynamic Fn) {
-			return Currying.ConstructN(n, Fn);
+			return Currying.ConstructN(n, Delegate(Fn));
 		}
 
 		public static dynamic ConstructN(int n, dynamic Fn) {
-			return Currying.ConstructN(n, Fn);
+			return Currying.ConstructN(n, Delegate(Fn));
 		}
 
 		public static dynamic ConstructN(RamdaPlaceholder n = null, RamdaPlaceholder Fn = null) {

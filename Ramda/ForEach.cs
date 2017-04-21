@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic ForEach(dynamic fn, RamdaPlaceholder list = null) {
-			return Currying.ForEach(fn, list);
+			return Currying.ForEach(Delegate(fn), list);
 		}
 
 		public static dynamic ForEach<TSource>(dynamic fn, IList<TSource> list) {
-			return Currying.ForEach(fn, list);
+			return Currying.ForEach(Delegate(fn), list);
 		}
 
 		public static dynamic ForEach(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {

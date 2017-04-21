@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UniqWith(dynamic pred, RamdaPlaceholder list = null) {
-			return Currying.UniqWith(pred, list);
+			return Currying.UniqWith(Delegate(pred), list);
 		}
 
 		public static dynamic UniqWith<TSource>(dynamic pred, IList<TSource> list) {
-			return Currying.UniqWith(pred, list);
+			return Currying.UniqWith(Delegate(pred), list);
 		}
 
 		public static dynamic UniqWith(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {

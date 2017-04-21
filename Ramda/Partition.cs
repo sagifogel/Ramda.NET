@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Partition(dynamic pred, RamdaPlaceholder filterable = null) {
-			return Currying.Partition(pred, filterable);
+			return Currying.Partition(Delegate(pred), filterable);
 		}
 
 		public static dynamic Partition<TTarget>(dynamic pred, TTarget filterable) {
-			return Currying.Partition(pred, filterable);
+			return Currying.Partition(Delegate(pred), filterable);
 		}
 
 		public static dynamic Partition(RamdaPlaceholder pred = null, RamdaPlaceholder filterable = null) {

@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UnionWith<TSource2>(dynamic pred, RamdaPlaceholder list1, IList<TSource2> list2) {
-			return Currying.UnionWith(pred, list1, list2);
+			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic UnionWith<TSource1>(dynamic pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
-			return Currying.UnionWith(pred, list1, list2);
+			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic UnionWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
-			return Currying.UnionWith(pred, list1, list2);
+			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic UnionWith<TSource1, TSource2>(dynamic pred, IList<TSource1> list1, IList<TSource2> list2) {
-			return Currying.UnionWith(pred, list1, list2);
+			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
 		public static dynamic UnionWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {

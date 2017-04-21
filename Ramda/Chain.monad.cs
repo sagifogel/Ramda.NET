@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Chain(dynamic fn, Delegate list) {
-			return Currying.Chain(Delegate(fn), list);
+			return Currying.Chain(Delegate(fn), Delegate(list));
 		}
 
 		public static dynamic Chain(Delegate fn, dynamic list) {
-			return Currying.Chain(fn, list);
+			return Currying.Chain(Delegate(fn), Delegate(list));
 		}
 	}
 }

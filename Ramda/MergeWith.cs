@@ -35,19 +35,19 @@ namespace Ramda.NET
 		}
 
 		public static dynamic MergeWith<TArg2>(dynamic fn, RamdaPlaceholder l, TArg2 r) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg1>(dynamic fn, TArg1 l, RamdaPlaceholder r = null) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
 		public static dynamic MergeWith(dynamic fn, RamdaPlaceholder l = null, RamdaPlaceholder r = null) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
 		public static dynamic MergeWith<TArg1, TArg2>(dynamic fn, TArg1 l, TArg2 r) {
-			return Currying.MergeWith(fn, l, r);
+			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
 		public static dynamic MergeWith(RamdaPlaceholder fn = null, RamdaPlaceholder l = null, RamdaPlaceholder r = null) {

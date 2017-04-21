@@ -35,27 +35,27 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Unless<TArg>(RamdaPlaceholder pred, dynamic whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(pred, Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless<TArg>(dynamic pred, RamdaPlaceholder whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), whenFalseFn, x);
 		}
 
 		public static dynamic Unless(dynamic pred, dynamic whenFalseFn, RamdaPlaceholder x = null) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless(dynamic pred, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), whenFalseFn, x);
 		}
 
 		public static dynamic Unless<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless<TArg>(Func<TArg, bool> pred, dynamic whenFalseFn, TArg x) {
-			return Currying.Unless(pred, whenFalseFn, x);
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
 		}
 
 		public static dynamic Unless(RamdaPlaceholder pred = null, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {

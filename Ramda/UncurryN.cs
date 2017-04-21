@@ -27,11 +27,11 @@ namespace Ramda.NET
 		}
 
 		public static dynamic UncurryN(RamdaPlaceholder length, dynamic fn) {
-			return Currying.UncurryN(length, fn);
+			return Currying.UncurryN(length, Delegate(fn));
 		}
 
 		public static dynamic UncurryN(int length, dynamic fn) {
-			return Currying.UncurryN(length, fn);
+			return Currying.UncurryN(length, Delegate(fn));
 		}
 
 		public static dynamic UncurryN(RamdaPlaceholder length = null, RamdaPlaceholder fn = null) {

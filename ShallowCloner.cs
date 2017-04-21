@@ -16,17 +16,22 @@ namespace Ramda.NET
         internal static object Clone(this object source) {
             var type = source.GetType();
 
-            var @delegate = cache.GetOrAdd(type, () => {
-                var parameter = Expression.Parameter(type);
-                var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
-                var lambda = Expression.Lambda(
-                                    Expression.GetFuncType(new[] { type, type }),
-                                    Expression.Convert(clone, type), parameter);
+            if (type.IsAnonymousType()) {
+                return source.CloneInternal();
+            }
+            else {
+                var @delegate = cache.GetOrAdd(type, () => {
+                    var parameter = Expression.Parameter(type);
+                    var clone = Expression.Call(parameter, type.GetMethod("MemberwiseClone", BindingFlags.Instance | BindingFlags.NonPublic));
+                    var lambda = Expression.Lambda(
+                                        Expression.GetFuncType(new[] { type, type }),
+                                        Expression.Convert(clone, type), parameter);
 
-                return lambda.Compile();
-            });
+                    return lambda.Compile();
+                });
 
-            return @delegate.DynamicInvoke(source);
+                return @delegate.DynamicInvoke(source);
+            }
         }
 
         internal static object CloneAndAssignValue(dynamic prop, object propValue, object obj) {
@@ -44,13 +49,19 @@ namespace Ramda.NET
         }
 
         internal static object CloneAndOmitValue(string prop, object obj) {
+            IDictionary<string, object> expando = obj.CloneInternal();
+
+            expando.Remove(prop);
+
+            return expando as ExpandoObject;
+        }
+
+        internal static ExpandoObject CloneInternal(this object obj) {
             Type type = obj.GetType();
             IDictionary<string, object> expando = new ExpandoObject();
 
             foreach (var pair in obj.ToMemberDictionary()) {
-                if (!pair.Key.Equals(prop)) {
-                    expando.Add(pair);
-                }
+                expando.Add(pair);
             }
 
             return expando as ExpandoObject;

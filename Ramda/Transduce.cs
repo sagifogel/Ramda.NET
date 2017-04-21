@@ -39,31 +39,31 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, RamdaPlaceholder fn, TAccumulator acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), fn, acc, list);
 		}
 
 		public static dynamic Transduce<TSource>(dynamic xf, dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TAccumulator>(dynamic xf, dynamic fn, TAccumulator acc, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce(dynamic xf, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), fn, acc, list);
 		}
 
 		public static dynamic Transduce(dynamic xf, dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, Func<TAccumulator, ITransformer> fn, TAccumulator acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
-			return Currying.Transduce(xf, fn, acc, list);
+			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
 		}
 	}
 }

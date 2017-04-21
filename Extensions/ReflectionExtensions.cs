@@ -156,7 +156,7 @@ namespace Ramda.NET
                 if (result != null) {
                     return result;
                 }
-            }            
+            }
             else if (type.TypeIsDelegate() && name.Equals("Length")) {
                 return FunctionArity(target);
             }
@@ -429,12 +429,12 @@ namespace Ramda.NET
             return Expression.Lambda(delegateType, Expression.New(ctor, parameters), parameters).Compile();
         }
 
-        internal static object Invoke(this Delegate target, params object[] arguments) {
+        internal static object Invoke(this Delegate target, object[] arguments) {
             if (target.Arity() == 1) {
                 var param = target.Method.GetParameters()[0];
 
                 if (param.ParameterType.IsArray && (arguments.Length != 1 || arguments.Length == 1 && (arguments[0].IsNotNull() && !arguments[0].IsArray()))) {
-                    arguments = new object[1] { arguments };
+                    arguments = new[] { arguments };
                 }
             }
 

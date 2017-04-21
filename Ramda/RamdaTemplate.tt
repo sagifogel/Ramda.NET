@@ -208,7 +208,7 @@ public class RamdaTemplate : CSharpTemplate
 	}
 
 	private string GenerateDynamicArguments(List<Tuple<string, string, bool>> dynamics) {
-		return string.Join(", ", dynamics.Select(d => d.Item1.Equals("dynamic") ? string.Format("Delegate({0})", d.Item2) : d.Item2));
+		return string.Join(", ", dynamics.Select(d => d.Item3 ? string.Format("Delegate({0})", d.Item2) : d.Item2));
 	}
 
 	public override string TransformText() {

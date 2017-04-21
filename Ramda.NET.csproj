@@ -722,6 +722,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Identity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\IfElse.dynamic.cs">
+      <DependentUpon>IfElse.dynamic.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\IfElse.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1884,6 +1889,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Identity.cs</LastGenOutput>
       <LastOutputs>.\Identity.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IfElse.dynamic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IfElse.dynamic.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\IfElse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

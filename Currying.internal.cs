@@ -110,7 +110,7 @@ namespace Ramda.NET
             var result = new object[len];
 
             while (idx < len) {
-                result[idx] = fn(functor[idx]);
+                result[idx] = DynamicInvoke(fn, new[] { functor[idx] });
                 idx += 1;
             }
 
@@ -305,7 +305,7 @@ namespace Ramda.NET
         private readonly static dynamic XDropLastWhile = Curry2(new Func<DynamicDelegate, ITransformer, ITransformer>((f, xf) => new XDropLstWhile(f, xf)));
 
         private readonly static dynamic XChain = Curry2(new Func<dynamic, ITransformer, object>((f, xf) => Map(f, new XFlatCat(xf))));
-        
+
         internal class ComparerFactory : IComparer
         {
             private Func<object, object, int> comparator;
@@ -361,7 +361,7 @@ namespace Ramda.NET
         }
 
         private static object InternalIfElse(dynamic condition, dynamic onTrue, dynamic onFalse, params object[] arguments) {
-            return condition(arguments) ? onTrue(arguments) : onFalse(arguments);
+            return DynamicInvoke(condition, arguments) ? DynamicInvoke(onTrue, arguments) : DynamicInvoke(onFalse, arguments);
         }
 
         private static object InternalEvolve(object transformationsObj, object target) {

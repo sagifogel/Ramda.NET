@@ -746,6 +746,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Ramda\IndexOf.object.cs">
+      <DependentUpon>IndexOf.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\IndexOf.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1914,6 +1919,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IndexBy.list.cs</LastGenOutput>
       <LastOutputs>.\IndexBy.list - Copy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\IndexOf.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IndexOf.object.cs</LastGenOutput>
+      <LastOutputs>.\IndexOf.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IndexOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

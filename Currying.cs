@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core = Ramda.NET.IEnumerableExtensions;
 using Reflection = Ramda.NET.ReflectionExtensions;
+using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -1407,12 +1408,30 @@ namespace Ramda.NET
         internal readonly static dynamic IndexBy = ReduceBy(Delegate((acc, elem) => elem), R.Null);
 
         internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
-            if (xs.IsList()) {
-                return ((IList)xs).IndexOf(target);
+            Delegate indexOf = null;
+            string stringIndexOf = null;
+            var list = xs as IList;
+
+            if (list != null) {
+                return list.IndexOf(target);
             }
 
-            if (xs.HasMemberWhere("IndexOf", t => t.IsFunction())) {
-                return ((dynamic)xs).IndexOf(target);
+            stringIndexOf = xs as string;
+
+            if (stringIndexOf != null) {
+                var targetAsString = target as string;
+
+                if (targetAsString != null) {
+                    return stringIndexOf.IndexOf(targetAsString);
+                }
+
+                return -1;
+            }
+
+            indexOf = xs.Member("IndexOf") as Delegate;
+
+            if (indexOf.IsNotNull()) {
+                return (int)indexOf.DynamicInvoke(new[] { target });
             }
 
             return -1;

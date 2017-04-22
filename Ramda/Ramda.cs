@@ -279,5 +279,9 @@ namespace Ramda.NET
         public static dynamic GroupWith(dynamic fn, string list) {
             return Currying.GroupWith(fn, list);
         }
+
+        public static dynamic Insert<TSource, TTarget>(int index, TTarget elt, IList<TSource> list) {
+            return Currying.Insert(index, elt, list);
+        }
     }
 }

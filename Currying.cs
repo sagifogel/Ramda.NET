@@ -357,7 +357,9 @@ namespace Ramda.NET
         internal readonly static dynamic Inc = Add(1);
 
         internal readonly static dynamic Insert = Curry3<int, object, IList, IList>((idx, elt, list) => {
-            var result = list.CreateNewList();
+            var elementType = list.GetElementType();
+            var eltIsSameType = elementType.Equals(elt.GetType());
+            var result = list.CreateNewList(list, eltIsSameType ? elementType : typeofObject);
 
             idx = idx < list.Count && idx >= 0 ? idx : list.Count;
             result.Insert(idx, elt);

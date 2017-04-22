@@ -7,30 +7,30 @@ using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
-    public interface IGroupWithStrategy
+    public interface IListStrategy
     {
-        int Length { get;}
+        int Length { get; }
         object Slice(int from, int to);
         object this[int index] { get; }
     }
 
-    public static class GroupByStrategy
+    public static class ListStrategy
     {
-        public static IGroupWithStrategy Resolve(IEnumerable enumerable) {
+        public static IListStrategy Resolve(IEnumerable enumerable) {
             var @string = enumerable as string;
 
             if (@string != null) {
-                return new GroupWithOfString(@string);
+                return new StringListStrategy(@string);
             }
 
-            return new GroupWithOfList((IList)enumerable);
+            return new ListStrategyImpl((IList)enumerable);
         }
 
-        private class GroupWithOfString : IGroupWithStrategy
+        private class StringListStrategy : IListStrategy
         {
             private readonly string value;
 
-            public GroupWithOfString(string value) {
+            public StringListStrategy(string value) {
                 this.value = value;
             }
 
@@ -51,11 +51,11 @@ namespace Ramda.NET
             }
         }
 
-        private class GroupWithOfList : IGroupWithStrategy
+        private class ListStrategyImpl : IListStrategy
         {
             private readonly IList list;
 
-            public GroupWithOfList(IList list) {
+            public ListStrategyImpl(IList list) {
                 this.list = list;
             }
 

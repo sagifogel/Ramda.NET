@@ -144,10 +144,6 @@ namespace Ramda.NET
             return Currying.Head(list);
         }
 
-        public static dynamic Init(string list) {
-            return Currying.Init(list.ToCharArray());
-        }
-
         public static dynamic Last(string list) {
             return Currying.Last(list.ToCharArray());
         }

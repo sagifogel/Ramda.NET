@@ -55,7 +55,7 @@
     <Compile Include="Curry2.cs" />
     <Compile Include="Curry1.cs" />
     <Compile Include="CurryN.cs" />
-    <Compile Include="GroupWithStrategy.cs" />
+    <Compile Include="ListStrategy.cs" />
     <Compile Include="IReducible.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />
@@ -756,10 +756,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexOf.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Init.cs">
+    <Compile Include="Ramda\Init.string.cs">
+      <DependentUpon>Init.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Init.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Init.list..cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Init.list..tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Insert.cs">
       <AutoGen>True</AutoGen>
@@ -1930,10 +1935,15 @@
       <LastGenOutput>IndexOf.cs</LastGenOutput>
       <LastOutputs>.\IndexOf.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Init.tt">
+    <Content Include="Ramda\Init.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Init.cs</LastGenOutput>
-      <LastOutputs>.\Init.cs</LastOutputs>
+      <LastGenOutput>Init.string.cs</LastGenOutput>
+      <LastOutputs>.\Init.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Init.list..tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Init.list..cs</LastGenOutput>
+      <LastOutputs>.\Init.list. - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Insert.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

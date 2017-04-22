@@ -290,7 +290,7 @@ namespace Ramda.NET
         internal readonly static dynamic GroupWith = Curry2<dynamic, IEnumerable, IEnumerable>((fn, list) => {
             var idx = 0;
             var res = new ArrayList();
-            var strategy = GroupByStrategy.Resolve(list);
+            var strategy = ListStrategy.Resolve(list);
             var len = strategy.Length;
 
             while (idx < len) {
@@ -1097,7 +1097,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Head = Nth(0);
 
-        internal readonly static dynamic Init = Curry1<IList, IList>(list => list.Slice(0, list.Count - 1));
+        internal readonly static dynamic Init = Curry1<IEnumerable, object>(list => {
+            var strategy = ListStrategy.Resolve(list);
+            
+            return strategy.Slice(0, strategy.Length - 1);
+        });
 
         internal readonly static dynamic IntersectionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => {
             IList lookupList;

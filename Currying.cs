@@ -374,7 +374,7 @@ namespace Ramda.NET
         internal readonly static dynamic InsertAll = Curry3<int, IList, IList, IList>((idx, elts, list) => {
             idx = idx < list.Count && idx >= 0 ? idx : list.Count;
 
-            return Slice(list, 0, idx).Concat(elts).Concat(Slice(list, idx));
+            return list.Slice(0, idx).Concat(elts).Concat(list.Slice(idx));
         });
 
         internal readonly static dynamic Intersperse = Curry2(CheckForMethod2("Intersperse", new Func<object, IList, IList>((separator, list) => {
@@ -1101,7 +1101,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Init = Curry1<IEnumerable, object>(list => {
             var strategy = ListStrategy.Resolve(list);
-            
+
             return strategy.Slice(0, strategy.Length - 1);
         });
 

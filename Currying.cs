@@ -1105,11 +1105,11 @@ namespace Ramda.NET
             return strategy.Slice(0, strategy.Length - 1);
         });
 
-        internal readonly static dynamic IntersectionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => {
+        internal readonly static dynamic IntersectionWith = Curry3<dynamic, IList, IList, IList>((pred, list1, list2) => {
             IList lookupList;
             IList filteredList;
             var results = new ArrayList();
-            Func<object, object, bool> containsPredicate = (a, b) => (bool)pred.Invoke(new[] { a, b });
+            Func<object, object, bool> containsPredicate = (a, b) => Reflection.DynamicInvoke(pred, new[] { a, b });
 
             if (list1.Count > list2.Count) {
                 lookupList = list1;

@@ -137,6 +137,7 @@
     <Compile Include="Init.cs" />
     <Compile Include="Insert.cs" />
     <Compile Include="InsertAll.cs" />
+    <Compile Include="Intersection.cs" />
     <Compile Include="Into.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />

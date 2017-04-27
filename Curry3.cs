@@ -14,14 +14,19 @@ namespace Ramda.NET
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
-            object arg2;
-            object arg3;
-            object arg1 = arguments[0];
+            object arg1 = null;
+            object arg2 = null;
+            object arg3 = null;
             var arg1IsPlaceHolder = false;
             var arg2IsPlaceHolder = false;
             var arg3IsPlaceHolder = false;
+            var arity = Currying.Arity(arguments);
 
-            switch (Currying.Arity(arguments)) {
+            if (arity > 0) {
+                arg1 = arguments[0];
+            }
+
+            switch (arity) {
                 case 0:
                     return Curry3(fn);
                 case 1:

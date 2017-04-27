@@ -139,7 +139,9 @@
     <Compile Include="InsertAll.cs" />
     <Compile Include="IntersectionWith.cs" />
     <Compile Include="Intersection.cs" />
+    <Compile Include="Intersperse.cs" />
     <Compile Include="Into.cs" />
+    <Compile Include="Invert.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />

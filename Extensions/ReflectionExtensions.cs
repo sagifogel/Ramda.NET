@@ -533,8 +533,12 @@ namespace Ramda.NET
             return @delegate.Method.DeclaringType.Equals(type);
         }
 
-        internal static bool IsPrimitive(this Type type) {
+        internal static bool TypeIsPrimitive(this Type type) {
             return primitives.Contains(type);
+        }
+
+        internal static bool IsPrimitive(this object @object) {
+            return @object.GetType().TypeIsPrimitive();
         }
     }
 }

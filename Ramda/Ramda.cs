@@ -283,5 +283,13 @@ namespace Ramda.NET
         public static dynamic Insert<TSource, TTarget>(int index, TTarget elt, IList<TSource> list) {
             return Currying.Insert(index, elt, list);
         }
+
+        public static dynamic Intersperse<TResult, TSeperator>(TSeperator separator, IDispersible<TSeperator, TResult> list) {
+            return Currying.Intersperse(separator, list);
+        }
+
+        public static dynamic Intersperse<TResult, TSeperator>(RamdaPlaceholder separator, IDispersible<TSeperator, TResult> list) {
+            return Currying.Intersperse(separator, list);
+        }
     }
 }

@@ -379,7 +379,7 @@ namespace Ramda.NET
                             result[key] = DynamicInvoke(transformation, new object[] { value });
                             continue;
                         }
-                        else if (!value.GetType().IsPrimitive()) {
+                        else if (!value.IsPrimitive()) {
                             if (!transformation.IsDictionary()) {
                                 transformation = transformation.ToMemberDictionary();
                             }
@@ -581,7 +581,7 @@ namespace Ramda.NET
                 return (bool)equalsB.DynamicInvoke(new[] { b, a });
             }
 
-            if (typeA.IsPrimitive()) {
+            if (typeA.TypeIsPrimitive()) {
                 return false;
             }
             else if (typeof(Exception).IsAssignableFrom(typeA)) {

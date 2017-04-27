@@ -421,7 +421,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic IsNil = Curry1<object, bool>(val => val.IsNull());
 
-        internal readonly static dynamic Keys = Curry1<object, IEnumerable<string>>(val => val.ToMemberDictionary().Select(kv => kv.Key));
+        internal readonly static dynamic Keys = Curry1<object, string[]>(val => val.ToMemberDictionary().Select(kv => kv.Key).ToArray());
 
         internal readonly static dynamic Length = Curry1<IList, int>(list => list.Count);
 
@@ -1143,16 +1143,18 @@ namespace Ramda.NET
             var inverted = new Dictionary<string, ArrayList>();
             IDictionary<string, object> result = new ExpandoObject();
 
-            foreach (var prop in obj.Keys()) {
-                var val = obj.Member(prop).ToString();
-                var list = inverted.ContainsKey(val) ? inverted[val] : inverted[val] = new ArrayList();
+            if (!obj.IsPrimitive()) {
+                foreach (var prop in obj.Keys()) {
+                    var val = obj.Member(prop).ToString();
+                    var list = inverted.ContainsKey(val) ? inverted[val] : inverted[val] = new ArrayList();
 
-                list.Add(prop);
+                    list.Add(prop);
+                }
+
+                inverted.Keys.ForEach(key => {
+                    result[key] = inverted[key].ToArray<Array>();
+                });
             }
-
-            inverted.Keys.ForEach(key => {
-                result[key] = inverted[key].ToArray<Array>();
-            });
 
             return result;
         });

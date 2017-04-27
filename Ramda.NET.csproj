@@ -55,6 +55,7 @@
     <Compile Include="Curry2.cs" />
     <Compile Include="Curry1.cs" />
     <Compile Include="CurryN.cs" />
+    <Compile Include="IDispersible.cs" />
     <Compile Include="ListStrategy.cs" />
     <Compile Include="IReducible.cs" />
     <Compile Include="Maybe.cs" />
@@ -786,10 +787,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntersectionWith.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Intersperse.cs">
+    <Compile Include="Ramda\Intersperse..cs">
+      <DependentUpon>Intersperse..tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Intersperse.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Into.ITransformer.cs">
       <DependentUpon>Into.ITransformer.tt</DependentUpon>
@@ -1965,10 +1966,10 @@
       <LastGenOutput>IntersectionWith.cs</LastGenOutput>
       <LastOutputs>.\IntersectionWith.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Intersperse.tt">
+    <Content Include="Ramda\Intersperse..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Intersperse.cs</LastGenOutput>
-      <LastOutputs>.\Intersperse.cs</LastOutputs>
+      <LastGenOutput>Intersperse..cs</LastGenOutput>
+      <LastOutputs>.\Intersperse.IIntersperse.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Into.ITransformer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

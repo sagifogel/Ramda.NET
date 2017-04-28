@@ -1162,10 +1162,12 @@ namespace Ramda.NET
         internal readonly static dynamic InvertObj = Curry1<object, IDictionary<string, object>>(obj => {
             IDictionary<string, object> result = new ExpandoObject();
 
-            foreach (var prop in obj.Keys()) {
-                var val = obj.Member(prop).ToString();
+            if (!obj.IsPrimitive()) {
+                foreach (var prop in obj.Keys()) {
+                    var val = obj.Member(prop).ToString();
 
-                result[val] = prop;
+                    result[val] = prop;
+                }
             }
 
             return result;
@@ -1609,7 +1611,7 @@ namespace Ramda.NET
         internal static dynamic Either = Curry2<object, object, object>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() || b()), Or));
 
         internal static dynamic Invoker = Curry2<int, string, object>((arity, method) => {
-            return CurryN(arity + 1, Delegate((object[] arguments) => {
+            return CurryN(arity + 1, Delegate(arguments => {
                 var target = arguments[arity];
 
                 if (target.IsNotNull()) {
@@ -1617,7 +1619,7 @@ namespace Ramda.NET
                     var @delegate = methodMember as Delegate;
 
                     if (methodMember.IsNotNull()) {
-                        return @delegate.DynamicInvoke((object[])arguments.Slice(0, arity));
+                        return @delegate.DynamicInvoke(new[] { arguments.Slice(0, arity) });
                     }
                 }
 

@@ -413,7 +413,7 @@ namespace Ramda.NET
             if (val.IsNotNull()) {
                 var valueType = val.GetType();
 
-                return valueType.Equals(type) || valueType.IsInstanceOfType(type);
+                return valueType.Equals(type) || type.IsInstanceOfType(val);
             }
 
             return false;

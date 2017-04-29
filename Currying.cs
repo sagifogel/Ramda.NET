@@ -219,7 +219,7 @@ namespace Ramda.NET
                     return ((IEnumerable)x).CreateNewList();
                 }
 
-                if (type.Equals(typeof(string))) {
+                if (type.Equals(typeofString)) {
                     return string.Empty;
                 }
 
@@ -407,7 +407,43 @@ namespace Ramda.NET
             return result;
         })));
 
-        internal readonly static dynamic IsArrayLike = Curry1<object, bool>(x => x.IsList());
+        internal readonly static dynamic IsArrayLike = Curry1<object, bool>(x => {
+            int length;
+            object member;
+            var type = x.GetType();
+
+            if (x.IsList()) {
+                return true;
+            }
+
+            if (type.TypeIsFunction()) {
+                return false;
+            }
+
+            if (type.Equals(typeofString)) {
+                return false;
+            }
+
+            member = x.Member("Length");
+
+            if (member is int) {
+                length = (int)member;
+
+                if (length == 0) {
+                    return true;
+                }
+
+                if (length > 0) {
+                    var dictionary = x as IDictionary;
+
+                    if (dictionary != null) {
+                        return dictionary.ContainsKeys(new object[] { 0, length - 1 });
+                    }
+                }
+            }
+
+            return false;
+        });
 
         internal readonly static dynamic Is = Curry2<Type, object, bool>((type, val) => {
             if (val.IsNotNull()) {
@@ -1619,7 +1655,9 @@ namespace Ramda.NET
                     var @delegate = methodMember as Delegate;
 
                     if (methodMember.IsNotNull()) {
-                        return @delegate.DynamicInvoke(new[] { arguments.Slice(0, arity) });
+                        var dynamicFn = Delegate(@delegate);
+
+                        return Reflection.DynamicInvoke(dynamicFn, (object[])arguments.Slice(0, arity));
                     }
                 }
 

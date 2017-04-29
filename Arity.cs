@@ -9,6 +9,7 @@ namespace Ramda.NET
     internal static partial class Currying
     {
         private static readonly Type typeofList = typeof(IList);
+        private static readonly Type typeofString = typeof(string);
         private static readonly Type typeofObject = typeof(object);
         private static readonly Type typeofObjectArray = typeof(object[]);
 

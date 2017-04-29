@@ -91,7 +91,11 @@ namespace Ramda.NET
         }
 
         internal static bool IsArray(this object value) {
-            return value.GetType().IsArray;
+            return value.GetType().TypeIsArray();
+        }
+
+        internal static bool TypeIsArray(this Type type) {
+            return typeof(Array).IsAssignableFrom(type);
         }
 
         internal static bool IsList(this object value) {
@@ -107,8 +111,10 @@ namespace Ramda.NET
         }
 
         internal static bool IsFunction(this object value) {
-            var type = value.GetType();
+            return value.GetType().TypeIsFunction();
+        }
 
+        internal static bool TypeIsFunction(this Type type) {
             return type.TypeIsDynamicDelegate() || type.TypeIsDelegate();
         }
 
@@ -431,9 +437,9 @@ namespace Ramda.NET
 
         internal static object Invoke(this Delegate target, object[] arguments) {
             if (target.Arity() == 1) {
-                var param = target.Method.GetParameters()[0];
+                var param = target.Method.GetParameters()[0].ParameterType;
 
-                if (param.ParameterType.IsArray && (arguments.Length != 1 || arguments.Length == 1 && (arguments[0].IsNotNull() && !arguments[0].IsArray()))) {
+                if (param.TypeIsArray() && (arguments.Length != 1 || arguments.Length == 1 && (arguments[0].IsNotNull() && !arguments[0].IsArray()))) {
                     arguments = new[] { arguments };
                 }
             }
@@ -539,6 +545,26 @@ namespace Ramda.NET
 
         internal static bool IsPrimitive(this object @object) {
             return @object.GetType().TypeIsPrimitive();
+        }
+
+        internal static bool ContainsKey(this IDictionary dictionary, object key) {
+            return dictionary.ContainsKey(new[] { key });
+        }
+
+        internal static bool ContainsKeys(this IDictionary dictionary, object[] keys) {
+            var contains = GetDictionaryContains(dictionary);
+
+            return keys.All(contains);
+        }
+
+        private static Func<object, bool> GetDictionaryContains(IDictionary dictionary) {
+            var dictionaryWithStringKey = dictionary as IDictionary<string, object>;
+
+            if (dictionaryWithStringKey != null) {
+                return key => dictionaryWithStringKey.ContainsKey(key.ToString());
+            }
+
+            return key => dictionary.Contains(key);
         }
     }
 }

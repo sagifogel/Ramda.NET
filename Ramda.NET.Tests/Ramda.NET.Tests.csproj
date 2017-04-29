@@ -145,6 +145,7 @@
     <Compile Include="Invert.cs" />
     <Compile Include="Invoker.cs" />
     <Compile Include="Is.cs" />
+    <Compile Include="IsArrayLike.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />

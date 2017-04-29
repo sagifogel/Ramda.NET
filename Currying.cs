@@ -236,7 +236,7 @@ namespace Ramda.NET
                 }
             }
 
-            return null;
+            return R.Null;
         });
 
         internal readonly static dynamic Evolve = Curry2<object, object, object>(InternalEvolve);

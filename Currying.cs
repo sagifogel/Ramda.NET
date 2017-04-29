@@ -1666,7 +1666,7 @@ namespace Ramda.NET
         });
 
         internal static dynamic Join = Curry2<string, IList, string>((separator, xs) => {
-            return string.Join(separator, xs.Select<string>(item => item.ToString()));
+            return string.Join(separator, xs.Select(item => item.ToString()));
         });
 
         internal static dynamic Memoize = Curry1<DynamicDelegate, DynamicDelegate>(fn => {

@@ -14,11 +14,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Join(string separator, IList<string> xs) {
+		public static dynamic Join<TSource>(string separator, IList<TSource> xs) {
 			return Currying.Join(separator, xs);
 		}
 
-		public static dynamic Join(RamdaPlaceholder separator, IList<string> xs) {
+		public static dynamic Join<TSource>(RamdaPlaceholder separator, IList<TSource> xs) {
 			return Currying.Join(separator, xs);
 		}
 

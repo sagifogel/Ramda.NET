@@ -150,6 +150,7 @@
     <Compile Include="IsNil.cs" />
     <Compile Include="Join.cs" />
     <Compile Include="Just.cs" />
+    <Compile Include="Juxt.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

@@ -538,14 +538,14 @@ namespace Ramda.NET
         internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
 
         internal readonly static dynamic Nth = Curry2<int, dynamic, object>((offset, list) => {
-            object item = null;
+            object item = R.Null;
             var @string = list as string;
             var isString = @string != null;
             var count = isString ? @string.Length : ((IList)list).Count;
             var idx = offset < 0 ? count + offset : offset;
 
             if (isString) {
-                if (idx == 0 && string.IsNullOrEmpty(list)) {
+                if (idx <= 0 && string.IsNullOrEmpty(list)) {
                     return string.Empty;
                 }
 
@@ -1219,23 +1219,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic Last = Nth(-1);
 
-        internal readonly static dynamic LastIndexOf = Curry2<object, IList, int>((target, xs) => {
-            if (!xs.IsArray() && xs.HasMemberWhere("LastIndexOf", m => m.IsFunction())) {
-                return ((dynamic)xs).LastIndexOf(target);
-            }
-            else {
-                var idx = xs.Count - 1;
-
-                while (idx >= 0) {
-                    if (Equals(xs[idx], target)) {
-                        return idx;
-                    }
-
-                    idx -= 1;
-                }
-
-                return -1;
-            }
+        internal readonly static dynamic LastIndexOf = Curry2<object, object, int>((target, xs) => {
+            return IndexOfInternal("LastIndexOf", target, xs, list => new ArrayList(list).LastIndexOf(target), (str, targetStr) => str.LastIndexOf(targetStr));
         });
 
         internal readonly static dynamic Map = Curry2(Dispatchable2("Map", XMap, new Func<dynamic, object, object>((fn, functor) => {
@@ -1460,33 +1445,7 @@ namespace Ramda.NET
         internal readonly static dynamic IndexBy = ReduceBy(Delegate((acc, elem) => elem), R.Null);
 
         internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
-            Delegate indexOf = null;
-            string stringIndexOf = null;
-            var list = xs as IList;
-
-            if (list != null) {
-                return list.IndexOf(target);
-            }
-
-            stringIndexOf = xs as string;
-
-            if (stringIndexOf != null) {
-                var targetAsString = target as string;
-
-                if (targetAsString != null) {
-                    return stringIndexOf.IndexOf(targetAsString);
-                }
-
-                return -1;
-            }
-
-            indexOf = xs.Member("IndexOf") as Delegate;
-
-            if (indexOf.IsNotNull()) {
-                return (int)indexOf.DynamicInvoke(new[] { target });
-            }
-
-            return -1;
+            return IndexOfInternal("IndexOf", target, xs, list => list.IndexOf(target), (str, targetStr) => str.IndexOf(targetStr));
         });
 
         internal readonly static dynamic Juxt = Curry1<IList, DynamicDelegate>(fns => Converge(ArrayOf, fns));

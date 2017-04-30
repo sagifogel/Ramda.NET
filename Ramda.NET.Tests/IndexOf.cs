@@ -4,86 +4,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class IndexOf
+    public class IndexOf : BaseIndexOf
     {
         private readonly int[] list2 = new[] { 1, 2, 3 };
         private readonly int[] list = new[] { 0, 10, 20, 30 };
         private readonly int[] input = new[] { 1, 2, 3, 4, 5 };
-
-        interface IIndexOf
-        {
-            int IndexOf(object x);
-        }
-
-        class StringIndexOf : IIndexOf, IEquatable<StringIndexOf>
-        {
-            private string Value { get; set; }
-
-            public StringIndexOf(string value) {
-                Value = value;
-            }
-
-            public int IndexOf(object x) {
-                if (x is string) {
-                    return Value.IndexOf((string)x);
-                }
-
-                return -1;
-            }
-
-            public override bool Equals(object obj) {
-                var str = obj as string;
-
-                if (str != null) {
-                    return Value.Equals(str);
-                }
-
-                return Equals(obj as StringIndexOf);
-            }
-
-            public override int GetHashCode() {
-                return Value.GetHashCode();
-            }
-
-            public bool Equals(StringIndexOf other) {
-                if (other != null) {
-                    return false;
-                }
-
-                return Value.Equals(other.Value);
-            }
-        }
-
-        class Empty : IIndexOf
-        {
-            private dynamic indexOf => R.Always(-1);
-
-            public int IndexOf(object x) {
-                return indexOf(x);
-            }
-        }
-
-        class List : IIndexOf
-        {
-            public IIndexOf Head { get; set; }
-            public IIndexOf Tail { get; set; }
-
-            public List(string head, IIndexOf tail) {
-                Head = new StringIndexOf(head);
-                Tail = tail;
-            }
-
-            public List(IIndexOf head, IIndexOf tail) {
-                Head = head;
-                Tail = tail;
-            }
-
-            public int IndexOf(object x) {
-                var idx = Tail.IndexOf(x);
-
-                return Head.Equals(x) ? 0 : idx >= 0 ? 1 + idx : -1;
-            }
-        }
 
         [TestMethod]
         [Description("IndexOf_Returns_A_Number_Indicating_An_Object\"s_Position_In_A_List")]
@@ -131,7 +56,9 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("IndexOf_Has_R.Equals_Semantics")]
         public void IndexOf_Has_R_Equals_Semantics() {
+            Assert.AreEqual(R.IndexOf(0, new[] { -0 }), 0);
             Assert.AreEqual(R.IndexOf(-0, new[] { 0 }), 0);
+            Assert.AreEqual(R.IndexOf(R.Null, new[] { R.Null }), 0);
             Assert.AreEqual(R.IndexOf(new Just(new[] { 42 }), new[] { new Just(new[] { 42 }) }), 0);
         }
 

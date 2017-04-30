@@ -843,5 +843,35 @@ namespace Ramda.NET
 
             return Lift(liftBy)(f, g);
         }
+
+        private static int IndexOfInternal(string indexOfName, object target, object xs, Func<IList, int> fromList, Func<string, string, int> fromString) {
+            Delegate indexOf = null;
+            string stringIndexOf = null;
+            var list = xs as IList;
+
+            if (list != null) {
+                return fromList(list);
+            }
+
+            stringIndexOf = xs as string;
+
+            if (stringIndexOf != null) {
+                var targetAsString = target as string;
+
+                if (targetAsString != null) {
+                    return fromString(stringIndexOf, targetAsString);
+                }
+
+                return -1;
+            }
+
+            indexOf = xs.Member(indexOfName) as Delegate;
+
+            if (indexOf.IsNotNull()) {
+                return (int)indexOf.DynamicInvoke(new[] { target });
+            }
+
+            return -1;
+        }
     }
 }

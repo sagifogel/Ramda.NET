@@ -145,7 +145,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Last(string list) {
-            return Currying.Last(list.ToCharArray());
+            return Currying.Last(list);
         }
 
         public static dynamic TakeLast(int n, string list) {

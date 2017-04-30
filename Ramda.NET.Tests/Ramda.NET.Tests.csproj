@@ -74,6 +74,7 @@
     <Compile Include="Assoc.cs" />
     <Compile Include="AssocPath.cs" />
     <Compile Include="BaseFind.cs" />
+    <Compile Include="BaseIndexOf.cs" />
     <Compile Include="Binary.cs" />
     <Compile Include="Bind.cs" />
     <Compile Include="Both.cs" />
@@ -152,6 +153,8 @@
     <Compile Include="Just.cs" />
     <Compile Include="Juxt.cs" />
     <Compile Include="Keys.cs" />
+    <Compile Include="Last.cs" />
+    <Compile Include="LastIndexOf.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

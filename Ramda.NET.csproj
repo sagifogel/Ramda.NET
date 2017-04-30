@@ -853,6 +853,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Join.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\LastIndexOf.object.cs">
+      <DependentUpon>LastIndexOf.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Memoize.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -938,10 +943,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Last.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\LastIndexOf.cs">
+    <Compile Include="Ramda\LastIndexOf.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LastIndexOf.tt</DependentUpon>
+      <DependentUpon>LastIndexOf.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Length.cs">
       <AutoGen>True</AutoGen>
@@ -2031,6 +2036,11 @@
       <LastGenOutput>Join.cs</LastGenOutput>
       <LastOutputs>.\Join.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\LastIndexOf.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LastIndexOf.object.cs</LastGenOutput>
+      <LastOutputs>.\LastIndexOf.object.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Memoize.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Memoize.cs</LastGenOutput>
@@ -2116,9 +2126,9 @@
       <LastGenOutput>Last.cs</LastGenOutput>
       <LastOutputs>.\Last.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\LastIndexOf.tt">
+    <Content Include="Ramda\LastIndexOf.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>LastIndexOf.cs</LastGenOutput>
+      <LastGenOutput>LastIndexOf.list.cs</LastGenOutput>
       <LastOutputs>.\LastIndexOf.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Length.tt">

@@ -10,6 +10,7 @@ namespace Ramda.NET.Tests
         public class Just
         {
             private readonly int num;
+            private readonly dynamic always = R.Always(-1);
 
             public Just(int num) {
                 this.num = num;
@@ -18,6 +19,11 @@ namespace Ramda.NET.Tests
             public Nothing Empty() {
                 return new Nothing();
             }
+
+            public int LastIndexOf() {
+                return always();
+            }
+
         }
         public class Nothing
         {

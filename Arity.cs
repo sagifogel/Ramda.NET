@@ -11,6 +11,7 @@ namespace Ramda.NET
         private static readonly Type typeofList = typeof(IList);
         private static readonly Type typeofString = typeof(string);
         private static readonly Type typeofObject = typeof(object);
+        private static readonly string[] emptyArray = new string[0];
         private static readonly Type typeofObjectArray = typeof(object[]);
 
         internal static object[] Arguments(params object[] arguments) {

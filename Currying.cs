@@ -457,7 +457,13 @@ namespace Ramda.NET
 
         internal readonly static dynamic IsNil = Curry1<object, bool>(val => val.IsNull());
 
-        internal readonly static dynamic Keys = Curry1<object, string[]>(val => val.ToMemberDictionary().Select(kv => kv.Key).ToArray());
+        internal readonly static dynamic Keys = Curry1<object, string[]>(val => {
+            if (val.IsPrimitive()) {
+                return emptyArray;
+            }
+
+            return val.ToMemberDictionary().Select(kv => kv.Key).ToArray();
+        });
 
         internal readonly static dynamic Length = Curry1<IList, int>(list => list.Count);
 
@@ -789,7 +795,7 @@ namespace Ramda.NET
             return value;
         });
 
-        internal readonly static dynamic Times = Curry2<Delegate, int, IList>((fn, n) => {
+        internal readonly static dynamic Times = Curry2<DynamicDelegate, int, IList>((fn, n) => {
             if (n < 0) {
                 throw new ArgumentOutOfRangeException("n must be a non-negative number");
             }
@@ -798,7 +804,7 @@ namespace Ramda.NET
             var list = new object[n];
 
             while (idx < n) {
-                list[idx] = fn.Invoke(new object[] { idx });
+                list[idx] = Reflection.DynamicInvoke(fn, new object[] { idx });
                 idx += 1;
             }
 

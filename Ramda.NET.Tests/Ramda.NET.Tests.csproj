@@ -155,6 +155,7 @@
     <Compile Include="Keys.cs" />
     <Compile Include="Last.cs" />
     <Compile Include="LastIndexOf.cs" />
+    <Compile Include="Length.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

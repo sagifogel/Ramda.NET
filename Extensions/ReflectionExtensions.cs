@@ -155,6 +155,7 @@ namespace Ramda.NET
         internal static object Member(this object target, object key, int length = 0, bool @private = false) {
             var type = target.GetType();
             var name = key.ToString();
+            var isLength = name.Equals("Length");
 
             if (type.TypeIsDictionary()) {
                 var result = target.DictionaryMember(key, type);
@@ -163,10 +164,10 @@ namespace Ramda.NET
                     return result;
                 }
             }
-            else if (type.TypeIsDelegate() && name.Equals("Length")) {
+            else if (type.TypeIsDelegate() && isLength) {
                 return FunctionArity(target);
             }
-            else {
+            else if (!isLength) {
                 var arr = target as IList;
 
                 if (arr != null) {

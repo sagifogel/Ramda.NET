@@ -16,6 +16,18 @@ namespace Ramda.NET
             return Currying.Length(list);
         }
 
+        public static dynamic Length(string list) {
+            return Currying.Length(list);
+        }
+
+        public static dynamic Length(Delegate list) {
+            return Currying.Length(Delegate(list));
+        }
+
+        public static dynamic Length(object list) {
+            return Currying.Length(list);
+        }
+
         public static dynamic CurryN(int length, Delegate fn) {
             return Currying.CurryN(length, Delegate(fn));
         }

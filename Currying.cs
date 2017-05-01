@@ -465,7 +465,15 @@ namespace Ramda.NET
             return val.ToMemberDictionary().Select(kv => kv.Key).ToArray();
         });
 
-        internal readonly static dynamic Length = Curry1<IList, int>(list => list.Count);
+        internal readonly static dynamic Length = Curry1<object, int>(list => {
+            object member = list.Member("Length");
+
+            if (member is int) {
+                return (int)member;
+            }
+
+            return -1;
+        });
 
         internal readonly static dynamic Lt = Curry2<dynamic, dynamic, bool>((a, b) => a < b);
 

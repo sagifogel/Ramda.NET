@@ -21,6 +21,14 @@ namespace Ramda.NET.Tests
                                           var innerA = typedA.Value as IDictionary<string, object>;
                                           var innerB = typedB.Value as IDictionary<string, object>;
 
+                                          if (innerA == null) {
+                                              innerA = typedA.Value.ToExpando();
+                                          }
+
+                                          if (innerB == null) {
+                                              innerB = typedB.Value.ToExpando();
+                                          }
+
                                           return innerA.ContentEquals(innerB);
                                       }
 

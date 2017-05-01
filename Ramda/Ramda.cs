@@ -28,6 +28,10 @@ namespace Ramda.NET
             return Currying.Length(list);
         }
 
+        public static dynamic Lens(dynamic getter, dynamic setter) {
+            return Currying.Lens(Delegate(getter), Delegate(setter));
+        }
+
         public static dynamic CurryN(int length, Delegate fn) {
             return Currying.CurryN(length, Delegate(fn));
         }
@@ -302,6 +306,10 @@ namespace Ramda.NET
 
         public static dynamic Intersperse<TResult, TSeperator>(RamdaPlaceholder separator, IDispersible<TSeperator, TResult> list) {
             return Currying.Intersperse(separator, list);
+        }
+
+        public static dynamic Over<TTarget>(dynamic lens, dynamic v, TTarget x) {
+            return Currying.Over(Delegate(lens), Delegate(v), x);
         }
     }
 }

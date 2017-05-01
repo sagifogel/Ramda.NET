@@ -503,7 +503,7 @@ namespace Ramda.NET
             return new Functor {
                 Value = x,
                 Map = new Func<dynamic, Functor>(f => {
-                    return IdentityFunctor(f.DynamicInvoke(x));
+                    return IdentityFunctor(DynamicInvoke(f, new[] { x }));
                 })
             };
         }

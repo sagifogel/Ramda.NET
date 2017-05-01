@@ -604,8 +604,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic Or = Curry2<bool, bool, bool>((a, b) => a || b);
 
-        internal readonly static dynamic Over = Curry3<Func<Func<object, Functor>, Func<object, Functor>>, Delegate, object, object>((lens, f, x) => {
-            return lens(y => IdentityFunctor(f.Invoke(new object[] { y })))(x).Value;
+        internal readonly static dynamic Over = Curry3<dynamic, dynamic, object, object>((lens, f, x) => {
+            return Reflection.DynamicInvoke(lens, new object[] { Delegate((object y) => IdentityFunctor(Reflection.DynamicInvoke(f, new object[] { y }))) })(x).Value;
         });
 
         internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => new object[2] { fst, snd });
@@ -727,7 +727,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Set = Curry3<Func<Func<object, Functor>>, object, object, object>((lens, v, x) => {
+        internal readonly static dynamic Set = Curry3<dynamic, object, object, object>((lens, v, x) => {
             return Over(lens, Always(v), x);
         });
 
@@ -991,10 +991,12 @@ namespace Ramda.NET
             return vals.ToArray<Array>();
         });
 
-        internal readonly static dynamic View = Curry2<Func<Func<object, Functor>, Func<object, Functor>>, object, object>((lens, x) => lens(Const)(x).Value);
+        internal readonly static dynamic View = Curry2<dynamic, object, object>((lens, x) => {
+            return Reflection.DynamicInvoke(lens, new object[] { (Func<object, Functor>)Const })(x).Value;
+        });
 
-        internal readonly static dynamic When = Curry3<Delegate, Delegate, object, object>((pred, whenTrueFn, x) => {
-            return (bool)pred.Invoke(new[] { x }) ? whenTrueFn.Invoke(new[] { x }) : x;
+        internal readonly static dynamic When = Curry3<dynamic, dynamic, object, object>((pred, whenTrueFn, x) => {
+            return Reflection.DynamicInvoke(pred, new[] { x }) ? Reflection.DynamicInvoke(whenTrueFn, new[] { x }) : x;
         });
 
         internal readonly static dynamic Where = Curry2<IDictionary<string, object>, object, bool>((spec, testObj) => {
@@ -1458,19 +1460,22 @@ namespace Ramda.NET
 
         internal readonly static dynamic Juxt = Curry1<IList, DynamicDelegate>(fns => Converge(ArrayOf, fns));
 
-        internal readonly static dynamic Lens = Curry2<Delegate, Delegate, Delegate>((getter, setter) => {
-            return new Func<Func<object, Functor>, Func<object, Functor>>(toFunctorFn => {
-                return new Func<object, Functor>(target => {
-                    return Map(new Func<object, object>(focus => setter.Invoke(new[] { focus, target })), toFunctorFn(getter.Invoke(new[] { target })));
+        internal readonly static dynamic Lens = Curry2<dynamic, dynamic, dynamic>((getter, setter) => {
+            return Delegate((dynamic toFunctorFn) => {
+                return Delegate(target => {
+                    var fn = Delegate(focus => Reflection.DynamicInvoke(setter, new[] { focus, target }));
+                    var functor = toFunctorFn(Reflection.DynamicInvoke(getter, new[] { target }));
+
+                    return Map(fn, functor);
                 });
             });
         });
 
-        internal readonly static dynamic LensIndex = Curry1<int, Delegate>(n => Lens(Nth(n), Update(n)));
+        internal readonly static dynamic LensIndex = Curry1<int, dynamic>(n => Lens(Nth(n), Update(n)));
 
-        internal readonly static dynamic LensPath = Curry1<IList<string>, Delegate>(p => Lens(Path(p), AssocPath(p)));
+        internal readonly static dynamic LensPath = Curry1<IList<string>, dynamic>(p => Reflection.DynamicInvoke(Lens, new object[] { Path(p), AssocPath(p) }));
 
-        internal readonly static dynamic LensProp = Curry1<string, Delegate>(k => Lens(Prop(k), Assoc(k)));
+        internal readonly static dynamic LensProp = Curry1<string, dynamic>(k => Lens(Prop(k), Assoc(k)));
 
         internal readonly static dynamic LiftN = Curry2<int, DynamicDelegate, DynamicDelegate>((arity, fn) => {
             return CurryN(arity, Delegate(arguments => ReduceInternal(Ap, Map(CurryN(arity, fn), arguments[0]), arguments.Slice(1))));

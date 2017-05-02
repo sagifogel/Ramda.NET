@@ -157,6 +157,7 @@
     <Compile Include="LastIndexOf.cs" />
     <Compile Include="Length.cs" />
     <Compile Include="Lenses.cs" />
+    <Compile Include="LensIndex.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

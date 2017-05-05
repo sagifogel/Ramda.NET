@@ -610,7 +610,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Pair = Curry2<object, object, object[]>((fst, snd) => new object[2] { fst, snd });
 
-        internal readonly static dynamic Path = Curry2<IList<string>, object, object>((paths, obj) => {
+        internal readonly static dynamic Path = Curry2<IList, object, object>((paths, obj) => {
             var idx = 0;
             var val = obj;
 
@@ -821,6 +821,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic ToPairs = Curry1<object, object[]>((obj) => {
             return obj.ToMemberDictionary()
+                      .OrderBy(prop => prop.Key)
                       .Select(prop => new[] { prop.Key, prop.Value })
                       .ToArray();
         });
@@ -1473,7 +1474,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic LensIndex = Curry1<int, dynamic>(n => Lens(Nth(n), Update(n)));
 
-        internal readonly static dynamic LensPath = Curry1<IList<string>, dynamic>(p => Reflection.DynamicInvoke(Lens, new object[] { Path(p), AssocPath(p) }));
+        internal readonly static dynamic LensPath = Curry1<IList, dynamic>(p => Reflection.DynamicInvoke(Lens, new object[] { Path(p), AssocPath(p) }));
 
         internal readonly static dynamic LensProp = Curry1<string, dynamic>(k => Lens(Prop(k), Assoc(k)));
 

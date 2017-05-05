@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic LensPath(IList<string> path) {
+		public static dynamic LensPath(IList path) {
 			return Currying.LensPath(path);
 		}
 

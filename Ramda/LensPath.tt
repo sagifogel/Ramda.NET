@@ -4,6 +4,6 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("IList<string>", "path", false));	
+	template.Parameters.Add(Tuple.Create("IList", "path", false));	
 	template.Render();
 #>

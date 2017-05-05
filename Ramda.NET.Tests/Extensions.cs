@@ -47,10 +47,19 @@ namespace Ramda.NET.Tests
                                           var innerB = typedB.Value as IList;
 
                                           if (innerA.Count == innerB.Count) {
-                                              var hash = new HashSet<object>(innerA.Select(o => o));
+                                              for (int i = 0; i < innerB.Count; i++) {
+                                                  var innerAItem = innerA[i];
+                                                  var innerBItem = innerB[i];
 
-                                              foreach (var item in innerB) {
-                                                  if (!hash.Contains(item)) {
+                                                  if (!innerAItem.GetType().Equals(innerBItem.GetType())) {
+                                                      var innerBItemMap = innerB[i].ToDynamic() as IDictionary<string, object>;
+                                                      var innerAItemMap = innerA[i].ToDynamic() as IDictionary<string, object>;
+
+                                                      if (!innerBItemMap.ContentEquals(innerAItemMap)) {
+                                                          return false;
+                                                      }
+                                                  }
+                                                  else if (!innerAItem.Equals(innerBItem)) {
                                                       return false;
                                                   }
                                               }
@@ -58,7 +67,7 @@ namespace Ramda.NET.Tests
                                               return true;
                                           }
 
-                                          return false;
+                                            return false;
                                       }
 
                                       return typedA.Value.Equals(typedB.Value);

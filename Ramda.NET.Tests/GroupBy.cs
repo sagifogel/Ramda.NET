@@ -74,24 +74,24 @@ namespace Ramda.NET.Tests
             Func<Student, string> byGrade = student => grade(student.Score);
 
             var students = new[] {
-                new Student { Name = "Jack", Score = 69 },
-                new Student { Name = "Eddy", Score = 58 },
-                new Student { Name = "Fred", Score = 67 },
                 new Student { Name = "Abby", Score = 84 },
                 new Student { Name = "Brad", Score = 73 },
                 new Student { Name = "Chris", Score = 89 },
-                new Student { Name = "Irene", Score = 85 },
                 new Student { Name = "Dianne", Score = 99 },
+                new Student { Name = "Eddy", Score = 58 },
+                new Student { Name = "Fred", Score = 67 },
+                new Student { Name = "Gillian", Score = 91 },
                 new Student { Name = "Hannah", Score = 78 },
-                new Student { Name = "Gillian", Score = 91 }
+                new Student { Name = "Irene", Score = 85 },
+                new Student { Name = "Jack", Score = 69 }
             };
 
             var expected = new {
                 A = new[] { new Student { Name = "Dianne", Score = 99 }, new Student { Name = "Gillian", Score = 91 } },
                 B = new[] { new Student { Name = "Abby", Score = 84 }, new Student { Name = "Chris", Score = 89 }, new Student { Name = "Irene", Score = 85 } },
-                F = new[] { new Student { Name = "Eddy", Score = 58 } },
                 C = new[] { new Student { Name = "Brad", Score = 73 }, new Student { Name = "Hannah", Score = 78 } },
-                D = new[] { new Student { Name = "Fred", Score = 67 }, new Student { Name = "Jack", Score = 69 } }
+                D = new[] { new Student { Name = "Fred", Score = 67 }, new Student { Name = "Jack", Score = 69 } },
+                F = new[] { new Student { Name = "Eddy", Score = 58 } }
             };
 
             DynamicAssert.AreEqual(R.GroupBy(byGrade, students), expected);

@@ -159,6 +159,7 @@
     <Compile Include="Lenses.cs" />
     <Compile Include="LensPath.cs" />
     <Compile Include="LensIndex.cs" />
+    <Compile Include="LensProp.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

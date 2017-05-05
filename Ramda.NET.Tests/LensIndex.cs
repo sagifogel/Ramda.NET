@@ -50,7 +50,7 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [Description("LensIndex_Well_Behaved_Get_(set(set_S_V1)_V2)_===_V2")]
+        [Description("LensIndex_Well_Behaved_Get_(Set(Set_S_V1)_V2)_===_V2")]
         public void LensIndex_Well_Behaved_Get_Set_Set_S_V1_V2_Equals_V2() {
             Assert.AreEqual(R.View(R.LensIndex(0), R.Set(R.LensIndex(0), 11, R.Set(R.LensIndex(0), 10, testList))), 11);
         }

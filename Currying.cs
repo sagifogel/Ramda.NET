@@ -782,7 +782,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Subtract = Curry2<double, double, double>((arg1, arg2) => arg1 - arg2);
+        internal readonly static dynamic Subtract = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 - arg2);
 
         internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MaxValue));
 
@@ -1478,8 +1478,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic LensProp = Curry1<string, dynamic>(k => Lens(Prop(k), Assoc(k)));
 
-        internal readonly static dynamic LiftN = Curry2<int, DynamicDelegate, DynamicDelegate>((arity, fn) => {
-            return CurryN(arity, Delegate(arguments => ReduceInternal(Ap, Map(CurryN(arity, fn), arguments[0]), arguments.Slice(1))));
+        internal readonly static dynamic LiftN = Curry2<int, dynamic, DynamicDelegate>((arity, fn) => {
+            return CurryN(arity, Delegate(arguments => ReduceInternal(Ap, Map(CurryN(arity, Delegate(fn)), arguments[0]), arguments.Slice(1))));
         });
 
         internal readonly static dynamic Mean = Curry1<IList<double>, double>(list => Sum(list) / list.Count);

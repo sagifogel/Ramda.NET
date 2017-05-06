@@ -129,6 +129,7 @@
     <Compile Include="Gt.cs" />
     <Compile Include="Has.cs" />
     <Compile Include="Head.cs" />
+    <Compile Include="IMappable.cs" />
     <Compile Include="Identical.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="IfElse.cs" />
@@ -150,6 +151,9 @@
     <Compile Include="IsEmpty.cs" />
     <Compile Include="IsNil.cs" />
     <Compile Include="Join.cs" />
+    <Compile Include="IAppable.cs" />
+    <Compile Include="Nothing.cs" />
+    <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />
     <Compile Include="Juxt.cs" />
     <Compile Include="Keys.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="LensPath.cs" />
     <Compile Include="LensIndex.cs" />
     <Compile Include="LensProp.cs" />
+    <Compile Include="Lift.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
     <Compile Include="T.cs" />

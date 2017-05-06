@@ -6,28 +6,37 @@ using System.Threading.Tasks;
 
 namespace Ramda.NET.Tests
 {
-    public class Just : IEquatable<Just>
+    public class Just : _Maybe, IEquatable<Just>, IAppable, IMappable
     {
-        public object Value { get; private set; }
-
-        public Just(object value) {
-            Value = value;
+        public Just(object value) : base(value){
         }
 
         public override bool Equals(object obj) {
             return Equals(obj as Just);
         }
 
-        public bool Equals(Just other) {
+        public override bool Equals(Just other) {
             if (other == null) {
                 return false;
             }
-
+            
             return R.Equals(other.Value, Value);
+        }
+
+        public object Map(dynamic f) {
+            return Of(f(Value));
+        }
+
+        public object Ap(IMappable m) {
+            return m.Map(Value);
         }
 
         public override int GetHashCode() {
             return Value.GetHashCode();
+        }
+
+        public override string ToString() {
+            return $"Just( + {Value})";
         }
     }
 }

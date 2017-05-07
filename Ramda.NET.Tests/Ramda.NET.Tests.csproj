@@ -155,6 +155,7 @@
     <Compile Include="LiftN.cs" />
     <Compile Include="Lte.cs" />
     <Compile Include="Lt.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

@@ -1252,12 +1252,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Map = Curry2(Dispatchable2("Map", XMap, new Func<dynamic, object, object>((fn, functor) => {
             IList listFunctor = null;
-            var functionFunctor = functor as DynamicDelegate;
 
-            if (functionFunctor.IsNotNull()) {
+            if (functor.IsFunction()) {
+                var functionFunctor = Delegate(functor);
+
                 return CurryN(functionFunctor.Length, Delegate(((object[] arguments) => {
-                    dynamic dynamicFunctor = functionFunctor;
-
                     return fn(Reflection.DynamicInvoke(functionFunctor, arguments));
                 })));
             }
@@ -1266,7 +1265,7 @@ namespace Ramda.NET
 
             if (listFunctor.IsNull()) {
                 return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
-                    acc[key] = fn.Invoke(functor.Member(key));
+                    acc[key] = Reflection.DynamicInvoke(fn, new[] { functor.Member(key) });
                     return acc;
                 })), new ExpandoObject(), functor.Keys());
             }

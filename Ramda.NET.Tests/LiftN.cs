@@ -36,7 +36,7 @@ namespace Ramda.NET.Tests
         public void LiftN_Is_Curried() {
             var f4 = R.LiftN(4);
 
-            //Assert.IsInstanceOfType(f4, typeof(DynamicDelegate));
+            Assert.IsInstanceOfType(f4, typeof(DynamicDelegate));
             CollectionAssert.AreEqual(f4(AddN)(new[] { 1 }, new[] { 2 }, new[] { 3 }, new[] { 4, 5 }), new[] { 10, 11 });
         }
 

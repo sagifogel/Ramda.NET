@@ -475,9 +475,25 @@ namespace Ramda.NET
             return -1;
         });
 
-        internal readonly static dynamic Lt = Curry2<dynamic, dynamic, bool>((a, b) => a < b);
+        internal readonly static dynamic Lt = Curry2<dynamic, dynamic, bool>((a, b) => {
+            var strA = a as string;
 
-        internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => a <= b);
+            if (strA != null) {
+                return string.Compare(strA, (string)b) < 0;
+            }
+
+            return a < b;
+        });
+
+        internal readonly static dynamic Lte = Curry2<dynamic, dynamic, bool>((a, b) => {
+            var strA = a as string;
+
+            if (strA != null) {
+                return string.Compare(strA, (string)b) <= 0;
+            }
+
+            return a <= b;
+        });
 
         internal readonly static dynamic MapAccum = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list));
 

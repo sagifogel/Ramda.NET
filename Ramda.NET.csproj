@@ -858,6 +858,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Lt.string.cs">
+      <DependentUpon>Lt.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Lte.string.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lte.string.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Memoize.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2045,6 +2055,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LastIndexOf.object.cs</LastGenOutput>
       <LastOutputs>.\LastIndexOf.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lt.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lt.string.cs</LastGenOutput>
+      <LastOutputs>.\Lt.double - Copy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Lte.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Lte.string.cs</LastGenOutput>
+      <LastOutputs>.\Lte.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Memoize.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

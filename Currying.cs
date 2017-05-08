@@ -1,6 +1,7 @@
 ﻿using System;
 using Ramda.NET;
 using System.Linq;
+using Sys = System;
 using System.Dynamic;
 using System.Collections;
 using static Ramda.NET.R;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core = Ramda.NET.IEnumerableExtensions;
 using Reflection = Ramda.NET.ReflectionExtensions;
-using System.Reflection;
 
 namespace Ramda.NET
 {
@@ -495,9 +495,34 @@ namespace Ramda.NET
             return a <= b;
         });
 
-        internal readonly static dynamic MapAccum = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(0, 1, from => from < list.Count, fn, acc, list));
+        internal readonly static dynamic MapAccum = Curry3<DynamicDelegate, object, IList, Tuple<object, IList>>((fn, acc, list) => {
+            var idx = 0;
+            var len = list.Count;
+            var tuple = R.Tuple.Create(acc, null);
+            IList result = new object[list.Count];
 
-        internal readonly static dynamic MapAccumRight = Curry3<Delegate, object, IList, Tuple<object, IList>>((fn, acc, list) => MapAccumInternal(list.Count - 1, -1, from => from >= 0, fn, acc, list));
+            while (idx < len) {
+                tuple = (Tuple<object, object>)Reflection.DynamicInvoke(fn, new[] { tuple.Item1, list[idx] });
+                result[idx] = tuple.Item1;
+                idx += 1;
+            }
+
+            return Sys.Tuple.Create(tuple.Item1, result);
+        });
+
+        internal readonly static dynamic MapAccumRight = Curry3<DynamicDelegate, object, IList, Tuple<IList, object>>((fn, acc, list) => {
+            var idx = list.Count -1;
+            var tuple = R.Tuple.Create(acc, null);
+            IList result = new object[list.Count];
+
+            while (idx >= 0) {
+                tuple = (Tuple<object, object>)Reflection.DynamicInvoke(fn, new[] { list[idx], tuple.Item1 });
+                result[idx] = tuple.Item1;
+                idx -= 1;
+            }
+
+            return Sys.Tuple.Create(result, tuple.Item1);
+        });
 
         internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
 

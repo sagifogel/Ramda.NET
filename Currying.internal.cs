@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq;
-using Sys = System;
+using System.Text;
 using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using static Ramda.NET.R;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using static Ramda.NET.ReflectionExtensions;
-using System.Text;
 using System.Text.RegularExpressions;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -317,19 +316,6 @@ namespace Ramda.NET
             public int Compare(object x, object y) {
                 return comparator(x, y);
             }
-        }
-
-        private static Tuple<object, IList> MapAccumInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, dynamic fn, object acc, IList list) {
-            var tuple = R.Tuple.Create(acc, null);
-            IList result = new object[list.Count];
-
-            while (loopPredicate(from)) {
-                tuple = (R.Tuple)fn.DynamicInvoke(tuple.Item1, list[from]);
-                result[from] = tuple.Item1;
-                from += indexerAcc;
-            }
-
-            return Sys.Tuple.Create(tuple.Item1, result);
         }
 
         private static object FindInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, Func<object, bool> fn, IList list) {

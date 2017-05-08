@@ -62,6 +62,7 @@
     <Compile Include="Nothing.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
+    <Compile Include="R.Tuple.cs" />
     <Compile Include="Ramda\Add.bool.cs">
       <DependentUpon>Add.bool.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1623,7 +1624,6 @@
     <Compile Include="Placeholder.cs" />
     <Compile Include="Ramda\Ramda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="R.Tuple.cs" />
     <Compile Include="Transformers\StepCatObject.cs" />
     <Compile Include="Transformers\StepCatString.cs" />
     <Compile Include="Transformers\StepCatArray.cs" />

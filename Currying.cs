@@ -91,7 +91,7 @@ namespace Ramda.NET
             index = start + idx;
             concatedList = list.Concat();
             elementType = concatedList.GetElementType();
-            adjustedValue = ((dynamic)fn)(list[index]);
+            adjustedValue = Reflection.DynamicInvoke(fn, new[] { list[index] });
 
             if (!elementType.Equals(adjustedValue.GetType())) {
                 adjustedValue = adjustedValue.Cast(elementType);
@@ -130,7 +130,7 @@ namespace Ramda.NET
             }
         });
 
-        internal readonly static dynamic Bind = Curry2<Delegate, object, object>((fn, thisObj) => {
+        internal readonly static dynamic Bind = Curry2<dynamic, object, object>((fn, thisObj) => {
             return Arity(fn.Arity(), Delegate(thisObj, fn));
         });
 
@@ -526,7 +526,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
 
-        internal readonly static dynamic MathMod = Curry2<dynamic, dynamic, dynamic>((m, p) => (m % p + p) % p);
+        internal readonly static dynamic MathMod = Curry2<int, uint, int>((m, p) => (int)((m % p + p) % p));
 
         internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a);
 

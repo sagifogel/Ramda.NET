@@ -5,6 +5,6 @@
 	var template = new RamdaTemplate();
 
 	template.Parameters.Add(Tuple.Create("int", "m", false));	
-	template.Parameters.Add(Tuple.Create("int", "p", false));
+	template.Parameters.Add(Tuple.Create("uint", "p", false));
 	template.Render();
 #>

@@ -14,11 +14,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic MathMod(int m, int p) {
+		public static dynamic MathMod(int m, uint p) {
 			return Currying.MathMod(m, p);
 		}
 
-		public static dynamic MathMod(RamdaPlaceholder m, int p) {
+		public static dynamic MathMod(RamdaPlaceholder m, uint p) {
 			return Currying.MathMod(m, p);
 		}
 

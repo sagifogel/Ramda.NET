@@ -869,6 +869,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lte.string.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Max.string.cs">
+      <DependentUpon>Max.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Max.date.cs">
+      <DependentUpon>Max.date.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Memoize.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2065,6 +2075,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Lte.string.cs</LastGenOutput>
       <LastOutputs>.\Lte.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.string.cs</LastGenOutput>
+      <LastOutputs>.\Max.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Max.date.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Max.date.cs</LastGenOutput>
+      <LastOutputs>.\Max.date.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Memoize.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

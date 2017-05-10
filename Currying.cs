@@ -528,7 +528,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic MathMod = Curry2<int, uint, int>((m, p) => (int)((m % p + p) % p));
 
-        internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => b > a ? b : a);
+        internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => Gt(b, a) ? b : a);
 
         internal readonly static dynamic MaxBy = Curry3<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) > f.DynamicInvoke(a) ? b : a);
 

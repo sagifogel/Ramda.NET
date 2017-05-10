@@ -159,6 +159,7 @@
     <Compile Include="MapAccumRight.cs" />
     <Compile Include="MapAccum.cs" />
     <Compile Include="MapObjIndexed.cs" />
+    <Compile Include="Match.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

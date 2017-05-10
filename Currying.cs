@@ -1298,9 +1298,9 @@ namespace Ramda.NET
             return MapInternal(fn, listFunctor);
         })));
 
-        internal readonly static dynamic MapObjIndexed = Curry2<Delegate, object, object>((fn, obj) => {
+        internal readonly static dynamic MapObjIndexed = Curry2<dynamic, object, object>((fn, obj) => {
             return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, object>((acc, key) => {
-                acc[key] = fn.Invoke(new[] { obj.Member(key), key, obj });
+                acc[key] = Reflection.DynamicInvoke(fn, new[] { obj.Member(key), key, obj });
                 return acc;
             })), new ExpandoObject(), obj.Keys());
         });

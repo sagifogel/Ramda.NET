@@ -162,6 +162,7 @@
     <Compile Include="Match.cs" />
     <Compile Include="MathMod.cs" />
     <Compile Include="Max.cs" />
+    <Compile Include="MaxBy.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

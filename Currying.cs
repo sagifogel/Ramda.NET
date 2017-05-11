@@ -122,11 +122,11 @@ namespace Ramda.NET
         internal readonly static dynamic AssocPath = Curry3<IList, object, object, object>((path, val, obj) => {
             switch (path.Count) {
                 case 0:
-                    return val;
+                return val;
                 case 1:
-                    return Assoc(path[0], val, obj);
+                return Assoc(path[0], val, obj);
                 default:
-                    return Assoc(path[0], AssocPath(path.Slice(1), val, Reflection.MemberOr(obj, path[0], () => new ExpandoObject())), obj);
+                return Assoc(path[0], AssocPath(path.Slice(1), val, Reflection.MemberOr(obj, path[0], () => new ExpandoObject())), obj);
             }
         });
 
@@ -511,7 +511,7 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic MapAccumRight = Curry3<DynamicDelegate, object, IList, Tuple<IList, object>>((fn, acc, list) => {
-            var idx = list.Count -1;
+            var idx = list.Count - 1;
             var tuple = R.Tuple.Create(acc, null);
             IList result = new object[list.Count];
 
@@ -530,7 +530,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => Gt(b, a) ? b : a);
 
-        internal readonly static dynamic MaxBy = Curry3<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) > f.DynamicInvoke(a) ? b : a);
+        internal readonly static dynamic MaxBy = Curry3<dynamic, dynamic, dynamic, dynamic>((f, a, b) => Reflection.DynamicInvoke(f, new[] { b }) > Reflection.DynamicInvoke(f, new[] { a }) ? b : a);
 
         internal readonly static dynamic Merge = Curry2<object, object, object>((l, r) => Assign(l, r));
 

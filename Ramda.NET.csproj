@@ -879,6 +879,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Mean.int.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mean.int.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Memoize.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1064,8 +1069,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Max.char.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Mean.cs">
-      <DependentUpon>Mean.tt</DependentUpon>
+    <Compile Include="Ramda\Mean.double.cs">
+      <DependentUpon>Mean.double.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -2086,6 +2091,11 @@
       <LastGenOutput>Max.date.cs</LastGenOutput>
       <LastOutputs>.\Max.date.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Mean.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Mean.int.cs</LastGenOutput>
+      <LastOutputs>.\Mean.int.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Memoize.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Memoize.cs</LastGenOutput>
@@ -2266,9 +2276,9 @@
       <LastGenOutput>MathMod.cs</LastGenOutput>
       <LastOutputs>.\MathMod.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Mean.tt">
+    <Content Include="Ramda\Mean.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Mean.cs</LastGenOutput>
+      <LastGenOutput>Mean.double.cs</LastGenOutput>
       <LastOutputs>.\Mean.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Median.tt">

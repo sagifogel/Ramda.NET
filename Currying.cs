@@ -1522,7 +1522,7 @@ namespace Ramda.NET
             return CurryN(arity, Delegate(arguments => ReduceInternal(Ap, Map(CurryN(arity, Delegate(fn)), arguments[0]), arguments.Slice(1))));
         });
 
-        internal readonly static dynamic Mean = Curry1<IList<double>, double>(list => Sum(list) / list.Count);
+        internal readonly static dynamic Mean = Curry1<IList, dynamic>(list => Sum(list) / list.Count);
 
         internal readonly static dynamic Median = Curry1<IList, double>(list => {
             var len = list.Count;

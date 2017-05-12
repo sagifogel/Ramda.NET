@@ -164,6 +164,7 @@
     <Compile Include="Max.cs" />
     <Compile Include="MaxBy.cs" />
     <Compile Include="Mean.cs" />
+    <Compile Include="Median.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

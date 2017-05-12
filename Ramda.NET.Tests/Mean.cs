@@ -17,10 +17,10 @@ namespace Ramda.NET.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(DivideByZeroException))]
+        [ExpectedException(typeof(NaNException))]
         [Description("Mean_Returns_NaN_For_An_Empty_List")]
-        public void Mean_Returns_Throws_DivideByZeroException_For_An_Empty_List() {
-            Assert.AreEqual(R.Mean(new int[0]), R.Null);
+        public void Mean_Returns_Throws_NaNException_For_An_Empty_List() {
+            R.Mean(new int[0]);
         }
 
         [TestMethod]

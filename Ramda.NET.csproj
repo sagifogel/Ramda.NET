@@ -48,6 +48,12 @@
     <Compile Include="AbstractLambda.cs" />
     <Compile Include="CurryParams.cs" />
     <Compile Include="DeepCloner.cs" />
+    <Compile Include="Exceptions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Exceptions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\NaNException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Functor.cs" />
@@ -884,6 +890,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Mean.int.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Median.int.cs">
+      <DependentUpon>Median.int.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Memoize.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1074,8 +1085,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Median.cs">
-      <DependentUpon>Median.tt</DependentUpon>
+    <Compile Include="Ramda\Median.double.cs">
+      <DependentUpon>Median.double.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -2096,6 +2107,11 @@
       <LastGenOutput>Mean.int.cs</LastGenOutput>
       <LastOutputs>.\Mean.int.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Median.int.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Median.int.cs</LastGenOutput>
+      <LastOutputs>.\Median.int.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Memoize.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Memoize.cs</LastGenOutput>
@@ -2281,10 +2297,10 @@
       <LastGenOutput>Mean.double.cs</LastGenOutput>
       <LastOutputs>.\Mean.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Median.tt">
+    <Content Include="Ramda\Median.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Median.cs</LastGenOutput>
-      <LastOutputs>.\Median.cs</LastOutputs>
+      <LastGenOutput>Median.double.cs</LastGenOutput>
+      <LastOutputs>.\Median.double - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MergeWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2843,6 +2859,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ramda\IfElse.dynamic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Exceptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Exceptions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

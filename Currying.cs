@@ -1522,19 +1522,25 @@ namespace Ramda.NET
             return CurryN(arity, Delegate(arguments => ReduceInternal(Ap, Map(CurryN(arity, Delegate(fn)), arguments[0]), arguments.Slice(1))));
         });
 
-        internal readonly static dynamic Mean = Curry1<IList, dynamic>(list => Sum(list) / list.Count);
+        internal readonly static dynamic Mean = Curry1<IList, dynamic>(list => {
+            if (list.Count == 0) {
+                throw new NaNException();
+            }
 
-        internal readonly static dynamic Median = Curry1<IList, double>(list => {
+            return  Sum(list) / list.Count;
+        });
+
+        internal readonly static dynamic Median = Curry1<IList, dynamic>(list => {
             var len = list.Count;
 
             if (len == 0) {
-                return 0;
+                throw new NaNException();
             }
 
             var width = 2 - len % 2;
             var idx = (len - width) / 2;
 
-            return Mean(list.Slice().Sort<double>((a, b) => {
+            return Mean(list.Slice().Sort<dynamic>((a, b) => {
                 return a < b ? -1 : a > b ? 1 : 0;
             }).Slice(idx, idx + width));
         });

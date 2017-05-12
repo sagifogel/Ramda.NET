@@ -15,7 +15,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		public static dynamic Bind<TTarget>(Delegate fn, TTarget thisObject) {
-			return Currying.Bind(fn, thisObject);
+			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
 		public static dynamic Bind<TTarget>(RamdaPlaceholder fn, TTarget thisObject) {
@@ -23,7 +23,15 @@ namespace Ramda.NET
 		}
 
 		public static dynamic Bind(Delegate fn, RamdaPlaceholder thisObject = null) {
-			return Currying.Bind(fn, thisObject);
+			return Currying.Bind(Delegate(fn), thisObject);
+		}
+
+		public static dynamic Bind(dynamic fn, RamdaPlaceholder thisObject = null) {
+			return Currying.Bind(Delegate(fn), thisObject);
+		}
+
+		public static dynamic Bind<TTarget>(dynamic fn, TTarget thisObject) {
+			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
 		public static dynamic Bind(RamdaPlaceholder fn = null, RamdaPlaceholder thisObject = null) {

@@ -104,12 +104,16 @@ namespace Ramda.NET
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
         private static object[] MapInternal(dynamic fn, IList functor) {
+            return MapInternal(obj => DynamicInvoke(fn, new[] { obj }), functor);
+        }
+
+        private static object[] MapInternal(Func<object, object> fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
             var result = new object[len];
 
             while (idx < len) {
-                result[idx] = DynamicInvoke(fn, new[] { functor[idx] });
+                result[idx] = fn(functor[idx]);
                 idx += 1;
             }
 
@@ -800,16 +804,62 @@ namespace Ramda.NET
         }
 
         private static string ToStringInternal(object x) {
-            if (x.IsList()) {
-                var list = (IList)x;
-                var stringBuilder = new StringBuilder("[");
+            return ToStringInternal(x, new object[0]);
+        }
 
-                list.ForEach(item => stringBuilder.Append(ToStringInternal(item)));
+        private static string ToStringInternal(object x, IList seen) {
+            IList list = null;
+            string str = null;
+            StringBuilder stringBuilder = null;
+            Func<object, string> recur = y => {
+                var xs = seen.Concat(new[] { x });
+
+                return ContainsInternal(y, xs) ? "<Circular>" : ToStringInternal(y, xs);
+            };
+
+            Func<object, IList, IList> mapPairs = (obj, keys) => {
+                return MapInternal(k => {
+                    return $"{Quote((string)k)}: {recur(obj.Member(k))}";
+                }, keys.Slice().Sort(new Comparison<string>((a, b) => string.Compare(a, b))));
+            };
+
+            list = x as IList;
+
+            if (list != null) {
+                IList transformedList = null;
+
+                stringBuilder = new StringBuilder("[");
+                transformedList = MapInternal(recur, list).Concat((IList)mapPairs(x, Reject(Delegate((object k) => {
+                    return Regex.IsMatch((string)k, @"^\d+$");
+                }), x.Keys())));
+
+                transformedList.ForEach(s => stringBuilder.Append(s));
 
                 return stringBuilder.Append("]").ToString();
             }
 
-            return x.ToString();
+            str = x as string;
+
+            if (str != null) {
+                return Quote(str);
+            }
+
+            if (R.Null.Equals(x)) {
+                return "null";
+            }
+
+            if (!x.IsAnonymousType()) {
+                str = x.ToString();
+
+                if (!str.Equals(x.GetType().FullName)) {
+                    return str;
+                }
+            }
+
+            stringBuilder = new StringBuilder("{");
+            str = string.Join(", ", (object[])mapPairs(x, x.Keys()));
+
+            return stringBuilder.Append(str).Append("}").ToString();
         }
 
         private static DynamicDelegate ComposeFactory(dynamic pipe, string name) {
@@ -858,6 +908,21 @@ namespace Ramda.NET
             }
 
             return -1;
+        }
+
+        public static string Quote(string s) {
+            var escaped = s;
+
+            escaped = Regex.Replace(escaped, @"\\", "\\\\");
+            escaped = Regex.Replace(escaped, "[\b]", "\\b");
+            escaped = Regex.Replace(escaped, "\f", "\\f");
+            escaped = Regex.Replace(escaped, "\r", "\\r");
+            escaped = Regex.Replace(escaped, "\t", "\\t");
+            escaped = Regex.Replace(escaped, "\v", "\\v");
+            escaped = Regex.Replace(escaped, "\0", "\\0");
+            escaped = Regex.Replace(escaped, "\"", "\\\"");
+
+            return $"\"{escaped}\"";
         }
     }
 }

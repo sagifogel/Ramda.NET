@@ -122,16 +122,22 @@ namespace Ramda.NET
         internal readonly static dynamic AssocPath = Curry3<IList, object, object, object>((path, val, obj) => {
             switch (path.Count) {
                 case 0:
-                return val;
+                    return val;
                 case 1:
-                return Assoc(path[0], val, obj);
+                    return Assoc(path[0], val, obj);
                 default:
-                return Assoc(path[0], AssocPath(path.Slice(1), val, Reflection.MemberOr(obj, path[0], () => new ExpandoObject())), obj);
+                    return Assoc(path[0], AssocPath(path.Slice(1), val, Reflection.MemberOr(obj, path[0], () => new ExpandoObject())), obj);
             }
         });
 
-        internal readonly static dynamic Bind = Curry2<dynamic, object, object>((fn, thisObj) => {
-            return Arity(fn.Arity(), Delegate(thisObj, fn));
+        internal readonly static dynamic Bind = Curry2<DynamicDelegate, object, object>((fn, thisObj) => {
+            return Arity(fn.Arity(), Delegate(arguments => {
+                Delegate @delegate = fn.Unwrap();
+
+                @delegate = @delegate.Method.CreateDelegate(thisObj);
+                
+                return Reflection.DynamicInvoke(Delegate(@delegate), arguments);
+            }));
         });
 
         internal readonly static dynamic Clamp = Curry3<dynamic, dynamic, dynamic, dynamic>((min, max, value) => {
@@ -526,7 +532,12 @@ namespace Ramda.NET
 
         internal readonly static dynamic Match = Curry2<Regex, string, MatchCollection>((rx, str) => rx.Matches(str));
 
-        internal readonly static dynamic MathMod = Curry2<int, uint, int>((m, p) => (int)((m % p + p) % p));
+        internal readonly static dynamic MathMod = Curry2<dynamic, dynamic, int>((m, p) => {
+            var modulus = (uint)p;
+            var dividend = (int)m;
+
+            return (int)((dividend % modulus + modulus) % modulus);
+        });
 
         internal readonly static dynamic Max = Curry2<dynamic, dynamic, dynamic>((a, b) => Gt(b, a) ? b : a);
 
@@ -1527,7 +1538,7 @@ namespace Ramda.NET
                 throw new NaNException();
             }
 
-            return  Sum(list) / list.Count;
+            return Sum(list) / list.Count;
         });
 
         internal readonly static dynamic Median = Curry1<IList, dynamic>(list => {
@@ -1694,19 +1705,17 @@ namespace Ramda.NET
             return string.Join(separator, xs.Select(item => item.ToString()));
         });
 
-        internal static dynamic Memoize = Curry1<DynamicDelegate, DynamicDelegate>(fn => {
-            dynamic dynamicFn = fn;
+        internal static dynamic Memoize = Curry1<dynamic, dynamic>(fn => {
             var cache = new Dictionary<string, object>();
-            var a = "A".Split();
 
             return Arity(fn.Length, Delegate((object[] arguments) => {
-                var key = (string)ToString(arguments);
+                var args = Arguments(arguments);
+                var key = args.IsNotNull() ? (string)ToString(args) : string.Empty;
 
                 return cache.GetOrAdd<string, object>(key, () => {
-                    return Reflection.DynamicInvoke(dynamicFn, arguments);
+                    return Reflection.DynamicInvoke(fn, args);
                 });
             }));
-
         });
 
         internal static dynamic Split = Invoker(1, "Split");

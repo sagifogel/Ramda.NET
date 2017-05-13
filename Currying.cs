@@ -135,7 +135,7 @@ namespace Ramda.NET
                 Delegate @delegate = fn.Unwrap();
 
                 @delegate = @delegate.Method.CreateDelegate(thisObj);
-                
+
                 return Reflection.DynamicInvoke(Delegate(@delegate), arguments);
             }));
         });
@@ -547,12 +547,12 @@ namespace Ramda.NET
 
         internal readonly static dynamic MergeAll = Curry1<IList, object>(Assign);
 
-        internal readonly static dynamic MergeWithKey = Curry3<Delegate, object, object, object>((fn, l, r) => {
+        internal readonly static dynamic MergeWithKey = Curry3<DynamicDelegate, object, object, object>((fn, l, r) => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in l.ToMemberDictionary()) {
                 if (l.Has(pair.Key)) {
-                    result[pair.Key] = r.Has(pair.Key) ? fn.Invoke(new[] { pair, l.Member(pair.Key), r.Member(pair.Key) }) : l.Member(pair.Key);
+                    result[pair.Key] = r.Has(pair.Key) ? Reflection.DynamicInvoke(fn, new[] { pair.Key, l.Member(pair.Key), r.Member(pair.Key) }) : l.Member(pair.Key);
                 }
             }
 
@@ -1316,8 +1316,8 @@ namespace Ramda.NET
             })), new ExpandoObject(), obj.Keys());
         });
 
-        internal readonly static dynamic MergeWith = Curry3<Delegate, object, object, object>((fn, l, r) => {
-            return MergeWithKey(new Func<object, object, object, object>((_, _l, _r) => fn.Invoke(new[] { _l, _r })), l, r);
+        internal readonly static dynamic MergeWith = Curry3<DynamicDelegate, object, object, object>((fn, l, r) => {
+            return MergeWithKey(Delegate(new Func<object, object, object, object>((_, _l, _r) => Reflection.DynamicInvoke(fn, new[] { _l, _r }))), l, r);
         });
 
         internal readonly static dynamic Partial = CreatePartialApplicator(new Func<IList, IList, IList>(Core.Concat));

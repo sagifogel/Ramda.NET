@@ -14,31 +14,31 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, TArg1 l, TArg2 r) {
+		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn, object l, object r) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg1, TArg2>(RamdaPlaceholder fn, TArg1 l, TArg2 r) {
+		public static dynamic MergeWith(RamdaPlaceholder fn, object l, object r) {
 			return Currying.MergeWith(fn, l, r);
 		}
 
-		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, RamdaPlaceholder l, TArg2 r) {
+		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn, RamdaPlaceholder l, object r) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, TArg1 l, RamdaPlaceholder r = null) {
+		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn, object l, RamdaPlaceholder r = null) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<string, TArg1, TArg2, TResult> fn, RamdaPlaceholder l = null, RamdaPlaceholder r = null) {
+		public static dynamic MergeWith<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> fn, RamdaPlaceholder l = null, RamdaPlaceholder r = null) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg2>(dynamic fn, RamdaPlaceholder l, TArg2 r) {
+		public static dynamic MergeWith(dynamic fn, RamdaPlaceholder l, object r) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg1>(dynamic fn, TArg1 l, RamdaPlaceholder r = null) {
+		public static dynamic MergeWith(dynamic fn, object l, RamdaPlaceholder r = null) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
@@ -46,7 +46,7 @@ namespace Ramda.NET
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 
-		public static dynamic MergeWith<TArg1, TArg2>(dynamic fn, TArg1 l, TArg2 r) {
+		public static dynamic MergeWith(dynamic fn, object l, object r) {
 			return Currying.MergeWith(Delegate(fn), l, r);
 		}
 

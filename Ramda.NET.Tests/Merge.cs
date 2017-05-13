@@ -4,17 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class Merge
+    public class Merge : BaseMerge
     {
-        class Base
-        {
-            public int X { get; set; }
-        }
-
-        class Cla : Base
-        {
-        }
-
         [TestMethod]
         [Description("Merge_Takes_Two_Objects,_Merges_Their_Own_Properties_And_Returns_A_New_Object")]
         public void Merge_Takes_Two_Objects_Merges_Their_Own_Properties_And_Returns_A_New_Object() {

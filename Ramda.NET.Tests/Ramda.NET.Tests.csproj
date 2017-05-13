@@ -75,6 +75,7 @@
     <Compile Include="AssocPath.cs" />
     <Compile Include="BaseFind.cs" />
     <Compile Include="BaseIndexOf.cs" />
+    <Compile Include="BaseMerge.cs" />
     <Compile Include="Binary.cs" />
     <Compile Include="Bind.cs" />
     <Compile Include="Both.cs" />
@@ -167,6 +168,9 @@
     <Compile Include="Median.cs" />
     <Compile Include="Memoize.cs" />
     <Compile Include="Merge.cs" />
+    <Compile Include="MergeAll.cs" />
+    <Compile Include="MergeWith.cs" />
+    <Compile Include="MergeWithKey.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

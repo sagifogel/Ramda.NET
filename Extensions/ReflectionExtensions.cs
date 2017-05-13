@@ -567,5 +567,32 @@ namespace Ramda.NET
 
             return key => dictionary.Contains(key);
         }
+
+        internal static bool Has(this object  obj, string prop) {
+            MemberInfo member = null;
+
+            if (obj.IsDictionary()) {
+                var dictionary = obj as IDictionary;
+                IDictionary<string, object> expandoDictionary;
+
+                if (dictionary.IsNotNull()) {
+                    return dictionary.Contains(prop);
+                }
+
+                expandoDictionary = obj as IDictionary<string, object>;
+
+                if (expandoDictionary.IsNotNull()) {
+                    return expandoDictionary.ContainsKey(prop);
+                }
+            }
+
+            member = obj.TryGetMemberInfo(prop);
+
+            if (member != null) {
+                return member.DeclaringType.Equals(obj.GetType());
+            }
+
+            return false;
+        }
     }
 }

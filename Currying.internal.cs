@@ -82,25 +82,6 @@ namespace Ramda.NET
 
         internal static IReduced ForceReduced(object x) => new ReducedImpl(x);
 
-        private static bool HasInternal(string prop, object obj) {
-            if (obj.IsDictionary()) {
-                var dictionary = obj as IDictionary;
-                IDictionary<string, object> expandoDictionary;
-
-                if (dictionary.IsNotNull()) {
-                    return dictionary.Contains(prop);
-                }
-
-                expandoDictionary = obj as IDictionary<string, object>;
-
-                if (expandoDictionary.IsNotNull()) {
-                    return expandoDictionary.ContainsKey(prop);
-                }
-            }
-
-            return obj.TryGetMemberInfo(prop).IsNotNull();
-        }
-
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
         private static object[] MapInternal(dynamic fn, IList functor) {

@@ -50,9 +50,14 @@ namespace Ramda.NET
             var assignExpression = GetAssignExpression(source, sourceParameter);
 
             foreach (var pair in source.ToMemberDictionary()) {
-                yield return Expression.Assign(
-                                Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
-                                assignExpression(pair.Key));
+                if (source.Has(pair.Key)) {
+                    yield return Expression.Assign(
+                                    Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
+                                    assignExpression(pair.Key));
+                }
+                else {
+                    yield return Expression.Empty();
+                }
             }
         }
 

@@ -337,7 +337,7 @@ namespace Ramda.NET
             return a >= b;
         });
 
-        internal readonly static dynamic Has = Curry2<string, object, bool>(HasInternal);
+        internal readonly static dynamic Has = Curry2<string, object, bool>((prop, obj) => obj.Has(prop));
 
         internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a?.Equals(b) ?? b.IsNull());
 
@@ -551,13 +551,13 @@ namespace Ramda.NET
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in l.ToMemberDictionary()) {
-                if (HasInternal(pair.Key, l)) {
-                    result[pair.Key] = HasInternal(pair.Key, r) ? fn.Invoke(new[] { pair, l.Member(pair.Key), r.Member(pair.Key) }) : l.Member(pair.Key);
+                if (l.Has(pair.Key)) {
+                    result[pair.Key] = r.Has(pair.Key) ? fn.Invoke(new[] { pair, l.Member(pair.Key), r.Member(pair.Key) }) : l.Member(pair.Key);
                 }
             }
 
             foreach (var pair in r.ToMemberDictionary()) {
-                if (HasInternal(pair.Key, r) && !HasInternal(pair.Key, result)) {
+                if (r.Has(pair.Key) && !result.Has(pair.Key)) {
                     result[pair.Key] = r.Member(pair.Key);
                 }
             }

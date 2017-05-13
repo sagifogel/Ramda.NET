@@ -6,6 +6,16 @@ namespace Ramda.NET.Tests
     [TestClass]
     public class Has
     {
+        class Person
+        {
+            public int Age { get; set; }
+            public string Name { get; set; }
+        }
+
+        class Bob : Person
+        {
+        }
+
         private readonly object anon = new { Age = 99 };
         private readonly object fred = new { Name = "Fred", Age = 23 };
 
@@ -17,6 +27,12 @@ namespace Ramda.NET.Tests
         [TestMethod]
         public void Has_Returns_False_If_The_Specified_Property_Is_Absent() {
             Assert.IsFalse(R.Has("Name", anon));
+        }
+
+        [TestMethod]
+        [Description("Has_Does_Not_Check_Properties_From_The_Prototype_Chain")]
+        public void Has_Does_Not_Check_Inherited_Properties() {
+            Assert.IsFalse(R.Has("Age", new Bob()));
         }
 
         [TestMethod]

@@ -173,6 +173,7 @@
     <Compile Include="MergeWith.cs" />
     <Compile Include="MergeWithKey.cs" />
     <Compile Include="Min.cs" />
+    <Compile Include="Modulo.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

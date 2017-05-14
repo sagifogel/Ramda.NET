@@ -565,9 +565,9 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Min = Curry2<dynamic, dynamic, dynamic>((a, b) => b < a ? b : a);
+        internal readonly static dynamic Min = Curry2<dynamic, dynamic, dynamic>((a, b) => Gt(a, b) ? b : a);
 
-        internal readonly static dynamic MinBy = Curry3<Delegate, dynamic, dynamic, dynamic>((f, a, b) => f.DynamicInvoke(b) < f.DynamicInvoke(a) ? b : a);
+        internal readonly static dynamic MinBy = Curry3<dynamic, dynamic, dynamic, dynamic>((f, a, b) => Reflection.DynamicInvoke(f, new[] { b }) < Reflection.DynamicInvoke(f, new[] { a }) ? b : a);
 
         internal readonly static dynamic Modulo = Curry2<dynamic, dynamic, dynamic>((a, b) => a % b);
 

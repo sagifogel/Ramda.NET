@@ -900,6 +900,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Memoize.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Min.string.cs">
+      <DependentUpon>Min.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Min.date.cs">
+      <DependentUpon>Min.date.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Omit.string.cs">
       <DependentUpon>Omit.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2116,6 +2126,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Memoize.cs</LastGenOutput>
       <LastOutputs>.\Memoize.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Min.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Min.string.cs</LastGenOutput>
+      <LastOutputs>.\Min.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Min.date.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Min.date.cs</LastGenOutput>
+      <LastOutputs>.\Min.date.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Omit.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

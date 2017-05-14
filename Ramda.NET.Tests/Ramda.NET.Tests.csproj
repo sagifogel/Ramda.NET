@@ -163,6 +163,7 @@
     <Compile Include="Match.cs" />
     <Compile Include="MathMod.cs" />
     <Compile Include="Max.cs" />
+    <Compile Include="MinBy.cs" />
     <Compile Include="MaxBy.cs" />
     <Compile Include="Mean.cs" />
     <Compile Include="Median.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="MergeAll.cs" />
     <Compile Include="MergeWith.cs" />
     <Compile Include="MergeWithKey.cs" />
+    <Compile Include="Min.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

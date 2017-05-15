@@ -593,7 +593,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Negate = Curry1<dynamic, dynamic>(n => -n);
 
-        internal readonly static dynamic None = Curry2(Dispatchable2("Any", XAny, new Func<object, object, dynamic>((a, b) => Any(a, b))));
+        internal readonly static dynamic None = Curry2(ComplementInternal(Dispatchable2("Any", XAny, new Func<object, object, dynamic>((a, b) => Any(a, b)))));
 
         internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
 

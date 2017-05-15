@@ -177,6 +177,7 @@
     <Compile Include="Multiply.cs" />
     <Compile Include="NAry.cs" />
     <Compile Include="Negate.cs" />
+    <Compile Include="None.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />

@@ -8,7 +8,7 @@ namespace Ramda.NET.Tests
     {
         [TestMethod]
         public void Identity_Returns_Its_First_Argument() {
-            Assert.AreEqual(R.Identity(R.Null), R.Null);
+            Assert.AreEqual(R.Identity(R.@null), R.@null);
             Assert.AreEqual(R.Identity("foo"), "foo");
         }
 

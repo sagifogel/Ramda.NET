@@ -15,7 +15,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("EqProps_Has_R.Equals_Semantics")]
         public void EqProps_Has_R_Equals_Semantics() {
-            object nullObject = R.Null;
+            object nullObject = R.@null;
 
             Assert.AreEqual(R.EqProps("value", new { value = nullObject }, new { value = nullObject }), true);
             Assert.AreEqual(R.EqProps("value", new { value = new Just(new[] { 42 }) }, new { value = new Just(new[] { 42 }) }), true);

@@ -9,7 +9,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("IsNil_Tests_A_Value_For_\"null\"_Or_\"undefined\"")]
         public void IsNil_Tests_A_Value_For_Null() {
-            Assert.IsTrue(R.IsNil(R.Null));
+            Assert.IsTrue(R.IsNil(R.@null));
             Assert.IsFalse(R.IsNil(new object[0]));
             Assert.IsFalse(R.IsNil(new { }));
             Assert.IsFalse(R.IsNil(0));

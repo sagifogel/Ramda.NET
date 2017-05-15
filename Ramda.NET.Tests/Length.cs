@@ -39,7 +39,7 @@ namespace Ramda.NET.Tests
         public void Length_Returns_Minus_One_For_Value_Of_Unexpected_Type() {
             Assert.AreEqual(R.Length(0), -1);
             Assert.AreEqual(R.Length(new { }), -1);
-            Assert.AreEqual(R.Length(R.Null), -1);
+            Assert.AreEqual(R.Length(R.@null), -1);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(R.Length(new { Length = string.Empty }), -1);
             Assert.AreEqual(R.Length(new { Length = "1.23" }), -1);
             Assert.AreEqual(R.Length(new { Length = (object)null }), -1);
-            Assert.AreEqual(R.Length(new { Length = R.Null }), -1);
+            Assert.AreEqual(R.Length(new { Length = R.@null }), -1);
             Assert.AreEqual(R.Length(new { }), -1);
         }
     }

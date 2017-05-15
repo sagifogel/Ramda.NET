@@ -9,7 +9,7 @@ namespace Ramda.NET
 {
     public static partial class R
     {
-        public readonly static Nothing Null = new Nothing();
+        public readonly static Nothing @null = new Nothing();
         public readonly static RamdaPlaceholder __ = new RamdaPlaceholder();
 
         public static dynamic Length<TValue>(IList list) {

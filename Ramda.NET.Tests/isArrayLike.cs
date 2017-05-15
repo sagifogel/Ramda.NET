@@ -19,7 +19,7 @@ namespace Ramda.NET.Tests
         public void IsArrayLike_Is_True_For_Params() {
             Assert.IsTrue(Test());
             Assert.IsTrue(Test(1, 2, 3));
-            Assert.IsTrue(Test(R.Null));
+            Assert.IsTrue(Test(R.@null));
         }
 
         private bool Test(params object[] arguments) {
@@ -52,7 +52,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void IsArrayLike_Is_False_For_Everything_Else() {
-            Assert.IsFalse(R.IsArrayLike(R.Null));
+            Assert.IsFalse(R.IsArrayLike(R.@null));
             Assert.IsFalse(R.IsArrayLike(1));
             Assert.IsFalse(R.IsArrayLike(new { }));
             Assert.IsFalse(R.IsArrayLike(false));

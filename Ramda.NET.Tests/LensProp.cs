@@ -16,7 +16,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("LensProp_Returns_Undefined_If_The_Specified_Property_Does_Not_Exist")]
         public void LensProp_Returns_Null_If_The_Specified_Property_Does_Not_Exist() {
-            Assert.AreEqual(R.View(R.LensProp("X"), testObject), R.Null);
+            Assert.AreEqual(R.View(R.LensProp("X"), testObject), R.@null);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("LensProp_Over_Applies_Function_To_Undefined_And_Adds_The_Property_If_It_Doesn't_Exist")]
         public void LensProp_Over_Applies_Function_To_Nulld_And_Adds_The_Property_If_It_Doesnt_Exist() {
-            DynamicAssert.AreEqual(R.Over(R.LensProp("X"), R.Identity(R.__), testObject), new { A = 1, B = 2, C = 3, X = R.Null });
+            DynamicAssert.AreEqual(R.Over(R.LensProp("X"), R.Identity(R.__), testObject), new { A = 1, B = 2, C = 3, X = R.@null });
         }
 
         [TestMethod]

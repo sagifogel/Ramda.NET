@@ -21,7 +21,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Difference_Does_Not_Allow_Duplicates_In_The_Output_Even_If_The_Input_Lists_Had_Duplicates() {
-            Assert.AreEqual(R.Difference(new[] { R.Null }, new [] { R.Null }).Length, 0);
+            Assert.AreEqual(R.Difference(new[] { R.@null }, new [] { R.@null }).Length, 0);
             CollectionAssert.AreEqual(R.Difference(M2, N2), new[] { 1, 2 });
         }
 

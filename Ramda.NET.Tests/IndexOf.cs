@@ -58,7 +58,7 @@ namespace Ramda.NET.Tests
         public void IndexOf_Has_R_Equals_Semantics() {
             Assert.AreEqual(R.IndexOf(0, new[] { -0 }), 0);
             Assert.AreEqual(R.IndexOf(-0, new[] { 0 }), 0);
-            Assert.AreEqual(R.IndexOf(R.Null, new[] { R.Null }), 0);
+            Assert.AreEqual(R.IndexOf(R.@null, new[] { R.@null }), 0);
             Assert.AreEqual(R.IndexOf(new Just(new[] { 42 }), new[] { new Just(new[] { 42 }) }), 0);
         }
 

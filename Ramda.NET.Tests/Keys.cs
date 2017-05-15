@@ -19,7 +19,7 @@ namespace Ramda.NET.Tests
             }
         }
 
-        private readonly object obj = new { A = 100, B = new[] { 1, 2, 3 }, C = new { X = 200, Y = 300 }, D = "D", E = R.Null, F = (object)null };
+        private readonly object obj = new { A = 100, B = new[] { 1, 2, 3 }, C = new { X = 200, Y = 300 }, D = "D", E = R.@null, F = (object)null };
         private readonly C cobj = new C();
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Keys_Works_For_Primitives() {
-            var result = R.Map(val => R.Keys(val), new object[] { R.Null, 55, string.Empty, true, false, new object[0] });
+            var result = R.Map(val => R.Keys(val), new object[] { R.@null, 55, string.Empty, true, false, new object[0] });
 
             NestedCollectionAssert.AreEqual(result, R.Repeat(new string[0], 6));
         }

@@ -160,7 +160,7 @@ namespace Ramda.NET
             var type = value.GetType();
 
             if (type.IsClass) {
-                return ReferenceEquals(value, Null) ? defaultValue : value;
+                return ReferenceEquals(value, @null) ? defaultValue : value;
             }
 
             return value == type.GetDefaultValue() ? defaultValue : value;
@@ -242,7 +242,7 @@ namespace Ramda.NET
                 }
             }
 
-            return R.Null;
+            return R.@null;
         });
 
         internal readonly static dynamic Evolve = Curry2<object, object, object>(InternalEvolve);
@@ -578,12 +578,12 @@ namespace Ramda.NET
                 return Delegate(arguments => {
                     object[] args;
                     dynamic dynamicFn = fn;
+                    var copyRange = Math.Min(length, arguments.Length);
 
-                    length = Math.Min(length, arguments.Length);
-                    args = new object[length];
-                    Array.Copy(arguments, (Array)args, length);
+                    args = (object[])R.Repeat(R.@null, length);
+                    Array.Copy(arguments, (Array)args, copyRange);
 
-                    return Reflection.DynamicInvoke(dynamicFn, args);
+                    return Reflection.DynamicDirectInvoke(dynamicFn, args);
                 }, length);
             }
             else {
@@ -598,7 +598,7 @@ namespace Ramda.NET
         internal readonly static dynamic Not = Curry1<bool, bool>(a => !a);
 
         internal readonly static dynamic Nth = Curry2<int, dynamic, object>((offset, list) => {
-            object item = R.Null;
+            object item = R.@null;
             var @string = list as string;
             var isString = @string != null;
             var count = isString ? @string.Length : ((IList)list).Count;
@@ -1502,9 +1502,9 @@ namespace Ramda.NET
             result.Add(item);
 
             return result;
-        })), R.Null)));
+        })), R.@null)));
 
-        internal readonly static dynamic IndexBy = ReduceBy(Delegate((acc, elem) => elem), R.Null);
+        internal readonly static dynamic IndexBy = ReduceBy(Delegate((acc, elem) => elem), R.@null);
 
         internal readonly static dynamic IndexOf = Curry2<object, object, int>((target, xs) => {
             return IndexOfInternal("IndexOf", target, xs, list => list.IndexOf(target), (str, targetStr) => str.IndexOf(targetStr));

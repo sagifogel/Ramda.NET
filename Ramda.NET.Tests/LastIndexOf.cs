@@ -66,7 +66,7 @@ namespace Ramda.NET.Tests
         public void LastIndexOf_Has_R_Equals_Semantics() {
             Assert.AreEqual(R.LastIndexOf(0, new[] { -0 }), 0);
             Assert.AreEqual(R.LastIndexOf(-0, new[] { 0 }), 0);
-            Assert.AreEqual(R.LastIndexOf(R.Null, new[] { R.Null }), 0);
+            Assert.AreEqual(R.LastIndexOf(R.@null, new[] { R.@null }), 0);
             Assert.AreEqual(R.LastIndexOf(new Just(new[] { 42 }), new[] { new Just(new[] { 42 }) }), 0);
         }
 

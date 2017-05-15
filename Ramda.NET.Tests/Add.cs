@@ -16,7 +16,7 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(R.Add("1", "2"), 3);
             Assert.AreEqual(R.Add(1, "2"), 3);
             Assert.AreEqual(R.Add(true, false), 1);
-            Assert.AreEqual(R.Add(R.Null, R.Null), 0);
+            Assert.AreEqual(R.Add(R.@null, R.@null), 0);
         }
 
         [TestMethod]

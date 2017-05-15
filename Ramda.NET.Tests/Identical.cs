@@ -20,7 +20,7 @@ namespace Ramda.NET.Tests
             Assert.IsTrue(R.Identical("string", "string"));
             Assert.IsFalse(R.Identical(new object[0], new object[0]));
             Assert.IsTrue(R.Identical(a, b));
-            Assert.IsTrue(R.Identical(R.Null, R.Null));
+            Assert.IsTrue(R.Identical(R.@null, R.@null));
             Assert.IsTrue(R.Identical(-0, 0));
             Assert.IsTrue(R.Identical(0, -0));
         }

@@ -247,7 +247,7 @@ namespace Ramda.NET.Tests
             var obj = new { };
             var list = new object[0];
 
-            Assert.AreEqual(R.Clone(R.Null), new Nothing());
+            Assert.AreEqual(R.Clone(R.@null), new Nothing());
             DynamicAssert.AreEqual(R.Clone(obj), obj);
             Assert.AreNotSame(R.Clone(list), list);
         }

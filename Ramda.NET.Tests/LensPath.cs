@@ -47,8 +47,8 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Lens_over_Applies_Function_To_Undefined_And_Adds_The_Property_If_It_Doesn't_Exist")]
         public void Lens_over_Applies_Function_To_Undefined_And_Adds_The_Property_If_It_Doesnt_Exist() {
-            DynamicAssert.AreEqual(R.Over(R.LensPath(new[] { "X" }), R.Identity(R.__), testObject), new { A = new object[] { new { B = 1 }, new { B = 2 } }, D = 3, X = R.Null });
-            DynamicAssert.AreEqual(R.Over(R.LensPath(new object[] { "A", 0, "X" }), R.Identity(R.__), testObject), new { A = new object[] { new { B = 1, X = R.Null }, new { B = 2 } }, D = 3 });
+            DynamicAssert.AreEqual(R.Over(R.LensPath(new[] { "X" }), R.Identity(R.__), testObject), new { A = new object[] { new { B = 1 }, new { B = 2 } }, D = 3, X = R.@null });
+            DynamicAssert.AreEqual(R.Over(R.LensPath(new object[] { "A", 0, "X" }), R.Identity(R.__), testObject), new { A = new object[] { new { B = 1, X = R.@null }, new { B = 2 } }, D = 3 });
         }
 
         [TestMethod]

@@ -18,7 +18,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("EqBy_Has_R.Equals_Semantics")]
         public void EqBy_Has_R_Equals_Semantics() {
-            object nullObject = R.Null;
+            object nullObject = R.@null;
             var identity = R.Identity(R.__);
 
             Assert.AreEqual(R.EqBy(identity, new { value = nullObject }, new { value = nullObject }), true);

@@ -12,7 +12,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void IsEmpty_Returns_False_For_Null() {
-            Assert.IsFalse(R.IsEmpty(R.Null));
+            Assert.IsFalse(R.IsEmpty(R.@null));
         }
 
         [TestMethod]

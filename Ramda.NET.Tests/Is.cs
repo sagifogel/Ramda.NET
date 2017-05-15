@@ -62,7 +62,7 @@ namespace Ramda.NET.Tests
             Assert.IsTrue(isObject(string.Empty));
             Assert.IsTrue(isObject(new object()));
             Assert.IsTrue(isObject(new Regex("(?:)")));
-            Assert.IsFalse(isObject(R.Null));
+            Assert.IsFalse(isObject(R.@null));
         }
 
         [TestMethod]

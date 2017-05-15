@@ -26,7 +26,7 @@ namespace Ramda.NET.Tests
         [Description("Intersection_Has_R.Equals_Semantics")]
         public void Intersection_Has_R_Equals_Semantics() {
             Assert.AreEqual(R.Intersection(new [] { 0 }, new[] { -0 }).Length, 1);
-            Assert.AreEqual(R.Intersection(new [] { R.Null }, new[] { R.Null }).Length, 1);
+            Assert.AreEqual(R.Intersection(new [] { R.@null }, new[] { R.@null }).Length, 1);
             Assert.AreEqual(R.Intersection(new[] { new Just(new[] { 42 } ) }, new[] { new Just(new[] { 42 }) }).Length, 1);
         }
     }

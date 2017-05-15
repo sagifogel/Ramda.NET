@@ -10,7 +10,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void DefaultTo_Returns_The_Default_Value_If_Input_Is_Null() {
-            Assert.AreEqual(42, DefaultTo42(R.Null));
+            Assert.AreEqual(42, DefaultTo42(R.@null));
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void DefaultTo_Can_Be_Called_With_Both_Arguments_Directly() {
-            Assert.AreEqual(42, R.DefaultTo(42, R.Null));
+            Assert.AreEqual(42, R.DefaultTo(42, R.@null));
             Assert.AreEqual("a real value", R.DefaultTo(42, "a real value"));
         }
     }

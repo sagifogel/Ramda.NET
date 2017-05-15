@@ -11,7 +11,7 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(R.Last(new[] { 1, 2, 3 }), 3);
             Assert.AreEqual(R.Last(new[] { 1, 2 }), 2);
             Assert.AreEqual(R.Last(new[] { 1 }), 1);
-            Assert.AreEqual(R.Last(new object[0]), R.Null);
+            Assert.AreEqual(R.Last(new object[0]), R.@null);
             Assert.AreEqual(R.Last("abc"), "c");
             Assert.AreEqual(R.Last("ab"), "b");
             Assert.AreEqual(R.Last("a"), "a");

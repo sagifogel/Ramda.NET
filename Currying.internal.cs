@@ -825,7 +825,7 @@ namespace Ramda.NET
                 return Quote(str);
             }
 
-            if (R.Null.Equals(x)) {
+            if (R.@null.Equals(x)) {
                 return "null";
             }
 

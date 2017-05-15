@@ -16,7 +16,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("LensIndex_Returns_Undefined_If_The_Specified_Index_Does_Not_Exist")]
         public void LensIndex_Returns_Null_If_The_Specified_Index_Does_Not_Exist() {
-            DynamicAssert.AreEqual(R.View(R.LensIndex(10), testList), R.Null);
+            DynamicAssert.AreEqual(R.View(R.LensIndex(10), testList), R.@null);
         }
 
         [TestMethod]

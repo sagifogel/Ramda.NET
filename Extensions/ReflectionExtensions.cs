@@ -140,7 +140,7 @@ namespace Ramda.NET
                     return ((Array)target).Member((int)member);
                 }
 
-                return R.Null;
+                return R.@null;
             }
 
             return target.Member((string)member);
@@ -196,7 +196,7 @@ namespace Ramda.NET
                 }
             }
 
-            return R.Null;
+            return R.@null;
         }
 
         internal static object DictionaryMember(this object target, object key, Type type = null) {
@@ -459,6 +459,10 @@ namespace Ramda.NET
             return DynamicInvoke(target, args, args.Length);
         }
 
+        internal static object DynamicDirectInvoke(dynamic target, object[] arguments = null) {
+            return DynamicInvoke(target, arguments, arguments.Length);
+        }
+
         internal static object InvokeNative(this Delegate @delegate, object[] arguments) {
             var args = arguments.Unwrap(@delegate);
 
@@ -568,7 +572,7 @@ namespace Ramda.NET
             return key => dictionary.Contains(key);
         }
 
-        internal static bool Has(this object  obj, string prop) {
+        internal static bool Has(this object obj, string prop) {
             MemberInfo member = null;
 
             if (obj.IsDictionary()) {

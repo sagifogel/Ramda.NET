@@ -24,7 +24,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("InvertObj_Returns_An_Empty_Object_When_Applied_To_Null/Undefined")]
         public void Invert_Returns_An_Empty_Object_When_Applied_To_Null() {
-            DynamicAssert.AreEqual(R.InvertObj(R.Null), new ExpandoObject());
+            DynamicAssert.AreEqual(R.InvertObj(R.@null), new ExpandoObject());
         }
 
         [TestMethod]

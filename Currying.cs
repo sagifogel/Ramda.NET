@@ -604,15 +604,17 @@ namespace Ramda.NET
             var count = isString ? @string.Length : ((IList)list).Count;
             var idx = offset < 0 ? count + offset : offset;
 
-            if (isString) {
-                if (idx <= 0 && string.IsNullOrEmpty(list)) {
+            if (idx < 0 || idx >= count) {
+                if (isString) {
                     return string.Empty;
                 }
-
-                item = list[idx].ToString();
             }
-            else if (count > 0 && idx <= count) {
+            else {
                 item = list[idx];
+
+                if (isString) {
+                    item = item.ToString();
+                }
             }
 
             return item;
@@ -621,9 +623,9 @@ namespace Ramda.NET
         internal readonly static dynamic NthArg = Curry1<int, DynamicDelegate>(n => {
             var arity = n < 0 ? 1 : n + 1;
 
-            return CurryN(arity, Curry1(arguments => {
+            return Arity(arity, CurryNInternal(arity, new object[0], Delegate((object[] arguments) => {
                 return Nth(n, arguments);
-            }));
+            })));
         });
 
         internal readonly static dynamic ObjOf = Curry2<string, object, object>((key, val) => {

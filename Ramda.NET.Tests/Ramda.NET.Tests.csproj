@@ -178,6 +178,7 @@
     <Compile Include="NAry.cs" />
     <Compile Include="Negate.cs" />
     <Compile Include="None.cs" />
+    <Compile Include="Not.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="Maybe.cs" />
     <Compile Include="Just.cs" />
@@ -193,6 +194,8 @@
     <Compile Include="Lift.cs" />
     <Compile Include="ListXf.cs" />
     <Compile Include="Clone.cs" />
+    <Compile Include="Nth.cs" />
+    <Compile Include="NthArg.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

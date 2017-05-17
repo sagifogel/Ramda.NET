@@ -5,6 +5,6 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TDelegate");
-	template.Parameters.Add(Tuple.Create("TDelegate", "fn", false));
+	template.Parameters.Add(Tuple.Create("TDelegate", "fn", true));
 	template.Render();
 #>	

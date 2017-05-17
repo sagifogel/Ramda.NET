@@ -196,6 +196,10 @@
     <Compile Include="Clone.cs" />
     <Compile Include="Nth.cs" />
     <Compile Include="NthArg.cs" />
+    <Compile Include="Of.cs" />
+    <Compile Include="ObjOf.cs" />
+    <Compile Include="Omit.cs" />
+    <Compile Include="Once.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

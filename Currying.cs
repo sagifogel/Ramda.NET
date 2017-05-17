@@ -640,18 +640,15 @@ namespace Ramda.NET
 
         internal readonly static dynamic Once = Curry1<DynamicDelegate, DynamicDelegate>(fn => {
             var called = false;
-            object result = null;
+            object result = R.@null;
 
             return Arity(fn.Arity(), Delegate((object[] arguments) => {
-                dynamic dynamicFn = fn;
-
                 if (called) {
                     return result;
                 }
 
-
                 called = true;
-                result = dynamicFn(arguments);
+                result = Reflection.DynamicInvoke(fn, arguments);
                 return result;
             }));
         });
@@ -1618,7 +1615,7 @@ namespace Ramda.NET
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in obj.ToMemberDictionary()) {
-                if (!ContainsInternal(names, pair.Key)) {
+                if (!ContainsInternal(pair.Key, names)) {
                     result[pair.Key] = pair.Value;
                 }
             }

@@ -1319,7 +1319,7 @@ namespace Ramda.NET
             return MergeWithKey(Delegate(new Func<object, object, object, object>((_, _l, _r) => Reflection.DynamicInvoke(fn, new[] { _l, _r }))), l, r);
         });
 
-        internal readonly static dynamic Partial = CreatePartialApplicator(new Func<IList, IList, IList>(Core.Concat));
+        internal readonly static dynamic Partial = CreatePartialApplicator(Delegate(new Func<IList, IList, IList>(Core.Concat)));
 
         internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(Core.Concat)));
 

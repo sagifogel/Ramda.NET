@@ -492,7 +492,8 @@ namespace Ramda.NET
         private static dynamic CreatePartialApplicator(dynamic concat) {
             return Curry2(new Func<DynamicDelegate, IList, dynamic>((fn, args) => {
                 return Arity(Math.Max(0, fn.Arity() - args.Count), Delegate((object[] arguments) => {
-                    var concatedArgs = (IList)DynamicInvoke(concat, new[] { args, arguments });
+                    var trimmedArgumnets = Arguments(arguments);
+                    var concatedArgs = (IList)DynamicInvoke(concat, new[] { args, trimmedArgumnets });
 
                     return DynamicInvoke(fn, concatedArgs.ToArray<object[]>(typeof(object)));
                 }));

@@ -677,9 +677,9 @@ namespace Ramda.NET
             return val;
         });
 
-        internal readonly static dynamic PathOr = Curry3<object, IList<string>, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj)));
+        internal readonly static dynamic PathOr = Curry3<object, IList, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj)));
 
-        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList<string>, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj)));
+        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj)));
 
         internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
 
@@ -1321,7 +1321,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PartialRight = CreatePartialApplicator(Flip(new Func<IList, IList, IList>(Core.Concat)));
 
-        internal readonly static dynamic PathEq = Curry3<IList<string>, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
+        internal readonly static dynamic PathEq = Curry3<IList, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
 
         internal readonly static dynamic Pluck = Curry2<object, IList, IList>((p, list) => Map(Prop(p), list));
 

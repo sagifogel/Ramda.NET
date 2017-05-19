@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PathEq<TValue, TTarget>(IList<string> path, TValue val, TTarget obj) {
+		public static dynamic PathEq<TValue, TTarget>(IList<object> path, TValue val, TTarget obj) {
 			return Currying.PathEq(path, val, obj);
 		}
 
@@ -22,15 +22,15 @@ namespace Ramda.NET
 			return Currying.PathEq(path, val, obj);
 		}
 
-		public static dynamic PathEq<TTarget>(IList<string> path, RamdaPlaceholder val, TTarget obj) {
+		public static dynamic PathEq<TTarget>(IList<object> path, RamdaPlaceholder val, TTarget obj) {
 			return Currying.PathEq(path, val, obj);
 		}
 
-		public static dynamic PathEq<TValue>(IList<string> path, TValue val, RamdaPlaceholder obj = null) {
+		public static dynamic PathEq<TValue>(IList<object> path, TValue val, RamdaPlaceholder obj = null) {
 			return Currying.PathEq(path, val, obj);
 		}
 
-		public static dynamic PathEq(IList<string> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
+		public static dynamic PathEq(IList<object> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.PathEq(path, val, obj);
 		}
 

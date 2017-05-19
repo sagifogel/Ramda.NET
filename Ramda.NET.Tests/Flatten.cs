@@ -27,9 +27,9 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Flatten_Handles_Ridiculously_Large_Inputs() {
-            var nulls = Enumerable.Range(0, 1000000).Select(i => R.@null).ToArray();
+            var nulls = R.Repeat(R.@null, 1000000);
 
-            Assert.AreEqual(R.Flatten(new object[] { nulls , R.Range(0, 56000), 5, 1, 3 }).Length, 1056003);
+            Assert.AreEqual(R.Flatten(new object[] { nulls, R.Range(0, 56000), 5, 1, 3 }).Length, 1056003);
         }
 
         [TestMethod]
@@ -60,7 +60,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Flatten_Flattens_An_Array_Of_Empty_Arrays() {
-            CollectionAssert.AreEqual(R.Flatten(new object[] { new object[0], new object[0], new object[0]}), new object[0]);
+            CollectionAssert.AreEqual(R.Flatten(new object[] { new object[0], new object[0], new object[0] }), new object[0]);
             CollectionAssert.AreEqual(R.Flatten(new object[0]), new object[0]);
         }
     }

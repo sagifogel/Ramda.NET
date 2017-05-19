@@ -73,7 +73,7 @@ namespace Ramda.NET
 
             foreach (var item in list) {
                 if (fn(item)) {
-                    result.Add(item);
+                    result.Add(item.IsNull() ? R.@null : item);
                 }
             }
 
@@ -91,7 +91,7 @@ namespace Ramda.NET
         private static object[] MapInternal(Func<object, object> fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
-            var result = new object[len];
+            var result = R.Repeat(R.@null, len);
 
             while (idx < len) {
                 result[idx] = fn(functor[idx]);

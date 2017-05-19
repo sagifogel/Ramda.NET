@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Path<TTarget>(IList<string> path, TTarget obj) {
+		public static dynamic Path<TTarget>(IList<object> path, TTarget obj) {
 			return Currying.Path(path, obj);
 		}
 
@@ -22,7 +22,7 @@ namespace Ramda.NET
 			return Currying.Path(path, obj);
 		}
 
-		public static dynamic Path(IList<string> path, RamdaPlaceholder obj = null) {
+		public static dynamic Path(IList<object> path, RamdaPlaceholder obj = null) {
 			return Currying.Path(path, obj);
 		}
 

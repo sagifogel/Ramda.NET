@@ -14,64 +14,66 @@ namespace Ramda.NET.Tests
                                   .SequenceEqual(dictionary.OrderBy(kvp => kvp.Key), (a, b) => {
                                       var typedA = (KeyValuePair<string, object>)a;
                                       var typedB = (KeyValuePair<string, object>)b;
-                                      var typedAIsAnonymous = false;
-                                      var typedBIsAnonymous = false;
 
-                                      if (typedA.Value.IsDictionary() && typedB.Value.IsDictionary()) {
-                                          var innerA = typedA.Value as IDictionary<string, object>;
-                                          var innerB = typedB.Value as IDictionary<string, object>;
-
-                                          if (innerA == null) {
-                                              innerA = typedA.Value.ToExpando();
-                                          }
-
-                                          if (innerB == null) {
-                                              innerB = typedB.Value.ToExpando();
-                                          }
-
-                                          return innerA.ContentEquals(innerB);
-                                      }
-
-                                      typedAIsAnonymous = typedA.Value.IsAnonymousType();
-                                      typedBIsAnonymous = typedB.Value.IsAnonymousType();
-
-                                      if (typedAIsAnonymous || typedBIsAnonymous) {
-                                          ExpandoObject innerA = typedA.Value.ToDynamic();
-                                          ExpandoObject innerB = typedB.Value.ToDynamic();
-
-                                          return innerA.ContentEquals(innerB);
-                                      }
-
-                                      if (typedA.Value.IsList() && typedB.Value.IsList()) {
-                                          var innerA = typedA.Value as IList;
-                                          var innerB = typedB.Value as IList;
-
-                                          if (innerA.Count == innerB.Count) {
-                                              for (int i = 0; i < innerB.Count; i++) {
-                                                  var innerAItem = innerA[i];
-                                                  var innerBItem = innerB[i];
-
-                                                  if (!innerAItem.GetType().Equals(innerBItem.GetType())) {
-                                                      var innerBItemMap = innerB[i].ToDynamic() as IDictionary<string, object>;
-                                                      var innerAItemMap = innerA[i].ToDynamic() as IDictionary<string, object>;
-
-                                                      if (!innerBItemMap.ContentEquals(innerAItemMap)) {
-                                                          return false;
-                                                      }
-                                                  }
-                                                  else if (!innerAItem.Equals(innerBItem)) {
-                                                      return false;
-                                                  }
-                                              }
-
-                                              return true;
-                                          }
-
-                                            return false;
-                                      }
-
-                                      return typedA.Value.Equals(typedB.Value);
+                                      return typedA.Value.EqualsInternal(typedB.Value);
                                   });
+        }
+
+        public static bool EqualsInternal(this object obj1, object obj2) {
+            if (obj1.IsDictionary() && obj2.IsDictionary()) {
+                var innerA = obj1 as IDictionary<string, object>;
+                var innerB = obj2 as IDictionary<string, object>;
+
+                if (innerA == null) {
+                    innerA = obj1.ToExpando();
+                }
+
+                if (innerB == null) {
+                    innerB = obj2.ToExpando();
+                }
+
+                return innerA.ContentEquals(innerB);
+            }
+
+            var typedAIsAnonymous = obj1.IsAnonymousType();
+            var typedBIsAnonymous = obj2.IsAnonymousType();
+
+            if (typedAIsAnonymous || typedBIsAnonymous) {
+                ExpandoObject innerA = obj1.ToDynamic();
+                ExpandoObject innerB = obj2.ToDynamic();
+
+                return innerA.ContentEquals(innerB);
+            }
+
+            if (obj1.IsList() && obj2.IsList()) {
+                var innerA = obj1 as IList;
+                var innerB = obj2 as IList;
+
+                if (innerA.Count == innerB.Count) {
+                    for (int i = 0; i < innerB.Count; i++) {
+                        var innerAItem = innerA[i];
+                        var innerBItem = innerB[i];
+
+                        if (!innerAItem.GetType().Equals(innerBItem.GetType())) {
+                            var innerBItemMap = innerB[i].ToDynamic() as IDictionary<string, object>;
+                            var innerAItemMap = innerA[i].ToDynamic() as IDictionary<string, object>;
+
+                            if (!innerBItemMap.ContentEquals(innerAItemMap)) {
+                                return false;
+                            }
+                        }
+                        else if (!innerAItem.Equals(innerBItem)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+
+            return obj1.Equals(obj2);
         }
 
         public static bool ContentEquals(object dictionary, object expando) {

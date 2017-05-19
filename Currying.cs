@@ -667,7 +667,7 @@ namespace Ramda.NET
 
             while (idx < paths.Count) {
                 if (val.IsNull()) {
-                    return null;
+                    return R.@null;
                 }
 
                 val = val.Member(paths[idx]);
@@ -1169,18 +1169,16 @@ namespace Ramda.NET
 
         internal new readonly static dynamic Equals = Curry2<object, object, bool>((a, b) => EqualsInternal(a, b, new ArrayList(), new ArrayList()));
 
-        internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<DynamicDelegate, object, object>((pred, filterable) => {
-            dynamic dynamicPred = pred;
-
+        internal readonly static dynamic Filter = Curry2(Dispatchable2("Filter", XFilter, new Func<dynamic, object, object>((pred, filterable) => {
             return !filterable.IsEnumerable() ? ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
                 var value = filterable.Member(key);
 
-                if (Reflection.DynamicInvoke(dynamicPred, new object[] { value })) {
+                if (Reflection.DynamicInvoke(pred, new object[] { value })) {
                     acc[key] = value;
                 }
 
                 return acc;
-            })), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => dynamicPred(item), (IList)filterable);
+            })), new ExpandoObject(), filterable.Keys()) : FilterInternal(item => pred(item), (IList)filterable);
         })));
 
         internal readonly static dynamic Flatten = Curry1(MakeFlat(true));
@@ -1555,7 +1553,7 @@ namespace Ramda.NET
             }).Slice(idx, idx + width));
         });
 
-        internal readonly static dynamic Partition = Juxt(new object[] { Filter, Reject });
+        internal readonly static dynamic Partition = Juxt(new[] { Filter, Reject });
 
         internal readonly static dynamic Pipe = PipeFactory(PipeInternal, "Pipe");
 

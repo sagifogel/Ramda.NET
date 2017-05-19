@@ -203,6 +203,8 @@
     <Compile Include="Or.cs" />
     <Compile Include="PartialRight.cs" />
     <Compile Include="Partial.cs" />
+    <Compile Include="Partition.cs" />
+    <Compile Include="Path.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

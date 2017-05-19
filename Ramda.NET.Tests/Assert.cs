@@ -39,7 +39,7 @@ namespace Ramda.NET.Tests
                 return false;
             }
 
-            return a.Equals(b);
+            return a.EqualsInternal(b);
         }
     }
 }

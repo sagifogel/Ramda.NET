@@ -14,11 +14,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList<string> propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TArg, TTarget>(Func<TArg, bool> pred, IList propPath, TTarget obj) {
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
-		public static dynamic PathSatisfies<TTarget>(RamdaPlaceholder pred, IList<string> propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TTarget>(RamdaPlaceholder pred, IList propPath, TTarget obj) {
 			return Currying.PathSatisfies(pred, propPath, obj);
 		}
 
@@ -26,7 +26,7 @@ namespace Ramda.NET
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
-		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, IList<string> propPath, RamdaPlaceholder obj = null) {
+		public static dynamic PathSatisfies<TArg>(Func<TArg, bool> pred, IList propPath, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
@@ -38,7 +38,7 @@ namespace Ramda.NET
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
-		public static dynamic PathSatisfies(dynamic pred, IList<string> propPath, RamdaPlaceholder obj = null) {
+		public static dynamic PathSatisfies(dynamic pred, IList propPath, RamdaPlaceholder obj = null) {
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
@@ -46,7 +46,7 @@ namespace Ramda.NET
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 
-		public static dynamic PathSatisfies<TTarget>(dynamic pred, IList<string> propPath, TTarget obj) {
+		public static dynamic PathSatisfies<TTarget>(dynamic pred, IList propPath, TTarget obj) {
 			return Currying.PathSatisfies(Delegate(pred), propPath, obj);
 		}
 

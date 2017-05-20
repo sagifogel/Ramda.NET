@@ -1,4 +1,6 @@
-﻿namespace Ramda.NET
+﻿using System;
+
+namespace Ramda.NET
 {
     public class Nothing
     {
@@ -15,6 +17,10 @@
 
         public override int GetHashCode() {
             return base.GetHashCode();
+        }
+
+        public static explicit operator bool(Nothing x) {
+            return false;
         }
     }
 }

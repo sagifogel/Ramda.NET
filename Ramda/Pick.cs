@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Pick<TTarget>(IList<string> names, TTarget obj) {
+		public static dynamic Pick<TTarget>(IList names, TTarget obj) {
 			return Currying.Pick(names, obj);
 		}
 
@@ -22,7 +22,7 @@ namespace Ramda.NET
 			return Currying.Pick(names, obj);
 		}
 
-		public static dynamic Pick(IList<string> names, RamdaPlaceholder obj = null) {
+		public static dynamic Pick(IList names, RamdaPlaceholder obj = null) {
 			return Currying.Pick(names, obj);
 		}
 

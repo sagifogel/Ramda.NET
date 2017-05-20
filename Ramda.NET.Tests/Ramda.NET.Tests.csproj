@@ -207,6 +207,10 @@
     <Compile Include="Path.cs" />
     <Compile Include="PathEq.cs" />
     <Compile Include="PathOr.cs" />
+    <Compile Include="PathSatisfies.cs" />
+    <Compile Include="Pick.cs" />
+    <Compile Include="PickAll.cs" />
+    <Compile Include="PickBy.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

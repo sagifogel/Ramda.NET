@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PickAll<TTarget>(IList<string> names, TTarget obj) {
+		public static dynamic PickAll<TTarget>(IList names, TTarget obj) {
 			return Currying.PickAll(names, obj);
 		}
 
@@ -22,7 +22,7 @@ namespace Ramda.NET
 			return Currying.PickAll(names, obj);
 		}
 
-		public static dynamic PickAll(IList<string> names, RamdaPlaceholder obj = null) {
+		public static dynamic PickAll(IList names, RamdaPlaceholder obj = null) {
 			return Currying.PickAll(names, obj);
 		}
 

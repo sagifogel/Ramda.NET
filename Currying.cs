@@ -679,17 +679,17 @@ namespace Ramda.NET
 
         internal readonly static dynamic PathOr = Curry3<object, IList, object, object>((d, p, obj) => DefaultTo(d, Path(p, obj)));
 
-        internal readonly static dynamic PathSatisfies = Curry3<Delegate, IList, object, bool>((pred, propPath, obj) => propPath.Count > 0 && (bool)pred.DynamicInvoke(Path(propPath, obj)));
+        internal readonly static dynamic PathSatisfies = Curry3<dynamic, IList, object, bool>((pred, propPath, obj) => propPath.Count > 0 && Reflection.DynamicInvoke(pred, new[] { Path(propPath, obj) }));
 
-        internal readonly static dynamic Pick = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
+        internal readonly static dynamic Pick = Curry2<IList, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj));
 
-        internal readonly static dynamic PickAll = Curry2<IList<string>, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj, true));
+        internal readonly static dynamic PickAll = Curry2<IList, object, IDictionary<string, object>>((names, obj) => PickIntrenal(names, obj, true));
 
-        internal readonly static dynamic PickBy = Curry2<Delegate, object, IDictionary<string, object>>((pred, obj) => {
+        internal readonly static dynamic PickBy = Curry2<dynamic, object, IDictionary<string, object>>((pred, obj) => {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var pair in obj.ToMemberDictionary()) {
-                if ((bool)pred.DynamicInvoke(pair.Value, pair.Key, obj)) {
+                if ((bool)Reflection.DynamicInvoke(pred, new[] { pair.Value, pair.Key, obj })) {
                     result[pair.Key] = pair.Value;
                 }
             }

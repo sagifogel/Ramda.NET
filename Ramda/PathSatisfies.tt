@@ -7,7 +7,7 @@
 	template.Generics.Add("TArg");
 	template.Generics.Add("TTarget");
 	template.Parameters.Add(Tuple.Create("Func<TArg, bool>", "pred", true));
-	template.Parameters.Add(Tuple.Create("IList<string>", "propPath", false));
+	template.Parameters.Add(Tuple.Create("IList", "propPath", false));
 	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
 	template.Render();
 #>

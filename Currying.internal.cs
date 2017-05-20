@@ -392,7 +392,7 @@ namespace Ramda.NET
             return !returnValue;
         }
 
-        private static IDictionary<string, object> PickIntrenal(IList<string> names, object obj, bool setIfNull = false) {
+        private static IDictionary<string, object> PickIntrenal(IList names, object obj, bool setIfNull = false) {
             IDictionary<string, object> result = new ExpandoObject();
 
             foreach (var name in names) {
@@ -402,7 +402,7 @@ namespace Ramda.NET
                     continue;
                 }
 
-                result[name] = member;
+                result[name.ToString()] = member;
             }
 
             return result;

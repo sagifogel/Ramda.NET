@@ -246,31 +246,7 @@ namespace Ramda.NET
         }
 
         internal static bool TryGetMember(dynamic name, object target, out object memberVal) {
-            Type typeOfName = name.GetType();
-
-            if (target.IsArray() && typeOfName.Equals(typeof(int))) {
-                return ((Array)target).TryGetMember((int)name, out memberVal);
-            }
-
-            var member = target.TryGetMemberInfo((string)name);
-
-            memberVal = null;
-
-            if (member.IsNotNull()) {
-                switch (member.MemberType) {
-                    case MemberTypes.Field:
-                        memberVal = ((FieldInfo)member).GetValue(target);
-                        return true;
-                    case MemberTypes.Property:
-                        memberVal = ((PropertyInfo)member).GetValue(target, null);
-                        return true;
-                    case MemberTypes.Method:
-                        memberVal = ((MethodInfo)member).CreateDelegate(target);
-                        return true;
-                }
-            }
-
-            return false;
+            return (memberVal = Member(target, name)).IsNotNull();
         }
 
         internal static TConvert MemberWhere<TConvert>(this object target, string name, Func<TConvert, bool> predicate) {

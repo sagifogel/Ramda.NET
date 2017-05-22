@@ -1555,9 +1555,15 @@ namespace Ramda.NET
 
         internal readonly static dynamic Partition = Juxt(new[] { Filter, Reject });
 
-        internal readonly static dynamic Pipe = PipeFactory(PipeInternal, "Pipe");
+        internal readonly static dynamic Pipe = Curry1<IList, DynamicDelegate>(arguments => {
+            var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
 
-        internal readonly static dynamic PipeP = PipeFactory(PipePInternal, "Pipe");
+            return Reflection.DynamicInvoke(_Pipe, new[] { delegates });
+        });
+
+        private readonly static dynamic _Pipe = PipeFactory(PipeInternal, "Pipe");
+
+        internal readonly static dynamic PipeP = PipeFactory(PipePInternal, "PipeP");
 
         internal readonly static dynamic Product = Reduce(Multiply, 1);
 
@@ -1573,7 +1579,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Unnest = Chain(Delegate(IdentityInternal));
 
-        internal readonly static dynamic Compose = ComposeFactory(Pipe, "Compose");
+        internal readonly static dynamic Compose = ComposeFactory(_Pipe, "Compose");
 
         internal readonly static dynamic ComposeK = Delegate((object[] arguments) => {
             arguments = arguments.Select(arg => {

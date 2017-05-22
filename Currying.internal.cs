@@ -113,7 +113,7 @@ namespace Ramda.NET
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
             return Delegate((object[] arguments) => DynamicInvoke(g, new[] { (object)DynamicInvoke(f, arguments) }));
         }
-
+        
         private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
             return Delegate((object[] arguments) => {
                 return new Task<object>(() => DynamicInvoke(f, arguments)).Then(result => g(result));

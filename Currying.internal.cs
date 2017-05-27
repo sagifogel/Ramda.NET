@@ -5,15 +5,19 @@ using System.Dynamic;
 using System.Reflection;
 using System.Collections;
 using static Ramda.NET.R;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using static Ramda.NET.ReflectionExtensions;
+using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
     internal static partial class Currying
     {
+        internal static AwaitableDynamicDelegate AwaitableDelegate(Func<dynamic, Task<dynamic>> task) {
+            return new AwaitableDynamicDelegate(task);
+        }
+
         internal static DynamicDelegate Delegate(Func<object[], object> fn, int? length = null) {
             return new DelegateDecorator(fn, length);
         }
@@ -52,6 +56,10 @@ namespace Ramda.NET
             }
 
             return fn;
+        }
+
+        internal static DynamicDelegate PromiseDelegateN(dynamic fn, int? length = null) {
+            return new PromiseLikeDynamicDelegate((AwaitableDynamicDelegate)fn);
         }
 
         private static dynamic ComplementInternal(dynamic fn) {
@@ -113,22 +121,10 @@ namespace Ramda.NET
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
             return Delegate((object[] arguments) => DynamicInvoke(g, new[] { (object)DynamicInvoke(f, arguments) }));
         }
-        
-        private static DynamicDelegate PipePInternal(dynamic f, dynamic g) {
-            return Delegate((object[] arguments) => {
-                return new Task<object>(() => DynamicInvoke(f, arguments)).Then(result => g(result));
-            });
-        }
 
-        private static DynamicDelegate PipeFactory(Func<dynamic, dynamic, DynamicDelegate> pipe, string name) {
-            return Delegate((object[] arguments) => {
-                if (arguments.Length == 0) {
-                    throw new ArgumentNullException($"{name} requires at least one argument");
-                }
-
-                var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
-
-                return Arity(delegates[0].Length, (DynamicDelegate)Reduce(Delegate(pipe), delegates[0], Tail(delegates)));
+        private static AwaitableDynamicDelegate PipePInternal(dynamic f, dynamic g) {
+            return new AwaitableDynamicDelegate(async (object arguments) => {
+                return await g(await f(arguments));
             });
         }
 
@@ -665,7 +661,7 @@ namespace Ramda.NET
 
         internal static object ReduceInternal(object fn, object acc, object list) {
             IReducible reducible = null;
-            var transformer = fn as ITransformer;
+            ITransformer transformer = fn as ITransformer;
 
             if (fn.IsFunction()) {
                 transformer = new XWrap((dynamic)fn);
@@ -682,6 +678,16 @@ namespace Ramda.NET
             }
 
             throw new ArgumentException("Reduce: list must be array or iterable");
+        }
+
+        internal static DynamicDelegate ReduceTaskInternal(AwaitableDynamicDelegate acc, IList<AwaitableDynamicDelegate> list) {
+            var xf = new TaskXWrap(PipePInternal);
+
+            foreach (var item in list) {
+                acc = xf.Step(acc, item);
+            }
+
+            return new PromiseLikeDynamicDelegate(xf.Result(acc));
         }
 
         private static object IterableReduce(ITransformer xf, object acc, IEnumerable list) {
@@ -841,16 +847,6 @@ namespace Ramda.NET
             str = string.Join(", ", (object[])mapPairs(x, x.Keys()));
 
             return stringBuilder.Append(str).Append("}").ToString();
-        }
-
-        private static DynamicDelegate ComposeFactory(dynamic pipe, string name) {
-            return Delegate((object[] arguments) => {
-                if (arguments.IsNull() || arguments.Length == 0) {
-                    throw new ArgumentNullException($"{name} requires at least one argument");
-                }
-
-                return DynamicInvoke(pipe, Reverse(arguments));
-            });
         }
 
         private static object BothOrEither(DynamicDelegate f, DynamicDelegate g, Func<Func<bool>, Func<bool>, bool> operand, dynamic liftBy) {

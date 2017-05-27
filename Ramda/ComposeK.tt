@@ -4,6 +4,6 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Parameters.Add(Tuple.Create("IList<Delegate>", "functions", false));
+	template.Parameters.Add(Tuple.Create("params Delegate[]", "functions", false));
 	template.Render();
 #>

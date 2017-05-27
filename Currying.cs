@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Core = Ramda.NET.IEnumerableExtensions;
 using Reflection = Ramda.NET.ReflectionExtensions;
+using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
@@ -1555,15 +1556,35 @@ namespace Ramda.NET
 
         internal readonly static dynamic Partition = Juxt(new[] { Filter, Reject });
 
-        internal readonly static dynamic Pipe = Curry1<IList, DynamicDelegate>(arguments => {
-            var delegates = arguments.Select(arg => Delegate(arg)).ToArray();
+        internal readonly static dynamic ComposeFactory = Curry3<IList, dynamic, string, DynamicDelegate>((arguments, compose, name) => {
+            if (arguments.Count == 0) {
+                throw new ArgumentNullException($"{name} requires at least one argument");
+            }
 
-            return Reflection.DynamicInvoke(_Pipe, new[] { delegates });
+            return Reflection.DynamicInvoke(compose, Reverse(arguments));
         });
 
-        private readonly static dynamic _Pipe = PipeFactory(PipeInternal, "Pipe");
+        internal readonly static dynamic Pipe = Curry1<IList, DynamicDelegate>(arguments => {
+            if (arguments.Count == 0) {
+                throw new ArgumentNullException("Pipe requires at least one argument");
+            }
 
-        internal readonly static dynamic PipeP = PipeFactory(PipePInternal, "PipeP");
+            var delegates = arguments.Select(Delegate).ToArray();
+
+            return Arity(delegates[0].Length, (DynamicDelegate)Reduce(Delegate(PipeInternal), delegates[0], Tail(delegates)));
+        });
+
+        internal readonly static dynamic PipeK = ComposeFactory(R.__, Delegate((object[] arguments) => ComposeK(arguments)), "PipeK");
+
+        internal readonly static dynamic PipeP = Curry1<IList<Func<dynamic, Task<dynamic>>>, DynamicDelegate>(arguments => {
+            if (arguments.Count == 0) {
+                throw new ArgumentNullException("PipeP requires at least one argument");
+            }
+
+            var delegates = arguments.Select(AwaitableDelegate).ToArray();
+
+            return Arity(delegates[0].Length, ReduceTaskInternal(delegates[0], Tail(delegates)));
+        });
 
         internal readonly static dynamic Product = Reduce(Multiply, 1);
 
@@ -1579,21 +1600,20 @@ namespace Ramda.NET
 
         internal readonly static dynamic Unnest = Chain(Delegate(IdentityInternal));
 
-        internal readonly static dynamic Compose = ComposeFactory(_Pipe, "Compose");
+        internal readonly static dynamic Compose = ComposeFactory(R.__, Delegate((object[] arguments) => Pipe(arguments)), "Compose");
 
-        internal readonly static dynamic ComposeK = Delegate((object[] arguments) => {
-            arguments = arguments.Select(arg => {
-                if (arg.IsFunction()) {
-                    return Delegate(arg);
-                }
+        internal readonly static dynamic ComposeK = Curry1<IList, DynamicDelegate>(arguments => {
+            if (arguments.Count == 0) {
+                throw new ArgumentNullException("ComposeK requires at least one argument");
+            }
 
-                return arg;
-            }).ToArray();
+            var init = arguments.Select(Delegate).ToArray();
+            var last = init.Last();
 
-            return Compose(Prepend(Identity, Map(Chain, arguments)));
+            return Reflection.DynamicInvoke(Compose, new[] { Prepend(Identity, Map(Chain, init), last) });
         });
 
-        internal readonly static dynamic ComposeP = ComposeFactory(PipeP, "ComposeP");
+        internal readonly static dynamic ComposeP = ComposeFactory(R.__, PipeP, "ComposeP");
 
         internal readonly static dynamic Construct = Curry1<DynamicDelegate, object>(Fn => ConstructN(Fn.Length, Fn));
 
@@ -1626,8 +1646,6 @@ namespace Ramda.NET
 
             return result;
         });
-
-        internal readonly static dynamic PipeK = Delegate((object[] arguments) => Reflection.DynamicInvoke(ComposeK, Reverse(arguments)));
 
         internal new readonly static dynamic ToString = Curry1<object, string>(ToStringInternal);
 
@@ -1774,6 +1792,6 @@ namespace Ramda.NET
             return Uniq(FilterInternal(a => flipped(a), filteredList));
         });
 
-        internal static dynamic Union = Curry2(Compose(Uniq, new Func<IList, IList, IList>(Core.ConcatInternal)));
+        internal static dynamic Union = Curry2(Compose(R.__, Uniq, new Func<IList, IList, IList>(Core.ConcatInternal)));
     }
 }

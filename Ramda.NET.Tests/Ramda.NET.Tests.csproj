@@ -211,6 +211,8 @@
     <Compile Include="Pick.cs" />
     <Compile Include="PickAll.cs" />
     <Compile Include="PickBy.cs" />
+    <Compile Include="PipeP.cs" />
+    <Compile Include="PipeK.cs" />
     <Compile Include="Pipe.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />

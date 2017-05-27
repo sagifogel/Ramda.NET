@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AwaitableDynamicDelegate.cs" />
+    <Compile Include="PromiseContinuation.cs" />
+    <Compile Include="PromiseLikeDynamicDelegate.cs" />
     <Compile Include="DynamicDelegate.cs" />
     <Compile Include="DelegateDecorator.cs" />
     <Compile Include="AbstractLambda.cs" />
@@ -55,7 +58,6 @@
     </Compile>
     <Compile Include="Exceptions\NaNException.cs" />
     <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\TaskExtensions.cs" />
     <Compile Include="Functor.cs" />
     <Compile Include="Curry3.cs" />
     <Compile Include="Curry2.cs" />
@@ -915,6 +917,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\PipeK.cs">
+      <DependentUpon>PipeK.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Set.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1663,6 +1670,7 @@
     <Compile Include="Transformers\StepCatObject.cs" />
     <Compile Include="Transformers\StepCatString.cs" />
     <Compile Include="Transformers\StepCatArray.cs" />
+    <Compile Include="Transformers\TaskXWrap.cs" />
     <Compile Include="Transformers\XAny.cs" />
     <Compile Include="Transformers\XAll.cs" />
     <Compile Include="Transformers\AbstractXAnyOrAll.cs" />
@@ -2141,6 +2149,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Omit.string.cs</LastGenOutput>
       <LastOutputs>.\Omit.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeK.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeK.cs</LastGenOutput>
+      <LastOutputs>.\PipeK.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Set.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -8,10 +8,11 @@ namespace Ramda.NET.Tests
     {
         [TestMethod]
         public void ComposeK_Is_A_Variadic_Function() {
+            var composeKMethod = typeof(R).GetMethod("ComposeK", new Type[] { typeof(Delegate[]) });
             var composeK = R.ComposeK(R.__);
 
             Assert.IsInstanceOfType(composeK, typeof(DynamicDelegate));
-            Assert.AreEqual(composeK.Length, 2);
+            Assert.IsTrue(composeKMethod.GetParameters()[0].IsDefined(typeof(ParamArrayAttribute), true));
         }
 
         [TestMethod]

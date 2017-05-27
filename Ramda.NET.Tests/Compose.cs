@@ -29,11 +29,10 @@ namespace Ramda.NET.Tests
             CollectionAssert.AreEqual((ICollection)f("10")(new[] { 1, 2, 3 }), new[] { 10, 20, 30 });
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void Compose_Throws_If_Given_No_Arguments() {
-            var f = R.Compose();
+            var f = R.Compose(new Delegate[0]);
         }
 
         [TestMethod]

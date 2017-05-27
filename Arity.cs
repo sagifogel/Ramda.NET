@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using Reflection = Ramda.NET.ReflectionExtensions;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
@@ -67,10 +68,6 @@ namespace Ramda.NET
             }
 
             return clipped;
-        }
-
-        internal static DynamicDelegate Arity(int length, Delegate fn) {
-            return Arity(length, new DelegateDecorator(fn));
         }
 
         internal static DynamicDelegate Arity(int length, DynamicDelegate fn) {

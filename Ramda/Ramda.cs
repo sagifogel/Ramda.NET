@@ -232,28 +232,16 @@ namespace Ramda.NET
             return Currying.Pipe(functions);
         }
 
-        public static dynamic PipeP(params dynamic[] functions) {
-            return Currying.PipeP(functions);
-        }
-
-        public static dynamic Compose(IList<dynamic> functions) {
-            return Currying.Compose(functions);
+        public static dynamic PipeK(params dynamic[] functions) {
+            return Currying.PipeK(functions);
         }
 
         public static dynamic Compose(params dynamic[] functions) {
             return Currying.Compose(functions);
         }
 
-        public static dynamic ComposeP(IList<dynamic> functions) {
-            return Currying.ComposeP(functions);
-        }
-
         public static dynamic ComposeP(params dynamic[] functions) {
             return Currying.ComposeP(functions);
-        }
-
-        public static dynamic ComposeK(IList<dynamic> functions) {
-            return Currying.ComposeK(functions);
         }
 
         public static dynamic ComposeK(params dynamic[] functions) {

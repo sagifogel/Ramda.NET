@@ -14,7 +14,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Compose(IList<Delegate> functions) {
+		public static dynamic Compose(params Delegate[] functions) {
 			return Currying.Compose(functions);
 		}
 

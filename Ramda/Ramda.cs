@@ -4,6 +4,7 @@ using System.Collections;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
@@ -234,6 +235,22 @@ namespace Ramda.NET
 
         public static dynamic PipeK(params dynamic[] functions) {
             return Currying.PipeK(functions);
+        }
+
+        public static dynamic PipeP(params Func<dynamic, Task<dynamic>>[] functions) {
+            return Currying.PipeP(functions);
+        }
+
+        public static dynamic PipeP(params Func<dynamic, dynamic, Task<dynamic>>[] functions) {
+            return Currying.PipeP(functions);
+        }
+
+        public static dynamic PipeP(params Func<dynamic, dynamic, dynamic, Task<dynamic>>[] functions) {
+            return Currying.PipeP(functions);
+        }
+
+        public static dynamic PipeP(params Func<dynamic, dynamic, dynamic, dynamic, Task<dynamic>>[] functions) {
+            return Currying.PipeP(functions);
         }
 
         public static dynamic Compose(params dynamic[] functions) {

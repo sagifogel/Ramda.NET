@@ -14,8 +14,8 @@ namespace Ramda.NET
 {
     internal static partial class Currying
     {
-        internal static AwaitableDynamicDelegate AwaitableDelegate(Func<dynamic, Task<dynamic>> task) {
-            return new AwaitableDynamicDelegate(task);
+        internal static AwaitableDynamicDelegate AwaitableDelegate(Delegate fn) {
+            return new AwaitableDynamicDelegate(fn);
         }
 
         internal static DynamicDelegate Delegate(Func<object[], object> fn, int? length = null) {
@@ -123,8 +123,8 @@ namespace Ramda.NET
         }
 
         private static AwaitableDynamicDelegate PipePInternal(dynamic f, dynamic g) {
-            return new AwaitableDynamicDelegate(async (object arguments) => {
-                return await g(await f(arguments));
+            return new AwaitableDynamicDelegate(async (object[] arguments) => {
+                return await DynamicInvoke(g, new[] { (await DynamicInvoke(f, arguments)) });
             });
         }
 

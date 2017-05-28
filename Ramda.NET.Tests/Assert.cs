@@ -26,16 +26,29 @@ namespace Ramda.NET.Tests
             }
         }
 
-        private static bool ItemsEqual(object a,  object b) {
-            bool aIsList = a.IsList();
-            bool bIsList = b.IsList();
+        private static bool ItemsEqual(object a, object b) {
+            bool aIsNotNull = a.IsNotNull();
+            bool bIsNotNull = b.IsNotNull();
+            bool aIsList = aIsNotNull && a.IsList();
+            bool bIsList = bIsNotNull && b.IsList();
             bool both = (Convert.ToInt32(aIsList) + Convert.ToInt32(bIsList)) % 2 == 0;
+            int nullResult = (Convert.ToInt32(!aIsNotNull) + Convert.ToInt32(!bIsNotNull));
+            bool oneIsNull = nullResult % 2 == 1;
+            bool bothNull = nullResult % 2 == 0;
 
             if (aIsList && bIsList) {
                 return ((IList)a).SequenceEqual((IList)b, ItemsEqual);
             }
 
             if (!both) {
+                return false;
+            }
+
+            if (bothNull) {
+                return true;
+            }
+
+            if (oneIsNull) {
                 return false;
             }
 

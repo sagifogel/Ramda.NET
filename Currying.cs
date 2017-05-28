@@ -1576,7 +1576,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PipeK = ComposeFactory(R.__, Delegate((object[] arguments) => ComposeK(arguments)), "PipeK");
 
-        internal readonly static dynamic PipeP = Curry1<IList<Func<dynamic, Task<dynamic>>>, DynamicDelegate>(arguments => {
+        internal readonly static dynamic PipeP = Curry1<IList<Delegate>, DynamicDelegate>(arguments => {
             if (arguments.Count == 0) {
                 throw new ArgumentNullException("PipeP requires at least one argument");
             }

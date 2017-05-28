@@ -217,7 +217,7 @@ namespace Ramda.NET
         internal static object[] ToArgumentsArray(this object value, Type type = null) {
             type = type ?? value.GetType();
 
-            if (type.IsArray) {
+            if (type.TypeIsArray()) {
                 value = value.ToArgumentsArray(type.GetElementType());
             }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Dynamic;
-using System.Threading.Tasks;
+using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -22,7 +22,7 @@ namespace Ramda.NET
         }
 
         public PromiseContinuation Then(Func<dynamic, dynamic> continuation) {
-            return new PromiseContinuation(f(arguments[0]).Result).Then(continuation);
+            return new PromiseContinuation(DynamicInvoke(f, arguments).Result).Then(continuation);
         }
 
         public override Delegate Unwrap() {

@@ -10,9 +10,14 @@ namespace Ramda.NET
     public class AwaitableDynamicDelegate : DynamicDelegate
     {
         protected object[] arguments;
-        private Func<dynamic, Task<dynamic>> fn;
+        private readonly Delegate fn;
 
-        public AwaitableDynamicDelegate(Func<dynamic, Task<dynamic>> fn) {
+        public AwaitableDynamicDelegate(Delegate fn) {
+            this.fn = fn;
+            Length = fn.Method.GetParameters().Length;
+        }
+
+        internal AwaitableDynamicDelegate(Func<dynamic[], Task<dynamic>> fn) {
             this.fn = fn;
         }
 
@@ -24,7 +29,7 @@ namespace Ramda.NET
         }
 
         public dynamic GetAwaiter() {
-            dynamic task = DynamicInvoke(fn, arguments);
+            dynamic task = fn.Invoke(arguments);
 
             return task.GetAwaiter();
         }

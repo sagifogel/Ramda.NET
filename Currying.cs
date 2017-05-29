@@ -1561,7 +1561,7 @@ namespace Ramda.NET
                 throw new ArgumentNullException($"{name} requires at least one argument");
             }
 
-            return Reflection.DynamicInvoke(compose, Reverse(arguments));
+            return Reflection.DynamicInvoke(compose, new[] { Reverse(arguments) });
         });
 
         internal readonly static dynamic Pipe = Curry1<IList, DynamicDelegate>(arguments => {

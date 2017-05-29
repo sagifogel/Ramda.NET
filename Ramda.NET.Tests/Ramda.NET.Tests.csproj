@@ -86,6 +86,7 @@
     <Compile Include="Complement.cs" />
     <Compile Include="Compose.cs" />
     <Compile Include="ComposeK.cs" />
+    <Compile Include="ComposeP.cs" />
     <Compile Include="Concat.cs" />
     <Compile Include="Cond.cs" />
     <Compile Include="Construct.cs" />

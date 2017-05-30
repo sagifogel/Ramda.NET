@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,11 +15,11 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic PropOr<TValue, TTarget>(TValue val, IList<string> p, TTarget obj) {
+		public static dynamic PropOr<TValue, TTarget>(TValue val, string p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
 
-		public static dynamic PropOr<TTarget>(RamdaPlaceholder val, IList<string> p, TTarget obj) {
+		public static dynamic PropOr<TTarget>(RamdaPlaceholder val, string p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
 
@@ -26,7 +27,7 @@ namespace Ramda.NET
 			return Currying.PropOr(val, p, obj);
 		}
 
-		public static dynamic PropOr<TValue>(TValue val, IList<string> p, RamdaPlaceholder obj = null) {
+		public static dynamic PropOr<TValue>(TValue val, string p, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
 

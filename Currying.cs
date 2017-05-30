@@ -704,22 +704,18 @@ namespace Ramda.NET
 
         internal readonly static dynamic PropIs = Curry3<Type, dynamic, object, bool>((type, name, obj) => Is(type, Reflection.Member(obj, name)));
 
-        internal readonly static dynamic PropOr = Curry3<object, dynamic, object, object>((val, p, obj) => obj.IsNotNull() ? Reflection.Member(obj, p) ?? val : val);
+        internal readonly static dynamic PropOr = Curry3<object, string, object, object>((val, p, obj) => obj.IsNotNull() && obj.Has(p) ? Reflection.Member(obj, p) : val);
 
-        internal readonly static dynamic PropSatisfies = Curry3<Delegate, dynamic, object, bool>((pred, name, obj) => (bool)pred.Invoke(new[] { (object)Reflection.Member(obj, name) }));
+        internal readonly static dynamic PropSatisfies = Curry3<dynamic, dynamic, object, bool>((pred, name, obj) => Reflection.DynamicInvoke(pred, new[] { Reflection.Member(obj, name) }));
 
-        internal readonly static dynamic Props = Curry2<IEnumerable<dynamic>, object, object>((ps, obj) => {
-            var result = new List<object>();
+        internal readonly static dynamic Props = Curry2<IEnumerable<string>, object, object>((ps, obj) => {
+            var result = new ArrayList();
 
             foreach (var prop in ps) {
-                object member;
-
-                if (Reflection.TryGetMember(prop, obj, out member)) {
-                    result.Add(member);
-                }
+                result.Add(obj.Member(prop));
             }
 
-            return result;
+            return result.ToArray<Array>();
         });
 
         internal readonly static dynamic Range = Curry2<int, int, IList>((from, to) => {

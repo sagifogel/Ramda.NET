@@ -221,6 +221,10 @@
     <Compile Include="Project.cs" />
     <Compile Include="PropEq.cs" />
     <Compile Include="Prop.cs" />
+    <Compile Include="PropIs.cs" />
+    <Compile Include="PropOr.cs" />
+    <Compile Include="Props.cs" />
+    <Compile Include="PropSatisfies.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

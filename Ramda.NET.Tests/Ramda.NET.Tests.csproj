@@ -217,6 +217,10 @@
     <Compile Include="Pipe.cs" />
     <Compile Include="Pluck.cs" />
     <Compile Include="Prepend.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="Project.cs" />
+    <Compile Include="PropEq.cs" />
+    <Compile Include="Prop.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

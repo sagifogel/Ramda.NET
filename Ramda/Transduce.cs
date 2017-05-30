@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -16,6 +17,10 @@ namespace Ramda.NET
 	{	
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, TAccumulator acc, IList<TSource> list) {
 			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
+		}
+
+		public static dynamic Transduce<TSource, TAccumulator>(RamdaPlaceholder xf, Func<TAccumulator, ITransformer> fn, TAccumulator acc, IList<TSource> list) {
+			return Currying.Transduce(xf, Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, RamdaPlaceholder fn, TAccumulator acc, IList<TSource> list) {
@@ -36,6 +41,10 @@ namespace Ramda.NET
 
 		public static dynamic Transduce<TAccumulator>(Func<ITransformer, ITransformer> xf, Func<TAccumulator, ITransformer> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
+		}
+
+		public static dynamic Transduce<TSource, TAccumulator>(RamdaPlaceholder xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
+			return Currying.Transduce(xf, Delegate(fn), acc, list);
 		}
 
 		public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, RamdaPlaceholder fn, TAccumulator acc, IList<TSource> list) {
@@ -64,6 +73,10 @@ namespace Ramda.NET
 
 		public static dynamic Transduce<TSource, TAccumulator>(Func<ITransformer, ITransformer> xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
 			return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
+		}
+
+		public static dynamic Transduce(RamdaPlaceholder xf = null, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
+			return Currying.Transduce(xf, fn, acc, list);
 		}
 	}
 }

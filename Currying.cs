@@ -1324,7 +1324,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic PathEq = Curry3<IList, object, object, bool>((_path, val, obj) => Equals(Path(_path, obj), val));
 
-        internal readonly static dynamic Pluck = Curry2<object, IList, IList>((p, list) => Map(Prop(p), list));
+        internal readonly static dynamic Pluck = Curry2<object, dynamic, dynamic>((p, list) => Map(Prop(p), list));
 
         internal readonly static dynamic Project = UseWith(Delegate(new Func<DynamicDelegate, IList, object>(MapInternal)), new object[] { PickAll, Identity });
 
@@ -1358,9 +1358,9 @@ namespace Ramda.NET
 
         internal readonly static dynamic TakeLast = Curry2<int, IList, IList>((n, xs) => Drop(n >= 0 ? xs.Count - n : 0, xs));
 
-        internal readonly static dynamic Transduce = CurryN(4, new Func<Delegate, object, object, object, object>((xf, fn, acc, list) => {
-            return ReduceInternal(xf.Invoke(new[] { fn.IsFunction() ? new XWrap((DynamicDelegate)fn) : fn }), acc, list);
-        }));
+        internal readonly static dynamic Transduce = CurryN(4, Delegate(new Func<dynamic, object, object, object, object>((xf, fn, acc, list) => {
+            return ReduceInternal(Reflection.DynamicInvoke(xf, new[] { fn.IsFunction() ? new XWrap((DynamicDelegate)fn) : fn }), acc, list);
+        })));
 
         internal readonly static dynamic UnionWith = Curry3<Delegate, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2)));
 

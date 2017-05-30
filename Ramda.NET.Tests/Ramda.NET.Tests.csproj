@@ -215,6 +215,8 @@
     <Compile Include="PipeP.cs" />
     <Compile Include="PipeK.cs" />
     <Compile Include="Pipe.cs" />
+    <Compile Include="Pluck.cs" />
+    <Compile Include="Prepend.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

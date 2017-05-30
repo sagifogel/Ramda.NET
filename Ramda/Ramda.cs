@@ -308,5 +308,13 @@ namespace Ramda.NET
         public static dynamic Over<TTarget>(dynamic lens, dynamic v, TTarget x) {
             return Currying.Over(Delegate(lens), Delegate(v), x);
         }
+
+        public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
+            return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
+        }
+
+        public static dynamic Prepend(object el, IList list) {
+            return Currying.Prepend(el, list);
+        }
     }
 }

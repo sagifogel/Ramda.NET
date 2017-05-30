@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Dynamic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ramda.NET
 {

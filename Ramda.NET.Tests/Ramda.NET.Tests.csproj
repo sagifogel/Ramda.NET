@@ -225,6 +225,10 @@
     <Compile Include="PropOr.cs" />
     <Compile Include="Props.cs" />
     <Compile Include="PropSatisfies.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="Reduce.cs" />
+    <Compile Include="ReduceBy.cs" />
+    <Compile Include="Reduced.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

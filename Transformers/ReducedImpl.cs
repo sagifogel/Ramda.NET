@@ -4,10 +4,10 @@
     {
         public ReducedImpl(object value) {
             Value = value;
-            IsReduced = true;
+            Reduced = true;
         }
 
         public object Value { get; private set; }
-        public bool IsReduced { get; private set; }
+        public bool Reduced { get; private set; }
     }
 }

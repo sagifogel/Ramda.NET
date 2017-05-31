@@ -11,7 +11,7 @@ namespace Ramda.NET
             var ret = xf.Step(result, input);
             var transformer = ret as IReduced;
 
-            return transformer.IsNotNull() && transformer.IsReduced ? ForceReduced(ret) : ret;
+            return transformer.IsNotNull() && transformer.Reduced ? ForceReduced(ret) : ret;
         }
     }
 }

@@ -131,7 +131,7 @@ namespace Ramda.NET
         internal static IReduced ReducedInternal(object x) {
             var reduced = x as IReduced;
 
-            return reduced.IsNotNull() && reduced.IsReduced ? reduced : new ReducedImpl(x);
+            return reduced.IsNotNull() && reduced.Reduced ? reduced : new ReducedImpl(x);
         }
 
         private static IList ApertureInternal(int length, IList list) {
@@ -714,7 +714,7 @@ namespace Ramda.NET
         }
 
         private static object MethodReduce(ITransformer xf, object acc, IReducible obj) {
-            return xf.Result((object)obj.Reduce(new Func<object, object, object>(xf.Step), acc));
+            return xf.Result(obj.Reduce(new Func<object, object, object>(xf.Step), acc));
         }
 
         private static ITransformer StepCat(object obj) {

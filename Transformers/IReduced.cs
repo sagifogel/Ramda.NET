@@ -3,6 +3,6 @@
     internal interface IReduced
     {
         object Value { get; }
-        bool IsReduced { get; }
+        bool Reduced { get; }
     }
 }

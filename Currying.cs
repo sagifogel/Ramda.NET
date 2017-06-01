@@ -735,7 +735,7 @@ namespace Ramda.NET
             dynamic dynamicFn = fn;
 
             while (idx >= 0) {
-                acc = dynamicFn(acc, list[idx]);
+                acc = dynamicFn(list[idx], acc);
                 idx -= 1;
             }
 
@@ -1337,12 +1337,12 @@ namespace Ramda.NET
             })), new ExpandoObject(), list);
         }))));
 
-        internal readonly static dynamic ReduceWhile = CurryN(4, new Func<Delegate, Delegate, object, IList, object>((pred, fn, a, list) => {
-            return ReduceInternal(new Func<object, object, object>((acc, x) => {
+        internal readonly static dynamic ReduceWhile = CurryN(4, new Func<dynamic, dynamic, object, IList, object>((pred, fn, a, list) => {
+            return ReduceInternal(Delegate(new Func<object, object, object>((acc, x) => {
                 var args = new[] { acc, x };
 
-                return (bool)pred.Invoke(args) ? fn.Invoke(args) : ReducedInternal(acc);
-            }), a, list);
+                return Reflection.DynamicInvoke(pred, args) ? Reflection.DynamicInvoke(fn, args) : ReducedInternal(acc);
+            })), a, list);
         }));
 
         internal readonly static dynamic Reject = Curry2<DynamicDelegate, object, object>((pred, filterable) => Filter(ComplementInternal(pred), filterable));

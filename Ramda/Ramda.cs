@@ -5,6 +5,7 @@ using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
@@ -324,5 +325,33 @@ namespace Ramda.NET
         public static dynamic Prepend(object el, IList list) {
             return Currying.Prepend(el, list);
         }
+
+        public static dynamic Replace(string pattern, string replacement, string str) {
+            return Currying.Replace(new Regex(pattern), replacement, str);
+        }
+        
+        public static dynamic Replace(string pattern, RamdaPlaceholder replacement, string str) {
+            return Currying.Replace(new Regex(pattern), replacement, str);
+        }
+
+        public static dynamic Replace(string pattern, string replacement, RamdaPlaceholder str = null) {
+            return Currying.Replace(new Regex(pattern), replacement, str);
+        }
+
+        public static dynamic Replace(string pattern, RamdaPlaceholder replacement = null, RamdaPlaceholder str = null) {
+            return Currying.Replace(new Regex(pattern), replacement, str);
+        }
+
+        public static dynamic Slice(int fromIndex, int toIndex, string list) {
+			return Currying.Slice(fromIndex, toIndex, list);
+		}
+
+		public static dynamic Slice(RamdaPlaceholder fromIndex, int toIndex, string list) {
+			return Currying.Slice(fromIndex, toIndex, list);
+		}
+
+		public static dynamic Slice(int fromIndex, RamdaPlaceholder toIndex, string list) {
+			return Currying.Slice(fromIndex, toIndex, list);
+		}
     }
 }

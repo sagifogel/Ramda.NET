@@ -730,12 +730,11 @@ namespace Ramda.NET
             return Enumerable.Range(start, count).ToArray();
         });
 
-        internal readonly static dynamic ReduceRight = Curry3<DynamicDelegate, object, IList, object>((fn, acc, list) => {
+        internal readonly static dynamic ReduceRight = Curry3<dynamic, object, IList, object>((fn, acc, list) => {
             var idx = list.Count - 1;
-            dynamic dynamicFn = fn;
 
             while (idx >= 0) {
-                acc = dynamicFn(list[idx], acc);
+                acc = Reflection.DynamicInvoke(fn, new[] { list[idx], acc });
                 idx -= 1;
             }
 
@@ -745,12 +744,18 @@ namespace Ramda.NET
         internal readonly static dynamic Reduced = Curry1<object, IReduced>(ReducedInternal);
 
         internal readonly static dynamic Remove = Curry3<int, int, IList, IList>((start, count, list) => {
-            return Slice(list, 0, Math.Min(start, list.Count)).Concat(Slice(list, Math.Min(list.Count, start + count)));
+            return list.Slice(0, Math.Min(start, list.Count)).Concat(list.Slice(Math.Min(list.Count, start + count)));
         });
 
         internal readonly static dynamic Replace = Curry3<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement));
 
         internal readonly static dynamic Reverse = Curry1<IEnumerable, IEnumerable>(enumerable => {
+            var listOfString = enumerable as string;
+
+            if (listOfString != null) {
+                return string.Join(string.Empty, listOfString.Reverse());
+            }
+
             var list = enumerable.CreateNewList();
             var enumerator = enumerable.GetEnumerator();
 
@@ -761,25 +766,35 @@ namespace Ramda.NET
             return list.ToArray<Array>();
         });
 
-        internal readonly static dynamic Scan = Curry3<Delegate, object, IList, IList>((fn, acc, list) => {
+        internal readonly static dynamic Scan = Curry3<dynamic, object, IList, IList>((fn, acc, list) => {
             var idx = 0;
             var len = list.Count;
-            var result = new List<object>() { acc };
+            var result = new ArrayList() { acc };
 
             while (idx < len) {
-                acc = fn.DynamicInvoke(acc, list[idx]);
+                acc = Reflection.DynamicInvoke(fn, new[] { acc, list[idx] });
                 result.Insert(idx + 1, acc);
                 idx += 1;
             }
 
-            return result;
+            return result.ToArray<Array>();
         });
 
         internal readonly static dynamic Set = Curry3<dynamic, object, object, object>((lens, v, x) => {
             return Over(lens, Always(v), x);
         });
 
-        internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IList, IList>((fromIndex, toIndex, list) => list.Slice(fromIndex, toIndex))));
+        internal readonly static dynamic Slice = Curry3(CheckForMethod3("Slice", new Func<int, int, IEnumerable, IEnumerable>((int fromIndex, int toIndex, IEnumerable list) => {
+            var strategy = ListStrategy.Resolve(list);
+            var upTo = Math.Min(toIndex, strategy.Length);
+            var start = (fromIndex >= 0) ? fromIndex : Math.Max(0, strategy.Length + fromIndex);
+
+            if (toIndex < 0) {
+                upTo = strategy.Length + toIndex;
+            }
+
+            return list.Slice(start, upTo);
+        })));
 
         internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
             return SortInternal(list, comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
@@ -1588,7 +1603,7 @@ namespace Ramda.NET
                 return ((dynamic)traversable).Sequence(of);
             }
 
-            return ReduceRight(Delegate((acc, x) => Ap(Map(Prepend, x), acc)), Of(new object[0]), traversable);
+            return ReduceRight(Delegate((x, acc) => Ap(Map(Prepend, x), acc)), Reflection.DynamicInvoke(of, new[] { new object[0] }), traversable);
         });
 
         internal readonly static dynamic Traverse = Curry3<DynamicDelegate, DynamicDelegate, object, IList>((of, f, traversable) => Sequence(Of, Map(f, traversable)));

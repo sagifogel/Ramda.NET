@@ -232,6 +232,13 @@
     <Compile Include="ReduceRight.cs" />
     <Compile Include="ReduceWhile.cs" />
     <Compile Include="Reject.cs" />
+    <Compile Include="Remove.cs" />
+    <Compile Include="Repeat.cs" />
+    <Compile Include="Replace.cs" />
+    <Compile Include="Reverse.cs" />
+    <Compile Include="Scan.cs" />
+    <Compile Include="Sequence.cs" />
+    <Compile Include="Slice.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -8,6 +8,17 @@ namespace Ramda.NET
 {
     public static class IEnumerableExtensions
     {
+        internal static IEnumerable Slice(this IEnumerable arguments, int from = int.MinValue, int to = int.MaxValue) {
+            var enumerableOfString = arguments as string;
+
+
+            if (enumerableOfString != null) {
+                return enumerableOfString.Slice(from, to);
+            }
+
+            return (arguments as IList).Slice(from, to);
+        }
+
         internal static string Slice(this string arguments, int from = int.MinValue, int to = int.MaxValue) {
             return string.Join(string.Empty, arguments.ToCharArray().Slice(from, to).Select(o => o.ToString()));
         }

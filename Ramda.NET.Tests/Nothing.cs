@@ -22,5 +22,9 @@ namespace Ramda.NET.Tests
         public object Ap(IMappable mappable) {
             return this;
         }
+
+        public object Filter(Func<object, bool> pred) {
+            return this;
+        }
     }
 }

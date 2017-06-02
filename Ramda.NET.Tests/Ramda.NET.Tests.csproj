@@ -231,6 +231,7 @@
     <Compile Include="Reduced.cs" />
     <Compile Include="ReduceRight.cs" />
     <Compile Include="ReduceWhile.cs" />
+    <Compile Include="Reject.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

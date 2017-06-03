@@ -62,8 +62,8 @@ namespace Ramda.NET
             return new PromiseLikeDynamicDelegate((AwaitableDynamicDelegate)fn);
         }
 
-        private static dynamic ComplementInternal(dynamic fn) {
-            return Delegate((object[] arguments) => !DynamicInvoke(fn, arguments));
+        private static dynamic ComplementInternal(DynamicDelegate fn) {
+            return Delegate((object[] arguments) => !fn.DynamicInvoke<bool>(arguments));
         }
 
         private static bool ContainsWith(Func<object, object, bool> predicate, object x, IList list) {
@@ -93,7 +93,7 @@ namespace Ramda.NET
         internal static TValue IdentityInternal<TValue>(TValue x) => x;
 
         private static object[] MapInternal(dynamic fn, IList functor) {
-            return MapInternal(obj => DynamicInvoke(fn, new[] { obj }), functor);
+            return MapInternal(obj => Delegate(fn).DynamicInvoke(obj), functor);
         }
 
         private static object[] MapInternal(Func<object, object> fn, IList functor) {
@@ -240,8 +240,9 @@ namespace Ramda.NET
 
         private static IList DropLastWhileInternal(dynamic pred, IList list) {
             var idx = list.Count - 1;
+            DynamicDelegate dynamicDelegate = Delegate(pred);
 
-            while (idx >= 0 && (bool)DynamicInvoke(pred, new[] { list[idx] })) {
+            while (idx >= 0 && dynamicDelegate.DynamicInvoke<bool>(list[idx])) {
                 idx -= 1;
             }
 
@@ -417,10 +418,10 @@ namespace Ramda.NET
             return array.CreateNewList(array);
         }
 
-        private static IList TakeWhileInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, dynamic fn, IList list, Func<int, int> sliceFrom, Func<int, int> sliceTo) {
+        private static IList TakeWhileInternal(int from, int indexerAcc, Func<int, bool> loopPredicate, DynamicDelegate fn, IList list, Func<int, int> sliceFrom, Func<int, int> sliceTo) {
             var idx = from;
 
-            while (loopPredicate(idx) && (bool)fn.DynamicInvoke(list[idx])) {
+            while (loopPredicate(idx) && fn.DynamicInvoke<bool>(list[idx])) {
                 idx += indexerAcc;
             }
 
@@ -745,9 +746,9 @@ namespace Ramda.NET
         private static DynamicDelegate AnyOrAllPass(IList preds, bool comparend) {
             return Delegate((object[] arguments) => {
                 foreach (dynamic pred in preds) {
-                    var dynamicPred = Delegate(pred);
+                    DynamicDelegate dynamicPred = Delegate(pred);
 
-                    if (DynamicInvoke(dynamicPred, arguments) == comparend) {
+                    if (dynamicPred.DynamicInvoke<bool>(arguments) == comparend) {
                         return comparend;
                     }
                 }
@@ -851,7 +852,7 @@ namespace Ramda.NET
 
         private static object BothOrEither(DynamicDelegate f, DynamicDelegate g, Func<Func<bool>, Func<bool>, bool> operand, dynamic liftBy) {
             if (f.IsNotNull()) {
-                return Delegate((object[] arguments) => operand(() => DynamicInvoke((dynamic)f, arguments), () => DynamicInvoke((dynamic)g, arguments)));
+                return Delegate((object[] arguments) => operand(() => f.DynamicInvoke<bool>(arguments), () => g.DynamicInvoke<bool>(arguments)));
             }
 
             return Lift(liftBy)(f, g);

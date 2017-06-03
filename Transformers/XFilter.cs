@@ -8,7 +8,7 @@ namespace Ramda.NET
         }
 
         public override object Step(object result, object input) {
-            return this.f(input) ? this.xf.Step(result, input) : result;
+            return f.DynamicInvoke<bool>(input) ? xf.Step(result, input) : result;
         }
     }
 }

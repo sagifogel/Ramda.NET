@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Dynamic;
+using System.Threading.Tasks;
 using Reflection = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
     public class PromiseLikeDynamicDelegate : DynamicDelegate
     {
-        private readonly dynamic f;
         private object[] arguments;
+        private readonly DynamicDelegate f;
 
         internal PromiseLikeDynamicDelegate(AwaitableDynamicDelegate fn) {
             f = fn;
@@ -22,7 +23,7 @@ namespace Ramda.NET
         }
 
         public PromiseContinuation Then(Func<dynamic, dynamic> continuation) {
-            return new PromiseContinuation(Reflection.DynamicInvoke(f, arguments).Result).Then(continuation);
+            return new PromiseContinuation(f.DynamicInvoke<dynamic>(arguments).Result).Then(continuation);
         }
 
         public override Delegate Unwrap() {

@@ -14,7 +14,7 @@ namespace Ramda.NET
         }
 
         public override object Step(object result, object input) {
-            if (f(input)) {
+            if (f.DynamicInvoke<bool>(input)) {
                 last = GetStepLastValue(input);
             }
 

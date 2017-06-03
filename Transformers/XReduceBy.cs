@@ -10,7 +10,7 @@ namespace Ramda.NET
     {
         private readonly dynamic keyFn;
         private readonly object valueAcc;
-        private readonly dynamic valueFn;
+        private readonly DynamicDelegate valueFn;
         private IDictionary<string, object[]> inputs;
 
         internal XReduceBy(DynamicDelegate valueFn, object valueAcc, dynamic keyFn, ITransformer xf) : base(xf) {
@@ -39,7 +39,7 @@ namespace Ramda.NET
             var key = keyFn(input);
 
             inputs[key] = inputs.ContainsKey(key) ? inputs[key] : new object[2] { key, valueAcc };
-            inputs[key][1] = DynamicInvoke(valueFn, new[] { inputs[key][1], input });
+            inputs[key][1] = valueFn.DynamicInvoke(inputs[key][1], input);
 
             return result;
         }

@@ -20,7 +20,7 @@ namespace Ramda.NET
         }
 
         public override object Step(object result, object input) {
-            if (f(input)) {
+            if (f.DynamicInvoke<bool>(input)) {
                 found = true;
                 result = ReducedInternal(xf.Step(result, GetStepInputValue(input)));
             }

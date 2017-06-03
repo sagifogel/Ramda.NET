@@ -20,7 +20,7 @@ namespace Ramda.NET
         }
 
         public override object Step(object result, object input) {
-            return DynamicInvoke(f, new[] { input }) ? Retain(result, input) : Flush(result, input);
+            return f.DynamicInvoke<bool>(input) ? Retain(result, input) : Flush(result, input);
         }
 
         private object Retain(object result, object input) {

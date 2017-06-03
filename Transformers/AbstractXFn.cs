@@ -4,7 +4,7 @@ namespace Ramda.NET
 {
     internal abstract class AbstractXFn<TReturn> : XFBase<ITransformer>, ITransformer
     {
-        protected dynamic f;
+        protected DynamicDelegate f;
 
         internal AbstractXFn(DynamicDelegate f, ITransformer xf) : base(xf) {
             this.f = f;

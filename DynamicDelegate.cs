@@ -8,6 +8,10 @@ namespace Ramda.NET
     {
         public int Length { get; protected set; }
 
+        public TResult DynamicInvoke<TResult>(params object[] arguments) {
+            return (TResult)Reflection.DynamicInvoke((dynamic)this, arguments);
+        }
+
         public object DynamicInvoke(params object[] arguments) {
             return Reflection.DynamicInvoke((dynamic)this, arguments);
         }

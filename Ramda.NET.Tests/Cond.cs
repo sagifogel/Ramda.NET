@@ -31,7 +31,7 @@ namespace Ramda.NET.Tests
                 new [] { R.Equals("bar"), R.Always(2) }
             });
 
-            Assert.IsNull(fn("quux"));
+            Assert.AreEqual(fn("quux"), R.@null);
         }
 
         [TestMethod]

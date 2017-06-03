@@ -10,7 +10,7 @@ namespace Ramda.NET
 
         public override object Step(object result, object input) {
             if (f.IsNotNull()) {
-                if (f(input)) {
+                if (f.DynamicInvoke<bool>(input)) {
                     return result;
                 }
 

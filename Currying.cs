@@ -796,14 +796,14 @@ namespace Ramda.NET
             return list.Slice(start, upTo);
         })));
 
-        internal readonly static dynamic Sort = Curry2<Delegate, IList, IList>((comparator, list) => {
-            return SortInternal(list, comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
+        internal readonly static dynamic Sort = Curry2<DynamicDelegate, IList, IList>((comparator, list) => {
+            return SortInternal(list.Slice(), comparator.ToComparer((x, y) => (int)comparator.DynamicInvoke(x, y)));
         });
 
-        internal readonly static dynamic SortBy = Curry2<Delegate, IList, IList>((fn, list) => {
+        internal readonly static dynamic SortBy = Curry2<DynamicDelegate, IList, IList>((fn, list) => {
             return SortInternal(list, fn.ToComparer((x, y) => {
-                var xx = (dynamic)fn.DynamicInvoke(x.ToArgumentsArray());
-                var yy = (dynamic)fn.DynamicInvoke(y.ToArgumentsArray());
+                var xx = (dynamic)Reflection.DynamicInvoke(fn, x.ToArgumentsArray());
+                var yy = (dynamic)Reflection.DynamicInvoke(y, y.ToArgumentsArray());
 
                 return xx < yy ? -1 : xx > yy ? 1 : 0;
             }));
@@ -824,7 +824,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic SplitWhen = Curry2<Delegate, IList, IList>((pred, list) => {
+        internal readonly static dynamic SplitWhen = Curry2<DynamicDelegate, IList, IList>((pred, list) => {
             var idx = 0;
             var len = list.Count;
             var prefix = list.CreateNewList();
@@ -834,7 +834,7 @@ namespace Ramda.NET
                 list = list.CreateNewList(list);
             }
 
-            while (idx < len && !(bool)pred.DynamicInvoke(list[idx])) {
+            while (idx < len && !(bool)Reflection.DynamicInvoke(pred, new [] { list[idx] })) {
                 prefix.Add(list[idx]);
                 idx += 1;
             }

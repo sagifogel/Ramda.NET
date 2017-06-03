@@ -40,7 +40,7 @@ namespace Ramda.NET
                 combinedIdx += 1;
             }
 
-            return left <= 0 ? DynamicInvoke(fn, combined.ToArray()) : Currying.Arity(left, new CurryN(fn, combined.ToArray(), Length));
+            return left <= 0 ? ReflectionExtensions.DynamicInvoke(fn, combined.ToArray()) : Currying.Arity(left, new CurryN(fn, combined.ToArray(), Length));
         }
     }
 }

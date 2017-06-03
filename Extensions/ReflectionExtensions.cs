@@ -474,7 +474,7 @@ namespace Ramda.NET
             }
         }
 
-        internal static IComparer ToComparer(this Delegate @delegate, Func<object, object, int> comparator) {
+        internal static IComparer ToComparer(this DynamicDelegate @delegate, Func<object, object, int> comparator) {
             return new ComparerFactory(comparator);
         }
 

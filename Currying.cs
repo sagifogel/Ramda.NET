@@ -1574,7 +1574,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic LensIndex = Curry1<int, dynamic>(n => Lens(Nth(n), Update(n)));
 
-        internal readonly static dynamic LensPath = Curry1<IList, dynamic>(p => Reflection.DynamicInvoke(Lens, new object[] { Path(p), AssocPath(p) }));
+        internal readonly static dynamic LensPath = Curry1<IList, dynamic>(p => Lens.DynamicInvoke(Path(p), AssocPath(p)));
 
         internal readonly static dynamic LensProp = Curry1<string, dynamic>(k => Lens(Prop(k), Assoc(k)));
 
@@ -1661,7 +1661,7 @@ namespace Ramda.NET
             var init = arguments.Select(Delegate).ToArray();
             var last = init.Last();
 
-            return Reflection.DynamicInvoke(Compose, new[] { Prepend(Identity, Map(Chain, init), last) });
+            return Compose.DynamicInvoke(Prepend(Identity, Map(Chain, init), last));
         });
 
         internal readonly static dynamic ComposeP = ComposeFactory(R.__, PipeP, "ComposeP");

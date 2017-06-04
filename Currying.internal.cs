@@ -119,12 +119,12 @@ namespace Ramda.NET
         }
 
         private static DynamicDelegate PipeInternal(dynamic f, dynamic g) {
-            return Delegate((object[] arguments) => DynamicInvoke(g, new[] { (object)DynamicInvoke(f, arguments) }));
+            return Delegate((object[] arguments) => g.DynamicInvoke(new[] { f.DynamicInvoke(arguments) }));
         }
 
         private static AwaitableDynamicDelegate PipePInternal(dynamic f, dynamic g) {
             return new AwaitableDynamicDelegate(async (object[] arguments) => {
-                return await DynamicInvoke(g, new[] { (await DynamicInvoke(f, arguments)) });
+                return await g.DynamicInvoke(new[] { await f.DynamicInvoke(arguments) });
             });
         }
 
@@ -185,7 +185,7 @@ namespace Ramda.NET
             invokeFn = member.IsNull() || !member.IsFunction();
 
             if (invokeFn || obj.IsList()) {
-                return DynamicInvoke(Delegate(fn), arguments);
+                return Delegate(fn).DynamicInvoke(arguments);
             }
 
             return member.InvokeNative((object[])arguments.Slice(0, length - 1));
@@ -229,13 +229,13 @@ namespace Ramda.NET
                 }
 
                 if (obj is ITransformer) {
-                    var transformer = DynamicInvoke(xf, args);
+                    var transformer = xf.DynamicInvoke(args);
 
                     return transformer(obj);
                 }
             }
 
-            return DynamicInvoke(fn, arguments);
+            return fn.DynamicInvoke(arguments);
         }
 
         private static IList DropLastWhileInternal(dynamic pred, IList list) {
@@ -329,7 +329,7 @@ namespace Ramda.NET
         }
 
         private static object InternalIfElse(dynamic condition, dynamic onTrue, dynamic onFalse, params object[] arguments) {
-            return DynamicInvoke(condition, arguments) ? DynamicInvoke(onTrue, arguments) : DynamicInvoke(onFalse, arguments);
+            return condition.DynamicInvoke(arguments) ? onTrue.DynamicInvoke(arguments) : onFalse.DynamicInvoke(arguments);
         }
 
         private static object InternalEvolve(object transformationsObj, object target) {
@@ -344,7 +344,7 @@ namespace Ramda.NET
                 if (transformations.TryGetValue(key, out transformation)) {
                     if (transformation.IsNotNull()) {
                         if (transformation.IsFunction()) {
-                            result[key] = DynamicInvoke(transformation, new object[] { value });
+                            result[key] = Delegate(transformation).DynamicInvoke(value);
                             continue;
                         }
                         else if (!value.IsPrimitive()) {
@@ -470,9 +470,7 @@ namespace Ramda.NET
         private static Functor IdentityFunctor(object x) {
             return new Functor {
                 Value = x,
-                Map = new Func<dynamic, Functor>(f => {
-                    return IdentityFunctor(DynamicInvoke(f, new[] { x }));
-                })
+                Map = new Func<dynamic, Functor>(f => IdentityFunctor(f.DynamicInvoke(x)))
             };
         }
 
@@ -486,13 +484,13 @@ namespace Ramda.NET
             return functor;
         }
 
-        private static dynamic CreatePartialApplicator(dynamic concat) {
-            return Curry2(new Func<DynamicDelegate, IList, dynamic>((fn, args) => {
+        private static dynamic CreatePartialApplicator(DynamicDelegate concat) {
+            return Curry2(new Func<dynamic, IList, dynamic>((fn, args) => {
                 return Arity(Math.Max(0, fn.Arity() - args.Count), Delegate((object[] arguments) => {
-                    var trimmedArgumnets = Arguments(arguments);
-                    var concatedArgs = (IList)DynamicInvoke(concat, new[] { args, trimmedArgumnets });
+                    DynamicDelegate dynamicDelegate = Delegate(fn);
+                    var concatedArgs = (IList)concat.DynamicInvoke(args, Arguments(arguments));
 
-                    return DynamicInvoke(fn, concatedArgs.ToArray<object[]>(typeof(object)));
+                    return dynamicDelegate.DynamicInvoke(concatedArgs.ToArray<object[]>(typeof(object)));
                 }));
             }));
         }

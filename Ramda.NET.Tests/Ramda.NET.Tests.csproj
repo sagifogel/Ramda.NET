@@ -240,6 +240,7 @@
     <Compile Include="Sequence.cs" />
     <Compile Include="Slice.cs" />
     <Compile Include="Sort.cs" />
+    <Compile Include="SortBy.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

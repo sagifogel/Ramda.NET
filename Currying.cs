@@ -819,10 +819,10 @@ namespace Ramda.NET
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
             return SortInternal(list, dynamicDelegate.ToComparer((x, y) => {
-                var xx = dynamicDelegate.DynamicInvoke<dynamic>(x.ToArgumentsArray());
-                var yy = Delegate(y).DynamicInvoke<dynamic>(y.ToArgumentsArray());
+                var xx = dynamicDelegate.DynamicInvoke<dynamic>(x);
+                var yy = dynamicDelegate.DynamicInvoke<dynamic>(y);
 
-                return xx < yy ? -1 : xx > yy ? 1 : 0;
+                return Lt(xx, yy) ? -1 : Gt(xx, yy) ? 1 : 0;
             }));
         });
 

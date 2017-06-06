@@ -14,6 +14,14 @@ namespace Ramda.NET
         public readonly static Nothing @null = new Nothing();
         public readonly static RamdaPlaceholder __ = new RamdaPlaceholder();
 
+        public static dynamic Descend<TSource>(IList<dynamic> functions, IList<TSource> list) {
+            return Currying.Descend(functions, list);
+        }
+
+        public static dynamic Descend<TSource>(IList<dynamic> functions, RamdaPlaceholder list = null) {
+            return Currying.Descend(functions, list);
+        }
+
         public static dynamic Length<TValue>(IList list) {
             return Currying.Length(list);
         }
@@ -353,5 +361,13 @@ namespace Ramda.NET
 		public static dynamic Slice(int fromIndex, RamdaPlaceholder toIndex, string list) {
 			return Currying.Slice(fromIndex, toIndex, list);
 		}
+
+        public static dynamic SortWith<TSource>(IList<dynamic> functions, IList<TSource> list) {
+            return Currying.SortWith(functions, list);
+        }
+
+        public static dynamic SortWith<TSource>(IList<dynamic> functions, RamdaPlaceholder list = null) {
+            return Currying.SortWith(functions, list);
+        }
     }
 }

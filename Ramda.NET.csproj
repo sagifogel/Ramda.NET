@@ -161,6 +161,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Descend.cs">
+      <DependentUpon>Descend.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Ascend.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ascend.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Binary.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -347,6 +357,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Descend.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Descend.cs</LastGenOutput>
+      <LastOutputs>.\Descend.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Ascend.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ascend.cs</LastGenOutput>
+      <LastOutputs>.\Ascend.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Binary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -927,6 +947,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Set.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\SortWith.cs">
+      <DependentUpon>SortWith.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Split.reverse.cs">
       <DependentUpon>Split.reverse.tt</DependentUpon>
@@ -2160,6 +2185,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Set.cs</LastGenOutput>
       <LastOutputs>.\Set.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SortWith.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SortWith.cs</LastGenOutput>
+      <LastOutputs>.\SortWith.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Split.reverse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

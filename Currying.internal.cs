@@ -900,5 +900,14 @@ namespace Ramda.NET
 
             return $"\"{escaped}\"";
         }
+
+        private static int AscendDescendInternal(dynamic firstOperator, dynamic secondOprator, dynamic fn, dynamic a, dynamic b) {
+            DynamicDelegate dynamicDelegate = Delegate(fn);
+
+            var aa = dynamicDelegate.DynamicInvoke<dynamic>(a);
+            var bb = dynamicDelegate.DynamicInvoke<dynamic>(b);
+
+            return firstOperator(aa, bb) ? -1 : secondOprator(aa, bb) ? 1 : 0;
+        }
     }
 }

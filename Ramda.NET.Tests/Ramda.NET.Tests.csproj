@@ -58,6 +58,7 @@
     <Compile Include="AbstractAnyOrAll.cs" />
     <Compile Include="AbstractAnyOrAllPass.cs" />
     <Compile Include="AbstractConstruct.cs" />
+    <Compile Include="AbstractSort.cs" />
     <Compile Include="Add.cs" />
     <Compile Include="AddIndex.cs" />
     <Compile Include="Adjust.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Ap.cs" />
     <Compile Include="Apply.cs" />
     <Compile Include="ApplySpec.cs" />
+    <Compile Include="Descend.cs" />
+    <Compile Include="Ascend.cs" />
     <Compile Include="Assert.cs" />
     <Compile Include="Assoc.cs" />
     <Compile Include="AssocPath.cs" />
@@ -240,6 +243,7 @@
     <Compile Include="Sequence.cs" />
     <Compile Include="Slice.cs" />
     <Compile Include="Sort.cs" />
+    <Compile Include="SortWith.cs" />
     <Compile Include="SortBy.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />

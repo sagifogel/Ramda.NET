@@ -4,18 +4,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class SortBy
+    public class SortBy : AbstractSort
     {
-        class Album
-        {
-            public string Title { get; set; }
-            public string Genre { get; set; }
-            public string Artist { get; set; }
-        }
-
-        private object[] Argumnets(params object[] args) => args;
-
-        private readonly Album[] albums = new[] {
+        protected readonly Album[] albums = new[] {
             new Album { Title = "Art of the Fugue", Artist = "Glenn Gould", Genre = "Baroque"},
             new Album { Title = "A Farewell to Kings", Artist = "Rush", Genre = "Rock"},
             new Album { Title = "Timeout", Artist = "Dave Brubeck Quartet", Genre = "Jazz"},

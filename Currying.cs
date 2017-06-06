@@ -116,6 +116,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic Append = Curry2<object, IList, IList>((el, list) => list.Concat(list.CreateNewList(new[] { el })));
 
+        internal readonly static dynamic Ascend = Curry3<dynamic, dynamic, dynamic, int>((fn, a, b) => AscendDescendInternal(Lt, Gt, fn, a, b));
+
         internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => Delegate(fn).DynamicInvoke(args));
 
         internal readonly static dynamic Assoc = Curry3<object, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
@@ -168,6 +170,8 @@ namespace Ramda.NET
 
             return value == type.GetDefaultValue() ? defaultValue : value;
         });
+
+        internal readonly static dynamic Descend = Curry3<dynamic, dynamic, dynamic, int>((fn, a, b) => AscendDescendInternal(Gt, Lt, fn, a, b));
 
         internal readonly static dynamic DifferenceWith = Curry3<dynamic, IList, IList, IList>((pred, first, second) => {
             var idx = 0;
@@ -819,11 +823,24 @@ namespace Ramda.NET
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
             return SortInternal(list, dynamicDelegate.ToComparer((x, y) => {
-                var xx = dynamicDelegate.DynamicInvoke<dynamic>(x);
-                var yy = dynamicDelegate.DynamicInvoke<dynamic>(y);
-
-                return Lt(xx, yy) ? -1 : Gt(xx, yy) ? 1 : 0;
+                return Ascend(dynamicDelegate, x, y);
             }));
+        });
+
+        internal readonly static dynamic SortWith = Curry2<IList, IList, IList>((fns, list) => {
+            return list.Sort<dynamic>((a, b) => {
+                var i = 0;
+                var result = 0;
+
+                while (result == 0 && i < fns.Count) {
+                    DynamicDelegate dynamicDelegate = Delegate(fns[i]);
+
+                    result = dynamicDelegate.DynamicInvoke(a, b);
+                    i += 1;
+                }
+
+                return result;
+            });
         });
 
         internal readonly static dynamic SplitEvery = Curry2<int, IList, IList>((n, list) => {

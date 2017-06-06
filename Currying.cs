@@ -827,6 +827,19 @@ namespace Ramda.NET
             }));
         });
 
+        internal readonly static dynamic SplitAt = Curry2<int, IEnumerable, IList>((index, array) => {
+            var strategy = ListStrategy.Resolve(array);
+
+            if (index < 0) {
+                index = strategy.Length + index;
+            }
+
+            return new [] {
+                strategy.Slice(0, index),
+                strategy.Slice(index, (int)Length(array))
+            };
+        });
+
         internal readonly static dynamic SortWith = Curry2<IList, IList, IList>((fns, list) => {
             return list.Sort<dynamic>((a, b) => {
                 var i = 0;

@@ -11,7 +11,6 @@ namespace Ramda.NET
         internal static IEnumerable Slice(this IEnumerable arguments, int from = int.MinValue, int to = int.MaxValue) {
             var enumerableOfString = arguments as string;
 
-
             if (enumerableOfString != null) {
                 return enumerableOfString.Slice(from, to);
             }

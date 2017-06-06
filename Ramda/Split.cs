@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Split(char[] sep, string str) {
+		public static dynamic Split(string sep, string str) {
 			return Currying.Split(sep, str);
 		}
 
@@ -22,7 +23,7 @@ namespace Ramda.NET
 			return Currying.Split(sep, str);
 		}
 
-		public static dynamic Split(char[] sep, RamdaPlaceholder str = null) {
+		public static dynamic Split(string sep, RamdaPlaceholder str = null) {
 			return Currying.Split(sep, str);
 		}
 

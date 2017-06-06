@@ -48,6 +48,14 @@ namespace Ramda.NET
             return DelegateN(fn);
         }
 
+        internal static DynamicDelegate NullableDelegate(dynamic fn) {
+            if (((object)fn).IsNull()) {
+                return fn;
+            }
+
+            return Delegate(fn);
+        }
+
         internal static DynamicDelegate DelegateN(dynamic fn, int? length = null) {
             Type type = fn.GetType();
 
@@ -908,6 +916,22 @@ namespace Ramda.NET
             var bb = dynamicDelegate.DynamicInvoke<dynamic>(b);
 
             return firstOperator(aa, bb) ? -1 : secondOprator(aa, bb) ? 1 : 0;
+        }
+
+        private static DynamicDelegate InvokerInternal(int arity, string method, Func<object, int, DynamicDelegate> delegateFactory) {
+            return CurryN(arity + 1, Delegate(arguments => {
+                var target = arguments[arity];
+
+                if (target.IsNotNull()) {
+                    var @delegate = delegateFactory(target, arity);
+
+                    if (@delegate.IsNotNull()) {
+                        return @delegate.DynamicInvoke((object[])arguments.Slice(0, arity));
+                    }
+                }
+
+                throw new MissingMethodException($"{nameof(target)} does not have a method named '{method}'");
+            }));
         }
     }
 }

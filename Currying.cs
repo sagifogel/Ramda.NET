@@ -1780,20 +1780,7 @@ namespace Ramda.NET
         internal static dynamic Either = Curry2<dynamic, dynamic, dynamic>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() || b()), Or));
 
         internal static dynamic Invoker = Curry2<int, string, object>((arity, method) => {
-            return CurryN(arity + 1, Delegate(arguments => {
-                var target = arguments[arity];
-
-                if (target.IsNotNull()) {
-                    var methodMember = target.Member(method, arity);
-                    var @delegate = methodMember as Delegate;
-
-                    if (methodMember.IsNotNull()) {
-                        return Delegate(@delegate).DynamicInvoke((object[])arguments.Slice(0, arity));
-                    }
-                }
-
-                throw new MissingMethodException($"{nameof(target)} does not have a method named '{method}'");
-            }));
+            return InvokerInternal(arity, method, (target, _) => NullableDelegate(target.Member(method, arity) as Delegate));
         });
 
         internal static dynamic Join = Curry2<string, IList, string>((separator, xs) => {
@@ -1814,7 +1801,14 @@ namespace Ramda.NET
             }));
         });
 
-        internal static dynamic Split = Invoker(1, "Split");
+        internal static dynamic Split = InvokerInternal(1, "Split", new Func<object, int, DynamicDelegate>((t, arity) => {
+            return Delegate((object[] arguments) => {
+                var target = (string)t;
+                var seperator = (string)arguments[0];
+
+                return target.Split(new[] { seperator }, StringSplitOptions.None);
+            });
+        }));
 
         internal static dynamic SymmetricDifference = Curry2<IList, IList, IList>((list1, list2) => {
             return Concat(Difference(list1, list2), Difference(list2, list1));

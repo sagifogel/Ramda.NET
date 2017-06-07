@@ -250,6 +250,7 @@
     <Compile Include="SplitEvery.cs" />
     <Compile Include="SplitWhen.cs" />
     <Compile Include="Subtract.cs" />
+    <Compile Include="Sum.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

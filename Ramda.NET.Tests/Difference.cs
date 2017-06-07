@@ -28,6 +28,8 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Difference_Has_R.Equals_Semantics")]
         public void Difference_Has_R_Equals_Semantics() {
+            Assert.IsTrue(R.PathEq(new[] { "Value" }, R.@null, new { Value = R.@null }));
+            Assert.IsTrue(R.PathEq(new[] { "Value" }, new Just(new[] { 42 }), new { Value = new Just(new[] { 42 }) }));
             Assert.AreEqual(R.Difference(new[] { new Just(new[] { 42 }) }, new[] { new Just(new[] { 42 }) }).Length, 0);
         }
 

@@ -252,6 +252,7 @@
     <Compile Include="Subtract.cs" />
     <Compile Include="Sum.cs" />
     <Compile Include="SymmetricDifference.cs" />
+    <Compile Include="SymmetricDifferenceWith.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

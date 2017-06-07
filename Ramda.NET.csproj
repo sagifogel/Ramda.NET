@@ -973,6 +973,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Subtract.string.cs">
+      <DependentUpon>Subtract.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Subtract.object.cs">
+      <DependentUpon>Subtract.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Subtract.bool.cs">
+      <DependentUpon>Subtract.bool.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\SymmetricDifferenceWith.cs">
       <DependentUpon>SymmetricDifferenceWith.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2220,6 +2235,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitEvery.string.cs</LastGenOutput>
       <LastOutputs>.\SplitEvery.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Subtract.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Subtract.string.cs</LastGenOutput>
+      <LastOutputs>.\Subtract.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Subtract.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Subtract.object.cs</LastGenOutput>
+      <LastOutputs>.\Subtract.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Subtract.bool.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Subtract.bool.cs</LastGenOutput>
+      <LastOutputs>.\Subtract.bool.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SymmetricDifferenceWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

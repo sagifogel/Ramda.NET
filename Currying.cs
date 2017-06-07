@@ -894,7 +894,7 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic Subtract = Curry2<dynamic, dynamic, dynamic>((arg1, arg2) => arg1 - arg2);
+        internal readonly static dynamic Subtract = Curry2<object, object, dynamic>((arg1, arg2) => arg1.ToNumber() - arg2.ToNumber());
 
         internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MaxValue));
 

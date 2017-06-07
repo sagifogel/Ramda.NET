@@ -167,7 +167,7 @@ namespace Ramda.NET
         }
 
         private static Curry1 CheckForMethod1(string methodName, dynamic fn) {
-            return Curry1<IList, IList>(list => (IList)CheckForMethodN(methodName, fn, list));
+            return Curry1<IEnumerable, IEnumerable>(list => CheckForMethodN(methodName, fn, list));
         }
 
         private static Func<object, object, object> CheckForMethod2(string methodName, dynamic fn) {

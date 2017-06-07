@@ -146,10 +146,6 @@ namespace Ramda.NET
             return Currying.SplitWhen(Delegate(pred), list.ToCharArray());
         }
 
-        public static dynamic Tail(string list) {
-            return Currying.Tail(list.ToCharArray());
-        }
-
         public static dynamic Take(int n, string list) {
             return Currying.Take(n, list.ToCharArray());
         }

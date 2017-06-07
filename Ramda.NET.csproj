@@ -998,6 +998,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SymmetricDifference.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Tail.string.cs">
+      <DependentUpon>Tail.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Test.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1538,10 +1543,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sum.int.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Tail.cs">
+    <Compile Include="Ramda\Tail.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Tail.tt</DependentUpon>
+      <DependentUpon>Tail.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Take.cs">
       <AutoGen>True</AutoGen>
@@ -2261,6 +2266,11 @@
       <LastGenOutput>SymmetricDifference.cs</LastGenOutput>
       <LastOutputs>.\SymmetricDifference.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Tail.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Tail.string.cs</LastGenOutput>
+      <LastOutputs>.\Tail.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Test.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Test.cs</LastGenOutput>
@@ -2802,9 +2812,9 @@
       <LastGenOutput>Sum.int.cs</LastGenOutput>
       <LastOutputs>.\Sum.int.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Tail.tt">
+    <Content Include="Ramda\Tail.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Tail.cs</LastGenOutput>
+      <LastGenOutput>Tail.list.cs</LastGenOutput>
       <LastOutputs>.\Tail.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Take.tt">

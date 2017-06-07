@@ -856,15 +856,16 @@ namespace Ramda.NET
             });
         });
 
-        internal readonly static dynamic SplitEvery = Curry2<int, IList, IList>((n, list) => {
+        internal readonly static dynamic SplitEvery = Curry2<int, IEnumerable, IEnumerable>((n, list) => {
             if (n <= 0) {
                 throw new ArgumentOutOfRangeException(nameof(n), "First argument to splitEvery must be a positive integer");
             }
 
             var idx = 0;
-            var result = list.CreateNewList(type: list.GetType());
+            var strategy = ListStrategy.Resolve(list);
+            var result = list.CreateNewList(type: strategy.GetElementType());
 
-            while (idx < list.Count) {
+            while (idx < strategy.Length) {
                 result.Add(Slice(idx, idx += n, list));
             }
 

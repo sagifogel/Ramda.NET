@@ -247,6 +247,7 @@
     <Compile Include="SortBy.cs" />
     <Compile Include="Split.cs" />
     <Compile Include="SplitAt.cs" />
+    <Compile Include="SplitEvery.cs" />
     <Compile Include="T.cs" />
     <Compile Include="F.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

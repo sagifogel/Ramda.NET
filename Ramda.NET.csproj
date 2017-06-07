@@ -968,6 +968,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Split.list.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\SplitEvery.string.cs">
+      <DependentUpon>SplitEvery.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\SymmetricDifferenceWith.cs">
       <DependentUpon>SymmetricDifferenceWith.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1488,10 +1493,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SortBy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\SplitEvery.cs">
+    <Compile Include="Ramda\SplitEvery.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SplitEvery.tt</DependentUpon>
+      <DependentUpon>SplitEvery.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\SplitWhen.cs">
       <AutoGen>True</AutoGen>
@@ -2211,6 +2216,11 @@
       <LastGenOutput>Split.list.cs</LastGenOutput>
       <LastOutputs>.\Split.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\SplitEvery.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SplitEvery.string.cs</LastGenOutput>
+      <LastOutputs>.\SplitEvery.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\SymmetricDifferenceWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SymmetricDifferenceWith.cs</LastGenOutput>
@@ -2732,9 +2742,9 @@
       <LastGenOutput>SortBy.cs</LastGenOutput>
       <LastOutputs>.\SortBy.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\SplitEvery.tt">
+    <Content Include="Ramda\SplitEvery.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SplitEvery.cs</LastGenOutput>
+      <LastGenOutput>SplitEvery.list.cs</LastGenOutput>
       <LastOutputs>.\SplitEvery.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SplitWhen.tt">

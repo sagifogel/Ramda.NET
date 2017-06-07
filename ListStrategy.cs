@@ -12,6 +12,7 @@ namespace Ramda.NET
         int Length { get; }
         object Slice(int from, int to);
         object this[int index] { get; }
+        Type GetElementType();
     }
 
     public static class ListStrategy
@@ -46,6 +47,10 @@ namespace Ramda.NET
                 }
             }
 
+            public Type GetElementType() {
+                return typeof(string);
+            }
+
             public object Slice(int from, int to) {
                 return value.Slice(from, to);
             }
@@ -73,6 +78,10 @@ namespace Ramda.NET
 
             public object Slice(int from, int to) {
                 return list.Slice(from, to);
+            }
+
+            public Type GetElementType() {
+                return typeof(object);
             }
         }
     }

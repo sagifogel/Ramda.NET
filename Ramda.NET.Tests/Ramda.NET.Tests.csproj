@@ -260,6 +260,7 @@
     <Compile Include="Append.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Tail.cs" />
+    <Compile Include="Take.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

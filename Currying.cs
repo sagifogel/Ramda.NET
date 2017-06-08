@@ -898,7 +898,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Tail = CheckForMethod1("Tail", Slice(1, int.MaxValue));
 
-        internal readonly static dynamic Take = Curry2(Dispatchable2("Take", XTake, new Func<int, IList, IList>((n, xs) => {
+        internal readonly static dynamic Take = Curry2(Dispatchable2("Take", XTake, new Func<int, IEnumerable, IEnumerable>((n, xs) => {
             return Slice(0, n < 0 ? int.MaxValue : n, xs);
         })));
 

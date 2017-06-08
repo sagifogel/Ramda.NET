@@ -147,7 +147,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Take(int n, string list) {
-            return Currying.Take(n, list.ToCharArray());
+            return Currying.Take(n, list);
         }
 
         public static dynamic Take(RamdaPlaceholder n, string list) {

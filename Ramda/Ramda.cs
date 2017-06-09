@@ -131,11 +131,11 @@ namespace Ramda.NET
         }
 
         public static dynamic SplitEvery<TValue>(int n, string list) {
-            return Currying.SplitEvery(n, list.ToCharArray());
+            return Currying.SplitEvery(n, list);
         }
 
         public static dynamic SplitEvery<TValue>(RamdaPlaceholder n, string list) {
-            return Currying.SplitEvery(n, list.ToCharArray());
+            return Currying.SplitEvery(n, list);
         }
 
         public static dynamic SplitWhen<TValue>(dynamic pred, string list) {
@@ -143,7 +143,7 @@ namespace Ramda.NET
         }
 
         public static dynamic SplitWhen(Func<char, bool> pred, string list) {
-            return Currying.SplitWhen(Delegate(pred), list.ToCharArray());
+            return Currying.SplitWhen(Delegate(pred), list);
         }
 
         public static dynamic Take(int n, string list) {
@@ -151,7 +151,7 @@ namespace Ramda.NET
         }
 
         public static dynamic Take(RamdaPlaceholder n, string list) {
-            return Currying.Take(n, list.ToCharArray());
+            return Currying.Take(n, list);
         }
 
         public static dynamic F = Delegate(() => Currying.F());
@@ -179,11 +179,11 @@ namespace Ramda.NET
         }
 
         public static dynamic TakeLast(int n, string list) {
-            return Currying.TakeLast(n, list.ToCharArray());
+            return Currying.TakeLast(n, list);
         }
 
         public static dynamic TakeLast(RamdaPlaceholder n, string list) {
-            return Currying.TakeLast(list.ToCharArray());
+            return Currying.TakeLast(list);
         }
 
         public static dynamic AllPass(IList<dynamic> preds) {

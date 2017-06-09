@@ -9,7 +9,7 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Take_Takes_Only_The_First_\"N\"_Elements_From_A_List")]
         public void Take_Takes_Only_The_First_N_Elements_From_A_List() {
-            CollectionAssert.AreEqual(R.Take(3, new[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g' }), new[] { 'a', 'b', 'c' });
+            CollectionAssert.AreEqual(R.Take(3, new[] { "a", "b", "c", "d", "e", "f", "g" }), new[] { "a", "b", "c" });
         }
 
         [TestMethod]

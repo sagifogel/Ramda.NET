@@ -265,6 +265,12 @@
     <Compile Include="TakeWhile.cs" />
     <Compile Include="Take.cs" />
     <Compile Include="Tap.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="Times.cs" />
+    <Compile Include="ToLower.cs" />
+    <Compile Include="ToPairs.cs" />
+    <Compile Include="ToString.cs" />
+    <Compile Include="ToUpper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

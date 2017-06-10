@@ -365,5 +365,21 @@ namespace Ramda.NET
         public static dynamic SortWith<TSource>(IList<dynamic> functions, RamdaPlaceholder list = null) {
             return Currying.SortWith(functions, list);
         }
+
+        public static dynamic Match(string rx, string str) {
+            return Currying.Match(new Regex(rx), str);
+        }
+
+        public static dynamic Match(string rx, RamdaPlaceholder str) {
+            return Currying.Match(new Regex(rx), str);
+        }
+
+        public static dynamic Test(string pattern, string str) {
+            return Currying.Test(new Regex(pattern), str);
+        }
+
+        public static dynamic Test(string pattern, RamdaPlaceholder str) {
+            return Currying.Test(new Regex(pattern), str);
+        }
     }
 }

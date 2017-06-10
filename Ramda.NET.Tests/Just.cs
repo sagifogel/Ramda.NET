@@ -40,7 +40,7 @@ namespace Ramda.NET.Tests
         }
 
         public override string ToString() {
-            return $"Just( + {Value})";
+            return $"Just({R.ToString(Value)})";
         }
     }
 }

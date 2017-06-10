@@ -283,12 +283,19 @@ namespace Ramda.NET
 
         internal static IDictionary<string, object> ToMemberDictionary(this object target) {
             var type = target.GetType();
+            IDictionary dictionary = null;
 
             if (type.TypeIsDictionaryOf<string, object>()) {
                 return (IDictionary<string, object>)target;
             }
 
-            if (type.IsArray) {
+            dictionary = target as IDictionary;
+
+            if (dictionary != null) {
+                return dictionary.Keys.Cast<string>().ToDictionary(k => k, k => dictionary[k]);
+            }
+
+            if (type.TypeIsArray()) {
                 return ((IList)target).ToDictionary((item, i) => i.ToString(), (item, i) => item);
             }
 
@@ -516,8 +523,12 @@ namespace Ramda.NET
             return (dynamic)obj;
         }
 
-        internal static bool IsOverridenMethod(this Delegate @delegate, Type type) {
-            return @delegate.Method.DeclaringType.Equals(type);
+        internal static bool IsOverriden(this Delegate @delegate, Type type) {
+            return @delegate.Method.IsOverriden(type);
+        }
+
+        internal static bool IsOverriden(this MethodInfo methodInfo, Type type) {
+            return methodInfo.DeclaringType.Equals(type);
         }
 
         internal static bool TypeIsPrimitive(this Type type) {

@@ -528,7 +528,7 @@ namespace Ramda.NET
             IDictionary<string, object> membersB;
             Func<object, Type, Delegate> getEquals = (obj, objType) => {
                 if (!a.IsAnonymousType()) {
-                    return a.MemberWhere<Delegate>("Equals", del => del.IsOverridenMethod(objType));
+                    return a.MemberWhere<Delegate>("Equals", del => del.IsOverriden(objType));
                 }
 
                 return null;
@@ -827,7 +827,10 @@ namespace Ramda.NET
                     return Regex.IsMatch((string)k, @"^\d+$");
                 }), x.Keys())));
 
-                transformedList.ForEach(s => stringBuilder.Append(s));
+                if (transformedList.Count > 0) {
+                    transformedList.ForEach(s => stringBuilder.AppendFormat(", {0}", s));
+                    stringBuilder.Remove(1, 2);
+                }
 
                 return stringBuilder.Append("]").ToString();
             }
@@ -843,10 +846,10 @@ namespace Ramda.NET
             }
 
             if (!x.IsAnonymousType()) {
-                str = x.ToString();
+                var toStringMethod = (MethodInfo)x.TryGetMemberInfo("ToString");
 
-                if (!str.Equals(x.GetType().FullName)) {
-                    return str;
+                if (toStringMethod.IsOverriden(x.GetType())) {
+                    return x.ToString();
                 }
             }
 

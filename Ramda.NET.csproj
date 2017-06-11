@@ -1018,6 +1018,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToLower.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Transduce.reducible.cs" />
     <Compile Include="Ramda\Type.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1588,10 +1589,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToString.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Transduce.cs">
+    <Compile Include="Ramda\Transduce.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Transduce.tt</DependentUpon>
+      <DependentUpon>Transduce.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Transpose.cs">
       <AutoGen>True</AutoGen>
@@ -2857,9 +2858,9 @@
       <LastGenOutput>ToString.cs</LastGenOutput>
       <LastOutputs>.\ToString.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Transduce.tt">
+    <Content Include="Ramda\Transduce.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Transduce.cs</LastGenOutput>
+      <LastGenOutput>Transduce.list.cs</LastGenOutput>
       <LastOutputs>.\Transduce.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Transpose.tt">

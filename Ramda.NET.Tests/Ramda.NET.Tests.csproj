@@ -271,6 +271,7 @@
     <Compile Include="ToPairs.cs" />
     <Compile Include="ToString.cs" />
     <Compile Include="ToUpper.cs" />
+    <Compile Include="Transduce.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

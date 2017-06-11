@@ -48,16 +48,23 @@ namespace Ramda.NET
 
         private static IEnumerable<Expression> GetAssignExpressions(object source, ParameterExpression targetParameter, ParameterExpression sourceParameter) {
             var assignExpression = GetAssignExpression(source, sourceParameter);
+            var members = source.ToMemberDictionary();
+            var emptyExpression = Expression.Empty();
 
-            foreach (var pair in source.ToMemberDictionary()) {
-                if (source.Has(pair.Key)) {
-                    yield return Expression.Assign(
-                                    Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
-                                    assignExpression(pair.Key));
+            if (members.Count > 0) {
+                foreach (var pair in members) {
+                    if (source.Has(pair.Key)) {
+                        yield return Expression.Assign(
+                                        Expression.Property(targetParameter, "Item", Expression.Constant(pair.Key)),
+                                        assignExpression(pair.Key));
+                    }
+                    else {
+                        yield return emptyExpression;
+                    }
                 }
-                else {
-                    yield return Expression.Empty();
-                }
+            }
+            else {
+                yield return emptyExpression;
             }
         }
 

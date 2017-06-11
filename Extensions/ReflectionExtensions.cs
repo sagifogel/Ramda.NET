@@ -509,6 +509,10 @@ namespace Ramda.NET
             var type = obj.GetType();
 
             if (type.Equals(typeof(string))) {
+                if (string.Empty.Equals(obj)) {
+                    obj = 0;
+                }
+
                 return Convert.ToDouble(obj);
             }
 

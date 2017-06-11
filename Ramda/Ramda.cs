@@ -322,10 +322,6 @@ namespace Ramda.NET
             return Currying.Over(Delegate(lens), Delegate(v), x);
         }
 
-        public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
-            return Currying.Transduce(Delegate(xf), Delegate(fn), acc, list);
-        }
-
         public static dynamic Prepend(object el, IList list) {
             return Currying.Prepend(el, list);
         }
@@ -380,6 +376,10 @@ namespace Ramda.NET
 
         public static dynamic Test(string pattern, RamdaPlaceholder str) {
             return Currying.Test(new Regex(pattern), str);
+        }
+
+        public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
+            return Currying.Transduce(xf, fn, acc, list);
         }
     }
 }

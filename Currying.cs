@@ -1440,10 +1440,15 @@ namespace Ramda.NET
         internal readonly static dynamic TakeLast = Curry2<int, IEnumerable, IEnumerable>((n, xs) => Drop(n >= 0 ? ListStrategy.Resolve(xs).Length - n : 0, xs));
 
         internal readonly static dynamic Transduce = CurryN(4, Delegate(new Func<dynamic, object, object, object, object>((xf, fn, acc, list) => {
+            bool isFunction = false;
             DynamicDelegate transducer = Delegate(xf);
-            DynamicDelegate dynamicDelegate = Delegate(fn);
 
-            return ReduceInternal(transducer.DynamicInvoke(fn.IsFunction() ? new XWrap(dynamicDelegate) : fn), acc, list);
+            if (fn.IsFunction()) {
+                isFunction = true;
+                fn = Delegate(fn);
+            }
+
+            return ReduceInternal(transducer.DynamicInvoke(isFunction ? new XWrap((DynamicDelegate)fn) : fn), acc, list);
         })));
 
         internal readonly static dynamic UnionWith = Curry3<dynamic, IList, IList, IList>((pred, list1, list2) => UniqWith(pred, list1.Concat(list2)));

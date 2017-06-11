@@ -16,8 +16,10 @@ public class RamdaTemplate : CSharpTemplate
 	}
 
 	public List<string> Generics { get; set; }
-
+	
 	private HashSet<string> Emitted { get; set; }
+
+	public bool IgnoreDelegateWrapping { get; set; }
 
 	public List<int> SkippedIndexedGaps { get; set; }
 	
@@ -155,7 +157,7 @@ public class RamdaTemplate : CSharpTemplate
 			var tuple = tuples[i];
 			var name = tuple.Item2.Replace(" = null", "");
 
-			if (tuple.Item3) {
+			if (tuple.Item3 && !IgnoreDelegateWrapping) {
 				list.Add(string.Format("Delegate({0})", name));
 			}
 			else {
@@ -208,7 +210,9 @@ public class RamdaTemplate : CSharpTemplate
 	}
 
 	private string GenerateDynamicArguments(List<Tuple<string, string, bool>> dynamics) {
-		return string.Join(", ", dynamics.Select(d => d.Item3 ? string.Format("Delegate({0})", d.Item2) : d.Item2));
+		var format = IgnoreDelegateWrapping ? "{0}" : "Delegate({0})";
+
+		return string.Join(", ", dynamics.Select(d => d.Item3 ? string.Format(format, d.Item2) : d.Item2));
 	}
 
 	public override string TransformText() {

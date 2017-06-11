@@ -6,6 +6,7 @@
 		
 	template.Generics.Add("TSource");
 	template.Generics.Add("TAccumulator");
+	template.IgnoreDelegateWrapping = true;
 	template.Parameters.Add(Tuple.Create("Func<ITransformer, ITransformer>", "xf", true));	
 	template.Parameters.Add(Tuple.Create("Func<TAccumulator, ITransformer>", "fn", true));	
 	template.Parameters.Add(Tuple.Create("TAccumulator", "acc", false));

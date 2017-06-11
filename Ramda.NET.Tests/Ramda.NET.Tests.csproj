@@ -272,6 +272,7 @@
     <Compile Include="ToString.cs" />
     <Compile Include="ToUpper.cs" />
     <Compile Include="Transduce.cs" />
+    <Compile Include="Transpose.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

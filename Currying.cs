@@ -1674,15 +1674,19 @@ namespace Ramda.NET
 
         internal readonly static dynamic Product = Reduce(Multiply, 1);
 
-        internal readonly static dynamic Sequence = Curry2<dynamic, IList, object>((of, traversable) => {
-            if (!traversable.IsArray() && traversable.HasMemberWhere("Sequence", m => m.IsFunction())) {
-                return ((dynamic)traversable).Sequence(of);
+        internal readonly static dynamic Sequence = Curry2<dynamic, object, object>((of, traversable) => {
+            if (!traversable.IsArray()) {
+                var member = traversable.Member("Sequence") as Delegate;
+
+                if (member != null) {
+                    return member.DynamicInvoke(new[] { of });
+                }
             }
 
             return ReduceRight(Delegate((x, acc) => Ap(Map(Prepend, x), acc)), Delegate(of).DynamicInvoke(new[] { new object[0] }), traversable);
         });
 
-        internal readonly static dynamic Traverse = Curry3<dynamic, dynamic, object, IList>((of, f, traversable) => Sequence(of, Map(f, traversable)));
+        internal readonly static dynamic Traverse = Curry3<dynamic, dynamic, object, object>((of, f, traversable) => Sequence(of, Map(f, traversable)));
 
         internal readonly static dynamic Unnest = Chain(Delegate(IdentityInternal));
 

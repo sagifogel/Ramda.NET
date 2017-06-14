@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Traverse<TSource>(DynamicDelegate of, Func<TSource, TSource> f, IList<TSource> traversable) {
+		public static dynamic Traverse<TSource>(Delegate of, Func<TSource, TSource> f, IList<TSource> traversable) {
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
@@ -22,15 +23,15 @@ namespace Ramda.NET
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
-		public static dynamic Traverse<TSource>(DynamicDelegate of, RamdaPlaceholder f, IList<TSource> traversable) {
+		public static dynamic Traverse<TSource>(Delegate of, RamdaPlaceholder f, IList<TSource> traversable) {
 			return Currying.Traverse(of, f, traversable);
 		}
 
-		public static dynamic Traverse<TSource>(DynamicDelegate of, Func<TSource, TSource> f, RamdaPlaceholder traversable = null) {
+		public static dynamic Traverse<TSource>(Delegate of, Func<TSource, TSource> f, RamdaPlaceholder traversable = null) {
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
-		public static dynamic Traverse(DynamicDelegate of, RamdaPlaceholder f = null, RamdaPlaceholder traversable = null) {
+		public static dynamic Traverse(Delegate of, RamdaPlaceholder f = null, RamdaPlaceholder traversable = null) {
 			return Currying.Traverse(of, f, traversable);
 		}
 
@@ -38,11 +39,11 @@ namespace Ramda.NET
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
-		public static dynamic Traverse(DynamicDelegate of, dynamic f, RamdaPlaceholder traversable = null) {
+		public static dynamic Traverse(Delegate of, dynamic f, RamdaPlaceholder traversable = null) {
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 
-		public static dynamic Traverse<TSource>(DynamicDelegate of, dynamic f, IList<TSource> traversable) {
+		public static dynamic Traverse<TSource>(Delegate of, dynamic f, IList<TSource> traversable) {
 			return Currying.Traverse(of, Delegate(f), traversable);
 		}
 	}

@@ -134,6 +134,7 @@
     <Compile Include="Gt.cs" />
     <Compile Include="Has.cs" />
     <Compile Include="Head.cs" />
+    <Compile Include="Id.cs" />
     <Compile Include="IMappable.cs" />
     <Compile Include="Identical.cs" />
     <Compile Include="Identity.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="ToUpper.cs" />
     <Compile Include="Transduce.cs" />
     <Compile Include="Transpose.cs" />
+    <Compile Include="Traverse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

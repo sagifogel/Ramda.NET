@@ -6,7 +6,7 @@
 
 	template.Generics.Add("TSource");
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("DynamicDelegate", "of", false));	
+	template.Parameters.Add(Tuple.Create("Delegate", "of", false));	
 	template.Parameters.Add(Tuple.Create("Func<TSource, TSource>", "f", true));	
 	template.Parameters.Add(Tuple.Create("IList<TSource>", "traversable", false));
 	template.Render();

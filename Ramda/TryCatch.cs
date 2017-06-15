@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic TryCatch<TSource>(Delegate tryer, Delegate catcher) {
+		public static dynamic TryCatch(Delegate tryer, Delegate catcher) {
 			return Currying.TryCatch(Delegate(tryer), Delegate(catcher));
 		}
 

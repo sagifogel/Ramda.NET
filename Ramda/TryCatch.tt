@@ -4,7 +4,6 @@
 <#
 	var template = new RamdaTemplate();
 
-	template.Generics.Add("TSource");
 	template.Parameters.Add(Tuple.Create("Delegate", "tryer", true));	
 	template.Parameters.Add(Tuple.Create("Delegate", "catcher", true));	
 	template.Render();

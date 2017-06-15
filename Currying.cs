@@ -972,14 +972,16 @@ namespace Ramda.NET
         internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
 
         internal readonly static dynamic TryCatch = Curry2<dynamic, dynamic, DynamicDelegate>((tryer, catcher) => {
-            return Delegate(arguments => {
+            DynamicDelegate tryerFn = Delegate(tryer);
+
+            return Arity(tryerFn.Length, Delegate((object[] arguments) => {
                 try {
-                    return Delegate(tryer).DynamicInvoke(arguments);
+                    return tryerFn.DynamicInvoke(arguments);
                 }
                 catch (Exception e) {
-                    return Delegate(catcher).DynamicInvoke(e).Concat(arguments);
+                    return Delegate(catcher).DynamicInvoke((object[])new[] { e }.Concat(Arguments(arguments)));
                 }
-            });
+            }));
         });
 
         internal readonly static dynamic Type = Curry1<object, string>(obj => {

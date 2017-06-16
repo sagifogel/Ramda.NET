@@ -29,7 +29,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Pipe_Is_A_Variadic_Function() {
-            var pipeMethod = typeof(R).GetMethod("Pipe", new Type[] { typeof(Delegate[]) });
+            var pipeMethod = typeof(R).GetMethod("Pipe", new [] { typeof(Delegate[]) });
 
             Assert.IsInstanceOfType(R.Pipe(R.__), typeof(DynamicDelegate));
             Assert.IsTrue(pipeMethod.GetParameters()[0].IsDefined(typeof(ParamArrayAttribute), true));

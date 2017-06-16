@@ -85,7 +85,7 @@ namespace Ramda.NET.Tests
                 return value;
             }
 
-            Type type = value.GetType();
+            var type = value.GetType();
             IDictionary<string, object> expando = new ExpandoObject();
             var dictionary = value as IDictionary;
 

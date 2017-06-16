@@ -12,7 +12,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void ComposeP_Is_A_Variadic_Function() {
-            var pipeMethod = typeof(R).GetMethod("ComposeP", new Type[] { typeof(Func<dynamic, Task<dynamic>>[]) });
+            var pipeMethod = typeof(R).GetMethod("ComposeP", new [] { typeof(Func<dynamic, Task<dynamic>>[]) });
 
             Assert.IsInstanceOfType(R.ComposeP(R.__), typeof(DynamicDelegate));
             Assert.IsTrue(pipeMethod.GetParameters()[0].IsDefined(typeof(ParamArrayAttribute), true));

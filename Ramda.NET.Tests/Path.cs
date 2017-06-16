@@ -50,7 +50,7 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Path_Works_With_Falsy_Items() {
-            var toString = typeof(bool).GetMethod("ToString", Type.EmptyTypes);
+            var toString = typeof(bool).GetMethod("ToString", System.Type.EmptyTypes);
             Assert.AreEqual(R.Path(new[] { "ToString" }, false).Method, toString);
         }
     }

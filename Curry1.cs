@@ -17,8 +17,6 @@ namespace Ramda.NET
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {
             object arg1 = null;
             var length = Currying.Arity(arguments);
-
-            arguments = Arguments(arguments);
             
             if (length == 0 || R.__.Equals(arg1 = arguments[0])) {
                 return Curry1(fn);

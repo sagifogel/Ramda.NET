@@ -107,10 +107,10 @@ namespace Ramda.NET
         private static object[] MapInternal(Func<object, object> fn, IList functor) {
             var idx = 0;
             var len = functor.Count;
-            var result = R.Repeat(R.@null, len);
+            var result = new object[len];
 
             while (idx < len) {
-                result[idx] = fn(functor[idx]);
+                result[idx] = fn(functor[idx]) ?? R.@null;
                 idx += 1;
             }
 
@@ -219,17 +219,17 @@ namespace Ramda.NET
             }));
         }
 
-        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, object[] arguments) {
+        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, IList arguments) {
             object obj;
 
-            if (arguments.Length == 0) {
+            if (arguments.Count == 0) {
                 return fn.Invoke(new object[0]);
             }
 
-            obj = arguments[arguments.Length - 1];
+            obj = arguments[arguments.Count - 1];
 
             if (!obj.IsList()) {
-                var args = (object[])arguments.Slice(0, arguments.Length - 1);
+                var args = (object[])arguments.Slice(0, arguments.Count - 1);
                 var member = obj.Member(methodName) as Delegate;
 
                 if (member.IsNotNull()) {
@@ -243,7 +243,7 @@ namespace Ramda.NET
                 }
             }
 
-            return fn.DynamicInvoke(arguments);
+            return fn.DynamicInvoke(arguments.ToArray<object[]>());
         }
 
         private static IList DropLastWhileInternal(dynamic pred, IList list) {

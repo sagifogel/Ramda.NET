@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
-using Reflection = Ramda.NET.ReflectionExtensions;
 using System.Collections;
-using System.Threading.Tasks;
+using Reflection = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -15,12 +14,12 @@ namespace Ramda.NET
         private static readonly string[] emptyArray = new string[0];
         private static readonly Type typeofObjectArray = typeof(object[]);
 
-        internal static object[] Arguments(params object[] arguments) {
+        internal static IList Arguments(params object[] arguments) {
             return Reflection.Arity(arguments);
         }
 
         internal static int Arity(params object[] arguments) {
-            return Arguments(arguments)?.Length ?? 0;
+            return Arguments(arguments)?.Count ?? 0;
         }
 
         internal static int Arity(this DynamicDelegate @delegate) {
@@ -56,12 +55,16 @@ namespace Ramda.NET
 
                 if (item.IsNotNull()) {
                     var itemType = item.GetType();
+                    var paramType = @params[0].ParameterType;
 
-                    if (itemType.IsArray) {
-                        var paramIsArray = @params[0].ParameterType.Equals(typeofObjectArray);
+                    if (itemType.IsArray && paramType.IsArray && !paramType.Equals(itemType)) {
+                        var typedItem = item as IList;
 
-                        if (paramIsArray && !itemType.Equals(typeofObjectArray)) {
-                            clipped[0] = Copy(((IList)item).Count, (Array)clipped[0]);
+                        if (paramType.IsObjectArray()) {
+                            clipped[0] = Copy(typedItem.Count, (Array)clipped[0]);
+                        }
+                        else {
+                            clipped[0] = typedItem.CopyToNewArray(typedItem.Count, paramType.GetElementType());
                         }
                     }
                 }

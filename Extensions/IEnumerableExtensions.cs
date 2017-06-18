@@ -8,33 +8,33 @@ namespace Ramda.NET
 {
     public static class IEnumerableExtensions
     {
-        internal static IEnumerable Slice(this IEnumerable arguments, int from = int.MinValue, int to = int.MaxValue) {
+        internal static IEnumerable Slice(this IEnumerable arguments, int from = int.MinValue, int to = int.MaxValue, Type type = null) {
             var enumerableOfString = arguments as string;
 
             if (enumerableOfString != null) {
-                return enumerableOfString.Slice(from, to);
+                return enumerableOfString.Slice(from, to, type);
             }
 
-            return (arguments as IList).Slice(from, to);
+            return (arguments as IList).Slice(from, to, type);
         }
 
-        internal static string Slice(this string arguments, int from = int.MinValue, int to = int.MaxValue) {
-            return string.Join(string.Empty, arguments.ToCharArray().Slice(from, to).Select(o => o.ToString()));
+        internal static string Slice(this string arguments, int from = int.MinValue, int to = int.MaxValue, Type type = null) {
+            return string.Join(string.Empty, arguments.ToCharArray().Slice(from, to, type).Select(o => o.ToString()));
         }
 
-        internal static IList Slice(this IList arguments, int from = int.MinValue, int to = int.MaxValue) {
+        internal static IList Slice(this IList arguments, int from = int.MinValue, int to = int.MaxValue, Type type = null) {
             if (from == int.MinValue) {
-                return arguments.Slice(0, arguments.Count);
+                return arguments.Slice(0, arguments.Count, type);
             }
             else if (to == int.MaxValue) {
-                return arguments.Slice(from, arguments.Count);
+                return arguments.Slice(from, arguments.Count, type);
             }
             else {
                 IList result;
                 var len = Math.Max(0, Math.Min(arguments.Count, to) - from);
 
                 if (arguments.IsArray()) {
-                    var arr = arguments.CreateNewArray(len);
+                    var arr = arguments.CreateNewArray(len, type);
 
                     Array.Copy((Array)arguments, Math.Min(from, arguments.Count), arr, 0, len);
                     result = arr;
@@ -42,7 +42,7 @@ namespace Ramda.NET
                 else {
                     var idx = 0;
 
-                    result = arguments.CreateNewList();
+                    result = arguments.CreateNewList(type: type);
 
                     while (idx < len) {
                         result.Add(arguments[from + idx]);
@@ -136,18 +136,20 @@ namespace Ramda.NET
             }
         }
 
-        public static IEnumerable<TSource> Distinct<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> predicate) {
-            var keys = new HashSet<TKey>();
+        internal static Array CopyToNewArray(this IList list, int? len = null, Type type = null) {
+            var newArray = list.CreateNewArray(len, type);
 
-            return source.Where(element => keys.Add(predicate(element)));
+            list.CopyTo(newArray, 0);
+
+            return newArray;
         }
 
         internal static Array CreateNewArray(this ICollection list, int? len = null, Type type = null) {
             return (type ?? list.GetElementType()).CreateNewArray<Array>(len ?? list.Count);
         }
 
-        internal static Array CreateNewArray(this IList list, Array sourceToCopy) {
-            var array = list.CreateNewArray(sourceToCopy.Length);
+        internal static Array CreateNewArray(this IList list, IList sourceToCopy) {
+            var array = list.CreateNewArray(sourceToCopy.Count);
 
             sourceToCopy.CopyTo(array, 0);
 
@@ -188,13 +190,16 @@ namespace Ramda.NET
             var enumerableType = enumerable.GetType();
 
             if (enumerableType.HasElementType) {
-                return enumerableType.GetElementType();
+                elementType = enumerableType.GetElementType();
+
+                if (elementType != typeof(object)) {
+                    return elementType;
+                }
             }
 
             if (enumerableType.IsGenericType) {
                 return enumerableType.GetGenericArguments()[0];
             }
-
 
             elementType = FindElementType(enumerable);
 

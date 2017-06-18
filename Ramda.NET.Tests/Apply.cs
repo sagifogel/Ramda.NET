@@ -14,12 +14,12 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Apply_Applies_Function_To_Argument_List() {
-            Assert.AreEqual(R.Apply((Func<int, int, int>)Math.Max, new object[] { -99, 42 }), 42);
+            Assert.AreEqual(R.Apply(new Func<int, int, int>(Math.Max), new [] { -99, 42 }), 42);
         }
 
         [TestMethod]
         public void Apply_Is_Cuuried() {
-            Assert.AreEqual(R.Apply((Func<int, int, int>)Math.Max)(new object[] { -99, 42 }), 42);
+            Assert.AreEqual(R.Apply((Func<int, int, int>)Math.Max)(new [] { -99, 42 }), 42);
         }
 
         [TestMethod]

@@ -278,6 +278,7 @@
     <Compile Include="Trim.cs" />
     <Compile Include="TryCatch.cs" />
     <Compile Include="Type.cs" />
+    <Compile Include="Unapply.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

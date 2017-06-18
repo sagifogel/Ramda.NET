@@ -25,11 +25,11 @@ namespace Ramda.NET
                                                                     typeof(sbyte), typeof(ushort), typeof(uint), typeof(ulong),
                                                                     typeof(DateTime), typeof(DateTimeOffset), typeof(TimeSpan),
                           };
-        internal static object[] Arity(params object[] arguments) {
-            object[] result;
+        internal static IList Arity(params object[] arguments) {
+            IList result;
 
             if (arguments.IsNull() || arguments.Length == 0) {
-                return null;
+                return emptyArray;
             }
 
             int i = arguments.Length - 1;
@@ -42,9 +42,9 @@ namespace Ramda.NET
                 i--;
             }
 
-            result = (object[])arguments.Slice(0, ++i);
+            result = arguments.Slice(0, ++i);
 
-            return result.Length == 0 ? null : result;
+            return result.Count == 0 ? emptyArray : result;
         }
 
         internal static bool TypeIsDelegate(this Type type) {
@@ -439,7 +439,7 @@ namespace Ramda.NET
         internal static object DynamicInvoke(dynamic target, object[] arguments = null) {
             var args = Arguments(arguments) ?? emptyArray;
 
-            return DynamicInvoke(target, args, args.Length);
+            return DynamicInvoke(target, args, args.Count);
         }
 
         internal static object DynamicDirectInvoke(dynamic target, object[] arguments = null) {
@@ -452,7 +452,7 @@ namespace Ramda.NET
             return DynamicInvoke(Delegate(@delegate), args, args.Length);
         }
 
-        internal static object DynamicInvoke(dynamic invoke, object[] args, int length) {
+        internal static object DynamicInvoke(dynamic invoke, IList args, int length) {
             switch (length) {
                 case 0:
                     return invoke();
@@ -588,6 +588,11 @@ namespace Ramda.NET
             }
 
             return false;
+        }
+
+        internal static bool IsObjectArray(this Type type) {
+            return type.HasElementType ? type.GetElementType().Equals(typeof(object)) :
+                   typeof(IList).IsAssignableFrom(type);
         }
     }
 }

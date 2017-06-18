@@ -11,7 +11,7 @@ namespace Ramda.NET.Tests
         [Description("Binary_Turns_Multiple-Argument_Function_Into_Binary_One")]
         public void Binary_Turns_Multiple_argument_Function_Into_Binary_One() {
             R.Binary(new Func<int, int, int?, int>((x, y, z) => {
-                Assert.AreEqual(Arity(x, x, z).Length, 2);
+                Assert.AreEqual(Arity(x, x, z).Count, 2);
                 Assert.IsNull(z);
                 return x + y;
             }))(10, 20, 30);

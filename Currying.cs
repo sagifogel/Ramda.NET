@@ -117,7 +117,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Ascend = Curry3<dynamic, dynamic, dynamic, int>((fn, a, b) => AscendDescendInternal(Lt, Gt, fn, a, b));
 
-        internal readonly static dynamic Apply = Curry2<dynamic, object[], object>((fn, args) => Delegate(fn).DynamicInvoke(args));
+        internal readonly static dynamic Apply = Curry2<dynamic, IList, object>((fn, args) => Delegate(fn).DynamicInvoke(args.Cast<object>().ToArray()));
 
         internal readonly static dynamic Assoc = Curry3<object, object, object, object>((prop, val, obj) => ShallowCloner.CloneAndAssignValue(prop, val, obj));
 
@@ -591,8 +591,9 @@ namespace Ramda.NET
                     object[] args;
                     DynamicDelegate dynamicDelegate = Delegate(fn);
                     var copyRange = Math.Min(length, arguments.Length);
+                    IList nulls = R.Repeat(R.@null, length);
 
-                    args = (object[])R.Repeat(R.@null, length);
+                    args = ((IList)nulls).ToArray<object[]>(typeof(object));
                     Array.Copy(arguments, (Array)args, copyRange);
 
                     return Reflection.DynamicDirectInvoke(dynamicDelegate, args);
@@ -995,7 +996,7 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Unapply = Curry1<dynamic, object>(fn => {
-            return Delegate(arguments => Delegate(fn).DynamicInvoke(arguments.Slice()));
+            return Delegate(arguments => Delegate(fn).DynamicInvoke(arguments.Slice()), 0);
         });
 
         internal readonly static dynamic Unary = Curry1<dynamic, DynamicDelegate>(fn => NAry(1, fn));
@@ -1409,7 +1410,7 @@ namespace Ramda.NET
 
         internal readonly static dynamic Reduce = Curry3<object, object, object, object>(ReduceInternal);
 
-        internal readonly static dynamic ReduceBy = CurryN(4, Dispatchable4("ReduceBy", XReduceBy, Delegate(new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
+        internal readonly static dynamic ReduceBy = CurryNInternal(4, new object[0], Dispatchable4("ReduceBy", XReduceBy, Delegate(new Func<dynamic, object, dynamic, IList, object>((valueFn, valueAcc, keyFn, list) => {
             DynamicDelegate dynamicKeyFn = Delegate(keyFn);
             DynamicDelegate dynamicValueFn = Delegate(valueFn);
 
@@ -1536,7 +1537,7 @@ namespace Ramda.NET
             }
 
             return CurryN(n, Delegate(arguments => {
-                return Reflection.DynamicInvoke(Fn, (object[])arguments.Slice(0, n));
+                return Reflection.DynamicInvoke(Fn, (object[])arguments.Slice(0, n, typeof(object)));
             }));
         });
 
@@ -1820,7 +1821,7 @@ namespace Ramda.NET
                 var key = args.IsNotNull() ? (string)ToString(args) : string.Empty;
 
                 return cache.GetOrAdd<string, object>(key, () => {
-                    return dynamicDelegate.DynamicInvoke(args);
+                    return dynamicDelegate.DynamicInvoke(args.Cast<object>().ToArray());
                 });
             }));
         });

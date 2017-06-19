@@ -1021,7 +1021,7 @@ namespace Ramda.NET
             }));
         });
 
-        internal readonly static dynamic Unfold = Curry2<dynamic, int, IList>((fn, seed) => {
+        internal readonly static dynamic Unfold = Curry2<dynamic, object, IList>((fn, seed) => {
             IList list;
             IList result = new List<int>();
             DynamicDelegate dynamicDelegate = Delegate(fn);

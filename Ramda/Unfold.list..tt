@@ -1,0 +1,12 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.SkippedIndexedGaps.Add(1);
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("Func<int, dynamic>", "fn", true));	
+	template.Parameters.Add(Tuple.Create("IList<int>", "seed", false));
+	template.Render();
+#>

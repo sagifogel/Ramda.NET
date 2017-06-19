@@ -1029,6 +1029,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Unfold.list..cs">
+      <DependentUpon>Unfold.list..tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Union.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1630,10 +1635,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UncurryN.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Unfold.cs">
+    <Compile Include="Ramda\Unfold.int.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Unfold.tt</DependentUpon>
+      <DependentUpon>Unfold.int.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\UnionWith.cs">
       <AutoGen>True</AutoGen>
@@ -2302,6 +2307,11 @@
       <LastGenOutput>Unary.cs</LastGenOutput>
       <LastOutputs>.\Unary.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Unfold.list..tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unfold.list..cs</LastGenOutput>
+      <LastOutputs>.\Unfold.list..cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Union.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Union.cs</LastGenOutput>
@@ -2903,9 +2913,9 @@
       <LastGenOutput>UncurryN.cs</LastGenOutput>
       <LastOutputs>.\UncurryN.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Unfold.tt">
+    <Content Include="Ramda\Unfold.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Unfold.cs</LastGenOutput>
+      <LastGenOutput>Unfold.int.cs</LastGenOutput>
       <LastOutputs>.\Unfold.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\UnionWith.tt">

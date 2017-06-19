@@ -281,6 +281,7 @@
     <Compile Include="Unapply.cs" />
     <Compile Include="Unary.cs" />
     <Compile Include="UncurryN.cs" />
+    <Compile Include="Unfold.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

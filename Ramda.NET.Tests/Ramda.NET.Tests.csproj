@@ -279,6 +279,8 @@
     <Compile Include="TryCatch.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="Unapply.cs" />
+    <Compile Include="Unary.cs" />
+    <Compile Include="UncurryN.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

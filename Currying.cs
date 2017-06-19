@@ -1002,22 +1002,22 @@ namespace Ramda.NET
         internal readonly static dynamic Unary = Curry1<dynamic, DynamicDelegate>(fn => NAry(1, fn));
 
         internal readonly static dynamic UncurryN = Curry2<int, dynamic, object>((depth, fn) => {
-            return CurryN(depth, Delegate(arguments => {
+            return CurryN(depth, Delegate((object[] arguments) => {
                 int endIdx;
                 var idx = 0;
-                DynamicDelegate dynamicDelegate = Delegate(fn);
                 var currentDepth = 1;
+                var args = Arguments(arguments);
+                dynamic value = Delegate(fn);
 
-                while (currentDepth <= depth && dynamicDelegate.IsFunction()) {
-                    var length = dynamicDelegate.Length;
-
-                    endIdx = currentDepth == depth ? arguments.Length : idx + length;
-                    dynamicDelegate = dynamicDelegate.DynamicInvoke<DynamicDelegate>(arguments.Slice(idx, endIdx));
+                while (currentDepth <= depth && ((object)value).IsFunction()) {
+                    value = Delegate(value);
+                    endIdx = currentDepth == depth ? args.Count : idx + value.Length;
+                    value = value.DynamicInvoke((object[])args.Slice(idx, endIdx, typeof(object)));
                     currentDepth += 1;
                     idx = endIdx;
                 }
 
-                return dynamicDelegate;
+                return value;
             }));
         });
 

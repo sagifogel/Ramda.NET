@@ -102,10 +102,6 @@ namespace Ramda.NET
             return typeof(IList).IsAssignableFrom(value.GetType());
         }
 
-        internal static bool TypeIsList(this Type type) {
-            return typeof(IList).IsAssignableFrom(type);
-        }
-
         internal static bool IsEnumerable(this object value) {
             return typeof(IEnumerable).IsAssignableFrom(value.GetType());
         }
@@ -263,10 +259,6 @@ namespace Ramda.NET
             return default(TConvert);
         }
 
-        internal static bool HasMemberWhere(this object target, string name, Func<object, bool> predicate) {
-            return target.MemberWhere(name, predicate) != null;
-        }
-
         internal static TMemberInfo GetMemberWhen<TMemberInfo>(this object target, string name, Func<MemberInfo, bool> predicate) where TMemberInfo : MemberInfo {
             var member = target.GetType().TryGetMemberInfoFromType(name);
 
@@ -275,10 +267,6 @@ namespace Ramda.NET
             }
 
             return null;
-        }
-
-        internal static bool TypeHasMember(this Type type, string name) {
-            return type.TryGetMemberInfoFromType(name).IsNotNull();
         }
 
         internal static IDictionary<string, object> ToMemberDictionary(this object target) {
@@ -303,12 +291,6 @@ namespace Ramda.NET
                        .Cast<MemberInfo>()
                        .Concat(type.GetFields(bindingFlags))
                        .ToDictionary(member => member.Name, m => target.Member(m.Name));
-        }
-
-        internal static IEnumerable<MemberInfo> ToMembersInfoFromType(this Type type) {
-            return type.GetProperties(bindingFlags)
-                       .Cast<MemberInfo>()
-                       .Concat(type.GetFields(bindingFlags));
         }
 
         internal static string[] Keys(this object target) {
@@ -399,24 +381,6 @@ namespace Ramda.NET
 
             return Expression.Lambda<Func<object>>(
                         Expression.Convert(Expression.New(ctor, arguments), typeof(object))).Compile();
-        }
-
-        internal static Delegate GetFactory(this Type type, int arity) {
-            Type delegateType;
-            Type[] parameterTypes;
-            IEnumerable<ParameterExpression> parameters;
-            var ctor = type.GetConstructors(ctorBindingFlags)
-                           .FirstOrDefault(c => c.GetParameters().Length == arity);
-
-            if (ctor.IsNull()) {
-                throw new ArgumentOutOfRangeException($"Constructor does not have {arity} arguments");
-            }
-
-            parameterTypes = ctor.GetParameters().Select(p => p.ParameterType).ToArray();
-            parameters = parameterTypes.Select(param => Expression.Parameter(param)).ToArray();
-            delegateType = Expression.GetFuncType(parameterTypes.Concat<Type>(new[] { type }).ToArray());
-
-            return Expression.Lambda(delegateType, Expression.New(ctor, parameters), parameters).Compile();
         }
 
         internal static object Invoke(this Delegate target, object[] arguments) {

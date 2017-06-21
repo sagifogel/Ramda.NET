@@ -282,6 +282,11 @@
     <Compile Include="Unary.cs" />
     <Compile Include="UncurryN.cs" />
     <Compile Include="Unfold.cs" />
+    <Compile Include="Union.cs" />
+    <Compile Include="UnionWith.cs" />
+    <Compile Include="Uniq.cs" />
+    <Compile Include="UniqeBy.cs" />
+    <Compile Include="UniqWith.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

@@ -1857,7 +1857,11 @@ namespace Ramda.NET
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
             foreach (var item in list) {
-                var appliedItem = dynamicDelegate.DynamicInvoke(item);
+                object appliedItem = item;
+
+                if (item != null) {
+                    appliedItem = dynamicDelegate.DynamicInvoke(item);
+                }
 
                 if (set.Add(appliedItem)) {
                     result.Add(item);
@@ -1888,6 +1892,6 @@ namespace Ramda.NET
             return Uniq(FilterInternal(a => flipped(a), filteredList));
         });
 
-        internal static dynamic Union = Curry2(Compose(R.__, Uniq, new Func<IList, IList, IList>(Core.ConcatInternal)));
+        internal static dynamic Union = Curry2(Compose(new[] { Uniq, new Func<IList, IList, IList>(Core.ConcatInternal) }));
     }
 }

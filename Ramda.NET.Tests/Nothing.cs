@@ -26,5 +26,9 @@ namespace Ramda.NET.Tests
         public object Filter(Func<object, bool> pred) {
             return this;
         }
+
+        public object Chain(dynamic f) {
+            return this;
+        }
     }
 }

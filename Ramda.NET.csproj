@@ -1049,6 +1049,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UniqBy.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Unnest.object.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Unnest.object.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Without.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1655,10 +1660,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Unless.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Unnest.cs">
+    <Compile Include="Ramda\Unnest.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Unnest.tt</DependentUpon>
+      <DependentUpon>Unnest.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Until.cs">
       <AutoGen>True</AutoGen>
@@ -2327,6 +2332,11 @@
       <LastGenOutput>UniqBy.cs</LastGenOutput>
       <LastOutputs>.\UniqBy.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Unnest.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Unnest.object.cs</LastGenOutput>
+      <LastOutputs>.\Unnest.object.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Without.cs</LastGenOutput>
@@ -2933,10 +2943,10 @@
       <LastGenOutput>Unless.cs</LastGenOutput>
       <LastOutputs>.\Unless.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Unnest.tt">
+    <Content Include="Ramda\Unnest.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Unnest.cs</LastGenOutput>
-      <LastOutputs>.\Unnest.cs</LastOutputs>
+      <LastGenOutput>Unnest.list.cs</LastGenOutput>
+      <LastOutputs>.\Unnest.list - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Until.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -182,6 +182,7 @@
     <Compile Include="Multiply.cs" />
     <Compile Include="NAry.cs" />
     <Compile Include="Negate.cs" />
+    <Compile Include="Unnest.cs" />
     <Compile Include="None.cs" />
     <Compile Include="Not.cs" />
     <Compile Include="Nothing.cs" />
@@ -287,6 +288,7 @@
     <Compile Include="Uniq.cs" />
     <Compile Include="UniqeBy.cs" />
     <Compile Include="UniqWith.cs" />
+    <Compile Include="Unless.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

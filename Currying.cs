@@ -1377,9 +1377,9 @@ namespace Ramda.NET
 
             if (listFunctor.IsNull()) {
                 return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, IDictionary<string, object>>((acc, key) => {
-                    acc[key] = dynamicDelegate.DynamicInvoke(functor.Member(key));
+                    acc[key.ToString()] = dynamicDelegate.DynamicInvoke(functor.Member(key));
                     return acc;
-                })), new ExpandoObject(), functor.Keys());
+                })), new ExpandoObject(), Keys(functor));
             }
 
             return MapInternal(dynamicDelegate, listFunctor);
@@ -1389,7 +1389,7 @@ namespace Ramda.NET
             return ReduceInternal(Delegate(new Func<IDictionary<string, object>, string, object>((acc, key) => {
                 acc[key] = Delegate(fn).DynamicInvoke(obj.Member(key), key, obj);
                 return acc;
-            })), new ExpandoObject(), obj.Keys());
+            })), new ExpandoObject(), Keys(obj));
         });
 
         internal readonly static dynamic MergeWith = Curry3<dynamic, object, object, object>((fn, l, r) => {

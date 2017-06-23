@@ -35,6 +35,10 @@ namespace Ramda.NET.Tests
             return m.Map(Value);
         }
 
+        public object Chain(dynamic f) {
+            return f(Value);
+        }
+
         public override int GetHashCode() {
             return Value.GetHashCode();
         }

@@ -26,6 +26,16 @@ namespace Ramda.NET.Tests
             }
         }
 
+        public static void AreNotEqual(IList expected, IList actual, string message = null) {
+            if (expected.Equals(actual)) {
+                Assert.Fail(message);
+            }
+
+            if (actual.SequenceEqual(expected, ItemsEqual)) {
+                Assert.Fail(message);
+            }
+        }
+
         private static bool ItemsEqual(object a, object b) {
             bool aIsNotNull = a.IsNotNull();
             bool bIsNotNull = b.IsNotNull();

@@ -381,5 +381,9 @@ namespace Ramda.NET
         public static dynamic Transduce<TSource, TAccumulator>(dynamic xf, dynamic fn, TAccumulator acc, IList<TSource> list) {
             return Currying.Transduce(xf, fn, acc, list);
         }
+
+        public static dynamic Until<TArg>(dynamic pred, dynamic fn, TArg init) {
+            return Currying.Until(Delegate(pred), Delegate(fn), init);
+        }
     }
 }

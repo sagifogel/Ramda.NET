@@ -1059,12 +1059,11 @@ namespace Ramda.NET
 
         internal readonly static dynamic Until = Curry3<dynamic, dynamic, object, object>((pred, fn, init) => {
             var val = init;
-            var args = new[] { val };
             DynamicDelegate predicate = Delegate(pred);
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
-            while (!predicate.DynamicInvoke<bool>(args)) {
-                val = fn.DynamicInvoke(args);
+            while (!predicate.DynamicInvoke<bool>(val)) {
+                val = fn.DynamicInvoke(val);
             }
 
             return val;

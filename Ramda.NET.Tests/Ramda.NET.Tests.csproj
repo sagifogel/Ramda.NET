@@ -290,6 +290,8 @@
     <Compile Include="UniqWith.cs" />
     <Compile Include="Unless.cs" />
     <Compile Include="Until.cs" />
+    <Compile Include="Update.cs" />
+    <Compile Include="UseWith.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

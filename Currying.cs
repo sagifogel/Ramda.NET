@@ -1072,14 +1072,14 @@ namespace Ramda.NET
         internal readonly static dynamic Update = Curry3<int, object, IList, IList>((idx, x, list) => Adjust(Always(x), idx, list));
 
         internal readonly static dynamic UseWith = Curry2<dynamic, IList, object>((fn, transformers) => {
-            return CurryN(transformers.Count, Delegate(arguments => {
+            return CurryN(transformers.Count, Delegate((object[] arguments) => {
                 var args = transformers.Select((item, i) => {
                     dynamic transformer = Delegate(item);
 
                     return transformer(arguments[i]);
-                });
+                }).ToArray();
 
-                return Reflection.DynamicDirectInvoke(fn, args.Concat((object[])arguments.Slice(transformers.Count)).ToArray());
+                return Delegate(fn).DynamicInvoke(args.Concat(arguments.Slice(transformers.Count)).ToArray<object[]>(typeof(object)));
             }));
         });
 

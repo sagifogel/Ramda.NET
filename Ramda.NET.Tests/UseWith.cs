@@ -59,7 +59,7 @@ namespace Ramda.NET.Tests
             Assert.AreEqual(context.A(1), 2);
             Assert.AreEqual(context.B(1), 3);
             Assert.AreEqual(context.D(1, 1), 5);
-            //Assert.AreEqual(context.D(2, 3), 8);
+            Assert.AreEqual(context.D(2, 3), 8);
         }
     }
 }

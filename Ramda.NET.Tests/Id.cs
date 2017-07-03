@@ -24,7 +24,9 @@ namespace Ramda.NET.Tests
         }
 
         public object Sequence(object of) {
-            return ((object[])Value).Select(i => _Id.Id(i)).ToArray<Array>();
+            var list = (object[])Value;
+
+            return list.Select(i => _Id.Id(i)).ToArray<Array>(len: list.Length);
         }
 
         public override bool Equals(object obj) {

@@ -572,7 +572,7 @@ namespace Ramda.NET
             else if (typeA.TypeIsDictionary() && !typeA.TypeIsExpandoObject()) {
                 return EqualsInternal(((IDictionary)a).Values.ToArray<Array>(typeofObject), ((IDictionary)b).Values.ToArray<Array>(typeofObject), stackA, stackB);
             }
-            else if (typeA.TypeIsSet()) {
+            else if (typeA.TypeIsSet() ) {
                 return EqualsInternal(((IEnumerable)a).ToArray<Array>(typeofObject), ((IEnumerable)b).ToArray<Array>(typeofObject), stackA, stackB);
             }
 

@@ -224,7 +224,7 @@ namespace Ramda.NET
                 type = x.GetType();
 
                 if (x.IsArray()) {
-                    return ((Array)x).CreateNewArray(0);
+                    return ((IList)x).CreateNewArray(0);
                 }
 
                 if (x.IsList()) {
@@ -322,7 +322,7 @@ namespace Ramda.NET
             var strA = a as string;
 
             if (strA != null) {
-                return string.Compare(strA, (string)b) > 0;
+                return string.Compare(strA, (string)b, StringComparison.Ordinal) > 0;
             }
 
             return a > b;
@@ -332,7 +332,7 @@ namespace Ramda.NET
             var strA = a as string;
 
             if (strA != null) {
-                return string.Compare(strA, (string)b) >= 0;
+                return string.Compare(strA, (string)b, StringComparison.Ordinal) >= 0;
             }
 
             return a >= b;
@@ -465,11 +465,14 @@ namespace Ramda.NET
         internal readonly static dynamic IsNil = Curry1<object, bool>(val => val.IsNull());
 
         internal readonly static dynamic Keys = Curry1<object, string[]>(val => {
-            if (val.IsPrimitive()) {
+            if (val.IsNull() || val.IsPrimitive()) {
                 return emptyArray;
             }
 
-            return val.ToMemberDictionary().Select(kv => kv.Key).ToArray();
+            return val.ToMemberDictionary()
+                      .Where(pair => val.Has(pair.Key))
+                      .Select(pair => pair.Key)
+                      .ToArray();
         });
 
         internal readonly static dynamic Length = Curry1<object, int>(list => {
@@ -486,7 +489,7 @@ namespace Ramda.NET
             var strA = a as string;
 
             if (strA != null) {
-                return string.Compare(strA, (string)b) < 0;
+                return string.Compare(strA, (string)b, StringComparison.Ordinal) < 0;
             }
 
             return a < b;
@@ -496,7 +499,7 @@ namespace Ramda.NET
             var strA = a as string;
 
             if (strA != null) {
-                return string.Compare(strA, (string)b) <= 0;
+                return string.Compare(strA, (string)b, StringComparison.Ordinal) <= 0;
             }
 
             return a <= b;
@@ -925,7 +928,7 @@ namespace Ramda.NET
             }
 
             var idx = 0;
-            var list = new object[n];
+            IList list = new object[n];
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
             while (idx < n) {
@@ -967,7 +970,7 @@ namespace Ramda.NET
                 i += 1;
             }
 
-            return outerlist.CreateNewArray(result.Select(list => list.ToArray<Array>()).ToArray());
+            return result.Select(list => list.ToArray<Array>()).ToArray();
         });
 
         internal readonly static dynamic Trim = Curry1<string, string>(str => str.Trim());
@@ -1084,27 +1087,14 @@ namespace Ramda.NET
         });
 
         internal readonly static dynamic Values = Curry1<object, IList>(obj => {
-            Type firstType = null;
-            bool sameTypeForAll = true;
-            var pairs = obj.ToMemberDictionary();
-            IList vals = new List<object>();
+            var idx = 0;
+            string[] props = Keys(obj);
+            var len = props.Length;
+            var vals = new ArrayList();
 
-            pairs.ForEach((pair, i) => {
-                var value = pair.Value;
-                var type = value.GetType();
-
-                if (i == 0) {
-                    firstType = type;
-                }
-                else {
-                    sameTypeForAll &= type.Equals(firstType);
-                }
-
-                vals.Add(value);
-            });
-
-            if (sameTypeForAll) {
-                vals = vals.CreateNewList(vals, firstType);
+            while (idx < len) {
+                vals.Insert(idx, obj.Member(props[idx]));
+                idx += 1;
             }
 
             return vals.ToArray<Array>();
@@ -1164,32 +1154,17 @@ namespace Ramda.NET
 
         internal readonly static dynamic ZipWith = Curry3<dynamic, IList, IList, IList>((fn, a, b) => {
             var idx = 0;
-            Type type = null;
-            var allSameType = true;
-            var rv = new List<object>();
+            var rv = new ArrayList();
             var len = Math.Min(a.Count, b.Count);
             DynamicDelegate dynamicDelegate = Delegate(fn);
 
             while (idx < len) {
                 var value = dynamicDelegate.DynamicInvoke(a[idx], b[idx]);
-                var typeofValue = value.GetType();
-
-                if (type.IsNotNull()) {
-                    allSameType &= typeofValue.Equals(type.GetType());
-                }
-                else {
-                    type = typeofValue;
-                }
-
                 rv.Add(value);
                 idx += 1;
             }
 
-            if (allSameType) {
-                return rv.ToArray<Array>(type);
-            }
-
-            return rv.ToArray();
+            return rv.ToArray<Array>();
         });
 
         internal readonly static dynamic F = Always(false);
@@ -1554,7 +1529,7 @@ namespace Ramda.NET
         internal readonly static dynamic DropRepeatsWith = Curry2(Dispatchable2("DropRepeatsWith", XDropRepeatsWith, new Func<dynamic, IList, IList>((pred, list) => {
             var idx = 1;
             var len = list.Count;
-            var result = new List<object>();
+            var result = new ArrayList();
             DynamicDelegate dynamicDelegate = Delegate(pred);
 
             if (len != 0) {

@@ -137,23 +137,15 @@ namespace Ramda.NET
         }
 
         internal static Array CopyToNewArray(this IList list, int? len = null, Type type = null) {
-            var newArray = list.CreateNewArray(len, type);
+            var newArray = list.CreateNewArray(len ?? list.Count, type);
 
             list.CopyTo(newArray, 0);
 
             return newArray;
         }
 
-        internal static Array CreateNewArray(this ICollection list, int? len = null, Type type = null) {
-            return (type ?? list.GetElementType()).CreateNewArray<Array>(len ?? list.Count);
-        }
-
-        internal static Array CreateNewArray(this IList list, IList sourceToCopy) {
-            var array = list.CreateNewArray(sourceToCopy.Count);
-
-            sourceToCopy.CopyTo(array, 0);
-
-            return array;
+        internal static Array CreateNewArray(this IEnumerable list, int len, Type type = null) {
+            return (type ?? list.GetElementType()).CreateNewArray<Array>(len);
         }
 
         internal static ListType CreateNewArray<ListType>(this Type type, int len) {
@@ -198,7 +190,9 @@ namespace Ramda.NET
             }
 
             if (enumerableType.IsGenericType) {
-                return enumerableType.GetGenericArguments()[0];
+                var genericArgs = enumerableType.GetGenericArguments();
+
+                return genericArgs[genericArgs.Length - 1];
             }
 
             elementType = FindElementType(enumerable);
@@ -240,8 +234,12 @@ namespace Ramda.NET
         }
 
         internal static TArray ToArray<TArray>(this ICollection list, Type type = null) where TArray : IList {
+            return list.ToArray<TArray>(list.Count, type);
+        }
+
+        internal static TArray ToArray<TArray>(this IEnumerable list, int len, Type type = null) where TArray : IList {
             int i = 0;
-            IList arr = list.CreateNewArray(list.Count, type);
+            IList arr = list.CreateNewArray(len, type);
 
             foreach (var item in list) {
                 arr[i] = item;
@@ -249,6 +247,10 @@ namespace Ramda.NET
             }
 
             return (TArray)arr;
+        }
+
+        internal static TArray ToArray<TArray>(this IEnumerable list, Type type = null) where TArray : IList {
+            return list.ToList<IList>().ToArray<TArray>(type);
         }
 
         internal static TList ToList<TList>(this IEnumerable list, Type type = null) where TList : IList {
@@ -261,8 +263,8 @@ namespace Ramda.NET
             return (TList)result;
         }
 
-        internal static TArray ToArray<TArray>(this IEnumerable list, Type type = null) where TArray : IList {
-            return list.ToList<IList>(type).ToArray<TArray>();
+        internal static TArray ToArray<TArray>(this ICollection<object> list, Type type = null) where TArray : IList {
+            return list.ToArray<TArray>(list.Count);
         }
 
         internal static bool SequenceEqual(this IEnumerable first, IEnumerable second, Func<object, object, bool> comparer) {

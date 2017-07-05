@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-		public static dynamic Where<TTarget>(IDictionary<string, Delegate> spec, TTarget testObj) {
+		public static dynamic Where<TTarget>(object spec, TTarget testObj) {
 			return Currying.Where(spec, testObj);
 		}
 
@@ -22,7 +23,7 @@ namespace Ramda.NET
 			return Currying.Where(spec, testObj);
 		}
 
-		public static dynamic Where(IDictionary<string, Delegate> spec, RamdaPlaceholder testObj = null) {
+		public static dynamic Where(object spec, RamdaPlaceholder testObj = null) {
 			return Currying.Where(spec, testObj);
 		}
 

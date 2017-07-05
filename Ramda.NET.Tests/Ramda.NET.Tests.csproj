@@ -294,6 +294,7 @@
     <Compile Include="UseWith.cs" />
     <Compile Include="Values.cs" />
     <Compile Include="When.cs" />
+    <Compile Include="Where.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

@@ -303,6 +303,7 @@ namespace Ramda.NET
 
         internal static MemberInfo TryGetMemberInfoFromType(this Type type, string name, int length = 0, bool @private = false) {
             MemberInfo[] members;
+            MemberInfo[] ownMembers;
             var flags = bindingFlags;
 
             if (@private) {
@@ -315,7 +316,20 @@ namespace Ramda.NET
                 return members[0];
             }
 
-            return members.Cast<MethodInfo>().SingleOrDefault(m => m.GetParameters().Length == length);
+            ownMembers = members.Where(m => {
+                if (m.MemberType == MemberTypes.Method) {
+                    return ((MethodInfo)m).IsOverriden(type);
+                }
+
+                return true;
+            }).ToArray();
+
+            if (ownMembers.Length == 1) {
+                return ownMembers[0];
+            }
+
+            return members.Where(m => m.MemberType == MemberTypes.Method)
+                          .Cast<MethodInfo>().SingleOrDefault(m => m.GetParameters().Length == length);
         }
 
         internal static object Cast(this object target, Type to) {

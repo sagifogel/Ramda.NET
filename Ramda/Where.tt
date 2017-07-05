@@ -5,7 +5,7 @@
 	var template = new RamdaTemplate();
 		
 	template.Generics.Add("TTarget");
-	template.Parameters.Add(Tuple.Create("IDictionary<string, Delegate>", "spec", false));
+	template.Parameters.Add(Tuple.Create("object", "spec", false));
 	template.Parameters.Add(Tuple.Create("TTarget", "testObj", false));
 	template.Render();
 #>

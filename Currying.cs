@@ -1108,13 +1108,15 @@ namespace Ramda.NET
             return Delegate(pred).DynamicInvoke(x) ? Delegate(whenTrueFn).DynamicInvoke(x) : x;
         });
 
-        internal readonly static dynamic Where = Curry2<IDictionary<string, object>, object, bool>((spec, testObj) => {
+        internal readonly static dynamic Where = Curry2<object, object, bool>((spec, testObj) => {
             foreach (var pair in spec.ToMemberDictionary()) {
-                var testObjMember = testObj.Member(pair.Key);
-                var @delegate = (Delegate)pair.Value;
+                if (spec.Has(pair.Key)) {
+                    var testObjMember = testObj.Member(pair.Key) ?? R.@null;
+                    DynamicDelegate @delegate = Delegate(pair.Value);
 
-                if (!(bool)@delegate.Invoke(new[] { testObjMember })) {
-                    return false;
+                    if (!@delegate.DynamicInvoke<bool>(testObjMember)) {
+                        return false;
+                    }
                 }
             }
 

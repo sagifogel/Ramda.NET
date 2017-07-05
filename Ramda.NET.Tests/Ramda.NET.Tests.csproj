@@ -300,6 +300,7 @@
     <Compile Include="XProd.cs" />
     <Compile Include="Zip.cs" />
     <Compile Include="ZipObj.cs" />
+    <Compile Include="ZipWith.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

@@ -1726,7 +1726,7 @@ namespace Ramda.NET
 
         internal new readonly static dynamic ToString = Curry1<object, string>(ToStringInternal);
 
-        internal readonly static dynamic Without = Curry2<IList, IList, IList>((xs, list) => Reject(Flip(new Func<object, object, bool>(ContainsInternal))(xs), list));
+        internal readonly static dynamic Without = Curry2<IList, object, object>((xs, list) => Reject(Flip(new Func<object, object, bool>(ContainsInternal))(xs), list));
 
         internal static dynamic Both = Curry2<object, object, object>((f, g) => BothOrEither(Delegate(f), Delegate(g), new Func<Func<bool>, Func<bool>, bool>((a, b) => a() && b()), And));
 

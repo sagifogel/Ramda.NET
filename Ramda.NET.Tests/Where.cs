@@ -58,11 +58,9 @@ namespace Ramda.NET.Tests
         [TestMethod]
         [Description("Where_Matches_Specs_That_Have_Undefined_Properties(The_Test_Object_Will_Have_A_Superset_Of_The_Specs_Properties)")]
         public void Where_Matches_Specs_That_Have_R_Null_Properties() {
-            var obj = new object();
             var spec = new { X = R.Equals(R.@null) };
             var test1 = new { };
             var test2 = new { X = R.@null };
-            var test = new { X = 1 };
 
             Assert.IsTrue(R.Where(spec, test1));
             Assert.IsTrue(R.Where(spec, test2));

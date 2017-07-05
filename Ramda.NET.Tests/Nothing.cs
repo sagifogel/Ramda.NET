@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ramda.NET.Tests
 {
-    public class _Nothing : _Maybe,  IAppable
+    public class _Nothing : _Maybe,  IAppable, IEquatable<_Nothing>
     {
         public _Nothing(object value) : base(value) {
         }
@@ -29,6 +29,22 @@ namespace Ramda.NET.Tests
 
         public object Chain(dynamic f) {
             return this;
+        }
+
+        public override bool Equals(object obj) {
+            return Equals(obj as _Nothing);
+        }
+
+        public bool Equals(_Nothing other) {
+            if (other == null) {
+                return false;
+            }
+
+            return Value == other.Value;
+        }
+
+        public override int GetHashCode() {
+            return Value?.GetHashCode() ?? 0;
         }
     }
 }

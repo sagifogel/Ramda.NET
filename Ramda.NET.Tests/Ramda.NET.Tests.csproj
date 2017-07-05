@@ -297,6 +297,7 @@
     <Compile Include="WhereEq.cs" />
     <Compile Include="Where.cs" />
     <Compile Include="Without.cs" />
+    <Compile Include="XProd.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ramda.NET.csproj">

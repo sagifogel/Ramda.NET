@@ -199,41 +199,48 @@ namespace Ramda.NET
             return member.InvokeNative((object[])arguments.Slice(0, length - 1));
         }
 
-        private static Func<object, object> Dispatchable1(string methodName, dynamic xf, dynamic fn) {
+        private static Func<object, object> Dispatchable1(string[] methodNames, dynamic xf, dynamic fn) {
             return new Func<object, object>(arg => {
-                return Dispatchable(methodName, xf, fn, Arguments(arg));
+                return Dispatchable(methodNames, xf, fn, Arguments(arg));
             });
         }
 
-        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, Delegate fn) {
+        private static DynamicDelegate Dispatchable2(string[] methodName, dynamic xf, Delegate fn) {
             return Dispatchable2(methodName, xf, new DelegateDecorator(fn));
         }
 
-        private static DynamicDelegate Dispatchable2(string methodName, dynamic xf, DynamicDelegate fn) {
-            return Delegate(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodName, xf, fn, Arguments(arg1, arg2))));
+        private static DynamicDelegate Dispatchable2(string[] methodNames, dynamic xf, DynamicDelegate fn) {
+            return Delegate(new Func<object, object, object>((arg1, arg2) => Dispatchable(methodNames, xf, fn, Arguments(arg1, arg2))));
         }
 
-        private static DynamicDelegate Dispatchable4(string methodName, dynamic xf, dynamic fn) {
+        private static DynamicDelegate Dispatchable4(string[] methodNames, dynamic xf, dynamic fn) {
             return Delegate(new Func<dynamic, dynamic, dynamic, dynamic, dynamic>((arg1, arg2, arg3, arg4) => {
-                return Dispatchable(methodName, xf, fn, Arguments(arg1, arg2, arg3, arg4));
+                return Dispatchable(methodNames, xf, fn, Arguments(arg1, arg2, arg3, arg4));
             }));
         }
 
-        private static object Dispatchable(string methodName, dynamic xf, dynamic fn, IList arguments) {
+        private static object Dispatchable(string[] methodNames, dynamic xf, dynamic fn, IList arguments) {
             object obj;
+            object[] args = null;
 
             if (arguments.Count == 0) {
-                return fn.Invoke(new object[0]);
+                return fn.DynamicInvoke();
             }
 
+            args = arguments.Cast<object>().Take(arguments.Count >= 2 ? arguments.Count - 1 : 0).ToArray();
             obj = arguments[arguments.Count - 1];
 
             if (!obj.IsList()) {
-                var args = (object[])arguments.Slice(0, arguments.Count - 1);
-                var member = obj.Member(methodName) as Delegate;
+                var idx = 0;
 
-                if (member.IsNotNull()) {
-                    return member.InvokeNative(args);
+                while (idx < methodNames.Length) {
+                    var member = obj.Member(methodNames[idx]) as Delegate;
+
+                    if (member.IsNotNull()) {
+                        return member.InvokeNative(args);
+                    }
+
+                    idx += 1;
                 }
 
                 if (obj is ITransformer) {
@@ -572,7 +579,7 @@ namespace Ramda.NET
             else if (typeA.TypeIsDictionary() && !typeA.TypeIsExpandoObject()) {
                 return EqualsInternal(((IDictionary)a).Values.ToArray<Array>(typeofObject), ((IDictionary)b).Values.ToArray<Array>(typeofObject), stackA, stackB);
             }
-            else if (typeA.TypeIsSet() ) {
+            else if (typeA.TypeIsSet()) {
                 return EqualsInternal(((IEnumerable)a).ToArray<Array>(typeofObject), ((IEnumerable)b).ToArray<Array>(typeofObject), stackA, stackB);
             }
 

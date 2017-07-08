@@ -62,7 +62,7 @@ namespace Ramda.NET.Tests
                                 return false;
                             }
                         }
-                        else if (!innerAItem.Equals(innerBItem)) {
+                        else if (!innerAItem.EqualsInternal(innerBItem)) {
                             return false;
                         }
                     }

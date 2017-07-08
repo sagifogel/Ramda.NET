@@ -173,6 +173,8 @@ namespace Ramda.NET
                         if (arr.Count > index) {
                             return arr[index];
                         }
+
+                        return R.@null;
                     }
                 }
             }
@@ -542,6 +544,7 @@ namespace Ramda.NET
         }
 
         internal static bool Has(this object obj, string prop) {
+            IList list = null;
             MemberInfo member = null;
 
             if (obj.IsDictionary()) {
@@ -559,6 +562,16 @@ namespace Ramda.NET
                 }
             }
 
+            list = obj as IList;
+
+            if (list != null) {
+                int index;
+
+                if (int.TryParse(prop, out index)) {
+                    return index <= list.Count - 1;
+                }
+            }
+
             member = obj.TryGetMemberInfo(prop);
 
             if (member != null) {
@@ -571,6 +584,10 @@ namespace Ramda.NET
         internal static bool IsObjectArray(this Type type) {
             return type.HasElementType ? type.GetElementType().Equals(typeof(object)) :
                    typeof(IList).IsAssignableFrom(type);
+        }
+
+        internal static bool IsInteger(this object target) {
+            return target.GetType().Equals(typeof(int));
         }
     }
 }

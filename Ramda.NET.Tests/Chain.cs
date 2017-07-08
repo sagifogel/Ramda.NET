@@ -55,18 +55,19 @@ namespace Ramda.NET.Tests
                 };
             };
 
-            var bound = R.Chain(h, (Delegate)f);
+            var bound = R.Chain(f, (Delegate)h);
 
             Assert.AreEqual(bound(10), 10 * 2 + 10);
+            CollectionAssert.AreEqual(R.Chain(R.Append(R.__), R.Head(R.__))(new[] { 1, 2, 3 }), new[] { 1, 2, 3, 1 });
         }
 
         [TestMethod]
-        [Description("Chain_Dispatches_To_Objects_That_Implement_`chain`")]
+        [Description("Chain_Dispatches_To_Objects_That_Implement_\"Chain\"")]
         public void Chain_Dispatches_To_Objects_That_Implement_Chain() {
             var obj = new Chainable(100);
 
             CollectionAssert.AreEqual(R.Chain(add1, obj), new[] { 101 });
-        }
+         }
 
         [TestMethod]
         public void Chain_Dispatches_To_Transformer_Objects() {

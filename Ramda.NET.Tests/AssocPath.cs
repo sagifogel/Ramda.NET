@@ -28,8 +28,7 @@ namespace Ramda.NET.Tests
             IDictionary<string, object> x = new ExpandoObject();
             IDictionary<string, object> zero = new ExpandoObject();
 
-            expando.x = x;
-            x["0"] = zero;
+            expando.x = new[] { zero };
             zero["y"] = 42;
 
             DynamicAssert.AreEqual(expando, obj2);

@@ -47,3 +47,6 @@ Temporary Items
 .apdisk
 obj/
 bin/
+packages/
+doc/node_modules/
+doc/doc.js

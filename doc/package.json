@@ -1,0 +1,10 @@
+{
+  "name": "ramda.net",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "doctrine": "^2.0.0",
+    "babel-core": "^6.25.0"
+  },
+  "author": "Sagi Fogel"
+}

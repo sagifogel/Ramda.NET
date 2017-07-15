@@ -1,12 +1,89 @@
 ﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="$(SolutionDir)\bin\Debug\Newtonsoft.Json.dll" #>
+<#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
+<#@ import namespace="Newtonsoft.Json" #>
+<#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ include file="T4Toolbox.tt" #><#+
 public class RamdaTemplate : CSharpTemplate
 {		
 	private readonly string name;
 	
+	private void DeserializeComments(string path) {
+        var fileContent = File.ReadAllText($"{path}doc.js");
+        var comments = JsonConvert.DeserializeObject<JSDoc[]>(fileContent);
+
+        comments.ToList().ForEach(c => {
+            var dictionary = c.LeadingComments.Tags.GroupBy(t => !t.Title.Equals("param"))
+												   .ToDictionary(g => g.Key, g => g.AsEnumerable());
+
+            c.Comments = new HashSet<Tag>(dictionary[true]).ToDictionary(t => t.Title);
+
+            if (dictionary.ContainsKey(false)) {
+                c.Params = dictionary[false].ToArray();
+            }
+        });
+    }
+
+	private void EnsureRamdaDocumentation(string path) {
+        var docFilePath = $"{path}doc.js";
+
+        if (!File.Exists(docFilePath)) {
+            WriteDocFile(path);
+        }
+    }
+
+	private void WriteDocFile(string path) {
+        var startInfo = new ProcessStartInfo(fileName: "doc.cmd") {
+            WorkingDirectory = path
+        };
+
+        Process.Start(startInfo).WaitForExit();
+    }
+
+	public class JSDoc
+    {
+        public string Name { get; set; }
+        public Tag[] Params { get; set; }
+        public Comments LeadingComments { get; set; }
+        public Dictionary<string, Tag> Comments { get; set; }
+
+        public JSDoc() {
+            Params = new Tag[0];
+        }
+    }
+
+    public class Comments
+    {
+        public Tag[] Tags { get; set; }
+        public string Description { get; set; }
+    }
+
+    public class Tag : IEquatable<Tag>
+    {
+        public string Name { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+
+        public bool Equals(Tag other) {
+            if (other == null) {
+                return false;
+            }
+
+            return this.Title.Equals(other.Title);
+        }
+
+        public override bool Equals(object obj) {
+            return Equals(obj as Tag);
+        }
+
+        public override int GetHashCode() {
+            return Title.GetHashCode();
+        }
+    }
+
 	public RamdaTemplate() {
 		Generics = new List<string>();
 		Emitted = new HashSet<string>();
@@ -231,10 +308,12 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 <#+		
+		var path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(this.Context.Host.TemplateFile), @"..\", @"doc\"));
 		var dynamics = Parameters.ToList();
 		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
 		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
 
+		EnsureRamdaDocumentation(path);
 		Emit(name, generics, Join(Parameters), ToArguments(Parameters), false);
 		Emit(Parameters.ToList(), name);
 		

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,74 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(Func<TArg, TArg, int> pred, IList<TArg> list) {
 			return Currying.Sort(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(RamdaPlaceholder pred, IList<TArg> list) {
 			return Currying.Sort(pred, list);
 		}
 
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(Func<TArg, TArg, int> pred, RamdaPlaceholder list = null) {
 			return Currying.Sort(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort(dynamic pred, RamdaPlaceholder list = null) {
 			return Currying.Sort(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(dynamic pred, IList<TArg> list) {
 			return Currying.Sort(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a copy of the list, sorted according to the comparator function,which should accept two values at a time and return a negative number if thefirst value is smaller, a positive number if it's larger, and zero if theyare equal. Please note that this is a **copy** of the list. It does notmodify the original.
+		/// <para />
+		/// sig: (a,a -> Number) -> [a] -> [a]
+		/// </summary>
+		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="list">The list to sort</param>
+		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.Sort(pred, list);
 		}

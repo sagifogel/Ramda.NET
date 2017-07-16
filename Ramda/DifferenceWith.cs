@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,162 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(RamdaPlaceholder pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(pred, list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(dynamic pred, RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(dynamic pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith<TSource>(dynamic pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.DifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements in the first list notcontained in the second list. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` that are not in `list2`.</returns>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.SymmetricDifferenceWith"/>
 		public static dynamic DifferenceWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.DifferenceWith(pred, list1, list2);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Turns a named method with a specified arity into a function that can becalled directly supplied with arguments and a target object.The returned function is curried and accepts `arity + 1` parameters wherethe final parameter is the target object.
+		/// <para />
+		/// sig: Number -> String -> (a -> b -> ... -> n -> Object -> *)
+		/// </summary>
+		/// <param name="arity">Number of arguments the returned function should take       before the target object.</param>
+		/// <param name="method">Name of the method to call.</param>
+		/// <returns>A new curried function.</returns>
 		public static dynamic Invoker(int arity, string method) {
 			return Currying.Invoker(arity, method);
 		}
 
+		/// <summary>
+		/// Turns a named method with a specified arity into a function that can becalled directly supplied with arguments and a target object.The returned function is curried and accepts `arity + 1` parameters wherethe final parameter is the target object.
+		/// <para />
+		/// sig: Number -> String -> (a -> b -> ... -> n -> Object -> *)
+		/// </summary>
+		/// <param name="arity">Number of arguments the returned function should take       before the target object.</param>
+		/// <param name="method">Name of the method to call.</param>
+		/// <returns>A new curried function.</returns>
 		public static dynamic Invoker(RamdaPlaceholder arity, string method) {
 			return Currying.Invoker(arity, method);
 		}
 
+		/// <summary>
+		/// Turns a named method with a specified arity into a function that can becalled directly supplied with arguments and a target object.The returned function is curried and accepts `arity + 1` parameters wherethe final parameter is the target object.
+		/// <para />
+		/// sig: Number -> String -> (a -> b -> ... -> n -> Object -> *)
+		/// </summary>
+		/// <param name="arity">Number of arguments the returned function should take       before the target object.</param>
+		/// <param name="method">Name of the method to call.</param>
+		/// <returns>A new curried function.</returns>
 		public static dynamic Invoker(int arity, RamdaPlaceholder method = null) {
 			return Currying.Invoker(arity, method);
 		}
 
+		/// <summary>
+		/// Turns a named method with a specified arity into a function that can becalled directly supplied with arguments and a target object.The returned function is curried and accepts `arity + 1` parameters wherethe final parameter is the target object.
+		/// <para />
+		/// sig: Number -> String -> (a -> b -> ... -> n -> Object -> *)
+		/// </summary>
+		/// <param name="arity">Number of arguments the returned function should take       before the target object.</param>
+		/// <param name="method">Name of the method to call.</param>
+		/// <returns>A new curried function.</returns>
 		public static dynamic Invoker(RamdaPlaceholder arity = null, RamdaPlaceholder method = null) {
 			return Currying.Invoker(arity, method);
 		}

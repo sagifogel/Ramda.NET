@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if its arguments are equivalent, `false` otherwise. Handlescyclical data structures.Dispatches symmetrically to the `equals` methods of both arguments, ifpresent.
+		/// <para />
+		/// sig: a -> b -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Equals<TTArget1, TTArget2>(TTArget1 a, TTArget2 b) {
 			return Currying.Equals(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if its arguments are equivalent, `false` otherwise. Handlescyclical data structures.Dispatches symmetrically to the `equals` methods of both arguments, ifpresent.
+		/// <para />
+		/// sig: a -> b -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Equals<TTArget2>(RamdaPlaceholder a, TTArget2 b) {
 			return Currying.Equals(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if its arguments are equivalent, `false` otherwise. Handlescyclical data structures.Dispatches symmetrically to the `equals` methods of both arguments, ifpresent.
+		/// <para />
+		/// sig: a -> b -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Equals<TTArget1>(TTArget1 a, RamdaPlaceholder b = null) {
 			return Currying.Equals(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if its arguments are equivalent, `false` otherwise. Handlescyclical data structures.Dispatches symmetrically to the `equals` methods of both arguments, ifpresent.
+		/// <para />
+		/// sig: a -> b -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Equals(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Equals(a, b);
 		}

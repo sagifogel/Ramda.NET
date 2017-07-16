@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a new list out of the two supplied by pairing up equally-positioneditems from both lists. The returned list is truncated to the length of theshorter of the two input lists.Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+		/// <para />
+		/// sig: [a] -> [b] -> [[a,b]]
+		/// </summary>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by pairing up same-indexed elements of `list1` and `list2`.</returns>
 		public static dynamic Zip<TSource1, TSource2>(IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.Zip(list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by pairing up equally-positioneditems from both lists. The returned list is truncated to the length of theshorter of the two input lists.Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+		/// <para />
+		/// sig: [a] -> [b] -> [[a,b]]
+		/// </summary>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by pairing up same-indexed elements of `list1` and `list2`.</returns>
 		public static dynamic Zip<TSource2>(RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.Zip(list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by pairing up equally-positioneditems from both lists. The returned list is truncated to the length of theshorter of the two input lists.Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+		/// <para />
+		/// sig: [a] -> [b] -> [[a,b]]
+		/// </summary>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by pairing up same-indexed elements of `list1` and `list2`.</returns>
 		public static dynamic Zip<TSource1>(IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.Zip(list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by pairing up equally-positioneditems from both lists. The returned list is truncated to the length of theshorter of the two input lists.Note: `zip` is equivalent to `zipWith(function(a, b) { return [a, b] })`.
+		/// <para />
+		/// sig: [a] -> [b] -> [[a,b]]
+		/// </summary>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by pairing up same-indexed elements of `list1` and `list2`.</returns>
 		public static dynamic Zip(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.Zip(list1, list2);
 		}

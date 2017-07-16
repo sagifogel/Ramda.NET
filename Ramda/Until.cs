@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,50 +15,158 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> fn, TArg init) {
 			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> fn, TArg init) {
 			return Currying.Until(pred, Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn, TArg init) {
 			return Currying.Until(Delegate(pred), fn, init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> fn, RamdaPlaceholder init = null) {
 			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(Delegate(pred), fn, init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg>(RamdaPlaceholder pred, dynamic fn, TArg init) {
 			return Currying.Until(pred, Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg>(dynamic pred, RamdaPlaceholder fn, TArg init) {
 			return Currying.Until(Delegate(pred), fn, init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until(dynamic pred, dynamic fn, RamdaPlaceholder init = null) {
 			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until(dynamic pred, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(Delegate(pred), fn, init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> fn, TArg init) {
 			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until<TArg>(Func<TArg, bool> pred, dynamic fn, TArg init) {
 			return Currying.Until(Delegate(pred), Delegate(fn), init);
 		}
 
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(pred, fn, init);
 		}

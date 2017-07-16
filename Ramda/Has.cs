@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns whether or not an object has an own property with the specified name
+		/// <para />
+		/// sig: s -> {s: x} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to check for.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>Whether the property exists.</returns>
 		public static dynamic Has<TTarget>(string prop, TTarget obj) {
 			return Currying.Has(prop, obj);
 		}
 
+		/// <summary>
+		/// Returns whether or not an object has an own property with the specified name
+		/// <para />
+		/// sig: s -> {s: x} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to check for.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>Whether the property exists.</returns>
 		public static dynamic Has<TTarget>(RamdaPlaceholder prop, TTarget obj) {
 			return Currying.Has(prop, obj);
 		}
 
+		/// <summary>
+		/// Returns whether or not an object has an own property with the specified name
+		/// <para />
+		/// sig: s -> {s: x} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to check for.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>Whether the property exists.</returns>
 		public static dynamic Has(string prop, RamdaPlaceholder obj = null) {
 			return Currying.Has(prop, obj);
 		}
 
+		/// <summary>
+		/// Returns whether or not an object has an own property with the specified name
+		/// <para />
+		/// sig: s -> {s: x} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to check for.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>Whether the property exists.</returns>
 		public static dynamic Has(RamdaPlaceholder prop = null, RamdaPlaceholder obj = null) {
 			return Currying.Has(prop, obj);
 		}

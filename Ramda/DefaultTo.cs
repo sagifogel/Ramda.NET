@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the second argument if it is not `null`, `undefined` or `NaN`otherwise the first argument is returned.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="default">The default value.</param>
+		/// <param name="val">`val` will be returned instead of `default` unless `val` is `null`, `undefined` or `NaN`.</param>
+		/// <returns>The second value if it is not `null`, `undefined` or `NaN`, otherwise the default value</returns>
 		public static dynamic DefaultTo<TArg1, TArg2>(TArg1 a, TArg2 b) {
 			return Currying.DefaultTo(a, b);
 		}
 
+		/// <summary>
+		/// Returns the second argument if it is not `null`, `undefined` or `NaN`otherwise the first argument is returned.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="default">The default value.</param>
+		/// <param name="val">`val` will be returned instead of `default` unless `val` is `null`, `undefined` or `NaN`.</param>
+		/// <returns>The second value if it is not `null`, `undefined` or `NaN`, otherwise the default value</returns>
 		public static dynamic DefaultTo<TArg2>(RamdaPlaceholder a, TArg2 b) {
 			return Currying.DefaultTo(a, b);
 		}
 
+		/// <summary>
+		/// Returns the second argument if it is not `null`, `undefined` or `NaN`otherwise the first argument is returned.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="default">The default value.</param>
+		/// <param name="val">`val` will be returned instead of `default` unless `val` is `null`, `undefined` or `NaN`.</param>
+		/// <returns>The second value if it is not `null`, `undefined` or `NaN`, otherwise the default value</returns>
 		public static dynamic DefaultTo<TArg1>(TArg1 a, RamdaPlaceholder b = null) {
 			return Currying.DefaultTo(a, b);
 		}
 
+		/// <summary>
+		/// Returns the second argument if it is not `null`, `undefined` or `NaN`otherwise the first argument is returned.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="default">The default value.</param>
+		/// <param name="val">`val` will be returned instead of `default` unless `val` is `null`, `undefined` or `NaN`.</param>
+		/// <returns>The second value if it is not `null`, `undefined` or `NaN`, otherwise the default value</returns>
 		public static dynamic DefaultTo(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.DefaultTo(a, b);
 		}

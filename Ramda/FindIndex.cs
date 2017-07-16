@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.FindIndex(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.FindIndex(fn, list);
 		}
 
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.FindIndex(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.FindIndex(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex<TSource>(dynamic fn, IList<TSource> list) {
 			return Currying.FindIndex(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns the index of the first element of the list which matches thepredicate, or `-1` if no element matches.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Number
+		/// </summary>
+		/// <param name="fn">The predicate function used to determine if the element is thedesired one.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The index of the element found, or `-1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic FindIndex(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.FindIndex(fn, list);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,58 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the smaller of its two arguments.
+		/// <para />
+		/// sig: Ord a => a -> a -> a
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.MinBy"/>
+		/// <see cref="R.Max"/>
 		public static dynamic Min(char a, char b) {
 			return Currying.Min(a, b);
 		}
 
+		/// <summary>
+		/// Returns the smaller of its two arguments.
+		/// <para />
+		/// sig: Ord a => a -> a -> a
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.MinBy"/>
+		/// <see cref="R.Max"/>
 		public static dynamic Min(RamdaPlaceholder a, char b) {
 			return Currying.Min(a, b);
 		}
 
+		/// <summary>
+		/// Returns the smaller of its two arguments.
+		/// <para />
+		/// sig: Ord a => a -> a -> a
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.MinBy"/>
+		/// <see cref="R.Max"/>
 		public static dynamic Min(char a, RamdaPlaceholder b = null) {
 			return Currying.Min(a, b);
 		}
 
+		/// <summary>
+		/// Returns the smaller of its two arguments.
+		/// <para />
+		/// sig: Ord a => a -> a -> a
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.MinBy"/>
+		/// <see cref="R.Max"/>
 		public static dynamic Min(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Min(a, b);
 		}

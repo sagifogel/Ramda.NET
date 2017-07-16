@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the median of the given list of numbers.
+		/// <para />
+		/// sig: [Number] -> Number
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>Number</returns>
 		public static dynamic Median(IList<double> list) {
 			return Currying.Median(list);
 		}
 
+		/// <summary>
+		/// Returns the median of the given list of numbers.
+		/// <para />
+		/// sig: [Number] -> Number
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>Number</returns>
 		public static dynamic Median(RamdaPlaceholder list = null) {
 			return Currying.Median(list);
 		}

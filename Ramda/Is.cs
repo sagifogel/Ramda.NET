@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// See if an object (`val`) is an instance of the supplied constructor. Thisfunction will check up the inheritance chain, if any.
+		/// <para />
+		/// sig: (* -> {*}) -> a -> Boolean
+		/// </summary>
+		/// <param name="ctor">A constructor</param>
+		/// <param name="val">The value to test</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Is<TTarget>(Type type, TTarget val) {
 			return Currying.Is(type, val);
 		}
 
+		/// <summary>
+		/// See if an object (`val`) is an instance of the supplied constructor. Thisfunction will check up the inheritance chain, if any.
+		/// <para />
+		/// sig: (* -> {*}) -> a -> Boolean
+		/// </summary>
+		/// <param name="ctor">A constructor</param>
+		/// <param name="val">The value to test</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Is<TTarget>(RamdaPlaceholder type, TTarget val) {
 			return Currying.Is(type, val);
 		}
 
+		/// <summary>
+		/// See if an object (`val`) is an instance of the supplied constructor. Thisfunction will check up the inheritance chain, if any.
+		/// <para />
+		/// sig: (* -> {*}) -> a -> Boolean
+		/// </summary>
+		/// <param name="ctor">A constructor</param>
+		/// <param name="val">The value to test</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Is(Type type, RamdaPlaceholder val = null) {
 			return Currying.Is(type, val);
 		}
 
+		/// <summary>
+		/// See if an object (`val`) is an instance of the supplied constructor. Thisfunction will check up the inheritance chain, if any.
+		/// <para />
+		/// sig: (* -> {*}) -> a -> Boolean
+		/// </summary>
+		/// <param name="ctor">A constructor</param>
+		/// <param name="val">The value to test</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Is(RamdaPlaceholder type = null, RamdaPlaceholder val = null) {
 			return Currying.Is(type, val);
 		}

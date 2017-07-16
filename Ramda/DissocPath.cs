@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Makes a shallow clone of an object, omitting the property at the given path.Note that this copies and flattens prototype properties onto the new objectas well. All non-primitive properties are copied by reference.
+		/// <para />
+		/// sig: [String] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="path">The path to the value to omit</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object without the property at path</returns>
+		/// <see cref="R.AssocPath"/>
 		public static dynamic DissocPath<TTarget>(IList<string> path, TTarget obj) {
 			return Currying.DissocPath(path, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, omitting the property at the given path.Note that this copies and flattens prototype properties onto the new objectas well. All non-primitive properties are copied by reference.
+		/// <para />
+		/// sig: [String] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="path">The path to the value to omit</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object without the property at path</returns>
+		/// <see cref="R.AssocPath"/>
 		public static dynamic DissocPath<TTarget>(RamdaPlaceholder path, TTarget obj) {
 			return Currying.DissocPath(path, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, omitting the property at the given path.Note that this copies and flattens prototype properties onto the new objectas well. All non-primitive properties are copied by reference.
+		/// <para />
+		/// sig: [String] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="path">The path to the value to omit</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object without the property at path</returns>
+		/// <see cref="R.AssocPath"/>
 		public static dynamic DissocPath(IList<string> path, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, omitting the property at the given path.Note that this copies and flattens prototype properties onto the new objectas well. All non-primitive properties are copied by reference.
+		/// <para />
+		/// sig: [String] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="path">The path to the value to omit</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object without the property at path</returns>
+		/// <see cref="R.AssocPath"/>
 		public static dynamic DissocPath(RamdaPlaceholder path = null, RamdaPlaceholder obj = null) {
 			return Currying.DissocPath(path, obj);
 		}

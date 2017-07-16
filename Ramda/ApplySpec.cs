@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Given a spec object recursively mapping properties to functions, creates afunction producing an object of the same structure, by mapping each propertyto the result of calling its associated function with the supplied arguments.
+		/// <para />
+		/// sig: {k: ((a, b, ..., m) -> v)} -> ((a, b, ..., m) -> {k: v})
+		/// </summary>
+		/// <param name="spec">an object recursively mapping properties to functions for       producing the values for these properties.</param>
+		/// <returns>A function that returns an object of the same structureas `spec', with each property set to the value returned by calling itsassociated function with the supplied arguments.</returns>
+		/// <see cref="R.Converge"/>
+		/// <see cref="R.Juxt"/>
 		public static dynamic ApplySpec<TTarget>(TTarget spec) {
 			return Currying.ApplySpec(spec);
 		}
 
+		/// <summary>
+		/// Given a spec object recursively mapping properties to functions, creates afunction producing an object of the same structure, by mapping each propertyto the result of calling its associated function with the supplied arguments.
+		/// <para />
+		/// sig: {k: ((a, b, ..., m) -> v)} -> ((a, b, ..., m) -> {k: v})
+		/// </summary>
+		/// <param name="spec">an object recursively mapping properties to functions for       producing the values for these properties.</param>
+		/// <returns>A function that returns an object of the same structureas `spec', with each property set to the value returned by calling itsassociated function with the supplied arguments.</returns>
+		/// <see cref="R.Converge"/>
+		/// <see cref="R.Juxt"/>
 		public static dynamic ApplySpec(RamdaPlaceholder spec = null) {
 			return Currying.ApplySpec(spec);
 		}

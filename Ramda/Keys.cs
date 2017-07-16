@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a list containing the names of all the enumerable own properties ofthe supplied object.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+		/// <para />
+		/// sig: {k: v} -> [k]
+		/// </summary>
+		/// <param name="obj">The object to extract properties from</param>
+		/// <returns>An array of the object's own properties.</returns>
 		public static dynamic Keys<TTarget>(TTarget obj) {
 			return Currying.Keys(obj);
 		}
 
+		/// <summary>
+		/// Returns a list containing the names of all the enumerable own properties ofthe supplied object.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+		/// <para />
+		/// sig: {k: v} -> [k]
+		/// </summary>
+		/// <param name="obj">The object to extract properties from</param>
+		/// <returns>An array of the object's own properties.</returns>
 		public static dynamic Keys(RamdaPlaceholder obj = null) {
 			return Currying.Keys(obj);
 		}

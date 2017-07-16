@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,92 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs<TTarget>(Type type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs<TTarget>(RamdaPlaceholder type, string name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs<TTarget>(Type type, RamdaPlaceholder name, TTarget obj) {
 			return Currying.PropIs(type, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs(Type type, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs(Type type, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
+		/// <para />
+		/// sig: Type -> String -> Object -> Boolean
+		/// </summary>
+		/// <param name="type">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Is"/>
+		/// <see cref="R.PropSatisfies"/>
 		public static dynamic PropIs(RamdaPlaceholder type = null, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropIs(type, name, obj);
 		}

@@ -15,42 +15,132 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(Func<TSource, int> fn, TSource a, TSource b) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(RamdaPlaceholder fn, TSource a, TSource b) {
 			return Currying.Descend(fn, a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(Func<TSource, int> fn, RamdaPlaceholder a, TSource b) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(Func<TSource, int> fn, TSource a, RamdaPlaceholder b = null) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(Func<TSource, int> fn, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(dynamic fn, RamdaPlaceholder a, TSource b) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(dynamic fn, TSource a, RamdaPlaceholder b = null) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend(dynamic fn, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend<TSource>(dynamic fn, TSource a, TSource b) {
 			return Currying.Descend(Delegate(fn), a, b);
 		}
 
+		/// <summary>
+		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> Number
+		/// </summary>
+		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
+		/// <param name="a">The first item to be compared.</param>
+		/// <param name="b">The second item to be compared.</param>
+		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
 		public static dynamic Descend(RamdaPlaceholder fn = null, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Descend(fn, a, b);
 		}

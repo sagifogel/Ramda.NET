@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,152 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.ReduceRight(fn, acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight<TSource, TAccmulator>(dynamic fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.ReduceRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Returns a single item by iterating through the list, successively callingthe iterator function and passing it an accumulator value and the currentvalue from the array, and then passing the result to the next call.Similar to `reduce`, except moves through the input list from the right tothe left.The iterator function receives two values: *(value, acc)*, while the arguments'order of `reduce`'s iterator function is *(acc, value)*.Note: `R.reduceRight` does not skip deleted or unassigned indices (sparsearrays), unlike the native `Array.prototype.reduce` method. For more detailson this behavior, see:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight#Description
+		/// <para />
+		/// sig: (a, b -> b) -> b -> [a] -> b
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the current element from the array       and the accumulator.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic ReduceRight(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceRight(fn, acc, list);
 		}

@@ -13,15 +13,42 @@ using System.Text.RegularExpressions;
 namespace Ramda.NET
 {
 	public static partial class R
-	{	
-		public static dynamic IndexBy(Func<object, string> fn, object array) {
+    {
+        /// <summary>
+        /// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+        /// <para />
+        /// sig: a -> [a] -> Number
+        /// </summary>
+        /// <param name="target">The item to find.</param>
+        /// <param name="xs">The array to search in.</param>
+        /// <returns>the index of the target, or -1 if the target is not found.</returns>
+        /// <see cref="R.LastIndexOf"/>
+        public static dynamic IndexBy(Func<object, string> fn, object array) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+        /// <summary>
+		/// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.LastIndexOf"/>
 		public static dynamic IndexBy(Func<object, string> fn, RamdaPlaceholder array = null) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+        /// <summary>
+		/// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.LastIndexOf"/>
 		public static dynamic IndexBy(dynamic fn, object array) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}

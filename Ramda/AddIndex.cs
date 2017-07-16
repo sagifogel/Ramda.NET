@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a new list iteration function from an existing one by adding two newparameters to its callback function: the current index, and the entire list.This would turn, for instance, Ramda's simple `map` function into one thatmore closely resembles `Array.prototype.map`. Note that this will only workfor functions in which the iteration callback function is the firstparameter, and where the list is the last parameter. (This latter might beunimportant if the list parameter is not used.)
+		/// <para />
+		/// sig: ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)
+		/// </summary>
+		/// <param name="fn">A list iteration function that does not pass index or list to its callback</param>
+		/// <returns>An altered list iteration function that passes (item, index, list) to its callback</returns>
 		public static dynamic AddIndex(Delegate fn) {
 			return Currying.AddIndex(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Creates a new list iteration function from an existing one by adding two newparameters to its callback function: the current index, and the entire list.This would turn, for instance, Ramda's simple `map` function into one thatmore closely resembles `Array.prototype.map`. Note that this will only workfor functions in which the iteration callback function is the firstparameter, and where the list is the last parameter. (This latter might beunimportant if the list parameter is not used.)
+		/// <para />
+		/// sig: ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)
+		/// </summary>
+		/// <param name="fn">A list iteration function that does not pass index or list to its callback</param>
+		/// <returns>An altered list iteration function that passes (item, index, list) to its callback</returns>
 		public static dynamic AddIndex(RamdaPlaceholder fn = null) {
 			return Currying.AddIndex(fn);
 		}
 
+		/// <summary>
+		/// Creates a new list iteration function from an existing one by adding two newparameters to its callback function: the current index, and the entire list.This would turn, for instance, Ramda's simple `map` function into one thatmore closely resembles `Array.prototype.map`. Note that this will only workfor functions in which the iteration callback function is the firstparameter, and where the list is the last parameter. (This latter might beunimportant if the list parameter is not used.)
+		/// <para />
+		/// sig: ((a ... -> b) ... -> [a] -> *) -> (a ..., Int, [a] -> b) ... -> [a] -> *)
+		/// </summary>
+		/// <param name="fn">A list iteration function that does not pass index or list to its callback</param>
+		/// <returns>An altered list iteration function that passes (item, index, list) to its callback</returns>
 		public static dynamic AddIndex(dynamic fn) {
 			return Currying.AddIndex(Delegate(fn));
 		}

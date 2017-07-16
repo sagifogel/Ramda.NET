@@ -15,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply<TSource>(Delegate fn, IList<TSource> args) {
 			return Currying.Apply(Delegate(fn), args);
 		}
 
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply<TSource>(RamdaPlaceholder fn, IList<TSource> args) {
 			return Currying.Apply(fn, args);
 		}
 
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply(Delegate fn, RamdaPlaceholder args = null) {
 			return Currying.Apply(Delegate(fn), args);
 		}
 
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply(dynamic fn, RamdaPlaceholder args = null) {
 			return Currying.Apply(Delegate(fn), args);
 		}
 
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply<TSource>(dynamic fn, IList<TSource> args) {
 			return Currying.Apply(Delegate(fn), args);
 		}
 
+		/// <summary>
+		/// Applies function `fn` to the argument list `args`. This is useful forcreating a fixed-arity function from a variadic function. `fn` should be abound function if context is significant.
+		/// <para />
+		/// sig: (*... -> a) -> [*] -> a
+		/// </summary>
+		/// <param name="fn">The function which will be called with `args`</param>
+		/// <param name="args">The arguments to call `fn` with</param>
+		/// <returns>result The result, equivalent to `fn(...args)`</returns>
+		/// <see cref="R.Call"/>
+		/// <see cref="R.Unapply"/>
 		public static dynamic Apply(RamdaPlaceholder fn = null, RamdaPlaceholder args = null) {
 			return Currying.Apply(fn, args);
 		}

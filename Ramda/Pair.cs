@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,58 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes two arguments, `fst` and `snd`, and returns `[fst, snd]`.
+		/// <para />
+		/// sig: a -> b -> (a,b)
+		/// </summary>
+		/// <param name="fst">first</param>
+		/// <param name="snd">second</param>
+		/// <returns>Array</returns>
+		/// <see cref="R.ObjOf"/>
+		/// <see cref="R.Of"/>
 		public static dynamic Pair<TSource1, TSource2>(TSource1 fst, TSource2 snd) {
 			return Currying.Pair(fst, snd);
 		}
 
+		/// <summary>
+		/// Takes two arguments, `fst` and `snd`, and returns `[fst, snd]`.
+		/// <para />
+		/// sig: a -> b -> (a,b)
+		/// </summary>
+		/// <param name="fst">first</param>
+		/// <param name="snd">second</param>
+		/// <returns>Array</returns>
+		/// <see cref="R.ObjOf"/>
+		/// <see cref="R.Of"/>
 		public static dynamic Pair<TSource2>(RamdaPlaceholder fst, TSource2 snd) {
 			return Currying.Pair(fst, snd);
 		}
 
+		/// <summary>
+		/// Takes two arguments, `fst` and `snd`, and returns `[fst, snd]`.
+		/// <para />
+		/// sig: a -> b -> (a,b)
+		/// </summary>
+		/// <param name="fst">first</param>
+		/// <param name="snd">second</param>
+		/// <returns>Array</returns>
+		/// <see cref="R.ObjOf"/>
+		/// <see cref="R.Of"/>
 		public static dynamic Pair<TSource1>(TSource1 fst, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd);
 		}
 
+		/// <summary>
+		/// Takes two arguments, `fst` and `snd`, and returns `[fst, snd]`.
+		/// <para />
+		/// sig: a -> b -> (a,b)
+		/// </summary>
+		/// <param name="fst">first</param>
+		/// <param name="snd">second</param>
+		/// <returns>Array</returns>
+		/// <see cref="R.ObjOf"/>
+		/// <see cref="R.Of"/>
 		public static dynamic Pair(RamdaPlaceholder fst = null, RamdaPlaceholder snd = null) {
 			return Currying.Pair(fst, snd);
 		}

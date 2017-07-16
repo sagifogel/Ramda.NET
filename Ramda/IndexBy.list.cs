@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,74 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, IList<TSource> array) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(RamdaPlaceholder fn, IList<TSource> array) {
 			return Currying.IndexBy(fn, array);
 		}
 
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, RamdaPlaceholder array = null) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy(dynamic fn, RamdaPlaceholder array = null) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(dynamic fn, IList<TSource> array) {
 			return Currying.IndexBy(Delegate(fn), array);
 		}
 
+		/// <summary>
+		/// Given a function that generates a key, turns a list of objects into anobject indexing the objects by the given key. Note that if multipleobjects generate the same value for the indexing key only the last valuewill be included in the generated object.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
+		/// </summary>
+		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="array">The array of objects to index</param>
+		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy(RamdaPlaceholder fn = null, RamdaPlaceholder array = null) {
 			return Currying.IndexBy(fn, array);
 		}

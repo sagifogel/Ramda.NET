@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Reasonable analog to SQL `select` statement.
+		/// <para />
+		/// sig: [k] -> [{k: v}] -> [{k: v}]
+		/// </summary>
+		/// <param name="props">The property names to project</param>
+		/// <param name="objs">The objects to query</param>
+		/// <returns>An array of objects with just the `props` properties.</returns>
 		public static dynamic Project<TSource>(IList<string> props, IList<TSource> objs) {
 			return Currying.Project(props, objs);
 		}
 
+		/// <summary>
+		/// Reasonable analog to SQL `select` statement.
+		/// <para />
+		/// sig: [k] -> [{k: v}] -> [{k: v}]
+		/// </summary>
+		/// <param name="props">The property names to project</param>
+		/// <param name="objs">The objects to query</param>
+		/// <returns>An array of objects with just the `props` properties.</returns>
 		public static dynamic Project<TSource>(RamdaPlaceholder props, IList<TSource> objs) {
 			return Currying.Project(props, objs);
 		}
 
+		/// <summary>
+		/// Reasonable analog to SQL `select` statement.
+		/// <para />
+		/// sig: [k] -> [{k: v}] -> [{k: v}]
+		/// </summary>
+		/// <param name="props">The property names to project</param>
+		/// <param name="objs">The objects to query</param>
+		/// <returns>An array of objects with just the `props` properties.</returns>
 		public static dynamic Project(IList<string> props, RamdaPlaceholder objs = null) {
 			return Currying.Project(props, objs);
 		}
 
+		/// <summary>
+		/// Reasonable analog to SQL `select` statement.
+		/// <para />
+		/// sig: [k] -> [{k: v}] -> [{k: v}]
+		/// </summary>
+		/// <param name="props">The property names to project</param>
+		/// <param name="objs">The objects to query</param>
+		/// <returns>An array of objects with just the `props` properties.</returns>
 		public static dynamic Project(RamdaPlaceholder props = null, RamdaPlaceholder objs = null) {
 			return Currying.Project(props, objs);
 		}

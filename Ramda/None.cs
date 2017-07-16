@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.None(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.None(fn, list);
 		}
 
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.None(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.None(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None<TSource>(dynamic fn, IList<TSource> list) {
 			return Currying.None(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if no elements of the list match the predicate, `false`otherwise.Dispatches to the `any` method of the second argument, if present.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is not satisfied by every element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.Any"/>
 		public static dynamic None(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.None(fn, list);
 		}

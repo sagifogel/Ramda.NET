@@ -15,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Splits a string into an array of strings based on the givenseparator.
+		/// <para />
+		/// sig: (String | RegExp) -> String -> [String]
+		/// </summary>
+		/// <param name="sep">The pattern.</param>
+		/// <param name="str">The string to separate into an array.</param>
+		/// <returns>The array of strings from `str` separated by `str`.</returns>
+		/// <see cref="R.Join"/>
 		public static dynamic Split(string sep, string str) {
 			return Currying.Split(sep, str);
 		}
 
+		/// <summary>
+		/// Splits a string into an array of strings based on the givenseparator.
+		/// <para />
+		/// sig: (String | RegExp) -> String -> [String]
+		/// </summary>
+		/// <param name="sep">The pattern.</param>
+		/// <param name="str">The string to separate into an array.</param>
+		/// <returns>The array of strings from `str` separated by `str`.</returns>
+		/// <see cref="R.Join"/>
 		public static dynamic Split(RamdaPlaceholder sep, string str) {
 			return Currying.Split(sep, str);
 		}
 
+		/// <summary>
+		/// Splits a string into an array of strings based on the givenseparator.
+		/// <para />
+		/// sig: (String | RegExp) -> String -> [String]
+		/// </summary>
+		/// <param name="sep">The pattern.</param>
+		/// <param name="str">The string to separate into an array.</param>
+		/// <returns>The array of strings from `str` separated by `str`.</returns>
+		/// <see cref="R.Join"/>
 		public static dynamic Split(string sep, RamdaPlaceholder str = null) {
 			return Currying.Split(sep, str);
 		}
 
+		/// <summary>
+		/// Splits a string into an array of strings based on the givenseparator.
+		/// <para />
+		/// sig: (String | RegExp) -> String -> [String]
+		/// </summary>
+		/// <param name="sep">The pattern.</param>
+		/// <param name="str">The string to separate into an array.</param>
+		/// <returns>The array of strings from `str` separated by `str`.</returns>
+		/// <see cref="R.Join"/>
 		public static dynamic Split(RamdaPlaceholder sep = null, RamdaPlaceholder str = null) {
 			return Currying.Split(sep, str);
 		}

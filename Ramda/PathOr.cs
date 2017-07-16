@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr<TValue, TTarget>(TValue d, IList p, TTarget obj) {
 			return Currying.PathOr(d, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr<TTarget>(RamdaPlaceholder d, IList p, TTarget obj) {
 			return Currying.PathOr(d, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr<TValue, TTarget>(TValue d, RamdaPlaceholder p, TTarget obj) {
 			return Currying.PathOr(d, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr<TValue>(TValue d, IList p, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr<TValue>(TValue d, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has a value at the given path, returns thevalue at that path. Otherwise returns the provided default value.
+		/// <para />
+		/// sig: a -> [Idx] -> {a} -> a
+		/// </summary>
+		/// <param name="d">The default value.</param>
+		/// <param name="p">The path to use.</param>
+		/// <param name="obj">The object to retrieve the nested property from.</param>
+		/// <returns>The data at `path` of the supplied object or the default value.</returns>
 		public static dynamic PathOr(RamdaPlaceholder d = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PathOr(d, p, obj);
 		}

@@ -15,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Splits a given list or string at a given index.
+		/// <para />
+		/// sig: Number -> [a] -> [[a], [a]]
+		/// </summary>
+		/// <param name="index">The index where the array/string is split.</param>
+		/// <param name="array">The array/string to be split.</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitAt(int index, string array) {
 			return Currying.SplitAt(index, array);
 		}
 
+		/// <summary>
+		/// Splits a given list or string at a given index.
+		/// <para />
+		/// sig: Number -> [a] -> [[a], [a]]
+		/// </summary>
+		/// <param name="index">The index where the array/string is split.</param>
+		/// <param name="array">The array/string to be split.</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitAt(RamdaPlaceholder index, string array) {
 			return Currying.SplitAt(index, array);
 		}

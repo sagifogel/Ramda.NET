@@ -4,6 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 
+	template.CommentName = "xprod";
 	template.Generics.Add("TSource1");
 	template.Generics.Add("TSource2");
 	template.Parameters.Add(Tuple.Create("IList<TSource1>", "@as", false));	

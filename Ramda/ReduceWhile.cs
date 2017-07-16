@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,66 +15,258 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(RamdaPlaceholder pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(pred, Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, Func<TAccmulator, TSource, bool> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(RamdaPlaceholder pred, dynamic fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(pred, Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(dynamic pred, RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource>(dynamic pred, dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TAccmulator>(dynamic pred, dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile(dynamic pred, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), fn, acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile(dynamic pred, dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(dynamic pred, Func<TAccmulator, TSource, bool> fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile<TSource, TAccmulator>(Func<TAccmulator, TSource, bool> pred, dynamic fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.ReduceWhile(Delegate(pred), Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Like `reduce`, `reduceWhile` returns a single item by iterating throughthe list, successively calling the iterator function. `reduceWhile` alsotakes a predicate that is evaluated before each step. If the predicate returns`false`, it "short-circuits" the iteration and returns the current valueof the accumulator.
+		/// <para />
+		/// sig: ((a, b) -> Boolean) -> ((a, b) -> a) -> a -> [b] -> a
+		/// </summary>
+		/// <param name="pred">The predicate. It is passed the accumulator and the       current element.</param>
+		/// <param name="fn">The iterator function. Receives two values, the       accumulator and the current element.</param>
+		/// <param name="a">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Reduced"/>
 		public static dynamic ReduceWhile(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceWhile(pred, fn, acc, list);
 		}

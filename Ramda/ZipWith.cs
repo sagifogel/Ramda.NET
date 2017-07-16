@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,132 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2, TReturn>(Func<TSource1, TSource2, TReturn> fn, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2>(RamdaPlaceholder fn, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.ZipWith(fn, list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2, TReturn>(Func<TSource1, TSource2, TReturn> fn, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2, TReturn>(Func<TSource1, TSource2, TReturn> fn, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2, TReturn>(Func<TSource1, TSource2, TReturn> fn, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource2>(dynamic fn, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1>(dynamic fn, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith(dynamic fn, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith<TSource1, TSource2>(dynamic fn, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.ZipWith(Delegate(fn), list1, list2);
 		}
 
+		/// <summary>
+		/// Creates a new list out of the two supplied by applying the function to eachequally-positioned pair in the lists. The returned list is truncated to thelength of the shorter of the two input lists.
+		/// <para />
+		/// sig: (a,b -> c) -> [a] -> [b] -> [c]
+		/// </summary>
+		/// <param name="fn">The function used to combine the two elements into one value.</param>
+		/// <param name="list1">The first array to consider.</param>
+		/// <param name="list2">The second array to consider.</param>
+		/// <returns>The list made by combining same-indexed elements of `list1` and `list2` using `fn`.</returns>
 		public static dynamic ZipWith(RamdaPlaceholder fn = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.ZipWith(fn, list1, list2);
 		}

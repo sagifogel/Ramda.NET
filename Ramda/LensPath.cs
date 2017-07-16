@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,30 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a lens whose focus is the specified path.
+		/// <para />
+		/// sig: [Idx] -> Lens s a
+		/// </summary>
+		/// <param name="path">The path to use.</param>
+		/// <returns>Lens</returns>
+		/// <see cref="R.View"/>
+		/// <see cref="R.Set"/>
+		/// <see cref="R.Over"/>
 		public static dynamic LensPath(IList path) {
 			return Currying.LensPath(path);
 		}
 
+		/// <summary>
+		/// Returns a lens whose focus is the specified path.
+		/// <para />
+		/// sig: [Idx] -> Lens s a
+		/// </summary>
+		/// <param name="path">The path to use.</param>
+		/// <returns>Lens</returns>
+		/// <see cref="R.View"/>
+		/// <see cref="R.Set"/>
+		/// <see cref="R.Over"/>
 		public static dynamic LensPath(RamdaPlaceholder path = null) {
 			return Currying.LensPath(path);
 		}

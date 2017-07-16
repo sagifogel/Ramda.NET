@@ -2,22 +2,84 @@
 <#@ assembly name="$(SolutionDir)\bin\Debug\Newtonsoft.Json.dll" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="Newtonsoft.Json" #>
 <#@ import namespace="System.Diagnostics" #>
 <#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
 <#@ include file="T4Toolbox.tt" #><#+
 public class RamdaTemplate : CSharpTemplate
 {		
 	private readonly string name;
-	
-	private void DeserializeComments(string path) {
+
+	private string EmitDocumentation(string path) {
+        JSDoc item = null;
+        Tag returnTag = null;
+        var hasSeeValues = true;
+        string returnValue = null;
+        IDictionary<string, JSDoc> jsdocs = null;
+        var comments = new StringBuilder("/// <summary>\n");
+        var indexesToDescription = new Dictionary<int, string> {
+            [0] = "first",
+            [1] = "second",
+            [2] = "third",
+            [3] = "fourth",
+            [4] = "fifth",
+            [5] = "sixth",
+            [6] = "seventh",
+            [7] = "eights",
+            [8] = "nines",
+            [9] = "tens"
+        };
+
+        EnsureRamdaDocumentation(path);
+        jsdocs = DeserializeComments(path);
+        item = jsdocs[ToCamelCase(CommentName ?? name)];
+		returnTag = item.Comments.ContainsKey("return") ? item.Comments["return"] : new Tag { Type = new Type { Name = "Function" } };
+        comments.AppendFormat("\t\t/// {0}\n", NormalizeComment(item.LeadingComments.Description));
+        comments.Append("\t\t/// <para />\n");
+        comments.AppendFormat("\t\t/// sig: {0}\n", NormalizeComment(item.Comments["sig"].Description));
+        comments.Append("\t\t/// </summary>\n");
+        hasSeeValues = item.Comments.ContainsKey("see");
+
+        for (int i = 0; i < item.Params.Length; i++) {
+            var param = item.Params[i];
+            var paramDescription = param.Description;
+
+            if (string.IsNullOrEmpty(param.Description)) {
+                paramDescription = indexesToDescription[i];
+            }
+
+            comments.AppendFormat("\t\t/// <param name=\"{0}\">{1}</param>\n", param.Name, NormalizeComment(paramDescription));
+        }
+
+        returnValue = (string.IsNullOrEmpty(returnTag.Description) ? returnTag.Type.Name : returnTag.Description) ?? "*";
+        comments.AppendFormat("\t\t/// <returns>{0}</returns>{1}", NormalizeComment(returnValue), hasSeeValues ? "\n" : string.Empty);
+
+        if (hasSeeValues) {
+            var parsedSeeValues = ParseSeeValues(item.Comments["see"].Description).ToList();
+
+            parsedSeeValues.ForEach(see => {
+                comments.AppendFormat("\t\t/// <see cref=\"{0}\"/>{1}", see, parsedSeeValues.Last().Equals(see) ? string.Empty : "\n");
+            });
+        }
+
+        return comments.ToString();
+    }
+
+	private string NormalizeComment(string comment) {
+        var splitted = Regex.Split(comment, "\n").Select(s => s.Replace("        ", " ").Replace("\n", "\n\t\t/// "));
+
+        return string.Join("", splitted);
+    }
+
+	private IDictionary<string, JSDoc> DeserializeComments(string path) {
         var fileContent = File.ReadAllText($"{path}doc.js");
         var comments = JsonConvert.DeserializeObject<JSDoc[]>(fileContent);
 
         comments.ToList().ForEach(c => {
-            var dictionary = c.LeadingComments.Tags.GroupBy(t => !t.Title.Equals("param"))
-												   .ToDictionary(g => g.Key, g => g.AsEnumerable());
+            var dictionary = c.LeadingComments.Tags.GroupBy(t => !t.Title.Equals("param")).ToDictionary(g => g.Key, g => g.AsEnumerable());
 
             c.Comments = new HashSet<Tag>(dictionary[true]).ToDictionary(t => t.Title);
 
@@ -25,17 +87,39 @@ public class RamdaTemplate : CSharpTemplate
                 c.Params = dictionary[false].ToArray();
             }
         });
+
+        return comments.ToDictionary(jsDoc => jsDoc.Name);
+    }
+
+    private string ToCamelCase(string value) {
+        return value.Substring(0, 1).ToLower() + value.Substring(1);
+    }
+
+    private IEnumerable<string> ParseSeeValues(string see) {
+        return SplitSeeValues(see).Select(s => {
+            var innerSplitted = Regex.Split(s, "R.");
+
+            return $"R.{ToPascalCase(innerSplitted[1])}";
+        });
+    }
+
+    private IEnumerable<string> SplitSeeValues(string see) {
+        return see.Split(new[] { ',' }).Select(s => s.Trim()).ToArray();
+    }
+
+    private string ToPascalCase(string value) {
+        return value.Substring(0, 1).ToUpper() + value.Substring(1);
     }
 
 	private void EnsureRamdaDocumentation(string path) {
         var docFilePath = $"{path}doc.js";
 
         if (!File.Exists(docFilePath)) {
-            WriteDocFile(path);
+            WriteDocumentationFile(path);
         }
     }
 
-	private void WriteDocFile(string path) {
+	private void WriteDocumentationFile(string path) {
         var startInfo = new ProcessStartInfo(fileName: "doc.cmd") {
             WorkingDirectory = path
         };
@@ -63,6 +147,7 @@ public class RamdaTemplate : CSharpTemplate
 
     public class Tag : IEquatable<Tag>
     {
+        public Type Type { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -84,6 +169,11 @@ public class RamdaTemplate : CSharpTemplate
         }
     }
 
+	public class Type
+    {
+        public string Name { get; set; }
+    }
+
 	public RamdaTemplate() {
 		Generics = new List<string>();
 		Emitted = new HashSet<string>();
@@ -91,6 +181,10 @@ public class RamdaTemplate : CSharpTemplate
 		Parameters = new List<Tuple<string, string, bool>>();
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
+
+	public string CommentName { get; set; }
+	
+	private string Documentation { get; set; }
 
 	public List<string> Generics { get; set; }
 	
@@ -279,6 +373,7 @@ public class RamdaTemplate : CSharpTemplate
 			if (addNewLine) {
 				WriteLine("");
 			}#>
+		<#= Documentation #>
 		public static dynamic <#= name #><#= generics #>(<#= parameters #>) {
 			return Currying.<#= name #>(<#= arguments #>);
 		}
@@ -313,7 +408,7 @@ namespace Ramda.NET
 		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
 		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
 
-		EnsureRamdaDocumentation(path);
+		Documentation = EmitDocumentation(path);
 		Emit(name, generics, Join(Parameters), ToArguments(Parameters), false);
 		Emit(Parameters.ToList(), name);
 		

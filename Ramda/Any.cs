@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,92 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.Any(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.Any(fn, list);
 		}
 
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.Any(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.Any(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any<TSource>(dynamic fn, IList<TSource> list) {
 			return Currying.Any(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns `true` if at least one of elements of the list match the predicate,`false` otherwise.Dispatches to the `any` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> Boolean
+		/// </summary>
+		/// <param name="fn">The predicate function.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if the predicate is satisfied by at least one element, `false` otherwise.</returns>
+		/// <see cref="R.All"/>
+		/// <see cref="R.None"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Any(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.Any(fn, list);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,152 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(Func<TArg, TArg> f, TArg a, TArg b) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(RamdaPlaceholder f, TArg a, TArg b) {
 			return Currying.MaxBy(f, a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a, TArg b) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(Func<TArg, TArg> f, TArg a, RamdaPlaceholder b = null) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(dynamic f, RamdaPlaceholder a, TArg b) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(dynamic f, TArg a, RamdaPlaceholder b = null) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy(dynamic f, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy<TArg>(dynamic f, TArg a, TArg b) {
 			return Currying.MaxBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thelarger result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Max"/>
+		/// <see cref="R.MinBy"/>
 		public static dynamic MaxBy(RamdaPlaceholder f = null, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MaxBy(f, a, b);
 		}

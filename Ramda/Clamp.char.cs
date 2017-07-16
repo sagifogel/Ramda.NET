@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,22 +15,67 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Restricts a number to be within a range.Also works for other ordered types such as Strings and Dates.
+		/// <para />
+		/// sig: Ord a => a -> a -> a -> a
+		/// </summary>
+		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
+		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
+		/// <param name="value">Value to be clamped</param>
+		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(char minimum, char maximum, char value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
 
+		/// <summary>
+		/// Restricts a number to be within a range.Also works for other ordered types such as Strings and Dates.
+		/// <para />
+		/// sig: Ord a => a -> a -> a -> a
+		/// </summary>
+		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
+		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
+		/// <param name="value">Value to be clamped</param>
+		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(RamdaPlaceholder minimum, char maximum, char value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
 
+		/// <summary>
+		/// Restricts a number to be within a range.Also works for other ordered types such as Strings and Dates.
+		/// <para />
+		/// sig: Ord a => a -> a -> a -> a
+		/// </summary>
+		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
+		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
+		/// <param name="value">Value to be clamped</param>
+		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(char minimum, RamdaPlaceholder maximum, char value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
 
+		/// <summary>
+		/// Restricts a number to be within a range.Also works for other ordered types such as Strings and Dates.
+		/// <para />
+		/// sig: Ord a => a -> a -> a -> a
+		/// </summary>
+		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
+		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
+		/// <param name="value">Value to be clamped</param>
+		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(char minimum, char maximum, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
 
+		/// <summary>
+		/// Restricts a number to be within a range.Also works for other ordered types such as Strings and Dates.
+		/// <para />
+		/// sig: Ord a => a -> a -> a -> a
+		/// </summary>
+		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
+		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
+		/// <param name="value">Value to be clamped</param>
+		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(char minimum, RamdaPlaceholder maximum = null, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}

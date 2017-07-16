@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Converts an object into an array of key, value arrays. Only the object'sown properties are used.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+		/// <para />
+		/// sig: {String: *} -> [[String,*]]
+		/// </summary>
+		/// <param name="obj">The object to extract from</param>
+		/// <returns>An array of key, value arrays from the object's own properties.</returns>
+		/// <see cref="R.FromPairs"/>
 		public static dynamic ToPairs<TTarget>(TTarget obj) {
 			return Currying.ToPairs(obj);
 		}
 
+		/// <summary>
+		/// Converts an object into an array of key, value arrays. Only the object'sown properties are used.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+		/// <para />
+		/// sig: {String: *} -> [[String,*]]
+		/// </summary>
+		/// <param name="obj">The object to extract from</param>
+		/// <returns>An array of key, value arrays from the object's own properties.</returns>
+		/// <see cref="R.FromPairs"/>
 		public static dynamic ToPairs(RamdaPlaceholder obj = null) {
 			return Currying.ToPairs(obj);
 		}

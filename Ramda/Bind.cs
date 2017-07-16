@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind<TTarget>(Delegate fn, TTarget thisObject) {
 			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind<TTarget>(RamdaPlaceholder fn, TTarget thisObject) {
 			return Currying.Bind(fn, thisObject);
 		}
 
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind(Delegate fn, RamdaPlaceholder thisObject = null) {
 			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind(dynamic fn, RamdaPlaceholder thisObject = null) {
 			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind<TTarget>(dynamic fn, TTarget thisObject) {
 			return Currying.Bind(Delegate(fn), thisObject);
 		}
 
+		/// <summary>
+		/// Creates a function that is bound to a context.Note: `R.bind` does not provide the additional argument-binding capabilities of[Function.prototype.bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind).
+		/// <para />
+		/// sig: (* -> *) -> {*} -> (* -> *)
+		/// </summary>
+		/// <param name="fn">The function to bind to context</param>
+		/// <param name="thisObj">The context to bind `fn` to</param>
+		/// <returns>A function that will execute in the context of `thisObj`.</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Bind(RamdaPlaceholder fn = null, RamdaPlaceholder thisObject = null) {
 			return Currying.Bind(fn, thisObject);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, TTarget obj) {
 			return Currying.PickBy(Delegate(pred), obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy<TTarget>(RamdaPlaceholder pred, TTarget obj) {
 			return Currying.PickBy(pred, obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy<TTarget>(Func<object, string, TTarget, bool> pred, RamdaPlaceholder obj = null) {
 			return Currying.PickBy(Delegate(pred), obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy(dynamic pred, RamdaPlaceholder obj = null) {
 			return Currying.PickBy(Delegate(pred), obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy<TTarget>(dynamic pred, TTarget obj) {
 			return Currying.PickBy(Delegate(pred), obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys that satisfythe supplied predicate.
+		/// <para />
+		/// sig: (v, k -> Boolean) -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="pred">A predicate to determine whether or not a key       should be included on the output object.</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties that satisfy `pred` on it.</returns>
+		/// <see cref="R.Pick"/>
+		/// <see cref="R.Filter"/>
 		public static dynamic PickBy(RamdaPlaceholder pred = null, RamdaPlaceholder obj = null) {
 			return Currying.PickBy(pred, obj);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition<TTarget, TArg>(Func<TArg, bool> pred, TTarget filterable) {
 			return Currying.Partition(Delegate(pred), filterable);
 		}
 
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition<TTarget>(RamdaPlaceholder pred, TTarget filterable) {
 			return Currying.Partition(pred, filterable);
 		}
 
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition<TArg>(Func<TArg, bool> pred, RamdaPlaceholder filterable = null) {
 			return Currying.Partition(Delegate(pred), filterable);
 		}
 
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition(dynamic pred, RamdaPlaceholder filterable = null) {
 			return Currying.Partition(Delegate(pred), filterable);
 		}
 
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition<TTarget>(dynamic pred, TTarget filterable) {
 			return Currying.Partition(Delegate(pred), filterable);
 		}
 
+		/// <summary>
+		/// Takes a predicate and a list or other "filterable" object and returns thepair of filterable objects of the same type of elements which do and do notsatisfy, the predicate, respectively.
+		/// <para />
+		/// sig: Filterable f => (a -> Boolean) -> f a -> [f a, f a]
+		/// </summary>
+		/// <param name="pred">A predicate to determine which side the element belongs to.</param>
+		/// <param name="filterable">the list (or other filterable) to partition.</param>
+		/// <returns>An array, containing first the subset of elements that satisfy the predicate, and second the subset of elements that do not satisfy.</returns>
+		/// <see cref="R.Filter"/>
+		/// <see cref="R.Reject"/>
 		public static dynamic Partition(RamdaPlaceholder pred = null, RamdaPlaceholder filterable = null) {
 			return Currying.Partition(pred, filterable);
 		}

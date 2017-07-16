@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(Regex pattern, string replacement, string str) {
 			return Currying.Replace(pattern, replacement, str);
 		}
 
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(RamdaPlaceholder pattern, string replacement, string str) {
 			return Currying.Replace(pattern, replacement, str);
 		}
 
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(Regex pattern, RamdaPlaceholder replacement, string str) {
 			return Currying.Replace(pattern, replacement, str);
 		}
 
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(Regex pattern, string replacement, RamdaPlaceholder str = null) {
 			return Currying.Replace(pattern, replacement, str);
 		}
 
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(Regex pattern, RamdaPlaceholder replacement = null, RamdaPlaceholder str = null) {
 			return Currying.Replace(pattern, replacement, str);
 		}
 
+		/// <summary>
+		/// Replace a substring or regex match in a string with a replacement.
+		/// <para />
+		/// sig: RegExp|String -> String -> String -> String
+		/// </summary>
+		/// <param name="pattern">A regular expression or a substring to match.</param>
+		/// <param name="replacement">The string to replace the matches with.</param>
+		/// <param name="str">The String to do the search and replacement in.</param>
+		/// <returns>The result.</returns>
 		public static dynamic Replace(RamdaPlaceholder pattern = null, RamdaPlaceholder replacement = null, RamdaPlaceholder str = null) {
 			return Currying.Replace(pattern, replacement, str);
 		}

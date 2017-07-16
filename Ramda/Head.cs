@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,30 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the first element of the given list or string. In some librariesthis function is named `first`.
+		/// <para />
+		/// sig: [a] -> a | Undefined
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Tail"/>
+		/// <see cref="R.Init"/>
+		/// <see cref="R.Last"/>
 		public static dynamic Head<TSource>(IList<TSource> list) {
 			return Currying.Head(list);
 		}
 
+		/// <summary>
+		/// Returns the first element of the given list or string. In some librariesthis function is named `first`.
+		/// <para />
+		/// sig: [a] -> a | Undefined
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Tail"/>
+		/// <see cref="R.Init"/>
+		/// <see cref="R.Last"/>
 		public static dynamic Head(RamdaPlaceholder list = null) {
 			return Currying.Head(list);
 		}

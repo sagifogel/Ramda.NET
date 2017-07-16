@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,142 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(RamdaPlaceholder pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.UnionWith(pred, list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource2>(dynamic pred, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1>(dynamic pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith<TSource1, TSource2>(dynamic pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.UnionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list. Duplication is determined according to the value returned byapplying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: (a -> a -> Boolean) -> [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
+		/// <see cref="R.Union"/>
 		public static dynamic UnionWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.UnionWith(pred, list1, list2);
 		}

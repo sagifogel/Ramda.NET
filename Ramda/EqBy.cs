@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,132 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, TArg x, TArg y) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(RamdaPlaceholder f, TArg x, TArg y) {
 			return Currying.EqBy(f, x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder x, TArg y) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, TArg x, RamdaPlaceholder y = null) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(dynamic f, RamdaPlaceholder x, TArg y) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(dynamic f, TArg x, RamdaPlaceholder y = null) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy(dynamic f, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy<TArg>(dynamic f, TArg x, TArg y) {
 			return Currying.EqBy(Delegate(f), x, y);
 		}
 
+		/// <summary>
+		/// Takes a function and two values in its domain and returns `true` if thevalues map to the same value in the codomain; `false` otherwise.
+		/// <para />
+		/// sig: (a -> b) -> a -> a -> Boolean
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="x">second</param>
+		/// <param name="y">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqBy(RamdaPlaceholder f = null, RamdaPlaceholder x = null, RamdaPlaceholder y = null) {
 			return Currying.EqBy(f, x, y);
 		}

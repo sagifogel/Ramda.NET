@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Multiplies together all the elements of a list.
+		/// <para />
+		/// sig: [Number] -> Number
+		/// </summary>
+		/// <param name="list">An array of numbers</param>
+		/// <returns>The product of all the numbers in the list.</returns>
+		/// <see cref="R.Reduce"/>
 		public static dynamic Product(IList<double> list) {
 			return Currying.Product(list);
 		}
 
+		/// <summary>
+		/// Multiplies together all the elements of a list.
+		/// <para />
+		/// sig: [Number] -> Number
+		/// </summary>
+		/// <param name="list">An array of numbers</param>
+		/// <returns>The product of all the numbers in the list.</returns>
+		/// <see cref="R.Reduce"/>
 		public static dynamic Product(RamdaPlaceholder list = null) {
 			return Currying.Product(list);
 		}

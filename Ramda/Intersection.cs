@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The list of elements found in both `list1` and `list2`.</returns>
+		/// <see cref="R.IntersectionWith"/>
 		public static dynamic Intersection<TSource>(IList<TSource> list1, IList<TSource> list2) {
 			return Currying.Intersection(list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The list of elements found in both `list1` and `list2`.</returns>
+		/// <see cref="R.IntersectionWith"/>
 		public static dynamic Intersection<TSource>(RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.Intersection(list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The list of elements found in both `list1` and `list2`.</returns>
+		/// <see cref="R.IntersectionWith"/>
 		public static dynamic Intersection<TSource>(IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.Intersection(list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The list of elements found in both `list1` and `list2`.</returns>
+		/// <see cref="R.IntersectionWith"/>
 		public static dynamic Intersection(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.Intersection(list1, list2);
 		}

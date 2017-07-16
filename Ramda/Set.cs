@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,98 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set<TSource, TTarget>(dynamic lens, TSource v, TTarget x) {
 			return Currying.Set(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set<TSource, TTarget>(RamdaPlaceholder lens, TSource v, TTarget x) {
 			return Currying.Set(lens, v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set<TTarget>(dynamic lens, RamdaPlaceholder v, TTarget x) {
 			return Currying.Set(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set<TSource>(dynamic lens, TSource v, RamdaPlaceholder x = null) {
 			return Currying.Set(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set(dynamic lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Set(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the given value.
+		/// <para />
+		/// sig: Lens s a -> a -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Set(RamdaPlaceholder lens = null, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Set(lens, v, x);
 		}

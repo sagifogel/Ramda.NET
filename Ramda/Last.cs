@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,30 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the last element of the given list or string.
+		/// <para />
+		/// sig: [a] -> a | Undefined
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Init"/>
+		/// <see cref="R.Head"/>
+		/// <see cref="R.Tail"/>
 		public static dynamic Last<TSource>(IList<TSource> list) {
 			return Currying.Last(list);
 		}
 
+		/// <summary>
+		/// Returns the last element of the given list or string.
+		/// <para />
+		/// sig: [a] -> a | Undefined
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Init"/>
+		/// <see cref="R.Head"/>
+		/// <see cref="R.Tail"/>
 		public static dynamic Last(RamdaPlaceholder list = null) {
 			return Currying.Last(list);
 		}

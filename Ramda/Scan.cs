@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,132 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.Scan(fn, acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator, TResult>(Func<TAccmulator, TSource, TResult> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource>(dynamic fn, RamdaPlaceholder acc, IEnumerable<TSource> list) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan<TSource, TAccmulator>(dynamic fn, TAccmulator acc, IEnumerable<TSource> list) {
 			return Currying.Scan(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// Scan is similar to reduce, but returns a list of successively reduced valuesfrom the left
+		/// <para />
+		/// sig: (a,b -> a) -> a -> [b] -> [a]
+		/// </summary>
+		/// <param name="fn">The iterator function. Receives two values, the accumulator and the       current element from the array</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>A list of all intermediately reduced values.</returns>
 		public static dynamic Scan(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.Scan(fn, acc, list);
 		}

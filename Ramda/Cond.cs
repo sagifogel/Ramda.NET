@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a function, `fn`, which encapsulates `if/else, if/else, ...` logic.`R.cond` takes a list of [predicate, transformer] pairs. All of the argumentsto `fn` are applied to each of the predicates in turn until one returns a"truthy" value, at which point `fn` returns the result of applying itsarguments to the corresponding transformer. If none of the predicatesmatches, `fn` returns undefined.
+		/// <para />
+		/// sig: [[(*... -> Boolean),(*... -> *)]] -> (*... -> *)
+		/// </summary>
+		/// <param name="pairs">A list of [predicate, transformer]</param>
+		/// <returns>Function</returns>
 		public static dynamic Cond(Delegate[][] pairs) {
 			return Currying.Cond(pairs);
 		}
 
+		/// <summary>
+		/// Returns a function, `fn`, which encapsulates `if/else, if/else, ...` logic.`R.cond` takes a list of [predicate, transformer] pairs. All of the argumentsto `fn` are applied to each of the predicates in turn until one returns a"truthy" value, at which point `fn` returns the result of applying itsarguments to the corresponding transformer. If none of the predicatesmatches, `fn` returns undefined.
+		/// <para />
+		/// sig: [[(*... -> Boolean),(*... -> *)]] -> (*... -> *)
+		/// </summary>
+		/// <param name="pairs">A list of [predicate, transformer]</param>
+		/// <returns>Function</returns>
 		public static dynamic Cond(RamdaPlaceholder pairs = null) {
 			return Currying.Cond(pairs);
 		}

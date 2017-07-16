@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new object with the keys of the given object as values, and thevalues of the given object, which are coerced to strings, as keys. Notethat the last key found is preferred when handling the same value.
+		/// <para />
+		/// sig: {s: x} -> {x: s}
+		/// </summary>
+		/// <param name="obj">The object or array to invert</param>
+		/// <returns>out A new object</returns>
 		public static dynamic InvertObj<TTarget>(TTarget obj) {
 			return Currying.InvertObj(obj);
 		}
 
+		/// <summary>
+		/// Returns a new object with the keys of the given object as values, and thevalues of the given object, which are coerced to strings, as keys. Notethat the last key found is preferred when handling the same value.
+		/// <para />
+		/// sig: {s: x} -> {x: s}
+		/// </summary>
+		/// <param name="obj">The object or array to invert</param>
+		/// <returns>out A new object</returns>
 		public static dynamic InvertObj(RamdaPlaceholder obj = null) {
 			return Currying.InvertObj(obj);
 		}

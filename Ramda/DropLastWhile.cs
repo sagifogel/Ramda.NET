@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,98 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile<TSource>(Func<TSource, bool> fn, IList<TSource> list) {
 			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.DropLastWhile(fn, list);
 		}
 
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile<TSource>(Func<TSource, bool> fn, RamdaPlaceholder list = null) {
 			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile<TSource>(dynamic fn, IList<TSource> list) {
 			return Currying.DropLastWhile(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Returns a new list excluding all the tailing elements of a given list whichsatisfy the supplied predicate function. It passes each value from the rightto the supplied predicate function, skipping elements until the predicatefunction returns a `falsy` value. The predicate function is applied to one argument:*(value)*.
+		/// <para />
+		/// sig: (a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="predicate">The function to be called on each element</param>
+		/// <param name="list">The collection to iterate over.</param>
+		/// <returns>A new array without any trailing elements that return `falsy` values from the `predicate`.</returns>
+		/// <see cref="R.TakeLastWhile"/>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic DropLastWhile(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.DropLastWhile(fn, list);
 		}

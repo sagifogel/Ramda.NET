@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new function much like the supplied one, except that the first twoarguments' order is reversed.
+		/// <para />
+		/// sig: (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to invoke with its first two parameters reversed.</param>
+		/// <returns>The result of invoking `fn` with its first two parameters' order reversed.</returns>
 		public static dynamic Flip(Delegate fn) {
 			return Currying.Flip(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Returns a new function much like the supplied one, except that the first twoarguments' order is reversed.
+		/// <para />
+		/// sig: (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to invoke with its first two parameters reversed.</param>
+		/// <returns>The result of invoking `fn` with its first two parameters' order reversed.</returns>
 		public static dynamic Flip(RamdaPlaceholder fn = null) {
 			return Currying.Flip(fn);
 		}
 
+		/// <summary>
+		/// Returns a new function much like the supplied one, except that the first twoarguments' order is reversed.
+		/// <para />
+		/// sig: (a -> b -> c -> ... -> z) -> (b -> a -> c -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to invoke with its first two parameters reversed.</param>
+		/// <returns>The result of invoking `fn` with its first two parameters' order reversed.</returns>
 		public static dynamic Flip(dynamic fn) {
 			return Currying.Flip(Delegate(fn));
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial<TSource, TReturn>(Func<TSource, TReturn> f, IList<TSource> args) {
 			return Currying.Partial(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial<TSource>(RamdaPlaceholder f, IList<TSource> args) {
 			return Currying.Partial(f, args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial<TSource, TReturn>(Func<TSource, TReturn> f, RamdaPlaceholder args = null) {
 			return Currying.Partial(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial(dynamic f, RamdaPlaceholder args = null) {
 			return Currying.Partial(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial<TSource>(dynamic f, IList<TSource> args) {
 			return Currying.Partial(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided initially followed by the arguments provided to `g`.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [a, b, c, ...] -> ((d, e, f, ..., n) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic Partial(RamdaPlaceholder f = null, RamdaPlaceholder args = null) {
 			return Currying.Partial(f, args);
 		}

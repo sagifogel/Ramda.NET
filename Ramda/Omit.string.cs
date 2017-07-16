@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a partial copy of an object omitting the keys specified.
+		/// <para />
+		/// sig: [String] -> {String: *} -> {String: *}
+		/// </summary>
+		/// <param name="names">an array of String property names to omit from the new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with properties from `names` not on it.</returns>
+		/// <see cref="R.Pick"/>
 		public static dynamic Omit<TTarget>(string names, TTarget obj) {
 			return Currying.Omit(names, obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object omitting the keys specified.
+		/// <para />
+		/// sig: [String] -> {String: *} -> {String: *}
+		/// </summary>
+		/// <param name="names">an array of String property names to omit from the new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with properties from `names` not on it.</returns>
+		/// <see cref="R.Pick"/>
 		public static dynamic Omit(string names, RamdaPlaceholder obj = null) {
 			return Currying.Omit(names, obj);
 		}

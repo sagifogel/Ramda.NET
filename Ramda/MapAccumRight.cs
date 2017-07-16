@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,152 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TArg, TSource, TAccmulator>(Func<TArg, TArg, Tuple<object, object>> fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccumRight(fn, acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TArg, TSource>(Func<TArg, TArg, Tuple<object, object>> fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TArg, TAccmulator>(Func<TArg, TArg, Tuple<object, object>> fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TArg>(Func<TArg, TArg, Tuple<object, object>> fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TSource>(dynamic fn, RamdaPlaceholder acc, IList<TSource> list) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight<TSource, TAccmulator>(dynamic fn, TAccmulator acc, IList<TSource> list) {
 			return Currying.MapAccumRight(Delegate(fn), acc, list);
 		}
 
+		/// <summary>
+		/// The mapAccumRight function behaves like a combination of map and reduce; itapplies a function to each element of a list, passing an accumulatingparameter from right to left, and returning a final value of thisaccumulator together with the new list.Similar to `mapAccum`, except moves through the input list from the right tothe left.The iterator function receives two arguments, *value* and *acc*, and shouldreturn a tuple *[value, acc]*.
+		/// <para />
+		/// sig: (x-> acc -> (y, acc)) -> acc -> [x] -> ([y], acc)
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="acc">The accumulator value.</param>
+		/// <param name="list">The list to iterate over.</param>
+		/// <returns>The final, accumulated value.</returns>
+		/// <see cref="R.AddIndex"/>
+		/// <see cref="R.MapAccum"/>
 		public static dynamic MapAccumRight(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder list = null) {
 			return Currying.MapAccumRight(fn, acc, list);
 		}

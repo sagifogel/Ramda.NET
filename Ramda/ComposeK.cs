@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,22 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the right-to-left Kleisli composition of the provided functions,each of which must return a value of a type supported by [`chain`](#chain).`R.composeK(h, g, f)` is equivalent to `R.compose(R.chain(h), R.chain(g), R.chain(f))`.
+		/// <para />
+		/// sig: Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (a -> m z)
+		/// </summary>
+		/// <returns>Function</returns>
 		public static dynamic ComposeK(params Delegate[] functions) {
 			return Currying.ComposeK(functions);
 		}
 
+		/// <summary>
+		/// Returns the right-to-left Kleisli composition of the provided functions,each of which must return a value of a type supported by [`chain`](#chain).`R.composeK(h, g, f)` is equivalent to `R.compose(R.chain(h), R.chain(g), R.chain(f))`.
+		/// <para />
+		/// sig: Chain m => ((y -> m z), (x -> m y), ..., (a -> m b)) -> (a -> m z)
+		/// </summary>
+		/// <returns>Function</returns>
 		public static dynamic ComposeK(RamdaPlaceholder functions = null) {
 			return Currying.ComposeK(functions);
 		}

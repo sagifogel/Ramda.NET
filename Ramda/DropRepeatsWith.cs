@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list) {
 			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
 			return Currying.DropRepeatsWith(pred, list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list = null) {
 			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith(dynamic pred, RamdaPlaceholder list = null) {
 			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith<TSource>(dynamic pred, IList<TSource> list) {
 			return Currying.DropRepeatsWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. Equality isdetermined by applying the supplied predicate to each pair of consecutive elements. Thefirst element in a series of equal elements will be preserved.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeatsWith(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.DropRepeatsWith(pred, list);
 		}

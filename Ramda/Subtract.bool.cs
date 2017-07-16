@@ -15,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Subtracts its second argument from its first argument.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a - b`.</returns>
+		/// <see cref="R.Add"/>
 		public static dynamic Subtract(bool a, bool b) {
 			return Currying.Subtract(a, b);
 		}
 
+		/// <summary>
+		/// Subtracts its second argument from its first argument.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a - b`.</returns>
+		/// <see cref="R.Add"/>
 		public static dynamic Subtract(RamdaPlaceholder a, bool b) {
 			return Currying.Subtract(a, b);
 		}
 
+		/// <summary>
+		/// Subtracts its second argument from its first argument.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a - b`.</returns>
+		/// <see cref="R.Add"/>
 		public static dynamic Subtract(bool a, RamdaPlaceholder b = null) {
 			return Currying.Subtract(a, b);
 		}

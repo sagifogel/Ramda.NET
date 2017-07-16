@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Transforms a [Traversable](https://github.com/fantasyland/fantasy-land#traversable)of [Applicative](https://github.com/fantasyland/fantasy-land#applicative) into anApplicative of Traversable.Dispatches to the `sequence` method of the second argument, if present.
+		/// <para />
+		/// sig: (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
+		/// </summary>
+		/// <param name="of">first</param>
+		/// <param name="traversable">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Traverse"/>
 		public static dynamic Sequence<TTraversable>(Delegate of, TTraversable traversable) {
 			return Currying.Sequence(Delegate(of), traversable);
 		}
 
+		/// <summary>
+		/// Transforms a [Traversable](https://github.com/fantasyland/fantasy-land#traversable)of [Applicative](https://github.com/fantasyland/fantasy-land#applicative) into anApplicative of Traversable.Dispatches to the `sequence` method of the second argument, if present.
+		/// <para />
+		/// sig: (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
+		/// </summary>
+		/// <param name="of">first</param>
+		/// <param name="traversable">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Traverse"/>
 		public static dynamic Sequence<TTraversable>(RamdaPlaceholder of, TTraversable traversable) {
 			return Currying.Sequence(of, traversable);
 		}
 
+		/// <summary>
+		/// Transforms a [Traversable](https://github.com/fantasyland/fantasy-land#traversable)of [Applicative](https://github.com/fantasyland/fantasy-land#applicative) into anApplicative of Traversable.Dispatches to the `sequence` method of the second argument, if present.
+		/// <para />
+		/// sig: (Applicative f, Traversable t) => (a -> f a) -> t (f a) -> f (t a)
+		/// </summary>
+		/// <param name="of">first</param>
+		/// <param name="traversable">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Traverse"/>
 		public static dynamic Sequence<TTraversable>(dynamic of, TTraversable traversable) {
 			return Currying.Sequence(Delegate(of), traversable);
 		}

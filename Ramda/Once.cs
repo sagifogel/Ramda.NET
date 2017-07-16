@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Accepts a function `fn` and returns a function that guards invocation of`fn` such that `fn` can only ever be called once, no matter how many timesthe returned function is invoked. The first value calculated is returned insubsequent invocations.
+		/// <para />
+		/// sig: (a... -> b) -> (a... -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap in a call-only-once wrapper.</param>
+		/// <returns>The wrapped function.</returns>
 		public static dynamic Once<TDelegate>(TDelegate fn) {
 			return Currying.Once(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and returns a function that guards invocation of`fn` such that `fn` can only ever be called once, no matter how many timesthe returned function is invoked. The first value calculated is returned insubsequent invocations.
+		/// <para />
+		/// sig: (a... -> b) -> (a... -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap in a call-only-once wrapper.</param>
+		/// <returns>The wrapped function.</returns>
 		public static dynamic Once(RamdaPlaceholder fn = null) {
 			return Currying.Once(fn);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and returns a function that guards invocation of`fn` such that `fn` can only ever be called once, no matter how many timesthe returned function is invoked. The first value calculated is returned insubsequent invocations.
+		/// <para />
+		/// sig: (a... -> b) -> (a... -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap in a call-only-once wrapper.</param>
+		/// <returns>The wrapped function.</returns>
 		public static dynamic Once(dynamic fn) {
 			return Currying.Once(Delegate(fn));
 		}

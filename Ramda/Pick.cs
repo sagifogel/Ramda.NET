@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,58 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys specified. Ifthe key does not exist, the property is ignored.
+		/// <para />
+		/// sig: [k] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="names">an array of String property names to copy onto a new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties from `names` on it.</returns>
+		/// <see cref="R.Omit"/>
+		/// <see cref="R.Props"/>
 		public static dynamic Pick<TTarget>(IList names, TTarget obj) {
 			return Currying.Pick(names, obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys specified. Ifthe key does not exist, the property is ignored.
+		/// <para />
+		/// sig: [k] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="names">an array of String property names to copy onto a new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties from `names` on it.</returns>
+		/// <see cref="R.Omit"/>
+		/// <see cref="R.Props"/>
 		public static dynamic Pick<TTarget>(RamdaPlaceholder names, TTarget obj) {
 			return Currying.Pick(names, obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys specified. Ifthe key does not exist, the property is ignored.
+		/// <para />
+		/// sig: [k] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="names">an array of String property names to copy onto a new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties from `names` on it.</returns>
+		/// <see cref="R.Omit"/>
+		/// <see cref="R.Props"/>
 		public static dynamic Pick(IList names, RamdaPlaceholder obj = null) {
 			return Currying.Pick(names, obj);
 		}
 
+		/// <summary>
+		/// Returns a partial copy of an object containing only the keys specified. Ifthe key does not exist, the property is ignored.
+		/// <para />
+		/// sig: [k] -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="names">an array of String property names to copy onto a new object</param>
+		/// <param name="obj">The object to copy from</param>
+		/// <returns>A new object with only properties from `names` on it.</returns>
+		/// <see cref="R.Omit"/>
+		/// <see cref="R.Props"/>
 		public static dynamic Pick(RamdaPlaceholder names = null, RamdaPlaceholder obj = null) {
 			return Currying.Pick(names, obj);
 		}

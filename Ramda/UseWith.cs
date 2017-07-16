@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith<TSource>(Delegate fn, IList<TSource> transformers) {
 			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith<TSource>(RamdaPlaceholder fn, IList<TSource> transformers) {
 			return Currying.UseWith(fn, transformers);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith(Delegate fn, RamdaPlaceholder transformers = null) {
 			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith(dynamic fn, RamdaPlaceholder transformers = null) {
 			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith<TSource>(dynamic fn, IList<TSource> transformers) {
 			return Currying.UseWith(Delegate(fn), transformers);
 		}
 
+		/// <summary>
+		/// Accepts a function `fn` and a list of transformer functions and returns anew curried function. When the new function is invoked, it calls thefunction `fn` with parameters consisting of the result of calling eachsupplied handler on successive arguments to the new function.If more arguments are passed to the returned function than transformerfunctions, those arguments are passed directly to `fn` as additionalparameters. If you expect additional arguments that don't need to betransformed, although you can ignore them, it's best to pass an identityfunction so that the new function reports the correct arity.
+		/// <para />
+		/// sig: (x1 -> x2 -> ... -> z) -> [(a -> x1), (b -> x2), ...] -> (a -> b -> ... -> z)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <param name="transformers">A list of transformer functions</param>
+		/// <returns>The wrapped function.</returns>
+		/// <see cref="R.Converge"/>
 		public static dynamic UseWith(RamdaPlaceholder fn = null, RamdaPlaceholder transformers = null) {
 			return Currying.UseWith(fn, transformers);
 		}

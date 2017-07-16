@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// A function that does nothing but return the parameter supplied to it. Goodas a default or placeholder function.
+		/// <para />
+		/// sig: a -> a
+		/// </summary>
+		/// <param name="x">The value to return.</param>
+		/// <returns>The input value, `x`.</returns>
 		public static dynamic Identity<TTarget>(TTarget x) {
 			return Currying.Identity(x);
 		}
 
+		/// <summary>
+		/// A function that does nothing but return the parameter supplied to it. Goodas a default or placeholder function.
+		/// <para />
+		/// sig: a -> a
+		/// </summary>
+		/// <param name="x">The value to return.</param>
+		/// <returns>The input value, `x`.</returns>
 		public static dynamic Identity(RamdaPlaceholder x = null) {
 			return Currying.Identity(x);
 		}

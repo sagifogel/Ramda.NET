@@ -15,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Wraps a function of any arity (including nullary) in a function that acceptsexactly 1 parameter. Any extraneous parameters will not be passed to thesupplied function.
+		/// <para />
+		/// sig: (* -> b) -> (a -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <returns>A new function wrapping `fn`. The new function is guaranteed to be of arity 1.</returns>
 		public static dynamic Unary(Delegate fn) {
 			return Currying.Unary(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Wraps a function of any arity (including nullary) in a function that acceptsexactly 1 parameter. Any extraneous parameters will not be passed to thesupplied function.
+		/// <para />
+		/// sig: (* -> b) -> (a -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <returns>A new function wrapping `fn`. The new function is guaranteed to be of arity 1.</returns>
 		public static dynamic Unary(RamdaPlaceholder fn = null) {
 			return Currying.Unary(fn);
 		}
 
+		/// <summary>
+		/// Wraps a function of any arity (including nullary) in a function that acceptsexactly 1 parameter. Any extraneous parameters will not be passed to thesupplied function.
+		/// <para />
+		/// sig: (* -> b) -> (a -> b)
+		/// </summary>
+		/// <param name="fn">The function to wrap.</param>
+		/// <returns>A new function wrapping `fn`. The new function is guaranteed to be of arity 1.</returns>
 		public static dynamic Unary(dynamic fn) {
 			return Currying.Unary(Delegate(fn));
 		}

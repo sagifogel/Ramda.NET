@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if the specified value is equal, in `R.equals` terms, to atleast one element of the given list; `false` otherwise.
+		/// <para />
+		/// sig: a -> [a] -> Boolean
+		/// </summary>
+		/// <param name="a">The item to compare against.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if an equivalent item is in the list, `false` otherwise.</returns>
+		/// <see cref="R.Any"/>
 		public static dynamic Contains<TSource>(TSource a, IList<TSource> list) {
 			return Currying.Contains(a, list);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified value is equal, in `R.equals` terms, to atleast one element of the given list; `false` otherwise.
+		/// <para />
+		/// sig: a -> [a] -> Boolean
+		/// </summary>
+		/// <param name="a">The item to compare against.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if an equivalent item is in the list, `false` otherwise.</returns>
+		/// <see cref="R.Any"/>
 		public static dynamic Contains<TSource>(RamdaPlaceholder a, IList<TSource> list) {
 			return Currying.Contains(a, list);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified value is equal, in `R.equals` terms, to atleast one element of the given list; `false` otherwise.
+		/// <para />
+		/// sig: a -> [a] -> Boolean
+		/// </summary>
+		/// <param name="a">The item to compare against.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if an equivalent item is in the list, `false` otherwise.</returns>
+		/// <see cref="R.Any"/>
 		public static dynamic Contains<TSource>(TSource a, RamdaPlaceholder list = null) {
 			return Currying.Contains(a, list);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified value is equal, in `R.equals` terms, to atleast one element of the given list; `false` otherwise.
+		/// <para />
+		/// sig: a -> [a] -> Boolean
+		/// </summary>
+		/// <param name="a">The item to compare against.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`true` if an equivalent item is in the list, `false` otherwise.</returns>
+		/// <see cref="R.Any"/>
 		public static dynamic Contains(RamdaPlaceholder a = null, RamdaPlaceholder list = null) {
 			return Currying.Contains(a, list);
 		}

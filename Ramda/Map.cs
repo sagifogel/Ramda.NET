@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map<TSource, TReturn>(Func<TSource, TReturn> fn, IList<TSource> list) {
 			return Currying.Map(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map<TSource>(RamdaPlaceholder fn, IList<TSource> list) {
 			return Currying.Map(fn, list);
 		}
 
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map<TSource, TReturn>(Func<TSource, TReturn> fn, RamdaPlaceholder list = null) {
 			return Currying.Map(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map(dynamic fn, RamdaPlaceholder list = null) {
 			return Currying.Map(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map<TSource>(dynamic fn, IList<TSource> list) {
 			return Currying.Map(Delegate(fn), list);
 		}
 
+		/// <summary>
+		/// Takes a function anda [functor](https://github.com/fantasyland/fantasy-land#functor),applies the function to each of the functor's values, and returnsa functor of the same shape.Ramda provides suitable `map` implementations for `Array` and `Object`,so this function may be applied to `[1, 2, 3]` or `{x: 1, y: 2, z: 3}`.Dispatches to the `map` method of the second argument, if present.Acts as a transducer if a transformer is given in list position.Also treats functions as functors and will compose them together.
+		/// <para />
+		/// sig: Functor f => (a -> b) -> f a -> f b
+		/// </summary>
+		/// <param name="fn">The function to be called on every element of the input `list`.</param>
+		/// <param name="list">The list to be iterated over.</param>
+		/// <returns>The new list.</returns>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.AddIndex"/>
 		public static dynamic Map(RamdaPlaceholder fn = null, RamdaPlaceholder list = null) {
 			return Currying.Map(fn, list);
 		}

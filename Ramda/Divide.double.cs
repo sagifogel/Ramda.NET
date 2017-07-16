@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Divides two numbers. Equivalent to `a / b`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a / b`.</returns>
+		/// <see cref="R.Multiply"/>
 		public static dynamic Divide(double a, double b) {
 			return Currying.Divide(a, b);
 		}
 
+		/// <summary>
+		/// Divides two numbers. Equivalent to `a / b`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a / b`.</returns>
+		/// <see cref="R.Multiply"/>
 		public static dynamic Divide(RamdaPlaceholder a, double b) {
 			return Currying.Divide(a, b);
 		}
 
+		/// <summary>
+		/// Divides two numbers. Equivalent to `a / b`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a / b`.</returns>
+		/// <see cref="R.Multiply"/>
 		public static dynamic Divide(double a, RamdaPlaceholder b = null) {
 			return Currying.Divide(a, b);
 		}
 
+		/// <summary>
+		/// Divides two numbers. Equivalent to `a / b`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The first value.</param>
+		/// <param name="b">The second value.</param>
+		/// <returns>The result of `a / b`.</returns>
+		/// <see cref="R.Multiply"/>
 		public static dynamic Divide(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Divide(a, b);
 		}

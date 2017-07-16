@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// The lower case version of a string.
+		/// <para />
+		/// sig: String -> String
+		/// </summary>
+		/// <param name="str">The string to lower case.</param>
+		/// <returns>The lower case version of `str`.</returns>
+		/// <see cref="R.ToUpper"/>
 		public static dynamic ToLower(string str) {
 			return Currying.ToLower(str);
 		}
 
+		/// <summary>
+		/// The lower case version of a string.
+		/// <para />
+		/// sig: String -> String
+		/// </summary>
+		/// <param name="str">The string to lower case.</param>
+		/// <returns>The lower case version of `str`.</returns>
+		/// <see cref="R.ToUpper"/>
 		public static dynamic ToLower(RamdaPlaceholder str = null) {
 			return Currying.ToLower(str);
 		}

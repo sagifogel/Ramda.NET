@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,92 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, TTarget x) {
 			return Currying.View(Delegate(lens), x);
 		}
 
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View<TTarget>(RamdaPlaceholder lens, TTarget x) {
 			return Currying.View(lens, x);
 		}
 
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder x = null) {
 			return Currying.View(Delegate(lens), x);
 		}
 
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View(dynamic lens, RamdaPlaceholder x = null) {
 			return Currying.View(Delegate(lens), x);
 		}
 
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View<TTarget>(dynamic lens, TTarget x) {
 			return Currying.View(Delegate(lens), x);
 		}
 
+		/// <summary>
+		/// Returns a "view" of the given data structure, determined by the given lens.The lens's focus determines which portion of the data structure is visible.
+		/// <para />
+		/// sig: Lens s a -> s -> a
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="x">second</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic View(RamdaPlaceholder lens = null, RamdaPlaceholder x = null) {
 			return Currying.View(lens, x);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if the given value is its type's empty value; `false`otherwise.
+		/// <para />
+		/// sig: a -> Boolean
+		/// </summary>
+		/// <param name="x">first</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Empty"/>
 		public static dynamic IsEmpty<TTarget>(TTarget x) {
 			return Currying.IsEmpty(x);
 		}
 
+		/// <summary>
+		/// Returns `true` if the given value is its type's empty value; `false`otherwise.
+		/// <para />
+		/// sig: a -> Boolean
+		/// </summary>
+		/// <param name="x">first</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Empty"/>
 		public static dynamic IsEmpty(RamdaPlaceholder x = null) {
 			return Currying.IsEmpty(x);
 		}

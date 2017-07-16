@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Makes a comparator function out of a function that reports whether the firstelement is less than the second.
+		/// <para />
+		/// sig: (a, b -> Boolean) -> (a, b -> Number)
+		/// </summary>
+		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
+		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
 		public static dynamic Comparator<TArg>(Func<TArg, TArg, bool> pred) {
 			return Currying.Comparator(Delegate(pred));
 		}
 
+		/// <summary>
+		/// Makes a comparator function out of a function that reports whether the firstelement is less than the second.
+		/// <para />
+		/// sig: (a, b -> Boolean) -> (a, b -> Number)
+		/// </summary>
+		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
+		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
 		public static dynamic Comparator(RamdaPlaceholder pred = null) {
 			return Currying.Comparator(pred);
 		}
 
+		/// <summary>
+		/// Makes a comparator function out of a function that reports whether the firstelement is less than the second.
+		/// <para />
+		/// sig: (a, b -> Boolean) -> (a, b -> Number)
+		/// </summary>
+		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
+		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
 		public static dynamic Comparator(dynamic pred) {
 			return Currying.Comparator(Delegate(pred));
 		}

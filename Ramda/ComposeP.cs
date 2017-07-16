@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Performs right-to-left composition of one or more Promise-returningfunctions. The rightmost function may have any arity; the remainingfunctions must be unary.
+		/// <para />
+		/// sig: ((y -> Promise z), (x -> Promise y), ..., (a -> Promise b)) -> (a -> Promise z)
+		/// </summary>
+		/// <param name="functions">The functions to compose</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.PipeP"/>
 		public static dynamic ComposeP(params Delegate[] functions) {
 			return Currying.ComposeP(functions);
 		}
 
+		/// <summary>
+		/// Performs right-to-left composition of one or more Promise-returningfunctions. The rightmost function may have any arity; the remainingfunctions must be unary.
+		/// <para />
+		/// sig: ((y -> Promise z), (x -> Promise y), ..., (a -> Promise b)) -> (a -> Promise z)
+		/// </summary>
+		/// <param name="functions">The functions to compose</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.PipeP"/>
 		public static dynamic ComposeP(RamdaPlaceholder functions = null) {
 			return Currying.ComposeP(functions);
 		}

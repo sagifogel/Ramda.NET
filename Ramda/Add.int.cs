@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Adds two values.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Number</returns>
+		/// <see cref="R.Subtract"/>
 		public static dynamic Add(int a, int b) {
 			return Currying.Add(a, b);
 		}
 
+		/// <summary>
+		/// Adds two values.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Number</returns>
+		/// <see cref="R.Subtract"/>
 		public static dynamic Add(RamdaPlaceholder a, int b) {
 			return Currying.Add(a, b);
 		}
 
+		/// <summary>
+		/// Adds two values.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Number</returns>
+		/// <see cref="R.Subtract"/>
 		public static dynamic Add(int a, RamdaPlaceholder b = null) {
 			return Currying.Add(a, b);
 		}

@@ -6,20 +6,41 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Ramda.NET
 {
-    public static partial class R
-    {
-        public static dynamic Init<TSource>(IList<TSource> list) {
-            return Currying.Init(list);
-        }
+	public static partial class R
+	{	
+		/// <summary>
+		/// Returns all but the last element of the given list or string.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Last"/>
+		/// <see cref="R.Head"/>
+		/// <see cref="R.Tail"/>
+		public static dynamic Init<TSource>(IList<TSource> list) {
+			return Currying.Init(list);
+		}
 
-        public static dynamic Init(RamdaPlaceholder list = null) {
-            return Currying.Init(list);
-        }
-    }
+		/// <summary>
+		/// Returns all but the last element of the given list or string.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Last"/>
+		/// <see cref="R.Head"/>
+		/// <see cref="R.Tail"/>
+		public static dynamic Init(RamdaPlaceholder list = null) {
+			return Currying.Init(list);
+		}
+	}
 }

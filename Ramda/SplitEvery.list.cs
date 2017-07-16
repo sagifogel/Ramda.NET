@@ -15,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Splits a collection into slices of the specified length.
+		/// <para />
+		/// sig: Number -> [a] -> [[a]]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitEvery<TValue>(int n, IList<TValue> list) {
 			return Currying.SplitEvery(n, list);
 		}
 
+		/// <summary>
+		/// Splits a collection into slices of the specified length.
+		/// <para />
+		/// sig: Number -> [a] -> [[a]]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitEvery<TValue>(RamdaPlaceholder n, IList<TValue> list) {
 			return Currying.SplitEvery(n, list);
 		}
 
+		/// <summary>
+		/// Splits a collection into slices of the specified length.
+		/// <para />
+		/// sig: Number -> [a] -> [[a]]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitEvery(int n, RamdaPlaceholder list = null) {
 			return Currying.SplitEvery(n, list);
 		}
 
+		/// <summary>
+		/// Splits a collection into slices of the specified length.
+		/// <para />
+		/// sig: Number -> [a] -> [[a]]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>Array</returns>
 		public static dynamic SplitEvery(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
 			return Currying.SplitEvery(n, list);
 		}

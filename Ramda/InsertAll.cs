@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll<TSource>(int index, IList<TSource> elts, IList<TSource> list) {
 			return Currying.InsertAll(index, elts, list);
 		}
 
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll<TSource>(RamdaPlaceholder index, IList<TSource> elts, IList<TSource> list) {
 			return Currying.InsertAll(index, elts, list);
 		}
 
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll<TSource>(int index, RamdaPlaceholder elts, IList<TSource> list) {
 			return Currying.InsertAll(index, elts, list);
 		}
 
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll<TSource>(int index, IList<TSource> elts, RamdaPlaceholder list = null) {
 			return Currying.InsertAll(index, elts, list);
 		}
 
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll(int index, RamdaPlaceholder elts = null, RamdaPlaceholder list = null) {
 			return Currying.InsertAll(index, elts, list);
 		}
 
+		/// <summary>
+		/// Inserts the sub-list into the list, at index `index`. _Note that this is notdestructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// <para />
+		/// sig: Number -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="index">The position to insert the sub-list</param>
+		/// <param name="elts">The sub-list to insert into the Array</param>
+		/// <param name="list">The list to insert the sub-list into</param>
+		/// <returns>A new Array with `elts` inserted starting at `index`.</returns>
 		public static dynamic InsertAll(RamdaPlaceholder index = null, RamdaPlaceholder elts = null, RamdaPlaceholder list = null) {
 			return Currying.InsertAll(index, elts, list);
 		}

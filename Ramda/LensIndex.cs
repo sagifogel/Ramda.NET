@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,30 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a lens whose focus is the specified index.
+		/// <para />
+		/// sig: Number -> Lens s a
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <returns>Lens</returns>
+		/// <see cref="R.View"/>
+		/// <see cref="R.Set"/>
+		/// <see cref="R.Over"/>
 		public static dynamic LensIndex(int n) {
 			return Currying.LensIndex(n);
 		}
 
+		/// <summary>
+		/// Returns a lens whose focus is the specified index.
+		/// <para />
+		/// sig: Number -> Lens s a
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <returns>Lens</returns>
+		/// <see cref="R.View"/>
+		/// <see cref="R.Set"/>
+		/// <see cref="R.Over"/>
 		public static dynamic LensIndex(RamdaPlaceholder n = null) {
 			return Currying.LensIndex(n);
 		}

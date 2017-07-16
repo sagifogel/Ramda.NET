@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. `R.equals`is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeats<TSource>(IList<TSource> list) {
 			return Currying.DropRepeats(list);
 		}
 
+		/// <summary>
+		/// Returns a new list without any consecutively repeating elements. `R.equals`is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>`list` without repeating elements.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic DropRepeats(RamdaPlaceholder list = null) {
 			return Currying.DropRepeats(list);
 		}

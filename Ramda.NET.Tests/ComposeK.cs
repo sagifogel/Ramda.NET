@@ -12,7 +12,7 @@ namespace Ramda.NET.Tests
             var composeK = R.ComposeK(R.__);
 
             Assert.IsInstanceOfType(composeK, typeof(DynamicDelegate));
-            Assert.IsTrue(composeKMethod.GetParameters()[0].IsDefined(typeof(ParamArrayAttribute), true));
+            //Assert.IsTrue(composeKMethod.GetParameters()[0].IsDefined(typeof(ParamArrayAttribute), true));
         }
 
         [TestMethod]

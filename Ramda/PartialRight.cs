@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight<TSource, TReturn>(Func<TSource, TReturn> f, IList<TSource> args) {
 			return Currying.PartialRight(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight<TSource>(RamdaPlaceholder f, IList<TSource> args) {
 			return Currying.PartialRight(f, args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight<TSource, TReturn>(Func<TSource, TReturn> f, RamdaPlaceholder args = null) {
 			return Currying.PartialRight(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight(dynamic f, RamdaPlaceholder args = null) {
 			return Currying.PartialRight(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight<TSource>(dynamic f, IList<TSource> args) {
 			return Currying.PartialRight(Delegate(f), args);
 		}
 
+		/// <summary>
+		/// Takes a function `f` and a list of arguments, and returns a function `g`.When applied, `g` returns the result of applying `f` to the argumentsprovided to `g` followed by the arguments provided initially.
+		/// <para />
+		/// sig: ((a, b, c, ..., n) -> x) -> [d, e, f, ..., n] -> ((a, b, c, ...) -> x)
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="args">second</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Partial"/>
 		public static dynamic PartialRight(RamdaPlaceholder f = null, RamdaPlaceholder args = null) {
 			return Currying.PartialRight(f, args);
 		}

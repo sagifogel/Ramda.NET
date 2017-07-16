@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,35 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a new function that, when invoked, caches the result of calling `fn`for a given argument set and returns the result. Subsequent calls to thememoized `fn` with the same argument set will not result in an additionalcall to `fn`; instead, the cached result for that set of arguments will bereturned.
+		/// <para />
+		/// sig: (*... -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">The function to memoize.</param>
+		/// <returns>Memoized version of `fn`.</returns>
 		public static dynamic Memoize(Delegate fn) {
 			return Currying.Memoize(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Creates a new function that, when invoked, caches the result of calling `fn`for a given argument set and returns the result. Subsequent calls to thememoized `fn` with the same argument set will not result in an additionalcall to `fn`; instead, the cached result for that set of arguments will bereturned.
+		/// <para />
+		/// sig: (*... -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">The function to memoize.</param>
+		/// <returns>Memoized version of `fn`.</returns>
 		public static dynamic Memoize(RamdaPlaceholder fn = null) {
 			return Currying.Memoize(fn);
 		}
 
+		/// <summary>
+		/// Creates a new function that, when invoked, caches the result of calling `fn`for a given argument set and returns the result. Subsequent calls to thememoized `fn` with the same argument set will not result in an additionalcall to `fn`; instead, the cached result for that set of arguments will bereturned.
+		/// <para />
+		/// sig: (*... -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">The function to memoize.</param>
+		/// <returns>Memoized version of `fn`.</returns>
 		public static dynamic Memoize(dynamic fn) {
 			return Currying.Memoize(Delegate(fn));
 		}

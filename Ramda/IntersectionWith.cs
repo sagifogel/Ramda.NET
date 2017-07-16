@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,142 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(RamdaPlaceholder pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.IntersectionWith(pred, list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(dynamic pred, RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(dynamic pred, IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith<TSource>(dynamic pred, IList<TSource> list1, IList<TSource> list2) {
 			return Currying.IntersectionWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of thoseelements common to both lists. Duplication is determined according to thevalue returned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate function that determines whether       the two supplied elements are equal.</param>
+		/// <param name="list1">One list of items to compare</param>
+		/// <param name="list2">A second list of items to compare</param>
+		/// <returns>A new list containing those elements common to both lists.</returns>
+		/// <see cref="R.Intersection"/>
 		public static dynamic IntersectionWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.IntersectionWith(pred, list1, list2);
 		}

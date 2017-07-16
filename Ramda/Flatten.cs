@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list by pulling every item out of it (and all its sub-arrays)and putting them in a new array, depth-first.
+		/// <para />
+		/// sig: [a] -> [b]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The flattened list.</returns>
+		/// <see cref="R.Unnest"/>
 		public static dynamic Flatten<TSource>(IList<TSource> list) {
 			return Currying.Flatten(list);
 		}
 
+		/// <summary>
+		/// Returns a new list by pulling every item out of it (and all its sub-arrays)and putting them in a new array, depth-first.
+		/// <para />
+		/// sig: [a] -> [b]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The flattened list.</returns>
+		/// <see cref="R.Unnest"/>
 		public static dynamic Flatten(RamdaPlaceholder list = null) {
 			return Currying.Flatten(list);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,66 +15,258 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(fn, acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, RamdaPlaceholder acc, Func<TSource, string> keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, RamdaPlaceholder keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, Func<TSource, string> keyFn, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator>(RamdaPlaceholder fn, TAccmulator acc, dynamic keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(fn, acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource>(dynamic fn, RamdaPlaceholder acc, dynamic keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TAccmulator>(dynamic fn, TAccmulator acc, dynamic keyFn, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy(dynamic fn, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TAccmulator>(dynamic fn, TAccmulator acc, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(Delegate(fn), acc, keyFn, list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator>(dynamic fn, TAccmulator acc, Func<TSource, string> keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy<TSource, TAccmulator, TReturn>(Func<TAccmulator, TSource, TReturn> fn, TAccmulator acc, dynamic keyFn, IList<TSource> list) {
 			return Currying.ReduceBy(Delegate(fn), acc, Delegate(keyFn), list);
 		}
 
+		/// <summary>
+		/// Groups the elements of the list according to the result of callingthe String-returning function `keyFn` on each element and reduces the elementsof each group to a single value via the reducer function `valueFn`.This function is basically a more general `groupBy` function.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+		/// </summary>
+		/// <param name="valueFn">The function that reduces the elements of each group to a single       value. Receives two values, accumulator for a particular group and the current element.</param>
+		/// <param name="acc">The (initial) accumulator value for each group.</param>
+		/// <param name="keyFn">The function that maps the list's element into a key.</param>
+		/// <param name="list">The array to group.</param>
+		/// <returns>An object with the output of `keyFn` for keys, mapped to the output of `valueFn` for elements which produced that key when passed to `keyFn`.</returns>
+		/// <see cref="R.GroupBy"/>
+		/// <see cref="R.Reduce"/>
 		public static dynamic ReduceBy(RamdaPlaceholder fn = null, RamdaPlaceholder acc = null, RamdaPlaceholder keyFn = null, RamdaPlaceholder list = null) {
 			return Currying.ReduceBy(fn, acc, keyFn, list);
 		}

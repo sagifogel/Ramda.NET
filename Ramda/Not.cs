@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// A function that returns the `!` of its argument. It will return `true` whenpassed false-y value, and `false` when passed a truth-y one.
+		/// <para />
+		/// sig: * -> Boolean
+		/// </summary>
+		/// <param name="a">any value</param>
+		/// <returns>the logical inverse of passed argument.</returns>
+		/// <see cref="R.Complement"/>
 		public static dynamic Not(bool a) {
 			return Currying.Not(a);
 		}
 
+		/// <summary>
+		/// A function that returns the `!` of its argument. It will return `true` whenpassed false-y value, and `false` when passed a truth-y one.
+		/// <para />
+		/// sig: * -> Boolean
+		/// </summary>
+		/// <param name="a">any value</param>
+		/// <returns>the logical inverse of passed argument.</returns>
+		/// <see cref="R.Complement"/>
 		public static dynamic Not(RamdaPlaceholder a = null) {
 			return Currying.Not(a);
 		}

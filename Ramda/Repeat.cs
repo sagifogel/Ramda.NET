@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a fixed list of size `n` containing a specified identical value.
+		/// <para />
+		/// sig: a -> n -> [a]
+		/// </summary>
+		/// <param name="value">The value to repeat.</param>
+		/// <param name="n">The desired size of the output list.</param>
+		/// <returns>A new array containing `n` `value`s.</returns>
 		public static dynamic Repeat<TTarget>(TTarget value, int n) {
 			return Currying.Repeat(value, n);
 		}
 
+		/// <summary>
+		/// Returns a fixed list of size `n` containing a specified identical value.
+		/// <para />
+		/// sig: a -> n -> [a]
+		/// </summary>
+		/// <param name="value">The value to repeat.</param>
+		/// <param name="n">The desired size of the output list.</param>
+		/// <returns>A new array containing `n` `value`s.</returns>
 		public static dynamic Repeat(RamdaPlaceholder value, int n) {
 			return Currying.Repeat(value, n);
 		}
 
+		/// <summary>
+		/// Returns a fixed list of size `n` containing a specified identical value.
+		/// <para />
+		/// sig: a -> n -> [a]
+		/// </summary>
+		/// <param name="value">The value to repeat.</param>
+		/// <param name="n">The desired size of the output list.</param>
+		/// <returns>A new array containing `n` `value`s.</returns>
 		public static dynamic Repeat<TTarget>(TTarget value, RamdaPlaceholder n = null) {
 			return Currying.Repeat(value, n);
 		}
 
+		/// <summary>
+		/// Returns a fixed list of size `n` containing a specified identical value.
+		/// <para />
+		/// sig: a -> n -> [a]
+		/// </summary>
+		/// <param name="value">The value to repeat.</param>
+		/// <param name="n">The desired size of the output list.</param>
+		/// <returns>A new array containing `n` `value`s.</returns>
 		public static dynamic Repeat(RamdaPlaceholder value = null, RamdaPlaceholder n = null) {
 			return Currying.Repeat(value, n);
 		}

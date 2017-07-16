@@ -107,8 +107,8 @@
     </Content>
     <Content Include="Ramda\AllPass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AllPass1.cs</LastGenOutput>
-      <LastOutputs>.\AllPass1.cs</LastOutputs>
+      <LastGenOutput>AllPass.cs</LastGenOutput>
+      <LastOutputs>.\AllPass.cs</LastOutputs>
     </Content>
     <Compile Include="Ramda\Add.object.cs">
       <DependentUpon>Add.object.tt</DependentUpon>
@@ -130,15 +130,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\AllPass.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllPass.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\AnyPass.cs">
       <DependentUpon>AnyPass.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Ramda\AllPass1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AllPass.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Ap.fn.cs">
       <DependentUpon>Ap.fn.tt</DependentUpon>
@@ -164,6 +164,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\CurryN.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CurryN.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Descend.cs">
       <DependentUpon>Descend.tt</DependentUpon>
@@ -362,6 +367,11 @@
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\CurryN.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CurryN.cs</LastGenOutput>
+      <LastOutputs>.\CurryN.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Descend.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Descend.cs</LastGenOutput>
@@ -385,7 +395,7 @@
     <Content Include="Ramda\Both.func.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Both.func.cs</LastGenOutput>
-      <LastOutputs>.\Both.func.cs</LastOutputs>
+      <LastOutputs>.\Both.Func.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Call.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -941,6 +951,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\NthArg.cs">
+      <DependentUpon>NthArg.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Omit.string.cs">
       <DependentUpon>Omit.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -982,6 +997,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\SplitWhen.string.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SplitWhen.string.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ramda\Subtract.string.cs">
       <DependentUpon>Subtract.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1009,6 +1029,11 @@
     </Compile>
     <Compile Include="Ramda\Tail.string.cs">
       <DependentUpon>Tail.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Take.string.cs">
+      <DependentUpon>Take.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -1543,10 +1568,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SplitEvery.list.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\SplitWhen.cs">
+    <Compile Include="Ramda\SplitWhen.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SplitWhen.tt</DependentUpon>
+      <DependentUpon>SplitWhen.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Subtract.double.cs">
       <DependentUpon>Subtract.double.tt</DependentUpon>
@@ -1573,10 +1598,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Tail.list.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Take.cs">
+    <Compile Include="Ramda\Take.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Take.tt</DependentUpon>
+      <DependentUpon>Take.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\TakeLast.cs">
       <AutoGen>True</AutoGen>
@@ -2074,12 +2099,12 @@
     <Content Include="Ramda\IndexBy.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IndexBy.list.cs</LastGenOutput>
-      <LastOutputs>.\IndexBy.list - Copy.cs</LastOutputs>
+      <LastOutputs>.\IndexBy.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IndexOf.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IndexOf.object.cs</LastGenOutput>
-      <LastOutputs>.\IndexOf.string.cs</LastOutputs>
+      <LastOutputs>.\IndexOf.object.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\IndexOf.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2094,7 +2119,7 @@
     <Content Include="Ramda\Init.list..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Init.list..cs</LastGenOutput>
-      <LastOutputs>.\Init.list. - Copy.cs</LastOutputs>
+      <LastOutputs>.\Init.list..cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Insert.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2119,7 +2144,7 @@
     <Content Include="Ramda\Intersperse..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Intersperse..cs</LastGenOutput>
-      <LastOutputs>.\Intersperse.IIntersperse.cs</LastOutputs>
+      <LastOutputs>.\Intersperse..cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Into.ITransformer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2189,7 +2214,7 @@
     <Content Include="Ramda\Lt.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Lt.string.cs</LastGenOutput>
-      <LastOutputs>.\Lt.double - Copy.cs</LastOutputs>
+      <LastOutputs>.\Lt.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Lte.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2231,6 +2256,11 @@
       <LastGenOutput>Min.date.cs</LastGenOutput>
       <LastOutputs>.\Min.date.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\NthArg.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>NthArg.cs</LastGenOutput>
+      <LastOutputs>.\NthArg.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Omit.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Omit.string.cs</LastGenOutput>
@@ -2264,12 +2294,17 @@
     <Content Include="Ramda\Split.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Split.list.cs</LastGenOutput>
-      <LastOutputs>.\Split.cs</LastOutputs>
+      <LastOutputs>.\Split.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SplitEvery.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitEvery.string.cs</LastGenOutput>
       <LastOutputs>.\SplitEvery.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\SplitWhen.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastOutputs>.\SplitWhen.string.cs</LastOutputs>
+      <LastGenOutput>SplitWhen.string.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\Subtract.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2300,6 +2335,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tail.string.cs</LastGenOutput>
       <LastOutputs>.\Tail.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Take.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Take.string.cs</LastGenOutput>
+      <LastOutputs>.\Take.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Test.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2374,7 +2414,7 @@
     <Content Include="Ramda\LastIndexOf.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LastIndexOf.list.cs</LastGenOutput>
-      <LastOutputs>.\LastIndexOf.cs</LastOutputs>
+      <LastOutputs>.\LastIndexOf.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Length.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2464,12 +2504,12 @@
     <Content Include="Ramda\Mean.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Mean.double.cs</LastGenOutput>
-      <LastOutputs>.\Mean.cs</LastOutputs>
+      <LastOutputs>.\Mean.double.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Median.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Median.double.cs</LastGenOutput>
-      <LastOutputs>.\Median.double - Copy.cs</LastOutputs>
+      <LastOutputs>.\Median.double.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MergeWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2594,7 +2634,7 @@
     <Content Include="Ramda\Omit.list..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Omit.list..cs</LastGenOutput>
-      <LastOutputs>.\Omit.list. - Copy.cs</LastOutputs>
+      <LastOutputs>.\Omit.list..cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Once.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2830,12 +2870,12 @@
     <Content Include="Ramda\SplitEvery.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SplitEvery.list.cs</LastGenOutput>
-      <LastOutputs>.\SplitEvery.cs</LastOutputs>
+      <LastOutputs>.\SplitEvery.list.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\SplitWhen.tt">
+    <Content Include="Ramda\SplitWhen.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SplitWhen.cs</LastGenOutput>
-      <LastOutputs>.\SplitWhen.cs</LastOutputs>
+      <LastGenOutput>SplitWhen.list.cs</LastGenOutput>
+      <LastOutputs>.\SplitWhen.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Subtract.double.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2860,12 +2900,12 @@
     <Content Include="Ramda\Tail.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Tail.list.cs</LastGenOutput>
-      <LastOutputs>.\Tail.cs</LastOutputs>
+      <LastOutputs>.\Tail.list.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Take.tt">
+    <Content Include="Ramda\Take.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Take.cs</LastGenOutput>
-      <LastOutputs>.\Take.cs</LastOutputs>
+      <LastGenOutput>Take.list.cs</LastGenOutput>
+      <LastOutputs>.\Take.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\TakeLast.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2905,7 +2945,7 @@
     <Content Include="Ramda\Transduce.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Transduce.list.cs</LastGenOutput>
-      <LastOutputs>.\Transduce.cs</LastOutputs>
+      <LastOutputs>.\Transduce.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Transpose.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2940,7 +2980,7 @@
     <Content Include="Ramda\Unfold.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unfold.int.cs</LastGenOutput>
-      <LastOutputs>.\Unfold.cs</LastOutputs>
+      <LastOutputs>.\Unfold.int.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\UnionWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2960,7 +3000,7 @@
     <Content Include="Ramda\Unnest.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unnest.list.cs</LastGenOutput>
-      <LastOutputs>.\Unnest.list - Copy.cs</LastOutputs>
+      <LastOutputs>.\Unnest.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Until.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,66 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns all but the first `n` elements of the given list, string, ortransducer/transformer (or object with a `drop` method).Dispatches to the `drop` method of the second argument, if present.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>A copy of list without the first `n` elements</returns>
+		/// <see cref="R.Take"/>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.DropLast"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic Drop<TSource>(int n, IEnumerable<TSource> list) {
 			return Currying.Drop(n, list);
 		}
 
+		/// <summary>
+		/// Returns all but the first `n` elements of the given list, string, ortransducer/transformer (or object with a `drop` method).Dispatches to the `drop` method of the second argument, if present.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>A copy of list without the first `n` elements</returns>
+		/// <see cref="R.Take"/>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.DropLast"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic Drop<TSource>(RamdaPlaceholder n, IEnumerable<TSource> list) {
 			return Currying.Drop(n, list);
 		}
 
+		/// <summary>
+		/// Returns all but the first `n` elements of the given list, string, ortransducer/transformer (or object with a `drop` method).Dispatches to the `drop` method of the second argument, if present.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>A copy of list without the first `n` elements</returns>
+		/// <see cref="R.Take"/>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.DropLast"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic Drop(int n, RamdaPlaceholder list = null) {
 			return Currying.Drop(n, list);
 		}
 
+		/// <summary>
+		/// Returns all but the first `n` elements of the given list, string, ortransducer/transformer (or object with a `drop` method).Dispatches to the `drop` method of the second argument, if present.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">first</param>
+		/// <param name="list">second</param>
+		/// <returns>A copy of list without the first `n` elements</returns>
+		/// <see cref="R.Take"/>
+		/// <see cref="R.Transduce"/>
+		/// <see cref="R.DropLast"/>
+		/// <see cref="R.DropWhile"/>
 		public static dynamic Drop(RamdaPlaceholder n = null, RamdaPlaceholder list = null) {
 			return Currying.Drop(n, list);
 		}

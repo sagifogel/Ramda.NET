@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,66 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a list containing all but the last `n` elements of the given `list`.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">The number of elements of `list` to skip.</param>
+		/// <param name="list">The list of elements to consider.</param>
+		/// <returns>A copy of the list with only the first `list.length - n` elements</returns>
+		/// <see cref="R.TakeLast"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
+		/// <see cref="R.DropLastWhile"/>
 		public static dynamic DropLast<TSource>(int n, IEnumerable<TSource> xs) {
 			return Currying.DropLast(n, xs);
 		}
 
+		/// <summary>
+		/// Returns a list containing all but the last `n` elements of the given `list`.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">The number of elements of `list` to skip.</param>
+		/// <param name="list">The list of elements to consider.</param>
+		/// <returns>A copy of the list with only the first `list.length - n` elements</returns>
+		/// <see cref="R.TakeLast"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
+		/// <see cref="R.DropLastWhile"/>
 		public static dynamic DropLast<TSource>(RamdaPlaceholder n, IEnumerable<TSource> xs) {
 			return Currying.DropLast(n, xs);
 		}
 
+		/// <summary>
+		/// Returns a list containing all but the last `n` elements of the given `list`.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">The number of elements of `list` to skip.</param>
+		/// <param name="list">The list of elements to consider.</param>
+		/// <returns>A copy of the list with only the first `list.length - n` elements</returns>
+		/// <see cref="R.TakeLast"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
+		/// <see cref="R.DropLastWhile"/>
 		public static dynamic DropLast(int n, RamdaPlaceholder xs = null) {
 			return Currying.DropLast(n, xs);
 		}
 
+		/// <summary>
+		/// Returns a list containing all but the last `n` elements of the given `list`.
+		/// <para />
+		/// sig: Number -> [a] -> [a]
+		/// </summary>
+		/// <param name="n">The number of elements of `list` to skip.</param>
+		/// <param name="list">The list of elements to consider.</param>
+		/// <returns>A copy of the list with only the first `list.length - n` elements</returns>
+		/// <see cref="R.TakeLast"/>
+		/// <see cref="R.Drop"/>
+		/// <see cref="R.DropWhile"/>
+		/// <see cref="R.DropLastWhile"/>
 		public static dynamic DropLast(RamdaPlaceholder n = null, RamdaPlaceholder xs = null) {
 			return Currying.DropLast(n, xs);
 		}

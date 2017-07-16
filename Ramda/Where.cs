@@ -15,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a spec object and a test object; returns true if the test satisfiesthe spec. Each of the spec's own properties must be a predicate function.Each predicate is applied to the value of the corresponding property of thetest object. `where` returns true if all the predicates return true, falseotherwise.`where` is well suited to declaratively expressing constraints for otherfunctions such as `filter` and `find`.
+		/// <para />
+		/// sig: {String: (* -> Boolean)} -> {String: *} -> Boolean
+		/// </summary>
+		/// <param name="spec">first</param>
+		/// <param name="testObj">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Where<TTarget>(object spec, TTarget testObj) {
 			return Currying.Where(spec, testObj);
 		}
 
+		/// <summary>
+		/// Takes a spec object and a test object; returns true if the test satisfiesthe spec. Each of the spec's own properties must be a predicate function.Each predicate is applied to the value of the corresponding property of thetest object. `where` returns true if all the predicates return true, falseotherwise.`where` is well suited to declaratively expressing constraints for otherfunctions such as `filter` and `find`.
+		/// <para />
+		/// sig: {String: (* -> Boolean)} -> {String: *} -> Boolean
+		/// </summary>
+		/// <param name="spec">first</param>
+		/// <param name="testObj">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Where<TTarget>(RamdaPlaceholder spec, TTarget testObj) {
 			return Currying.Where(spec, testObj);
 		}
 
+		/// <summary>
+		/// Takes a spec object and a test object; returns true if the test satisfiesthe spec. Each of the spec's own properties must be a predicate function.Each predicate is applied to the value of the corresponding property of thetest object. `where` returns true if all the predicates return true, falseotherwise.`where` is well suited to declaratively expressing constraints for otherfunctions such as `filter` and `find`.
+		/// <para />
+		/// sig: {String: (* -> Boolean)} -> {String: *} -> Boolean
+		/// </summary>
+		/// <param name="spec">first</param>
+		/// <param name="testObj">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Where(object spec, RamdaPlaceholder testObj = null) {
 			return Currying.Where(spec, testObj);
 		}
 
+		/// <summary>
+		/// Takes a spec object and a test object; returns true if the test satisfiesthe spec. Each of the spec's own properties must be a predicate function.Each predicate is applied to the value of the corresponding property of thetest object. `where` returns true if all the predicates return true, falseotherwise.`where` is well suited to declaratively expressing constraints for otherfunctions such as `filter` and `find`.
+		/// <para />
+		/// sig: {String: (* -> Boolean)} -> {String: *} -> Boolean
+		/// </summary>
+		/// <param name="spec">first</param>
+		/// <param name="testObj">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Where(RamdaPlaceholder spec = null, RamdaPlaceholder testObj = null) {
 			return Currying.Where(spec, testObj);
 		}

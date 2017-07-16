@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,152 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TTarget>(RamdaPlaceholder pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, RamdaPlaceholder name, TTarget obj) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TArg>(Func<TArg, bool> pred, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TArg>(Func<TArg, bool> pred, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TTarget>(dynamic pred, RamdaPlaceholder name, TTarget obj) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies(dynamic pred, string name, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies(dynamic pred, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies<TTarget>(dynamic pred, string name, TTarget obj) {
 			return Currying.PropSatisfies(Delegate(pred), name, obj);
 		}
 
+		/// <summary>
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
+		/// <para />
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
+		/// </summary>
+		/// <param name="pred">first</param>
+		/// <param name="name">second</param>
+		/// <param name="obj">third</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
 		public static dynamic PropSatisfies(RamdaPlaceholder pred = null, RamdaPlaceholder name = null, RamdaPlaceholder obj = null) {
 			return Currying.PropSatisfies(pred, name, obj);
 		}

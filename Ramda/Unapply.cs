@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,38 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function `fn`, which takes a single array argument, and returns afunction which:  - takes any number of positional arguments;  - passes these arguments to `fn` as an array; and  - returns the result.In other words, R.unapply derives a variadic function from a function whichtakes an array. R.unapply is the inverse of R.apply.
+		/// <para />
+		/// sig: ([*...] -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">first</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Apply"/>
 		public static dynamic Unapply(Delegate fn) {
 			return Currying.Unapply(Delegate(fn));
 		}
 
+		/// <summary>
+		/// Takes a function `fn`, which takes a single array argument, and returns afunction which:  - takes any number of positional arguments;  - passes these arguments to `fn` as an array; and  - returns the result.In other words, R.unapply derives a variadic function from a function whichtakes an array. R.unapply is the inverse of R.apply.
+		/// <para />
+		/// sig: ([*...] -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">first</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Apply"/>
 		public static dynamic Unapply(RamdaPlaceholder fn = null) {
 			return Currying.Unapply(fn);
 		}
 
+		/// <summary>
+		/// Takes a function `fn`, which takes a single array argument, and returns afunction which:  - takes any number of positional arguments;  - passes these arguments to `fn` as an array; and  - returns the result.In other words, R.unapply derives a variadic function from a function whichtakes an array. R.unapply is the inverse of R.apply.
+		/// <para />
+		/// sig: ([*...] -> a) -> (*... -> a)
+		/// </summary>
+		/// <param name="fn">first</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.Apply"/>
 		public static dynamic Unapply(dynamic fn) {
 			return Currying.Unapply(Delegate(fn));
 		}

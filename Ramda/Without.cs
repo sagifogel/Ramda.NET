@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list without values in the first argument.`R.equals` is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="list1">The values to be removed from `list2`.</param>
+		/// <param name="list2">The array to remove values from.</param>
+		/// <returns>The new array without values in `list1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Without<TSource>(IList<TSource> list1, IList<TSource> list2) {
 			return Currying.Without(list1, list2);
 		}
 
+		/// <summary>
+		/// Returns a new list without values in the first argument.`R.equals` is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="list1">The values to be removed from `list2`.</param>
+		/// <param name="list2">The array to remove values from.</param>
+		/// <returns>The new array without values in `list1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Without<TSource>(RamdaPlaceholder list1, IList<TSource> list2) {
 			return Currying.Without(list1, list2);
 		}
 
+		/// <summary>
+		/// Returns a new list without values in the first argument.`R.equals` is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="list1">The values to be removed from `list2`.</param>
+		/// <param name="list2">The array to remove values from.</param>
+		/// <returns>The new array without values in `list1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Without<TSource>(IList<TSource> list1, RamdaPlaceholder list2 = null) {
 			return Currying.Without(list1, list2);
 		}
 
+		/// <summary>
+		/// Returns a new list without values in the first argument.`R.equals` is used to determine equality.Acts as a transducer if a transformer is given in list position.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="list1">The values to be removed from `list2`.</param>
+		/// <param name="list2">The array to remove values from.</param>
+		/// <returns>The new array without values in `list1`.</returns>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Without(RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.Without(list1, list2);
 		}

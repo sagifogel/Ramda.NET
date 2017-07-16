@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the result of concatenating the given lists or strings.Note: `R.concat` expects both arguments to be of the same type,unlike the native `Array.prototype.concat` method. It will throwan error if you `concat` an Array with a non-Array value.Dispatches to the `concat` method of the first argument, if present.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="firstList">The first list</param>
+		/// <param name="secondList">The second list</param>
+		/// <returns>A list consisting of the elements of `firstList` followed by the elements of`secondList`.</returns>
 		public static dynamic Concat<TSource1, TSource2>(IList<TSource1> a, IList<TSource2> b) {
 			return Currying.Concat(a, b);
 		}
 
+		/// <summary>
+		/// Returns the result of concatenating the given lists or strings.Note: `R.concat` expects both arguments to be of the same type,unlike the native `Array.prototype.concat` method. It will throwan error if you `concat` an Array with a non-Array value.Dispatches to the `concat` method of the first argument, if present.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="firstList">The first list</param>
+		/// <param name="secondList">The second list</param>
+		/// <returns>A list consisting of the elements of `firstList` followed by the elements of`secondList`.</returns>
 		public static dynamic Concat<TSource2>(RamdaPlaceholder a, IList<TSource2> b) {
 			return Currying.Concat(a, b);
 		}
 
+		/// <summary>
+		/// Returns the result of concatenating the given lists or strings.Note: `R.concat` expects both arguments to be of the same type,unlike the native `Array.prototype.concat` method. It will throwan error if you `concat` an Array with a non-Array value.Dispatches to the `concat` method of the first argument, if present.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="firstList">The first list</param>
+		/// <param name="secondList">The second list</param>
+		/// <returns>A list consisting of the elements of `firstList` followed by the elements of`secondList`.</returns>
 		public static dynamic Concat<TSource1>(IList<TSource1> a, RamdaPlaceholder b = null) {
 			return Currying.Concat(a, b);
 		}
 
+		/// <summary>
+		/// Returns the result of concatenating the given lists or strings.Note: `R.concat` expects both arguments to be of the same type,unlike the native `Array.prototype.concat` method. It will throwan error if you `concat` an Array with a non-Array value.Dispatches to the `concat` method of the first argument, if present.
+		/// <para />
+		/// sig: [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="firstList">The first list</param>
+		/// <param name="secondList">The second list</param>
+		/// <returns>A list consisting of the elements of `firstList` followed by the elements of`secondList`.</returns>
 		public static dynamic Concat(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Concat(a, b);
 		}

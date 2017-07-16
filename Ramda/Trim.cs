@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Removes (strips) whitespace from both ends of the string.
+		/// <para />
+		/// sig: String -> String
+		/// </summary>
+		/// <param name="str">The string to trim.</param>
+		/// <returns>Trimmed version of `str`.</returns>
 		public static dynamic Trim(string str) {
 			return Currying.Trim(str);
 		}
 
+		/// <summary>
+		/// Removes (strips) whitespace from both ends of the string.
+		/// <para />
+		/// sig: String -> String
+		/// </summary>
+		/// <param name="str">The string to trim.</param>
+		/// <returns>Trimmed version of `str`.</returns>
 		public static dynamic Trim(RamdaPlaceholder str = null) {
 			return Currying.Trim(str);
 		}

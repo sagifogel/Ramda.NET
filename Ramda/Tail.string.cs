@@ -15,6 +15,16 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns all but the first element of the given list or string (or objectwith a `tail` method).Dispatches to the `slice` method of the first argument, if present.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Head"/>
+		/// <see cref="R.Init"/>
+		/// <see cref="R.Last"/>
 		public static dynamic Tail(string list) {
 			return Currying.Tail(list);
 		}

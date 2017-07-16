@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.LastIndexOf"/>
 		public static dynamic IndexOf(object target, object array) {
 			return Currying.IndexOf(target, array);
 		}
 
+		/// <summary>
+		/// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.LastIndexOf"/>
 		public static dynamic IndexOf(RamdaPlaceholder target, object array) {
 			return Currying.IndexOf(target, array);
 		}
 
+		/// <summary>
+		/// Returns the position of the first occurrence of an item in an array, or -1if the item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.LastIndexOf"/>
 		public static dynamic IndexOf(object target, RamdaPlaceholder array = null) {
 			return Currying.IndexOf(target, array);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Merges a list of objects together into one object.
+		/// <para />
+		/// sig: [{k: v}] -> {k: v}
+		/// </summary>
+		/// <param name="list">An array of objects</param>
+		/// <returns>A merged object.</returns>
+		/// <see cref="R.Reduce"/>
 		public static dynamic MergeAll<TSource>(IList<TSource> list) {
 			return Currying.MergeAll(list);
 		}
 
+		/// <summary>
+		/// Merges a list of objects together into one object.
+		/// <para />
+		/// sig: [{k: v}] -> {k: v}
+		/// </summary>
+		/// <param name="list">An array of objects</param>
+		/// <returns>A merged object.</returns>
+		/// <see cref="R.Reduce"/>
 		public static dynamic MergeAll(RamdaPlaceholder list = null) {
 			return Currying.MergeAll(list);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,86 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc<TValue, TTarget>(string prop, TValue val, TTarget obj) {
 			return Currying.Assoc(prop, val, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc<TValue, TTarget>(RamdaPlaceholder prop, TValue val, TTarget obj) {
 			return Currying.Assoc(prop, val, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc<TTarget>(string prop, RamdaPlaceholder val, TTarget obj) {
 			return Currying.Assoc(prop, val, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc<TValue>(string prop, TValue val, RamdaPlaceholder obj = null) {
 			return Currying.Assoc(prop, val, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc(string prop, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.Assoc(prop, val, obj);
 		}
 
+		/// <summary>
+		/// Makes a shallow clone of an object, setting or overriding the specifiedproperty with the given value. Note that this copies and flattens prototypeproperties onto the new object as well. All non-primitive properties arecopied by reference.
+		/// <para />
+		/// sig: String -> a -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="prop">The property name to set</param>
+		/// <param name="val">The new value</param>
+		/// <param name="obj">The object to clone</param>
+		/// <returns>A new object equivalent to the original except for the changed property.</returns>
+		/// <see cref="R.Dissoc"/>
 		public static dynamic Assoc(RamdaPlaceholder prop = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.Assoc(prop, val, obj);
 		}

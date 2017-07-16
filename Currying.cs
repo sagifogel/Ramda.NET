@@ -903,23 +903,20 @@ namespace Ramda.NET
             return result;
         });
 
-        internal readonly static dynamic SplitWhen = Curry2<DynamicDelegate, IList, IList>((pred, list) => {
+        internal readonly static dynamic SplitWhen = Curry2<DynamicDelegate, IEnumerable, IList>((pred, list) => {
             var idx = 0;
-            var len = list.Count;
-            var prefix = list.CreateNewList();
+            var prefix = ListStrategy.New(list);
+            var strategy = ListStrategy.Resolve(list);
+            var len = strategy.Length;
             DynamicDelegate dynamicDelegate = Delegate(pred);
-            var result = list.CreateNewList(type: prefix.GetType());
+            var result = list.CreateNewList(type: prefix.GetElementType());
 
-            if (list.IsArray()) {
-                list = list.CreateNewList(list);
-            }
-
-            while (idx < len && !dynamicDelegate.DynamicInvoke<bool>(list[idx])) {
-                prefix.Add(list[idx]);
+            while (idx < len && !dynamicDelegate.DynamicInvoke<bool>(strategy[idx])) {
+                prefix.Add(strategy[idx]);
                 idx += 1;
             }
 
-            result.Add(prefix);
+            result.Add(prefix.Slice(0, prefix.Length));
             result.Add(list.Slice(idx));
 
             return result;

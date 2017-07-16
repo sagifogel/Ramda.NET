@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a value wrapped to indicate that it is the final value of the reduceand transduce functions. The returned value should be considered a blackbox: the internal structure is not guaranteed to be stable.Note: this optimization is unavailable to functions not explicitly listedabove. For instance, it is not currently supported by reduceRight.
+		/// <para />
+		/// sig: a -> *
+		/// </summary>
+		/// <param name="x">The final value of the reduce.</param>
+		/// <returns>The wrapped value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Reduced<TTarget>(TTarget x) {
 			return Currying.Reduced(x);
 		}
 
+		/// <summary>
+		/// Returns a value wrapped to indicate that it is the final value of the reduceand transduce functions. The returned value should be considered a blackbox: the internal structure is not guaranteed to be stable.Note: this optimization is unavailable to functions not explicitly listedabove. For instance, it is not currently supported by reduceRight.
+		/// <para />
+		/// sig: a -> *
+		/// </summary>
+		/// <param name="x">The final value of the reduce.</param>
+		/// <returns>The wrapped value.</returns>
+		/// <see cref="R.Reduce"/>
+		/// <see cref="R.Transduce"/>
 		public static dynamic Reduced(RamdaPlaceholder x = null) {
 			return Currying.Reduced(x);
 		}

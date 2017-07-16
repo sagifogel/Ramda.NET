@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Determines whether a given string matches a given regular expression.
+		/// <para />
+		/// sig: RegExp -> String -> Boolean
+		/// </summary>
+		/// <param name="pattern">first</param>
+		/// <param name="str">second</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Match"/>
 		public static dynamic Test(Regex pattern, string str) {
 			return Currying.Test(pattern, str);
 		}
 
+		/// <summary>
+		/// Determines whether a given string matches a given regular expression.
+		/// <para />
+		/// sig: RegExp -> String -> Boolean
+		/// </summary>
+		/// <param name="pattern">first</param>
+		/// <param name="str">second</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Match"/>
 		public static dynamic Test(RamdaPlaceholder pattern, string str) {
 			return Currying.Test(pattern, str);
 		}
 
+		/// <summary>
+		/// Determines whether a given string matches a given regular expression.
+		/// <para />
+		/// sig: RegExp -> String -> Boolean
+		/// </summary>
+		/// <param name="pattern">first</param>
+		/// <param name="str">second</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Match"/>
 		public static dynamic Test(Regex pattern, RamdaPlaceholder str = null) {
 			return Currying.Test(pattern, str);
 		}
 
+		/// <summary>
+		/// Determines whether a given string matches a given regular expression.
+		/// <para />
+		/// sig: RegExp -> String -> Boolean
+		/// </summary>
+		/// <param name="pattern">first</param>
+		/// <param name="str">second</param>
+		/// <returns>Boolean</returns>
+		/// <see cref="R.Match"/>
 		public static dynamic Test(RamdaPlaceholder pattern = null, RamdaPlaceholder str = null) {
 			return Currying.Test(pattern, str);
 		}

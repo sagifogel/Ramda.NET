@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,54 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns `true` if one or both of its arguments are `true`. Returns `false`if both arguments are `false`.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>the first argument if truthy, otherwise the second argument.</returns>
+		/// <see cref="R.Either"/>
 		public static dynamic Or(bool a, bool b) {
 			return Currying.Or(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if one or both of its arguments are `true`. Returns `false`if both arguments are `false`.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>the first argument if truthy, otherwise the second argument.</returns>
+		/// <see cref="R.Either"/>
 		public static dynamic Or(RamdaPlaceholder a, bool b) {
 			return Currying.Or(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if one or both of its arguments are `true`. Returns `false`if both arguments are `false`.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>the first argument if truthy, otherwise the second argument.</returns>
+		/// <see cref="R.Either"/>
 		public static dynamic Or(bool a, RamdaPlaceholder b = null) {
 			return Currying.Or(a, b);
 		}
 
+		/// <summary>
+		/// Returns `true` if one or both of its arguments are `true`. Returns `false`if both arguments are `false`.
+		/// <para />
+		/// sig: a -> b -> a | b
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>the first argument if truthy, otherwise the second argument.</returns>
+		/// <see cref="R.Either"/>
 		public static dynamic Or(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Or(a, b);
 		}

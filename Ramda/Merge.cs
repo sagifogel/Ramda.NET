@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,58 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Create a new object with the own properties of the first object merged withthe own properties of the second object. If a key exists in both objects,the value from the second object will be used.
+		/// <para />
+		/// sig: {k: v} -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="l">first</param>
+		/// <param name="r">second</param>
+		/// <returns>Object</returns>
+		/// <see cref="R.MergeWith"/>
+		/// <see cref="R.MergeWithKey"/>
 		public static dynamic Merge<TSource1, TSource2>(TSource1 l, TSource2 r) {
 			return Currying.Merge(l, r);
 		}
 
+		/// <summary>
+		/// Create a new object with the own properties of the first object merged withthe own properties of the second object. If a key exists in both objects,the value from the second object will be used.
+		/// <para />
+		/// sig: {k: v} -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="l">first</param>
+		/// <param name="r">second</param>
+		/// <returns>Object</returns>
+		/// <see cref="R.MergeWith"/>
+		/// <see cref="R.MergeWithKey"/>
 		public static dynamic Merge<TSource2>(RamdaPlaceholder l, TSource2 r) {
 			return Currying.Merge(l, r);
 		}
 
+		/// <summary>
+		/// Create a new object with the own properties of the first object merged withthe own properties of the second object. If a key exists in both objects,the value from the second object will be used.
+		/// <para />
+		/// sig: {k: v} -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="l">first</param>
+		/// <param name="r">second</param>
+		/// <returns>Object</returns>
+		/// <see cref="R.MergeWith"/>
+		/// <see cref="R.MergeWithKey"/>
 		public static dynamic Merge<TSource1>(TSource1 l, RamdaPlaceholder r = null) {
 			return Currying.Merge(l, r);
 		}
 
+		/// <summary>
+		/// Create a new object with the own properties of the first object merged withthe own properties of the second object. If a key exists in both objects,the value from the second object will be used.
+		/// <para />
+		/// sig: {k: v} -> {k: v} -> {k: v}
+		/// </summary>
+		/// <param name="l">first</param>
+		/// <param name="r">second</param>
+		/// <returns>Object</returns>
+		/// <see cref="R.MergeWith"/>
+		/// <see cref="R.MergeWithKey"/>
 		public static dynamic Merge(RamdaPlaceholder l = null, RamdaPlaceholder r = null) {
 			return Currying.Merge(l, r);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist. `R.equals` is used to determine equality.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic Uniq<TSource>(IList<TSource> list) {
 			return Currying.Uniq(list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist. `R.equals` is used to determine equality.
+		/// <para />
+		/// sig: [a] -> [a]
+		/// </summary>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic Uniq(RamdaPlaceholder list = null) {
 			return Currying.Uniq(list);
 		}

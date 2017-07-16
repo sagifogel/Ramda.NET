@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,22 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Performs right-to-left function composition. The rightmost function may haveany arity; the remaining functions must be unary.**Note:** The result of compose is not automatically curried.
+		/// <para />
+		/// sig: ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
+		/// </summary>
+		/// <returns>Function</returns>
 		public static dynamic Compose(params Delegate[] functions) {
 			return Currying.Compose(functions);
 		}
 
+		/// <summary>
+		/// Performs right-to-left function composition. The rightmost function may haveany arity; the remaining functions must be unary.**Note:** The result of compose is not automatically curried.
+		/// <para />
+		/// sig: ((y -> z), (x -> y), ..., (o -> p), ((a, b, ..., n) -> o)) -> ((a, b, ..., n) -> z)
+		/// </summary>
+		/// <returns>Function</returns>
 		public static dynamic Compose(RamdaPlaceholder functions = null) {
 			return Currying.Compose(functions);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,50 +15,194 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, TTarget x) {
 			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget, TElement>(RamdaPlaceholder lens, Func<TElement, TElement> v, TTarget x) {
 			return Currying.Over(lens, Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v, TTarget x) {
 			return Currying.Over(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget, TElement>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, Func<TElement, TElement> v, RamdaPlaceholder x = null) {
 			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Over(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget>(RamdaPlaceholder lens, dynamic v, TTarget x) {
 			return Currying.Over(lens, Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget>(dynamic lens, RamdaPlaceholder v, TTarget x) {
 			return Currying.Over(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over(dynamic lens, dynamic v, RamdaPlaceholder x = null) {
 			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over(dynamic lens, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Over(Delegate(lens), v, x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget, TElement>(dynamic lens, Func<TElement, TElement> v, TTarget x) {
 			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over<TTarget>(Func<Func<TTarget, Functor>, Func<TTarget, Functor>> lens, dynamic v, TTarget x) {
 			return Currying.Over(Delegate(lens), Delegate(v), x);
 		}
 
+		/// <summary>
+		/// Returns the result of "setting" the portion of the given data structurefocused by the given lens to the result of applying the given function tothe focused value.
+		/// <para />
+		/// sig: Lens s a -> (a -> a) -> s -> s
+		/// </summary>
+		/// <param name="lens">first</param>
+		/// <param name="v">second</param>
+		/// <param name="x">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Prop"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Over(RamdaPlaceholder lens = null, RamdaPlaceholder v = null, RamdaPlaceholder x = null) {
 			return Currying.Over(lens, v, x);
 		}

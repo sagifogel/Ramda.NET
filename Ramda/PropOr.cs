@@ -15,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr<TValue, TTarget>(TValue val, string p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr<TTarget>(RamdaPlaceholder val, string p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr<TValue, TTarget>(TValue val, RamdaPlaceholder p, TTarget obj) {
 			return Currying.PropOr(val, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr<TValue>(TValue val, string p, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr<TValue>(TValue val, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}
 
+		/// <summary>
+		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
+		/// <para />
+		/// sig: a -> String -> Object -> a
+		/// </summary>
+		/// <param name="val">The default value.</param>
+		/// <param name="p">The name of the property to return.</param>
+		/// <param name="obj">The object to query.</param>
+		/// <returns>The value of given property of the supplied object or the default value.</returns>
 		public static dynamic PropOr(RamdaPlaceholder val = null, RamdaPlaceholder p = null, RamdaPlaceholder obj = null) {
 			return Currying.PropOr(val, p, obj);
 		}

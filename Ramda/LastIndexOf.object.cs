@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the position of the last occurrence of an item in an array, or -1 ifthe item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.IndexOf"/>
 		public static dynamic LastIndexOf(object target, object xs) {
 			return Currying.LastIndexOf(target, xs);
 		}
 
+		/// <summary>
+		/// Returns the position of the last occurrence of an item in an array, or -1 ifthe item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.IndexOf"/>
 		public static dynamic LastIndexOf(RamdaPlaceholder target, object xs) {
 			return Currying.LastIndexOf(target, xs);
 		}
 
+		/// <summary>
+		/// Returns the position of the last occurrence of an item in an array, or -1 ifthe item is not included in the array. `R.equals` is used to determineequality.
+		/// <para />
+		/// sig: a -> [a] -> Number
+		/// </summary>
+		/// <param name="target">The item to find.</param>
+		/// <param name="xs">The array to search in.</param>
+		/// <returns>the index of the target, or -1 if the target is not found.</returns>
+		/// <see cref="R.IndexOf"/>
 		public static dynamic LastIndexOf(object target, RamdaPlaceholder xs = null) {
 			return Currying.LastIndexOf(target, xs);
 		}

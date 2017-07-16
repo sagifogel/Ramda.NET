@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,14 +15,41 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Divides the first parameter by the second and returns the remainder. Notethat this function preserves the JavaScript-style behavior for modulo. Formathematical modulo see `mathMod`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The value to the divide.</param>
+		/// <param name="b">The pseudo-modulus</param>
+		/// <returns>The result of `b % a`.</returns>
+		/// <see cref="R.MathMod"/>
 		public static dynamic Modulo(int a, int b) {
 			return Currying.Modulo(a, b);
 		}
 
+		/// <summary>
+		/// Divides the first parameter by the second and returns the remainder. Notethat this function preserves the JavaScript-style behavior for modulo. Formathematical modulo see `mathMod`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The value to the divide.</param>
+		/// <param name="b">The pseudo-modulus</param>
+		/// <returns>The result of `b % a`.</returns>
+		/// <see cref="R.MathMod"/>
 		public static dynamic Modulo(RamdaPlaceholder a, int b) {
 			return Currying.Modulo(a, b);
 		}
 
+		/// <summary>
+		/// Divides the first parameter by the second and returns the remainder. Notethat this function preserves the JavaScript-style behavior for modulo. Formathematical modulo see `mathMod`.
+		/// <para />
+		/// sig: Number -> Number -> Number
+		/// </summary>
+		/// <param name="a">The value to the divide.</param>
+		/// <param name="b">The pseudo-modulus</param>
+		/// <returns>The result of `b % a`.</returns>
+		/// <see cref="R.MathMod"/>
 		public static dynamic Modulo(int a, RamdaPlaceholder b = null) {
 			return Currying.Modulo(a, b);
 		}

@@ -15,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Sorts a list according to a list of comparators.
+		/// <para />
+		/// sig: [a -> a -> Number] -> [a] -> [a]
+		/// </summary>
+		/// <param name="functions">A list of comparator functions.</param>
+		/// <param name="list">The list to sort.</param>
+		/// <returns>A new list sorted according to the comarator functions.</returns>
 		public static dynamic SortWith<TSource>(IList<Func<TSource, int>> functions, IList<TSource> list) {
 			return Currying.SortWith(functions, list);
 		}
 
+		/// <summary>
+		/// Sorts a list according to a list of comparators.
+		/// <para />
+		/// sig: [a -> a -> Number] -> [a] -> [a]
+		/// </summary>
+		/// <param name="functions">A list of comparator functions.</param>
+		/// <param name="list">The list to sort.</param>
+		/// <returns>A new list sorted according to the comarator functions.</returns>
 		public static dynamic SortWith<TSource>(RamdaPlaceholder functions, IList<TSource> list) {
 			return Currying.SortWith(functions, list);
 		}
 
+		/// <summary>
+		/// Sorts a list according to a list of comparators.
+		/// <para />
+		/// sig: [a -> a -> Number] -> [a] -> [a]
+		/// </summary>
+		/// <param name="functions">A list of comparator functions.</param>
+		/// <param name="list">The list to sort.</param>
+		/// <returns>A new list sorted according to the comarator functions.</returns>
 		public static dynamic SortWith<TSource>(IList<Func<TSource, int>> functions, RamdaPlaceholder list = null) {
 			return Currying.SortWith(functions, list);
 		}
 
+		/// <summary>
+		/// Sorts a list according to a list of comparators.
+		/// <para />
+		/// sig: [a -> a -> Number] -> [a] -> [a]
+		/// </summary>
+		/// <param name="functions">A list of comparator functions.</param>
+		/// <param name="list">The list to sort.</param>
+		/// <returns>A new list sorted according to the comarator functions.</returns>
 		public static dynamic SortWith(RamdaPlaceholder functions = null, RamdaPlaceholder list = null) {
 			return Currying.SortWith(functions, list);
 		}

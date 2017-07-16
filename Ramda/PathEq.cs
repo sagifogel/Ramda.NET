@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq<TValue, TTarget>(IList<object> path, TValue val, TTarget obj) {
 			return Currying.PathEq(path, val, obj);
 		}
 
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq<TValue, TTarget>(RamdaPlaceholder path, TValue val, TTarget obj) {
 			return Currying.PathEq(path, val, obj);
 		}
 
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq<TTarget>(IList<object> path, RamdaPlaceholder val, TTarget obj) {
 			return Currying.PathEq(path, val, obj);
 		}
 
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq<TValue>(IList<object> path, TValue val, RamdaPlaceholder obj = null) {
 			return Currying.PathEq(path, val, obj);
 		}
 
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq(IList<object> path, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.PathEq(path, val, obj);
 		}
 
+		/// <summary>
+		/// Determines whether a nested path on an object has a specific value, in`R.equals` terms. Most likely used to filter a list.
+		/// <para />
+		/// sig: [Idx] -> a -> {a} -> Boolean
+		/// </summary>
+		/// <param name="path">The path of the nested property to use</param>
+		/// <param name="val">The value to compare the nested property with</param>
+		/// <param name="obj">The object to check the nested property in</param>
+		/// <returns>`true` if the value equals the nested object property, `false` otherwise.</returns>
 		public static dynamic PathEq(RamdaPlaceholder path = null, RamdaPlaceholder val = null, RamdaPlaceholder obj = null) {
 			return Currying.PathEq(path, val, obj);
 		}

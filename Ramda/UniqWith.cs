@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,74 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, IList<TSource> list) {
 			return Currying.UniqWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith<TSource>(RamdaPlaceholder pred, IList<TSource> list) {
 			return Currying.UniqWith(pred, list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith<TSource>(Func<TSource, TSource, bool> pred, RamdaPlaceholder list = null) {
 			return Currying.UniqWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith(dynamic pred, RamdaPlaceholder list = null) {
 			return Currying.UniqWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith<TSource>(dynamic pred, IList<TSource> list) {
 			return Currying.UniqWith(Delegate(pred), list);
 		}
 
+		/// <summary>
+		/// Returns a new list containing only one copy of each element in the originallist, based upon the value returned by applying the supplied predicate totwo list elements. Prefers the first item if two items compare equal basedon the predicate.
+		/// <para />
+		/// sig: (a, a -> Boolean) -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list">The array to consider.</param>
+		/// <returns>The list of unique items.</returns>
 		public static dynamic UniqWith(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {
 			return Currying.UniqWith(pred, list);
 		}

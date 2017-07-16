@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the string representation of the given value. `eval`'ing the outputshould result in a value equivalent to the input value. Many of the built-in`toString` methods do not satisfy this requirement.If the given value is an `[object Object]` with a `toString` method otherthan `Object.prototype.toString`, this method is invoked with no argumentsto produce the return value. This means user-defined constructor functionscan provide a suitable `toString` method. For example:    function Point(x, y) {      this.x = x;      this.y = y;    }    Point.prototype.toString = function() {      return 'new Point(' + this.x + ', ' + this.y + ')';    };    R.toString(new Point(1, 2)); //=> 'new Point(1, 2)'
+		/// <para />
+		/// sig: * -> String
+		/// </summary>
+		/// <param name="val">first</param>
+		/// <returns>String</returns>
 		public static dynamic ToString<TTarget>(TTarget val) {
 			return Currying.ToString(val);
 		}
 
+		/// <summary>
+		/// Returns the string representation of the given value. `eval`'ing the outputshould result in a value equivalent to the input value. Many of the built-in`toString` methods do not satisfy this requirement.If the given value is an `[object Object]` with a `toString` method otherthan `Object.prototype.toString`, this method is invoked with no argumentsto produce the return value. This means user-defined constructor functionscan provide a suitable `toString` method. For example:    function Point(x, y) {      this.x = x;      this.y = y;    }    Point.prototype.toString = function() {      return 'new Point(' + this.x + ', ' + this.y + ')';    };    R.toString(new Point(1, 2)); //=> 'new Point(1, 2)'
+		/// <para />
+		/// sig: * -> String
+		/// </summary>
+		/// <param name="val">first</param>
+		/// <returns>String</returns>
 		public static dynamic ToString(RamdaPlaceholder val = null) {
 			return Currying.ToString(val);
 		}

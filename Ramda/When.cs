@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,50 +15,182 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenTrueFn, TArg x) {
 			return Currying.When(Delegate(pred), Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg, TReturn>(RamdaPlaceholder pred, Func<TArg, TReturn> whenTrueFn, TArg x) {
 			return Currying.When(pred, Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenTrueFn, TArg x) {
 			return Currying.When(Delegate(pred), whenTrueFn, x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg, TReturn>(Func<TArg, bool> pred, Func<TArg, TReturn> whenTrueFn, RamdaPlaceholder x = null) {
 			return Currying.When(Delegate(pred), Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg>(Func<TArg, bool> pred, RamdaPlaceholder whenTrueFn = null, RamdaPlaceholder x = null) {
 			return Currying.When(Delegate(pred), whenTrueFn, x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg>(RamdaPlaceholder pred, dynamic whenTrueFn, TArg x) {
 			return Currying.When(pred, Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg>(dynamic pred, RamdaPlaceholder whenTrueFn, TArg x) {
 			return Currying.When(Delegate(pred), whenTrueFn, x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When(dynamic pred, dynamic whenTrueFn, RamdaPlaceholder x = null) {
 			return Currying.When(Delegate(pred), Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When(dynamic pred, RamdaPlaceholder whenTrueFn = null, RamdaPlaceholder x = null) {
 			return Currying.When(Delegate(pred), whenTrueFn, x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg, TReturn>(dynamic pred, Func<TArg, TReturn> whenTrueFn, TArg x) {
 			return Currying.When(Delegate(pred), Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When<TArg>(Func<TArg, bool> pred, dynamic whenTrueFn, TArg x) {
 			return Currying.When(Delegate(pred), Delegate(whenTrueFn), x);
 		}
 
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is satisfied, the function will return the result of callingthe `whenTrueFn` function with the same argument. If the predicate is notsatisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenTrueFn">A function to invoke when the `condition`        evaluates to a truthy value.</param>
+		/// <param name="x">An object to test with the `pred` function and        pass to `whenTrueFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenTrueFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.Unless"/>
 		public static dynamic When(RamdaPlaceholder pred = null, RamdaPlaceholder whenTrueFn = null, RamdaPlaceholder x = null) {
 			return Currying.When(pred, whenTrueFn, x);
 		}

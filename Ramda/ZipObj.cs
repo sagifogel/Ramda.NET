@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Creates a new object out of a list of keys and a list of values.Key/value pairing is truncated to the length of the shorter of the two lists.Note: `zipObj` is equivalent to `pipe(zipWith(pair), fromPairs)`.
+		/// <para />
+		/// sig: [String] -> [*] -> {String: *}
+		/// </summary>
+		/// <param name="keys">The array that will be properties on the output object.</param>
+		/// <param name="values">The list of values on the output object.</param>
+		/// <returns>The object made by pairing up same-indexed elements of `keys` and `values`.</returns>
 		public static dynamic ZipObj<TSource>(IList<string> keys, IList<TSource> values) {
 			return Currying.ZipObj(keys, values);
 		}
 
+		/// <summary>
+		/// Creates a new object out of a list of keys and a list of values.Key/value pairing is truncated to the length of the shorter of the two lists.Note: `zipObj` is equivalent to `pipe(zipWith(pair), fromPairs)`.
+		/// <para />
+		/// sig: [String] -> [*] -> {String: *}
+		/// </summary>
+		/// <param name="keys">The array that will be properties on the output object.</param>
+		/// <param name="values">The list of values on the output object.</param>
+		/// <returns>The object made by pairing up same-indexed elements of `keys` and `values`.</returns>
 		public static dynamic ZipObj<TSource>(RamdaPlaceholder keys, IList<TSource> values) {
 			return Currying.ZipObj(keys, values);
 		}
 
+		/// <summary>
+		/// Creates a new object out of a list of keys and a list of values.Key/value pairing is truncated to the length of the shorter of the two lists.Note: `zipObj` is equivalent to `pipe(zipWith(pair), fromPairs)`.
+		/// <para />
+		/// sig: [String] -> [*] -> {String: *}
+		/// </summary>
+		/// <param name="keys">The array that will be properties on the output object.</param>
+		/// <param name="values">The list of values on the output object.</param>
+		/// <returns>The object made by pairing up same-indexed elements of `keys` and `values`.</returns>
 		public static dynamic ZipObj(IList<string> keys, RamdaPlaceholder values = null) {
 			return Currying.ZipObj(keys, values);
 		}
 
+		/// <summary>
+		/// Creates a new object out of a list of keys and a list of values.Key/value pairing is truncated to the length of the shorter of the two lists.Note: `zipObj` is equivalent to `pipe(zipWith(pair), fromPairs)`.
+		/// <para />
+		/// sig: [String] -> [*] -> {String: *}
+		/// </summary>
+		/// <param name="keys">The array that will be properties on the output object.</param>
+		/// <param name="values">The list of values on the output object.</param>
+		/// <returns>The object made by pairing up same-indexed elements of `keys` and `values`.</returns>
 		public static dynamic ZipObj(RamdaPlaceholder keys = null, RamdaPlaceholder values = null) {
 			return Currying.ZipObj(keys, values);
 		}

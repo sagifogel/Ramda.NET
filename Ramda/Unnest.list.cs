@@ -15,10 +15,28 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Shorthand for `R.chain(R.identity)`, which removes one level of nesting fromany [Chain](https://github.com/fantasyland/fantasy-land#chain).
+		/// <para />
+		/// sig: Chain c => c (c a) -> c a
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Flatten"/>
+		/// <see cref="R.Chain"/>
 		public static dynamic Unnest<TSource>(IList<TSource> list) {
 			return Currying.Unnest(list);
 		}
 
+		/// <summary>
+		/// Shorthand for `R.chain(R.identity)`, which removes one level of nesting fromany [Chain](https://github.com/fantasyland/fantasy-land#chain).
+		/// <para />
+		/// sig: Chain c => c (c a) -> c a
+		/// </summary>
+		/// <param name="list">first</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Flatten"/>
+		/// <see cref="R.Chain"/>
 		public static dynamic Unnest(RamdaPlaceholder list = null) {
 			return Currying.Unnest(list);
 		}

@@ -15,10 +15,26 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Performs left-to-right composition of one or more Promise-returningfunctions. The leftmost function may have any arity; the remaining functionsmust be unary.
+		/// <para />
+		/// sig: ((a -> Promise b), (b -> Promise c), ..., (y -> Promise z)) -> (a -> Promise z)
+		/// </summary>
+		/// <param name="functions">first</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.ComposeP"/>
 		public static dynamic PipeP(params Delegate[] functions) {
 			return Currying.PipeP(functions);
 		}
 
+		/// <summary>
+		/// Performs left-to-right composition of one or more Promise-returningfunctions. The leftmost function may have any arity; the remaining functionsmust be unary.
+		/// <para />
+		/// sig: ((a -> Promise b), (b -> Promise c), ..., (y -> Promise z)) -> (a -> Promise z)
+		/// </summary>
+		/// <param name="functions">first</param>
+		/// <returns>Function</returns>
+		/// <see cref="R.ComposeP"/>
 		public static dynamic PipeP(RamdaPlaceholder functions = null) {
 			return Currying.PipeP(functions);
 		}

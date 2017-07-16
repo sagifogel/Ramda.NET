@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,74 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, TTarget x) {
 			return Currying.Tap(Delegate(fn), x);
 		}
 
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap<TTarget>(RamdaPlaceholder fn, TTarget x) {
 			return Currying.Tap(fn, x);
 		}
 
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap<TTarget>(Action<TTarget> fn, RamdaPlaceholder x = null) {
 			return Currying.Tap(Delegate(fn), x);
 		}
 
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap(dynamic fn, RamdaPlaceholder x = null) {
 			return Currying.Tap(Delegate(fn), x);
 		}
 
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap<TTarget>(dynamic fn, TTarget x) {
 			return Currying.Tap(Delegate(fn), x);
 		}
 
+		/// <summary>
+		/// Runs the given function with the supplied object, then returns the object.
+		/// <para />
+		/// sig: (a -> *) -> a -> a
+		/// </summary>
+		/// <param name="fn">The function to call with `x`. The return value of `fn` will be thrown away.</param>
+		/// <param name="x">second</param>
+		/// <returns>`x`.</returns>
 		public static dynamic Tap(RamdaPlaceholder fn = null, RamdaPlaceholder x = null) {
 			return Currying.Tap(fn, x);
 		}

@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,152 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, TArg a, TArg b) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(RamdaPlaceholder f, TArg a, TArg b) {
 			return Currying.MinBy(f, a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a, TArg b) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, TArg a, RamdaPlaceholder b = null) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(Func<TArg, TArg> f, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(dynamic f, RamdaPlaceholder a, TArg b) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(dynamic f, TArg a, RamdaPlaceholder b = null) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy(dynamic f, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy<TArg>(dynamic f, TArg a, TArg b) {
 			return Currying.MinBy(Delegate(f), a, b);
 		}
 
+		/// <summary>
+		/// Takes a function and two values, and returns whichever value produces thesmaller result when passed to the provided function.
+		/// <para />
+		/// sig: Ord b => (a -> b) -> a -> a -> a
+		/// </summary>
+		/// <param name="f">first</param>
+		/// <param name="a">second</param>
+		/// <param name="b">third</param>
+		/// <returns>*</returns>
+		/// <see cref="R.Min"/>
+		/// <see cref="R.MaxBy"/>
 		public static dynamic MinBy(RamdaPlaceholder f = null, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.MinBy(f, a, b);
 		}

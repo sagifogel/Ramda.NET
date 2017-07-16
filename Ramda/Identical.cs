@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns true if its arguments are identical, false otherwise. Values areidentical if they reference the same memory. `NaN` is identical to `NaN`;`0` and `-0` are not identical.
+		/// <para />
+		/// sig: a -> a -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Identical<TTarget>(TTarget a, TTarget b) {
 			return Currying.Identical(a, b);
 		}
 
+		/// <summary>
+		/// Returns true if its arguments are identical, false otherwise. Values areidentical if they reference the same memory. `NaN` is identical to `NaN`;`0` and `-0` are not identical.
+		/// <para />
+		/// sig: a -> a -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Identical<TTarget>(RamdaPlaceholder a, TTarget b) {
 			return Currying.Identical(a, b);
 		}
 
+		/// <summary>
+		/// Returns true if its arguments are identical, false otherwise. Values areidentical if they reference the same memory. `NaN` is identical to `NaN`;`0` and `-0` are not identical.
+		/// <para />
+		/// sig: a -> a -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Identical<TTarget>(TTarget a, RamdaPlaceholder b = null) {
 			return Currying.Identical(a, b);
 		}
 
+		/// <summary>
+		/// Returns true if its arguments are identical, false otherwise. Values areidentical if they reference the same memory. `NaN` is identical to `NaN`;`0` and `-0` are not identical.
+		/// <para />
+		/// sig: a -> a -> Boolean
+		/// </summary>
+		/// <param name="a">first</param>
+		/// <param name="b">second</param>
+		/// <returns>Boolean</returns>
 		public static dynamic Identical(RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Identical(a, b);
 		}

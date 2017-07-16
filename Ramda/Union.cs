@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="as">The first list.</param>
+		/// <param name="bs">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
 		public static dynamic Union<TSource>(IList<TSource> @as, IList<TSource> bs) {
 			return Currying.Union(@as, bs);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="as">The first list.</param>
+		/// <param name="bs">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
 		public static dynamic Union<TSource>(RamdaPlaceholder @as, IList<TSource> bs) {
 			return Currying.Union(@as, bs);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="as">The first list.</param>
+		/// <param name="bs">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
 		public static dynamic Union<TSource>(IList<TSource> @as, RamdaPlaceholder bs = null) {
 			return Currying.Union(@as, bs);
 		}
 
+		/// <summary>
+		/// Combines two lists into a set (i.e. no duplicates) composed of the elementsof each list.
+		/// <para />
+		/// sig: [*] -> [*] -> [*]
+		/// </summary>
+		/// <param name="as">The first list.</param>
+		/// <param name="bs">The second list.</param>
+		/// <returns>The first and second lists concatenated, with duplicates removed.</returns>
 		public static dynamic Union(RamdaPlaceholder @as = null, RamdaPlaceholder bs = null) {
 			return Currying.Union(@as, bs);
 		}

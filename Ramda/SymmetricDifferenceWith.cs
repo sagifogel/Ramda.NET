@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,42 +15,162 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(RamdaPlaceholder pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.SymmetricDifferenceWith(pred, list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(Func<TSource1, TSource2, bool> pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource2>(dynamic pred, RamdaPlaceholder list1, IList<TSource2> list2) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1>(dynamic pred, IList<TSource1> list1, RamdaPlaceholder list2 = null) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith(dynamic pred, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith<TSource1, TSource2>(dynamic pred, IList<TSource1> list1, IList<TSource2> list2) {
 			return Currying.SymmetricDifferenceWith(Delegate(pred), list1, list2);
 		}
 
+		/// <summary>
+		/// Finds the set (i.e. no duplicates) of all elements contained in the first orsecond list, but not both. Duplication is determined according to the valuereturned by applying the supplied predicate to two list elements.
+		/// <para />
+		/// sig: ((a, a) -> Boolean) -> [a] -> [a] -> [a]
+		/// </summary>
+		/// <param name="pred">A predicate used to test whether two items are equal.</param>
+		/// <param name="list1">The first list.</param>
+		/// <param name="list2">The second list.</param>
+		/// <returns>The elements in `list1` or `list2`, but not both.</returns>
+		/// <see cref="R.SymmetricDifference"/>
+		/// <see cref="R.Difference"/>
+		/// <see cref="R.DifferenceWith"/>
 		public static dynamic SymmetricDifferenceWith(RamdaPlaceholder pred = null, RamdaPlaceholder list1 = null, RamdaPlaceholder list2 = null) {
 			return Currying.SymmetricDifferenceWith(pred, list1, list2);
 		}

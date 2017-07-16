@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,10 +15,24 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Checks if the input value is `null` or `undefined`.
+		/// <para />
+		/// sig: * -> Boolean
+		/// </summary>
+		/// <param name="x">The value to test.</param>
+		/// <returns>`true` if `x` is `undefined` or `null`, otherwise `false`.</returns>
 		public static dynamic IsNil<TTarget>(TTarget x) {
 			return Currying.IsNil(x);
 		}
 
+		/// <summary>
+		/// Checks if the input value is `null` or `undefined`.
+		/// <para />
+		/// sig: * -> Boolean
+		/// </summary>
+		/// <param name="x">The value to test.</param>
+		/// <returns>`true` if `x` is `undefined` or `null`, otherwise `false`.</returns>
 		public static dynamic IsNil(RamdaPlaceholder x = null) {
 			return Currying.IsNil(x);
 		}

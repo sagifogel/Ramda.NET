@@ -13,23 +13,32 @@ namespace Ramda.NET
         object Slice(int from, int to);
         object this[int index] { get; }
         Type GetElementType();
+        void Add(object item);
     }
 
     public static class ListStrategy
     {
+        public static IListStrategy New(IEnumerable enumerable) {
+            return ResolveInternal(enumerable, true);
+        }
+
         public static IListStrategy Resolve(IEnumerable enumerable) {
+            return ResolveInternal(enumerable);
+        }
+
+        public static IListStrategy ResolveInternal(IEnumerable enumerable, bool isNew = false) {
             var @string = enumerable as string;
 
             if (@string != null) {
-                return new StringListStrategy(@string);
+                return new StringListStrategy(isNew ? string.Empty : @string);
             }
 
-            return new ListStrategyImpl((IList)enumerable);
+            return new ListStrategyImpl(isNew ? new ArrayList() : (IList)enumerable);
         }
 
         private class StringListStrategy : IListStrategy
         {
-            private readonly string value;
+            private string value;
 
             public StringListStrategy(string value) {
                 this.value = value;
@@ -45,6 +54,10 @@ namespace Ramda.NET
                 get {
                     return value.Length;
                 }
+            }
+
+            public void Add(object item) {
+                value += item;
             }
 
             public Type GetElementType() {
@@ -82,6 +95,10 @@ namespace Ramda.NET
 
             public Type GetElementType() {
                 return typeof(object);
+            }
+
+            public void Add(object item) {
+                list.Add(item);
             }
         }
     }

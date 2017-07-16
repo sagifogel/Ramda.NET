@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,26 +15,80 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps<TArg1, TArg2>(string props, TArg1 obj1, TArg2 obj2) {
 			return Currying.EqProps(props, obj1, obj2);
 		}
 
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps<TArg1, TArg2>(RamdaPlaceholder props, TArg1 obj1, TArg2 obj2) {
 			return Currying.EqProps(props, obj1, obj2);
 		}
 
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps<TArg2>(string props, RamdaPlaceholder obj1, TArg2 obj2) {
 			return Currying.EqProps(props, obj1, obj2);
 		}
 
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps<TArg1>(string props, TArg1 obj1, RamdaPlaceholder obj2 = null) {
 			return Currying.EqProps(props, obj1, obj2);
 		}
 
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps(string props, RamdaPlaceholder obj1 = null, RamdaPlaceholder obj2 = null) {
 			return Currying.EqProps(props, obj1, obj2);
 		}
 
+		/// <summary>
+		/// Reports whether two objects have the same value, in `R.equals` terms, forthe specified property. Useful as a curried predicate.
+		/// <para />
+		/// sig: k -> {k: v} -> {k: v} -> Boolean
+		/// </summary>
+		/// <param name="prop">The name of the property to compare</param>
+		/// <param name="obj1">second</param>
+		/// <param name="obj2">third</param>
+		/// <returns>Boolean</returns>
 		public static dynamic EqProps(RamdaPlaceholder props = null, RamdaPlaceholder obj1 = null, RamdaPlaceholder obj2 = null) {
 			return Currying.EqProps(props, obj1, obj2);
 		}

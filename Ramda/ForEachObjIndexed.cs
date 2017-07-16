@@ -15,26 +15,74 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed<TSource>(Action<object, string, TSource> fn, TSource obj) {
 			return Currying.ForEachObjIndexed(Delegate(fn), obj);
 		}
 
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed<TSource>(RamdaPlaceholder fn, TSource obj) {
 			return Currying.ForEachObjIndexed(fn, obj);
 		}
 
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed<TSource>(Action<object, string, TSource> fn, RamdaPlaceholder obj = null) {
 			return Currying.ForEachObjIndexed(Delegate(fn), obj);
 		}
 
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed(dynamic fn, RamdaPlaceholder obj = null) {
 			return Currying.ForEachObjIndexed(Delegate(fn), obj);
 		}
 
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed<TSource>(dynamic fn, TSource obj) {
 			return Currying.ForEachObjIndexed(Delegate(fn), obj);
 		}
 
+		/// <summary>
+		/// Iterate over an input `object`, calling a provided function `fn` for eachkey and value in the object.`fn` receives three argument: *(value, key, obj)*.
+		/// <para />
+		/// sig: ((a, String, StrMap a) -> Any) -> StrMap a -> StrMap a
+		/// </summary>
+		/// <param name="fn">The function to invoke. Receives three argument, `value`, `key`, `obj`.</param>
+		/// <param name="obj">The object to iterate over.</param>
+		/// <returns>The original object.</returns>
 		public static dynamic ForEachObjIndexed(RamdaPlaceholder fn = null, RamdaPlaceholder obj = null) {
 			return Currying.ForEachObjIndexed(fn, obj);
 		}

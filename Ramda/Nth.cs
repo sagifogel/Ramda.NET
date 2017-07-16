@@ -6,6 +6,7 @@
 using System;
 using System.Dynamic;
 using System.Collections;
+using System.Threading.Tasks;
 using static Ramda.NET.Currying;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -14,18 +15,50 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
+		/// <summary>
+		/// Returns the nth element of the given list or string. If n is negative theelement at index length + n is returned.
+		/// <para />
+		/// sig: Number -> [a] -> a | Undefined
+		/// </summary>
+		/// <param name="offset">first</param>
+		/// <param name="list">second</param>
+		/// <returns>*</returns>
 		public static dynamic Nth<TSource>(int offset, IEnumerable<TSource> list) {
 			return Currying.Nth(offset, list);
 		}
 
+		/// <summary>
+		/// Returns the nth element of the given list or string. If n is negative theelement at index length + n is returned.
+		/// <para />
+		/// sig: Number -> [a] -> a | Undefined
+		/// </summary>
+		/// <param name="offset">first</param>
+		/// <param name="list">second</param>
+		/// <returns>*</returns>
 		public static dynamic Nth<TSource>(RamdaPlaceholder offset, IEnumerable<TSource> list) {
 			return Currying.Nth(offset, list);
 		}
 
+		/// <summary>
+		/// Returns the nth element of the given list or string. If n is negative theelement at index length + n is returned.
+		/// <para />
+		/// sig: Number -> [a] -> a | Undefined
+		/// </summary>
+		/// <param name="offset">first</param>
+		/// <param name="list">second</param>
+		/// <returns>*</returns>
 		public static dynamic Nth(int offset, RamdaPlaceholder list = null) {
 			return Currying.Nth(offset, list);
 		}
 
+		/// <summary>
+		/// Returns the nth element of the given list or string. If n is negative theelement at index length + n is returned.
+		/// <para />
+		/// sig: Number -> [a] -> a | Undefined
+		/// </summary>
+		/// <param name="offset">first</param>
+		/// <param name="list">second</param>
+		/// <returns>*</returns>
 		public static dynamic Nth(RamdaPlaceholder offset = null, RamdaPlaceholder list = null) {
 			return Currying.Nth(offset, list);
 		}

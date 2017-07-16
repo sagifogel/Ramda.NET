@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Both.delegate.cs">
+      <DependentUpon>Both.delegate.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Compose.dynamic.array.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -240,7 +245,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Bind.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Both.delegate.cs" />
     <Compile Include="Ramda\Both.func.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -421,6 +425,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Both.delegate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Both.delegate.cs</LastGenOutput>
+      <LastOutputs>.\Both.delegate.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Compose.dynamic.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

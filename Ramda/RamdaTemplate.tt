@@ -11,7 +11,7 @@
 <#@ include file="T4Toolbox.tt" #><#+
 public class RamdaTemplate : CSharpTemplate
 {		
-	private readonly string name;
+	private string name;
 
 	private string EmitDocumentation(string path) {
         JSDoc item = null;
@@ -35,7 +35,8 @@ public class RamdaTemplate : CSharpTemplate
 
         EnsureRamdaDocumentation(path);
         jsdocs = DeserializeComments(path);
-        item = jsdocs[ToCamelCase(CommentName ?? name)];
+		name = CommentName ?? name;
+        item = jsdocs[name.Length > 1 ? ToCamelCase(name) : name];
 		returnTag = item.Comments.ContainsKey("return") ? item.Comments["return"] : new Tag { Type = new Type { Name = "Function" } };
         comments.AppendFormat("\t\t/// {0}\n", NormalizeComment(item.LeadingComments.Description));
         comments.Append("\t\t/// <para />\n");

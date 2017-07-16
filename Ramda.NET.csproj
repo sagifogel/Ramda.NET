@@ -100,14 +100,24 @@
       <LastGenOutput>All.listxf.cs</LastGenOutput>
       <LastOutputs>.\All.listxf.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\AnyPass.tt">
+    <Content Include="Ramda\AllPass.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AnyPass.cs</LastGenOutput>
-      <LastOutputs>.\AnyPass.cs</LastOutputs>
+      <LastGenOutput>AllPass.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\AllPass.dynamic.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\AllPass.tt">
+    <Content Include="Ramda\AnyPass.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AllPass.cs</LastGenOutput>
+      <LastGenOutput>AnyPass.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\AnyPass.dynamic.list.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\AnyPass.generic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AnyPass.generic.list.cs</LastGenOutput>
+      <LastOutputs>.\AnyPass.generic.list - Copy.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\AllPass.generic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AllPass.generic.list.cs</LastGenOutput>
       <LastOutputs>.\AllPass.cs</LastOutputs>
     </Content>
     <Compile Include="Ramda\Add.object.cs">
@@ -130,13 +140,28 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\AllPass.cs">
+    <Compile Include="Ramda\AllPass.dynamic.list.cs">
+      <DependentUpon>AllPass.dynamic.list.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AllPass.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\AnyPass.cs">
-      <DependentUpon>AnyPass.tt</DependentUpon>
+    <Compile Include="Ramda\AllPass.generic.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllPass.generic.list.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\AnyPass.dynamic.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnyPass.dynamic.list.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\AnyPass.generic.list.cs">
+      <DependentUpon>AnyPass.generic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Ap.dynamic.cs">
+      <DependentUpon>Ap.dynamic.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -145,8 +170,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Ap.dynamic.cs">
-      <DependentUpon>Ap.dynamic.tt</DependentUpon>
+    <Compile Include="Ramda\Ap.dynamic.list.cs">
+      <DependentUpon>Ap.dynamic.list.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -347,14 +372,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Equals.tt</DependentUpon>
     </Compile>
+    <Content Include="Ramda\Ap.dynamic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Ap.dynamic.cs</LastGenOutput>
+      <LastOutputs>.\Ap.dynamic.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Ap.fn.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Ap.fn.cs</LastGenOutput>
       <LastOutputs>.\Ap.fn.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Ap.dynamic.tt">
+    <Content Include="Ramda\Ap.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Ap.dynamic.cs</LastGenOutput>
+      <LastGenOutput>Ap.dynamic.list.cs</LastGenOutput>
       <LastOutputs>.\Ap.dynamic.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Ap.list.tt">
@@ -517,15 +547,25 @@
       <LastGenOutput>EqProps.cs</LastGenOutput>
       <LastOutputs>.\EqProps.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Filter.tt">
+    <Content Include="Ramda\Filter.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Filter.cs</LastGenOutput>
+      <LastGenOutput>Filter.object.cs</LastGenOutput>
+      <LastOutputs>.\Filter.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Filter.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Filter.list.cs</LastGenOutput>
       <LastOutputs>.\Filter.cs</LastOutputs>
     </Content>
-    <Compile Include="Ramda\Filter.cs">
+    <Compile Include="Ramda\Filter.object.cs">
+      <DependentUpon>Filter.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Filter.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Filter.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Filter.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Find.cs">
       <DependentUpon>Find.tt</DependentUpon>
@@ -756,10 +796,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Has.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Head.cs">
+    <Compile Include="Ramda\Head.string.cs">
+      <DependentUpon>Head.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Head.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Head.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Head.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Identical.cs">
       <AutoGen>True</AutoGen>
@@ -901,6 +946,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Join.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Last.string.cs">
+      <DependentUpon>Last.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\LastIndexOf.object.cs">
       <DependentUpon>LastIndexOf.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1037,6 +1087,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\TakeLast.string.cs">
+      <DependentUpon>TakeLast.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Test.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1103,10 +1158,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Keys.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Last.cs">
+    <Compile Include="Ramda\Last.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Last.tt</DependentUpon>
+      <DependentUpon>Last.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\LastIndexOf.list.cs">
       <AutoGen>True</AutoGen>
@@ -2066,9 +2121,14 @@
       <LastGenOutput>Has.cs</LastGenOutput>
       <LastOutputs>.\Has.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Head.tt">
+    <Content Include="Ramda\Head.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Head.cs</LastGenOutput>
+      <LastGenOutput>Head.string.cs</LastGenOutput>
+      <LastOutputs>.\Head.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Head.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Head.list.cs</LastGenOutput>
       <LastOutputs>.\Head.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Identical.tt">
@@ -2206,6 +2266,11 @@
       <LastGenOutput>Join.cs</LastGenOutput>
       <LastOutputs>.\Join.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Last.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Last.string.cs</LastGenOutput>
+      <LastOutputs>.\Last.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\LastIndexOf.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LastIndexOf.object.cs</LastGenOutput>
@@ -2341,6 +2406,11 @@
       <LastGenOutput>Take.string.cs</LastGenOutput>
       <LastOutputs>.\Take.string.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\TakeLast.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>TakeLast.string.cs</LastGenOutput>
+      <LastOutputs>.\TakeLast.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Test.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Test.cs</LastGenOutput>
@@ -2406,10 +2476,10 @@
       <LastGenOutput>Keys.cs</LastGenOutput>
       <LastOutputs>.\Keys.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Last.tt">
+    <Content Include="Ramda\Last.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Last.cs</LastGenOutput>
-      <LastOutputs>.\Last.cs</LastOutputs>
+      <LastGenOutput>Last.list.cs</LastGenOutput>
+      <LastOutputs>.\Last.list - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\LastIndexOf.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -27,5 +27,12 @@ namespace Ramda.NET.Tests
         public void SplitWhen_Only_Splits_Once() {
             NestedCollectionAssert.AreEqual(R.SplitWhen(R.Equals(2), new[] { 1, 2, 3, 1, 2, 3 }), new[] { new[] { 1 }, new[] { 2, 3, 1, 2, 3 } });
         }
+
+        [TestMethod]
+        public void SplitWhen_Can_Split_Strings() {
+            Func<char, bool> split = c => c.Equals('A');
+
+            NestedCollectionAssert.AreEqual(R.SplitWhen(split, "TosinAbasi"), new[] { "Tosin", "Abasi" });
+        }
     }
 }

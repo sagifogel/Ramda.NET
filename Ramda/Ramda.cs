@@ -330,63 +330,23 @@ namespace Ramda.NET
         public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, RamdaPlaceholder obj = null) where TTarget : IList {
             return Currying.PropSatisfies(Delegate(pred), p, obj);
         }
-        
+
+        /// <summary>
+        /// A function that always returns `true`. Any passed in parameters are ignored.
+        /// <para />
+        /// sig: * -> Boolean
+        /// </summary>
+        /// <returns>Function</returns>
         public static dynamic F = Delegate(() => Currying.F());
 
+        /// <summary>
+		/// A function that always returns `false`. Any passed in parameters are ignored.
+		/// <para />
+		/// sig: * -> Boolean
+		/// </summary>
+		/// <returns>Function</returns>
         public static dynamic T = Delegate(() => Currying.T());
-
-        public static dynamic Filter<TSource>(Func<TSource, bool> pred, object filterable) {
-            return Currying.Filter(Delegate(pred), filterable);
-        }
-
-        public static dynamic Filter(RamdaPlaceholder pred, object filterable) {
-            return Currying.Filter(pred, filterable);
-        }
-
-        public static dynamic Filter(dynamic pred, object filterable) {
-            return Currying.Filter(Delegate(pred), filterable);
-        }
-
-        public static dynamic Head(string list) {
-            return Currying.Head(list);
-        }
-
-        public static dynamic Last(string list) {
-            return Currying.Last(list);
-        }
-
-        public static dynamic TakeLast(int n, string list) {
-            return Currying.TakeLast(n, list);
-        }
-
-        public static dynamic TakeLast(RamdaPlaceholder n, string list) {
-            return Currying.TakeLast(list);
-        }
-
-        public static dynamic AllPass(IList<dynamic> preds) {
-            return Currying.AllPass(preds);
-        }
-
-        public static dynamic AnyPass(IList<dynamic> preds) {
-            return Currying.AnyPass(preds);
-        }
-
-        public static dynamic Ap(dynamic fns, dynamic vs) {
-            return Currying.Ap(fns, vs);
-        }
-
-        public static dynamic Ap(dynamic fns, RamdaPlaceholder vs = null) {
-            return Currying.Ap(fns, vs);
-        }
-
-        public static dynamic Ap(RamdaPlaceholder fns, dynamic vs) {
-            return Currying.Ap(fns, vs);
-        }
-
-        public static dynamic Ap<TSource>(dynamic fns, dynamic vs) {
-            return Currying.Ap(fns, vs);
-        }
-
+        
         public static dynamic Cond(IList<dynamic> pairs) {
             return Currying.Cond(pairs);
         }

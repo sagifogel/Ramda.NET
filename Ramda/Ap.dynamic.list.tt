@@ -4,8 +4,10 @@
 <#
 	var template = new RamdaTemplate();
 
+	template.Generics.Add("TSource");
+	template.SkippedIndexedGaps.Add(0);
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("dynamic", "fns", false));	
-	template.Parameters.Add(Tuple.Create("dynamic", "vs", false));
+	template.Parameters.Add(Tuple.Create("IList<dynamic>", "fns", false));	
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "vs", false));
 	template.Render();
 #>

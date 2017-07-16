@@ -5,7 +5,6 @@
 	var template = new RamdaTemplate();
 
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("dynamic", "fns", false));	
-	template.Parameters.Add(Tuple.Create("dynamic", "vs", false));
+	template.Parameters.Add(Tuple.Create("string", "list", false));
 	template.Render();
 #>

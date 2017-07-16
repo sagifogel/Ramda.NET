@@ -1,11 +1,10 @@
-<#@ template language="C#" debug="True" #>
+﻿<#@ template language="C#" debug="True" #>
 <#@ output extension="cs" #>
 <#@ include file="RamdaTemplate.tt" #>
 <#
 	var template = new RamdaTemplate();
 
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("dynamic", "fns", false));	
-	template.Parameters.Add(Tuple.Create("dynamic", "vs", false));
+	template.Parameters.Add(Tuple.Create("IList<dynamic>", "preds", false));
 	template.Render();
 #>

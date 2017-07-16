@@ -1035,8 +1035,38 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\PipeK.cs">
-      <DependentUpon>PipeK.tt</DependentUpon>
+    <Compile Include="Ramda\Pipe.dynamic.array.cs">
+      <DependentUpon>Pipe.dynamic.array.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeK.dynamic.array.cs">
+      <DependentUpon>PipeK.dynamic.array.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeK.delegate.array.cs">
+      <DependentUpon>PipeK.delegate.array.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeP.func4.cs">
+      <DependentUpon>PipeP.func4.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeP.func3.cs">
+      <DependentUpon>PipeP.func3.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeP.func2.cs">
+      <DependentUpon>PipeP.func2.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\PipeP.func1.cs">
+      <DependentUpon>PipeP.func1.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -1166,6 +1196,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Unnest.object.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\UseWith.dynamic.list.cs">
+      <DependentUpon>UseWith.dynamic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Without.cs">
       <AutoGen>True</AutoGen>
@@ -1482,15 +1517,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PickBy.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Pipe.cs">
+    <Compile Include="Ramda\Pipe.delegate.array.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Pipe.tt</DependentUpon>
+      <DependentUpon>Pipe.delegate.array.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\PipeP.cs">
+    <Compile Include="Ramda\PipeP.delegate.array.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PipeP.tt</DependentUpon>
+      <DependentUpon>PipeP.delegate.array.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Pluck.string.cs">
       <DependentUpon>Pluck.string.tt</DependentUpon>
@@ -2360,10 +2395,40 @@
       <LastGenOutput>Omit.string.cs</LastGenOutput>
       <LastOutputs>.\Omit.string.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\PipeK.tt">
+    <Content Include="Ramda\Pipe.dynamic.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PipeK.cs</LastGenOutput>
+      <LastGenOutput>Pipe.dynamic.array.cs</LastGenOutput>
+      <LastOutputs>.\Pipe.dynamic.list.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeK.dynamic.array.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeK.dynamic.array.cs</LastGenOutput>
+      <LastOutputs>.\PipeK.dynamic.array.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeK.delegate.array.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeK.delegate.array.cs</LastGenOutput>
       <LastOutputs>.\PipeK.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeP.func4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeP.func4.cs</LastGenOutput>
+      <LastOutputs>.\PipeP.func4.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeP.func3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeP.func3.cs</LastGenOutput>
+      <LastOutputs>.\PipeP.func3.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeP.func2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeP.func2.cs</LastGenOutput>
+      <LastOutputs>.\PipeP.func2.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\PipeP.func1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PipeP.func1.cs</LastGenOutput>
+      <LastOutputs>.\PipeP.func1.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Set.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2489,6 +2554,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Unnest.object.cs</LastGenOutput>
       <LastOutputs>.\Unnest.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\UseWith.dynamic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UseWith.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\UseWith.dynamic.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2805,14 +2875,14 @@
       <LastGenOutput>PickBy.cs</LastGenOutput>
       <LastOutputs>.\PickBy.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Pipe.tt">
+    <Content Include="Ramda\Pipe.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Pipe.cs</LastGenOutput>
+      <LastGenOutput>Pipe.delegate.array.cs</LastGenOutput>
       <LastOutputs>.\Pipe.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\PipeP.tt">
+    <Content Include="Ramda\PipeP.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PipeP.cs</LastGenOutput>
+      <LastGenOutput>PipeP.delegate.array.cs</LastGenOutput>
       <LastOutputs>.\PipeP.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Pluck.string.tt">

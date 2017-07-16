@@ -371,38 +371,6 @@ namespace Ramda.NET
             return Currying.ConstructN(n, typeof(TTarget));
         }
 
-        public static dynamic UseWith<TSource>(Delegate fn, IList<dynamic> transformers) {
-            return Currying.UseWith(Delegate(fn), transformers);
-        }
-
-        public static dynamic UseWith<TSource>(RamdaPlaceholder fn, IList<dynamic> transformers) {
-            return Currying.UseWith(fn, transformers);
-        }
-
-        public static dynamic Pipe(params dynamic[] functions) {
-            return Currying.Pipe(functions);
-        }
-
-        public static dynamic PipeK(params dynamic[] functions) {
-            return Currying.PipeK(functions);
-        }
-
-        public static dynamic PipeP(params Func<dynamic, Task<dynamic>>[] functions) {
-            return Currying.PipeP(functions);
-        }
-
-        public static dynamic PipeP(params Func<dynamic, dynamic, Task<dynamic>>[] functions) {
-            return Currying.PipeP(functions);
-        }
-
-        public static dynamic PipeP(params Func<dynamic, dynamic, dynamic, Task<dynamic>>[] functions) {
-            return Currying.PipeP(functions);
-        }
-
-        public static dynamic PipeP(params Func<dynamic, dynamic, dynamic, dynamic, Task<dynamic>>[] functions) {
-            return Currying.PipeP(functions);
-        }
-
         public static dynamic Compose(params dynamic[] functions) {
             return Currying.Compose(functions);
         }

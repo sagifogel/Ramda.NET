@@ -190,6 +190,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Cond.dynamic.list.cs">
+      <DependentUpon>Cond.dynamic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Converge.dynamic.list.cs">
+      <DependentUpon>Converge.dynamic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\CurryN.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -286,10 +296,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Concat.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Cond.cs">
+    <Compile Include="Ramda\Cond.delegates.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Cond.tt</DependentUpon>
+      <DependentUpon>Cond.delegates.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Construct.cs" />
     <Compile Include="Ramda\ConstructN.cs">
@@ -397,6 +407,15 @@
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Cond.dynamic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Cond.dynamic.list.cs</LastGenOutput>
+    </Content>
+    <Content Include="Ramda\Converge.dynamic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Converge.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\Converge.dynamic.list.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\CurryN.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CurryN.cs</LastGenOutput>
@@ -487,14 +506,14 @@
       <LastGenOutput>Concat.cs</LastGenOutput>
       <LastOutputs>.\Concat.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Cond.tt">
+    <Content Include="Ramda\Cond.delegates.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Cond.cs</LastGenOutput>
-      <LastOutputs>.\Cond.cs</LastOutputs>
+      <LastGenOutput>Cond.delegates.cs</LastGenOutput>
+      <LastOutputs>.\Cond.delegates.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ConstructN.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastOutputs>.\ConstructN.cs</LastOutputs>
+      <LastOutputs>.\ConstructN.delegate.cs</LastOutputs>
       <LastGenOutput>ConstructN.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\Contains.tt">
@@ -945,6 +964,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Join.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Juxt.dynamic.list.cs">
+      <DependentUpon>Juxt.dynamic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Last.string.cs">
       <DependentUpon>Last.string.tt</DependentUpon>
@@ -2265,6 +2289,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Join.cs</LastGenOutput>
       <LastOutputs>.\Join.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Juxt.dynamic.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Juxt.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\Juxt.dynamic.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Last.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -346,29 +346,29 @@ namespace Ramda.NET
 		/// </summary>
 		/// <returns>Function</returns>
         public static dynamic T = Delegate(() => Currying.T());
-        
-        public static dynamic Cond(IList<dynamic> pairs) {
-            return Currying.Cond(pairs);
-        }
 
+        /// <summary>
+		/// Wraps a constructor function inside a curried function that can be calledwith the same arguments and returns the same type. The arity of the functionreturned is specified to allow using variadic constructor functions.
+		/// <para />
+		/// sig: Number -> (* -> {*}) -> (* -> {*})
+		/// </summary>
+		/// <param name="n">The arity of the constructor function.</param>
+		/// <param name="Fn">The constructor function to wrap.</param>
+		/// <returns>A wrapped, curried constructor function.</returns>
         public static dynamic ConstructN<TTarget>(int n) {
             return Currying.ConstructN(n, typeof(TTarget));
         }
 
+        /// <summary>
+		/// Wraps a constructor function inside a curried function that can be calledwith the same arguments and returns the same type. The arity of the functionreturned is specified to allow using variadic constructor functions.
+		/// <para />
+		/// sig: Number -> (* -> {*}) -> (* -> {*})
+		/// </summary>
+		/// <param name="n">The arity of the constructor function.</param>
+		/// <param name="Fn">The constructor function to wrap.</param>
+		/// <returns>A wrapped, curried constructor function.</returns>
         public static dynamic ConstructN<TTarget>(RamdaPlaceholder n = null) {
             return Currying.ConstructN(n, typeof(TTarget));
-        }
-
-        public static dynamic Converge(Delegate after, IList<dynamic> functions) {
-            return Currying.Converge(Delegate(after), functions);
-        }
-
-        public static dynamic Converge(RamdaPlaceholder after, IList<dynamic> functions) {
-            return Currying.Converge(after, functions);
-        }
-
-        public static dynamic Juxt(IList<dynamic> fns) {
-            return Currying.Juxt(fns);
         }
 
         public static dynamic UseWith<TSource>(Delegate fn, IList<dynamic> transformers) {

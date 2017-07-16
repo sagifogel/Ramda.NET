@@ -371,18 +371,6 @@ namespace Ramda.NET
             return Currying.ConstructN(n, typeof(TTarget));
         }
 
-        public static dynamic Compose(params dynamic[] functions) {
-            return Currying.Compose(functions);
-        }
-
-        public static dynamic ComposeP(params dynamic[] functions) {
-            return Currying.ComposeP(functions);
-        }
-
-        public static dynamic ComposeK(params dynamic[] functions) {
-            return Currying.ComposeK(functions);
-        }
-
         public static dynamic Both(dynamic f, dynamic g) {
             return Currying.Both(f, g);
         }

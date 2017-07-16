@@ -190,6 +190,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ApplySpec.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Compose.dynamic.array.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compose.dynamic.array.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ComposeK.dynamic.array.cs">
+      <DependentUpon>ComposeK.dynamic.array.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\ComposeP.dynamic.array.cs">
+      <DependentUpon>ComposeP.dynamic.array.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Cond.dynamic.list.cs">
       <DependentUpon>Cond.dynamic.list.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -266,20 +281,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Complement.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\ComposeK.cs">
+    <Compile Include="Ramda\ComposeK.delegate.array.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ComposeK.tt</DependentUpon>
+      <DependentUpon>ComposeK.delegate.array.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\ComposeP.cs">
-      <DependentUpon>ComposeP.tt</DependentUpon>
+    <Compile Include="Ramda\ComposeP.delegate.array.cs">
+      <DependentUpon>ComposeP.delegate.array.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Compose.cs">
+    <Compile Include="Ramda\Compose.delegate.array.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Compose.tt</DependentUpon>
+      <DependentUpon>Compose.delegate.array.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Concat.object.cs">
       <DependentUpon>Concat.object.tt</DependentUpon>
@@ -407,6 +422,21 @@
       <LastGenOutput>ApplySpec.cs</LastGenOutput>
       <LastOutputs>.\ApplySpec.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Compose.dynamic.array.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Compose.dynamic.array.cs</LastGenOutput>
+      <LastOutputs>.\Compose.dynamic.array.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ComposeK.dynamic.array.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ComposeK.dynamic.array.cs</LastGenOutput>
+      <LastOutputs>.\ComposeK.dynamic.array.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ComposeP.dynamic.array.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ComposeP.dynamic.array.cs</LastGenOutput>
+      <LastOutputs>.\ComposeP.dynamic.array.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Cond.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Cond.dynamic.list.cs</LastGenOutput>
@@ -476,20 +506,20 @@
       <LastGenOutput>Complement.cs</LastGenOutput>
       <LastOutputs>.\Complement.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\ComposeK.tt">
+    <Content Include="Ramda\ComposeK.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ComposeK.cs</LastGenOutput>
+      <LastGenOutput>ComposeK.delegate.array.cs</LastGenOutput>
       <LastOutputs>.\ComposeK.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\ComposeP.tt">
+    <Content Include="Ramda\ComposeP.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ComposeP.cs</LastGenOutput>
+      <LastGenOutput>ComposeP.delegate.array.cs</LastGenOutput>
       <LastOutputs>.\ComposeP.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Compose.tt">
+    <Content Include="Ramda\Compose.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Compose.cs</LastGenOutput>
-      <LastOutputs>.\Compose.cs</LastOutputs>
+      <LastGenOutput>Compose.delegate.array.cs</LastGenOutput>
+      <LastOutputs>.\Compose.delegate.array - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Concat.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

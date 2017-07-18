@@ -25,7 +25,7 @@ namespace Ramda.NET
 		/// <param name="p">The name of the property to return.</param>
 		/// <param name="obj">The object to query.</param>
 		/// <returns>The value of given property of the supplied object or the default value.</returns>
-		public static dynamic PropOr<TValue, TTarget>(TValue val, IList<int> p, TTarget obj) {
+		public static dynamic PropOr<TValue, TTarget>(TValue val, IList<int> p, TTarget obj) where TTarget : IList {
 			return Currying.PropOr(val, p, obj);
 		}
 

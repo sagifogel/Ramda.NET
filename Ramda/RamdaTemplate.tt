@@ -35,8 +35,7 @@ public class RamdaTemplate : CSharpTemplate
 
         EnsureRamdaDocumentation(path);
         jsdocs = DeserializeComments(path);
-		name = CommentName ?? name;
-        item = jsdocs[name.Length > 1 ? ToCamelCase(name) : name];
+        item = jsdocs[name.Length > 1 ? ToCamelCase(CommentName ?? name) : name];
 		returnTag = item.Comments.ContainsKey("return") ? item.Comments["return"] : new Tag { Type = new Type { Name = "Function" } };
         comments.AppendFormat("\t\t/// {0}\n", NormalizeComment(item.LeadingComments.Description));
         comments.Append("\t\t/// <para />\n");
@@ -409,7 +408,7 @@ public class RamdaTemplate : CSharpTemplate
 			return Currying.<#= name #>(<#= arguments #>);
 		}
 <#+	} else {#>
-		public static dynamic <#= name #><#= generics #>(<#= parameters #>) {
+		public static dynamic <#= name #><#= GetGenerics(generics) #>(<#= parameters #>)<#= GetConstraints(generics) #> {
 			return <#= InvocationExpression #>
 		}
 <#+	}

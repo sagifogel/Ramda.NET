@@ -1,0 +1,14 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.SkippedIndexedGaps.Add(2);
+	template.SkippedIndexedParams.Add(0);
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("int", "fromIndex", false));	
+	template.Parameters.Add(Tuple.Create("int", "toIndex", false));	
+	template.Parameters.Add(Tuple.Create("string", "list", false));	
+	template.Render();
+#>

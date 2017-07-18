@@ -793,7 +793,12 @@ namespace Ramda.NET
             return source.ToArray<Array>();
         });
 
-        internal readonly static dynamic Replace = Curry3<Regex, string, string, string>((regex, replacement, str) => regex.Replace(str, replacement));
+        internal readonly static dynamic Replace = Curry3<object, string, string, string>((regex, replacement, str) => {
+            var regexLiteral = regex as string;
+            var trueRegex = regexLiteral != null ? new Regex(regexLiteral) : (Regex)regex;
+
+            return trueRegex.Replace(str, replacement);
+        });
 
         internal readonly static dynamic Reverse = Curry1<IEnumerable, IEnumerable>(enumerable => {
             var listOfString = enumerable as string;

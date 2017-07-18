@@ -179,6 +179,7 @@ public class RamdaTemplate : CSharpTemplate
 		Generics = new List<string>();
 		Emitted = new HashSet<string>();
 		SkippedIndexedGaps = new List<int>();
+		SkippedIndexedParams = new List<int>();
 		Parameters = new List<Tuple<string, string, bool>>();
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
@@ -194,6 +195,8 @@ public class RamdaTemplate : CSharpTemplate
 	public bool IgnoreDelegateWrapping { get; set; }
 
 	public List<int> SkippedIndexedGaps { get; set; }
+
+	public List<int> SkippedIndexedParams { get; set; }
 	
 	public bool AllGapsFunctionAlreadyExists { get; set; }
 	
@@ -358,8 +361,12 @@ public class RamdaTemplate : CSharpTemplate
 				Emit(name, ResolveGenerics(shifted), joined, ToArguments(shifted));
 			}
         }
-
+		//System.Diagnostics.Debugger.Launch();
 		for (var i = 1; i < list.Count - 1; i++)	 {
+			if (SkippedIndexedParams.Contains(i - 1)) {
+				continue;
+			}
+
 			var taken = list.Take(i);
 			var skipped = list.Skip(i);
 			var joined = taken.Concat(skipped.Select(FillNullablePlaceholder)).ToList();
@@ -403,7 +410,7 @@ namespace Ramda.NET
 {
 	public static partial class R
 	{	
-<#+		
+<#+
 		var path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(this.Context.Host.TemplateFile), @"..\", @"doc\"));
 		var dynamics = Parameters.ToList();
 		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";

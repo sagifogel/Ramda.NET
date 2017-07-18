@@ -784,10 +784,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Flip.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\ForEach.cs">
+    <Compile Include="Ramda\ForEach.object.cs">
+      <DependentUpon>ForEach.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ForEach.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\ForEach.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ForEach.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\ForEachObjIndexed.cs">
       <AutoGen>True</AutoGen>
@@ -937,6 +942,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IntersectionWith.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Intersperse.idispersible.cs">
+      <DependentUpon>Intersperse.idispersible.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Intersperse..cs">
       <DependentUpon>Intersperse..tt</DependentUpon>
@@ -1109,11 +1119,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Prepend.object.cs">
+      <DependentUpon>Prepend.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Reduce.reducable.cs" />
+    <Compile Include="Ramda\Replace.string.cs">
+      <DependentUpon>Replace.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Set.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Set.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Slice.string.cs">
+      <DependentUpon>Slice.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\SortWith.cs">
       <DependentUpon>SortWith.tt</DependentUpon>
@@ -1576,10 +1601,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pluck.int.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Prepend.cs">
+    <Compile Include="Ramda\Prepend.generic.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Prepend.tt</DependentUpon>
+      <DependentUpon>Prepend.generic.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Product.int.cs">
       <DependentUpon>Product.int.tt</DependentUpon>
@@ -1671,10 +1696,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Repeat.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Replace.cs">
+    <Compile Include="Ramda\Replace.regex.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Replace.tt</DependentUpon>
+      <DependentUpon>Replace.regex.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Reverse.cs">
       <AutoGen>True</AutoGen>
@@ -2149,9 +2174,14 @@
       <LastGenOutput>Flip.cs</LastGenOutput>
       <LastOutputs>.\Flip.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\ForEach.tt">
+    <Content Include="Ramda\ForEach.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ForEach.cs</LastGenOutput>
+      <LastGenOutput>ForEach.object.cs</LastGenOutput>
+      <LastOutputs>.\ForEach.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ForEach.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ForEach.list.cs</LastGenOutput>
       <LastOutputs>.\ForEach.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ForEachObjIndexed.tt">
@@ -2298,6 +2328,11 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IntersectionWith.cs</LastGenOutput>
       <LastOutputs>.\IntersectionWith.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Intersperse.idispersible.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Intersperse.idispersible.cs</LastGenOutput>
+      <LastOutputs>.\Intersperse.idispersible.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Intersperse..tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2469,10 +2504,25 @@
       <LastGenOutput>PipeP.func1.cs</LastGenOutput>
       <LastOutputs>.\PipeP.func1.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Prepend.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Prepend.object.cs</LastGenOutput>
+      <LastOutputs>.\Prepend.object.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Replace.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Replace.string.cs</LastGenOutput>
+      <LastOutputs>.\Replace.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Set.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Set.cs</LastGenOutput>
       <LastOutputs>.\Set.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Slice.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Slice.string.cs</LastGenOutput>
+      <LastOutputs>.\Slice.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SortWith.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2934,9 +2984,9 @@
       <LastGenOutput>Pluck.int.cs</LastGenOutput>
       <LastOutputs>.\Pluck.int.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Prepend.tt">
+    <Content Include="Ramda\Prepend.generic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Prepend.cs</LastGenOutput>
+      <LastGenOutput>Prepend.generic.cs</LastGenOutput>
       <LastOutputs>.\Prepend.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Product.int.tt">
@@ -3030,10 +3080,10 @@
       <LastGenOutput>Repeat.cs</LastGenOutput>
       <LastOutputs>.\Repeat.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Replace.tt">
+    <Content Include="Ramda\Replace.regex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Replace.cs</LastGenOutput>
-      <LastOutputs>.\Replace.cs</LastOutputs>
+      <LastGenOutput>Replace.regex.cs</LastGenOutput>
+      <LastOutputs>.\Replace.regex.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Reverse.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

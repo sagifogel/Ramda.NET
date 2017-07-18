@@ -1,0 +1,15 @@
+<#@ template language="C#" debug="True" #>
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TResult");
+	template.Generics.Add("TSeperator");
+	template.SkippedIndexedGaps.Add(1);
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("TSeperator", "separator", false));	
+	template.Parameters.Add(Tuple.Create("IDispersible<TSeperator, TResult>", "list", false));
+	template.Render();
+#>

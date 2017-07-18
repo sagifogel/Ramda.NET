@@ -24,75 +24,6 @@ namespace Ramda.NET
         public readonly static RamdaPlaceholder __ = new RamdaPlaceholder();
 
         /// <summary>
-		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
-		/// <para />
-		/// sig: Ord b => (a -> b) -> a -> a -> Number
-		/// </summary>
-		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
-		/// <param name="a">The first item to be compared.</param>
-		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
-        public static dynamic Descend<TSource>(IList<dynamic> functions, IList<TSource> list) {
-            return Currying.Descend(functions, list);
-        }
-
-        /// <summary>
-		/// Makes a descending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
-		/// <para />
-		/// sig: Ord b => (a -> b) -> a -> a -> Number
-		/// </summary>
-		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
-		/// <param name="a">The first item to be compared.</param>
-		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) > fn(b), `1` if fn(b) > fn(a), otherwise `0`</returns>
-        public static dynamic Descend<TSource>(IList<dynamic> functions, RamdaPlaceholder list = null) {
-            return Currying.Descend(functions, list);
-        }
-
-        /// <summary>
-		/// Returns the number of elements in the array by returning `list.length`.
-		/// <para />
-		/// sig: [a] -> Number
-		/// </summary>
-		/// <param name="list">The array to inspect.</param>
-		/// <returns>The length of the array.</returns>
-        public static dynamic Length<TValue>(IList list) {
-            return Currying.Length(list);
-        }
-
-        /// <summary>
-		/// Returns the number of elements in the array by returning `list.length`.
-		/// <para />
-		/// sig: [a] -> Number
-		/// </summary>
-		/// <param name="list">The array to inspect.</param>
-		/// <returns>The length of the array.</returns>
-        public static dynamic Length(string list) {
-            return Currying.Length(list);
-        }
-        /// <summary>
-        /// Returns the number of elements in the array by returning `list.length`.
-        /// <para />
-        /// sig: [a] -> Number
-        /// </summary>
-        /// <param name="list">The array to inspect.</param>
-        /// <returns>The length of the array.</returns>
-        public static dynamic Length(Delegate list) {
-            return Currying.Length(Delegate(list));
-        }
-
-        /// <summary>
-		/// Returns the number of elements in the array by returning `list.length`.
-		/// <para />
-		/// sig: [a] -> Number
-		/// </summary>
-		/// <param name="list">The array to inspect.</param>
-		/// <returns>The length of the array.</returns>
-        public static dynamic Length(object list) {
-            return Currying.Length(list);
-        }
-
-        /// <summary>
 		/// Returns a lens for the given getter and setter functions. The getter "gets"the value of the focus; the setter "sets" the value of the focus. The settershould not mutate the data structure.
 		/// <para />
 		/// sig: (s -> a) -> ((a, s) -> s) -> Lens s a
@@ -110,151 +41,19 @@ namespace Ramda.NET
         }
 
         /// <summary>
-        /// Creates a new object by recursively evolving a shallow copy of `object`,according to the `transformation` functions. All non-primitive propertiesare copied by reference.A `transformation` function will not be invoked if its corresponding keydoes not exist in the evolved object.
-        /// <para />
-        /// sig: {k: (v -> v)} -> {k: v} -> {k: v}
-        /// </summary>
-        /// <param name="transformations">The object specifying transformation functions to apply       to the object.</param>
-        /// <param name="object">The object to be transformed.</param>
-        /// <returns>The transformed object.</returns>
-        public static dynamic Evolve<TTarget>(object transformations, TTarget obj) {
-            return Currying.Evolve(transformations, obj);
-        }
-
-        /// <summary>
-		/// Creates a new object by recursively evolving a shallow copy of `object`,according to the `transformation` functions. All non-primitive propertiesare copied by reference.A `transformation` function will not be invoked if its corresponding keydoes not exist in the evolved object.
+		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
 		/// <para />
-		/// sig: {k: (v -> v)} -> {k: v} -> {k: v}
+		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
 		/// </summary>
-		/// <param name="transformations">The object specifying transformation functions to apply       to the object.</param>
-		/// <param name="object">The object to be transformed.</param>
-		/// <returns>The transformed object.</returns>
-        public static dynamic Evolve(object transformations, RamdaPlaceholder obj = null) {
-            return Currying.Evolve(transformations, obj);
-        }
-
-        /// <summary>
-		/// Creates a new object from a list key-value pairs. If a key appears inmultiple pairs, the rightmost pair is included in the object.
-		/// <para />
-		/// sig: [[k,v]] -> {k: v}
-		/// </summary>
-		/// <param name="pairs">An array of two-element arrays that will be the keys and values of the output object.</param>
-		/// <returns>The object made by pairing up `keys` and `values`.</returns>
-		/// <see cref="R.ToPairs"/>
-		/// <see cref="R.Pair"/>
-        public static dynamic FormPairs<TValue>(IEnumerable<KeyValuePair<string, TValue>> pairs) {
-            return Currying.FromPairs(pairs.Select(pair => new object[] { pair.Key, pair.Value }).ToArray());
-        }
-
-        /// <summary>
-		/// Returns a function that when supplied an object returns the indicatedproperty of that object, if it exists.
-		/// <para />
-		/// sig: s -> {s: a} -> a | Undefined
-		/// </summary>
-		/// <param name="p">The property name</param>
-		/// <param name="obj">The object to query</param>
-		/// <returns>The value at `obj.p`.</returns>
-		/// <see cref="R.Path"/>
-        public static dynamic Prop<TTarget>(int p, TTarget obj) where TTarget : IList {
-            return Currying.Prop(p, obj);
-        }
-
-        /// <summary>
-		/// Returns a function that when supplied an object returns the indicatedproperty of that object, if it exists.
-		/// <para />
-		/// sig: s -> {s: a} -> a | Undefined
-		/// </summary>
-		/// <param name="p">The property name</param>
-		/// <param name="obj">The object to query</param>
-		/// <returns>The value at `obj.p`.</returns>
-		/// <see cref="R.Path"/>
-        public static dynamic Prop<TTarget>(int p, RamdaPlaceholder obj = null) where TTarget : IList {
-            return Currying.Prop(p, obj);
-        }
-
-        /// <summary>
-		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
-		/// <para />
-		/// sig: Type -> String -> Object -> Boolean
-		/// </summary>
-		/// <param name="type">first</param>
+		/// <param name="pred">first</param>
 		/// <param name="name">second</param>
 		/// <param name="obj">third</param>
 		/// <returns>Boolean</returns>
-		/// <see cref="R.Is"/>
-		/// <see cref="R.PropSatisfies"/>
-        public static dynamic PropIs<TTarget>(Type type, int p, TTarget obj) where TTarget : IList {
-            return Currying.PropIs(type, p, obj);
-        }
-
-        /// <summary>
-		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
-		/// <para />
-		/// sig: Type -> String -> Object -> Boolean
-		/// </summary>
-		/// <param name="type">first</param>
-		/// <param name="name">second</param>
-		/// <param name="obj">third</param>
-		/// <returns>Boolean</returns>
-		/// <see cref="R.Is"/>
-		/// <see cref="R.PropSatisfies"/>
-        public static dynamic PropIs<TTarget>(RamdaPlaceholder type, int p, TTarget obj) where TTarget : IList {
-            return Currying.PropIs(type, p, obj);
-        }
-
-        /// <summary>
-		/// Returns `true` if the specified object property is of the given type;`false` otherwise.
-		/// <para />
-		/// sig: Type -> String -> Object -> Boolean
-		/// </summary>
-		/// <param name="type">first</param>
-		/// <param name="name">second</param>
-		/// <param name="obj">third</param>
-		/// <returns>Boolean</returns>
-		/// <see cref="R.Is"/>
-		/// <see cref="R.PropSatisfies"/>
-        public static dynamic PropIs<TTarget>(Type type, int name, RamdaPlaceholder obj = null) where TTarget : IList {
-            return Currying.PropIs(type, name, obj);
-        }
-
-        /// <summary>
-		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
-		/// <para />
-		/// sig: a -> String -> Object -> a
-		/// </summary>
-		/// <param name="val">The default value.</param>
-		/// <param name="p">The name of the property to return.</param>
-		/// <param name="obj">The object to query.</param>
-		/// <returns>The value of given property of the supplied object or the default value.</returns>
-        public static dynamic PropOr<TValue, TTarget>(TValue val, IList<int> p, TTarget obj) where TTarget : IList {
-            return Currying.PropOr(val, p, obj);
-        }
-
-        /// <summary>
-		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
-		/// <para />
-		/// sig: a -> String -> Object -> a
-		/// </summary>
-		/// <param name="val">The default value.</param>
-		/// <param name="p">The name of the property to return.</param>
-		/// <param name="obj">The object to query.</param>
-		/// <returns>The value of given property of the supplied object or the default value.</returns>
-        public static dynamic PropOr<TValue, TTarget>(RamdaPlaceholder val, IList<int> p, TTarget obj) where TTarget : IList {
-            return Currying.PropOr(val, p, obj);
-        }
-
-        /// <summary>
-		/// If the given, non-null object has an own property with the specified name,returns the value of that property. Otherwise returns the provided defaultvalue.
-		/// <para />
-		/// sig: a -> String -> Object -> a
-		/// </summary>
-		/// <param name="val">The default value.</param>
-		/// <param name="p">The name of the property to return.</param>
-		/// <param name="obj">The object to query.</param>
-		/// <returns>The value of given property of the supplied object or the default value.</returns>
-        public static dynamic PropOr<TValue, TTarget>(TValue val, IList<int> p, RamdaPlaceholder obj = null) where TTarget : IList {
-            return Currying.PropOr(val, p, obj);
-        }
+		/// <see cref="R.PropEq"/>
+		/// <see cref="R.PropIs"/>
+        //public static dynamic PropSatisfies<TTarget>(dynamic pred, int p, TTarget obj) where TTarget : IList {
+        //    return Currying.PropSatisfies(pred, p, obj);
+        //}
 
         /// <summary>
 		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
@@ -267,9 +66,9 @@ namespace Ramda.NET
 		/// <returns>Boolean</returns>
 		/// <see cref="R.PropEq"/>
 		/// <see cref="R.PropIs"/>
-        public static dynamic PropSatisfies<TTarget>(dynamic pred, int p, TTarget obj) where TTarget : IList {
-            return Currying.PropSatisfies(pred, p, obj);
-        }
+        //public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, TTarget obj) where TTarget : IList {
+        //    return Currying.PropSatisfies(pred, p, obj);
+        //}
 
         /// <summary>
 		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
@@ -282,9 +81,9 @@ namespace Ramda.NET
 		/// <returns>Boolean</returns>
 		/// <see cref="R.PropEq"/>
 		/// <see cref="R.PropIs"/>
-        public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, TTarget obj) where TTarget : IList {
-            return Currying.PropSatisfies(pred, p, obj);
-        }
+        //public static dynamic PropSatisfies<TArg, TTarget>(RamdaPlaceholder pred, int p, TTarget obj) {
+        //    return Currying.PropSatisfies(pred, p, obj);
+        //}
 
         /// <summary>
 		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
@@ -297,9 +96,9 @@ namespace Ramda.NET
 		/// <returns>Boolean</returns>
 		/// <see cref="R.PropEq"/>
 		/// <see cref="R.PropIs"/>
-        public static dynamic PropSatisfies<TArg, TTarget>(RamdaPlaceholder pred, int p, TTarget obj) {
-            return Currying.PropSatisfies(pred, p, obj);
-        }
+        //public static dynamic PropSatisfies(dynamic pred, int p, RamdaPlaceholder obj = null) {
+        //    return Currying.PropSatisfies(pred, p, obj);
+        //}
 
         /// <summary>
 		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
@@ -312,24 +111,9 @@ namespace Ramda.NET
 		/// <returns>Boolean</returns>
 		/// <see cref="R.PropEq"/>
 		/// <see cref="R.PropIs"/>
-        public static dynamic PropSatisfies(dynamic pred, int p, RamdaPlaceholder obj = null) {
-            return Currying.PropSatisfies(pred, p, obj);
-        }
-
-        /// <summary>
-		/// Returns `true` if the specified object property satisfies the givenpredicate; `false` otherwise.
-		/// <para />
-		/// sig: (a -> Boolean) -> String -> {String: a} -> Boolean
-		/// </summary>
-		/// <param name="pred">first</param>
-		/// <param name="name">second</param>
-		/// <param name="obj">third</param>
-		/// <returns>Boolean</returns>
-		/// <see cref="R.PropEq"/>
-		/// <see cref="R.PropIs"/>
-        public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, RamdaPlaceholder obj = null) where TTarget : IList {
-            return Currying.PropSatisfies(Delegate(pred), p, obj);
-        }
+        //public static dynamic PropSatisfies<TArg, TTarget>(Func<TArg, bool> pred, int p, RamdaPlaceholder obj = null) where TTarget : IList {
+        //    return Currying.PropSatisfies(Delegate(pred), p, obj);
+        //}
 
         /// <summary>
         /// A function that always returns `true`. Any passed in parameters are ignored.

@@ -59,6 +59,13 @@ namespace Ramda.NET
             return Currying.Construct(new DelegateDecorator(Fn));
         }
 
+        /// <summary>
+        /// Wraps a constructor function inside a curried function that can be calledwith the same arguments and returns the same type.
+        /// <para />
+        /// sig: (* -> {*}) -> (* -> {*})
+        /// </summary>
+        /// <param name="fn">The constructor function to wrap.</param>
+        /// <returns>A wrapped, curried constructor function.</returns>
         public static dynamic Construct<TTarget, TArg1, TArg2, TArg3, TArg4, TArg5>(Func<TArg1, TArg2, TArg3, TArg4, TArg5, TTarget> Fn) {
             return Currying.Construct(new DelegateDecorator(Fn));
         }

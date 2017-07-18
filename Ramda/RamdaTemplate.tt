@@ -178,6 +178,7 @@ public class RamdaTemplate : CSharpTemplate
 	public RamdaTemplate() {
 		Generics = new List<string>();
 		Emitted = new HashSet<string>();
+		GenericConstraints = string.Empty;
 		SkippedIndexedGaps = new List<int>();
 		SkippedIndexedParams = new List<int>();
 		Parameters = new List<Tuple<string, string, bool>>();
@@ -192,7 +193,11 @@ public class RamdaTemplate : CSharpTemplate
 	
 	private HashSet<string> Emitted { get; set; }
 
+	public string GenericConstraints { get; set; }
+
 	public bool IgnoreDelegateWrapping { get; set; }
+	
+	public string InvocationExpression { get; set; }
 
 	public List<int> SkippedIndexedGaps { get; set; }
 
@@ -207,7 +212,7 @@ public class RamdaTemplate : CSharpTemplate
 	}
 
 	private string ResolveGenerics(List<string> generics) {
-		return generics.Count > 0 ? "<" + string.Join(", ", generics) + ">" : "";
+		return string.Join(", ", generics);
 	}
 
 	private bool FillPlaceholders(List<Tuple<string, string, bool>> tuples, int index) {
@@ -361,7 +366,7 @@ public class RamdaTemplate : CSharpTemplate
 				Emit(name, ResolveGenerics(shifted), joined, ToArguments(shifted));
 			}
         }
-		//System.Diagnostics.Debugger.Launch();
+
 		for (var i = 1; i < list.Count - 1; i++)	 {
 			if (SkippedIndexedParams.Contains(i - 1)) {
 				continue;
@@ -376,16 +381,39 @@ public class RamdaTemplate : CSharpTemplate
 		}
 	}
 
+	private bool AnyGeneric(string value) {
+		return value.Split(new[] { ", " }, StringSplitOptions.None).Any(v => GenericConstraints.Contains(v));
+	}
+
+	private string GetConstraints(string generics) {
+		if (!string.IsNullOrEmpty(generics) && !string.IsNullOrEmpty(GenericConstraints)) {
+			return AnyGeneric(generics) ? " where " + GenericConstraints : string.Empty;
+		}
+
+		return string.Empty;
+	}
+
+	private string GetGenerics(string generics) {
+		return string.IsNullOrEmpty(generics) ? generics : "<" + generics + ">";
+	}
+
 	private void Emit(string name, string generics, string parameters, string arguments, bool addNewLine = true) {
 		if (!Emitted.Contains(parameters)) {
 			if (addNewLine) {
 				WriteLine("");
-			}#>
+			}
+#>
 		<#= Documentation #>
-		public static dynamic <#= name #><#= generics #>(<#= parameters #>) {
+<#+ if (string.IsNullOrEmpty(InvocationExpression)) {#>
+		public static dynamic <#= name #><#= GetGenerics(generics) #>(<#= parameters #>)<#= GetConstraints(generics) #> {
 			return Currying.<#= name #>(<#= arguments #>);
 		}
-<#+			Emitted.Add(parameters);
+<#+	} else {#>
+		public static dynamic <#= name #><#= generics #>(<#= parameters #>) {
+			return <#= InvocationExpression #>
+		}
+<#+	}
+		Emitted.Add(parameters);
 		}
 	}
 
@@ -399,6 +427,7 @@ public class RamdaTemplate : CSharpTemplate
 		base.TransformText();
 #>
 using System;
+using System.Linq;
 using System.Dynamic;
 using System.Collections;
 using System.Threading.Tasks;
@@ -413,7 +442,7 @@ namespace Ramda.NET
 <#+
 		var path = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(this.Context.Host.TemplateFile), @"..\", @"doc\"));
 		var dynamics = Parameters.ToList();
-		var generics = Generics.Count > 0 ? "<" + string.Join(", ", Generics) + ">" : "";
+		var generics = ResolveGenerics(Generics);
 		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
 
 		Documentation = EmitDocumentation(path);

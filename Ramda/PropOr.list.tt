@@ -1,0 +1,17 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.Generics.Add("TValue");
+	template.Generics.Add("TTarget");
+	template.SkippedIndexedGaps.Add(1);
+	template.SkippedIndexedParams.Add(0);
+	template.AllGapsFunctionAlreadyExists = true;
+	template.GenericConstraints = "TTarget : IList";
+	template.Parameters.Add(Tuple.Create("TValue", "val", false));
+	template.Parameters.Add(Tuple.Create("IList<int>", "p", false));
+	template.Parameters.Add(Tuple.Create("TTarget", "obj", false));
+	template.Render();
+#>

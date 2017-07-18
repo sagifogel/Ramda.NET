@@ -12,8 +12,8 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Length_Returns_The_Length_Of_A_List() {
-            Assert.AreEqual(R.Length(new object[0]), 0);
-            Assert.AreEqual(R.Length(new[] { "a", "b", "c", "d" }), 4);
+            Assert.AreEqual(R.Length<object>(new object[0]), 0);
+            Assert.AreEqual(R.Length<string>(new[] { "a", "b", "c", "d" }), 4);
         }
 
         [TestMethod]
@@ -30,8 +30,8 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Length_Returns_The_Length_Of_An_Arguments_Object() {
-            Assert.AreEqual(R.Length(Arguments()), 0);
-            Assert.AreEqual(R.Length(Arguments("x", "y", "z")), 3);
+            Assert.AreEqual(R.Length<object>(Arguments()), 0);
+            Assert.AreEqual(R.Length<object>(Arguments("x", "y", "z")), 3);
         }
 
         [TestMethod]

@@ -148,6 +148,23 @@ namespace Ramda.NET
 		/// <see cref="R.Over"/>
 		/// <see cref="R.LensIndex"/>
 		/// <see cref="R.LensProp"/>
+		public static dynamic Lens(dynamic getter, dynamic setter) {
+			return Currying.Lens(Delegate(getter), Delegate(setter));
+		}
+
+		/// <summary>
+		/// Returns a lens for the given getter and setter functions. The getter "gets"the value of the focus; the setter "sets" the value of the focus. The settershould not mutate the data structure.
+		/// <para />
+		/// sig: (s -> a) -> ((a, s) -> s) -> Lens s a
+		/// </summary>
+		/// <param name="getter">first</param>
+		/// <param name="setter">second</param>
+		/// <returns>Lens</returns>
+		/// <see cref="R.View"/>
+		/// <see cref="R.Set"/>
+		/// <see cref="R.Over"/>
+		/// <see cref="R.LensIndex"/>
+		/// <see cref="R.LensProp"/>
 		public static dynamic Lens(RamdaPlaceholder getter = null, RamdaPlaceholder setter = null) {
 			return Currying.Lens(getter, setter);
 		}

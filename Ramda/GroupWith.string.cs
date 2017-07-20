@@ -25,7 +25,7 @@ namespace Ramda.NET
 		/// <param name="list">The array to group. Also accepts a string, which will be       treated as a list of characters.</param>
 		/// <returns>A list that contains sublists of equal elements, whose concatenations are equal to the original list.</returns>
 		public static dynamic GroupWith(Func<string, string, bool> fn, string list) {
-			return Currying.GroupWith(fn, list);
+			return Currying.GroupWith(Delegate(fn), list);
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Ramda.NET
 		/// <param name="fn">Function for determining whether two given (adjacent)       elements should be in the same group</param>
 		/// <param name="list">The array to group. Also accepts a string, which will be       treated as a list of characters.</param>
 		/// <returns>A list that contains sublists of equal elements, whose concatenations are equal to the original list.</returns>
-		public static dynamic GroupWith(Func<string, string, bool> fn, RamdaPlaceholder list = null) {
-			return Currying.GroupWith(fn, list);
+		public static dynamic GroupWith(dynamic fn, string list) {
+			return Currying.GroupWith(Delegate(fn), list);
 		}
 	}
 }

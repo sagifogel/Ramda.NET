@@ -184,6 +184,8 @@ public class RamdaTemplate : CSharpTemplate
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
 
+	public bool ForceGenerics { get; set; }
+
 	public string CommentName { get; set; }
 	
 	private string Documentation { get; set; }
@@ -198,8 +200,10 @@ public class RamdaTemplate : CSharpTemplate
 	
 	public string InvocationExpression { get; set; }
 
-	public List<int> SkippedIndexedGaps { get; set; }
+	public bool SkippedAllDynamicParams { get; set; }
 
+	public List<int> SkippedIndexedGaps { get; set; }
+	
 	public List<int> SkippedIndexedParams { get; set; }
 	
 	public bool AllGapsFunctionAlreadyExists { get; set; }
@@ -275,18 +279,22 @@ public class RamdaTemplate : CSharpTemplate
 		var hash = new HashSet<string>();
         var generics = new List<string>();
 		var sorted = new List<string>();
-        
         var types = tuples.Select(tuple => tuple.Item1).ToList();
 
-        types.ForEach(type => {
-			var filteredGenerics = Generics.Where(g => type.IndexOf(g) > -1).ToList();
+		if (!ForceGenerics) {
+			types.ForEach(type => {
+				var filteredGenerics = Generics.Where(g => type.IndexOf(g) > -1).ToList();
 
-			filteredGenerics.ForEach(generic => {
-				if (generic != null && hash.Add(generic)) {
-					generics.Add(generic);
-				}
+				filteredGenerics.ForEach(generic => {
+					if (generic != null && hash.Add(generic)) {
+						generics.Add(generic);
+					}
+				});
 			});
-        });
+		}
+		else {
+			generics = Generics;
+		}
 
 		Generics.ForEach(generic => {
 			if (generics.Contains(generic)) {
@@ -443,12 +451,13 @@ namespace Ramda.NET
 		var dynamics = Parameters.ToList();
 		var generics = ResolveGenerics(Generics);
 		var arguments = string.Join(", ", Parameters.Select(t => t.Item2));
-
+		
 		Documentation = EmitDocumentation(path);
 		Emit(name, generics, Join(Parameters), ToArguments(Parameters), false);
 		Emit(Parameters.ToList(), name);
 		
 		if (TryGetDynamicParameters(dynamics)) {
+			var allDynamics = dynamics;
 			var indexes = TryGetDynamicIndexes(dynamics);
 			
 			Emit(dynamics, name);
@@ -462,6 +471,10 @@ namespace Ramda.NET
 					Emit(name, ResolveGenerics(dynamics), joined, GenerateDynamicArguments(dynamics));
 				}
 			});
+
+			if (!SkippedAllDynamicParams) {
+				Emit(name, ResolveGenerics(allDynamics), string.Join(", ", allDynamics.Select(FormatTuple)), GenerateDynamicArguments(allDynamics));
+			}
 		}
 		
 		if (!AllGapsFunctionAlreadyExists && Parameters.Count > 1) {

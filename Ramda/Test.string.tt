@@ -5,9 +5,9 @@
 	var template = new RamdaTemplate();
 
 	template.SkippedIndexedGaps.Add(0);
-	template.SkippedIndexedGaps.Add(1);
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("Delegate", "f", true));	
-	template.Parameters.Add(Tuple.Create("Delegate", "g", true));
+	template.InvocationExpression = "Currying.Test(new Regex(pattern), str);";
+	template.Parameters.Add(Tuple.Create("string", "pattern", false));
+	template.Parameters.Add(Tuple.Create("string", "str", false));
 	template.Render();
 #>

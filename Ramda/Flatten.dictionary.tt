@@ -3,11 +3,8 @@
 <#@ include file="RamdaTemplate.tt" #>
 <#
 	var template = new RamdaTemplate();
-
-	template.SkippedIndexedGaps.Add(0);
-	template.SkippedIndexedGaps.Add(1);
+		
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("Delegate", "f", true));	
-	template.Parameters.Add(Tuple.Create("Delegate", "g", true));
+	template.Parameters.Add(Tuple.Create("IDictionary", "list", false));
 	template.Render();
 #>

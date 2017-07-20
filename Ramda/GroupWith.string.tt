@@ -4,8 +4,9 @@
 <#
 	var template = new RamdaTemplate();
 
+	template.SkippedIndexedGaps.Add(1);
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("Func<string, string, bool>", "fn", false));	
+	template.Parameters.Add(Tuple.Create("Func<string, string, bool>", "fn", true));	
 	template.Parameters.Add(Tuple.Create("string", "list", false));
 	template.Render();
 #>

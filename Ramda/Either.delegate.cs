@@ -26,7 +26,7 @@ namespace Ramda.NET
 		/// <returns>a function that applies its arguments to `f` and `g` and `||`s their outputs together.</returns>
 		/// <see cref="R.Or"/>
 		public static dynamic Either(Delegate f, Delegate g) {
-			return Currying.Either(f, g);
+			return Currying.Either(Delegate(f), Delegate(g));
 		}
 
 		/// <summary>
@@ -38,8 +38,8 @@ namespace Ramda.NET
 		/// <param name="g">another predicate</param>
 		/// <returns>a function that applies its arguments to `f` and `g` and `||`s their outputs together.</returns>
 		/// <see cref="R.Or"/>
-		public static dynamic Either(RamdaPlaceholder f, Delegate g) {
-			return Currying.Either(f, g);
+		public static dynamic Either(dynamic f, Delegate g) {
+			return Currying.Either(Delegate(f), Delegate(g));
 		}
 
 		/// <summary>
@@ -51,8 +51,21 @@ namespace Ramda.NET
 		/// <param name="g">another predicate</param>
 		/// <returns>a function that applies its arguments to `f` and `g` and `||`s their outputs together.</returns>
 		/// <see cref="R.Or"/>
-		public static dynamic Either(Delegate f, RamdaPlaceholder g = null) {
-			return Currying.Either(f, g);
+		public static dynamic Either(Delegate f, dynamic g) {
+			return Currying.Either(Delegate(f), Delegate(g));
+		}
+
+		/// <summary>
+		/// A function wrapping calls to the two functions in an `||` operation,returning the result of the first function if it is truth-y and the resultof the second function otherwise. Note that this is short-circuited,meaning that the second function will not be invoked if the first returns atruth-y value.In addition to functions, `R.either` also accepts any fantasy-land compatibleapplicative functor.
+		/// <para />
+		/// sig: (*... -> Boolean) -> (*... -> Boolean) -> (*... -> Boolean)
+		/// </summary>
+		/// <param name="f">a predicate</param>
+		/// <param name="g">another predicate</param>
+		/// <returns>a function that applies its arguments to `f` and `g` and `||`s their outputs together.</returns>
+		/// <see cref="R.Or"/>
+		public static dynamic Either(dynamic f, dynamic g) {
+			return Currying.Either(Delegate(f), Delegate(g));
 		}
 	}
 }

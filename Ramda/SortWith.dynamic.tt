@@ -3,11 +3,12 @@
 <#@ include file="RamdaTemplate.tt" #>
 <#
 	var template = new RamdaTemplate();
-
+		
+	template.ForceGenerics= true;
+	template.Generics.Add("TSource");
 	template.SkippedIndexedGaps.Add(0);
-	template.SkippedIndexedGaps.Add(1);
 	template.AllGapsFunctionAlreadyExists = true;
-	template.Parameters.Add(Tuple.Create("Delegate", "f", true));	
-	template.Parameters.Add(Tuple.Create("Delegate", "g", true));
+	template.Parameters.Add(Tuple.Create("IList<dynamic>", "functions", false));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
 	template.Render();
 #>

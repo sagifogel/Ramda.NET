@@ -220,6 +220,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\ConstructN.type.cs">
+      <DependentUpon>ConstructN.type.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Converge.dynamic.list.cs">
       <DependentUpon>Converge.dynamic.list.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -326,10 +331,10 @@
       <DependentUpon>Cond.delegates.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Construct.cs" />
-    <Compile Include="Ramda\ConstructN.cs">
+    <Compile Include="Ramda\ConstructN.factory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ConstructN.tt</DependentUpon>
+      <DependentUpon>ConstructN.factory.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Contains.cs">
       <AutoGen>True</AutoGen>
@@ -454,6 +459,12 @@
     <Content Include="Ramda\Cond.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Cond.dynamic.list.cs</LastGenOutput>
+      <LastOutputs>.\Cond.dynamic.list.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ConstructN.type.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConstructN.type.cs</LastGenOutput>
+      <LastOutputs>.\ConstructN.type.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Converge.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -523,17 +534,17 @@
     <Content Include="Ramda\ComposeK.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ComposeK.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\ComposeK.cs</LastOutputs>
+      <LastOutputs>.\ComposeK.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ComposeP.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ComposeP.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\ComposeP.cs</LastOutputs>
+      <LastOutputs>.\ComposeP.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Compose.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Compose.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\Compose.delegate.array - Copy.cs</LastOutputs>
+      <LastOutputs>.\Compose.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Concat.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -555,10 +566,10 @@
       <LastGenOutput>Cond.delegates.cs</LastGenOutput>
       <LastOutputs>.\Cond.delegates.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\ConstructN.tt">
+    <Content Include="Ramda\ConstructN.factory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastOutputs>.\ConstructN.delegate.cs</LastOutputs>
-      <LastGenOutput>ConstructN.cs</LastGenOutput>
+      <LastOutputs>.\ConstructN.factory.cs</LastOutputs>
+      <LastGenOutput>ConstructN.factory.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\Contains.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -615,6 +626,11 @@
       <LastGenOutput>Evolve.object.cs</LastGenOutput>
       <LastOutputs>.\Evolve.object.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\SortWith.dynamic.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SortWith.dynamic.cs</LastGenOutput>
+      <LastOutputs>.\SortWith.dynamic.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Filter.object.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Filter.object.cs</LastGenOutput>
@@ -623,12 +639,17 @@
     <Content Include="Ramda\Filter.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Filter.list.cs</LastGenOutput>
-      <LastOutputs>.\Filter.cs</LastOutputs>
+      <LastOutputs>.\Filter.list.cs</LastOutputs>
     </Content>
     <Compile Include="Ramda\Evolve.object.cs">
       <DependentUpon>Evolve.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\SortWith.dynamic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SortWith.dynamic.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Filter.object.cs">
       <DependentUpon>Filter.object.tt</DependentUpon>
@@ -789,10 +810,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FindLastIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Flatten.cs">
+    <Compile Include="Ramda\Flatten.expando.cs">
+      <DependentUpon>Flatten.expando.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Flatten.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Flatten.dictionary.cs">
+      <DependentUpon>Flatten.dictionary.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Flatten.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flatten.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Flip.cs">
       <AutoGen>True</AutoGen>
@@ -943,10 +974,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Init.list..tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Insert.cs">
+    <Compile Include="Ramda\Insert.source.tartget.cs">
+      <DependentUpon>Insert.source.tartget.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Insert.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Insert.source.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Insert.source.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\InsertAll.cs">
       <AutoGen>True</AutoGen>
@@ -1079,6 +1115,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Lte.string.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\Match.string.cs">
+      <DependentUpon>Match.string.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Max.string.cs">
       <DependentUpon>Max.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1200,8 +1241,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\SortWith.cs">
-      <DependentUpon>SortWith.tt</DependentUpon>
+    <Compile Include="Ramda\SortWith.func.cs">
+      <DependentUpon>SortWith.func.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -1270,10 +1311,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Test.cs">
+    <Compile Include="Ramda\Test.string.cs">
+      <DependentUpon>Test.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Test.regex.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.regex.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\ToUpper.cs">
       <DependentUpon>ToUpper.tt</DependentUpon>
@@ -1426,10 +1472,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MapObjIndexed.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Match.cs">
+    <Compile Include="Ramda\Match.regex.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Match.tt</DependentUpon>
+      <DependentUpon>Match.regex.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\MathMod.cs">
       <AutoGen>True</AutoGen>
@@ -2207,7 +2253,7 @@
     <Content Include="Ramda\Evolve.dictionary.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Evolve.dictionary.cs</LastGenOutput>
-      <LastOutputs>.\Evolve.cs</LastOutputs>
+      <LastOutputs>.\Evolve.dictionary.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\FindIndex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2219,9 +2265,19 @@
       <LastGenOutput>FindLastIndex.cs</LastGenOutput>
       <LastOutputs>.\FindLastIndex.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Flatten.tt">
+    <Content Include="Ramda\Flatten.expando.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Flatten.cs</LastGenOutput>
+      <LastGenOutput>Flatten.expando.cs</LastGenOutput>
+      <LastOutputs>.\Flatten.expando.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Flatten.dictionary.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Flatten.dictionary.cs</LastGenOutput>
+      <LastOutputs>.\Flatten.dictionary.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Flatten.list.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Flatten.list.cs</LastGenOutput>
       <LastOutputs>.\Flatten.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Flip.tt">
@@ -2237,7 +2293,7 @@
     <Content Include="Ramda\ForEach.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ForEach.list.cs</LastGenOutput>
-      <LastOutputs>.\ForEach.cs</LastOutputs>
+      <LastOutputs>.\ForEach.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ForEachObjIndexed.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2252,7 +2308,7 @@
     <Content Include="Ramda\FromPairs.jagged.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FromPairs.jagged.array.cs</LastGenOutput>
-      <LastOutputs>.\FromPairs.cs</LastOutputs>
+      <LastOutputs>.\FromPairs.jagged.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\GroupBy.transformer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2317,7 +2373,7 @@
     <Content Include="Ramda\Head.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Head.list.cs</LastGenOutput>
-      <LastOutputs>.\Head.cs</LastOutputs>
+      <LastOutputs>.\Head.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Identical.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2369,10 +2425,15 @@
       <LastGenOutput>Init.list..cs</LastGenOutput>
       <LastOutputs>.\Init.list..cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Insert.tt">
+    <Content Include="Ramda\Insert.source.tartget.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Insert.cs</LastGenOutput>
-      <LastOutputs>.\Insert.cs</LastOutputs>
+      <LastGenOutput>Insert.source.tartget.cs</LastGenOutput>
+      <LastOutputs>.\Insert.source.tartget.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Insert.source.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Insert.source.cs</LastGenOutput>
+      <LastOutputs>.\Insert.source.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\InsertAll.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2504,6 +2565,11 @@
       <LastGenOutput>Lte.string.cs</LastGenOutput>
       <LastOutputs>.\Lte.string.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Match.string.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Match.string.cs</LastGenOutput>
+      <LastOutputs>.\Match.string.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\Max.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Max.string.cs</LastGenOutput>
@@ -2552,7 +2618,7 @@
     <Content Include="Ramda\Pipe.dynamic.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pipe.dynamic.array.cs</LastGenOutput>
-      <LastOutputs>.\Pipe.dynamic.list.cs</LastOutputs>
+      <LastOutputs>.\Pipe.dynamic.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PipeK.dynamic.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2562,7 +2628,7 @@
     <Content Include="Ramda\PipeK.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PipeK.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\PipeK.cs</LastOutputs>
+      <LastOutputs>.\PipeK.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PipeP.func4.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2624,10 +2690,10 @@
       <LastGenOutput>Slice.string.cs</LastGenOutput>
       <LastOutputs>.\Slice.string.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\SortWith.tt">
+    <Content Include="Ramda\SortWith.func.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SortWith.cs</LastGenOutput>
-      <LastOutputs>.\SortWith.cs</LastOutputs>
+      <LastGenOutput>SortWith.func.cs</LastGenOutput>
+      <LastOutputs>.\SortWith.func - Copy.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SplitAt.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2694,10 +2760,15 @@
       <LastGenOutput>TakeLast.string.cs</LastGenOutput>
       <LastOutputs>.\TakeLast.string.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Test.tt">
+    <Content Include="Ramda\Test.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Test.cs</LastGenOutput>
-      <LastOutputs>.\Test.cs</LastOutputs>
+      <LastGenOutput>Test.string.cs</LastGenOutput>
+      <LastOutputs>.\Test.string.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Test.regex.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Test.regex.cs</LastGenOutput>
+      <LastOutputs>.\Test.regex.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ToUpper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2767,7 +2838,7 @@
     <Content Include="Ramda\Last.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Last.list.cs</LastGenOutput>
-      <LastOutputs>.\Last.list - Copy.cs</LastOutputs>
+      <LastOutputs>.\Last.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\LastIndexOf.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2777,7 +2848,7 @@
     <Content Include="Ramda\Length.generic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Length.generic.list.cs</LastGenOutput>
-      <LastOutputs>.\Length.generic.list - Copy.cs</LastOutputs>
+      <LastOutputs>.\Length.generic.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\LensIndex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2849,10 +2920,10 @@
       <LastGenOutput>MapObjIndexed.cs</LastGenOutput>
       <LastOutputs>.\MapObjIndexed.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Match.tt">
+    <Content Include="Ramda\Match.regex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Match.cs</LastGenOutput>
-      <LastOutputs>.\Match.cs</LastOutputs>
+      <LastGenOutput>Match.regex.cs</LastGenOutput>
+      <LastOutputs>.\Match.regex.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\MathMod.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3067,12 +3138,12 @@
     <Content Include="Ramda\Pipe.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Pipe.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\Pipe.cs</LastOutputs>
+      <LastOutputs>.\Pipe.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PipeP.delegate.array.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PipeP.delegate.array.cs</LastGenOutput>
-      <LastOutputs>.\PipeP.cs</LastOutputs>
+      <LastOutputs>.\PipeP.delegate.array.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Pluck.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3087,7 +3158,7 @@
     <Content Include="Ramda\Prepend.generic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Prepend.generic.cs</LastGenOutput>
-      <LastOutputs>.\Prepend.cs</LastOutputs>
+      <LastOutputs>.\Prepend.generic.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Product.int.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3107,7 +3178,7 @@
     <Content Include="Ramda\Prop.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Prop.string.cs</LastGenOutput>
-      <LastOutputs>.\Prop.cs</LastOutputs>
+      <LastOutputs>.\Prop.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PropEq.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3117,7 +3188,7 @@
     <Content Include="Ramda\PropIs.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PropIs.string.cs</LastGenOutput>
-      <LastOutputs>.\PropIs.cs</LastOutputs>
+      <LastOutputs>.\PropIs.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\PropOr.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -3132,7 +3203,7 @@
     <Content Include="Ramda\PropSatisfies.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PropSatisfies.string.cs</LastGenOutput>
-      <LastOutputs>.\PropSatisfies.cs</LastOutputs>
+      <LastOutputs>.\PropSatisfies.string.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\RamdaTemplate.tt" />
     <Content Include="Ramda\Range.tt">

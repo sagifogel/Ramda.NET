@@ -1,0 +1,15 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+
+	template.ForceGenerics = true;
+	template.Generics.Add("TSource");
+	template.Generics.Add("TTarget");
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("int", "index", false));	
+	template.Parameters.Add(Tuple.Create("TTarget", "elt", false));
+	template.Parameters.Add(Tuple.Create("IList<TSource>", "list", false));
+	template.Render();
+#>

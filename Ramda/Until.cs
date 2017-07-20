@@ -168,6 +168,19 @@ namespace Ramda.NET
 		/// <param name="fn">The iterator function</param>
 		/// <param name="init">Initial value</param>
 		/// <returns>Final value that satisfies predicate</returns>
+		public static dynamic Until<TArg>(dynamic pred, dynamic fn, TArg init) {
+			return Currying.Until(Delegate(pred), Delegate(fn), init);
+		}
+
+		/// <summary>
+		/// Takes a predicate, a transformation function, and an initial value,and returns a value of the same type as the initial value.It does so by applying the transformation until the predicate is satisfied,at which point it returns the satisfactory value.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="fn">The iterator function</param>
+		/// <param name="init">Initial value</param>
+		/// <returns>Final value that satisfies predicate</returns>
 		public static dynamic Until(RamdaPlaceholder pred = null, RamdaPlaceholder fn = null, RamdaPlaceholder init = null) {
 			return Currying.Until(pred, fn, init);
 		}

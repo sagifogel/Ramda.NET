@@ -1,0 +1,17 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+		
+	template.SkippedIndexedGaps.Add(3);
+	template.SkippedIndexedParams.Add(0);
+	template.SkippedIndexedParams.Add(1);
+	template.Generics.Add("TAccumulator");
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("Func<ITransformer, ITransformer>", "xf", true));	
+	template.Parameters.Add(Tuple.Create("Func<TAccumulator, ITransformer>", "fn", true));	
+	template.Parameters.Add(Tuple.Create("TAccumulator", "acc", false));
+	template.Parameters.Add(Tuple.Create("IReducible", "list", false));
+	template.Render();
+#>

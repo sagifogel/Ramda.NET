@@ -1331,7 +1331,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ToLower.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Transduce.reducible.cs" />
+    <Compile Include="Ramda\Transduce.reducible.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transduce.reducible.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Traverse.traversable.cs">
+      <DependentUpon>Traverse.traversable.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Type.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1937,7 +1946,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Traverse.list..tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Traverse.traversable.cs" />
     <Compile Include="Ramda\Trim.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2779,6 +2787,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToLower.cs</LastGenOutput>
       <LastOutputs>.\ToLower.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Transduce.reducible.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Transduce.reducible.cs</LastGenOutput>
+      <LastOutputs>.\Transduce.reducible.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Traverse.traversable.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Traverse.traversable.cs</LastGenOutput>
+      <LastOutputs>.\Traverse.traversable.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Type.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

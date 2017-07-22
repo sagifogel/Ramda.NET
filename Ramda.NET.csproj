@@ -740,6 +740,16 @@
       <LastGenOutput>IndexBy.object.cs</LastGenOutput>
       <LastOutputs>.\IndexBy.object.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Into.list.reducible.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.list.reducible.cs</LastGenOutput>
+      <LastOutputs>.\Into.list.reducible.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Into.reduce.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Into.reduce.cs</LastGenOutput>
+      <LastOutputs>.\Into.reduce.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\SortWith.dynamic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SortWith.dynamic.cs</LastGenOutput>
@@ -764,6 +774,16 @@
       <DependentUpon>IndexBy.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Into.list.reducible.cs">
+      <DependentUpon>Into.list.reducible.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Into.reduce.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Into.reduce.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\SortWith.dynamic.cs">
       <AutoGen>True</AutoGen>
@@ -1129,7 +1149,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Into.reduce.cs" />
     <Compile Include="Ramda\Into.object.cs">
       <DependentUpon>Into.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1140,10 +1159,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Into.IList.cs">
+    <Compile Include="Ramda\Into.list.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Into.IList.tt</DependentUpon>
+      <DependentUpon>Into.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\Invert.cs">
       <AutoGen>True</AutoGen>
@@ -2598,10 +2617,10 @@
       <LastGenOutput>Into.string.cs</LastGenOutput>
       <LastOutputs>.\Into.string.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Into.IList.tt">
+    <Content Include="Ramda\Into.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Into.IList.cs</LastGenOutput>
-      <LastOutputs>.\Into.IList.cs</LastOutputs>
+      <LastGenOutput>Into.list.cs</LastGenOutput>
+      <LastOutputs>.\Into.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Invert.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

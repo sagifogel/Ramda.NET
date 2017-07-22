@@ -194,16 +194,18 @@ public class RamdaTemplate : CSharpTemplate
 	public List<string> Generics { get; set; }
 	
 	private HashSet<string> Emitted { get; set; }
-
+	
 	public string GenericConstraints { get; set; }
 
 	public bool IgnoreDelegateWrapping { get; set; }
-	
-	public string InvocationExpression { get; set; }
 
+	public string InvocationExpression { get; set; }
+	
 	public bool SkippedAllDynamicParams { get; set; }
 
 	public List<int> SkippedIndexedGaps { get; set; }
+
+	public bool EmitDynamicCombinations { get; set; }
 
 	public List<int> SkippedIndexedParams { get; set; }
 	
@@ -434,10 +436,74 @@ public class RamdaTemplate : CSharpTemplate
 		}
 	}
 
-	private string GenerateDynamicArguments(List<Tuple<string, string, bool>> dynamics) {
+	private string GenerateDynamicArguments(IEnumerable<Tuple<string, string, bool>> dynamics) {
 		var format = IgnoreDelegateWrapping ? "{0}" : "Delegate({0})";
 
 		return string.Join(", ", dynamics.Select(d => d.Item3 ? string.Format(format, d.Item2) : d.Item2));
+	}
+
+	private void EmitConditionalSkipedDynamics(List<Tuple<string, string, bool>> allDynamics, List<int> indexes = null) {
+		indexes = indexes ?? TryGetDynamicIndexes(allDynamics);
+
+		if (!(SkippedAllDynamicParams && indexes.Count == Parameters.Count)) {
+			Emit(name, ResolveGenerics(allDynamics), string.Join(", ", allDynamics.Select(FormatTuple)), GenerateDynamicArguments(allDynamics));
+		}
+	}
+
+	private IEnumerable<IEnumerable<string>> GetCombinations(IEnumerable<string> list, int length) {
+        if (length == 1) return list.Select(t => new [] { t });
+
+        return GetCombinations(list, length - 1)
+            .SelectMany(t => list, (t1, t2) => t1.Concat(new [] { t2 }));
+    }
+
+	private IEnumerable<IEnumerable<string>> CreateAllCombinations(IEnumerable<string> source, int length) {
+        return GetCombinations(source, length).Where(comb => {
+            var allDynamic = true;
+            var hasDynamic = false;
+
+            foreach (var item in comb) {
+                var isDynamic = item.Equals("dynamic");
+
+                hasDynamic |= isDynamic;
+                allDynamic &= isDynamic;
+            }
+
+            return hasDynamic && !allDynamic;
+        });
+    }
+
+	public void EmitAllDynamicCombinations(IEnumerable<Tuple<string, string, bool>> dynamics) {
+		//System.Diagnostics.Debugger.Launch();
+		var set = new HashSet<string>(dynamics.Select(d => d.Item1).Concat(new [] { "dynamic" }));
+		var combinations = CreateAllCombinations(set, dynamics.Count());
+
+		foreach (var combination in combinations) {
+			var swapped = SwapParameters(combination);
+			var joined = string.Join(", ", swapped.Select(FormatTuple));;
+
+			Emit(name, ResolveGenerics(swapped), joined, GenerateDynamicArguments(swapped));
+		}
+	}
+
+	public IEnumerable<Tuple<string, string, bool>> SwapParameters(IEnumerable<string> combination) {
+		return combination.Select((comb, i) => Tuple.Create(comb, Parameters[i].Item2, Parameters[i].Item3)); 
+	}
+
+	public void EmitDynamicsByIndexes(List<Tuple<string, string, bool>> dynamics) {
+		var indexes = TryGetDynamicIndexes(dynamics);
+			
+		Emit(dynamics, name);
+
+		indexes.ForEach(i => {
+			dynamics = Parameters.ToList();
+
+			if (TryGetDynamicParameters(dynamics, i)) {
+				var joined = string.Join(", ", dynamics.Select(FormatTuple));
+
+				Emit(name, ResolveGenerics(dynamics), joined, GenerateDynamicArguments(dynamics));
+			}
+		});
 	}
 
 	public override string TransformText() {
@@ -467,24 +533,14 @@ namespace Ramda.NET
 		Emit(Parameters.ToList(), name);
 		
 		if (TryGetDynamicParameters(dynamics)) {
-			var allDynamics = dynamics;
-			var indexes = TryGetDynamicIndexes(dynamics);
-			
-			Emit(dynamics, name);
-
-			indexes.ForEach(i => {
-				dynamics = Parameters.ToList();
-
-				if (TryGetDynamicParameters(dynamics, i)) {
-					var joined = string.Join(", ", dynamics.Select(FormatTuple));
-
-					Emit(name, ResolveGenerics(dynamics), joined, GenerateDynamicArguments(dynamics));
-				}
-			});
-
-			if (!(SkippedAllDynamicParams && indexes.Count == Parameters.Count)) {
-				Emit(name, ResolveGenerics(allDynamics), string.Join(", ", allDynamics.Select(FormatTuple)), GenerateDynamicArguments(allDynamics));
+			if (EmitDynamicCombinations) {
+				EmitAllDynamicCombinations(Parameters);
 			}
+			else {
+				EmitDynamicsByIndexes(dynamics.ToList());
+			}
+
+			EmitConditionalSkipedDynamics(dynamics);
 		}
 		
 		if (!AllGapsFunctionAlreadyExists && Parameters.Count > 1) {

@@ -4,6 +4,7 @@
 <#
 	var template = new RamdaTemplate();
 
+	template.EmitDynamicCombinations = true;
 	template.Parameters.Add(Tuple.Create("Delegate", "condition", true));
 	template.Parameters.Add(Tuple.Create("Delegate", "onTrue", true));
 	template.Parameters.Add(Tuple.Create("Delegate", "onFalse", true));

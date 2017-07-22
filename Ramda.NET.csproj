@@ -750,6 +750,11 @@
       <LastGenOutput>Into.reduce.cs</LastGenOutput>
       <LastOutputs>.\Into.reduce.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Reduce.reducable.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Reduce.reducable.cs</LastGenOutput>
+      <LastOutputs>.\Reduce.reducable.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\SortWith.dynamic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SortWith.dynamic.cs</LastGenOutput>
@@ -784,6 +789,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Into.reduce.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Reduce.reducable.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reduce.reducable.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ramda\Reduce.list.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reduce.list.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\SortWith.dynamic.cs">
       <AutoGen>True</AutoGen>
@@ -1359,7 +1374,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Ramda\Reduce.reducable.cs" />
+    <Compile Include="Ramda\Reduce.reducable2.cs" />
     <Compile Include="Ramda\Replace.string.cs">
       <DependentUpon>Replace.string.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1904,11 +1919,6 @@
       <DependentUpon>Range.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Ramda\Reduce.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reduce.tt</DependentUpon>
     </Compile>
     <Compile Include="Ramda\ReduceBy.cs">
       <AutoGen>True</AutoGen>
@@ -3363,10 +3373,10 @@
       <LastGenOutput>Range.cs</LastGenOutput>
       <LastOutputs>.\Range.cs</LastOutputs>
     </Content>
-    <Content Include="Ramda\Reduce.tt">
+    <Content Include="Ramda\Reduce.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Reduce.cs</LastGenOutput>
-      <LastOutputs>.\Reduce.cs</LastOutputs>
+      <LastGenOutput>Reduce.list.cs</LastGenOutput>
+      <LastOutputs>.\Reduce.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\ReduceBy.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -17,131 +17,131 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(Func<TSource, int> fn, TSource a, TSource b) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(RamdaPlaceholder fn, TSource a, TSource b) {
 			return Currying.Ascend(fn, a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(Func<TSource, int> fn, RamdaPlaceholder a, TSource b) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(Func<TSource, int> fn, TSource a, RamdaPlaceholder b = null) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(Func<TSource, int> fn, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(dynamic fn, RamdaPlaceholder a, TSource b) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(dynamic fn, TSource a, RamdaPlaceholder b = null) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend(dynamic fn, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend<TSource>(dynamic fn, TSource a, TSource b) {
 			return Currying.Ascend(Delegate(fn), a, b);
 		}
 
 		/// <summary>
-		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<` and `>`.
+		/// Makes an ascending comparator function out of a function that returns a valuethat can be compared with `<![CDATA[<]]>` and `<![CDATA[>]]>`.
 		/// <para />
 		/// sig: Ord b => (a -> b) -> a -> a -> Number
 		/// </summary>
 		/// <param name="fn">A function of arity one that returns a value that can be compared</param>
 		/// <param name="a">The first item to be compared.</param>
 		/// <param name="b">The second item to be compared.</param>
-		/// <returns>`-1` if fn(a) < fn(b), `1` if fn(b) < fn(a), otherwise `0`</returns>
+		/// <returns>`-1` if fn(a) <![CDATA[<]]> fn(b), `1` if fn(b) <![CDATA[<]]> fn(a), otherwise `0`</returns>
 		public static dynamic Ascend(RamdaPlaceholder fn = null, RamdaPlaceholder a = null, RamdaPlaceholder b = null) {
 			return Currying.Ascend(fn, a, b);
 		}

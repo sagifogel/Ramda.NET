@@ -20,7 +20,7 @@ public class RamdaTemplate : CSharpTemplate
         string returnValue = null;
         IDictionary<string, JSDoc> jsdocs = null;
         var comments = new StringBuilder("/// <summary>\n");
-        var indexesToDescription = new Dictionary<int, string> {
+		var indexesToDescription = new Dictionary<int, string> {
             [0] = "first",
             [1] = "second",
             [2] = "third",
@@ -39,7 +39,7 @@ public class RamdaTemplate : CSharpTemplate
 		returnTag = item.Comments.ContainsKey("return") ? item.Comments["return"] : new Tag { Type = new Type { Name = "Function" } };
         comments.AppendFormat("\t\t/// {0}\n", NormalizeComment(item.LeadingComments.Description));
         comments.Append("\t\t/// <para />\n");
-        comments.AppendFormat("\t\t/// sig: {0}\n", NormalizeComment(item.Comments["sig"].Description));
+        comments.AppendFormat("\t\t/// sig: {0}\n", NormalizeComment(item.Comments["sig"].Description, true));
         comments.Append("\t\t/// </summary>\n");
         hasSeeValues = item.Comments.ContainsKey("see");
 
@@ -68,10 +68,15 @@ public class RamdaTemplate : CSharpTemplate
         return comments.ToString();
     }
 
-	private string NormalizeComment(string comment) {
+	private string NormalizeComment(string comment, bool ignoreIllegalChars = false) {
         var splitted = Regex.Split(comment, "\n").Select(s => s.Replace("        ", " ").Replace("\n", "\n\t\t/// "));
+		var joined = string.Join("", splitted);
 
-        return string.Join("", splitted);
+		if (ignoreIllegalChars) {
+			return joined;
+		}
+
+        return Regex.Replace(joined, "(<|>|&&)", "<![CDATA[$1]]>");
     }
 
 	private IDictionary<string, JSDoc> DeserializeComments(string path) {

@@ -24,7 +24,7 @@ namespace Ramda.NET
 		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
 		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
 		/// <param name="value">Value to be clamped</param>
-		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
+		/// <returns>Returns `minimum` when `val <![CDATA[<]]> minimum`, `maximum` when `val <![CDATA[>]]> maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(double minimum, double maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
@@ -37,7 +37,7 @@ namespace Ramda.NET
 		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
 		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
 		/// <param name="value">Value to be clamped</param>
-		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
+		/// <returns>Returns `minimum` when `val <![CDATA[<]]> minimum`, `maximum` when `val <![CDATA[>]]> maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(RamdaPlaceholder minimum, double maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
@@ -50,7 +50,7 @@ namespace Ramda.NET
 		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
 		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
 		/// <param name="value">Value to be clamped</param>
-		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
+		/// <returns>Returns `minimum` when `val <![CDATA[<]]> minimum`, `maximum` when `val <![CDATA[>]]> maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(double minimum, RamdaPlaceholder maximum, double value) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
@@ -63,7 +63,7 @@ namespace Ramda.NET
 		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
 		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
 		/// <param name="value">Value to be clamped</param>
-		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
+		/// <returns>Returns `minimum` when `val <![CDATA[<]]> minimum`, `maximum` when `val <![CDATA[>]]> maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(double minimum, double maximum, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}
@@ -76,7 +76,7 @@ namespace Ramda.NET
 		/// <param name="minimum">The lower limit of the clamp (inclusive)</param>
 		/// <param name="maximum">The upper limit of the clamp (inclusive)</param>
 		/// <param name="value">Value to be clamped</param>
-		/// <returns>Returns `minimum` when `val < minimum`, `maximum` when `val > maximum`, returns `val` otherwise</returns>
+		/// <returns>Returns `minimum` when `val <![CDATA[<]]> minimum`, `maximum` when `val <![CDATA[>]]> maximum`, returns `val` otherwise</returns>
 		public static dynamic Clamp(double minimum, RamdaPlaceholder maximum = null, RamdaPlaceholder value = null) {
 			return Currying.Clamp(minimum, maximum, value);
 		}

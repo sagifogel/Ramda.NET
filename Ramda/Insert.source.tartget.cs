@@ -17,7 +17,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		/// <summary>
-		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> a -> [a] -> [a]
 		/// </summary>
@@ -30,7 +30,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> a -> [a] -> [a]
 		/// </summary>
@@ -43,7 +43,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> a -> [a] -> [a]
 		/// </summary>
@@ -56,7 +56,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> a -> [a] -> [a]
 		/// </summary>
@@ -69,7 +69,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Inserts the supplied element into the list, at index `index`. _Note thatthis is not destructive_: it returns a copy of the list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> a -> [a] -> [a]
 		/// </summary>

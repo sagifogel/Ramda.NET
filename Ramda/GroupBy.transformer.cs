@@ -21,7 +21,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [a] -> {String: [a]}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="list">The array to group</param>
 		/// <returns>An object with the output of `fn` for keys, mapped to arrays of elements that produced that key when passed to `fn`.</returns>
 		/// <see cref="R.Transduce"/>
@@ -34,7 +34,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [a] -> {String: [a]}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="list">The array to group</param>
 		/// <returns>An object with the output of `fn` for keys, mapped to arrays of elements that produced that key when passed to `fn`.</returns>
 		/// <see cref="R.Transduce"/>
@@ -47,7 +47,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [a] -> {String: [a]}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="list">The array to group</param>
 		/// <returns>An object with the output of `fn` for keys, mapped to arrays of elements that produced that key when passed to `fn`.</returns>
 		/// <see cref="R.Transduce"/>

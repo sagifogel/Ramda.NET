@@ -17,7 +17,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		/// <summary>
-		/// Returns a new list containing the last `n` elements of the given list.If `n > list.length`, returns a list of `list.length` elements.
+		/// Returns a new list containing the last `n` elements of the given list.If `n <![CDATA[>]]> list.length`, returns a list of `list.length` elements.
 		/// <para />
 		/// sig: Number -> [a] -> [a]
 		/// </summary>
@@ -30,7 +30,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Returns a new list containing the last `n` elements of the given list.If `n > list.length`, returns a list of `list.length` elements.
+		/// Returns a new list containing the last `n` elements of the given list.If `n <![CDATA[>]]> list.length`, returns a list of `list.length` elements.
 		/// <para />
 		/// sig: Number -> [a] -> [a]
 		/// </summary>

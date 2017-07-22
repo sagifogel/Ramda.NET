@@ -17,7 +17,7 @@ namespace Ramda.NET
 	public static partial class R
 	{	
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>
@@ -30,7 +30,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>
@@ -43,7 +43,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>
@@ -56,7 +56,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>
@@ -69,7 +69,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>
@@ -82,7 +82,7 @@ namespace Ramda.NET
 		}
 
 		/// <summary>
-		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<small>No lists have been harmed in the application of this function.</small>
+		/// Removes the sub-list of `list` starting at index `start` and containing`count` elements. _Note that this is not destructive_: it returns a copy ofthe list with the changes.<![CDATA[<]]>small<![CDATA[>]]>No lists have been harmed in the application of this function.<![CDATA[<]]>/small<![CDATA[>]]>
 		/// <para />
 		/// sig: Number -> Number -> [a] -> [a]
 		/// </summary>

@@ -22,7 +22,7 @@ namespace Ramda.NET
 		/// sig: (a, b -> Boolean) -> (a, b -> Number)
 		/// </summary>
 		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
-		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
+		/// <returns>A Function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int that returns `-1` if a <![CDATA[<]]> b, `1` if b <![CDATA[<]]> a, otherwise `0`</returns>
 		public static dynamic Comparator<TArg>(Func<TArg, TArg, bool> pred) {
 			return Currying.Comparator(Delegate(pred));
 		}
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		/// sig: (a, b -> Boolean) -> (a, b -> Number)
 		/// </summary>
 		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
-		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
+		/// <returns>A Function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int that returns `-1` if a <![CDATA[<]]> b, `1` if b <![CDATA[<]]> a, otherwise `0`</returns>
 		public static dynamic Comparator(RamdaPlaceholder pred = null) {
 			return Currying.Comparator(pred);
 		}
@@ -44,7 +44,7 @@ namespace Ramda.NET
 		/// sig: (a, b -> Boolean) -> (a, b -> Number)
 		/// </summary>
 		/// <param name="pred">A predicate function of arity two which will return `true` if the first argumentis less than the second, `false` otherwise</param>
-		/// <returns>A Function :: a -> b -> Int that returns `-1` if a < b, `1` if b < a, otherwise `0`</returns>
+		/// <returns>A Function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int that returns `-1` if a <![CDATA[<]]> b, `1` if b <![CDATA[<]]> a, otherwise `0`</returns>
 		public static dynamic Comparator(dynamic pred) {
 			return Currying.Comparator(Delegate(pred));
 		}

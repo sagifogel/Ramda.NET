@@ -21,7 +21,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, IList<TSource> array) {
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(RamdaPlaceholder fn, IList<TSource> array) {
@@ -45,7 +45,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(Func<TSource, string> fn, RamdaPlaceholder array = null) {
@@ -57,7 +57,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy(dynamic fn, RamdaPlaceholder array = null) {
@@ -69,7 +69,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy<TSource>(dynamic fn, IList<TSource> array) {
@@ -81,7 +81,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a -> String) -> [{k: v}] -> {k: {k: v}}
 		/// </summary>
-		/// <param name="fn">Function :: a -> String</param>
+		/// <param name="fn">Function :: a -<![CDATA[>]]> String</param>
 		/// <param name="array">The array of objects to index</param>
 		/// <returns>An object indexing each array element by the given property.</returns>
 		public static dynamic IndexBy(RamdaPlaceholder fn = null, RamdaPlaceholder array = null) {

@@ -21,7 +21,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(Func<TArg, TArg, int> pred, IList<TArg> list) {
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(RamdaPlaceholder pred, IList<TArg> list) {
@@ -45,7 +45,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(Func<TArg, TArg, int> pred, RamdaPlaceholder list = null) {
@@ -57,7 +57,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort(dynamic pred, RamdaPlaceholder list = null) {
@@ -69,7 +69,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort<TArg>(dynamic pred, IList<TArg> list) {
@@ -81,7 +81,7 @@ namespace Ramda.NET
 		/// <para />
 		/// sig: (a,a -> Number) -> [a] -> [a]
 		/// </summary>
-		/// <param name="comparator">A sorting function :: a -> b -> Int</param>
+		/// <param name="comparator">A sorting function :: a -<![CDATA[>]]> b -<![CDATA[>]]> Int</param>
 		/// <param name="list">The list to sort</param>
 		/// <returns>a new array with its elements sorted by the comparator function.</returns>
 		public static dynamic Sort(RamdaPlaceholder pred = null, RamdaPlaceholder list = null) {

@@ -22,7 +22,7 @@ namespace Ramda.NET
 		/// sig: a -> (* -> a)
 		/// </summary>
 		/// <param name="val">The value to wrap in a function</param>
-		/// <returns>A Function :: * -> val.</returns>
+		/// <returns>A Function :: * -<![CDATA[>]]> val.</returns>
 		public static dynamic Always<TTarget>(TTarget val) {
 			return Currying.Always(val);
 		}
@@ -33,7 +33,7 @@ namespace Ramda.NET
 		/// sig: a -> (* -> a)
 		/// </summary>
 		/// <param name="val">The value to wrap in a function</param>
-		/// <returns>A Function :: * -> val.</returns>
+		/// <returns>A Function :: * -<![CDATA[>]]> val.</returns>
 		public static dynamic Always(RamdaPlaceholder val = null) {
 			return Currying.Always(val);
 		}

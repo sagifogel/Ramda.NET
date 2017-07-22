@@ -192,6 +192,21 @@ namespace Ramda.NET
 		/// <returns>Either `x` or the result of applying `x` to `whenFalseFn`.</returns>
 		/// <see cref="R.IfElse"/>
 		/// <see cref="R.When"/>
+		public static dynamic Unless<TArg>(dynamic pred, dynamic whenFalseFn, TArg x) {
+			return Currying.Unless(Delegate(pred), Delegate(whenFalseFn), x);
+		}
+
+		/// <summary>
+		/// Tests the final argument by passing it to the given predicate function. Ifthe predicate is not satisfied, the function will return the result ofcalling the `whenFalseFn` function with the same argument. If the predicateis satisfied, the argument is returned as is.
+		/// <para />
+		/// sig: (a -> Boolean) -> (a -> a) -> a -> a
+		/// </summary>
+		/// <param name="pred">A predicate function</param>
+		/// <param name="whenFalseFn">A function to invoke when the `pred` evaluates         to a falsy value.</param>
+		/// <param name="x">An object to test with the `pred` function and         pass to `whenFalseFn` if necessary.</param>
+		/// <returns>Either `x` or the result of applying `x` to `whenFalseFn`.</returns>
+		/// <see cref="R.IfElse"/>
+		/// <see cref="R.When"/>
 		public static dynamic Unless(RamdaPlaceholder pred = null, RamdaPlaceholder whenFalseFn = null, RamdaPlaceholder x = null) {
 			return Currying.Unless(pred, whenFalseFn, x);
 		}

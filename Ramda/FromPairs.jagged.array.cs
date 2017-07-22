@@ -25,7 +25,7 @@ namespace Ramda.NET
 		/// <returns>The object made by pairing up `keys` and `values`.</returns>
 		/// <see cref="R.ToPairs"/>
 		/// <see cref="R.Pair"/>
-		public static dynamic FromPairs(object[][] pairs)  {
+		public static dynamic FromPairs(object[][] pairs) {
 			return Currying.FromPairs(pairs);
 		}
 
@@ -38,7 +38,7 @@ namespace Ramda.NET
 		/// <returns>The object made by pairing up `keys` and `values`.</returns>
 		/// <see cref="R.ToPairs"/>
 		/// <see cref="R.Pair"/>
-		public static dynamic FromPairs(RamdaPlaceholder pairs = null)  {
+		public static dynamic FromPairs(RamdaPlaceholder pairs = null) {
 			return Currying.FromPairs(pairs);
 		}
 	}

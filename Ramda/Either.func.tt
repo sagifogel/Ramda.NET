@@ -5,6 +5,7 @@
 	var template = new RamdaTemplate();
 
 	template.Generics.Add("TSource");
+	template.SkippedAllDynamicParams = true;
 	template.Parameters.Add(Tuple.Create("Func<TSource, bool>", "f", true));	
 	template.Parameters.Add(Tuple.Create("Func<TSource, bool>", "g", true));	
 	template.Render();

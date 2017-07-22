@@ -108,6 +108,18 @@ namespace Ramda.NET
 		/// <param name="tryer">The function that may throw.</param>
 		/// <param name="catcher">The function that will be evaluated if `tryer` throws.</param>
 		/// <returns>A new function that will catch exceptions and send then to the catcher.</returns>
+		public static dynamic TryCatch(dynamic tryer, dynamic catcher) {
+			return Currying.TryCatch(Delegate(tryer), Delegate(catcher));
+		}
+
+		/// <summary>
+		/// `tryCatch` takes two functions, a `tryer` and a `catcher`. The returnedfunction evaluates the `tryer`; if it does not throw, it simply returns theresult. If the `tryer` *does* throw, the returned function evaluates the`catcher` function and returns its result. Note that for effectivecomposition with this function, both the `tryer` and `catcher` functionsmust return the same type of results.
+		/// <para />
+		/// sig: (...x -> a) -> ((e, ...x) -> a) -> (...x -> a)
+		/// </summary>
+		/// <param name="tryer">The function that may throw.</param>
+		/// <param name="catcher">The function that will be evaluated if `tryer` throws.</param>
+		/// <returns>A new function that will catch exceptions and send then to the catcher.</returns>
 		public static dynamic TryCatch(RamdaPlaceholder tryer = null, RamdaPlaceholder catcher = null) {
 			return Currying.TryCatch(tryer, catcher);
 		}

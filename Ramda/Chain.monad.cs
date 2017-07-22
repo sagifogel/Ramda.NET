@@ -75,5 +75,17 @@ namespace Ramda.NET
 		public static dynamic Chain(Delegate fn, dynamic list) {
 			return Currying.Chain(Delegate(fn), Delegate(list));
 		}
+
+		/// <summary>
+		/// `chain` maps a function over a list and concatenates the results. `chain`is also known as `flatMap` in some librariesDispatches to the `chain` method of the second argument, if present,according to the [FantasyLand Chain spec](https://github.com/fantasyland/fantasy-land#chain).
+		/// <para />
+		/// sig: Chain m => (a -> m b) -> m a -> m b
+		/// </summary>
+		/// <param name="fn">The function to map with</param>
+		/// <param name="list">The list to map over</param>
+		/// <returns>The result of flat-mapping `list` with `fn`</returns>
+		public static dynamic Chain(dynamic fn, dynamic list) {
+			return Currying.Chain(Delegate(fn), Delegate(list));
+		}
 	}
 }

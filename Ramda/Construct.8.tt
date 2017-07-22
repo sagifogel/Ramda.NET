@@ -1,0 +1,19 @@
+<#@ template language="C#" debug="True" #>
+<#@ output extension="cs" #>
+<#@ include file="RamdaTemplate.tt" #>
+<#
+	var template = new RamdaTemplate();
+		
+	template.Generics.Add("TArg1");
+	template.Generics.Add("TArg2");
+	template.Generics.Add("TArg3");
+	template.Generics.Add("TArg4");
+	template.Generics.Add("TArg5");
+	template.Generics.Add("TArg6");
+	template.Generics.Add("TArg7");
+	template.Generics.Add("TArg8");
+	template.Generics.Add("TTarget");
+	template.AllGapsFunctionAlreadyExists = true;
+	template.Parameters.Add(Tuple.Create("Func<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6, TArg7, TArg8, TTarget>", "fn", false));	
+	template.Render();
+#>

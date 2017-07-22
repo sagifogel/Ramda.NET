@@ -180,6 +180,7 @@ public class RamdaTemplate : CSharpTemplate
 		GenericConstraints = string.Empty;
 		SkippedIndexedGaps = new List<int>();
 		SkippedIndexedParams = new List<int>();
+		SkippedDynamicIndexedParams = new List<int>();
 		Parameters = new List<Tuple<string, string, bool>>();
 		name = Path.GetFileNameWithoutExtension(TransformationContext.Current.Host.TemplateFile).Split('.')[0];
 	}
@@ -203,10 +204,12 @@ public class RamdaTemplate : CSharpTemplate
 	public bool SkippedAllDynamicParams { get; set; }
 
 	public List<int> SkippedIndexedGaps { get; set; }
-	
+
 	public List<int> SkippedIndexedParams { get; set; }
 	
 	public bool AllGapsFunctionAlreadyExists { get; set; }
+	
+	public List<int> SkippedDynamicIndexedParams { get; set; }
 	
 	public List<Tuple<string, string, bool>> Parameters { get; set; }
 
@@ -355,21 +358,28 @@ public class RamdaTemplate : CSharpTemplate
 		return string.Join(", ", list);
 	}
 
+	private bool ShouldSkipDynamicEmission(List<Tuple<string, string, bool>> shifted, int i) {
+		return SkippedDynamicIndexedParams.Contains(i - 1) && 
+			   shifted[i - 1].Item1.Equals("dynamic") &&
+			   shifted.Skip(1).All(e => e.Item1 == "RamdaPlaceholder");
+	}
+
 	private void Emit(List<Tuple<string, string, bool>> list, string name) {
 		for (var i = 0; i < list.Count; i++)	 {
+			var shiftedItem = list[i];
+
 			if (SkippedIndexedGaps.Contains(i)) {
 				continue;
 			}
 
 			string joined;
 			var shifted = list.ToList();
-			var shiftedItem = list[i];
 			
 			shifted.RemoveAt(i);
 			shifted.Insert(i, i == Parameters.Count - 1 ? FillNullablePlaceholder(shiftedItem) : FillPlaceholder(shiftedItem)); 
 			joined = Join(shifted);
 
-			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1) {
+			if (!AllGapsFunctionAlreadyExists || Parameters.Count > 1 && !ShouldSkipDynamicEmission(shifted, i)) {
 				Emit(name, ResolveGenerics(shifted), joined, ToArguments(shifted));
 			}
         }
@@ -472,7 +482,7 @@ namespace Ramda.NET
 				}
 			});
 
-			if (!SkippedAllDynamicParams) {
+			if (!(SkippedAllDynamicParams && indexes.Count == Parameters.Count)) {
 				Emit(name, ResolveGenerics(allDynamics), string.Join(", ", allDynamics.Select(FormatTuple)), GenerateDynamicArguments(allDynamics));
 			}
 		}

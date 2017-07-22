@@ -220,8 +220,63 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Ramda\Construct.10.cs">
+      <DependentUpon>Construct.10.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.9.cs">
+      <DependentUpon>Construct.9.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.8.cs">
+      <DependentUpon>Construct.8.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.7.cs">
+      <DependentUpon>Construct.7.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.6.cs">
+      <DependentUpon>Construct.6.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.5.cs">
+      <DependentUpon>Construct.5.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.4.cs">
+      <DependentUpon>Construct.4.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.3.cs">
+      <DependentUpon>Construct.3.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.2.cs">
+      <DependentUpon>Construct.2.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.1.cs">
+      <DependentUpon>Construct.1.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\ConstructN.type.cs">
       <DependentUpon>ConstructN.type.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\Construct.0.cs">
+      <DependentUpon>Construct.0.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -330,7 +385,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Cond.delegates.tt</DependentUpon>
     </Compile>
-    <Compile Include="Ramda\Construct.cs" />
     <Compile Include="Ramda\ConstructN.factory.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -461,10 +515,65 @@
       <LastGenOutput>Cond.dynamic.list.cs</LastGenOutput>
       <LastOutputs>.\Cond.dynamic.list.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\Construct.10.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.10.cs</LastGenOutput>
+      <LastOutputs>.\Construct.10.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.9.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.9.cs</LastGenOutput>
+      <LastOutputs>.\Construct.9.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.8.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.8.cs</LastGenOutput>
+      <LastOutputs>.\Construct.8.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.7.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.7.cs</LastGenOutput>
+      <LastOutputs>.\Construct.7.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.6.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.6.cs</LastGenOutput>
+      <LastOutputs>.\Construct.6.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.5.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.5.cs</LastGenOutput>
+      <LastOutputs>.\Construct.5.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.4.cs</LastGenOutput>
+      <LastOutputs>.\Construct.4.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.3.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.3.cs</LastGenOutput>
+      <LastOutputs>.\Construct.3.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.2.cs</LastGenOutput>
+      <LastOutputs>.\Construct.2.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.1.cs</LastGenOutput>
+      <LastOutputs>.\Construct.1.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\ConstructN.type.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ConstructN.type.cs</LastGenOutput>
       <LastOutputs>.\ConstructN.type.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\Construct.0.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Construct.0.cs</LastGenOutput>
+      <LastOutputs>.\Construct.0.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Converge.dynamic.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -626,6 +735,11 @@
       <LastGenOutput>Evolve.object.cs</LastGenOutput>
       <LastOutputs>.\Evolve.object.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\IndexBy.object.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IndexBy.object.cs</LastGenOutput>
+      <LastOutputs>.\IndexBy.object.cs</LastOutputs>
+    </Content>
     <Content Include="Ramda\SortWith.dynamic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SortWith.dynamic.cs</LastGenOutput>
@@ -643,6 +757,11 @@
     </Content>
     <Compile Include="Ramda\Evolve.object.cs">
       <DependentUpon>Evolve.object.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\IndexBy.object.cs">
+      <DependentUpon>IndexBy.object.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -949,10 +1068,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexBy.list.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Ramda\IndexBy.object.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Ramda\IndexOf.object.cs">
       <DependentUpon>IndexOf.object.tt</DependentUpon>
@@ -2286,7 +2401,7 @@
     <Content Include="Ramda\Flatten.list.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Flatten.list.cs</LastGenOutput>
-      <LastOutputs>.\Flatten.cs</LastOutputs>
+      <LastOutputs>.\Flatten.list.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\Flip.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2701,7 +2816,7 @@
     <Content Include="Ramda\SortWith.func.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SortWith.func.cs</LastGenOutput>
-      <LastOutputs>.\SortWith.func - Copy.cs</LastOutputs>
+      <LastOutputs>.\SortWith.func.cs</LastOutputs>
     </Content>
     <Content Include="Ramda\SplitAt.string.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

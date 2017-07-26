@@ -904,7 +904,7 @@ namespace Ramda.NET
             return -1;
         }
 
-        public static string Quote(string s) {
+        private static string Quote(string s) {
             var escaped = s;
 
             escaped = Regex.Replace(escaped, @"\\", "\\\\");

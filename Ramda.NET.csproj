@@ -71,7 +71,6 @@
     <Compile Include="IDispersible.cs" />
     <Compile Include="ListStrategy.cs" />
     <Compile Include="IReducible.cs" />
-    <Compile Include="Maybe.cs" />
     <Compile Include="Nothing.cs" />
     <Compile Include="ObjectAssigner.cs" />
     <Compile Include="Currying.internal.cs" />
@@ -676,6 +675,10 @@
       <LastGenOutput>Gte.string.cs</LastGenOutput>
       <LastOutputs>.\Gte.string.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\HasIn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HasIn.cs</LastGenOutput>
+    </Content>
     <Content Include="Ramda\Has.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Has.cs</LastGenOutput>
@@ -860,6 +863,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Juxt.cs</LastGenOutput>
       <LastOutputs>.\Juxt.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\KeysIn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>KeysIn.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\Keys.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -2001,6 +2008,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Ramda\HasIn.cs">
+      <DependentUpon>HasIn.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\Has.cs">
       <DependentUpon>Has.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -2185,6 +2197,11 @@
       <DependentUpon>Juxt.dynamic.list.tt</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Ramda\KeysIn.cs">
+      <DependentUpon>KeysIn.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Ramda\Keys.cs">
       <DependentUpon>Keys.tt</DependentUpon>
@@ -2830,6 +2847,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.regex.tt</DependentUpon>
     </Compile>
+    <Compile Include="Ramda\ToPairsIn.cs">
+      <DependentUpon>ToPairsIn.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Ramda\ToUpper.cs">
       <DependentUpon>ToUpper.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2887,6 +2909,11 @@
     </Compile>
     <Compile Include="Ramda\UseWith.dynamic.list.cs">
       <DependentUpon>UseWith.dynamic.list.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Ramda\ValuesIn.cs">
+      <DependentUpon>ValuesIn.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -3307,6 +3334,10 @@
       <LastGenOutput>Test.regex.cs</LastGenOutput>
       <LastOutputs>.\Test.regex.cs</LastOutputs>
     </Content>
+    <Content Include="Ramda\ToPairsIn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToPairsIn.cs</LastGenOutput>
+    </Content>
     <Content Include="Ramda\ToUpper.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ToUpper.cs</LastGenOutput>
@@ -3366,6 +3397,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>UseWith.dynamic.list.cs</LastGenOutput>
       <LastOutputs>.\UseWith.dynamic.list.cs</LastOutputs>
+    </Content>
+    <Content Include="Ramda\ValuesIn.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ValuesIn.cs</LastGenOutput>
     </Content>
     <Content Include="Ramda\Without.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

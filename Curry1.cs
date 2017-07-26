@@ -6,12 +6,12 @@ using static Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
-    public class Curry1 : AbstractLambda
+    internal class Curry1 : AbstractLambda
     {
-        public Curry1(DynamicDelegate fn) : base(fn, 1) {
+        internal Curry1(DynamicDelegate fn) : base(fn, 1) {
         }
 
-        public Curry1(Delegate fn) : base(new DelegateDecorator(fn)) {
+        internal Curry1(Delegate fn) : base(new DelegateDecorator(fn)) {
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {

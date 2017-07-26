@@ -4,21 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Ramda.NET.Tests
 {
     [TestClass]
-    public class Has
+    public class Has : AbstractHas
     {
-        class Person
-        {
-            public int Age { get; set; }
-            public string Name { get; set; }
-        }
-
-        class Bob : Person
-        {
-        }
-
-        private readonly object anon = new { Age = 99 };
-        private readonly object fred = new { Name = "Fred", Age = 23 };
-
         [TestMethod]
         public void Has_Returns_True_If_The_Specified_Property_Is_Present() {
             Assert.IsTrue(R.Has("Name", fred));

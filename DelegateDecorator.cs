@@ -19,7 +19,7 @@ namespace Ramda.NET
             return true;
         }
 
-        public override Delegate Unwrap() {
+        internal override Delegate Unwrap() {
             return @delegate;
         }
     }

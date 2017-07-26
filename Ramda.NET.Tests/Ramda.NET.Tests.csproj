@@ -133,6 +133,8 @@
     <Compile Include="GroupBy.cs" />
     <Compile Include="Gte.cs" />
     <Compile Include="Gt.cs" />
+    <Compile Include="AbstractHas.cs" />
+    <Compile Include="HasIn.cs" />
     <Compile Include="Has.cs" />
     <Compile Include="Head.cs" />
     <Compile Include="Id.cs" />
@@ -159,6 +161,8 @@
     <Compile Include="IsNil.cs" />
     <Compile Include="Join.cs" />
     <Compile Include="IAppable.cs" />
+    <Compile Include="AbstractKeys.cs" />
+    <Compile Include="KeysIn.cs" />
     <Compile Include="LiftN.cs" />
     <Compile Include="Lte.cs" />
     <Compile Include="Lt.cs" />
@@ -183,6 +187,7 @@
     <Compile Include="Multiply.cs" />
     <Compile Include="NAry.cs" />
     <Compile Include="Negate.cs" />
+    <Compile Include="ToPairsIn.cs" />
     <Compile Include="Unnest.cs" />
     <Compile Include="None.cs" />
     <Compile Include="Not.cs" />
@@ -293,6 +298,7 @@
     <Compile Include="Until.cs" />
     <Compile Include="Update.cs" />
     <Compile Include="UseWith.cs" />
+    <Compile Include="ValuesIn.cs" />
     <Compile Include="Values.cs" />
     <Compile Include="When.cs" />
     <Compile Include="WhereEq.cs" />

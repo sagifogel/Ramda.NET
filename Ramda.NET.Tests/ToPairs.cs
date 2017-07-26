@@ -6,6 +6,11 @@ namespace Ramda.NET.Tests
     [TestClass]
     public class ToPairs
     {
+        protected class Base
+        {
+            public string ProtoProp => "you can\'t see me";
+        }
+
         class F
         {
             public int X { get; set; }

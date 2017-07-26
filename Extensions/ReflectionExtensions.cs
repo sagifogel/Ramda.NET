@@ -18,6 +18,7 @@ namespace Ramda.NET
         private static Dictionary<Type, Delegate> cache = new Dictionary<Type, Delegate>();
         internal static BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public;
         private static BindingFlags ctorBindingFlags = bindingFlags | BindingFlags.NonPublic;
+        private static Dictionary<string, object> emptyDictionary = new Dictionary<string, object>();
         private static ISet<Type> primitives = new HashSet<Type> {  typeof(Enum), typeof(string), typeof(char),
                                                                     typeof(Guid), typeof(bool), typeof(byte),
                                                                     typeof(short), typeof(int), typeof(long),
@@ -272,6 +273,10 @@ namespace Ramda.NET
         }
 
         internal static IDictionary<string, object> ToMemberDictionary(this object target) {
+            if (target.IsPrimitive()) {
+                return emptyDictionary;
+            }
+
             var type = target.GetType();
             IDictionary dictionary = null;
 
@@ -543,7 +548,7 @@ namespace Ramda.NET
             return key => dictionary.Contains(key);
         }
 
-        internal static bool Has(this object obj, string prop) {
+        internal static bool HasInternal(this object obj, string prop, Func<MemberInfo, bool> memberInfoHas = null) {
             IList list = null;
             MemberInfo member = null;
 
@@ -575,10 +580,22 @@ namespace Ramda.NET
             member = obj.TryGetMemberInfo(prop);
 
             if (member != null) {
-                return member.DeclaringType.Equals(obj.GetType());
+                if (memberInfoHas != null) {
+                    return memberInfoHas(member);
+                }
+
+                return true;
             }
 
             return false;
+        }
+
+        internal static bool Has(this object obj, string prop) {
+            return obj.HasInternal(prop, member => member.DeclaringType.Equals(obj.GetType()));
+        }
+
+        internal static bool HasIn(this object obj, string prop) {
+            return obj.HasInternal(prop);
         }
 
         internal static bool IsObjectArray(this Type type) {

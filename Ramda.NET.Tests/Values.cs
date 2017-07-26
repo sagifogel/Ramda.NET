@@ -52,9 +52,9 @@ namespace Ramda.NET.Tests
 
         [TestMethod]
         public void Values_Returns_An_Empty_Object_For_Primitives() {
-            var result = R.Map<object, string[]>(val => R.Keys(val), new object[] { R.@null, 55, string.Empty, true, false, new object[0] });
+            var result = R.Map(val => R.Values(val), new object[] { R.@null, 55, string.Empty, true, false, new object[0] });
 
-            NestedCollectionAssert.AreEqual(result, R.Repeat(new string[0], 6));
+            NestedCollectionAssert.AreEqual(result, R.Repeat(new object[0], 6));
         }
     }
 }

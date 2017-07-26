@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace Ramda.NET
 {
-    public class Curry3 : AbstractLambda
+    internal class Curry3 : AbstractLambda
     {
-        public Curry3(DynamicDelegate fn) : base(fn, 3) {
+        internal Curry3(DynamicDelegate fn) : base(fn, 3) {
         }
 
-        public Curry3(Delegate fn) : base(new DelegateDecorator(fn)) {
+        internal Curry3(Delegate fn) : base(new DelegateDecorator(fn)) {
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {

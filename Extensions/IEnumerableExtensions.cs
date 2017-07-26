@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Ramda.NET
 {
-    public static class IEnumerableExtensions
+    internal static class IEnumerableExtensions
     {
         internal static IEnumerable Slice(this IEnumerable arguments, int from = int.MinValue, int to = int.MaxValue, Type type = null) {
             var enumerableOfString = arguments as string;
@@ -90,7 +90,7 @@ namespace Ramda.NET
             }
         }
 
-        public static Dictionary<TKey, TElement> ToDictionary<TKey, TElement>(this IList source, Func<object, int, TKey> keySelector, Func<object, int, TElement> elementSelector) {
+        internal static Dictionary<TKey, TElement> ToDictionary<TKey, TElement>(this IList source, Func<object, int, TKey> keySelector, Func<object, int, TElement> elementSelector) {
             int num = -1;
             Dictionary<TKey, TElement> tKeys = new Dictionary<TKey, TElement>();
 
@@ -289,7 +289,7 @@ namespace Ramda.NET
             return flag;
         }
 
-        public static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
+        internal static TResult[] Sort<TResult>(this IList list, Comparison<TResult> comparison) {
             var newList = new List<TResult>(list.Cast<TResult>());
 
             newList.Sort(comparison);

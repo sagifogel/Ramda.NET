@@ -4,6 +4,145 @@
         <name>Ramda.NET</name>
     </assembly>
     <members>
+        <member name="T:Ramda.NET.AwaitableDynamicDelegate">
+            <summary>
+            Provides a class for specifying dynamic async invocation behavior at run time
+            </summary>
+        </member>
+        <member name="F:Ramda.NET.AwaitableDynamicDelegate.arguments">
+            <summary>
+            The arguments
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.AwaitableDynamicDelegate.#ctor(System.Delegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ramda.NET.AwaitableDynamicDelegate"/> class.
+            </summary>
+            <param name="fn">The function.</param>
+        </member>
+        <member name="M:Ramda.NET.AwaitableDynamicDelegate.#ctor(System.Func{System.Object[],System.Threading.Tasks.Task{System.Object}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ramda.NET.AwaitableDynamicDelegate"/> class.
+            </summary>
+            <param name="fn">The function.</param>
+        </member>
+        <member name="M:Ramda.NET.AwaitableDynamicDelegate.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)">
+            <summary>
+            Provides the implementation for operations that invoke an object. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations such as invoking an object or a delegate.
+            </summary>
+            <param name="binder">The binder.</param>
+            <param name="arguments">The arguments.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ramda.NET.AwaitableDynamicDelegate.GetAwaiter">
+            <summary>
+            Gets the awaiter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Ramda.NET.AwaitableDynamicDelegate.Result">
+            <summary>
+            Gets the result.
+            </summary>
+            <value>
+            The result.
+            </value>
+        </member>
+        <member name="T:Ramda.NET.PromiseContinuation">
+            <summary>
+             Provides a continuation context as a result of calling to <see cref="T:Ramda.NET.PromiseLikeDynamicDelegate" />Then method
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.PromiseContinuation.#ctor(System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Ramda.NET.PromiseContinuation"/> class.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Ramda.NET.PromiseContinuation.Then(System.Func{System.Object,System.Object})">
+            <summary>
+            Gets a continuation callback and invokes it.
+            </summary>
+            <param name="continuation">The continuation.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ramda.NET.PromiseLikeDynamicDelegate">
+            <summary>
+            Provides a class for specifying dynamic invocation of promise like behavior at run time
+            </summary>
+            <seealso cref="T:Ramda.NET.DynamicDelegate" />
+        </member>
+        <member name="M:Ramda.NET.PromiseLikeDynamicDelegate.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)">
+            <summary>
+            Provides the implementation for operations that invoke an object. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations such as invoking an object or a delegate.
+            </summary>
+            <param name="binder">The binder.</param>
+            <param name="arguments">The arguments.</param>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ramda.NET.PromiseLikeDynamicDelegate.Then(System.Func{System.Object,System.Object})">
+            <summary>
+            Creates a continuation that executes asynchronously when the target Dynamic Method completes.
+            </summary>
+            <param name="continuation"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Ramda.NET.DynamicDelegate">
+            <summary>
+            Provides a base class for specifying dynamic invocation behavior at run time
+            </summary>
+        </member>
+        <member name="P:Ramda.NET.DynamicDelegate.Length">
+            <summary>
+            The Arity of the function
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.DynamicDelegate.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Provides the implementation for operations that get member values. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations such as getting a value for a property.
+            </summary>
+            <param name="binder">Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member on which the dynamic operation is performed. For example, for the Console.WriteLine(sampleObject.SampleProperty) statement, where sampleObject is an instance of the class derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, binder.Name returns "SampleProperty". The binder.IgnoreCase property specifies whether the member name is case-sensitive.</param>
+            <param name="result">The result of the get operation. For example, if the method is called for a property, you can assign the property value to <paramref name="result" />.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a run-time exception is thrown.)
+            </returns>
+        </member>
+        <member name="T:Ramda.NET.AbstractLambda">
+            <summary>
+            Provides a base class for specifying dynamic invocation behavior at run time
+            </summary>
+        </member>
+        <member name="F:Ramda.NET.AbstractLambda.fn">
+            <summary>
+            The function
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.AbstractLambda.#ctor(Ramda.NET.DynamicDelegate,System.Nullable{System.Int32})">
+            <summary>
+            Provides a base class for specifying dynamic invocation behavior at run time
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.AbstractLambda.TryInvoke(System.Dynamic.InvokeBinder,System.Object[],System.Object@)">
+            <summary>
+            Provides the implementation for operations that invoke an object. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations such as invoking an object or a delegate.
+            </summary>
+            <param name="binder">Provides information about the invoke operation.</param>
+            <param name="args">The arguments that are passed to the object during the invoke operation. For example, for the sampleObject(100) operation, where sampleObject is derived from the <see cref="T:System.Dynamic.DynamicObject" /> class, <paramref name="args[0][0]" /> is equal to 100.</param>
+            <param name="result">The result of the object invocation.</param>
+            <returns>
+            true if the operation is successful; otherwise, false. If this method returns false, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.
+            </returns>
+        </member>
+        <member name="M:Ramda.NET.AbstractLambda.TryInvoke(System.Dynamic.InvokeBinder,System.Object[])">
+            <summary>
+            Provides the implementation for operations that invoke an object. Classes derived from the <see cref="T:System.Dynamic.DynamicObject" /> class can override this method to specify dynamic behavior for operations such as invoking an object or a delegate.
+            </summary>
+            <param name="binder">The binder.</param>
+            <param name="args">The arguments.</param>
+            <returns></returns>
+        </member>
         <member name="T:Ramda.NET.Exceptions">
             <summary>
               A strongly-typed resource class, for looking up localized strings, etc.
@@ -23,6 +162,45 @@
         <member name="P:Ramda.NET.Exceptions.NotANumberException">
             <summary>
               Looks up a localized string similar to The operartion produced a NaN (Not ot Number) value. Do not use empty collections..
+            </summary>
+        </member>
+        <member name="T:Ramda.NET.R.Functor">
+            <summary>
+            Provides a class to map between categories
+            </summary>
+        </member>
+        <member name="P:Ramda.NET.R.Functor.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Ramda.NET.R.Functor.Map">
+            <summary>
+            Gets or sets the mapping function.
+            </summary>
+            <value>
+            The map.
+            </value>
+        </member>
+        <member name="T:Ramda.NET.R.IReducible">
+            <summary>
+            Returns a single item by iterating through the list, successively calling the iterator function and passing it an accumulator value and the current value from the array, and then passing the result to the next call.
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.R.IReducible.Reduce(System.Func{System.Object,System.Object,System.Object},System.Object)">
+            <summary>
+            Reduces the specified step.
+            </summary>
+            <param name="step">The step.</param>
+            <param name="acc">The acc.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ramda.NET.R.Tuple">
+            <summary>
+             Provides static methods for creating tuple objects. To browse the .NET Framework
             </summary>
         </member>
         <member name="M:Ramda.NET.R.Add(System.Boolean,System.Boolean)">
@@ -4975,6 +5153,46 @@
             <returns>Boolean</returns>
             <see cref="M:Ramda.NET.R.Lte(System.Double,System.Double)"/>
         </member>
+        <member name="M:Ramda.NET.R.HasIn``1(System.String,``0)">
+            <summary>
+            Returns whether or not an object or its prototype chain has a property withthe specified name
+            <para />
+            sig: s -> {s: x} -> Boolean
+            </summary>
+            <param name="prop">The name of the property to check for.</param>
+            <param name="obj">The object to query.</param>
+            <returns>Whether the property exists.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.HasIn``1(Ramda.NET.RamdaPlaceholder,``0)">
+            <summary>
+            Returns whether or not an object or its prototype chain has a property withthe specified name
+            <para />
+            sig: s -> {s: x} -> Boolean
+            </summary>
+            <param name="prop">The name of the property to check for.</param>
+            <param name="obj">The object to query.</param>
+            <returns>Whether the property exists.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.HasIn(System.String,Ramda.NET.RamdaPlaceholder)">
+            <summary>
+            Returns whether or not an object or its prototype chain has a property withthe specified name
+            <para />
+            sig: s -> {s: x} -> Boolean
+            </summary>
+            <param name="prop">The name of the property to check for.</param>
+            <param name="obj">The object to query.</param>
+            <returns>Whether the property exists.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.HasIn(Ramda.NET.RamdaPlaceholder,Ramda.NET.RamdaPlaceholder)">
+            <summary>
+            Returns whether or not an object or its prototype chain has a property withthe specified name
+            <para />
+            sig: s -> {s: x} -> Boolean
+            </summary>
+            <param name="prop">The name of the property to check for.</param>
+            <param name="obj">The object to query.</param>
+            <returns>Whether the property exists.</returns>
+        </member>
         <member name="M:Ramda.NET.R.Has``1(System.String,``0)">
             <summary>
             Returns whether or not an object has an own property with the specified name
@@ -6595,6 +6813,24 @@
             <param name="fns">An array of functions</param>
             <returns>A function that returns a list of values after applying each of the original `fns` to its parameters.</returns>
             <see cref="M:Ramda.NET.R.ApplySpec(Ramda.NET.RamdaPlaceholder)"/>
+        </member>
+        <member name="M:Ramda.NET.R.KeysIn``1(``0)">
+            <summary>
+            Returns a list containing the names of all the properties of the suppliedobject, including prototype properties.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+            <para />
+            sig: {k: v} -> [k]
+            </summary>
+            <param name="obj">The object to extract properties from</param>
+            <returns>An array of the object's own and prototype properties.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.KeysIn(Ramda.NET.RamdaPlaceholder)">
+            <summary>
+            Returns a list containing the names of all the properties of the suppliedobject, including prototype properties.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+            <para />
+            sig: {k: v} -> [k]
+            </summary>
+            <param name="obj">The object to extract properties from</param>
+            <returns>An array of the object's own and prototype properties.</returns>
         </member>
         <member name="M:Ramda.NET.R.Keys``1(``0)">
             <summary>
@@ -12329,6 +12565,24 @@
             <returns>Boolean</returns>
             <see cref="M:Ramda.NET.R.Match(System.Text.RegularExpressions.Regex,System.String)"/>
         </member>
+        <member name="M:Ramda.NET.R.ToPairsIn``1(``0)">
+            <summary>
+            Converts an object into an array of key, value arrays. The object's ownproperties and prototype properties are used. Note that the order of theoutput array is not guaranteed to be consistent across different JSplatforms.
+            <para />
+            sig: {String: *} -> [[String,*]]
+            </summary>
+            <param name="obj">The object to extract from</param>
+            <returns>An array of key, value arrays from the object's own and prototype properties.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.ToPairsIn(Ramda.NET.RamdaPlaceholder)">
+            <summary>
+            Converts an object into an array of key, value arrays. The object's ownproperties and prototype properties are used. Note that the order of theoutput array is not guaranteed to be consistent across different JSplatforms.
+            <para />
+            sig: {String: *} -> [[String,*]]
+            </summary>
+            <param name="obj">The object to extract from</param>
+            <returns>An array of key, value arrays from the object's own and prototype properties.</returns>
+        </member>
         <member name="M:Ramda.NET.R.ToUpper(System.String)">
             <summary>
             The upper case version of a string.
@@ -12840,6 +13094,24 @@
             <param name="transformers">A list of transformer functions</param>
             <returns>The wrapped function.</returns>
             <see cref="M:Ramda.NET.R.Converge(System.Delegate,System.Collections.Generic.IList{System.Delegate})"/>
+        </member>
+        <member name="M:Ramda.NET.R.ValuesIn``1(``0)">
+            <summary>
+            Returns a list of all the properties, including prototype properties, of thesupplied object.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+            <para />
+            sig: {k: v} -> [v]
+            </summary>
+            <param name="obj">The object to extract values from</param>
+            <returns>An array of the values of the object's own and prototype properties.</returns>
+        </member>
+        <member name="M:Ramda.NET.R.ValuesIn(Ramda.NET.RamdaPlaceholder)">
+            <summary>
+            Returns a list of all the properties, including prototype properties, of thesupplied object.Note that the order of the output array is not guaranteed to be consistentacross different JS platforms.
+            <para />
+            sig: {k: v} -> [v]
+            </summary>
+            <param name="obj">The object to extract values from</param>
+            <returns>An array of the values of the object's own and prototype properties.</returns>
         </member>
         <member name="M:Ramda.NET.R.Without``1(System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0})">
             <summary>
@@ -16684,6 +16956,94 @@
             sig: * -> Boolean
             </summary>
             <returns>Function</returns>
+        </member>
+        <member name="T:Ramda.NET.IDispersible`2">
+            <summary>
+            Provides a contract to interpose a seperator between elements
+            </summary>
+            <typeparam name="TSeperator">The type of the seperator.</typeparam>
+            <typeparam name="TResult">The type of the result.</typeparam>
+        </member>
+        <member name="M:Ramda.NET.IDispersible`2.Intersperse(`0)">
+            <summary>
+            Intersperses the specified seperator.
+            </summary>
+            <param name="seperator">The seperator.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Ramda.NET.IListStrategy">
+            <summary>
+             Provides a unified contract for list or string manipulation
+            </summary>
+        </member>
+        <member name="P:Ramda.NET.IListStrategy.Length">
+            <summary>
+            Gets the length.
+            </summary>
+            <value>
+            The length.
+            </value>
+        </member>
+        <member name="M:Ramda.NET.IListStrategy.Slice(System.Int32,System.Int32)">
+            <summary>
+            Slices the specified list.
+            </summary>
+            <param name="from">From.</param>
+            <param name="to">To.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Ramda.NET.IListStrategy.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value>
+            The <see cref="T:System.Object"/>.
+            </value>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Ramda.NET.IListStrategy.GetElementType">
+            <summary>
+            Gets the type of the element.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Ramda.NET.IListStrategy.Add(System.Object)">
+            <summary>
+            Adds the specified item.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="T:Ramda.NET.Nothing">
+            <summary>
+             Equivalent to null
+            </summary>
+        </member>
+        <member name="M:Ramda.NET.Nothing.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Ramda.NET.Nothing.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:Ramda.NET.Nothing.op_Explicit(Ramda.NET.Nothing)~System.Boolean">
+            <summary>
+            Performs an explicit conversion from <see cref="T:Ramda.NET.Nothing"/> to <see cref="T:System.Boolean"/>.
+            </summary>
+            <param name="x">The x.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
         </member>
     </members>
 </doc>

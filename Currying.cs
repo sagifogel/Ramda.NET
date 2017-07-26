@@ -361,6 +361,8 @@ namespace Ramda.NET
 
         internal readonly static dynamic Has = Curry2<string, object, bool>((prop, obj) => obj.Has(prop));
 
+        internal readonly static dynamic HasIn = Curry2<string, object, bool>((prop, obj) => obj.HasIn(prop));
+
         internal readonly static dynamic Identical = Curry2<object, object, bool>((a, b) => a?.Equals(b) ?? b.IsNull());
 
         internal readonly static dynamic Identity = Curry1<object, object>(IdentityInternal);
@@ -486,14 +488,13 @@ namespace Ramda.NET
         internal readonly static dynamic IsNil = Curry1<object, bool>(val => val.IsNull());
 
         internal readonly static dynamic Keys = Curry1<object, string[]>(val => {
-            if (val.IsNull() || val.IsPrimitive()) {
-                return emptyArray;
-            }
-
-            return val.ToMemberDictionary()
-                      .Where(pair => val.Has(pair.Key))
-                      .Select(pair => pair.Key)
+            return val.Keys()
+                      .Where(key => val.Has(key))
                       .ToArray();
+        });
+
+        internal readonly static dynamic KeysIn = Curry1<object, string[]>(val => {
+            return val.Keys();
         });
 
         internal readonly static dynamic Length = Curry1<object, int>(list => {
@@ -971,6 +972,14 @@ namespace Ramda.NET
 
         internal readonly static dynamic ToPairs = Curry1<object, object[]>((obj) => {
             return obj.ToMemberDictionary()
+                      .Where(prop => obj.Has(prop.Key))
+                      .OrderBy(prop => prop.Key)
+                      .Select(prop => new[] { prop.Key, prop.Value })
+                      .ToArray();
+        });
+
+        internal readonly static dynamic ToPairsIn = Curry1<object, object[]>((obj) => {
+            return obj.ToMemberDictionary()
                       .OrderBy(prop => prop.Key)
                       .Select(prop => new[] { prop.Key, prop.Value })
                       .ToArray();
@@ -1125,6 +1134,16 @@ namespace Ramda.NET
             while (idx < len) {
                 vals.Insert(idx, obj.Member(props[idx]));
                 idx += 1;
+            }
+
+            return vals.ToArray<Array>();
+        });
+
+        internal readonly static dynamic ValuesIn = Curry1<object, IList>(obj => {
+            var vals = new ArrayList();
+
+            foreach (var pair in obj.ToMemberDictionary()) {
+                vals.Add(pair.Value);
             }
 
             return vals.ToArray<Array>();
@@ -1344,18 +1363,16 @@ namespace Ramda.NET
             var inverted = new Dictionary<string, ArrayList>();
             IDictionary<string, object> result = new ExpandoObject();
 
-            if (!obj.IsPrimitive()) {
-                foreach (var prop in obj.Keys()) {
-                    var val = obj.Member(prop).ToString();
-                    var list = inverted.ContainsKey(val) ? inverted[val] : inverted[val] = new ArrayList();
+            foreach (var prop in obj.Keys()) {
+                var val = obj.Member(prop).ToString();
+                var list = inverted.ContainsKey(val) ? inverted[val] : inverted[val] = new ArrayList();
 
-                    list.Add(prop);
-                }
-
-                inverted.Keys.ForEach(key => {
-                    result[key] = inverted[key].ToArray<Array>();
-                });
+                list.Add(prop);
             }
+
+            inverted.Keys.ForEach(key => {
+                result[key] = inverted[key].ToArray<Array>();
+            });
 
             return result;
         });
@@ -1363,12 +1380,10 @@ namespace Ramda.NET
         internal readonly static dynamic InvertObj = Curry1<object, IDictionary<string, object>>(obj => {
             IDictionary<string, object> result = new ExpandoObject();
 
-            if (!obj.IsPrimitive()) {
-                foreach (var prop in obj.Keys()) {
-                    var val = obj.Member(prop).ToString();
+            foreach (var prop in obj.Keys()) {
+                var val = obj.Member(prop).ToString();
 
-                    result[val] = prop;
-                }
+                result[val] = prop;
             }
 
             return result;

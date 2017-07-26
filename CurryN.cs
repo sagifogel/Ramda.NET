@@ -5,11 +5,11 @@ using Reflection = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
-    public class CurryN : AbstractLambda
+    internal class CurryN : AbstractLambda
     {
         private readonly object[] received;
 
-        public CurryN(DynamicDelegate fn, object[] received, int left) : base(fn, left) {
+        internal CurryN(DynamicDelegate fn, object[] received, int left) : base(fn, left) {
             this.received = received ?? new object[0];
         }
 

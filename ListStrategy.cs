@@ -7,16 +7,47 @@ using System.Threading.Tasks;
 
 namespace Ramda.NET
 {
+    /// <summary>
+    ///  Provides a unified contract for list or string manipulation
+    /// </summary>
     public interface IListStrategy
     {
+        /// <summary>
+        /// Gets the length.
+        /// </summary>
+        /// <value>
+        /// The length.
+        /// </value>
         int Length { get; }
+        /// <summary>
+        /// Slices the specified list.
+        /// </summary>
+        /// <param name="from">From.</param>
+        /// <param name="to">To.</param>
+        /// <returns></returns>
         object Slice(int from, int to);
+        /// <summary>
+        /// Gets the <see cref="System.Object"/> at the specified index.
+        /// </summary>
+        /// <value>
+        /// The <see cref="System.Object"/>.
+        /// </value>
+        /// <param name="index">The index.</param>
+        /// <returns></returns>
         object this[int index] { get; }
+        /// <summary>
+        /// Gets the type of the element.
+        /// </summary>
+        /// <returns></returns>
         Type GetElementType();
+        /// <summary>
+        /// Adds the specified item.
+        /// </summary>
+        /// <param name="item">The item.</param>
         void Add(object item);
     }
 
-    public static class ListStrategy
+    internal static class ListStrategy
     {
         public static IListStrategy New(IEnumerable enumerable) {
             return ResolveInternal(enumerable, true);

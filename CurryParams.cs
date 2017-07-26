@@ -4,12 +4,12 @@ using static Ramda.NET.Currying;
 
 namespace Ramda.NET
 {
-    public class CurryParams : AbstractLambda
+    internal class CurryParams : AbstractLambda
     {
-        public CurryParams(DynamicDelegate fn) : base(fn, 2) {
+        internal CurryParams(DynamicDelegate fn) : base(fn, 2) {
         }
 
-        public CurryParams(Delegate fn) : this(new DelegateDecorator(fn)) {
+        internal CurryParams(Delegate fn) : this(new DelegateDecorator(fn)) {
         }
 
         protected override object TryInvoke(InvokeBinder binder, object[] arguments) {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Collections;
 using System.ComponentModel;
+using Reflection = Ramda.NET.ReflectionExtensions;
 
 namespace Ramda.NET
 {
@@ -17,7 +18,7 @@ namespace Ramda.NET
             var type = source.GetType();
 
             if (type.IsAnonymousType()) {
-                return source.CloneInternal();
+                return source.ToExpando();
             }
             else {
                 var @delegate = cache.GetOrAdd(type, () => {
@@ -42,27 +43,26 @@ namespace Ramda.NET
                 target = AnonymousTypeCloneAndAssignValue(prop, propValue, type, obj);
             }
             else {
-                target = WellKnownTypeCloneAndAssignValue(prop, obj, propValue);
+                MemberInfo memberInfo = Reflection.TryGetMemberInfoFromType(type, prop);
+
+                if (memberInfo != null && memberInfo.GetUnderlyingType().IsAssignableFrom(propValue.GetType())) {
+                    target = WellKnownTypeCloneAndAssignValue(prop, obj, propValue);
+                }
+                else {
+                    IDictionary<string, object> expando = Reflection.ToExpando(obj);
+
+                    expando[prop] = propValue;
+                    target = expando;
+                }
             }
 
             return target;
         }
 
         internal static object CloneAndOmitValue(string prop, object obj) {
-            IDictionary<string, object> expando = obj.CloneInternal();
+            IDictionary<string, object> expando = obj.ToExpando();
 
             expando.Remove(prop);
-
-            return expando as ExpandoObject;
-        }
-
-        internal static ExpandoObject CloneInternal(this object obj) {
-            Type type = obj.GetType();
-            IDictionary<string, object> expando = new ExpandoObject();
-
-            foreach (var pair in obj.ToMemberDictionary()) {
-                expando.Add(pair);
-            }
 
             return expando as ExpandoObject;
         }

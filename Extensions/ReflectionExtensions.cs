@@ -55,6 +55,7 @@ namespace Ramda.NET
         internal static bool IsDictionary(this object target) {
             return target.GetType().TypeIsDictionary();
         }
+
         internal static bool IsExpandoObject(this object target) {
             return target.GetType().TypeIsExpandoObject();
         }
@@ -165,9 +166,7 @@ namespace Ramda.NET
                 return FunctionArity(target);
             }
             else if (!isLength) {
-                var arr = target as IList;
-
-                if (arr != null) {
+                if (target is IList arr) {
                     int index;
 
                     if (int.TryParse(name, out index)) {
@@ -270,6 +269,25 @@ namespace Ramda.NET
             }
 
             return null;
+        }
+
+        public static dynamic ToExpando(this object value) {
+            var type = value.GetType();
+            var dictionary = value as IDictionary;
+            IDictionary<string, object> expando = new ExpandoObject();
+
+            if (dictionary != null) {
+                dictionary.Keys.ForEach(key => expando[key.ToString()] = dictionary[key]);
+            }
+            else if (type.Assembly.Equals(typeof(object).Assembly)) {
+                return value;
+            }
+            else {
+                value.ToMemberDictionary()
+                     .ForEach(kv => expando.Add(kv.Key, kv.Value));
+            }
+
+            return expando as ExpandoObject;
         }
 
         internal static IDictionary<string, object> ToMemberDictionary(this object target) {
@@ -605,6 +623,21 @@ namespace Ramda.NET
 
         internal static bool IsInteger(this object target) {
             return target.GetType().Equals(typeof(int));
+        }
+
+        public static Type GetUnderlyingType(this MemberInfo member) {
+            switch (member.MemberType) {
+                case MemberTypes.Event:
+                    return ((EventInfo)member).EventHandlerType;
+                case MemberTypes.Field:
+                    return ((FieldInfo)member).FieldType;
+                case MemberTypes.Method:
+                    return ((MethodInfo)member).ReturnType;
+                case MemberTypes.Property:
+                    return ((PropertyInfo)member).PropertyType;
+                default:
+                    throw new ArgumentException("Input MemberInfo must be if type EventInfo, FieldInfo, MethodInfo, or PropertyInfo");
+            }
         }
     }
 }
